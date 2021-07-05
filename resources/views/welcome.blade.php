@@ -6,7 +6,7 @@
         <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
 
 
-        <title>Hechos Vitales</title>
+        <title>Plantilla Inicial</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -49,7 +49,7 @@
                             <div class="  flex items-center">
     
                                 <!--<div class="ml-4 text-lg leading-7 font-semibold"> <b>
-                                        <font size="50">Hechos Vitales </font>
+                                        <font size="50">Plantilla Inicial </font>
                                     </b></div>-->
                                     
 

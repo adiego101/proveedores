@@ -14,7 +14,7 @@ return [
     |
      */
 
-    'title' => 'Hechos Vitales',
+    'title' => 'Plantilla Inicial',
     'title_prefix' => '',
     'title_postfix' => '',
 
