@@ -14,7 +14,7 @@ return [
     |
      */
 
-    'title' => 'Plantilla Inicial',
+    'title' => 'Registro Único de Proveedores de Actividades Económicas',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,12 +45,12 @@ return [
     |
      */
 
-    'logo' => '<b >Nombre del Sistema</b>',
+    'logo' => '<b>RUPAE</b>',
     'logo_img' => '/logo_santacruz.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Nombre del Sistema',
+    'logo_img_alt' => 'Logo Santa Cruz',
 
     /*
     |--------------------------------------------------------------------------
@@ -243,47 +243,53 @@ return [
         'submenu' => [
          */
 
-        ['header' => 'Titulo de Pestañas'],
+        ['header' => 'Funciones Principales'],
         
 
         [
-            'text' => 'Pestaña #1',
-            'url' => '/',
-            'icon' => 'fas fa-fw fa-calendar-alt',
+            'text' => 'Datos generales',
+            'url' => '/datosGenerales',
+            'icon' => 'fas fa-fw fa-clipboard-list',
             'label_color' => 'success',
         ],
         [
-            'text' => 'Pestaña #2',
+            'text' => 'Sucursales',
             'url' => '/',
-            'icon' => 'far fa-fw fa-file-pdf',
+            'icon' => 'fas fa-fw fa-building',
             'label_color' => 'success',
         ],
         [
-            'text' => 'Pestaña #3',
+            'text' => 'Información impositiva',
             'url' => '/',
-            'icon' => 'far fa-fw fa-file-pdf',
+            'icon' => 'fas fa-fw fa-chart-bar',
             'label_color' => 'success',
         ],
         [
-            'text' => 'Pestaña #4',
+            'text' => 'Actividad',
             'url' => '/',
-            'icon' => 'far fa-fw fa-file-alt',
+            'icon' => 'fas fa-fw fa-chart-pie',
             'label_color' => 'success',
         ],
         [
-            'text' => 'Pestaña #5',
+            'text' => 'Valor agregado',
             'url' => '/',
-            'icon' => 'far fa-fw fa-file-alt',
+            'icon' => 'fas fa-fw fa-hand-holding-usd',
             'label_color' => 'success',
         ],
         [
-            'text' => 'Pestaña #6',
+            'text' => 'Personal ocupado',
             'url' => '/',
-            'icon' => 'fas fa-fw fa-ban',
+            'icon' => 'fas fa-fw fa-handshake',
             'label_color' => 'success',
         ],
         [
-            'text' => 'Pestaña #1',
+            'text' => 'Pagos',
+            'url' => '/',
+            'icon' => 'fas fa-fw fa-donate',
+            'label_color' => 'success',
+        ],
+        [
+            'text' => 'Otros datos',
             'url' => '/',
             'icon' => 'fas fa-fw fa-address-card',
             'label_color' => 'success',
