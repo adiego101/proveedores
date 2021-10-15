@@ -21,6 +21,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/datosGenerales', function () {
-    return view('datosGenerales');
+Route::get('/nuevoRegistro', function () {
+    return view('nuevoRegistro');
 });

@@ -247,51 +247,27 @@ return [
         
 
         [
-            'text' => 'Datos generales',
-            'url' => '/datosGenerales',
+            'text' => 'Nuevo Registro',
+            'url' => '/nuevoRegistro',
+            'icon' => 'fas fa-fw fa-plus-circle',
+            'label_color' => 'success',
+        ],
+        [
+            'text' => 'Certificado de inscripción y registro de alta',
+            'url' => '/',
             'icon' => 'fas fa-fw fa-clipboard-list',
             'label_color' => 'success',
         ],
         [
-            'text' => 'Sucursales',
+            'text' => 'Exportar empresas activas',
             'url' => '/',
-            'icon' => 'fas fa-fw fa-building',
+            'icon' => 'fas fa-fw fa-download',
             'label_color' => 'success',
         ],
         [
-            'text' => 'Información impositiva',
+            'text' => 'Nueva localidad',
             'url' => '/',
-            'icon' => 'fas fa-fw fa-chart-bar',
-            'label_color' => 'success',
-        ],
-        [
-            'text' => 'Actividad',
-            'url' => '/',
-            'icon' => 'fas fa-fw fa-chart-pie',
-            'label_color' => 'success',
-        ],
-        [
-            'text' => 'Valor agregado',
-            'url' => '/',
-            'icon' => 'fas fa-fw fa-hand-holding-usd',
-            'label_color' => 'success',
-        ],
-        [
-            'text' => 'Personal ocupado',
-            'url' => '/',
-            'icon' => 'fas fa-fw fa-handshake',
-            'label_color' => 'success',
-        ],
-        [
-            'text' => 'Pagos',
-            'url' => '/',
-            'icon' => 'fas fa-fw fa-donate',
-            'label_color' => 'success',
-        ],
-        [
-            'text' => 'Otros datos',
-            'url' => '/',
-            'icon' => 'fas fa-fw fa-address-card',
+            'icon' => 'fas fa-fw fa-plus-circle',
             'label_color' => 'success',
         ],
         /*],
