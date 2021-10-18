@@ -265,7 +265,7 @@ return [
             'label_color' => 'success',
         ],
         [
-            'text' => 'Nueva localidad',
+            'text' => 'Gestionar localidades',
             'url' => '/',
             'icon' => 'fas fa-fw fa-plus-circle',
             'label_color' => 'success',

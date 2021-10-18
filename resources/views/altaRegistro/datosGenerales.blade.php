@@ -8,8 +8,10 @@
     <label for="nombre-fantasia">Nombre de fantasía:</label><br>
     <input type="text" class="form-control" placeholder="ingrese el nombre de fantasía" aria-describedby="basic-addon1" id="nombre-fantasia" name="nombre-fantasia" required><br>
 
-    <!--<label for="cuit">Cuit:</label><br>
-    <input type="text" class="form-control" placeholder="ingrese el cuit de la empresa" aria-describedby="basic-addon1" id="cuit" name="cuit" required><br>-->
+    <!-- El cuit se utiliza en esta primer etapa -->
+
+    <label for="cuit">Cuit:</label><br>
+    <input type="text" class="form-control" placeholder="ingrese el cuit de la empresa" aria-describedby="basic-addon1" id="cuit" name="cuit" required><br>
 
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
@@ -48,15 +50,15 @@
 
             <label for="email-real">Correo electrónico:</label><br>
             <input type="email" class="form-control" placeholder="ingrese su correo electrónico" aria-describedby="basic-addon1" id="email-real" name="email-real" required><br>
-                        
+
             <label for="web-real">Página web:</label><br>
             <input type="text" class="form-control" placeholder="ingrese su página web" aria-describedby="basic-addon1" id="web-real" name="web-real" required><br>
-            
+
             <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />            
+            <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
         </fieldset>
-                    
-        <fieldset>                  
+
+        <fieldset>
             <h1>Datos del Domicilio legal</h1><br>
 
             <label for="domicilio-legal">Domicilio:</label><br>
@@ -88,7 +90,7 @@
 
             <label for="email-legal">Correo electrónico:</label><br>
             <input type="email" class="form-control" placeholder="ingrese su correo electrónico" aria-describedby="basic-addon1" id="email-legal" name="email-legal" required><br>
-                        
+
             <label for="representante-legal">Representante:</label><br>
             <input type="text" class="form-control" placeholder="ingrese el nombre del representante legal" aria-describedby="basic-addon1" id="representante-legal" name="representante-legal" required><br>
 
@@ -97,7 +99,7 @@
 
            <!-- <label for="observaciones">Observaciones:</label><br>
             <textarea id="observaciones" name="observaciones" rows="10" cols="101" placeholder="ingrese las observaciones que considere necesarias"></textarea> -->
-            
+
             <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
             <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
