@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class clasificaciones_empresas extends Model
 {
     use HasFactory;
-    protected $table = "actividades_economicas_f883";
+    protected $table = "clasificaciones_empresas";
 
     protected $fillable = [
-                            'cod_actividad_f833',
-                            'desc_actividad_f883',
-                            'descl_actividad_f883',
-                            'agrupamiento',
+                            'tamanio',
                             'sector',
+                            'simbolo',
+                            'facturacion_max',
+                            'fact_max_2018',
                             ];
-    protected $hidden = ['id_actividades_economicas_f883'];
+                            
+    protected $hidden = ['id_clasificacion_empresa'];
 }

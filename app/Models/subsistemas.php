@@ -8,14 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class subsistemas extends Model
 {
     use HasFactory;
-    protected $table = "actividades_economicas_f883";
+    protected $table = "subsistemas";
 
     protected $fillable = [
-                            'cod_actividad_f833',
-                            'desc_actividad_f883',
-                            'descl_actividad_f883',
-                            'agrupamiento',
-                            'sector',
+                            'nombre_subsistema',
+                            'desc_subsistema',
                             ];
-    protected $hidden = ['id_actividades_economicas_f883'];
+                            
+    protected $hidden = ['id_subsistema'];
 }

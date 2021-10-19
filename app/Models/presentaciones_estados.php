@@ -8,14 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class presentaciones_estados extends Model
 {
     use HasFactory;
-    protected $table = "actividades_economicas_f883";
+    protected $table = "presentaciones_estados";
 
     protected $fillable = [
-                            'cod_actividad_f833',
-                            'desc_actividad_f883',
-                            'descl_actividad_f883',
-                            'agrupamiento',
-                            'sector',
+                            'cod_presentacion_estado',
+                            'desc_presentacion_estado',
                             ];
-    protected $hidden = ['id_actividades_economicas_f883'];
+                            
+    protected $hidden = ['id_presentacion_estado'];
 }

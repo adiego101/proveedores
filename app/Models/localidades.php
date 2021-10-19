@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class localidades extends Model
 {
     use HasFactory;
-    protected $table = "actividades_economicas_f883";
+    protected $table = "localidades";
 
     protected $fillable = [
-                            'cod_actividad_f833',
-                            'desc_actividad_f883',
-                            'descl_actividad_f883',
-                            'agrupamiento',
-                            'sector',
+                            'codigo_localidad',
+                            'localidad',
+                            'provincia',
+                            'pais',
+                            'codigo_postal',
                             ];
-    protected $hidden = ['id_actividades_economicas_f883'];
+
+    protected $hidden = ['id_localidad'];
 }
