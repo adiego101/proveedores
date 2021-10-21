@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class localidades extends Model
+class Localidad extends Model
 {
     use HasFactory;
+
     protected $table = "localidades";
 
     protected $fillable = [
@@ -19,4 +20,14 @@ class localidades extends Model
                             ];
 
     protected $hidden = ['id_localidad'];
+
+    public function obtenerLocalidades(){
+
+        return Localidad::All();
+    }
+
+    public function obtenerLocalidadId($id){
+
+        return Localidad::find($id);
+    }
 }

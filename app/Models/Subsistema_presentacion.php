@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class subsistemas_presentaciones extends Model
+class Subsistema_presentacion extends Model
 {
     use HasFactory;
+
     protected $table = "subsistemas_presentaciones";
 
     protected $fillable = [
@@ -17,4 +18,14 @@ class subsistemas_presentaciones extends Model
                             ];
 
     protected $hidden = ['id_subsistema_presentacion'];
+
+    public function obtenerSubsistemasPresentaciones(){
+
+        return Subsistema_presentacion::All();
+    }
+
+    public function obtenerSubsistemaPresentacionId($id){
+
+        return Subsistema_presentacion::find($id);
+    }
 }

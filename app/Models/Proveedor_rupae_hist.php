@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class proveedores_rupae_hist extends Model
+class Proveedor_rupae_hist extends Model
 {
     use HasFactory;
+
     protected $table = "proveedores_rupae_hist";
 
     protected $fillable = [
@@ -73,4 +74,14 @@ class proveedores_rupae_hist extends Model
                             ];
 
     protected $hidden = ['id_proveedores_rupae'];
+
+    public function obtenerProveedoresRupaeHist(){
+
+        return Proveedor_rupae_hist::All();
+    }
+
+    public function obtenerProveedorRupaeHistId($id){
+
+        return Proveedor_rupae_hist::find($id);
+    }
 }

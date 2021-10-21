@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class proveedores_sucursales extends Model
+class Proveedor_sucursal extends Model
 {
     use HasFactory;
+
     protected $table = "proveedores_sucursales";
 
     protected $fillable = [
@@ -18,5 +19,16 @@ class proveedores_sucursales extends Model
                             'fax',
                             'correo_electronico',
                             ];
+
     protected $hidden = ['id_sucursal'];
+
+    public function obtenerProveedoresSucursales(){
+
+        return Proveedor_sucursal::All();
+    }
+
+    public function obtenerProveedorSucursalId($id){
+
+        return Proveedor_sucursal::find($id);
+    }
 }

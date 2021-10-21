@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class proveedores_domicilios extends Model
+class Proveedor_domicilio extends Model
 {
     use HasFactory;
+
     protected $table = "proveedores_domicilios";
 
     protected $fillable = [
@@ -26,5 +27,16 @@ class proveedores_domicilios extends Model
                             'barrio',
                             'id_localidad',
                             ];
+
     protected $hidden = ['id_proveedores_domicilios'];
+
+    public function obtenerProveedoresDomicilios(){
+
+        return Proveedor_domicilio::All();
+    }
+
+    public function obtenerProveedorDomicilioId($id){
+
+        return Proveedor_domicilio::find($id);
+    }
 }

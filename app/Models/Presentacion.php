@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class presentaciones extends Model
+class Presentacion extends Model
 {
     use HasFactory;
+
     protected $table = "presentaciones";
 
     protected $fillable = [
@@ -16,4 +17,14 @@ class presentaciones extends Model
                             ];
 
     protected $hidden = ['id_presentacion'];
+
+    public function obtenerPresentaciones(){
+
+        return Presentacion::All();
+    }
+
+    public function obtenerPresentacionId($id){
+
+        return Presentacion::find($id);
+    }
 }

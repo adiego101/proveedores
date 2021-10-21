@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class actividades_econimicas_f883 extends Model
+class Actividad_economica_f883 extends Model
 {
     use HasFactory;
+
     protected $table = "actividades_economicas_f883";
 
     protected $fillable = [
@@ -17,5 +18,16 @@ class actividades_econimicas_f883 extends Model
                             'agrupamiento',
                             'sector',
                             ];
+
     protected $hidden = ['id_actividades_economicas_f883'];
+
+    public function obtenerActividadesEconomicas(){
+
+        return Actividad_economica_f883::All();
+    }
+
+    public function obtenerActividadEconomicaId($id){
+
+        return Actividad_economica_f883::find($id);
+    }
 }

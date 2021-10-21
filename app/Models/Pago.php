@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class pagos extends Model
+class Pago extends Model
 {
     use HasFactory;
+
     protected $table = "pagos";
 
     protected $fillable = [
@@ -16,5 +17,16 @@ class pagos extends Model
                             'importe',
                             'observaciones',
                             ];
+
     protected $hidden = ['id_pagos'];
+
+    public function obtenerPagos(){
+
+        return Pago::All();
+    }
+
+    public function obtenerPagoId($id){
+
+        return Pago::find($id);
+    }
 }

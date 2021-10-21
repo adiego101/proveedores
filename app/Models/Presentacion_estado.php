@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class presentaciones_estados extends Model
+class Presentacion_estado extends Model
 {
     use HasFactory;
+
     protected $table = "presentaciones_estados";
 
     protected $fillable = [
@@ -16,4 +17,14 @@ class presentaciones_estados extends Model
                             ];
                             
     protected $hidden = ['id_presentacion_estado'];
+
+    public function obtenerPresentacionesEstados(){
+
+        return Presentacion_estado::All();
+    }
+
+    public function obtenerPresentacionEstadoId($id){
+
+        return Presentacion_estado::find($id);
+    }
 }

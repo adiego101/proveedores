@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class proveedores_telefonos extends Model
+class Proveedor_telefono extends Model
 {
     use HasFactory;
     protected $table = "proveedores_telefonos";
@@ -19,4 +19,14 @@ class proveedores_telefonos extends Model
                             ];
                             
     protected $hidden = ['id_proveedores_telefonos'];
+
+    public function obtenerProveedoresTelefonos(){
+
+        return Proveedor_telefono::All();
+    }
+
+    public function obtenerProveedorTelefonoId($id){
+
+        return Proveedor_telefono::find($id);
+    }
 }
