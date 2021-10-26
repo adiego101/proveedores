@@ -229,22 +229,8 @@ return [
 
         // Sidebar items:
 
-        /*[
-            'type' => 'sidebar-menu-search',
-            'text' => 'Buscar',
-        ],*/
-        /*['header' => 'Certificado de Defuncion'
-        //,'can'    => 'admin',
-        ]*/
-
-        /*[
-        'text'    => 'Titulo de seccion #1',
-        'icon'    => 'fas fa-fw fa-user-slash',
-        'submenu' => [
-         */
-
         ['header' => 'Funciones Principales'],
-        
+
 
         [
             'text' => 'Nuevo Registro',
@@ -252,51 +238,41 @@ return [
             'icon' => 'fas fa-fw fa-plus-circle',
             'label_color' => 'success',
         ],
-        [
-            'text' => 'Certificado de inscripción y registro de alta',
-            'url' => '/',
-            'icon' => 'fas fa-fw fa-clipboard-list',
-            'label_color' => 'success',
-        ],
-        [
-            'text' => 'Exportar empresas activas',
-            'url' => '/',
-            'icon' => 'fas fa-fw fa-download',
-            'label_color' => 'success',
-        ],
-        [
-            'text' => 'Gestionar localidades',
-            'url' => '/',
-            'icon' => 'fas fa-fw fa-plus-circle',
-            'label_color' => 'success',
-        ],
-        /*],
-    ],
 
-    [
-    'text'    => 'Titulo de seccion #2',
-    'icon'    => 'fas fa-fw fa-share',
-    'submenu' => [
-    [
-    'text' => 'child 1',
-    'url'  => 'menu/child1',
+         //Panel de Administracion
+
+         [
+            'text'    => 'Administracion',
+            'can'    => ['admin_users', 'admin_lista_roles'],
+            'topnav_right' => true,
+            'icon' => 'fas fa-cogs',
+
+
+
+            'submenu' =>
+            [
+        [
+            'text' => 'Administracion Usuarios',
+            'url' => '/users',
+            'icon' => 'fas fa-fw fa-address-card',
+            'label_color' => 'success',
+            'can'    => 'admin_users'
+        ],
+        [
+            'text' => 'Administracion de roles',
+            'url' => '/roles',
+            'icon' => 'fas fa-fw fa-address-card',
+            'label_color' => 'success',
+            'can'    => 'admin_lista_roles'
+        ],
+
+        ],
     ],
-    [
-    'text' => 'child 2',
-    'url'  => 'menu/child2',
-    ],
-    ],
-    ],*/
 
     ],
 
     /*
-    ['header' => 'Opciones'],
-    [
-    'text' => 'Ver mi perfil',
-    'url'  => 'admin/settings',
-    'icon' => 'fas fa-fw fa-user',
-    ],
+
     |--------------------------------------------------------------------------
     | Menu Filters
     |--------------------------------------------------------------------------

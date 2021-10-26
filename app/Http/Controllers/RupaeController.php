@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedores_rupae;
+use App\Models\Proveedor_rupae;
 use Illuminate\Http\Request;
 
 class RupaeController extends Controller
 {
+
+
+    protected $proveedores_rupae;
+
+    public function __construct(Proveedor_rupae $proveedores_rupae)
+    {
+        $this->proveedores_rupae = $proveedores_rupae;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,8 @@ class RupaeController extends Controller
      */
     public function index()
     {
-        //
+        $proveedores_rupae = $this->proveedores_rupae->obtenerProveedoresRupae();
+        return view('proveedores.listado', ['proveedores_rupae' => $proveedores_rupae]);
     }
 
     /**
@@ -24,7 +35,7 @@ class RupaeController extends Controller
      */
     public function create()
     {
-        //
+        return view('proveedores.crear');
     }
 
     /**
@@ -35,51 +46,56 @@ class RupaeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $proveedores_rupae = new Proveedor_rupae($request->all());
+        $proveedores_rupae->save();
+        return redirect()->action([RupaeController::class, 'index']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Proveedores_rupae  $proveedores_rupae
      * @return \Illuminate\Http\Response
      */
-    public function show(Proveedores_rupae $proveedores_rupae)
+    public function show($id)
     {
-        //
+        $proveedores_rupae = $this->proveedores_rupae->obtenerProveedorRupaeId($id);
+        return view('proveedores.ver', ['proveedores_rupae' => $proveedores_rupae]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Proveedores_rupae  $proveedores_rupae
      * @return \Illuminate\Http\Response
      */
-    public function edit(Proveedores_rupae $proveedores_rupae)
+    public function edit($id)
     {
-        //
+        $proveedores_rupae = $this->proveedores_rupae->obtenerProveedorRupaeId($id);
+        return view('proveedores_rupae.editar', ['proveedores_rupae' => $proveedores_rupae]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Proveedores_rupae  $proveedores_rupae
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proveedores_rupae $proveedores_rupae)
+    public function update(Request $request, $id)
     {
-        //
+        $proveedores_rupae = Proveedor_rupae::find($id);
+        $proveedores_rupae->fill($request->all());
+        $proveedores_rupae->save();
+        return redirect()->action([RupaeController::class, 'index']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Proveedores_rupae  $proveedores_rupae
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Proveedores_rupae $proveedores_rupae)
+    public function destroy($id)
     {
-        //
+        $proveedores_rupae = Proveedor_rupae::find($id);
+        $proveedores_rupae->delete();
+        return redirect()->action([RupaeController::class, 'index']);
     }
 }
