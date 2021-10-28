@@ -29,6 +29,9 @@ Route::get('/nuevoRegistro', function () {
     return view('nuevoRegistro');
 });
 
+Route::get('/Cambiar_contraseña', function () {
+    return view('CambiarContraseña');
+});
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
