@@ -1,19 +1,161 @@
+<fieldset>
+
+<div class="row">
+      <div class="col-sm">
+        <h1>Sucursales</h1>
+      </div>
+      <div class="col-sm">
+        <a href="javascript:void(0);" class="add_button" title="Agregue una nueva sucursal"><input type="button" value="Agregar sucursal"></a>
+      </div>
+</div>
+ 
+      <br>
+
+  <div class="field_wrapper">
+    <div>
+    <div class="row">
+      <div class="col-sm">
+
+          <label for="calle">Calle:</label><br>
+          <input type="text" class="form-control" placeholder="Calle" aria-describedby="basic-addon1" id="calle" name="calles[]"><br>
+
+          <label for="numero">Numero:</label><br>
+          <input type="number" class="form-control" placeholder="Numero" aria-describedby="basic-addon1" id="numero" name="numeros[]"><br>
+
+          <label for="lote">Lote:</label><br>
+          <input type="text" class="form-control" placeholder="Lote" aria-describedby="basic-addon1" id="lote" name="lotes[]"><br>
+
+          <label for="entreCalles">Entre Calle:</label><br>
+          <input type="text" class="form-control" placeholder="Entre Calles" aria-describedby="basic-addon1" id="entreCalles" name="entreCalles[]"><br>
+
+          <label for="monoblock">Monoblock:</label><br>
+          <input type="text" class="form-control" placeholder="Monoblock" aria-describedby="basic-addon1" id="monoblock" name="monoblocks[]"><br>
+
+      </div> 
+
+      <div class="col-sm">
+
+          <label for="dpto">Departamento:</label><br>
+          <input type="text" class="form-control" placeholder="Departamento" aria-describedby="basic-addon1" id="dpto" name="dptos[]"><br>
+
+          <label for="puerta">Puerta:</label><br>
+          <input type="number" class="form-control" placeholder="Puerta" aria-describedby="basic-addon1" id="puerta" name="puertas[]"><br>
+
+          <label for="oficina">Oficina:</label><br>
+          <input type="text" class="form-control" placeholder="Oficina" aria-describedby="basic-addon1" id="oficina" name="oficinas[]"><br>
+
+          <label for="manzana">Manzana:</label><br>
+          <input type="text" class="form-control" placeholder="Manzana" aria-describedby="basic-addon1" id="manzana" name="manzanas[]"><br>
+
+          <label for="barrio">Barrio:</label><br>
+          <input type="text" class="form-control" placeholder="Barrio" aria-describedby="basic-addon1" id="barrio" name="barrios[]"><br>
+
+      </div>
+
+    </div>
+
+        <label for="localidad">Localidad:</label><br>
+        <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Localidad" id="localidad" name="Localidades[]"><br>
+  
+        <label for="telefono">Telefono:</label><br>
+        <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Número de teléfono" id="telefono" name="Telefonos-sucursales[]"><br>
+        
+        <label for="correo">Correo electrónico:</label><br>
+        <input type="email" class="form-control" aria-describedby="basic-addon1" placeholder="ejemplo@dominio.com" id="correo" name="Correos-electronicos[]"><br>
+     
+        <hr>
+        
+      </div>
+  </div>
+
+  
+  <br>
+
+  <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
+
+  <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
 
-<fieldset> 
-    <h1>Sucursales</h1>
-    <br>   
-    <label for="Localidad-sucursal">Localidad:</label><br>
-      <input type="text" class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad" required ><br>
 
-      <label for="Domicilio">Domicilio:</label><br>
-      <input type="text" class="form-control" aria-describedby="basic-addon1" id="Domicilio-sucursal" name="Domicilio-sucursal" required ><br>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-      <label for="Telefono-sucursal">Telefono:</label><br>
-      <input type="text" class="form-control" aria-describedby="basic-addon1" id="Telefono-sucursal" name="Telefono-sucursal" required ><br>
-      <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
+  <script type="text/javascript">
+  $(document).ready(function(){
+      var maxField = 10; //Cantidad maxima de campos (sucursales) a agregar
+      var addButton = $('.add_button');
+      var wrapper = $('.field_wrapper');
 
-      <input type="button" name="next" class="next btn btn-info" value="Siguiente" />    
-      
-  </fieldset> 
-    
+      //Nuevo campo html (agregar una nueva sucursal)
+      var fieldHTML = '<div>'+
+      '<div class="row">'+
+            '<div class="col-sm">'+
+
+                '<label for="calle">Calle:</label><br>'+
+                '<input type="text" class="form-control" placeholder="Calle" aria-describedby="basic-addon1" id="calle" name="calles[]"><br>'+
+
+                '<label for="numero">Numero:</label><br>'+
+                '<input type="number" class="form-control" placeholder="Numero" aria-describedby="basic-addon1" id="numero" name="numeros[]"><br>'+
+
+                '<label for="lote">Lote:</label><br>'+
+                '<input type="text" class="form-control" placeholder="Lote" aria-describedby="basic-addon1" id="lote" name="lotes[]"><br>'+
+
+                '<label for="entreCalles">Entre Calle:</label><br>'+
+                '<input type="text" class="form-control" placeholder="Entre Calles" aria-describedby="basic-addon1" id="entreCalles" name="entreCalles[]"><br>'+
+
+                '<label for="monoblock">Monoblock:</label><br>'+
+                '<input type="text" class="form-control" placeholder="Monoblock" aria-describedby="basic-addon1" id="monoblock" name="monoblocks[]"><br>'+
+
+            '</div>'+
+
+            '<div class="col-sm">'+
+
+                '<label for="dpto">Departamento:</label><br>'+
+                '<input type="text" class="form-control" placeholder="Departamento" aria-describedby="basic-addon1" id="dpto" name="dptos[]"><br>'+
+
+                '<label for="puerta">Puerta:</label><br>'+
+                '<input type="number" class="form-control" placeholder="Puerta" aria-describedby="basic-addon1" id="puerta" name="puertas[]"><br>'+
+
+                '<label for="oficina">Oficina:</label><br>'+
+                '<input type="text" class="form-control" placeholder="Oficina" aria-describedby="basic-addon1" id="oficina" name="oficinas[]"><br>'+
+
+                '<label for="manzana">Manzana:</label><br>'+
+                '<input type="text" class="form-control" placeholder="Manzana" aria-describedby="basic-addon1" id="manzana" name="manzanas[]"><br>'+
+
+                '<label for="barrio">Barrio:</label><br>'+
+                '<input type="text" class="form-control" placeholder="Barrio" aria-describedby="basic-addon1" id="barrio" name="barrios[]"><br>'+
+
+            '</div>'+
+
+          '</div>'+
+
+              '<label for="localidad">Localidad:</label><br>'+
+              '<input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Localidad" id="localidad" name="Localidades[]"><br>'+
+        
+              '<label for="telefono">Telefono:</label><br>'+
+              '<input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Número de teléfono" id="telefono" name="Telefonos-sucursales[]"><br>'+
+              
+              '<label for="correo">Correo electrónico:</label><br>'+
+              '<input type="email" class="form-control" aria-describedby="basic-addon1" placeholder="ejemplo@dominio.com" id="correo" name="Correos-electronicos[]"><br>'+
+          
+        
+              '<a href="javascript:void(0);" class="remove_button" title="Elimine la sucursal"><input type="button" value="Eliminar sucursal"></a>'+
+              '<hr>'+
+            '</div>';
+
+
+      var x = 1; //Contador inicial, comienza en 1
+      $(addButton).click(function(){
+          if(x < maxField){ //Verifica el numero maximo de campos a agregar, con el limite establecido
+              x++; //Incrementa el contador en 1
+              $(wrapper).append(fieldHTML); // Agrega un nuevo campo html (sucursal)
+          }
+      });
+      $(wrapper).on('click', '.remove_button', function(e){
+          e.preventDefault();
+          $(this).parent('div').remove(); //Remueve un campo html (sucursal)
+          x--; //Decrementa el contador en 1
+      });
+  });
+  </script>
+
+</fieldset>

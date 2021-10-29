@@ -3,9 +3,7 @@
   
   <h1>Valor Agregado</h1><br>   
 
-  <hr>
-
-  <p>Para servicios:</p><br>
+  <h4>Para servicios:</h4><br>
 
   <input type="checkbox" id="cbox1" value="Posee servicio de atención al cliente">
   <label for="cbox1">Posee servicio de atención al cliente</label><br>
@@ -24,7 +22,7 @@
   
   <hr>
 
-  <p>Para productos:</p><br>
+  <h4>Para productos:</h4><br>
 
   <input type="checkbox" id="cbox6" value="Posee el producto alguna transformación significativa">
   <label for="cbox6">Posee el producto alguna transformación significativa</label><br>
