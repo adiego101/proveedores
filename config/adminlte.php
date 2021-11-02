@@ -239,6 +239,12 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text' => 'Descargar PDF',
+            'url' => '/pdf',
+            'icon' => 'fas fa-fw fa-plus-circle',
+            'label_color' => 'success',
+        ],
+        [
             'text' => 'Cambiar Contraseña',
             'url' => '/Cambiar_contraseña',
             'icon' => 'fas fa-key',

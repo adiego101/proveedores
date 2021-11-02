@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Proveedor_rupae;
 use Illuminate\Http\Request;
+use PDF;
 
 class RupaeController extends Controller
 {
@@ -98,4 +99,18 @@ class RupaeController extends Controller
         $proveedores_rupae->delete();
         return redirect()->action([RupaeController::class, 'index']);
     }
+
+
+
+//Prueba generacion PDF
+
+public function download()
+{
+    $data = [
+        'titulo' => 'Styde.net'
+    ];
+
+    return PDF::loadView('pruebaPdf', $data)
+        ->stream('archivo.pdf');
+}
 }

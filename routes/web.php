@@ -38,3 +38,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', UserController::class)->middleware(['can:admin_users']);
     Route::patch('/changePassword/{id}', 'App\Http\Controllers\UserController@changePassword')->name('changePassword');
 });
+
+
+//Prueba generacion PDF
+
+Route::get('/pdf', 'App\Http\Controllers\RupaeController@download');
