@@ -107,10 +107,10 @@ class RupaeController extends Controller
 public function download()
 {
     $data = [
-        'titulo' => 'Styde.net'
+        'titulo' => 'pdf'
     ];
 
     return PDF::loadView('pruebaPdf', $data)
-        ->stream('archivo.pdf');
+        ->stream('certificado-inscripcion.pdf');
 }
 }

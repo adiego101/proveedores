@@ -114,45 +114,45 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
 
     <section>
         <div style="width: 50%; float:left">
-            <label for="calle">Razón Social:</label><br>
-            <label for="calle">Nombre de Fantasía:</label><br>
+            <label for="">Razón Social:</label><br>
+            <label for="">Nombre de Fantasía:</label><br>
             <br>
             <span>Datos del Domicilio Real:</span><br>
                 <br>
-                <label for="calle">Domicilio Real:</label><br>
-                <label for="calle">Localidad:</label><br>
-                <label for="calle">Provincia:</label><br>
-                <label for="calle">Teléfono:</label><br>
-                <label for="calle">Correo electrónico:</label><br>
+                <label for="">Domicilio Real:</label><br>
+                <label for="">Localidad:</label><br>
+                <label for="">Provincia:</label><br>
+                <label for="">Teléfono:</label><br>
+                <label for="">Correo electrónico:</label><br>
                 <br>
                 <br>
                 <br>
                 <hr>
-                <label for="calle">Tipo de sociedad:</label><br>
+                <label for="">Tipo de sociedad:</label><br>
 
-                <label for="calle">Situación IVA:</label><br>
-                <label for="calle">Nro Ingresos brutos:</label><br>
-                <label for="calle">Tipo contribuyente:</label><br>
+                <label for="">Situación IVA:</label><br>
+                <label for="">Nro Ingresos brutos:</label><br>
+                <label for="">Tipo contribuyente:</label><br>
                 <br>
                 
-                <label for="calle">Nro habilitación municipal:</label><br>
+                <label for="">Nro habilitación municipal:</label><br>
                
-                <label for="calle">Nro de Inscripción personas jurídicas:</label><br>
+                <label for="">Nro de Inscripción personas jurídicas:</label><br>
                 
-                <label for="calle">Registro público de comercio:</label><br>
+                <label for="">Registro público de comercio:</label><br>
                
-                <label for="calle">Inspección general de justicia:</label><br>
+                <label for="">Inspección general de justicia:</label><br>
                 
-                <label for="calle">Act principal:</label><br>
-                <label for="calle">Act secundaria:</label><br>
+                <label for="">Act principal:</label><br>
+                <label for="">Act secundaria:</label><br>
                 
                 <hr>
 
-                <label for="calle">Porcentaje facturación:</label><br>
-                <label for="calle">Porcentaje gasto:</label><br>
-                <label for="calle">Porcentaje mano de obra:</label><br>
+                <label for="">Porcentaje facturación:</label><br>
+                <label for="">Porcentaje gasto:</label><br>
+                <label for="">Porcentaje mano de obra:</label><br>
 
-                <label for="calle">Indice:</label><br>
+                <label for="">Indice:</label><br>
 
                 <br>
                 <br>
@@ -166,32 +166,32 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
             <br>
             <span>Datos del Domicilio Legal:</span><br>
                 <br>
-                <label for="calle">Domicilio Legal:</label><br>
-                <label for="calle">Localidad:</label><br>
-                <label for="calle">Provincia:</label><br>
-                <label for="calle">Teléfono:</label><br>
-                <label for="calle">Correo electrónico:</label><br>
-                <label for="calle">Representante legal:</label><br>
-                <label for="calle">DNI:</label><br>
+                <label for="">Domicilio Legal:</label><br>
+                <label for="">Localidad:</label><br>
+                <label for="">Provincia:</label><br>
+                <label for="">Teléfono:</label><br>
+                <label for="">Correo electrónico:</label><br>
+                <label for="">Representante legal:</label><br>
+                <label for="">DNI:</label><br>
                 <br>
                 <hr>
                 <br>
-                <label for="calle">Retención:</label><br>
-                <label for="calle">Juridicción:</label><br>
+                <label for="">Retención:</label><br>
+                <label for="">Juridicción:</label><br>
                 <br>
                 <br>
-                <label for="calle">Localidad habilitación:</label><br>
-                <label for="calle">Provincia inscrip personas jurídicas:</label><br>
-                <label for="calle">Provincia registro público:</label><br>
-                <label for="calle">Provincia inspección justicia:</label><br>
+                <label for="">Localidad habilitación:</label><br>
+                <label for="">Provincia inscrip personas jurídicas:</label><br>
+                <label for="">Provincia registro público:</label><br>
+                <label for="">Provincia inspección justicia:</label><br>
                 <br>
                 <br>
                 <hr>
-                <label for="calle">Antiguedad en provincia:</label><br>
-                <label for="calle">Domicilio fiscal en la provincia:</label><br>
-                <label for="calle">Valor agregado:</label><br>
+                <label for="">Antiguedad en provincia:</label><br>
+                <label for="">Domicilio fiscal en la provincia:</label><br>
+                <label for="">Valor agregado:</label><br>
                
-                <label for="calle">Proveedor:</label><br>
+                <label for="">Proveedor:</label><br>
 
         </div>
        
