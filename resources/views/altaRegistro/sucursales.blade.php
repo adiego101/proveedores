@@ -8,7 +8,7 @@
         <a href="javascript:void(0);" class="add_button" title="Agregue una nueva sucursal"><input type="button" value="Agregar sucursal"></a>
       </div>
 </div>
- 
+
       <br>
 
   <div class="field_wrapper">
@@ -25,13 +25,13 @@
           <label for="lote">Lote:</label><br>
           <input type="text" class="form-control" placeholder="Lote" aria-describedby="basic-addon1" id="lote" name="lotes[]"><br>
 
-          <label for="entreCalles">Entre Calle:</label><br>
-          <input type="text" class="form-control" placeholder="Entre Calles" aria-describedby="basic-addon1" id="entreCalles" name="entreCalles[]"><br>
+          <label for="entre_calles">Entre Calle:</label><br>
+          <input type="text" class="form-control" placeholder="Entre Calles" aria-describedby="basic-addon1" id="entre_calles" name="entreCalles[]"><br>
 
           <label for="monoblock">Monoblock:</label><br>
           <input type="text" class="form-control" placeholder="Monoblock" aria-describedby="basic-addon1" id="monoblock" name="monoblocks[]"><br>
 
-      </div> 
+      </div>
 
       <div class="col-sm">
 
@@ -39,7 +39,7 @@
           <input type="text" class="form-control" placeholder="Departamento" aria-describedby="basic-addon1" id="dpto" name="dptos[]"><br>
 
           <label for="puerta">Puerta:</label><br>
-          <input type="number" class="form-control" placeholder="Puerta" aria-describedby="basic-addon1" id="puerta" name="puertas[]"><br>
+          <input type="text" class="form-control" placeholder="Puerta" aria-describedby="basic-addon1" id="puerta" name="puertas[]"><br>
 
           <label for="oficina">Oficina:</label><br>
           <input type="text" class="form-control" placeholder="Oficina" aria-describedby="basic-addon1" id="oficina" name="oficinas[]"><br>
@@ -56,19 +56,17 @@
 
         <label for="localidad">Localidad:</label><br>
         <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Localidad" id="localidad" name="Localidades[]"><br>
-  
-        <label for="telefono">Telefono:</label><br>
-        <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Número de teléfono" id="telefono" name="Telefonos-sucursales[]"><br>
-        
-        <label for="correo">Correo electrónico:</label><br>
-        <input type="email" class="form-control" aria-describedby="basic-addon1" placeholder="ejemplo@dominio.com" id="correo" name="Correos-electronicos[]"><br>
-     
-        <hr>
-        
+
+        <label for="nro_tel">Telefono:</label><br>
+        <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Número de teléfono" id="nro_tel" name="Telefonos-sucursales[]"><br>
+
+        <label for="email">Correo electrónico:</label><br>
+        <input type="email" class="form-control" aria-describedby="basic-addon1" placeholder="ejemplo@dominio.com" id="email" name="Correos-electronicos[]"><br>
+
       </div>
   </div>
 
-  
+
   <br>
 
   <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
@@ -86,9 +84,10 @@
       var wrapper = $('.field_wrapper');
 
       //Nuevo campo html (agregar una nueva sucursal)
-      var fieldHTML = '<div>'+
+      var fieldHTML = '<div>'+ 
+      '<hr>'+
       '<div class="row">'+
-            '<div class="col-sm">'+
+            '<div class="col-sm">'+ 
 
                 '<label for="calle">Calle:</label><br>'+
                 '<input type="text" class="form-control" placeholder="Calle" aria-describedby="basic-addon1" id="calle" name="calles[]"><br>'+
@@ -99,8 +98,8 @@
                 '<label for="lote">Lote:</label><br>'+
                 '<input type="text" class="form-control" placeholder="Lote" aria-describedby="basic-addon1" id="lote" name="lotes[]"><br>'+
 
-                '<label for="entreCalles">Entre Calle:</label><br>'+
-                '<input type="text" class="form-control" placeholder="Entre Calles" aria-describedby="basic-addon1" id="entreCalles" name="entreCalles[]"><br>'+
+                '<label for="entre_calles">Entre Calle:</label><br>'+
+                '<input type="text" class="form-control" placeholder="Entre Calles" aria-describedby="basic-addon1" id="entre_calles" name="entreCalles[]"><br>'+
 
                 '<label for="monoblock">Monoblock:</label><br>'+
                 '<input type="text" class="form-control" placeholder="Monoblock" aria-describedby="basic-addon1" id="monoblock" name="monoblocks[]"><br>'+
@@ -113,7 +112,7 @@
                 '<input type="text" class="form-control" placeholder="Departamento" aria-describedby="basic-addon1" id="dpto" name="dptos[]"><br>'+
 
                 '<label for="puerta">Puerta:</label><br>'+
-                '<input type="number" class="form-control" placeholder="Puerta" aria-describedby="basic-addon1" id="puerta" name="puertas[]"><br>'+
+                '<input type="text" class="form-control" placeholder="Puerta" aria-describedby="basic-addon1" id="puerta" name="puertas[]"><br>'+
 
                 '<label for="oficina">Oficina:</label><br>'+
                 '<input type="text" class="form-control" placeholder="Oficina" aria-describedby="basic-addon1" id="oficina" name="oficinas[]"><br>'+
@@ -130,17 +129,16 @@
 
               '<label for="localidad">Localidad:</label><br>'+
               '<input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Localidad" id="localidad" name="Localidades[]"><br>'+
-        
-              '<label for="telefono">Telefono:</label><br>'+
-              '<input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Número de teléfono" id="telefono" name="Telefonos-sucursales[]"><br>'+
-              
-              '<label for="correo">Correo electrónico:</label><br>'+
-              '<input type="email" class="form-control" aria-describedby="basic-addon1" placeholder="ejemplo@dominio.com" id="correo" name="Correos-electronicos[]"><br>'+
-          
-        
+
+              '<label for="nro_tel">Telefono:</label><br>'+
+              '<input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Número de teléfono" id="nro_tel" name="Telefonos-sucursales[]"><br>'+
+
+              '<label for="email">Correo electrónico:</label><br>'+
+              '<input type="email" class="form-control" aria-describedby="basic-addon1" placeholder="ejemplo@dominio.com" id="email" name="Correos-electronicos[]"><br>'+
+
               '<a href="javascript:void(0);" class="remove_button" title="Elimine la sucursal"><input type="button" value="Eliminar sucursal"></a>'+
-              '<hr>'+
-            '</div>';
+             
+      '</div>';
 
 
       var x = 1; //Contador inicial, comienza en 1
