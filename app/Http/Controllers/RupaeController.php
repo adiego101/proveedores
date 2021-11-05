@@ -104,13 +104,26 @@ class RupaeController extends Controller
 
 //Prueba generacion PDF
 
-public function download()
+public function descargarRegistroAlta()
 {
     $data = [
         'titulo' => 'pdf'
     ];
 
-    return PDF::loadView('pruebaPdf', $data)
+    return PDF::loadView('registroAlta', $data)
+        ->stream('registro-alta.pdf');
+}
+
+
+public function descargarCertificadoInscripcion()
+{
+    $data = [
+        'titulo' => 'pdf'
+    ];
+
+    return PDF::loadView('certificadoInscripcion', $data)
         ->stream('certificado-inscripcion.pdf');
 }
+
+
 }

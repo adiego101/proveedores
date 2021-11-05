@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ProveedoresController;
 
 
 /*
@@ -34,6 +35,10 @@ Route::get('/Cambiar_contraseña', function () {
 });
 
 Route::group(['middleware' => ['auth']], function() {
+
+    Route::post('/todos', [ProveedoresController::class,'todos'])->name('todos');
+
+
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class)->middleware(['can:admin_users']);
     Route::patch('/changePassword/{id}', 'App\Http\Controllers\UserController@changePassword')->name('changePassword');
@@ -42,4 +47,5 @@ Route::group(['middleware' => ['auth']], function() {
 
 //Prueba generacion PDF
 
-Route::get('/pdf', 'App\Http\Controllers\RupaeController@download');
+Route::get('/registro-alta', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');
+Route::get('/certificado-inscripcion', 'App\Http\Controllers\RupaeController@descargarCertificadoInscripcion');

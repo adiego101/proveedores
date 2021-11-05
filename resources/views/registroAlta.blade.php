@@ -23,7 +23,7 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
             left: 0cm;
             right: 0cm;
             height: 2cm;
-            background-color: #D3FAFF;
+            /*background-color: #D3FAFF;*/
             color: black;
             text-align: center;
             line-height: 30px;
@@ -35,10 +35,11 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
             left: 0cm;
             right: 0cm;
             height: 2cm;
-            background-color: #D3FAFF;
+            /*background-color: #D3FAFF;*/
             color: black;
             text-align: center;
             line-height: 35px;
+            font-size: small;
         }
 
         .img-left{
@@ -48,18 +49,18 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
             margin-right: auto;
             margin-bottom: auto;
             margin-top: 10px;  
-            width: 180;
-            height: 30;  
+            width: 150;
+            height: 35; 
         }
 
         .img-right{
             float: right;
             display: block;
-            margin-right: 10px;
+            margin-right: -10px;
             margin-bottom: auto;
-            margin-top: 10px;
-            width: 30;
-            height: 30;  
+            margin-top: 5px;
+            width: 150;
+            height: 40;  
         }
 
         .txt-left{
@@ -83,6 +84,12 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
 
         .center {
             text-align: center;
+            font-size: small;
+            width: 30%;
+            margin-left: 170px;
+            margin-right: auto;
+            margin-bottom: auto;
+            margin-top: 10px; 
         }
 
         article{
@@ -90,7 +97,7 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
             margin: 30px;
         }
 
-        span{
+        .titulo{
             font-size: 20px;
             font-weight: bold;
 
@@ -103,10 +110,9 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
 </head>
 <body>
 <header>
-    <img src="../public/JEFATURA.png" class="img-left">
-    <img src="../public/logo_santacruz.png" class="img-right">
-    <div class="center">Registro Único Provincial  <br> de Actividades Económicas</div>
-    
+    <img src="../public/Santa_Cruz.png" class="img-left"> 
+    <img src="../public/logo_minpro.png" class="img-right">
+    <div class="center"> Registro Único Provincial   de Actividades Económicas</div>
 </header>
 
 <main>
@@ -117,7 +123,7 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
             <label for="">Razón Social:</label><br>
             <label for="">Nombre de Fantasía:</label><br>
             <br>
-            <span>Datos del Domicilio Real:</span><br>
+            <span class="titulo">Datos del Domicilio Real:</span><br>
                 <br>
                 <label for="">Domicilio Real:</label><br>
                 <label for="">Localidad:</label><br>
@@ -164,7 +170,7 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
             <label for="calle">Fecha de Inscripción:</label><br>
             <label for="numero">Cuit:</label><br>
             <br>
-            <span>Datos del Domicilio Legal:</span><br>
+            <span class="titulo">Datos del Domicilio Legal:</span><br>
                 <br>
                 <label for="">Domicilio Legal:</label><br>
                 <label for="">Localidad:</label><br>
@@ -203,6 +209,7 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
 <!--<div class="page_break"></div>-->
 <footer>
     <div>
+  
         Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br> 
         Río Gallegos - PROVINCIA DE SANTA CRUZ
     </div>

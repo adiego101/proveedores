@@ -239,8 +239,14 @@ return [
             'label_color' => 'success',
         ],
         [
-            'text' => 'Descargar PDF',
-            'url' => '/pdf',
+            'text' => 'Descargar Registro de Alta',
+            'url' => '/registro-alta',
+            'icon' => 'fas fa-fw fa-plus-circle',
+            'label_color' => 'success',
+        ],
+        [
+            'text' => 'Descargar Certificado de Inscripción',
+            'url' => '/certificado-inscripcion',
             'icon' => 'fas fa-fw fa-plus-circle',
             'label_color' => 'success',
         ],
