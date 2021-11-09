@@ -36,7 +36,10 @@
                     .html(percent + "%");
             }
         });
+
     </script>
+
+
 
     <style>
         #regiration_form fieldset:not(:first-of-type) {
@@ -54,7 +57,10 @@
         y presione el botón <b>Siguiente</b>, para continuar la carga de datos.
     </div>
 
-    <form id="regiration_form" action="">
+    <form id="regiration_form" action="{{ route('todos') }}"  method="POST">
+        @csrf
+        @include('altaRegistro.valorAgregado')
+
         @include('altaRegistro.datosGenerales')
         @include('altaRegistro.domicilioReal')
         @include('altaRegistro.domicilioLegal')
@@ -62,7 +68,6 @@
         @include('altaRegistro.sucursales')
         @include('altaRegistro.infoImpositiva')
         @include('altaRegistro.actividad')
-        @include('altaRegistro.valorAgregado')
         @include('altaRegistro.personalOcupado')
         @include('altaRegistro.pagos')
         @include('altaRegistro.otrosDatos')
@@ -77,6 +82,18 @@
     @yield('datos')
 
 @endsection
+
+@push('js')
+<script>
+
+$('input[type="checkbox"]').on('change', function(){
+    this.value = this.checked ? 1 : 0;
+     console.log(this.value);
+ }).change();
+</script>
+
+@endpush
+
 @push('css')
     <style>
         .progress-bar {

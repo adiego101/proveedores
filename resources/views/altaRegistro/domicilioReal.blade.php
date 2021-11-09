@@ -34,15 +34,15 @@
                 <br>
                 <label for="provincia-real">Provincia:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="provincia-real"
-                    name="provincia-real" required disabled><br>
+                    name="provincia-real"  disabled><br>
 
                 <label for="telefono-real">Teléfono:</label><br>
                 <input type="number" class="form-control" placeholder="ingrese su teléfono"
-                    aria-describedby="basic-addon1" id="telefono-real" name="telefono-real" required><br>
+                    aria-describedby="basic-addon1" id="telefono-real" name="telefono-real" ><br>
 
                 <label for="email-real">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ingrese su correo electrónico"
-                    aria-describedby="basic-addon1" id="email-real" name="email-real" required><br>
+                    aria-describedby="basic-addon1" id="email-real" name="email-real" ><br>
 
 
 
@@ -72,16 +72,16 @@
 
                 <label for="pais-real">Pais:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="pais-real"
-                    name="pais-real" required disabled><br>
+                    name="pais-real"  disabled><br>
 
                 <label for="cp-real">Código Postal:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp-real" name="cp-real"
-                    required disabled><br>
+                     disabled><br>
 
 
                 <label for="web-real">Página web:</label><br>
                 <input type="text" class="form-control" placeholder="ingrese su página web"
-                    aria-describedby="basic-addon1" id="web-real" name="web-real" required><br>
+                    aria-describedby="basic-addon1" id="web-real" name="web-real" ><br>
 
 
             </div>

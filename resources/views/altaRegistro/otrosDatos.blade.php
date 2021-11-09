@@ -5,39 +5,39 @@
 
     <label for="fact-sc">Porcentaje de facturacion en Santa Cruz:</label><br>
     <input type="text" class="form-control" aria-describedby="basic-addon1" id="porcentaje-sc" name="porcentaje-sc"
-        required><br>
+        ><br>
 
     <label for="gastos-sc">Porcentaje de Gastos en Santa Cruz:</label><br>
     <input type="text" class="form-control" aria-describedby="basic-addon1" id="gastos-sc" name="gastos-sc"
-        required><br>
+        ><br>
 
     <label for="manodeobra-sc">Porcentaje de Mano de Obra en Santa Cruz:</label><br>
     <input type="text" class="form-control" aria-describedby="basic-addon1" id="manodeobra-sc" name="manodeobra-sc"
-        required><br>
+        ><br>
 
     <label for="antiguedad-sc">Antiguedad en Santa Cruz:</label><br>
     <input type="text" class="form-control" aria-describedby="basic-addon1" id="antiguedad-sc" name="antiguedad-sc"
-        required><br>
+        ><br>
 
         <div class="container">
           <div class="row">
               <div class="col-sm">
                   <input type="checkbox" id="dom-fiscal" value="dom-fiscal">
                   <label for="dom-fiscal">Domicilio Fiscal</label><br>
-                  
-  
+
+
               </div>
               <div class="col-sm">
                   <input type="checkbox" id="val-Agregado" value="val-Agregado">
                   <label for="val-Agregado">Valor Agregado</label><br>
-                  
+
               </div>
           </div>
       </div><br>
 
       <label for="valor-indice">Valor del indice:</label><br>
     <input type="text" class="form-control" aria-describedby="basic-addon1" id="valor-indice" name="valor-indice"
-        required disabled><br>
+         disabled><br>
 
     <h5>Proveedor Santacruceño</h5>
 

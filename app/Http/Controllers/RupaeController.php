@@ -110,7 +110,7 @@ public function descargarRegistroAlta()
         'titulo' => 'pdf'
     ];
 
-    return PDF::loadView('registroAlta', $data)
+    return PDF::loadView('registroAlta', array('data'=> $data))
         ->stream('registro-alta.pdf');
 }
 
@@ -118,10 +118,20 @@ public function descargarRegistroAlta()
 public function descargarCertificadoInscripcion()
 {
     $data = [
-        'titulo' => 'pdf'
+        'titulo' => 'pdf',
+        'cuit' => '123456789',
+        'nombre_establecimiento' => 'Establecimiento de Prueba',
+        'nombre_propietario_RazonSocial' => 'Gobierno Santa Cruz',
+        'actividad_principal' => 'Desarrollo',
+        'actividad_secundaria' => 'Mantenimiento',
+        'calle_ruta' => 'calle 1',
+        'telefono' => '2966 - 665544',
+        'fecha_inscripcion' => '08/11/2021',
+        'localidad' => 'Rio Gallegos'
+
     ];
 
-    return PDF::loadView('certificadoInscripcion', $data)
+    return PDF::loadView('certificadoInscripcion', array('data'=> $data))
         ->stream('certificado-inscripcion.pdf');
 }
 

@@ -30,6 +30,12 @@ Route::get('/nuevoRegistro', function () {
     return view('nuevoRegistro');
 });
 
+Route::get('/gestionarRegistros', function () {
+    return view('gestionarRegistros');
+});
+
+Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
+
 Route::get('/Cambiar_contraseña', function () {
     return view('CambiarContraseña');
 });

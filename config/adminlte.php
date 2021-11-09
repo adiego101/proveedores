@@ -239,15 +239,21 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text' => 'Gestionar Registros',
+            'url' => '/gestionarRegistros',
+            'icon' => 'fas fa-fw fa-building',
+            'label_color' => 'success',
+        ],
+        [
             'text' => 'Descargar Registro de Alta',
             'url' => '/registro-alta',
-            'icon' => 'fas fa-fw fa-plus-circle',
+            'icon' => 'fas fa-fw fa-file-pdf',
             'label_color' => 'success',
         ],
         [
             'text' => 'Descargar Certificado de Inscripción',
             'url' => '/certificado-inscripcion',
-            'icon' => 'fas fa-fw fa-plus-circle',
+            'icon' => 'far fa-fw fa-file-pdf',
             'label_color' => 'success',
         ],
         [

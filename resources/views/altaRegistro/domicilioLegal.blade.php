@@ -33,13 +33,13 @@
                 <br>
                 <label for="provincia-legal">Provincia:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="provincia-legal"
-                    name="provincia-legal" required disabled><br>
+                    name="provincia-legal"  disabled><br>
 
                 <label for="telefono-legal">Teléfono:</label><br>
                 <input type="number" class="form-control" placeholder="ingrese su teléfono"
-                    aria-describedby="basic-addon1" id="telefono-legal" name="telefono-legal" required><br>
+                    aria-describedby="basic-addon1" id="telefono-legal" name="telefono-legal" ><br>
                 <!-- <label for="fax-legal">Fax:</label><br>
-            <input type="text" class="form-control" placeholder="ingrese su fax" aria-describedby="basic-addon1" id="fax-legal" name="fax-legal" required><br> -->
+            <input type="text" class="form-control" placeholder="ingrese su fax" aria-describedby="basic-addon1" id="fax-legal" name="fax-legal" ><br> -->
 
 
                 <!-- <label for="observaciones">Observaciones:</label><br>
@@ -72,15 +72,15 @@
 
                 <label for="pais-legal">Pais:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="pais-legal"
-                    name="pais-legal" required disabled><br>
+                    name="pais-legal"  disabled><br>
 
                 <label for="cp-legal">Código Postal:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp-legal" name="cp-legal"
-                    required disabled><br>
+                     disabled><br>
 
                 <label for="email-legal">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ingrese su correo electrónico"
-                    aria-describedby="basic-addon1" id="email-legal" name="email-legal" required><br>
+                    aria-describedby="basic-addon1" id="email-legal" name="email-legal" ><br>
 
 
             </div>
@@ -89,11 +89,11 @@
     </div>
     <label for="representante-legal">Representante:</label><br>
     <input type="text" class="form-control" placeholder="ingrese el nombre del representante legal"
-        aria-describedby="basic-addon1" id="representante-legal" name="representante-legal" required><br>
+        aria-describedby="basic-addon1" id="representante-legal" name="representante-legal" ><br>
 
     <label for="dni-legal">Dni:</label><br>
     <input type="number" class="form-control" placeholder="ingrese el dni del representante legal"
-        aria-describedby="basic-addon1" id="dni-legal" name="dni-legal" required><br>
+        aria-describedby="basic-addon1" id="dni-legal" name="dni-legal" ><br>
 
 
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
