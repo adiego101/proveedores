@@ -83,5 +83,22 @@
     });
     
   });
+
+    //Funciones a implementar
+
+    function editarRegistro() {
+        
+        return  alert("Retornar vista para editar registro!");
+    }
+
+    function verRegistro() {
+        
+        return  alert("Retornar vista para visualizar un registro!");
+    }
+
+    function eliminarRegistro() {
+        
+        return  alert("Retornar modal para eliminar un registro ?!");
+    }
 </script>
 @endpush

@@ -43,7 +43,7 @@ class ProveedoresController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Editar</a> <a href="javascript:void(0)" class="view btn btn-warning btn-sm">Ver</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Eliminar</a>';
+                    $actionBtn = '<a onclick="editarRegistro();" class="edit btn btn-success btn-sm">Editar</a> <a onclick="verRegistro();" class="view btn btn-warning btn-sm">Ver</a> <a onclick="eliminarRegistro();" class="delete btn btn-danger btn-sm">Eliminar</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
