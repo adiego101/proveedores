@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Support\Facades\DB;
 
 class Proveedor_rupae extends Model
 {
@@ -80,8 +81,20 @@ class Proveedor_rupae extends Model
         return Proveedor_rupae::All();
     }
 
-    public function obtenerProveedorRupaeId($id){
+    /*public function obtenerProveedorRupaeId($id){
 
-        return Proveedor_rupae::find($id);
-    }
+        $date = DB::table('proveedores_rupae')
+        ->where('id_proveedores_rupae', $id)
+        ->first();
+        return $date;
+    }*/
+
+   /* public function obtenerProveedorRupaeId()
+    {
+        $users = DB::table('proveedores_rupae')
+        ->where('id_proveedores_rupae', 16)
+        ->first();
+
+        return view('vistaPrueba', $users);
+    }*/
 }
