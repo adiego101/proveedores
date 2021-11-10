@@ -46,7 +46,7 @@
   $(function () {
     
     var table = $('.yajra-datatable').DataTable({
-        language: {
+    language: {
         "decimal": "",
         "emptyTable": "No hay información",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
@@ -86,15 +86,11 @@
 
     //Funciones a implementar
 
-    function editarRegistro() {
-        
-        return  alert("Retornar vista para editar registro!");
-    }
-
     function verRegistro() {
         
         return  alert("Retornar vista para visualizar un registro!");
     }
+
 
     function eliminarRegistro() {
         
