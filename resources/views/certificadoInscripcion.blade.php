@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-use Carbon\Carbon; 
+use Carbon\Carbon;
 
 $date = Carbon::now()->format("d/m/Y");
 ?>
@@ -47,9 +47,9 @@ $date = Carbon::now()->format("d/m/Y");
             margin-left: 10px;
             margin-right: auto;
             margin-bottom: auto;
-            margin-top: -8px;  
+            margin-top: -8px;
             width: 150;
-            height: 35;  
+            height: 35;
         }
 
         .img-right{
@@ -59,7 +59,7 @@ $date = Carbon::now()->format("d/m/Y");
             margin-bottom: auto;
             margin-top: -13px;
             width: 150;
-            height: 40;  
+            height: 40;
         }
 
         .txt-left{
@@ -69,7 +69,7 @@ $date = Carbon::now()->format("d/m/Y");
             margin-right: auto;
             margin-bottom: auto;
             margin-top: 10px;
-        
+
         }
 
         .txt-right{
@@ -77,8 +77,8 @@ $date = Carbon::now()->format("d/m/Y");
             display: block;
             margin-right: 80px;
             margin-bottom: auto;
-            margin-top: 10px; 
-          
+            margin-top: 10px;
+
         }
 
         .center {
@@ -88,12 +88,12 @@ $date = Carbon::now()->format("d/m/Y");
             margin-left: 170px;
             margin-right: auto;
             margin-bottom: auto;
-            margin-top: 0px;  
-  
+            margin-top: 0px;
+
         }
 
         article{
-  
+
             margin: 30px;
         }
 
@@ -102,9 +102,9 @@ $date = Carbon::now()->format("d/m/Y");
             font-weight: bold;
 
         }
-        
 
-       /* .page_break { page-break-before: always; } */
+
+       /* .page_break { page-break-before: always; } {{$data['titulo']}} */
 
     </style>
 </head>
@@ -114,64 +114,64 @@ $date = Carbon::now()->format("d/m/Y");
     <main>
 
         <section>
-            
+
             <img src="../public/Santa_Cruz.png" class="img-left">
-            
+
             <img src="../public/logo_minpro.png" class="img-right">
 
             <div class="center">
-                Registro Único Provincial  <br> de Actividades Económicas
+                 Registro Único Provincial  <br> de Actividades Económicas
             </div>
-        
+
     <br>
     <br>
             <span><u>Certificado de Inscripción</u></span>
-            <label for="" class="txt-right">Cuit Nº</label><br><br>
-            <label for="">Nombre del establecimiento:</label><br><br>
-            <label for="">Nombre del propietario o razón social:</label><br><br>
-            <label for="">Actividad principal:</label><br><br>
-            <label for="">Actividad secundaria:</label><br><br>
-            <label for="">Calle o ruta:</label><br><br>
-            <label for="">Teléfono:</label> 
-            <label for="" class="txt-right">Localidad / Paraje:</label><br><br>
-            <label for="">Fecha de Inscripción:</label>
+            <label for="" class="txt-right">Cuit Nº: {{$data['cuit']}}</label><br><br>
+            <label for="">Nombre del establecimiento: {{$data['nombre_establecimiento']}}</label><br><br>
+            <label for="">Nombre del propietario o razón social: {{$data['nombre_propietario_RazonSocial']}}</label><br><br>
+            <label for="">Actividad principal: {{$data['actividad_principal']}}</label><br><br>
+            <label for="">Actividad secundaria: {{$data['actividad_secundaria']}}</label><br><br>
+            <label for="">Calle o ruta: {{$data['calle_ruta']}}</label><br><br>
+            <label for="">Teléfono: {{$data['telefono']}}</label>
+            <label for="" class="txt-right">Localidad / Paraje: {{$data['localidad']}}</label><br><br>
+            <label for="">Fecha de Inscripción: {{$data['fecha_inscripcion']}}</label>
             <label for="" class="txt-right"><b>Válido hasta:</b>  <?php echo $date; ?></label>
-                
-           
+
+
             <br>
             <br>
             <label for="" class="txt-right">__________________</label>
             <br>
             <br>
-            
+
             <div style="text-align: center; font-size: small;">
             <hr>
-            Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br> 
+            Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br>
             Río Gallegos - PROVINCIA DE SANTA CRUZ
             </div>
         </section>
         <br>
         <p>-------------------------------------------------------------------------------------------------------------------------</p>
-        
+
         <section>
-            
+
             <img src="../public/Santa_Cruz.png" class="img-left">
             <img src="../public/logo_minpro.png" class="img-right">
             <div class="center">Registro Único Provincial  <br> de Actividades Económicas</div>
             <br>
             <br>
             <span><u>Certificado de Inscripción</u></span>
-            <label for="" class="txt-right">Cuit Nº</label><br><br>
-            <label for="">Nombre del establecimiento:</label><br><br>
-            <label for="">Nombre del propietario o razón social:</label><br><br>
-            <label for="">Actividad principal:</label><br><br>
-            <label for="">Actividad secundaria:</label><br><br>
-            <label for="">Calle o ruta:</label><br><br>
-            <label for="">Teléfono:</label> 
-            <label for="" class="txt-right">Localidad / Paraje:</label><br><br>
-            <label for="">Fecha de Inscripción:</label>
-            <label for="" class="txt-right"><b>Válido hasta:</b> <?php echo $date; ?></label>
-            
+            <label for="" class="txt-right">Cuit Nº: {{$data['cuit']}}</label><br><br>
+            <label for="">Nombre del establecimiento: {{$data['nombre_establecimiento']}}</label><br><br>
+            <label for="">Nombre del propietario o razón social: {{$data['nombre_propietario_RazonSocial']}}</label><br><br>
+            <label for="">Actividad principal: {{$data['actividad_principal']}}</label><br><br>
+            <label for="">Actividad secundaria: {{$data['actividad_secundaria']}}</label><br><br>
+            <label for="">Calle o ruta: {{$data['calle_ruta']}}</label><br><br>
+            <label for="">Teléfono: {{$data['telefono']}}</label>
+            <label for="" class="txt-right">Localidad / Paraje: {{$data['localidad']}}</label><br><br>
+            <label for="">Fecha de Inscripción: {{$data['fecha_inscripcion']}}</label>
+            <label for="" class="txt-right"><b>Válido hasta:</b>  <?php echo $date; ?></label>
+
             <br>
             <br>
             <label for="" class="txt-right">__________________</label>
@@ -180,12 +180,12 @@ $date = Carbon::now()->format("d/m/Y");
 
             <div style="text-align: center; font-size: small;">
             <hr>
-            Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br> 
+            Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br>
             Río Gallegos - PROVINCIA DE SANTA CRUZ
             </div>
-        
+
         </section>
-    
+
     </main>
     <!--<div class="page_break"></div>-->
 </body>

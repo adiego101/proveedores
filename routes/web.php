@@ -30,6 +30,15 @@ Route::get('/nuevoRegistro', function () {
     return view('nuevoRegistro');
 });
 
+Route::get('/gestionarRegistros', function () {
+    return view('gestionarRegistros');
+});
+
+Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
+
+//Ruta para editar los registros, se llama desde el boton "editar" de la tabla.
+Route::get('editarRegistro/{id}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId');
+
 Route::get('/Cambiar_contraseña', function () {
     return view('CambiarContraseña');
 });

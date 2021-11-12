@@ -1,10 +1,10 @@
 
-<fieldset> 
+<fieldset>
 
-  <h1>Información Impositiva</h1><br>   
+  <h1>Información Impositiva</h1><br>
 
   <label for="cuit">Cuit:</label><br>
-  <input type="text" class="form-control" placeholder="ingrese el cuit de la empresa" aria-describedby="basic-addon1" id="cuit" name="cuit" required><br>
+  <input type="text" class="form-control" placeholder="ingrese el cuit de la empresa" aria-describedby="basic-addon1" id="cuit" name="cuit" ><br>
 
   <!--En este caso, se deben recuperar los datos de la BD -->
   <label for="tipo_de_sociedad">Tipo de sociedad:</label><br>
@@ -51,19 +51,19 @@
   <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="En caso de corresponder, indique el motivo" id="motivo-exclusion" name="motivo-exclusion"><br>
   -->
   <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-  <input type="button" name="next" class="next btn btn-info" value="Siguiente" />    
-      
+  <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+
 </fieldset>
 
 <fieldset>
 
-  <h1>Impuestos sobre ingresos brutos</h1><br>   
+  <h1>Impuestos sobre ingresos brutos</h1><br>
 
   <label for="nro_ingresos_brutos">Número de ingresos brutos:</label><br>
   <input type="number" class="form-control" placeholder="ingrese el número de ingresos brutos" aria-describedby="basic-addon1" id="nro_ingresos_brutos" name="nro_ingresos_brutos" required><br>
 
   <label for="jurisdiccion">Jurisdicción:</label><br>
-  <input type="text" class="form-control" placeholder="ingrese su jurisdicción" aria-describedby="basic-addon1" id="jurisdiccion" name="jurisdiccion" required><br>
+  <input type="text" class="form-control" placeholder="ingrese su jurisdicción" aria-describedby="basic-addon1" id="jurisdiccion" name="jurisdiccion" ><br>
 
    <!--En este caso, se deben recuperar los datos de la BD -->
    <label for="tipo_contribuyente">Tipo de contribuyente:</label><br>
@@ -121,7 +121,7 @@
   </div>
   <!-- CAMBIO POR NUEVO FORMATO DE DOMICILIO
   <label for="domicilio-fiscal">Domicilio fiscal:</label><br>
-  <input type="text" class="form-control" placeholder="ingrese su domicilio fiscal" aria-describedby="basic-addon1" id="domicilio-fiscal" name="domicilio-fiscal" required><br>
+  <input type="text" class="form-control" placeholder="ingrese su domicilio fiscal" aria-describedby="basic-addon1" id="domicilio-fiscal" name="domicilio-fiscal" ><br>
 
   En este caso, se deben recuperar las localidades de la BD
   <label for="localidad-fiscal">Localidad fiscal:</label><br>
@@ -188,7 +188,7 @@
             </div>
   </div>
   <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-  <input type="button" name="next" class="next btn btn-info" value="Siguiente" />    
+  <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
 </fieldset>
-    
+

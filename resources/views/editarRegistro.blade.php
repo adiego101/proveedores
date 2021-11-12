@@ -53,24 +53,24 @@
     </div>
     <br>
     <div class="alert alert-info" role="alert">
-        Complete los campos que se presentan continuación
-        y presione el botón <b>Siguiente</b>, para continuar la carga de datos.
+        Modifique los campos que se presentan continuación
+        y presione el botón <b>Siguiente</b>, para continuar la modificación de los datos.
     </div>
 
     <form id="regiration_form" action="{{ route('todos') }}"  method="POST">
         @csrf
-        @include('altaRegistro.valorAgregado')
+        @include('editarRegistro.valorAgregado')
 
-        @include('altaRegistro.datosGenerales')
-        @include('altaRegistro.domicilioReal')
-        @include('altaRegistro.domicilioLegal')
+        @include('editarRegistro.datosGenerales')
+        @include('editarRegistro.domicilioReal')
+        @include('editarRegistro.domicilioLegal')
 
-        @include('altaRegistro.sucursales')
-        @include('altaRegistro.infoImpositiva')
-        @include('altaRegistro.actividad')
-        @include('altaRegistro.personalOcupado')
-        @include('altaRegistro.pagos')
-        @include('altaRegistro.otrosDatos')
+        @include('editarRegistro.sucursales')
+        @include('editarRegistro.infoImpositiva')
+        @include('editarRegistro.actividad')
+        @include('editarRegistro.personalOcupado')
+        @include('editarRegistro.pagos')
+        @include('editarRegistro.otrosDatos')
 
         <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <div class="btn-group">

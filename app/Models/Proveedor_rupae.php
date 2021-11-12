@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Support\Facades\DB;
 
 class Proveedor_rupae extends Model
 {
@@ -50,11 +51,11 @@ class Proveedor_rupae extends Model
                             'empleados_nomina',
                             'puestos_trabajo_Sta_Cruz',
                             'cant_administrativos',
-                            'periodo_de_contratacion',
+                            'periodo_contr_administrativos',
                             'cant_operarios',
-                            'periodo_contratacion1',
+                            'periodo_contr_operarios',
                             'cant_personal_vta',
-                            'periodo_contratacion2',
+                            'periodo_contr_pventas',
                             'cant_empleados_domicilio_sta_cruz',
                             'masa_salarial_bruta',
                             'fecha_inscripcion',
@@ -80,8 +81,20 @@ class Proveedor_rupae extends Model
         return Proveedor_rupae::All();
     }
 
-    public function obtenerProveedorRupaeId($id){
+    /*public function obtenerProveedorRupaeId($id){
 
-        return Proveedor_rupae::find($id);
-    }
+        $date = DB::table('proveedores_rupae')
+        ->where('id_proveedores_rupae', $id)
+        ->first();
+        return $date;
+    }*/
+
+   /* public function obtenerProveedorRupaeId()
+    {
+        $users = DB::table('proveedores_rupae')
+        ->where('id_proveedores_rupae', 16)
+        ->first();
+
+        return view('vistaPrueba', $users);
+    }*/
 }
