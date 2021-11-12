@@ -37,19 +37,24 @@
   <!--En este caso, se deben recuperar los datos de la BD -->
   <label for="en_la_provincia_de">En la provincia de:</label><br>
   <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese la provincia en la que se encuentra excento" id="en_la_provincia_de" name="en_la_provincia_de" required><br>
-  <br>
 
-  <p>Corresponde retención:</p>
-  <div>
-    <input type="radio" id="retencion" name="retencion" value="1" checked>
-    <label for="retencion">SI</label>
-    <input type="radio" id="retencion" name="retencion" value="0" checked>
-    <label for="retencion">NO</label>
+  
+  <div class="row">
+    <label>Corresponde retención:</label>
+    <div class="form-check">
+      <div class="col-sm">
+        <input type="radio" id="retencion" name="retencion" value="1">SI
+      </div>
+      <div class="col-sm">
+        <input type="radio" id="retencion" name="retencion" value="0">NO
+      </div>
+    </div>
   </div>
   <!-- NI EN EL FORMULARIO NI EN LA BASE DE DATOS SE SOLICITA UN MOTIVO DE EXCLUSION
   <label for="motivo-exclusion">Motivo de la exclusión:</label><br>
   <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="En caso de corresponder, indique el motivo" id="motivo-exclusion" name="motivo-exclusion"><br>
   -->
+  <br>
   <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
   <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
@@ -131,61 +136,84 @@
   </select>
   <br>
   -->
-  <div class="row">
-            <div class="col-sm">
-                <label for="calle-fiscal">Calle:</label><br>
-                <input type="text" class="form-control" placeholder="Calle" aria-describedby="basic-addon1"
-                    id="calle-fiscal" name="calle-fiscal"><br>
-
-                <label for="numero-fiscal">Numero:</label><br>
-                <input type="number" class="form-control" placeholder="Numero" aria-describedby="basic-addon1"
-                    id="numero-fiscal" name="numero-fiscal"><br>
-
-                <label for="lote-fiscal">Lote:</label><br>
-                <input type="text" class="form-control" placeholder="lote:" aria-describedby="basic-addon1"
-                    id="lote-fiscal" name="lote-fiscal"><br>
-
-                <label for="entreCalles-fiscal">Entre Calle:</label><br>
-                <input type="text" class="form-control" placeholder="Entre Calles:" aria-describedby="basic-addon1"
-                    id="entreCalles-fiscal" name="entreCalles-fiscal"><br>
-
-                <label for="monoblock-fiscal">Monoblock:</label><br>
-                <input type="text" class="form-control" placeholder="Monoblock:" aria-describedby="basic-addon1"
-                    id="monoblock-fiscal" name="monoblock-fiscal"><br>
-
-                <label for="departamento-fiscal">Departamento:</label><br>
-                <input type="text" class="form-control" placeholder="Departamento:" aria-describedby="basic-addon1"
-                    id="departamento-fiscal" name="departamento-fiscal"><br>
-
-                <label for="puerta-fiscal">Puerta:</label><br>
-                <input type="text" class="form-control" placeholder="Puerta:" aria-describedby="basic-addon1"
-                    id="puerta-fiscal" name="puerta-fiscal"><br>    
-                
-                <label for="oficina-fiscal">Oficina:</label><br>
-                <input type="text" class="form-control" placeholder="Oficina:" aria-describedby="basic-addon1"
-                    id="oficina-fiscal" name="oficina-fiscal"><br>
-
-                <label for="manzana-fiscal">Manzana:</label><br>
-                <input type="text" class="form-control" placeholder="Manzana:" aria-describedby="basic-addon1"
-                    id="manzana-fiscal" name="manzana-fiscal"><br>
-
-                <label for="barrio-fiscal">Barrio:</label><br>
-                <input type="text" class="form-control" placeholder="Barrio:" aria-describedby="basic-addon1"
-                    id="barrio-fiscal" name="barrio-fiscal"><br>
-
-                <!--En este caso, se deben recuperar las localidades de la BD -->
-                <label for="localidad-fiscal">Localidad:</label><br>
-                <select class="form-control" aria-describedby="basic-addon1" id="localidad-fiscal"
-                    name="localidad-fiscal">
-                    <option selected value="M">Masculino</option>
-                    <option value="F">Femenino</option>
-                </select>
-                <br>
-
-                <label for="provincia-fiscal">Provincia:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="provincia-fiscal"
-                    name="provincia-fiscal" required disabled><br>
-            </div>
+  <h1>Datos del Domicilio fiscal</h1><br>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <label for="calle-fiscal">Calle:</label><br>
+        <input type="text" class="form-control" placeholder="Calle" aria-describedby="basic-addon1"
+            id="calle-fiscal" name="calle-fiscal"><br>
+      </div>
+      <div class="col-sm">
+        <label for="numero-fiscal">Numero:</label><br>
+        <input type="number" class="form-control" placeholder="Numero" aria-describedby="basic-addon1"
+            id="numero-fiscal" name="numero-fiscal"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <label for="lote-fiscal">Lote:</label><br>
+        <input type="text" class="form-control" placeholder="lote:" aria-describedby="basic-addon1"
+            id="lote-fiscal" name="lote-fiscal"><br>
+      </div>
+      <div class="col-sm">
+        <label for="entreCalles-fiscal">Entre Calle:</label><br>
+        <input type="text" class="form-control" placeholder="Entre Calles:" aria-describedby="basic-addon1"
+            id="entreCalles-fiscal" name="entreCalles-fiscal"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <label for="monoblock-fiscal">Monoblock:</label><br>
+        <input type="text" class="form-control" placeholder="Monoblock:" aria-describedby="basic-addon1"
+            id="monoblock-fiscal" name="monoblock-fiscal"><br>
+      </div>
+      <div class="col-sm">
+        <label for="departamento-fiscal">Departamento:</label><br>
+        <input type="text" class="form-control" placeholder="Departamento:" aria-describedby="basic-addon1"
+            id="departamento-fiscal" name="departamento-fiscal"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <label for="puerta-fiscal">Puerta:</label><br>
+        <input type="text" class="form-control" placeholder="Puerta:" aria-describedby="basic-addon1"
+            id="puerta-fiscal" name="puerta-fiscal"><br>    
+      </div>
+      <div class="col-sm">
+        <label for="oficina-fiscal">Oficina:</label><br>
+        <input type="text" class="form-control" placeholder="Oficina:" aria-describedby="basic-addon1"
+            id="oficina-fiscal" name="oficina-fiscal"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <label for="manzana-fiscal">Manzana:</label><br>
+        <input type="text" class="form-control" placeholder="Manzana:" aria-describedby="basic-addon1"
+            id="manzana-fiscal" name="manzana-fiscal"><br>
+      </div>
+      <div class="col-sm">
+        <label for="barrio-fiscal">Barrio:</label><br>
+        <input type="text" class="form-control" placeholder="Barrio:" aria-describedby="basic-addon1"
+            id="barrio-fiscal" name="barrio-fiscal"><br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <!--En este caso, se deben recuperar las localidades de la BD -->
+        <label for="localidad-fiscal">Localidad:</label><br>
+        <select class="form-control" aria-describedby="basic-addon1" id="localidad-fiscal"
+            name="localidad-fiscal">
+            <option selected value="M">Masculino</option>
+            <option value="F">Femenino</option>
+        </select>
+      </div>
+      <div class="col-sm">
+        <label for="provincia-fiscal">Provincia:</label><br>
+        <input type="text" class="form-control" aria-describedby="basic-addon1" id="provincia-fiscal"
+            name="provincia-fiscal" required disabled><br>
+      </div>
+    </div>
   </div>
   <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
   <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
