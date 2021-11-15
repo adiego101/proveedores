@@ -57,9 +57,8 @@
         y presione el botón <b>Siguiente</b>, para continuar la modificación de los datos.
     </div>
 
-    <form id="regiration_form" action="{{ route('todos') }}"  method="POST">
+    <form id="regiration_form" action="{{'route(modificarRegistro/$proveedor->id)'}}"  method="POST">
         @csrf
-        @include('editarRegistro.valorAgregado')
 
         @include('editarRegistro.datosGenerales')
         @include('editarRegistro.domicilioReal')
@@ -68,6 +67,8 @@
         @include('editarRegistro.sucursales')
         @include('editarRegistro.infoImpositiva')
         @include('editarRegistro.actividad')
+        @include('editarRegistro.valorAgregado')
+
         @include('editarRegistro.personalOcupado')
         @include('editarRegistro.pagos')
         @include('editarRegistro.otrosDatos')

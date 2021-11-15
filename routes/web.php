@@ -37,7 +37,6 @@ Route::get('/gestionarRegistros', function () {
 Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
 
 //Ruta para editar los registros, se llama desde el boton "editar" de la tabla.
-Route::get('editarRegistro/{id}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId');
 
 Route::get('/Cambiar_contraseña', function () {
     return view('CambiarContraseña');
@@ -45,7 +44,11 @@ Route::get('/Cambiar_contraseña', function () {
 
 Route::group(['middleware' => ['auth']], function() {
 
-    Route::post('/todos', [ProveedoresController::class,'todos'])->name('todos');
+    Route::post('/crear_registro', [ProveedoresController::class,'crear_registro'])->name('crear_registro');
+    //Levanta las vistas para editar (del formulario)
+    Route::get('modificarRegistro/{id}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId');
+    //Llama al metodo que realiza las modificaciones en la BD
+    Route::get('editarProveedor/{id}', 'App\Http\Controllers\editarProveedor@obtenerProveedorRupaeId');
 
 
     Route::resource('roles', RoleController::class);

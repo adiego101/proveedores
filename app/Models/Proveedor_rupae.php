@@ -74,7 +74,7 @@ class Proveedor_rupae extends Model
                             'observaciones',
                             ];
 
-    protected $hidden = ['id_proveedores_rupae'];
+    protected $hidden = ['id'];
 
     public function obtenerProveedoresRupae(){
 

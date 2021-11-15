@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class ProveedoresController extends Controller
 {
     //
-    public function todos(Request $request)
+    public function crear_registro(Request $request)
     {
         /*
         'puestos_trabajo_Sta_Cruz',
@@ -44,7 +44,7 @@ class ProveedoresController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="editarRegistro/'."$row->id_proveedores_rupae".'" class="edit btn btn-success btn-sm">Editar</a> <a onclick="verRegistro();" class="view btn btn-warning btn-sm">Ver</a> <a onclick="eliminarRegistro();" class="delete btn btn-danger btn-sm">Eliminar</a>';
+                    $actionBtn = '<a href="modificarRegistro/'."$row->id".'" class="edit btn btn-success btn-sm">Editar</a> <a onclick="verRegistro();" class="view btn btn-warning btn-sm">Ver</a> <a onclick="eliminarRegistro();" class="delete btn btn-danger btn-sm">Eliminar</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -61,6 +61,26 @@ class ProveedoresController extends Controller
     /*En esta función obtenemos cada uno de los datos de las distintas tablas.
     Pero debemos validar que los datos de las demas tablas no sean nulos ya que dan error*/
     public function obtenerProveedorRupaeId($id)
+    {
+        $proveedor = DB::table('proveedores_rupae')
+        ->where('id', $id)
+        ->first();
+
+        $proveedor_email = DB::table('proveedores_emails')
+        ->where('id_proveedores_rupae', $id)
+        ->first();
+
+
+        $proveedor_domicilio = DB::table('proveedores_domicilios')
+        ->where('id_proveedores_rupae', $id)
+        ->first();
+
+        return view('editarRegistro', ['proveedor' => $proveedor,
+                                        'proveedor_email' => $proveedor_email,
+                                        'proveedor_domicilio' => $proveedor_domicilio]);
+    }
+
+    public function editarProveedor($id)
     {
         $proveedor = DB::table('proveedores_rupae')
         ->where('id_proveedores_rupae', $id)
