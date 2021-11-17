@@ -100,6 +100,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <script type="text/javascript">
+
         let calle;
         let barrio;
         let telefono;
@@ -108,6 +109,7 @@
         let departamento;
         let i = 1; //contador para asignar id al boton que borrara la fila
         $("#add_sucursal").on("click", function(e) {
+
             calle = $("#calle").val();
             barrio = $("#barrio").val();
             telefono = $("#nro_tel").val();
@@ -120,17 +122,19 @@
             $("#body_table").append(
                 '<tr id="row' + i +'">'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="calle' + i +'" name="calles[]" readonly value="' + calle +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="barrio" name="barrios[]" readonly value="' + barrio +'"></td>'+
-                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="nro_tel" name="Telefonos_sucursales[]" readonly value="' + telefono +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="entre_calles" name="entreCalles[]" readonly value="'+ entre_calle +'"></td>'+
-                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="numero" name="numeros[]" readonly value="'+numero+'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dpto" name="dptos[]" readonly value="'+ departamento +'"></td>'+
-                    '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email" name="correos_electronicos[]" readonly value="'+ email +'"></td>'+
+                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="barrio' + i +'" name="barrios[]" readonly value="' + barrio +'"></td>'+
+                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="nro_tel' + i +'" name="Telefonos_sucursales[]" readonly value="' + telefono +'"></td>'+
+                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="entre_calles' + i +'" name="entreCalles[]" readonly value="'+ entre_calle +'"></td>'+
+                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="numero' + i +'" name="numeros[]" readonly value="'+numero+'"></td>'+
+                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dpto' + i +'" name="dptos[]" readonly value="'+ departamento +'"></td>'+
+                    '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email' + i +'" name="correos_electronicos[]" readonly value="'+ email +'"></td>'+
                     '<td><button type="button" name="remove" id="' + i +'" class="btn btn-danger btn_remove">Quitar</button> <button type="button" name="edit" id="'+ i +'" class="btn btn-warning btn_edit">Editar</button></td>'+
                 '</tr>'
             );
 
             i++;
+
+            //Limpiamos cada campo luego de presionar el botón Agregar Sucursal
 
             document.getElementById("calle").value = "";
             document.getElementById("numero").value = "";
@@ -148,26 +152,47 @@
             document.getElementById("barrio").value = "";
             document.getElementById("nro_tel").value = "";
 
+
+
             $(document).on("click", ".btn_remove", function() {
+
+                //cuando da click al boton quitar, obtenemos el id del boton
                 var button_id = $(this).attr("id");
-                //cuando da click obtenemos el id del boton
-                $("#row" + button_id + "").remove(); //borra la fila
+
+                //borra la fila
+                $("#row" + button_id + "").remove(); 
             });
+
 
 
             //Cargamos los inputs del modal con los datos de la fila de la tabla
 
             $(document).on("click", ".btn_edit", function() {
                 
-                //cuando da click obtenemos el id del boton
+                //cuando da click al boton editar, obtenemos el id del boton
                 var button_id = $(this).attr("id");
       
-                var first=$("#calle"+ button_id).val();
+                //Recuperamos los valores de los campos pertenecientes a una fila
+                var modal_calle=$("#calle"+ button_id).val();
+                var modal_numero=$("#numero"+ button_id).val();
+                var modal_entre_calles=$("#entre_calles"+ button_id).val();
+                var modal_barrio=$("#barrio"+ button_id).val();
+                var modal_departamento=$("#dpto"+ button_id).val();
+                var modal_telefono=$("#nro_tel"+ button_id).val();
+                var modal_email=$("#email"+ button_id).val();
 
+                //Desplegamos el modal
                 $('#myModal').modal('show'); 
             
-                $('#ecalle').val(first);
-               
+                //Enviamos los valores recuperados anteriormente a los inputs del modal
+                $('#modal_calle').val(modal_calle);
+                $('#modal_numero').val(modal_numero);
+                $('#modal_entre_calles').val(modal_entre_calles);
+                $('#modal_barrio').val(modal_barrio);
+                $('#modal_dpto').val(modal_departamento);
+                $('#modal_nro_tel').val(modal_telefono);
+                $('#modal_email').val(modal_email);
+                $('#numero_fila').val(button_id);
                 
             });
             
