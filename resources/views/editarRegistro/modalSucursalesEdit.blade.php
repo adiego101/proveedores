@@ -19,7 +19,7 @@
         <div class="col-sm">
             <label for="calle">Calle:</label><br />
             <input type="text" class="form-control" placeholder="Calle" aria-describedby="basic-addon1"
-                id="modal_calle" /><br />
+                id="modal_calle"/><br />
 
             <label for="entre_calles">Entre Calle:</label><br />
             <input type="text" class="form-control" placeholder="Entre Calles" aria-describedby="basic-addon1"
@@ -75,8 +75,8 @@
             </div>
             <div class="modal-footer">
                 <input id="numero_fila" name="numero_fila" type="hidden">
-                <button type="button" name="edit" class="btn btn-warning btn_edit_modal">Editar</button>
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>
@@ -115,4 +115,4 @@
                 $('#email'+id_fila).val(modal_email);
                 
             });
-            </script>
+</script>

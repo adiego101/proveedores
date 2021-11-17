@@ -11,11 +11,11 @@
         <div class="col-sm">
             <label for="calle">Calle:</label><br />
             <input type="text" class="form-control" placeholder="Calle" aria-describedby="basic-addon1"
-                id="calle" /><br />
+                id="calle" required /><br />
 
             <label for="entre_calles">Entre Calle:</label><br />
             <input type="text" class="form-control" placeholder="Entre Calles" aria-describedby="basic-addon1"
-                id="entre_calles" /><br />
+                id="entre_calles" required /><br />
 
             <label for="dpto">Departamento:</label><br />
             <input type="text" class="form-control" placeholder="Departamento" aria-describedby="basic-addon1"
@@ -33,14 +33,14 @@
                 id="localidad" name="Localidades[]" /><br /> --}}
             
             <label for="email">Correo electrónico:</label><br />
-            <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email" name="correos_electronicos[]" /><br />
+            <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email" name="correos_electronicos[]" required /><br />
         </div>
 
         <div class="col-sm">
 
             <label for="numero">Numero:</label><br />
             <input type="number" class="form-control" placeholder="Numero" aria-describedby="basic-addon1"
-                id="numero" /><br />
+                id="numero" required /><br />
 
             {{-- <label for="puerta">Puerta:</label><br />
             <input type="text" class="form-control" placeholder="Puerta" aria-describedby="basic-addon1"
@@ -59,7 +59,7 @@
                 id="barrio" /><br />
 
             <label for="nro_tel">Telefono:</label><br />
-            <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Número de teléfono" id="nro_tel" /><br /><br />
+            <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Número de teléfono" id="nro_tel" required /><br /><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_sucursal" class="btn btn-success">Agregar Sucursal</a>
@@ -128,7 +128,7 @@
                     '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="numero' + i +'" name="numeros[]" readonly value="'+numero+'"></td>'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dpto' + i +'" name="dptos[]" readonly value="'+ departamento +'"></td>'+
                     '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email' + i +'" name="correos_electronicos[]" readonly value="'+ email +'"></td>'+
-                    '<td><button type="button" name="remove" id="' + i +'" class="btn btn-danger btn_remove">Quitar</button> <button type="button" name="edit" id="'+ i +'" class="btn btn-warning btn_edit">Editar</button></td>'+
+                    '<td><button type="button" name="edit" id="'+ i +'" class="btn btn-warning btn-sm btn_edit" title="editar sucursal"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i +'" class="btn btn-danger btn-sm btn_remove" title="quitar sucursal"><i class="fas fa-trash"></i></button></td>'+
                 '</tr>'
             );
 
