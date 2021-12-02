@@ -4,7 +4,7 @@
   
     <div class="container">
         <div class="row">
-            <div class="col-sm field_wrapper">
+            <div class="col-sm">
                 <label for="calle_real">Calle:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_real" name="calle_real"><br>
 
@@ -32,13 +32,21 @@
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="provincia_real"
                     name="provincia_real"  disabled><br>
 
+                <label for="web_real">Página web:</label><br>
+                <input type="text" class="form-control" placeholder="Ingrese la página web"
+                    aria-describedby="basic-addon1" id="web_real" name="web_real" ><br>
+
                 <label for="email_real">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
-                    aria-describedby="basic-addon1" id="email_real" name="email_real" ><br>
-
+                    aria-describedby="basic-addon1" id="email_real" name="email_real[]" ><br>
+                <div class="field_email_real">
+                
+                </div>
                 <label for="telefono_real">Teléfono:</label><br>
                 <input type="number" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" >
-                       
+                <div class="field_telefono_real">
+                
+                </div>  
             </div>
             <div class="col-sm">
              
@@ -63,13 +71,19 @@
 
                 <label for="cp_real">Código Postal:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_real" name="cp_real" disabled><br>
-
-                <label for="web_real">Página web:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la página web"
-                    aria-describedby="basic-addon1" id="web_real" name="web_real" ><br>
-                    <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <a href="javascript:void(0);" class="add_button" title="Agregue un nuevo teléfono"><input type="button" value="Agregar Teléfono" class="btn btn-success"></a>
+                    <a href="javascript:void(0);" class="add_email_real" title="Agregue un nuevo correo"><input type="button" value="Agregar Correo" class="btn btn-success"></a>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="javascript:void(0);" class="add_telefono_real" title="Agregue un nuevo teléfono"><input type="button" value="Agregar Teléfono" class="btn btn-success"></a>
                 </div>
             </div>
         </div>
@@ -81,36 +95,67 @@
 
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var maxField = 3; //Cantidad máxima de campos (teléfonos) a agregar
-            var addButton = $('.add_button');
-            var wrapper = $('.field_wrapper');
+<script type="text/javascript">
+    $(document).ready(function() {
 
-            //Nuevo campo html (agregar un nuevo teléfono)
-            var fieldHTML = '<div>'+
-                                '<br>'+
-                                '<label for="telefono_real">Teléfono:</label><br>' +
-                                '<input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el número de teléfono" id="telefono_real" name="telefono_real[]">' + 
-                                '<a href="javascript:void(0);" class="remove_button" title="Elimine el teléfono"><input type="button" value="Eliminar"></a>'+
-                                '<br>'+
-                            '</div>';
+        var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
+        var addTelefono_real = $('.add_telefono_real');
+        var wrapper_telefono_real = $('.field_telefono_real');
+       
+
+        //Nuevo campo html (agregar un nuevo teléfono)
+        var fieldHTML_telefono_real = '<div>'+
+                                 '<br>'+
+                                    '<label for="telefono_real">Teléfono:</label><br>'+
+                                    '<input type="number" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" >'+
+                                    '<a href="javascript:void(0);" class="remove_telefono_real" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+                                 '<br>'+
+                                '</div>';
 
 
-            var x = 1; //Contador inicial, comienza en 1
-            $(addButton).click(function() {
-                if (x < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    x++; //Incrementa el contador en 1
-                    $(wrapper).append(fieldHTML); // Agrega un nuevo campo html (teléfono)
-                }
-            });
-            $(wrapper).on('click', '.remove_button', function(e) {
-                e.preventDefault();
-                $(this).parent('div').remove(); //Remueve un campo html (teléfono)
-                x--; //Decrementa el contador en 1
-            });
+        var x = 1; //Contador inicial, comienza en 1
+        $(addTelefono_real).click(function() {
+            if (x < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
+                x++; //Incrementa el contador en 1
+                $(wrapper_telefono_real).append(fieldHTML_telefono_real); // Agrega un nuevo campo html (telefono)
+            }
         });
-    </script>
+        $(wrapper_telefono_real).on('click', '.remove_telefono_real', function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remueve un campo html (telefono)
+            x--; //Decrementa el contador en 1
+        });
+
+
+
+        var addEmail_real = $('.add_email_real');
+        var wrapper_email_real = $('.field_email_real');
+        
+        //Nuevo campo html (agregar un nuevo correo)
+        var fieldHTML_email_real = '<div>'+
+                                    '<label for="email_real">Correo electrónico:</label><br>'+
+                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_real" name="email_real[]" >'+
+                                    '<a href="javascript:void(0);" class="remove_email_real" title="Elimine el correo"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+                                    '<br>'+
+                                    '<br>'+
+                                '</div>';
+
+
+       
+        var i = 1; //Contador inicial, comienza en 1
+        $(addEmail_real).click(function() {
+            if (i < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
+                i++; //Incrementa el contador en 1
+                $(wrapper_email_real).append(fieldHTML_email_real); // Agrega un nuevo campo html (correo)
+            }
+        });
+        $(wrapper_email_real).on('click', '.remove_email_real', function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remueve un campo html (correo)
+            i--; //Decrementa el contador en 1
+        });
+    });
+</script>
 </fieldset>
