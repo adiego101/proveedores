@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Proveedor_rupae_hist extends Model
+class Proveedor_hist extends Model
 {
     use HasFactory;
 
-    protected $table = "proveedores_rupae_hist";
+    protected $table = "proveedores_hist";
 
     protected $fillable = [
                             'start_date',
@@ -69,19 +69,19 @@ class Proveedor_rupae_hist extends Model
                             'antiguedad',
                             'dom_fiscal',
                             'valor_agregado',
-                            'tamaño',
                             'observaciones',
                             ];
 
-    protected $hidden = ['id_proveedores_rupae'];
+    protected $hidden = ['id_proveedor'];
+    protected $primaryKey = 'id_proveedor';
 
-    public function obtenerProveedoresRupaeHist(){
+    public function obtenerProveedoresHist(){
 
-        return Proveedor_rupae_hist::All();
+        return Proveedor_hist::All();
     }
 
-    public function obtenerProveedorRupaeHistId($id){
+    public function obtenerProveedorHistId($id){
 
-        return Proveedor_rupae_hist::find($id);
+        return Proveedor_hist::find($id);
     }
 }

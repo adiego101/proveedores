@@ -12,14 +12,14 @@ class Proveedor_patente extends Model
     protected $table = "proveedores_patentes";
 
     protected $fillable = [
-                            'id_proveedores_rupae',
                             'dominio',
                             'marca',
                             'modelo',
                             'inscripto_en',
                             ];
 
-    protected $hidden = ['id_proveedores_patentes'];
+    protected $hidden = ['id_proveedor_patente'];
+    protected $primaryKey = 'id_proveedor_patente';
 
     public function obtenerProveedoresPatentes(){
 
@@ -29,5 +29,9 @@ class Proveedor_patente extends Model
     public function obtenerProveedorPatenteId($id){
 
         return Proveedor_patente::find($id);
+    }
+
+    public function proveedor(){
+        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
     }
 }

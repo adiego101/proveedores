@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Support\Facades\DB;
 
-class Proveedor_rupae extends Model
+class Proveedor extends Model
 {
     use HasFactory;
 
-    protected $table = "proveedores_rupae";
+    protected $table = "proveedores";
 
     protected $fillable = [
                             'start_date',
@@ -70,18 +70,18 @@ class Proveedor_rupae extends Model
                             'antiguedad',
                             'dom_fiscal',
                             'valor_agregado',
-                            'tamaño',
                             'observaciones',
                             ];
 
-    protected $hidden = ['id'];
+    protected $primaryKey = 'id_proveedor';
+    protected $hidden = ['id_proveedor'];
 
-    public function obtenerProveedoresRupae(){
+    public function obtenerProveedores(){
 
-        return Proveedor_rupae::All();
+        return Proveedor::All();
     }
 
-    /*public function obtenerProveedorRupaeId($id){
+    /*public function obtenerProveedorId($id){
 
         $date = DB::table('proveedores_rupae')
         ->where('id_proveedores_rupae', $id)
@@ -89,7 +89,7 @@ class Proveedor_rupae extends Model
         return $date;
     }*/
 
-   /* public function obtenerProveedorRupaeId()
+   /* public function obtenerProveedorId()
     {
         $users = DB::table('proveedores_rupae')
         ->where('id_proveedores_rupae', 16)
@@ -97,4 +97,56 @@ class Proveedor_rupae extends Model
 
         return view('vistaPrueba', $users);
     }*/
+
+    public function personas(){
+        return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
+                    ->withPivot('rol_persona_proveedor')
+                    ->withTimestamps();
+    }
+
+    public function actividades_economicas(){
+        return $this->belongsToMany(Actividad_economica::class, 'actividades_proveedores', 'id_proveedor', 'id_actividad_economica');
+    }
+
+    public function tipos_actividades(){
+        return $this->belongsToMany(Tipo_actividad::class, 'actividades_proveedores', 'id_proveedor', 'id_tipo_actividad');
+    }
+
+    public function telefonos(){
+        return $this->hasMany(Proveedor_telefono::class, 'id_proveedor', 'id_proveedor');
+    }
+
+    public function emails(){
+        return $this->hasMany(Proveedor_email::class, 'id_proveedor', 'id_proveedor');
+    }
+
+    public function domicilios(){
+        return $this->hasMany(Proveedor_domicilio::class, 'id_proveedor', 'id_domicilio');
+    }
+
+    public function sucursales(){
+        return $this->hasMany(Sucursal::class, 'id_proveedor', 'id_proveedor');
+    }
+
+    public function productos(){
+        return $this->hasMany(Producto::class, 'id_proveedor', 'id_proveedor');
+    }
+
+    public function proveedores_patentes(){
+        return $this->hasMany(Proveedor_patente::class, 'id_proveedor', 'id_proveedor');
+    }
+
+    public function proveedores_seguros(){
+        return $this->hasMany(Proveedor_seguro::class, 'id_proveedor', 'id_proveedor');
+    }
+
+    public function pagos(){
+        return $this->hasMany(Pago::class, 'id_pagos', 'id_pagos');
+    }
+
+    public function presentaciones_estados(){
+        return $this->belongsToMany(Presentacion_estado::class, 'proveedores_presentaciones', 'id_presentacion_estado', 'id_proveedor')
+                    ->withPivot('fecha_presentacion','ubic_presentacion')
+                    ->withTimestamps();
+    }
 }

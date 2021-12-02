@@ -20,6 +20,7 @@ class Persona extends Model
                             ];
 
     protected $hidden = ['id_persona'];
+    protected $primaryKey = 'id_persona';
 
     public function obtenerPersonas(){
 
@@ -29,5 +30,11 @@ class Persona extends Model
     public function obtenerPersonaId($id){
 
         return Persona::find($id);
+    }
+
+    public function proveedores(){
+        return $this->belongsToMany(Proveedor::class, 'personas_proveedores', 'id_persona', 'id_proveedor')
+                    ->withPivot('rol_persona_proveedor')
+                    ->withTimestamps();
     }
 }

@@ -9,10 +9,9 @@ class Proveedor_domicilio extends Model
 {
     use HasFactory;
 
-    protected $table = "proveedores_domicilios";
+    protected $table = "proveedores_domicilio";
 
     protected $fillable = [
-                            'id_proveedores_rupae',
                             'tipo_domicilio',
                             'nro_orden_domicilio',
                             'calle',
@@ -25,18 +24,27 @@ class Proveedor_domicilio extends Model
                             'oficina',
                             'manzana',
                             'barrio',
-                            'id_localidad',
+                            'codigo_postal',
                             ];
 
-    protected $hidden = ['id_proveedores_domicilios'];
+    protected $hidden = ['id_proveedor_domicilio'];
+    protected $primaryKey = 'id_proveedor_domicilio';
 
-    public function obtenerProveedoresDomicilios(){
+    public function obtenerDomicilio_proveedors(){
 
         return Proveedor_domicilio::All();
     }
 
-    public function obtenerProveedorDomicilioId($id){
+    public function obtenerDomicilio_proveedorId($id){
 
         return Proveedor_domicilio::find($id);
+    }
+
+    public function proveedor(){
+        return $this->belongsTo(Proveedor::class, 'id_domicilio_proveedor', 'id_proveedor');
+    }
+
+    public function localidad(){
+        return $this->belongsTo(Localidad::class, 'id_localidad', 'id_localidad');
     }
 }

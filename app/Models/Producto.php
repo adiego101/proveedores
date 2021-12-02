@@ -12,14 +12,14 @@ class Producto extends Model
     protected $table = "productos";
 
     protected $fillable = [
-                            'id_proveedores_rupae',
                             'producto_elaborado',
                             'rnpa',
-                            'producida_unidad',
+                            'Producida_unidad',
                             'capacidad_produccion_total',
                             ];
 
     protected $hidden = ['id_producto'];
+    protected $primaryKey = 'id_producto';
 
 
     public function obtenerProductos(){
@@ -30,5 +30,9 @@ class Producto extends Model
     public function obtenerProductoId($id){
 
         return Producto::find($id);
+    }
+
+    public function proveedor(){
+        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
     }
 }

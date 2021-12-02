@@ -12,14 +12,13 @@ class Clasificacion_empresa extends Model
     protected $table = "clasificaciones_empresas";
 
     protected $fillable = [
-                            'tamanio',
-                            'sector',
                             'simbolo',
                             'facturacion_max',
                             'fact_max_2018',
                             ];
                             
     protected $hidden = ['id_clasificacion_empresa'];
+    protected $primaryKey = 'id_clasificacion_empresa';
 
     public function obtenerClasificacionesEmpresas(){
 
@@ -29,5 +28,13 @@ class Clasificacion_empresa extends Model
     public function obtenerClasificacionEmpresaId($id){
 
         return Clasificacion_empresa::find($id);
+    }
+
+    public function sector(){
+        return $this->belongsTo(Sector::class, 'id_sector', 'id_sector');
+    }
+
+    public function tamanio_empresa(){
+        return $this->belongsTo(Tamanio_empresa::class, 'id_tamanio_empresa', 'id_tamanio_empresa');
     }
 }

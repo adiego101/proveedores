@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Proveedor_email extends Model
+class Sucursal_email extends Model
 {
     use HasFactory;
 
-    protected $table = "proveedores_emails";
+    protected $table = "sucursales_emails";
 
     protected $fillable = [
                             'email',
@@ -18,20 +18,20 @@ class Proveedor_email extends Model
                             'nro_orden_email',
                             ];
 
-    protected $primaryKey = 'id_proveedor_email';
-    protected $hidden = ['id_proveedor_email'];
+    protected $primaryKey = 'id_sucursal_email';
+    protected $hidden = ['id_sucursal_email'];
 
     public function obtenerEmails(){
 
-        return Proveedor_email::All();
+        return Sucursal_email::All();
     }
 
     public function obtenerEmailId($id){
 
-        return Proveedor_email::find($id);
+        return Sucursal_email::find($id);
     }
 
-    public function proveedor(){
-        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
+    public function sucursal(){
+        return $this->belongsTo(Sucursal::class, 'id_sucursal', 'id_sucursal');
     }
 }

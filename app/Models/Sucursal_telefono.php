@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Proveedor_telefono extends Model
+class Sucursal_telefono extends Model
 {
     use HasFactory;
-    protected $table = "proveedores_telefonos";
+    protected $table = "sucursales_telefonos";
 
     protected $fillable = [
                             'nro_tel',
@@ -19,20 +19,20 @@ class Proveedor_telefono extends Model
                             'nro_orden_telefono'
                             ];
                             
-    protected $hidden = ['id_proveedor_telefono'];
-    protected $primaryKey = 'id_proveedor_telefono';
+    protected $hidden = ['id_sucursal_telefono'];
+    protected $primaryKey = 'id_sucursal_telefono';
 
     public function obtenerProveedor_telefonos(){
 
-        return Proveedor_telefono::All();
+        return Sucursal_telefono::All();
     }
 
     public function obtenerProveedor_telefonoId($id){
 
-        return Proveedor_telefono::find($id);
+        return Sucursal_telefono::find($id);
     }
 
-    public function proveedor(){
-        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
+    public function sucursal(){
+        return $this->belongsTo(Sucursal::class, 'id_sucursal', 'id_sucursal');
     }
 }

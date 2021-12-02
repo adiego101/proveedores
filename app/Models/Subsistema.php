@@ -17,6 +17,7 @@ class Subsistema extends Model
                             ];
                             
     protected $hidden = ['id_subsistema'];
+    protected $primaryKey = 'id_subsistema';
 
     public function obtenerSubsistemas(){
 
@@ -26,5 +27,11 @@ class Subsistema extends Model
     public function obtenerSubsistemaId($id){
 
         return Subsistema::find($id);
+    }
+
+    public function presentaciones(){
+        return $this->belongsToMany(Presentacion::class, 'subsistemas_presentaciones', 'id_presentacion', 'id_subsistema')
+                    ->withPivot('desc_subsistema_presentacion')
+                    ->withTimestamps();
     }
 }
