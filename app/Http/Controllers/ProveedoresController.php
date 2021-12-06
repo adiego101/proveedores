@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proveedor_domicilio;
-use App\Models\Proveedor_rupae;
+use App\Models\Proveedor;
 use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\DB;
 class ProveedoresController extends Controller
 {
 
-    
+
     //Funcion para dar de alta un nuevo registro en la BD
     public function crear_registro(Request $request)
     {
 
-        $proveedores_rupae = new Proveedor_rupae($request->all());
-        
+        $proveedores_rupae = new Proveedor($request->all());
+
         $domicilio_real = Proveedor_domicilio::create([
                                                         'tipo_domicilio'=>'real',
                                                         //'nro_orden_domicilio',
@@ -67,7 +67,7 @@ class ProveedoresController extends Controller
                                                 ]);
         $proveedores_rupae->domicilios()->attach($domicilio_fiscal);
         $proveedores_rupae->save();
-
+/*
         $arraySize = count( $request->calles);
         var_dump($arraySize );
 
@@ -83,9 +83,9 @@ class ProveedoresController extends Controller
             $proveedores_domicilio->dpto = $request->dptos[$i];
             $proveedores_domicilio->email = $request->barrios[$i];
             $proveedores_domicilio->telefono = $request->Telefonos_sucursales[$i];
-            $proveedores_domicilio->save();
+            $proveedores_domicilio->save();*/
             /*echo($proveedores_domicilio->toJson());*/
-        }
+        //}
 
         /*$proveedores_domicilio->save();
         return redirect()->back();*/
@@ -99,7 +99,7 @@ class ProveedoresController extends Controller
 
     }
 
-    
+
 
     //onclick="bajaRegistro('.$row->id.');"
     /*
@@ -109,7 +109,7 @@ class ProveedoresController extends Controller
     public function getProveedores(Request $request)
     {
         if ($request->ajax()) {
-            $data = Proveedor_rupae::latest()->where('dado_de_baja', 0)->get();
+            $data = Proveedor::latest()->where('dado_de_baja', 0)->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -167,7 +167,7 @@ class ProveedoresController extends Controller
             ->where('id_proveedores_rupae', $id)
             ->first();
 
-        $proveedores_rupae = Proveedor_rupae::find($id);
+        $proveedores_rupae = Proveedor::find($id);
         //return response()->json($proveedores_rupae);
         $proveedores_rupae = $proveedores_rupae->fill($request->all());
         $proveedores_rupae->save();
@@ -180,7 +180,7 @@ class ProveedoresController extends Controller
     public function dar_baja(Request $request)
     {
 
-        $proveedores_rupae = Proveedor_rupae::find($request->id);
+        $proveedores_rupae = Proveedor::find($request->id);
         //return response()->json($proveedores_rupae);
         $proveedores_rupae->dado_de_baja = 1;
         $proveedores_rupae->save();
@@ -192,7 +192,7 @@ class ProveedoresController extends Controller
     public function dar_baja_id($id)
     {
 
-        $proveedores_rupae = Proveedor_rupae::find($id);
+        $proveedores_rupae = Proveedor::find($id);
         //return response()->json($proveedores_rupae);
         $proveedores_rupae->dado_de_baja = 1;
         $proveedores_rupae->save();

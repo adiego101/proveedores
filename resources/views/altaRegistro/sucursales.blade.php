@@ -10,11 +10,10 @@
     <div class="row">
         <div class="col-sm">
             <label for="calle">Calle:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la calle de la sucursal" aria-describedby="basic-addon1"
-                id="calle" required /><br />
+            <input type="text" class="form-control" placeholder="Ingrese la calle de la sucursal" aria-describedby="basic-addon1" id="calle" /><br />
 
             <label for="entre_calles">Entre Calles:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entre_calles" required /><br />
+            <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entre_calles" /><br />
 
             <label for="dpto">Departamento:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto" /><br />
@@ -29,13 +28,13 @@
             <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese la localidad" id="localidad" name="Localidades[]" /><br /> -->
             
             <label for="email">Correo electrónico:</label><br />
-            <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email" name="correos_electronicos[]" required /><br />
+            <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email" name="correos_electronicos[]" /><br />
         </div>
 
         <div class="col-sm">
 
             <label for="numero">Número:</label><br />
-            <input type="number" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero" required /><br />
+            <input type="number" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero" /><br />
 
             <!-- <label for="puerta">Puerta:</label><br />
             <input type="number" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta" name="puertas[]" /><br />
@@ -50,7 +49,7 @@
             <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio" /><br />
 
             <label for="nro_tel">Teléfono:</label><br />
-            <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el número de teléfono" id="nro_tel" required /><br /><br />
+            <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el número de teléfono" id="nro_tel" /><br /><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_sucursal" class="btn btn-success">Agregar Sucursal</a>
