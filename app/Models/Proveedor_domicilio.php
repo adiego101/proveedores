@@ -25,10 +25,7 @@ class Proveedor_domicilio extends Model
                             'oficina',
                             'manzana',
                             'barrio',
-                            'id_localidad',
-                            'email',
-                            'fax',
-                            'telefono',
+                            'codigo_postal'
                             ];
 
 
