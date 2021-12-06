@@ -159,7 +159,7 @@
             dominio = $("#dominio").val();
             inscripto_en = $("#inscripto_en").val();
             
-
+/*
             $("#body_table_vehiculo").append(
                 '<tr id="row' + i +'">'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="marca' + i +'" name="marcas[]" readonly value="' + marca +'"></td>'+
@@ -169,6 +169,16 @@
                     '<td><button type="button" name="edit" id="'+ i +'" class="btn btn-warning btn-sm btn_edit_vehiculo" title="editar vehículo"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i +'" class="btn btn-danger btn-sm btn_remove_vehiculo" title="quitar vehículo"><i class="fas fa-trash"></i></button></td>'+
                 '</tr>'
             );
+*/
+
+$("#body_table_vehiculo").append(
+                '<tr id="row' + i +'">'+
+                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="marca' + i +'" name="marcas[]" readonly value="' + marca +'"></td>'+
+                    
+                '</tr>'
+            );
+
+
 
             i++;
 
