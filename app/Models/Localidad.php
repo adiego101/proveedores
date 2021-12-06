@@ -14,13 +14,13 @@ class Localidad extends Model
 
     protected $fillable = [
                             'codigo_localidad',
-                            'localidad',
-                            'provincia',
-                            'pais',
-                            'codigo_postal',
+                            'nombre_localidad',
+                            'nombre_departamento',
+                            'flg_user_generated',
                             ];
 
     protected $hidden = ['id_localidad'];
+    protected $primaryKey = 'id_localidad';
 
     public function obtenerLocalidades(){
 
@@ -30,5 +30,13 @@ class Localidad extends Model
     public function obtenerLocalidadId($id){
 
         return Localidad::find($id);
+    }
+
+    public function domicilios(){
+        return $this->hasMany(Domicilio::class, 'id_domicilio', 'id_domicilio');
+    }
+
+    public function provincia(){
+        return $this->belongsTo(Provincia::class, 'id_provincia', 'id_provincia');
     }
 }

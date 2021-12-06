@@ -14,13 +14,13 @@ class Pago extends Model
 
 
     protected $fillable = [
-                            'id_proveedores_rupae',
                             'fecha',
                             'importe',
                             'observaciones',
                             ];
 
     protected $hidden = ['id_pagos'];
+    protected $primaryKey = 'id_pagos';
 
     public function obtenerPagos(){
 
@@ -30,5 +30,9 @@ class Pago extends Model
     public function obtenerPagoId($id){
 
         return Pago::find($id);
+    }
+
+    public function proveedor(){
+        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
     }
 }

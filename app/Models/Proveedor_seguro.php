@@ -13,14 +13,14 @@ class Proveedor_seguro extends Model
     protected $primaryKey = 'id_proveedores_seguros';
 
     protected $fillable = [
-                            'id_proveedores_rupae',
                             'poliza',
                             'agencia',
                             'asegurado',
                             'vigencia_hasta',
                             ];
 
-    protected $hidden = ['id_proveedores_seguros'];
+    protected $hidden = ['id_proveedor_seguro'];
+    protected $primaryKey = 'id_proveedor_seguro';
 
     public function obtenerProveedoresSeguros(){
 
@@ -30,5 +30,9 @@ class Proveedor_seguro extends Model
     public function obtenerProveedorSeguroId($id){
 
         return Proveedor_seguro::find($id);
+    }
+
+    public function proveedor(){
+        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
     }
 }

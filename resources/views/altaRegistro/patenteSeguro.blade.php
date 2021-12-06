@@ -10,14 +10,7 @@
 <input type="checkbox" id="vehiculos_afectados" name="vehiculos_afectados" value="0">
 <label for="vehiculos_afectados">Posee vehículos afectados a la actividad económica que desarrolla</label><br>
 
-<input type="checkbox" id="seguros_sta_cruz"  name="seguros_sta_cruz" value="0">
-<label for="seguros_sta_cruz">Posee seguros contratados con promotores residentes en nuestra provincia</label><br>
 
-<input type="checkbox" id="servicio_personal_especializado" name="servicio_personal_especializado"  value="0">
-<label for="servicio_personal_especializado">Utiliza como sede de la actividad económica que desarrolla algún inmueble que tribute impuesto inmobiliario en localidades de la Provincia de Santa Cruz</label><br>
-
-
-    
 <!-- SE DEBEN ELIMINAR LOS ATRIBUTOS NAME DE CADA CAMPO Y SOLO DEJARLOS EN EL APPEND JS, PORQUE SINO AL ENVIAR LOS DATOS A LA BD SE ALMACENA SIEMPRE UN VALOR NULO AL PRINCIPIO. -->
 
     <div class="row">
@@ -25,17 +18,12 @@
             <label for="marca">Marca:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca" name="marcas[]" /><br />
 
-            
-
             <label for="dominio">Dominio:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio" name="dominios[]" /><br />
-            
-            
         </div>
 
         <div class="col-sm">
-
-        <label for="modelo">Modelo:</label><br />
+            <label for="modelo">Modelo:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo" name="modelos[]" /><br />
 
             <label for="inscripto_en">Inscripto en:</label><br />
@@ -46,26 +34,104 @@
             </div>
         </div>
     </div>
-
+<br>
     <div>
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Calle</th>
-                    <th>Barrio</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
                     <th>Teléfono</th>
-                    <th>Entre calle</th>
-                    <th>Número</th>
-                    <th>Departamento</th>
-                    <th>email</th>
+                    <th>Dominio</th>
+                    <th>Inscripto en</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="body_table"></tbody>
+            <tbody id="body_table_vehiculo"></tbody>
         </table>
     </div>
 
     <br />
+
+    
+<input type="checkbox" id="seguros_sta_cruz"  name="seguros_sta_cruz" value="0">
+<label for="seguros_sta_cruz">Posee seguros contratados con promotores residentes en nuestra provincia</label><br>
+
+
+<div class="row">
+        <div class="col-sm">
+            <label for="poliza">Poliza:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="poliza" name="polizas[]" /><br />
+
+            <label for="asegurado">Asegurado:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" name="asegurados[]" /><br />
+        </div>
+
+        <div class="col-sm">
+            <label for="agencia">Agencia:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" name="agencias[]" /><br />
+
+            <label for="vigente_hasta">Vigencia hasta:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigente_hasta" name="vigentes[]" /><br />
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a id="add_sucursal" class="btn btn-success">Agregar Seguro</a>
+            </div>
+        </div>
+    </div>
+<br>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Poliza</th>
+                    <th>Agencia</th>
+                    <th>Asegurado</th>
+                    <th>Vigencia hasta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="body_table_seguro"></tbody>
+        </table>
+    </div>
+
+    <br />
+
+<input type="checkbox" id="servicio_personal_especializado" name="servicio_personal_especializado"  value="0">
+<label for="servicio_personal_especializado">Utiliza como sede de la actividad económica que desarrolla algún inmueble que tribute impuesto inmobiliario en localidades de la Provincia de Santa Cruz</label><br>
+
+
+<div class="row">
+        <div class="col-sm">
+            <label for="domicilio">Domicilio:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio" name="domicilios[]" /><br />
+        </div>
+
+        <div class="col-sm">
+            <label for="localidad">Localidad:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese la localidad" aria-describedby="basic-addon1" id="localidad" name="localidades[]" /><br />
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a id="add_sucursal" class="btn btn-success">Agregar sede</a>
+            </div>
+        </div>
+    </div>
+<br>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Domicilio</th>
+                    <th>Localidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="body_table_sede"></tbody>
+        </table>
+    </div>
+
+    <br />
+
 
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />

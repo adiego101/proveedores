@@ -12,22 +12,27 @@ class Proveedor_telefono extends Model
     protected $primaryKey = 'id_proveedores_telefonos';
 
     protected $fillable = [
-                            'id_proveedores_rupae',
-                            'tipo_telefono',
-                            'nro_orden_telefono',
                             'nro_tel',
+                            'cod_area_tel',
                             'tipo_medio',
+                            'desc_telefono',
+                            'tipo_telefono',
+                            'nro_orden_telefono'
                             ];
 
     protected $hidden = ['id_proveedores_telefonos'];
 
-    public function obtenerProveedoresTelefonos(){
+    public function obtenerProveedor_telefonos(){
 
         return Proveedor_telefono::All();
     }
 
-    public function obtenerProveedorTelefonoId($id){
+    public function obtenerProveedor_telefonoId($id){
 
         return Proveedor_telefono::find($id);
+    }
+
+    public function proveedor(){
+        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
     }
 }
