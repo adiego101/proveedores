@@ -1,6 +1,5 @@
 <fieldset>
-
-    <h1>Datos generales</h1><br>
+    <legend>Datos generales</legend>
 
     <label for="razon_social">Razón social:</label><br>
     <input type="text" class="form-control" placeholder="ingrese la razón social" aria-describedby="basic-addon1"
@@ -19,6 +18,14 @@
         aria-describedby="basic-addon1" id="cuit" name="cuit"
         value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}"><br>
 
-    <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+        <div class="row navbuttons pt-5">
+            <div class="col-6 col-sm-auto" id="btnPrevious">
+                <a class="btn btn-primary btnPrevious">Previous</a>
+            </div>
+            <div class="col-6 col-sm-auto" id="btnNext">
+                <a class="btn btn-primary btnNext">Next</a>
+            </div>
+
+        </div>
 
 </fieldset>

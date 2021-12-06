@@ -10,6 +10,8 @@ class Actividad_economica_f883 extends Model
     use HasFactory;
 
     protected $table = "actividades_economicas_f883";
+    protected $primaryKey = 'id_actividades_economicas_f883';
+
 
     protected $fillable = [
                             'cod_actividad_f833',

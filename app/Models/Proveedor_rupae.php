@@ -10,7 +10,8 @@ class Proveedor_rupae extends Model
 {
     use HasFactory;
 
-    protected $table = "proveedores_rupae";
+    protected $table = "proveedores";
+    protected $primaryKey = 'id';
 
     protected $fillable = [
                             'start_date',
@@ -70,8 +71,10 @@ class Proveedor_rupae extends Model
                             'antiguedad',
                             'dom_fiscal',
                             'valor_agregado',
-                            'tamaño',
+                            'id_tamanio_empresa',
                             'observaciones',
+                            'created_at',
+                            'updated_at',
                             ];
 
     protected $hidden = ['id'];

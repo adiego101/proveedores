@@ -10,6 +10,7 @@ class Proveedor_seguro extends Model
     use HasFactory;
 
     protected $table = "proveedores_seguros";
+    protected $primaryKey = 'id_proveedores_seguros';
 
     protected $fillable = [
                             'id_proveedores_rupae',

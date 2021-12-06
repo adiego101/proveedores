@@ -64,9 +64,13 @@
 
     <br>
 
-    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-    <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-    <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
-
+    <div class="row navbuttons pt-5">
+        <div class="col-6 col-sm-auto" id="btnPrevious">
+            <a class="btn btn-primary btnPrevious">Previous</a>
+        </div>
+        <div class="col-6 col-sm-auto" id="btnNext">
+            <a class="btn btn-primary btnNext">Next</a>
+        </div>
+    </div>
 
 </fieldset>

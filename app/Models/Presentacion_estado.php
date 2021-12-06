@@ -10,12 +10,13 @@ class Presentacion_estado extends Model
     use HasFactory;
 
     protected $table = "presentaciones_estados";
+    protected $primaryKey = 'id_presentacion_estado';
 
     protected $fillable = [
                             'cod_presentacion_estado',
                             'desc_presentacion_estado',
                             ];
-                            
+
     protected $hidden = ['id_presentacion_estado'];
 
     public function obtenerPresentacionesEstados(){

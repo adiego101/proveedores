@@ -10,6 +10,7 @@ class Subsistema_presentacion extends Model
     use HasFactory;
 
     protected $table = "subsistemas_presentaciones";
+    protected $primaryKey = 'id_subsistema_presentacion';
 
     protected $fillable = [
                             'id_subsistema',

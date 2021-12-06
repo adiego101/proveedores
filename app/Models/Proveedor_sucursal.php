@@ -10,6 +10,7 @@ class Proveedor_sucursal extends Model
     use HasFactory;
 
     protected $table = "proveedores_sucursales";
+    protected $primaryKey = 'id_sucursal';
 
     protected $fillable = [
                             'id_proveedores_rupae',

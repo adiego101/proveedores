@@ -10,6 +10,7 @@ class Proveedor_email extends Model
     use HasFactory;
 
     protected $table = "proveedores_emails";
+    protected $primaryKey = 'id_proveedores_emails';
 
     protected $fillable = [
                             'id_proveedores_rupae',

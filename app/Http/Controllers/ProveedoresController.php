@@ -2,49 +2,69 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Proveedor_domicilio;
 use App\Models\Proveedor_rupae;
 use DataTables;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProveedoresController extends Controller
 {
-    //
+
+    
+    //Funcion para dar de alta un nuevo registro en la BD
     public function crear_registro(Request $request)
     {
-        /*
-        'puestos_trabajo_Sta_Cruz',
-                            'cant_administrativos',
-                            'periodo_de_contratacion',
-                            'cant_operarios',
-                            'periodo_contratacion1',
-                            'cant_personal_vta',
-                            'periodo_contratacion2',
-                            'cant_empleados_domicilio_sta_cruz',
-                            'masa_salarial_bruta',*/
 
         $proveedores_rupae = new Proveedor_rupae($request->all());
         $proveedores_rupae->save();
-        return redirect()->back();
-/*
-        var_dump( $request->prov_estado );
-        var_dump( $request->prov_minero );
-        var_dump( $request->prov_petrolero );
 
-        var_dump( $request->prov_provincial );
-*/
+        $arraySize = count( $request->calles);
+        var_dump($arraySize );
+
+        for($i=0; $i < $arraySize; $i++) {
+
+            $proveedores_domicilio = new Proveedor_domicilio();
+            $proveedores_domicilio->id_proveedores_rupae = $proveedores_rupae->id;
+            $proveedores_domicilio->tipo_domicilio = "Sucursal";
+            $proveedores_domicilio->calle = $request->calles[$i];
+            $proveedores_domicilio->barrio = $request->barrios[$i];
+            $proveedores_domicilio->numero = $request->numeros[$i];
+            $proveedores_domicilio->entre_calles = $request->entreCalles[$i];
+            $proveedores_domicilio->dpto = $request->dptos[$i];
+            $proveedores_domicilio->email = $request->barrios[$i];
+            $proveedores_domicilio->telefono = $request->Telefonos_sucursales[$i];
+            $proveedores_domicilio->save();
+            /*echo($proveedores_domicilio->toJson());*/
+        }
+
+        /*$proveedores_domicilio->save();
+        return redirect()->back();*/
+
+        //$domicilio->numero = $request->numeros[$i];
+
+        //var_dump($request->calles[$i]);
+        //$domicilio->telefono = $request->telefonos[$i];
+
+        //$domicilio->tipo_domicilio = "Sucursal";
 
     }
 
+    
 
+    //onclick="bajaRegistro('.$row->id.');"
+    /*
+    Funcion que devuelve un listado de proveedores almacenados en la BD (Datatable)
+    junto a los botones para editar, ver y dar de baja un registro
+    */
     public function getProveedores(Request $request)
     {
         if ($request->ajax()) {
-            $data = Proveedor_rupae::latest()->get();
+            $data = Proveedor_rupae::latest()->where('dado_de_baja', 0)->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="modificarRegistro/'."$row->id".'" class="edit btn btn-success btn-sm">Editar</a> <a onclick="verRegistro();" class="view btn btn-warning btn-sm">Ver</a> <a onclick="eliminarRegistro();" class="delete btn btn-danger btn-sm">Eliminar</a>';
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="modificarRegistro/' . "$row->id" . '" class="edit btn btn-warning btn-sm">Editar</a> <a onclick="verRegistro();" class="view btn btn-success btn-sm">Ver</a> <a href="bajaid/' . "$row->id" . '" class="delete btn btn-danger btn-sm">Dar de baja</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -53,50 +73,81 @@ class ProveedoresController extends Controller
     }
 
     /*public function obtenerDatosProveedor($id){
-        $proveedores_rupae = new Proveedor_rupae();
-        $datos = $proveedores_rupae->obtenerProveedorRupaeId($id);
-        return $datos;
+    $proveedores_rupae = new Proveedor_rupae();
+    $datos = $proveedores_rupae->obtenerProveedorRupaeId($id);
+    return $datos;
     }*/
 
-    /*En esta función obtenemos cada uno de los datos de las distintas tablas.
-    Pero debemos validar que los datos de las demas tablas no sean nulos ya que dan error*/
+
+
+    /*
+    En esta función obtenemos cada uno de los datos de las distintas tablas, de un proveedor.
+    */
     public function obtenerProveedorRupaeId($id)
     {
         $proveedor = DB::table('proveedores_rupae')
-        ->where('id', $id)
-        ->first();
+            ->where('id', $id)
+            ->first();
 
         $proveedor_email = DB::table('proveedores_emails')
-        ->where('id_proveedores_rupae', $id)
-        ->first();
-
+            ->where('id_proveedores_rupae', $id)
+            ->first();
 
         $proveedor_domicilio = DB::table('proveedores_domicilios')
-        ->where('id_proveedores_rupae', $id)
-        ->first();
+            ->where('id_proveedores_rupae', $id)
+            ->first();
 
         return view('editarRegistro', ['proveedor' => $proveedor,
-                                        'proveedor_email' => $proveedor_email,
-                                        'proveedor_domicilio' => $proveedor_domicilio]);
+            'proveedor_email' => $proveedor_email,
+            'proveedor_domicilio' => $proveedor_domicilio]);
     }
 
-    public function editarProveedor($id)
+
+
+    public function editarProveedor($id, Request $request)
     {
         $proveedor = DB::table('proveedores_rupae')
-        ->where('id_proveedores_rupae', $id)
-        ->first();
+            ->where('id', $id)
+            ->first();
 
         $proveedor_email = DB::table('proveedores_emails')
-        ->where('id_proveedores_rupae', $id)
-        ->first();
-
+            ->where('id_proveedores_rupae', $id)
+            ->first();
 
         $proveedor_domicilio = DB::table('proveedores_domicilios')
-        ->where('id_proveedores_rupae', $id)
-        ->first();
+            ->where('id_proveedores_rupae', $id)
+            ->first();
 
-        return view('editarRegistro', ['proveedor' => $proveedor,
-                                        'proveedor_email' => $proveedor_email,
-                                        'proveedor_domicilio' => $proveedor_domicilio]);
+        $proveedores_rupae = Proveedor_rupae::find($id);
+        //return response()->json($proveedores_rupae);
+        $proveedores_rupae = $proveedores_rupae->fill($request->all());
+        $proveedores_rupae->save();
+        return redirect()->back();
+
+    }
+
+
+
+    public function dar_baja(Request $request)
+    {
+
+        $proveedores_rupae = Proveedor_rupae::find($request->id);
+        //return response()->json($proveedores_rupae);
+        $proveedores_rupae->dado_de_baja = 1;
+        $proveedores_rupae->save();
+        return redirect()->back();
+
+    }
+
+
+    public function dar_baja_id($id)
+    {
+
+        $proveedores_rupae = Proveedor_rupae::find($id);
+        //return response()->json($proveedores_rupae);
+        $proveedores_rupae->dado_de_baja = 1;
+        $proveedores_rupae->save();
+        return redirect()->back();
+
     }
 }

@@ -14,7 +14,7 @@
     
 <!--<div class="container mt-5">-->
     <h2 class="mb-4">Gestionar Registros:</h2>
-    <table class="table table-bordered yajra-datatable">
+    <table class="table table-hover yajra-datatable">
         <thead>
             <tr>
                 <th>Nombre de fantasia</th>
@@ -30,7 +30,11 @@
         </tbody>
     </table>
 <!--</div>-->
+
+    <!--Incluimos el modal para dar de baja un registro -->
+    <!-- Falta incluir el modal -->
    
+
 </body>
 </html>
 @endsection
@@ -92,9 +96,11 @@
     }
 
 
-    function eliminarRegistro() {
+    function bajaRegistro(id_registro) {
         
-        return  alert("Retornar modal para eliminar un registro ?!");
+         //Desplegamos el modal
+         $('#myModal').modal('show'); 
+         $('#myModal').val(id_registro);
     }
 </script>
 @endpush

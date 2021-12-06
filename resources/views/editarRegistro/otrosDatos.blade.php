@@ -3,7 +3,7 @@
     <br>
     <h5>Calculo del indice de compra local</h5>
 
-    <label for="fact-sc">Porcentaje de facturacion en Santa Cruz:</label><br>
+    <label for="porc_facturacion">Porcentaje de facturacion en Santa Cruz:</label><br>
     <input type="text" class="form-control" aria-describedby="basic-addon1"
         value="{{ isset($proveedor->porc_facturacion) ? $proveedor->porc_facturacion : '' }}" id="porc_facturacion"
         name="porc_facturacion"><br>
@@ -60,8 +60,13 @@
     </select><br>
 
 
-    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-
-    <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
+    <div class="row navbuttons pt-5">
+        <div class="col-6 col-sm-auto" id="btnPrevious">
+            <a class="btn btn-primary btnPrevious">Previous</a>
+        </div>
+        <div class="col-6 col-sm-auto" id="btnNext">
+            <a class="btn btn-primary btnNext">Next</a>
+        </div>
+    </div>
 
 </fieldset>

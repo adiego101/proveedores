@@ -10,11 +10,12 @@ class Tipo_actividad extends Model
     use HasFactory;
 
     protected $table = "tipos_actividades";
+    protected $primaryKey = 'id_tipo_actividad';
 
     protected $fillable = [
                             'tipo_actividad',
                             ];
-                            
+
     protected $hidden = ['id_tipo_actividad'];
 
     public function obtenerTiposActividades(){

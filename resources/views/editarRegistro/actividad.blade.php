@@ -18,8 +18,13 @@
     <input type="text" class="text-danger form-control" aria-describedby="basic-addon1" id="nomina_productos"
         name="nomina_productos" value="{{ isset($proveedor->nomina_productos) ? $proveedor->nomina_productos : 'no se encuentra cargado el campo' }}"><br>
 
-    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-
-    <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+        <div class="row navbuttons pt-5">
+            <div class="col-6 col-sm-auto" id="btnPrevious">
+                <a class="btn btn-primary btnPrevious">Previous</a>
+            </div>
+            <div class="col-6 col-sm-auto" id="btnNext">
+                <a class="btn btn-primary btnNext">Next</a>
+            </div>
+        </div>
 
 </fieldset>

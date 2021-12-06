@@ -10,6 +10,7 @@ class Localidad extends Model
     use HasFactory;
 
     protected $table = "localidades";
+    protected $primaryKey = 'id_localidad';
 
     protected $fillable = [
                             'codigo_localidad',

@@ -10,12 +10,13 @@ class Subsistema extends Model
     use HasFactory;
 
     protected $table = "subsistemas";
+    protected $primaryKey = 'id_subsistema';
 
     protected $fillable = [
                             'nombre_subsistema',
                             'desc_subsistema',
                             ];
-                            
+
     protected $hidden = ['id_subsistema'];
 
     public function obtenerSubsistemas(){

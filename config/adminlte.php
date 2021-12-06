@@ -245,6 +245,12 @@ return [
             'label_color' => 'success',
         ],
         [
+            'text' => 'Dar de baja',
+            'url' => '/baja',
+            'icon' => 'fas fa-fw fa-building',
+            'label_color' => 'success',
+        ],
+        [
             'text' => 'Descargar Registro de Alta',
             'url' => '/registro-alta',
             'icon' => 'fas fa-fw fa-file-pdf',

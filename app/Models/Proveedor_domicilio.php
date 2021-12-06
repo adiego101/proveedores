@@ -10,6 +10,7 @@ class Proveedor_domicilio extends Model
     use HasFactory;
 
     protected $table = "proveedores_domicilios";
+    protected $primaryKey = 'id_proveedores_domicilios';
 
     protected $fillable = [
                             'id_proveedores_rupae',
@@ -26,7 +27,11 @@ class Proveedor_domicilio extends Model
                             'manzana',
                             'barrio',
                             'id_localidad',
+                            'email',
+                            'fax',
+                            'telefono',
                             ];
+
 
     protected $hidden = ['id_proveedores_domicilios'];
 

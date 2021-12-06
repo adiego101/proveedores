@@ -10,6 +10,7 @@ class Clasificacion_empresa extends Model
     use HasFactory;
 
     protected $table = "clasificaciones_empresas";
+    protected $primaryKey = 'id_clasificacion_empresa';
 
     protected $fillable = [
                             'tamanio',
@@ -18,7 +19,7 @@ class Clasificacion_empresa extends Model
                             'facturacion_max',
                             'fact_max_2018',
                             ];
-                            
+
     protected $hidden = ['id_clasificacion_empresa'];
 
     public function obtenerClasificacionesEmpresas(){

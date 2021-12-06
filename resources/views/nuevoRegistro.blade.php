@@ -63,22 +63,22 @@
         @include('altaRegistro.datosGenerales')
         @include('altaRegistro.domicilioReal')
         @include('altaRegistro.domicilioLegal')
-
         @include('altaRegistro.sucursales')
         @include('altaRegistro.infoImpositiva')
         @include('altaRegistro.actividad')
         @include('altaRegistro.valorAgregado')
-
-        @include('altaRegistro.personalOcupado')
         @include('altaRegistro.pagos')
+        @include('altaRegistro.personalOcupado')
+        @include('altaRegistro.patenteSeguro')
         @include('altaRegistro.otrosDatos')
 
-        <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <div class="btn-group">
-                        <button type="submit" name="boton" value="ver" class="btn btn-outline-primary"><i class="fas fa-info-circle"></i> {{ 'Siguiente' }} </button>
+                        <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
 
-                    </div>
-                </div>-->
+                    </div> </div>
+
+
     </form>
     @yield('datos')
 

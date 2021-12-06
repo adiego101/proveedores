@@ -9,6 +9,7 @@ class Proveedor_telefono extends Model
 {
     use HasFactory;
     protected $table = "proveedores_telefonos";
+    protected $primaryKey = 'id_proveedores_telefonos';
 
     protected $fillable = [
                             'id_proveedores_rupae',
@@ -17,7 +18,7 @@ class Proveedor_telefono extends Model
                             'nro_tel',
                             'tipo_medio',
                             ];
-                            
+
     protected $hidden = ['id_proveedores_telefonos'];
 
     public function obtenerProveedoresTelefonos(){

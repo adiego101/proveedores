@@ -34,6 +34,10 @@ Route::get('/gestionarRegistros', function () {
     return view('gestionarRegistros');
 });
 
+Route::get('/baja', function () {
+    return view('bajaRegistro');
+});
+
 Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
 
 //Ruta para editar los registros, se llama desde el boton "editar" de la tabla.
@@ -48,8 +52,10 @@ Route::group(['middleware' => ['auth']], function() {
     //Levanta las vistas para editar (del formulario)
     Route::get('modificarRegistro/{id}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId');
     //Llama al metodo que realiza las modificaciones en la BD
-    Route::get('editarProveedor/{id}', 'App\Http\Controllers\editarProveedor@obtenerProveedorRupaeId');
+    Route::post('editarProveedor/{id}', 'App\Http\Controllers\ProveedoresController@editarProveedor');
 
+    Route::post('/dar_baja', 'App\Http\Controllers\ProveedoresController@dar_baja');
+    Route::get('bajaid/{id}', 'App\Http\Controllers\ProveedoresController@dar_baja_id');
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class)->middleware(['can:admin_users']);

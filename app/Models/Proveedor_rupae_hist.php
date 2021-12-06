@@ -10,6 +10,7 @@ class Proveedor_rupae_hist extends Model
     use HasFactory;
 
     protected $table = "proveedores_rupae_hist";
+    protected $primaryKey = 'id_proveedores_rupae';
 
     protected $fillable = [
                             'start_date',

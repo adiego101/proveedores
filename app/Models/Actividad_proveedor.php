@@ -10,13 +10,14 @@ class Actividad_proveedor extends Model
     use HasFactory;
 
     protected $table = "actividades_proveedores";
+    protected $primaryKey = 'id_actividad_proveedor';
 
     protected $fillable = [
                             'id_proveedores_rupae',
                             'tipo_de_actividad',
                             'actividad',
                             ];
-                            
+
     protected $hidden = ['id_actividad_proveedor'];
 
     public function obtenerActividadesProveedores(){

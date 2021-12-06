@@ -10,6 +10,7 @@ class Proveedor_presentacion extends Model
     use HasFactory;
 
     protected $table = "proveedores_presentaciones";
+    protected $primaryKey = 'id_proveedores_presentaciones';
 
     protected $fillable = [
                             'id_presentacion',
