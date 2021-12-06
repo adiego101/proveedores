@@ -13,7 +13,7 @@ class Tipo_actividad extends Model
     protected $primaryKey = 'id_tipo_actividad';
 
     protected $fillable = [
-                            'tipo_actividad',
+                            'desc_tipo_actividad',
                             ];
 
     protected $hidden = ['id_tipo_actividad'];
@@ -26,5 +26,13 @@ class Tipo_actividad extends Model
     public function obtenerTipoActividadId($id){
 
         return Tipo_actividad::find($id);
+    }
+
+    public function proveedores(){
+        return $this->belongsToMany(Proveedor::class, 'actividades_proveedores', 'id_tipo_actividad', 'id_proveedor');
+    }
+
+    public function actividades_economicas(){
+        return $this->belongsToMany(Actividad_economica::class, 'actividades_proveedores', 'id_tipo_actividad', 'id_actividad_economica');
     }
 }

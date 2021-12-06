@@ -23,16 +23,16 @@
     <div class="row">
         <div class="col-sm">
             <label for="marca">Marca:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca" required /><br />
+            <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca" name="marcas[]" /><br />
 
             <label for="modelo">Modelo:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo" required /><br />
+            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo" name="modelos[]" /><br />
 
             <label for="dominio">Dominio:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio" name="dominios[]" /><br />
             
-            <label for="email">Inscripto en:</label><br />
-            <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email" name="correos_electronicos[]" required /><br />
+            <label for="inscripto_en">Inscripto en:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en" name="inscriptos[]" /><br />
         </div>
 
         <div class="col-sm">
