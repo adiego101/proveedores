@@ -25,38 +25,24 @@
             <label for="marca">Marca:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca" name="marcas[]" /><br />
 
-            <label for="modelo">Modelo:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo" name="modelos[]" /><br />
+            
 
             <label for="dominio">Dominio:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio" name="dominios[]" /><br />
             
-            <label for="inscripto_en">Inscripto en:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en" name="inscriptos[]" /><br />
+            
         </div>
 
         <div class="col-sm">
 
-            <label for="numero">Número:</label><br />
-            <input type="number" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero" required /><br />
+        <label for="modelo">Modelo:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo" name="modelos[]" /><br />
 
-            <!-- <label for="puerta">Puerta:</label><br />
-            <input type="number" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta" name="puertas[]" /><br />
-
-            <label for="oficina">Oficina:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina" name="oficinas[]" /><br />
-
-            <label for="manzana">Manzana:</label><br />
-            <input type="number" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana" name="manzanas[]" /><br /> -->
-                
-            <label for="barrio">Barrio:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio" /><br />
-
-            <label for="nro_tel">Teléfono:</label><br />
-            <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el número de teléfono" id="nro_tel" required /><br /><br />
+            <label for="inscripto_en">Inscripto en:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en" name="inscriptos[]" /><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <a id="add_sucursal" class="btn btn-success">Agregar Sucursal</a>
+                <a id="add_sucursal" class="btn btn-success">Agregar Vehículo</a>
             </div>
         </div>
     </div>
