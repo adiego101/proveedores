@@ -14,12 +14,12 @@ class Proveedor_email extends Model
 
     protected $fillable = [
                             'email',
+                            'id_proveedor',
                             'desc_email',
                             'tipo_email',
                             'nro_orden_email',
                             ];
 
-    protected $primaryKey = 'id_proveedor_email';
     protected $hidden = ['id_proveedor_email'];
 
     public function obtenerEmails(){

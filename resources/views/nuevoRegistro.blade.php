@@ -64,6 +64,11 @@
         @include('altaRegistro.domicilioLegal')
         @include('altaRegistro.sucursales')
         @include('altaRegistro.infoImpositiva')
+
+        @include('altaRegistro.Impuestosingresosbrutos')
+
+        @include('altaRegistro.domicilioFiscal')
+
         @include('altaRegistro.actividad')
         @include('altaRegistro.valorAgregado')
         @include('altaRegistro.pagos')

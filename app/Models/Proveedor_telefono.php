@@ -13,6 +13,7 @@ class Proveedor_telefono extends Model
 
     protected $fillable = [
                             'nro_tel',
+                            'id_proveedor',
                             'cod_area_tel',
                             'tipo_medio',
                             'desc_telefono',

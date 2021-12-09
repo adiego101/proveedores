@@ -6,6 +6,7 @@ use DataTables;
 use App\Models\Sucursal;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
+use App\Models\Proveedor_telefono;
 use Illuminate\Support\Facades\DB;
 use App\Models\Proveedor_domicilio;
 
@@ -13,7 +14,7 @@ class ProveedoresController extends Controller
 {
 
 
-    //Funcion para dar de alta un nuevo registro en la BD
+    //Carga Completa de Proveedor
     public function crear_registro(Request $request)
     {
         //-------------------Carga Proveedor-------------------
@@ -41,6 +42,40 @@ class ProveedoresController extends Controller
                                                     ]);
         $domicilio_real->save();
 
+        //---------Contador de Telefono_Real----------
+
+        $arraySize = count( $request->telefono_real);
+
+        for($i=0; $i < $arraySize; $i++) {
+        //---------Carga de Telefonos_Real----------
+
+        $telefono_real = Proveedor_telefono::create([
+            'nro_tel'=>$request->telefono_real[i] ,
+            'id_proveedor'=>$proveedores_rupae->id_proveedor,
+            //'cod_area_tel' =>,
+            //'tipo_medio'=>,
+            //'desc_telefono'=>,
+            'tipo_telefono'=>'real',
+            //'nro_orden_telefono'=>,
+            ]);
+            $telefono_real->save;
+        }
+
+        //---------Contador de Email_Real----------
+
+        $arraySize = count( $request->email_real);
+
+        for($i=0; $i < $arraySize; $i++) {
+        //---------Carga de Email_Real----------
+
+        $email_real = Proveedor_email::create([
+            'email'=>$request->email_real[i] ,
+            'id_proveedor'=>$proveedores_rupae->id_proveedor,
+            'tipo_email'=>'real',
+            ]);
+            $email_real->save;
+        }
+
         //----------------------------------Carga Domicilio Legal---------------------------------------------
 
         $domicilio_legal = Proveedor_domicilio::create([
@@ -61,6 +96,40 @@ class ProveedoresController extends Controller
                                                     'codigo_postal'=>$request->input('cp_legal'),
                                                 ]);
         $domicilio_legal->save();
+        //---------Contador de Telefono_Legal----------
+
+        $arraySize = count( $request->telefono_legal);
+
+        //---------Carga de Telefonos_Legal----------
+
+        for($i=0; $i < $arraySize; $i++) {
+
+        $telefono_legal = Proveedor_telefono::create([
+            'nro_tel'=>$request->telefono_legal[i] ,
+            'id_proveedor'=>$proveedores_rupae->id_proveedor,
+            //'cod_area_tel' =>,
+            //'tipo_medio'=>,
+            //'desc_telefono'=>,
+            'tipo_telefono'=>'legal',
+            //'nro_orden_telefono'=>,
+            ]);
+            $telefono_legal->save;
+        }
+        //---------Contador de Email_Legal----------
+
+        $arraySize = count( $request->email_legal);
+
+        for($i=0; $i < $arraySize; $i++) {
+        //---------Carga de Email_legal----------
+
+        $email_legal = Proveedor_email::create([
+            'email'=>$request->email_legal[i] ,
+            'id_proveedor'=>$proveedores_rupae->id_proveedor,
+            'tipo_email'=>'legal',
+            ]);
+            $email_legal->save;
+        }
+
 
         //----------------------------------Carga Domicilio Fiscal---------------------------------------------
 
@@ -81,7 +150,42 @@ class ProveedoresController extends Controller
                                                     'codigo_postal'=>$request->input('cp_fiscal'),
                                                 ]);
         $domicilio_fiscal->save();
+        //---------Contador de Telefono_Fiscal----------
 
+        $arraySize = count( $request->telefono_fiscal);
+
+        //---------Carga de Telefonos_Fiscal----------
+
+        for($i=0; $i < $arraySize; $i++) {
+        $telefono_fiscal = Proveedor_telefono::create([
+            'nro_tel'=>$request->telefono_fiscal[i] ,
+            'id_proveedor'=>$proveedores_rupae->id_proveedor,
+            //'cod_area_tel' =>,
+            //'tipo_medio'=>,
+            //'desc_telefono'=>,
+            'tipo_telefono'=>'fiscal',
+            //'nro_orden_telefono'=>,
+            ]);
+            $telefono_fiscal->save;
+
+        }
+
+        //---------Contador de Email_fiscal----------
+
+        $arraySize = count( $request->email_legal);
+
+        for($i=0; $i < $arraySize; $i++) {
+        //---------Carga de Email_fiscal----------
+
+        $email_fiscal = Proveedor_email::create([
+            'email'=>$request->email_fiscal[i] ,
+            'id_proveedor'=>$proveedores_rupae->id_proveedor,
+            'tipo_email'=>'fiscal',
+            ]);
+            $email_fiscal->save;
+        }
+
+        //------------------------------------------SUCURSALES--------------------------------------------------------
 
         //---------Contador de sucursales----------
 
