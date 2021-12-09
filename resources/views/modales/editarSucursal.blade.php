@@ -17,15 +17,15 @@
 
     <div class="row">
         <div class="col-sm">
-            <label for="calle">Calle:</label><br />
+            <label for="modal_calle">Calle:</label><br />
             <input type="text" class="form-control" placeholder="Calle" aria-describedby="basic-addon1"
                 id="modal_calle"/><br />
 
-            <label for="entre_calles">Entre Calle:</label><br />
+            <label for="modal_entre_calles">Entre Calle:</label><br />
             <input type="text" class="form-control" placeholder="Entre Calles" aria-describedby="basic-addon1"
                 id="modal_entre_calles" /><br />
 
-            <label for="dpto">Departamento:</label><br />
+            <label for="modal_dpto">Departamento:</label><br />
             <input type="text" class="form-control" placeholder="Departamento" aria-describedby="basic-addon1"
                 id="modal_dpto" /><br />
 
@@ -40,13 +40,13 @@
             <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Localidad"
                 id="localidad" name="Localidades[]" /><br /> --}}
             
-            <label for="email">Correo electrónico:</label><br />
+            <label for="modal_email">Correo electrónico:</label><br />
             <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="modal_email" name="correos_electronicos[]" /><br />
         </div>
 
         <div class="col-sm">
 
-            <label for="numero">Numero:</label><br />
+            <label for="modal_numero">Numero:</label><br />
             <input type="number" class="form-control" placeholder="Numero" aria-describedby="basic-addon1"
                 id="modal_numero" /><br />
 
@@ -62,15 +62,15 @@
             <input type="text" class="form-control" placeholder="Manzana" aria-describedby="basic-addon1"
                 id="manzana" name="manzanas[]" /><br /> --}} 
                 
-            <label for="barrio">Barrio:</label><br />
+            <label for="modal_barrio">Barrio:</label><br />
             <input type="text" class="form-control" placeholder="Barrio" aria-describedby="basic-addon1"
                 id="modal_barrio" /><br />
 
-            <label for="nro_tel">Telefono:</label><br />
+            <label for="modal_nro_tel">Telefono:</label><br />
             <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Número de teléfono" id="modal_nro_tel" /><br /><br />
 
-        </div>
-    </div>
+            </div>
+            </div>
 
             </div>
             <div class="modal-footer">
@@ -91,16 +91,16 @@
     $(document).on("click", ".btn_edit_modal", function() {
                 
                 //Obtenemos el numero de la fila que queremos modificar
-                var id_fila=$("#numero_fila").val();
+                var id_fila = $("#numero_fila").val();
 
                 //Recuperamos los valores de los campos del modal
-                var modal_calle=$("#modal_calle").val();
-                var modal_numero=$("#modal_numero").val();
-                var modal_entre_calles=$("#modal_entre_calles").val();
-                var modal_barrio=$("#modal_barrio").val();
-                var modal_departamento=$("#modal_dpto").val();
-                var modal_telefono=$("#modal_nro_tel").val();
-                var modal_email=$("#modal_email").val();
+                var modal_calle = $("#modal_calle").val();
+                var modal_numero = $("#modal_numero").val();
+                var modal_entre_calles = $("#modal_entre_calles").val();
+                var modal_barrio = $("#modal_barrio").val();
+                var modal_departamento = $("#modal_dpto").val();
+                var modal_telefono = $("#modal_nro_tel").val();
+                var modal_email = $("#modal_email").val();
 
                 //Ocultamos el modal
                 $('#myModal').modal('hide'); 

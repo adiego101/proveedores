@@ -83,7 +83,7 @@
 
     <!--Incluimos el modal para editar los campos -->
 
-    @include('editarRegistro.modalSucursalesEdit')
+    @include('modales.editarSucursal')
 
 
 
@@ -163,13 +163,13 @@
                 var button_id = $(this).attr("id");
       
                 //Recuperamos los valores de los campos pertenecientes a una fila
-                var modal_calle=$("#calle"+ button_id).val();
-                var modal_numero=$("#numero"+ button_id).val();
-                var modal_entre_calles=$("#entre_calles"+ button_id).val();
-                var modal_barrio=$("#barrio"+ button_id).val();
-                var modal_departamento=$("#dpto"+ button_id).val();
-                var modal_telefono=$("#nro_tel"+ button_id).val();
-                var modal_email=$("#email"+ button_id).val();
+                var modal_calle = $("#calle"+ button_id).val();
+                var modal_numero = $("#numero"+ button_id).val();
+                var modal_entre_calles = $("#entre_calles"+ button_id).val();
+                var modal_barrio = $("#barrio"+ button_id).val();
+                var modal_departamento = $("#dpto"+ button_id).val();
+                var modal_telefono = $("#nro_tel"+ button_id).val();
+                var modal_email = $("#email"+ button_id).val();
 
                 //Desplegamos el modal
                 $('#myModal').modal('show'); 
