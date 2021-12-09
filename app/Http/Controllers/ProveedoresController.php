@@ -17,11 +17,13 @@ class ProveedoresController extends Controller
     {
 
         $proveedores_rupae = new Proveedor($request->all());
+        $proveedores_rupae->save();
 
         $domicilio_real = Proveedor_domicilio::create([
                                                         'tipo_domicilio'=>'real',
                                                         //'nro_orden_domicilio',
                                                         'calle'=>$request->input('calle_real'),
+                                                        'id_proveedor'=>$proveedores_rupae->id_proveedor,
                                                         'numero'=>$request->input('numero_real'),
                                                         'lote'=>$request->input('lote_real'),
                                                         'entre_calles'=>$request->input('entreCalles_real'),
@@ -33,9 +35,12 @@ class ProveedoresController extends Controller
                                                         'barrio'=>$request->input('barrio_real'),
                                                         'codigo_postal'=>$request->input('cp_real'),
                                                     ]);
-        $proveedores_rupae->domicilios()->attach($domicilio_real);
+        $domicilio_real->save();
+
         $domicilio_legal = Proveedor_domicilio::create([
                                                     'tipo_domicilio'=>'legal',
+                                                    'id_proveedor'=>$proveedores_rupae->id_proveedor,
+
                                                     //'nro_orden_domicilio',
                                                     'calle'=>$request->input('calle_legal'),
                                                     'numero'=>$request->input('numero_legal'),
@@ -49,9 +54,10 @@ class ProveedoresController extends Controller
                                                     'barrio'=>$request->input('barrio_legal'),
                                                     'codigo_postal'=>$request->input('cp_legal'),
                                                 ]);
-        $proveedores_rupae->domicilios()->attach($domicilio_legal);
+        $domicilio_legal->save();
         $domicilio_fiscal = Proveedor_domicilio::create([
                                                     'tipo_domicilio'=>'fiscal',
+                                                    'id_proveedor'=>$proveedores_rupae->id_proveedor,
                                                     //'nro_orden_domicilio',
                                                     'calle'=>$request->input('calle_fiscal'),
                                                     'numero'=>$request->input('numero_fiscal'),
@@ -65,8 +71,10 @@ class ProveedoresController extends Controller
                                                     'barrio'=>$request->input('barrio_fiscal'),
                                                     'codigo_postal'=>$request->input('cp_fiscal'),
                                                 ]);
-        $proveedores_rupae->domicilios()->attach($domicilio_fiscal);
-        $proveedores_rupae->save();
+        $domicilio_fiscal->save();
+
+        return redirect()->back();
+
 /*
         $arraySize = count( $request->calles);
         var_dump($arraySize );
@@ -113,7 +121,7 @@ class ProveedoresController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarRegistro/' . "$row->id" . '" class="edit btn btn-warning btn-sm">Editar</a> <a onclick="verRegistro();" class="view btn btn-success btn-sm">Ver</a> <a href="bajaid/' . "$row->id" . '" class="delete btn btn-danger btn-sm">Dar de baja</a>';
+                    $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm">Editar</a> <a onclick="verRegistro();" class="view btn btn-success btn-sm">Ver</a> <a href="bajaid/' . "$row->id_proveedor" . '" class="delete btn btn-danger btn-sm">Dar de baja</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -134,16 +142,16 @@ class ProveedoresController extends Controller
     */
     public function obtenerProveedorRupaeId($id)
     {
-        $proveedor = DB::table('proveedores_rupae')
-            ->where('id', $id)
+        $proveedor = DB::table('proveedores')
+            ->where('id_proveedor', $id)
             ->first();
 
         $proveedor_email = DB::table('proveedores_emails')
-            ->where('id_proveedores_rupae', $id)
+            ->where('id_proveedor', $id)
             ->first();
 
         $proveedor_domicilio = DB::table('proveedores_domicilios')
-            ->where('id_proveedores_rupae', $id)
+            ->where('id_proveedor', $id)
             ->first();
 
         return view('editarRegistro', ['proveedor' => $proveedor,
@@ -155,16 +163,16 @@ class ProveedoresController extends Controller
 
     public function editarProveedor($id, Request $request)
     {
-        $proveedor = DB::table('proveedores_rupae')
-            ->where('id', $id)
+        $proveedor = DB::table('proveedores')
+            ->where('id_proveedor', $id)
             ->first();
 
         $proveedor_email = DB::table('proveedores_emails')
-            ->where('id_proveedores_rupae', $id)
+            ->where('id_proveedor', $id)
             ->first();
 
         $proveedor_domicilio = DB::table('proveedores_domicilios')
-            ->where('id_proveedores_rupae', $id)
+            ->where('id_proveedor', $id)
             ->first();
 
         $proveedores_rupae = Proveedor::find($id);

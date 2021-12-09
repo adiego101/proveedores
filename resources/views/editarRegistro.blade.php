@@ -69,7 +69,7 @@
 
     </nav>
 
-    <form id="regiration_form" action="{{url('editarProveedor/'.$proveedor->id)}}"  method="POST">
+    <form id="regiration_form" action="{{url('editarProveedor/'.$proveedor->id_proveedor)}}"  method="POST">
         @csrf
 
                     <div class="tab-content" id="nav-tabContent">

@@ -98,6 +98,10 @@ class Proveedor extends Model
         return view('vistaPrueba', $users);
     }*/
 
+    public function domicilios(){
+       return $this->belongsTo(Proveedor_domicilio::class,'id_proveedor', 'id_proveedor_domicilio');
+    }
+
     public function personas(){
         return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
                     ->withPivot('rol_persona_proveedor')
@@ -120,9 +124,7 @@ class Proveedor extends Model
         return $this->hasMany(Proveedor_email::class, 'id_proveedor', 'id_proveedor');
     }
 
-    public function domicilios(){
-        return $this->hasMany(Proveedor_domicilio::class, 'id_proveedor', 'id_domicilio');
-    }
+
 
     public function sucursales(){
         return $this->hasMany(Sucursal::class, 'id_proveedor', 'id_proveedor');

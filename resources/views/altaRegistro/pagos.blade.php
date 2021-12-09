@@ -68,16 +68,6 @@
             </table>
         </div>
 
-
-
-        <h5>Completar solo si desea Registrar Baja del registro:</h5><br>
-
-        <label for="fecha_baja">Fecha de baja:</label><br>
-        <input type="text" class="form-control" aria-describedby="basic-addon1" id="fecha_baja" name="fecha_baja"><br>
-
-        <label for="motivo_baja">Motivo de Baja:</label><br>
-        <input type="text" class="form-control" aria-describedby="basic-addon1" id="motivo_baja"
-            name="motivo_baja"><br>
         <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
 
         <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
