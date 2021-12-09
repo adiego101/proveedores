@@ -7,46 +7,56 @@
     
 <!-- SE DEBEN ELIMINAR LOS ATRIBUTOS NAME DE CADA CAMPO Y SOLO DEJARLOS EN EL APPEND JS, PORQUE SINO AL ENVIAR LOS DATOS A LA BD SE ALMACENA SIEMPRE UN VALOR NULO AL PRINCIPIO. -->
 
+    <label for="nombre_sucursal">Nombre Sucursal:</label><br />
+    <input type="text" class="form-control" placeholder="Ingrese el nombre de la sucursal" aria-describedby="basic-addon1" id="nombre_sucursal" /><br />
+
     <div class="row">
         <div class="col-sm">
             <label for="calle">Calle:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese la calle de la sucursal" aria-describedby="basic-addon1" id="calle" /><br />
 
-            <label for="entre_calles">Entre Calles:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entre_calles" /><br />
-
             <label for="dpto">Departamento:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto" /><br />
 
-            <!-- <label for="lote">Lote:</label><br />
+            <label for="lote">Lote:</label><br />
             <input type="number" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote" name="lotes[]" /><br />
+
+            <label for="entre_calles">Entre Calles:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entre_calles" /><br />
 
             <label for="monoblock">Monoblock:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock" name="monoblocks[]" /><br />
 
-            <label for="localidad">Localidad:</label><br />
-            <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese la localidad" id="localidad" name="Localidades[]" /><br /> -->
+            <!--En este caso, se deben recuperar las localidades de la BD -->
+            <label for="localidad">Localidad:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="localidad" name="localidad">
+                    <option selected value="M">Localidad 1</option>
+                    <option value="F">Localidad 2</option>
+                </select>
+                <br>
             
             <label for="email">Correo electrónico:</label><br />
             <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email" name="correos_electronicos[]" /><br />
         </div>
 
         <div class="col-sm">
-
             <label for="numero">Número:</label><br />
             <input type="number" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero" /><br />
 
-            <!-- <label for="puerta">Puerta:</label><br />
+            <label for="puerta">Puerta:</label><br />
             <input type="number" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta" name="puertas[]" /><br />
+
+            <label for="manzana">Manzana:</label><br />
+            <input type="number" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana" name="manzanas[]" /><br />
 
             <label for="oficina">Oficina:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina" name="oficinas[]" /><br />
-
-            <label for="manzana">Manzana:</label><br />
-            <input type="number" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana" name="manzanas[]" /><br /> -->
                 
             <label for="barrio">Barrio:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio" /><br />
+
+            <label for="codigo_postal">Código Postal:</label><br>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" id="codigo_postal" name="codigo_postal" placeholder="Ingrese el código postal"><br>
 
             <label for="nro_tel">Teléfono:</label><br />
             <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el número de teléfono" id="nro_tel" /><br /><br />
@@ -54,6 +64,7 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_sucursal" class="btn btn-success">Agregar Sucursal</a>
             </div>
+            <br>
         </div>
     </div>
 
