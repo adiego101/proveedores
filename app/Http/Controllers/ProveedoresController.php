@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedor_domicilio;
-use App\Models\Proveedor;
 use DataTables;
+use App\Models\Sucursal;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Proveedor_domicilio;
 
 class ProveedoresController extends Controller
 {
@@ -15,9 +16,12 @@ class ProveedoresController extends Controller
     //Funcion para dar de alta un nuevo registro en la BD
     public function crear_registro(Request $request)
     {
+        //-------------------Carga Proveedor-------------------
 
         $proveedores_rupae = new Proveedor($request->all());
         $proveedores_rupae->save();
+
+        //----------------------------------Carga Domicilio Real---------------------------------------------
 
         $domicilio_real = Proveedor_domicilio::create([
                                                         'tipo_domicilio'=>'real',
@@ -37,6 +41,8 @@ class ProveedoresController extends Controller
                                                     ]);
         $domicilio_real->save();
 
+        //----------------------------------Carga Domicilio Legal---------------------------------------------
+
         $domicilio_legal = Proveedor_domicilio::create([
                                                     'tipo_domicilio'=>'legal',
                                                     'id_proveedor'=>$proveedores_rupae->id_proveedor,
@@ -55,6 +61,9 @@ class ProveedoresController extends Controller
                                                     'codigo_postal'=>$request->input('cp_legal'),
                                                 ]);
         $domicilio_legal->save();
+
+        //----------------------------------Carga Domicilio Fiscal---------------------------------------------
+
         $domicilio_fiscal = Proveedor_domicilio::create([
                                                     'tipo_domicilio'=>'fiscal',
                                                     'id_proveedor'=>$proveedores_rupae->id_proveedor,
@@ -73,37 +82,44 @@ class ProveedoresController extends Controller
                                                 ]);
         $domicilio_fiscal->save();
 
-        return redirect()->back();
 
-/*
+        //---------Contador de sucursales----------
+
         $arraySize = count( $request->calles);
         var_dump($arraySize );
 
         for($i=0; $i < $arraySize; $i++) {
 
-            $proveedores_domicilio = new Proveedor_domicilio();
-            $proveedores_domicilio->id_proveedores_rupae = $proveedores_rupae->id;
-            $proveedores_domicilio->tipo_domicilio = "Sucursal";
-            $proveedores_domicilio->calle = $request->calles[$i];
-            $proveedores_domicilio->barrio = $request->barrios[$i];
-            $proveedores_domicilio->numero = $request->numeros[$i];
-            $proveedores_domicilio->entre_calles = $request->entreCalles[$i];
-            $proveedores_domicilio->dpto = $request->dptos[$i];
-            $proveedores_domicilio->email = $request->barrios[$i];
-            $proveedores_domicilio->telefono = $request->Telefonos_sucursales[$i];
-            $proveedores_domicilio->save();*/
-            /*echo($proveedores_domicilio->toJson());*/
-        //}
+            //----------------Carga de Sucursal---------------
 
-        /*$proveedores_domicilio->save();
-        return redirect()->back();*/
+            $sucursal = new Sucursal();
+            $sucursal->id_proveedor = $proveedores_rupae->id_proveedor;
+            $sucursal->calle = $request->calles[$i];
+            $sucursal->barrio = $request->barrios[$i];
+            $sucursal->numero = $request->numeros[$i];
+            $sucursal->entre_calles = $request->entreCalles[$i];
+            $sucursal->dpto = $request->dptos[$i];
 
-        //$domicilio->numero = $request->numeros[$i];
+            $sucursal->save();
 
-        //var_dump($request->calles[$i]);
-        //$domicilio->telefono = $request->telefonos[$i];
+            //----------------Carga de email Sucursal---------------
 
-        //$domicilio->tipo_domicilio = "Sucursal";
+            $sucursal_email = new Sucursal_email();
+            $sucursal_email->id_sucursal = $sucursal->id_sucursal;
+            $sucursal_email->email = $request->email[$i];
+            $sucursal_email ->save();
+
+            //----------------Carga de telefono Sucursal---------------
+            $sucursal_telefono = new Sucursal_telefono();
+            $sucursal_telefono->id_sucursal = $sucursal->id_sucursal;
+            $sucursal_telefono->nro_tel = $request->Telefonos_sucursales[$i];
+            $sucursal_telefono->save();
+
+            echo($sucursal->toJson());
+        }
+
+
+        return redirect()->back();
 
     }
 
