@@ -59,7 +59,6 @@
 
     <form id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
         @csrf
-
         @include('altaRegistro.datosGenerales')
         @include('altaRegistro.domicilioReal')
         @include('altaRegistro.domicilioLegal')

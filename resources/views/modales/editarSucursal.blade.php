@@ -12,7 +12,7 @@
     </div>
 
     <br />
-    
+
 <!-- SE DEBEN ELIMINAR LOS ATRIBUTOS NAME DE CADA CAMPO Y SOLO DEJARLOS EN EL APPEND JS, PORQUE SINO AL ENVIAR LOS DATOS A LA BD SE ALMACENA SIEMPRE UN VALOR NULO AL PRINCIPIO. -->
 
     <div class="row">
@@ -39,7 +39,7 @@
             <label for="localidad">Localidad:</label><br />
             <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Localidad"
                 id="localidad" name="Localidades[]" /><br /> --}}
-            
+
             <label for="modal_email">Correo electrónico:</label><br />
             <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="modal_email" name="correos_electronicos[]" /><br />
         </div>
@@ -60,8 +60,8 @@
 
             <label for="manzana">Manzana:</label><br />
             <input type="text" class="form-control" placeholder="Manzana" aria-describedby="basic-addon1"
-                id="manzana" name="manzanas[]" /><br /> --}} 
-                
+                id="manzana" name="manzanas[]" /><br /> --}}
+
             <label for="modal_barrio">Barrio:</label><br />
             <input type="text" class="form-control" placeholder="Barrio" aria-describedby="basic-addon1"
                 id="modal_barrio" /><br />
@@ -74,7 +74,7 @@
 
             </div>
             <div class="modal-footer">
-                <input id="numero_fila" name="numero_fila" type="hidden">
+                <input id="numero_filasu" name="numero_filasu" type="hidden">
                 <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
             </div>
@@ -89,9 +89,9 @@
     //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
     $(document).on("click", ".btn_edit_modal", function() {
-                
+
                 //Obtenemos el numero de la fila que queremos modificar
-                var id_fila = $("#numero_fila").val();
+                var id_filasu = $("#numero_filasu").val();
 
                 //Recuperamos los valores de los campos del modal
                 var modal_calle = $("#modal_calle").val();
@@ -103,16 +103,16 @@
                 var modal_email = $("#modal_email").val();
 
                 //Ocultamos el modal
-                $('#myModal').modal('hide'); 
-            
+                $('#myModal').modal('hide');
+
                 //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                $('#calle'+id_fila).val(modal_calle);
-                $('#numero'+id_fila).val(modal_numero);
-                $('#entre_calles'+id_fila).val(modal_entre_calles);
-                $('#barrio'+id_fila).val(modal_barrio);
-                $('#dpto'+id_fila).val(modal_departamento);
-                $('#nro_tel'+id_fila).val(modal_telefono);
-                $('#email'+id_fila).val(modal_email);
-                
+                $('#calle'+id_filasu).val(modal_calle);
+                $('#numero'+id_filasu).val(modal_numero);
+                $('#entre_calles'+id_filasu).val(modal_entre_calles);
+                $('#barrio'+id_filasu).val(modal_barrio);
+                $('#dpto'+id_filasu).val(modal_departamento);
+                $('#nro_tel'+id_filasu).val(modal_telefono);
+                $('#email'+id_filasu).val(modal_email);
+
             });
 </script>

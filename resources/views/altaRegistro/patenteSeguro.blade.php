@@ -49,7 +49,7 @@
             <tbody id="body_table_vehiculo"></tbody>
         </table>
     </div>
- 
+
     <br />
 
     <hr>
@@ -93,14 +93,14 @@
             </thead>
             <tbody id="body_table_seguro"></tbody>
         </table>
-        
- 
+
+
     </div>
-  
+
     <br />
 
     <hr>
-    
+
 <input type="checkbox" id="servicio_personal_especializado" name="servicio_personal_especializado"  value="0">
 <label for="servicio_personal_especializado">Utiliza como sede de la actividad económica que desarrolla algún inmueble que tribute impuesto inmobiliario en localidades de la Provincia de Santa Cruz</label><br>
 <br>
@@ -132,7 +132,7 @@
             </thead>
             <tbody id="body_table_sede"></tbody>
         </table>
-          
+
     </div>
 
     <br />
@@ -147,7 +147,7 @@
 
     <!--Incluimos el modal para editar los campos de un seguro -->
     @include('modales.editarSeguro')
- 
+
     <!--Incluimos el modal para editar los campos de una sede -->
     @include('modales.editarSede')
 
@@ -166,7 +166,7 @@
             modelo = $("#modelo_vehiculo").val();
             dominio = $("#dominio_vehiculo").val();
             inscripto_en = $("#inscripto_en_vehiculo").val();
-            
+
 
             $("#body_table_vehiculo").append(
                 '<tr id="row_vehiculo' + j +'">'+
@@ -187,43 +187,43 @@
             document.getElementById("modelo_vehiculo").value = "";
             document.getElementById("dominio_vehiculo").value = "";
             document.getElementById("inscripto_en_vehiculo").value = "";
-        
+
 
             $(document).on("click", ".btn_remove_vehiculo", function() {
 
                 //cuando da click al boton quitar, obtenemos el id del boton
-                var button_id = $(this).attr("id");
+                let button_id = $(this).attr("id");
 
                 //borra la fila
-                $("#row_vehiculo" + button_id + "").remove(); 
+                $("#row_vehiculo" + button_id + "").remove();
             });
 
 
               //Cargamos los inputs del modal con los datos de la fila de la tabla
 
               $(document).on("click", ".btn_edit_vehiculo", function() {
-                
-                //cuando da click al boton editar, obtenemos el id del boton
-                var button_id = $(this).attr("id");
-      
-                //Recuperamos los valores de los campos pertenecientes a una fila
-                var modal_marca = $("#marca_vehiculo"+ button_id).val();
-                var modal_modelo = $("#modelo_vehiculo"+ button_id).val();
-                var modal_dominio = $("#dominio_vehiculo"+ button_id).val();
-                var modal_inscripto = $("#inscripto_en_vehiculo"+ button_id).val();
 
+                //cuando da click al boton editar, obtenemos el id del boton
+                let button_id = $(this).attr("id");
+
+                //Recuperamos los valores de los campos pertenecientes a una fila
+                let modal_marca = $("#marca_vehiculo"+ button_id).val();
+                let modal_modelo = $("#modelo_vehiculo"+ button_id).val();
+                let modal_dominio = $("#dominio_vehiculo"+ button_id).val();
+                let modal_inscripto = $("#inscripto_en_vehiculo"+ button_id).val();
+               
                 //Desplegamos el modal
-                $('#modal_vehiculo').modal('show'); 
-            
+                $('#modal_vehiculo').modal('show');
+
                 //Enviamos los valores recuperados anteriormente a los inputs del modal
                 $('#modal_marca_vehiculo').val(modal_marca);
                 $('#modal_modelo_vehiculo').val(modal_modelo);
                 $('#modal_dominio_vehiculo').val(modal_dominio);
                 $('#modal_inscripto_en_vehiculo').val(modal_inscripto);
-                $('#numero_fila').val(button_id);
-                
+                $('#numero_fila_vehiculo').val(button_id);
+
             });
-            
+
         });
     </script>
 
@@ -240,7 +240,7 @@
             agencia = $("#agencia").val();
             asegurado = $("#asegurado").val();
             vigencia = $("#vigencia_hasta").val();
-            
+
 
             $("#body_table_seguro").append(
                 '<tr id="row_seguro' + k +'">'+
@@ -261,43 +261,43 @@
             document.getElementById("agencia").value = "";
             document.getElementById("asegurado").value = "";
             document.getElementById("vigencia_hasta").value = "";
-        
+
 
             $(document).on("click", ".btn_remove_seguro", function() {
 
                 //cuando da click al boton quitar, obtenemos el id del boton
-                var button_id = $(this).attr("id");
+                let button_id = $(this).attr("id");
 
                 //borra la fila
-                $("#row_seguro" + button_id + "").remove(); 
+                $("#row_seguro" + button_id + "").remove();
             });
 
 
             //Cargamos los inputs del modal con los datos de la fila de la tabla
 
             $(document).on("click", ".btn_edit_seguro", function() {
-                
-                //cuando da click al boton editar, obtenemos el id del boton
-                var button_id = $(this).attr("id");
-      
-                //Recuperamos los valores de los campos pertenecientes a una fila
-                var modal_poliza = $("#poliza"+ button_id).val();
-                var modal_agencia = $("#agencia"+ button_id).val();
-                var modal_asegurado = $("#asegurado"+ button_id).val();
-                var modal_vigencia = $("#vigencia_hasta"+ button_id).val();
 
-                //Desplegamos el modal
-                $('#modal_seguro').modal('show'); 
+                //cuando da click al boton editar, obtenemos el id del boton
+                let button_id = $(this).attr("id");
+
+                //Recuperamos los valores de los campos pertenecientes a una fila
+                let modal_poliza = $("#poliza"+ button_id).val();
+                let modal_agencia = $("#agencia"+ button_id).val();
+                let modal_asegurado = $("#asegurado"+ button_id).val();
+                let modal_vigencia = $("#vigencia_hasta"+ button_id).val();
             
+                //Desplegamos el modal
+                $('#modal_seguro').modal('show');
+
                 //Enviamos los valores recuperados anteriormente a los inputs del modal
                 $('#modal_poliza').val(modal_poliza);
                 $('#modal_agencia').val(modal_agencia);
                 $('#modal_asegurado').val(modal_asegurado);
                 $('#modal_vigencia_hasta').val(modal_vigencia);
-                $('#numero_fila').val(button_id);
-                
+                $('#numero_fila_seguro').val(button_id);
+
             });
-            
+
         });
     </script>
 
@@ -311,7 +311,7 @@
 
         domicilio = $("#domicilio").val();
         localidad = $("#localidad").val();
-        
+
 
         $("#body_table_sede").append(
             '<tr id="row_sede' + l +'">'+
@@ -333,34 +333,34 @@
         $(document).on("click", ".btn_remove_sede", function() {
 
             //cuando da click al boton quitar, obtenemos el id del boton
-            var button_id = $(this).attr("id");
+            let button_id = $(this).attr("id");
 
             //borra la fila
-            $("#row_sede" + button_id + "").remove(); 
+            $("#row_sede" + button_id + "").remove();
         });
 
 
         //Cargamos los inputs del modal con los datos de la fila de la tabla
 
         $(document).on("click", ".btn_edit_sede", function() {
-                
-                //cuando da click al boton editar, obtenemos el id del boton
-                var button_id = $(this).attr("id");
-      
-                //Recuperamos los valores de los campos pertenecientes a una fila
-                var modal_domicilio = $("#domicilio"+ button_id).val();
-                var modal_localidad = $("#localidad"+ button_id).val();
 
+                //cuando da click al boton editar, obtenemos el id del boton
+                let button_id = $(this).attr("id");
+
+                //Recuperamos los valores de los campos pertenecientes a una fila
+                let modal_domicilio = $("#domicilio"+ button_id).val();
+                let modal_localidad = $("#localidad"+ button_id).val();
+             
                 //Desplegamos el modal
-                $('#modal_sede').modal('show'); 
-            
+                $('#modal_sede').modal('show');
+
                 //Enviamos los valores recuperados anteriormente a los inputs del modal
                 $('#modal_domicilio').val(modal_domicilio);
                 $('#modal_localidad').val(modal_localidad);
-                $('#numero_fila').val(button_id);
-                
+                $('#numero_fila_sede').val(button_id);
+
             });
-        
+
     });
     </script>
 
