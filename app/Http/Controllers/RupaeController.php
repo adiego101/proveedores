@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedor_rupae;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -12,7 +12,7 @@ class RupaeController extends Controller
 
     protected $proveedores_rupae;
 
-    public function __construct(Proveedor_rupae $proveedores_rupae)
+    public function __construct(Proveedor $proveedores_rupae)
     {
         $this->proveedores_rupae = $proveedores_rupae;
     }
@@ -47,7 +47,7 @@ class RupaeController extends Controller
      */
     public function store(Request $request)
     {
-        $proveedores_rupae = new Proveedor_rupae($request->all());
+        $proveedores_rupae = new Proveedor($request->all());
         $proveedores_rupae->save();
         return redirect()->action([RupaeController::class, 'index']);
     }
@@ -82,7 +82,7 @@ class RupaeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $proveedores_rupae = Proveedor_rupae::find($id);
+        $proveedores_rupae = Proveedor::find($id);
         $proveedores_rupae->fill($request->all());
         $proveedores_rupae->save();
         return redirect()->action([RupaeController::class, 'index']);
@@ -95,7 +95,7 @@ class RupaeController extends Controller
      */
     public function destroy($id)
     {
-        $proveedores_rupae = Proveedor_rupae::find($id);
+        $proveedores_rupae = Proveedor::find($id);
         $proveedores_rupae->delete();
         return redirect()->action([RupaeController::class, 'index']);
     }
