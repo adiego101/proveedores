@@ -12,9 +12,38 @@
                 <p>Esta operación <b>NO</b> podrá deshacerse.</p>
             </div>
             <div class="modal-footer">
-               <input type="text" name="demo" id="demo">
+       
+                <input type="hidden" id="demo">
+                <button type="button" class="btn btn-danger btn_baja_modal">Baja</button>
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
+
+    $(document).on("click", ".btn_baja_modal", function() {
+
+                //Obtenemos el numero de la fila que queremos modificar
+                var id = $("#demo").val();
+              
+                $.ajax({
+                    type: "GET",
+                    //Si colocamos un numero (id) funciona sin problemas... VER
+                    url: {{ url('AjaxBaja/{id}')}},
+                    data: id,
+                });
+
+                //Ocultamos el modal
+                $('#modal_baja').modal('hide');
+
+                
+                
+
+            });
+</script>

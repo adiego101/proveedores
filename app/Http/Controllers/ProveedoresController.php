@@ -413,7 +413,7 @@ class ProveedoresController extends Controller
     }
 
 
-    public function dar_baja_id($id)
+    /*public function dar_baja_id($id)
     {
 
         $proveedores_rupae = Proveedor::find($id);
@@ -422,5 +422,21 @@ class ProveedoresController extends Controller
         $proveedores_rupae->save();
         return redirect()->back();
 
+    }*/
+
+
+    public function dar_baja_id(Request $request)
+    {
+
+
+        $proveedores_rupae = Proveedor::find($request->id);
+        //return response()->json($proveedores_rupae);
+        $proveedores_rupae->dado_de_baja = 1;
+        $proveedores_rupae->save();
+        return redirect()->back();
+
+
     }
+
+
 }
