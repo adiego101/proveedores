@@ -15,12 +15,12 @@ class Proveedor_patente extends Model
     protected $fillable = [
                             'dominio',
                             'marca',
+                            'id_proveedor',
                             'modelo',
                             'inscripto_en',
                             ];
 
     protected $hidden = ['id_proveedor_patente'];
-    protected $primaryKey = 'id_proveedor_patente';
 
     public function obtenerProveedoresPatentes(){
 

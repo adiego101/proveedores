@@ -20,7 +20,6 @@ class Localidad extends Model
                             ];
 
     protected $hidden = ['id_localidad'];
-    protected $primaryKey = 'id_localidad';
 
     public function obtenerLocalidades(){
 

@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use DataTables;
+use App\Models\Pago;
+use App\Models\Persona;
 use App\Models\Sucursal;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
+use App\Models\Sucursal_email;
+use App\Models\Proveedor_email;
+use App\Models\Proveedor_seguro;
+use App\Models\Proveedor_patente;
+use App\Models\Sucursal_telefono;
 use App\Models\Proveedor_telefono;
 use Illuminate\Support\Facades\DB;
 use App\Models\Proveedor_domicilio;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 class ProveedoresController extends Controller
 {
@@ -17,6 +26,8 @@ class ProveedoresController extends Controller
     //Carga Completa de Proveedor
     public function crear_registro(Request $request)
     {
+
+        //try{
         //-------------------Carga Proveedor-------------------
 
         $proveedores_rupae = new Proveedor($request->all());
@@ -50,7 +61,7 @@ class ProveedoresController extends Controller
         //---------Carga de Telefonos_Real----------
 
         $telefono_real = Proveedor_telefono::create([
-            'nro_tel'=>$request->telefono_real[i] ,
+            'nro_tel'=>$request->telefono_real[$i] ,
             'id_proveedor'=>$proveedores_rupae->id_proveedor,
             //'cod_area_tel' =>,
             //'tipo_medio'=>,
@@ -58,7 +69,7 @@ class ProveedoresController extends Controller
             'tipo_telefono'=>'real',
             //'nro_orden_telefono'=>,
             ]);
-            $telefono_real->save;
+            $telefono_real->save();
         }
 
         //---------Contador de Email_Real----------
@@ -69,11 +80,11 @@ class ProveedoresController extends Controller
         //---------Carga de Email_Real----------
 
         $email_real = Proveedor_email::create([
-            'email'=>$request->email_real[i] ,
+            'email'=>$request->email_real[$i] ,
             'id_proveedor'=>$proveedores_rupae->id_proveedor,
             'tipo_email'=>'real',
             ]);
-            $email_real->save;
+            $email_real->save();
         }
 
         //----------------------------------Carga Domicilio Legal---------------------------------------------
@@ -105,7 +116,7 @@ class ProveedoresController extends Controller
         for($i=0; $i < $arraySize; $i++) {
 
         $telefono_legal = Proveedor_telefono::create([
-            'nro_tel'=>$request->telefono_legal[i] ,
+            'nro_tel'=>$request->telefono_legal[$i] ,
             'id_proveedor'=>$proveedores_rupae->id_proveedor,
             //'cod_area_tel' =>,
             //'tipo_medio'=>,
@@ -113,7 +124,7 @@ class ProveedoresController extends Controller
             'tipo_telefono'=>'legal',
             //'nro_orden_telefono'=>,
             ]);
-            $telefono_legal->save;
+            $telefono_legal->save();
         }
         //---------Contador de Email_Legal----------
 
@@ -123,12 +134,26 @@ class ProveedoresController extends Controller
         //---------Carga de Email_legal----------
 
         $email_legal = Proveedor_email::create([
-            'email'=>$request->email_legal[i] ,
+            'email'=>$request->email_legal[$i] ,
             'id_proveedor'=>$proveedores_rupae->id_proveedor,
             'tipo_email'=>'legal',
             ]);
-            $email_legal->save;
+            $email_legal->save();
         }
+
+        $Representante_legal = Persona::create([
+            'dni_persona'=>$request->dni_legal,
+            //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+            'nombre_persona'=>$request->representante_legal,
+            //'apellido_persona'=>$proveedores_rupae->apellido_persona,
+            //'genero_persona'=>$proveedores_rupae->genero_persona,
+            ]);
+        $Representante_legal->save();
+
+        $proveedores_rupae->personas()->attach($Representante_legal);
+
+
+
 
 
         //----------------------------------Carga Domicilio Fiscal---------------------------------------------
@@ -158,7 +183,7 @@ class ProveedoresController extends Controller
 
         for($i=0; $i < $arraySize; $i++) {
         $telefono_fiscal = Proveedor_telefono::create([
-            'nro_tel'=>$request->telefono_fiscal[i] ,
+            'nro_tel'=>$request->telefono_fiscal[$i] ,
             'id_proveedor'=>$proveedores_rupae->id_proveedor,
             //'cod_area_tel' =>,
             //'tipo_medio'=>,
@@ -166,7 +191,7 @@ class ProveedoresController extends Controller
             'tipo_telefono'=>'fiscal',
             //'nro_orden_telefono'=>,
             ]);
-            $telefono_fiscal->save;
+            $telefono_fiscal->save();
 
         }
 
@@ -178,19 +203,19 @@ class ProveedoresController extends Controller
         //---------Carga de Email_fiscal----------
 
         $email_fiscal = Proveedor_email::create([
-            'email'=>$request->email_fiscal[i] ,
+            'email'=>$request->email_fiscal[$i] ,
             'id_proveedor'=>$proveedores_rupae->id_proveedor,
             'tipo_email'=>'fiscal',
             ]);
-            $email_fiscal->save;
+            $email_fiscal->save();
         }
 
         //------------------------------------------SUCURSALES--------------------------------------------------------
 
         //---------Contador de sucursales----------
+        if(isset($request->calles)){
 
         $arraySize = count( $request->calles);
-        var_dump($arraySize );
 
         for($i=0; $i < $arraySize; $i++) {
 
@@ -207,23 +232,94 @@ class ProveedoresController extends Controller
             $sucursal->save();
 
             //----------------Carga de email Sucursal---------------
-
+            if(isset($request->correos_electronicos)){
             $sucursal_email = new Sucursal_email();
             $sucursal_email->id_sucursal = $sucursal->id_sucursal;
-            $sucursal_email->email = $request->email[$i];
+            $sucursal_email->email = $request->correos_electronicos[$i];
             $sucursal_email ->save();
-
+        }
             //----------------Carga de telefono Sucursal---------------
+            if(isset($request->Telefonos_sucursales)){
+
             $sucursal_telefono = new Sucursal_telefono();
             $sucursal_telefono->id_sucursal = $sucursal->id_sucursal;
             $sucursal_telefono->nro_tel = $request->Telefonos_sucursales[$i];
             $sucursal_telefono->save();
-
+            }
             echo($sucursal->toJson());
         }
+            }
+        //---------Contador de Patentes----------
+        if(isset($request->marcas)){
+
+        $arraySize = count( $request->marcas);
+        var_dump($arraySize );
+
+        //---------Carga de Patentes----------
+
+        for($i=0; $i < $arraySize; $i++) {
+        $Proveedor_patente = Proveedor_patente::create([
+            'id_proveedor'=>$proveedores_rupae->id_proveedor,
+            'dominio'=>$request->dominios[$i] ,
+            'marca'=>$request->marcas[$i] ,
+            'modelo'=>$request->modelos[$i] ,
+            'inscripto_en'=>$request->inscriptos[$i] ,
+
+            ]);
+
+        $Proveedor_patente->save();
+        }
+        }
+        //---------Contador de Polizas----------
+        if(isset($request->polizas)){
+
+        $arraySize = count( $request->polizas);
+        var_dump($arraySize );
+
+        //---------Carga de Polizas----------
+
+        for($i=0; $i < $arraySize; $i++) {
+        $Proveedor_seguro = Proveedor_seguro::create([
+            'id_proveedor'=>$proveedores_rupae->id_proveedor,
+            'poliza'=>$request->polizas[$i],
+            'agencia'=>$request->agencias[$i],
+            'asegurado'=>$request->asegurados[$i],
+            'vigencia_hasta'=>$request->vigentes[$i],
+
+            ]);
+        $Proveedor_seguro->save();
+        }
+    }
+
+        //---------Contador de Pagos----------
+        if(isset($request->importes)){
+
+        $arraySize = count( $request->importes);
+        var_dump($arraySize );
+
+        //---------Carga de Pagos----------
+        for($i=0; $i < $arraySize; $i++) {
+        $Pago = Pago::create([
+            'id_proveedor'=>$proveedores_rupae->id_proveedor,
+            'fecha'=>$request->fechas[$i],
+            'importe'=>$request->importes[$i],
+            'observaciones'=>$request->observaciones[$i],
+
+            ]);
+        $Pago->save();
+        }
+    }
 
 
-        return redirect()->back();
+            return redirect()->back()->with('message','Registro Creado Correctamente');
+        //}
+        /*catch (\Exception $e)
+        {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+        }*/
 
     }
 
@@ -241,7 +337,7 @@ class ProveedoresController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm">Editar</a> <a onclick="verRegistro();" class="view btn btn-success btn-sm">Ver</a> <a href="bajaid/' . "$row->id_proveedor" . '" class="delete btn btn-danger btn-sm">Dar de baja</a>';
+                    $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm">Editar</a> <a onclick="verRegistro();" class="view btn btn-success btn-sm">Ver</a> <a onclick="bajaRegistro('.$row->id_proveedor.');" class="delete btn btn-danger btn-sm">Dar de baja</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

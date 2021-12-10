@@ -18,7 +18,6 @@ class Presentacion_estado extends Model
                             ];
 
     protected $hidden = ['id_presentacion_estado'];
-    protected $primaryKey = 'id_presentacion_estado';
 
     public function obtenerPresentacionesEstados(){
 

@@ -99,7 +99,10 @@ class Proveedor extends Model
     }*/
 
     public function domicilios(){
-       return $this->belongsTo(Proveedor_domicilio::class,'id_proveedor', 'id_proveedor_domicilio');
+       return $this->hasMany(Proveedor_domicilio::class,'id_proveedor', 'id_proveedor_domicilio');
+    }
+    public function telefonos(){
+        return $this->hasMany(Proveedor_telefono::class, 'id_proveedor', 'id_proveedor_telefono');
     }
 
     public function personas(){
@@ -116,12 +119,10 @@ class Proveedor extends Model
         return $this->belongsToMany(Tipo_actividad::class, 'actividades_proveedores', 'id_proveedor', 'id_tipo_actividad');
     }
 
-    public function telefonos(){
-        return $this->hasMany(Proveedor_telefono::class, 'id_proveedor', 'id_proveedor');
-    }
+
 
     public function emails(){
-        return $this->hasMany(Proveedor_email::class, 'id_proveedor', 'id_proveedor');
+        return $this->hasMany(Proveedor_email::class, 'id_proveedor', 'id_proveedor_email');
     }
 
 

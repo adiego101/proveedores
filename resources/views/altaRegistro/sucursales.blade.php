@@ -4,7 +4,7 @@
     </div>
 
     <br />
-    
+
 <!-- SE DEBEN ELIMINAR LOS ATRIBUTOS NAME DE CADA CAMPO Y SOLO DEJARLOS EN EL APPEND JS, PORQUE SINO AL ENVIAR LOS DATOS A LA BD SE ALMACENA SIEMPRE UN VALOR NULO AL PRINCIPIO. -->
 
     <label for="nombre_sucursal">Nombre Sucursal:</label><br />
@@ -34,7 +34,7 @@
                     <option value="F">Localidad 2</option>
                 </select>
                 <br>
-            
+
             <label for="email">Correo electrónico:</label><br />
             <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email" name="correos_electronicos[]" /><br />
         </div>
@@ -51,7 +51,7 @@
 
             <label for="oficina">Oficina:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina" name="oficinas[]" /><br />
-                
+
             <label for="barrio">Barrio:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio" /><br />
 
@@ -59,7 +59,7 @@
             <input type="text" class="form-control" aria-describedby="basic-addon1" id="codigo_postal" name="codigo_postal" placeholder="Ingrese el código postal"><br>
 
             <label for="nro_tel">Teléfono:</label><br />
-            <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el número de teléfono" id="nro_tel" /><br /><br />
+            <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el número de teléfono" id="nro_tel" name="Telefonos_sucursales[]"/><br /><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_sucursal" class="btn btn-success">Agregar Sucursal</a>
@@ -118,7 +118,7 @@
             numero = $("#numero").val();
             departamento = $("#dpto").val();
             email = $("#email").val();
-            
+
 
             $("#body_table").append(
                 '<tr id="row' + i +'">'+
@@ -161,7 +161,7 @@
                 var button_id = $(this).attr("id");
 
                 //borra la fila
-                $("#row" + button_id + "").remove(); 
+                $("#row" + button_id + "").remove();
             });
 
 
@@ -169,10 +169,10 @@
             //Cargamos los inputs del modal con los datos de la fila de la tabla
 
             $(document).on("click", ".btn_edit", function() {
-                
+
                 //cuando da click al boton editar, obtenemos el id del boton
                 var button_id = $(this).attr("id");
-      
+
                 //Recuperamos los valores de los campos pertenecientes a una fila
                 var modal_calle = $("#calle"+ button_id).val();
                 var modal_numero = $("#numero"+ button_id).val();
@@ -183,8 +183,8 @@
                 var modal_email = $("#email"+ button_id).val();
 
                 //Desplegamos el modal
-                $('#myModal').modal('show'); 
-            
+                $('#myModal').modal('show');
+
                 //Enviamos los valores recuperados anteriormente a los inputs del modal
                 $('#modal_calle').val(modal_calle);
                 $('#modal_numero').val(modal_numero);
@@ -194,9 +194,9 @@
                 $('#modal_nro_tel').val(modal_telefono);
                 $('#modal_email').val(modal_email);
                 $('#numero_fila').val(button_id);
-                
+
             });
-            
+
         });
     </script>
 </fieldset>

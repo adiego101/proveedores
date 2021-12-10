@@ -19,7 +19,6 @@ class Clasificacion_empresa extends Model
                             ];
 
     protected $hidden = ['id_clasificacion_empresa'];
-    protected $primaryKey = 'id_clasificacion_empresa';
 
     public function obtenerClasificacionesEmpresas(){
 

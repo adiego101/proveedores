@@ -10,7 +10,7 @@ class Proveedor_email extends Model
     use HasFactory;
 
     protected $table = "proveedores_emails";
-    protected $primaryKey = 'id_proveedores_emails';
+    protected $primaryKey = 'id_proveedor_email';
 
     protected $fillable = [
                             'email',
@@ -33,6 +33,6 @@ class Proveedor_email extends Model
     }
 
     public function proveedor(){
-        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
+        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor_email');
     }
 }

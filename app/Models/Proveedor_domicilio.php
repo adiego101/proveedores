@@ -45,7 +45,7 @@ class Proveedor_domicilio extends Model
 
 
     public function proveedor(){
-        return $this->hasMany(Proveedor::class, 'id_proveedor', 'id_proveedor_domicilio');
+        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor_domicilio');
     }
     /*public function proveedor(){
         return $this->belongsTo(Proveedor::class);

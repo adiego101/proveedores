@@ -18,7 +18,6 @@ class Subsistema extends Model
                             ];
 
     protected $hidden = ['id_subsistema'];
-    protected $primaryKey = 'id_subsistema';
 
     public function obtenerSubsistemas(){
 

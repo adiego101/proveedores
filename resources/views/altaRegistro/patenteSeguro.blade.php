@@ -211,7 +211,7 @@
                 let modal_modelo = $("#modelo_vehiculo"+ button_id).val();
                 let modal_dominio = $("#dominio_vehiculo"+ button_id).val();
                 let modal_inscripto = $("#inscripto_en_vehiculo"+ button_id).val();
-               
+
                 //Desplegamos el modal
                 $('#modal_vehiculo').modal('show');
 
@@ -285,7 +285,7 @@
                 let modal_agencia = $("#agencia"+ button_id).val();
                 let modal_asegurado = $("#asegurado"+ button_id).val();
                 let modal_vigencia = $("#vigencia_hasta"+ button_id).val();
-            
+
                 //Desplegamos el modal
                 $('#modal_seguro').modal('show');
 
@@ -350,7 +350,7 @@
                 //Recuperamos los valores de los campos pertenecientes a una fila
                 let modal_domicilio = $("#domicilio"+ button_id).val();
                 let modal_localidad = $("#localidad"+ button_id).val();
-             
+
                 //Desplegamos el modal
                 $('#modal_sede').modal('show');
 

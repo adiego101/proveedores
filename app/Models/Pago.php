@@ -15,12 +15,12 @@ class Pago extends Model
 
     protected $fillable = [
                             'fecha',
+                            'id_proveedor',
                             'importe',
                             'observaciones',
                             ];
 
     protected $hidden = ['id_pagos'];
-    protected $primaryKey = 'id_pagos';
 
     public function obtenerPagos(){
 

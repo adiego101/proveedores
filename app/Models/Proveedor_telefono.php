@@ -9,7 +9,7 @@ class Proveedor_telefono extends Model
 {
     use HasFactory;
     protected $table = "proveedores_telefonos";
-    protected $primaryKey = 'id_proveedores_telefonos';
+    protected $primaryKey = 'id_proveedor_telefono';
 
     protected $fillable = [
                             'nro_tel',
@@ -21,7 +21,7 @@ class Proveedor_telefono extends Model
                             'nro_orden_telefono'
                             ];
 
-    protected $hidden = ['id_proveedores_telefonos'];
+    protected $hidden = ['id_proveedor_telefono'];
 
     public function obtenerProveedor_telefonos(){
 
@@ -34,6 +34,6 @@ class Proveedor_telefono extends Model
     }
 
     public function proveedor(){
-        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
+        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor_telefono');
     }
 }

@@ -18,7 +18,6 @@ class Presentacion extends Model
                             ];
 
     protected $hidden = ['id_presentacion'];
-    protected $primaryKey = 'id_presentacion';
 
     public function obtenerPresentaciones(){
 

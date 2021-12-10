@@ -20,7 +20,6 @@ class Producto extends Model
                             ];
 
     protected $hidden = ['id_producto'];
-    protected $primaryKey = 'id_producto';
 
 
     public function obtenerProductos(){

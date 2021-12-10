@@ -14,6 +14,7 @@ class Proveedor_seguro extends Model
 
     protected $fillable = [
                             'poliza',
+                            'id_proveedor',
                             'agencia',
                             'asegurado',
                             'vigencia_hasta',

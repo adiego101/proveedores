@@ -1,5 +1,5 @@
 <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
+    <div id="modal_baja" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Contenido del Modal-->
             <div class="modal-content">
@@ -12,9 +12,7 @@
                 <p>Esta operación <b>NO</b> podrá deshacerse.</p>
             </div>
             <div class="modal-footer">
-                {!! Form::open(['method' => 'GET','route' => ['baja', 1],'style'=>'display:inline']) !!}
-                {!! Form::submit('Dar de Baja', ['class' => 'btn btn-danger']) !!}
-                {!! Form::close() !!}
+               <input type="text" name="demo" id="demo">
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
             </div>
         </div>

@@ -21,7 +21,6 @@ class Persona extends Model
                             ];
 
     protected $hidden = ['id_persona'];
-    protected $primaryKey = 'id_persona';
 
     public function obtenerPersonas(){
 

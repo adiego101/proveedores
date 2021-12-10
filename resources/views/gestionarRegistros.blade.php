@@ -33,7 +33,7 @@
 
     <!--Incluimos el modal para dar de baja un registro -->
     <!-- Falta incluir el modal -->
-   
+@include('modalBajaRegistro')
 
 </body>
 </html>
@@ -99,8 +99,8 @@
     function bajaRegistro(id_registro) {
         
          //Desplegamos el modal
-         $('#myModal').modal('show'); 
-         $('#myModal').val(id_registro);
+         $('#modal_baja').modal('show'); 
+         $('#demo').val(id_registro);
     }
 </script>
 @endpush
