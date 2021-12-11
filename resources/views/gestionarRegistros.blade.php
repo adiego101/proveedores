@@ -11,7 +11,7 @@
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body>
-    
+
 <!--<div class="container mt-5">-->
     <h2 class="mb-4">Gestionar Registros:</h2>
     <table class="table table-hover yajra-datatable">
@@ -35,12 +35,13 @@
     <!-- Falta incluir el modal -->
 @include('modalBajaRegistro')
 
+
 </body>
 </html>
 @endsection
 
 @push('js')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -48,7 +49,7 @@
 
 <script type="text/javascript">
   $(function () {
-    
+
     var table = $('.yajra-datatable').DataTable({
     language: {
         "decimal": "",
@@ -78,29 +79,31 @@
             {data: 'cuit', name: 'cuit'},
             {data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
             {
-                data: 'action', 
-                name: 'action', 
-                orderable: true, 
+                data: 'action',
+                name: 'action',
+                orderable: true,
                 searchable: true
             },
         ]
     });
-    
+
   });
 
     //Funciones a implementar
 
     function verRegistro() {
-        
+
         return  alert("Retornar vista para visualizar un registro!");
     }
 
 
     function bajaRegistro(id_registro) {
-        
+
          //Desplegamos el modal
-         $('#modal_baja').modal('show'); 
+         $('#modal_baja').modal('show');
          $('#demo').val(id_registro);
     }
 </script>
+
+
 @endpush
