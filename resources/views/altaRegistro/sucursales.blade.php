@@ -121,6 +121,7 @@
         let i = 1; //contador para asignar id al boton que borrara la fila
         $("#add_sucursal").on("click", function(e) {
             nombre_sucursal=$('#nombre_sucursal').val();
+            console.log("Nombre sucursal**"+nombre_sucursal);
             if(nombre_sucursal=''){
                 error_encontrado=true;
                 console.log("Nombre sucursal"+nombre_sucursal);
