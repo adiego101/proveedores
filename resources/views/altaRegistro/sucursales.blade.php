@@ -111,6 +111,7 @@
 
     <script type="text/javascript">
 
+        let nombre_sucursal;
         let calle;
         let barrio;
         //let telefono;
@@ -119,7 +120,12 @@
         let departamento;
         let i = 1; //contador para asignar id al boton que borrara la fila
         $("#add_sucursal").on("click", function(e) {
-
+            nombre_sucursal=$('#nombre_sucursal').val();
+            if(nombre_sucursal=''){
+                $('#errors').show();
+                $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar su NOMBRE.</li>");
+                return false;
+            }
             calle = $("#calle").val();
             barrio = $("#barrio").val();
             //telefono = $("#nro_tel").val();
@@ -127,6 +133,11 @@
             numero = $("#numero").val();
             departamento = $("#dpto").val();
             email = $("#email").val();
+            if(email=''){
+                $('#errors').show();
+                $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar su EMAIL.</li>");
+                return false;
+            }
 
             let valoresTelefonos = [];
             let telefono = "";
@@ -134,6 +145,11 @@
                 telefono = $(this).val();
                 if(telefono != '')
                     valoresTelefonos.push(telefono);
+                else{
+                    $('#errors').show();
+                    $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar al menos 1 (UN) TELEFONO.</li>");
+                    return false;
+                }
             });
 
             let telefono_aux = '';
