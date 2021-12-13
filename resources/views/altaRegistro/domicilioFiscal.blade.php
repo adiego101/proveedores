@@ -24,7 +24,7 @@
                 <label for="pais_fiscal">Pais:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="pais_fiscal" name="pais_fiscal">
                     @foreach($paises as $pais)
-                    <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
+                    <option value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
                     @endforeach
                 </select>
                 <br>
@@ -33,7 +33,7 @@
                 <label for="localidad_fiscal">Localidad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="localidad_fiscal" name="localidad_fiscal">
                     @foreach($localidades as $localidad)
-                    <option selected value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
+                    <option value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
                     @endforeach
                 </select>
                 <br>
@@ -75,7 +75,7 @@
                 <label for="provincia_fiscal">Provincia:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_fiscal" name="provincia_fiscal">
                     @foreach($provincias as $provincia)
-                    <option selected value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
                     @endforeach
                 </select>
                 <br>

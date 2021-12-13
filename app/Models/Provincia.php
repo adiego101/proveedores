@@ -9,12 +9,14 @@ class Provincia extends Model
 {
     use HasFactory;
     protected $table = "provincias";
+    protected $primaryKey = 'id_provincia';
+
 
     protected $fillable = [
                             'nombre_provincia',
                             ];
-                            
-    protected $hidden = ['id_provincia'];
+
+    //protected $hidden = ['id_provincia'];
 
     public function obtenerProvincias(){
 
@@ -27,7 +29,7 @@ class Provincia extends Model
     }
 
     public function localidades(){
-        return $this->hasMany(Localidad::class, 'id_localidad', 'id_localidad');
+        return $this->hasMany(Localidad::class, 'id_provincia', 'id_provincia');
     }
 
     public function pais(){

@@ -15,6 +15,7 @@ class Localidad extends Model
     protected $fillable = [
                             'codigo_localidad',
                             'nombre_localidad',
+                            'id_provincia',
                             'nombre_departamento',
                             'flg_user_generated',
                             ];

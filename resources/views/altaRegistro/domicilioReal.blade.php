@@ -1,7 +1,7 @@
 <fieldset>
 
     <h1>Datos del domicilio real</h1><br>
-  
+
     <div class="container">
         <div class="row">
             <div class="col-sm">
@@ -46,16 +46,16 @@
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
                     aria-describedby="basic-addon1" id="email_real" name="email_real[]" ><br>
                 <div class="field_email_real">
-                
+
                 </div>
                 <label for="telefono_real">Teléfono:</label><br>
                 <input type="number" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" >
                 <div class="field_telefono_real">
-                
-                </div>  
+
+                </div>
             </div>
             <div class="col-sm">
-             
+
                 <label for="numero_real">Número:</label><br>
                 <input type="number" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_real" name="numero_real"><br>
 
@@ -78,6 +78,10 @@
                     <option selected value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
                     @endforeach
                 </select>
+                <br>
+
+                <div id="select2lista"></div>
+
                 <br>
 
                 <label for="cp_real">Código Postal:</label><br>
@@ -114,7 +118,7 @@
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
         var addTelefono_real = $('.add_telefono_real');
         var wrapper_telefono_real = $('.field_telefono_real');
-       
+
 
         //Nuevo campo html (agregar un nuevo teléfono)
         var fieldHTML_telefono_real = '<div>'+
@@ -143,7 +147,7 @@
 
         var addEmail_real = $('.add_email_real');
         var wrapper_email_real = $('.field_email_real');
-        
+
         //Nuevo campo html (agregar un nuevo correo)
         var fieldHTML_email_real = '<div>'+
                                     '<label for="email_real">Correo electrónico:</label><br>'+
@@ -154,7 +158,7 @@
                                 '</div>';
 
 
-       
+
         var i = 1; //Contador inicial, comienza en 1
         $(addEmail_real).click(function() {
             if (i < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
@@ -168,5 +172,32 @@
             i--; //Decrementa el contador en 1
         });
     });
+
+
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#provincia_real').val(1);
+		recargarLista();
+
+		$('#provincia_real').change(function(){
+			recargarLista();
+		});
+	})
+</script>
+<script type="text/javascript">
+	function recargarLista(){
+		$.ajax({
+			type:"GET",
+			url:"localidades/"+$('#provincia_real').val(),
+			success:function(r){
+				$('#select2lista').html(r);
+			}
+		});
+	}
+</script>
+
+
+
 </fieldset>
