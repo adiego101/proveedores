@@ -110,6 +110,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <script type="text/javascript">
+        let error_encontrado=false;
         let nombre_sucursal;
         let calle;
         let barrio;
@@ -121,6 +122,7 @@
         $("#add_sucursal").on("click", function(e) {
             nombre_sucursal=$('#nombre_sucursal').val();
             if(nombre_sucursal=''){
+                error_encontrado=true;
                 $('#errors').show();
                 $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar su NOMBRE.</li>");
                 return false;
@@ -144,6 +146,7 @@
                 if(telefono != '')
                     valoresTelefonos.push(telefono);
                 else{
+                    error_encontrado=true;
                     $('#errors').show();
                     $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar al menos 1 (UN) TELEFONO.</li>");
                     return false;
@@ -162,6 +165,7 @@
                 if(email != '')
                     valoresEmails.push(telefono);
                 else{
+                    error_encontrado=true;
                     $('#errors').show();
                     $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar al menos 1 (UN) EMAIL.</li>");
                     return false;
@@ -172,40 +176,40 @@
             for(i in valoresEmails){
                 email_aux = email_aux + valoresEmails[i] + '/';
             }
+            if(!error_encontrado){
+                $("#body_table").append(
+                    '<tr id="row' + i +'">'+
+                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="calle' + i +'" name="calles[]" readonly value="' + calle +'"></td>'+
+                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="barrio' + i +'" name="barrios[]" readonly value="' + barrio +'"></td>'+
+                        '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="nro_tel' + i +'" name="Telefonos_sucursales[]" value="'+telefono_aux+'" readonly></td>'+
+                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="entre_calles' + i +'" name="entreCalles[]" readonly value="'+ entre_calle +'"></td>'+
+                        '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="numero' + i +'" name="numeros[]" readonly value="'+numero+'"></td>'+
+                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dpto' + i +'" name="dptos[]" readonly value="'+ departamento +'"></td>'+
+                        '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email' + i +'" name="correos_electronicos[]" readonly value="'+ email +'"></td>'+
+                        '<td><button type="button" name="edit" id="'+ i +'" class="btn btn-warning btn-sm btn_edit" title="editar sucursal"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i +'" class="btn btn-danger btn-sm btn_remove" title="quitar sucursal"><i class="fas fa-trash"></i></button></td>'+
+                    '</tr>'
+                );
 
-            $("#body_table").append(
-                '<tr id="row' + i +'">'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="calle' + i +'" name="calles[]" readonly value="' + calle +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="barrio' + i +'" name="barrios[]" readonly value="' + barrio +'"></td>'+
-                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="nro_tel' + i +'" name="Telefonos_sucursales[]" value="'+telefono_aux+'" readonly></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="entre_calles' + i +'" name="entreCalles[]" readonly value="'+ entre_calle +'"></td>'+
-                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="numero' + i +'" name="numeros[]" readonly value="'+numero+'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dpto' + i +'" name="dptos[]" readonly value="'+ departamento +'"></td>'+
-                    '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email' + i +'" name="correos_electronicos[]" readonly value="'+ email +'"></td>'+
-                    '<td><button type="button" name="edit" id="'+ i +'" class="btn btn-warning btn-sm btn_edit" title="editar sucursal"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i +'" class="btn btn-danger btn-sm btn_remove" title="quitar sucursal"><i class="fas fa-trash"></i></button></td>'+
-                '</tr>'
-            );
+                i++;
 
-            i++;
+                //Limpiamos cada campo luego de presionar el botón Agregar Sucursal
 
-            //Limpiamos cada campo luego de presionar el botón Agregar Sucursal
+                /*document.getElementById("calle").value = "";
+                document.getElementById("numero").value = "";
 
-            /*document.getElementById("calle").value = "";
-            document.getElementById("numero").value = "";
+                //document.getElementById("lote").value = "";
+                document.getElementById("entre_calles").value = "";
+                //document.getElementById("monoblock").value = "";
+                //document.getElementById("localidad").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("dpto").value = "";
+                //document.getElementById("puerta").value = "";
+                //document.getElementById("oficina").value = "";
+                //document.getElementById("manzana").value = "";
 
-            //document.getElementById("lote").value = "";
-            document.getElementById("entre_calles").value = "";
-            //document.getElementById("monoblock").value = "";
-            //document.getElementById("localidad").value = "";
-            document.getElementById("email").value = "";
-            document.getElementById("dpto").value = "";
-            //document.getElementById("puerta").value = "";
-            //document.getElementById("oficina").value = "";
-            //document.getElementById("manzana").value = "";
-
-            document.getElementById("barrio").value = "";
-            document.getElementById("nro_tel").value = "";*/
-
+                document.getElementById("barrio").value = "";
+                document.getElementById("nro_tel").value = "";*/
+            }
         });
         $(document).on("click", ".btn_remove", function() {
 
