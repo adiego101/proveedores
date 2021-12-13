@@ -24,8 +24,14 @@
         <input type="number" class="form-control" placeholder="Ingrese el número de habilitación municipal" aria-describedby="basic-addon1" id="nro_habilitacion_municipal" name="nro_habilitacion_municipal" ><br>
       </div>
       <div class="col-sm">
+        <!--En este caso, se deben recuperar las localidades de la BD -->
         <label for="localidad_habilitacion">Localidad:</label><br>
-        <input type="text" class="form-control" placeholder="Ingrese la localidad correspondiente" aria-describedby="basic-addon1" id="localidad_habilitacion" name="localidad_habilitacion" ><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="localidad_habilitacion" name="localidad_habilitacion">
+                    @foreach($localidades as $localidad)
+                    <option selected value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
+                    @endforeach
+                </select>
+                <br>
       </div>
     </div>
 

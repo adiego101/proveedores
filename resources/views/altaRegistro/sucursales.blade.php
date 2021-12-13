@@ -40,9 +40,9 @@
                 <input type="email" class="form-control email_sucursal" placeholder="ejemplo@dominio.com"
                     aria-describedby="basic-addon1"><br>
                 <div class="field_email_sucursal">
-                
+
                 </div>
-                 
+
         </div>
 
         <div class="col-sm">
@@ -67,8 +67,8 @@
             <label for="telefono_sucursal">Teléfono:</label><br>
                 <input type="number" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" >
                 <div class="field_telefono_sucursal">
-                
-                </div> 
+
+                </div>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_sucursal" class="btn btn-success">Agregar Sucursal</a>
@@ -113,7 +113,7 @@
 
         let calle;
         let barrio;
-        let telefono;
+        //let telefono;
         let entre_calle;
         let numero;
         let departamento;
@@ -122,14 +122,14 @@
 
             calle = $("#calle").val();
             barrio = $("#barrio").val();
-            telefono = $("#nro_tel").val();
+            //telefono = $("#nro_tel").val();
             entre_calle = $("#entre_calles").val();
             numero = $("#numero").val();
             departamento = $("#dpto").val();
             email = $("#email").val();
 
             let valoresTelefonos = [];
-            let telefono;
+            let telefono = "";
             $('.telefono_sucursal').each(function(){
                 telefono = $(this).val();
                 if(telefono != '')
@@ -227,7 +227,7 @@
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
         var addTelefono_sucursal = $('.add_telefono_sucursal');
         var wrapper_telefono_sucursal = $('.field_telefono_sucursal');
-       
+
 
         //Nuevo campo html (agregar un nuevo teléfono)
         var fieldHTML_telefono_sucursal = '<div>'+
@@ -256,7 +256,7 @@
 
         var addEmail_sucursal = $('.add_email_sucursal');
         var wrapper_email_sucursal = $('.field_email_sucursal');
-        
+
         //Nuevo campo html (agregar un nuevo correo)
         var fieldHTML_email_sucursal = '<div>'+
                                     '<label for="email_sucursal">Correo electrónico:</label><br>'+
@@ -267,7 +267,7 @@
                                 '</div>';
 
 
-       
+
         var i = 1; //Contador inicial, comienza en 1
         $(addEmail_sucursal).click(function() {
             if (i < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
