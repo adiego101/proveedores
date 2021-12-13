@@ -35,8 +35,13 @@
                 </select>
                 <br>
 
-            <label for="email">Correo electrónico:</label><br />
-            <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email" name="correos_electronicos[]" /><br />
+                <label for="email_sucursal">Correo electrónico:</label><br>
+                <input type="email" class="form-control email_sucursal" placeholder="ejemplo@dominio.com"
+                    aria-describedby="basic-addon1"><br>
+                <div class="field_email_sucursal">
+                
+                </div>
+                 
         </div>
 
         <div class="col-sm">
@@ -58,8 +63,11 @@
             <label for="codigo_postal">Código Postal:</label><br>
             <input type="text" class="form-control" aria-describedby="basic-addon1" id="codigo_postal" name="codigo_postal" placeholder="Ingrese el código postal"><br>
 
-            <label for="nro_tel">Teléfono:</label><br />
-            <input type="number" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el número de teléfono" id="nro_tel" name="Telefonos_sucursales[]"/><br /><br />
+            <label for="telefono_sucursal">Teléfono:</label><br>
+                <input type="number" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" >
+                <div class="field_telefono_sucursal">
+                
+                </div> 
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_sucursal" class="btn btn-success">Agregar Sucursal</a>
@@ -119,12 +127,24 @@
             departamento = $("#dpto").val();
             email = $("#email").val();
 
+            let valoresTelefonos = [];
+            let telefono;
+            $('.telefono_sucursal').each(function(){
+                telefono = $(this).val();
+                if(telefono != '')
+                    valoresTelefonos.push(telefono);
+            });
+
+            let telefono_aux = '';
+            for(i in valoresTelefonos){
+                telefono_aux = telefono_aux + valoresTelefonos[i] + '/';
+            }
 
             $("#body_table").append(
                 '<tr id="row' + i +'">'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="calle' + i +'" name="calles[]" readonly value="' + calle +'"></td>'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="barrio' + i +'" name="barrios[]" readonly value="' + barrio +'"></td>'+
-                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="nro_tel' + i +'" name="Telefonos_sucursales[]" readonly value="' + telefono +'"></td>'+
+                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="nro_tel' + i +'" name="Telefonos_sucursales[]" value="'+telefono_aux+'" readonly></td>'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="entre_calles' + i +'" name="entreCalles[]" readonly value="'+ entre_calle +'"></td>'+
                     '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="numero' + i +'" name="numeros[]" readonly value="'+numero+'"></td>'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dpto' + i +'" name="dptos[]" readonly value="'+ departamento +'"></td>'+
@@ -199,4 +219,66 @@
 
         });
     </script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
+        var addTelefono_sucursal = $('.add_telefono_sucursal');
+        var wrapper_telefono_sucursal = $('.field_telefono_sucursal');
+       
+
+        //Nuevo campo html (agregar un nuevo teléfono)
+        var fieldHTML_telefono_sucursal = '<div>'+
+                                 '<br>'+
+                                    '<label for="telefono_sucursal">Teléfono:</label><br>'+
+                                    '<input type="number" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" >'+
+                                    '<a href="javascript:void(0);" class="remove_telefono_sucursal" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+                                 '<br>'+
+                                '</div>';
+
+
+        var x = 1; //Contador inicial, comienza en 1
+        $(addTelefono_sucursal).click(function() {
+            if (x < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
+                x++; //Incrementa el contador en 1
+                $(wrapper_telefono_sucursal).append(fieldHTML_telefono_sucursal); // Agrega un nuevo campo html (telefono)
+            }
+        });
+        $(wrapper_telefono_sucursal).on('click', '.remove_telefono_sucursal', function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remueve un campo html (telefono)
+            x--; //Decrementa el contador en 1
+        });
+
+
+
+        var addEmail_sucursal = $('.add_email_sucursal');
+        var wrapper_email_sucursal = $('.field_email_sucursal');
+        
+        //Nuevo campo html (agregar un nuevo correo)
+        var fieldHTML_email_sucursal = '<div>'+
+                                    '<label for="email_sucursal">Correo electrónico:</label><br>'+
+                                    '<input type="email" class="form-control email_sucursal" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" >'+
+                                    '<a href="javascript:void(0);" class="remove_email_sucursal" title="Elimine el correo"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+                                    '<br>'+
+                                    '<br>'+
+                                '</div>';
+
+
+       
+        var i = 1; //Contador inicial, comienza en 1
+        $(addEmail_sucursal).click(function() {
+            if (i < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
+                i++; //Incrementa el contador en 1
+                $(wrapper_email_sucursal).append(fieldHTML_email_sucursal); // Agrega un nuevo campo html (correo)
+            }
+        });
+        $(wrapper_email_sucursal).on('click', '.remove_email_sucursal', function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remueve un campo html (correo)
+            i--; //Decrementa el contador en 1
+        });
+    });
+</script>
 </fieldset>
