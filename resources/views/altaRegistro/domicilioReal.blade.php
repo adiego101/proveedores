@@ -178,8 +178,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#provincia_real').val(1);
-		recargarLista();
+-
 
 		$('#provincia_real').change(function(){
 			recargarLista();
