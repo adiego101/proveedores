@@ -56,8 +56,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('editarProveedor/{id}', 'App\Http\Controllers\ProveedoresController@editarProveedor');
 
     Route::post('/dar_baja', 'App\Http\Controllers\ProveedoresController@dar_baja');
-    //Route::get('bajaid/{id}', 'App\Http\Controllers\ProveedoresController@dar_baja_id');
-    Route::get('AjaxBaja/{id}', 'App\Http\Controllers\ProveedoresController@dar_baja_id');
+    Route::get('bajaRegistro/{id}', 'App\Http\Controllers\ProveedoresController@dar_baja_id');
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class)->middleware(['can:admin_users']);

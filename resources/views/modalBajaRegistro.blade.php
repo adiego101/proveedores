@@ -37,16 +37,13 @@
         $.ajax({
             type: "GET",
             //Si colocamos un numero (id) funciona sin problemas... VER
-            url: "AjaxBaja/"+id,
+            url: "bajaRegistro/"+id,
         });
 
         //se recarga la tabla para que desaparesca la fila dada de baja
         $('.yajra-datatable').DataTable().ajax.reload();
         //Ocultamos el modal
         $('#modal_baja').modal('hide');
-
-
-
 
     });
 </script>
