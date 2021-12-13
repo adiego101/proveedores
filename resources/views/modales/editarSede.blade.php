@@ -30,7 +30,6 @@
         </div>
     </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <script type="text/javascript">
 
@@ -44,7 +43,7 @@
                 //Recuperamos los valores de los campos del modal
                 var modal_domicilio = $("#modal_domicilio").val();
                 var modal_localidad = $("#modal_localidad").val();
-               
+
                 //Ocultamos el modal
                 $('#modal_sede').modal('hide');
 

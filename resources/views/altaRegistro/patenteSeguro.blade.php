@@ -151,7 +151,6 @@
     <!--Incluimos el modal para editar los campos de una sede -->
     @include('modales.editarSede')
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <script type="text/javascript">
 

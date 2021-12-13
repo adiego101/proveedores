@@ -13,14 +13,22 @@
                         <div class="col-sm">
                             <!--En este caso, se deben recuperar los tipos de actividad de la BD -->
                             <label for="modal_tipo_actividad">Tipo de Actividad:</label><br>
-                               
+                                <select class="form-control" aria-describedby="basic-addon1" id="modal_tipo_actividad" name="modal_tipo_actividad">
+                                    @foreach($tipos_actividades as $tipo_actividad)
+                                    <option value="{{$tipo_actividad->desc_tipo_actividad}}">{{$tipo_actividad->desc_tipo_actividad}}</option>
+                                    @endforeach
+                                </select>
                                 <br />
                         </div>
 
                         <div class="col-sm">
                             <!--En este caso, se deben recuperar las actividades de la BD -->
                             <label for="modal_actividad">Actividad:</label><br>
-                             
+                                <select class="form-control" aria-describedby="basic-addon1" id="modal_actividad" name="modal_actividad">
+                                    @foreach($actividades as $actividad)
+                                    <option value="{{$actividad->desc_actividad}}">{{$actividad->desc_actividad}}</option>
+                                    @endforeach
+                                </select>
                                 <br />
                         </div>
                     </div>

@@ -44,13 +44,13 @@
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
                     aria-describedby="basic-addon1" id="email_legal" name="email_legal[]" ><br>
                 <div class="field_email_legal">
-                
+
                 </div>
                 <label for="telefono_legal">Teléfono:</label><br>
                 <input type="number" class="form-control" placeholder="Ingrese el número de teléfono"
                     aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" >
                 <div class="field_telefono_legal">
-                
+
                 </div>
                 <!-- <label for="fax-legal">Fax:</label><br>
             <input type="text" class="form-control" placeholder="ingrese su fax" aria-describedby="basic-addon1" id="fax-legal" name="fax-legal" ><br> -->
@@ -111,9 +111,8 @@
     <br>
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
-    
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -121,7 +120,7 @@
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
         var addTelefono_legal = $('.add_telefono_legal');
         var wrapper_telefono_legal = $('.field_telefono_legal');
-       
+
 
         //Nuevo campo html (agregar un nuevo teléfono)
         var fieldHTML_telefono_legal = '<div>'+
@@ -150,7 +149,7 @@
 
         var addEmail_legal = $('.add_email_legal');
         var wrapper_email_legal = $('.field_email_legal');
-        
+
         //Nuevo campo html (agregar un nuevo correo)
         var fieldHTML_email_legal = '<div>'+
                                     '<label for="email_legal">Correo electrónico:</label><br>'+
@@ -161,7 +160,7 @@
                                 '</div>';
 
 
-       
+
         var i = 1; //Contador inicial, comienza en 1
         $(addEmail_legal).click(function() {
             if (i < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido

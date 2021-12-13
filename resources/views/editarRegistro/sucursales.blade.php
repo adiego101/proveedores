@@ -6,7 +6,7 @@
 
     <br>
 
-      
+
             <div class="row">
                 <div class="col-sm">
 
@@ -85,7 +85,7 @@
 
             </div>
 
-    
+
 
     <div>
         <table class="table table-hover">
@@ -98,7 +98,7 @@
                 </tr>
             </thead>
             <tbody id="body_table">
-                
+
             </tbody>
         </table>
 
@@ -115,7 +115,6 @@
         </div>
     </div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 
     <script type="text/javascript">
@@ -127,7 +126,7 @@
             calle = $("#calle").val();
             barrio = $("#barrio").val();
             telefono = $("#nro_tel").val();
-            
+
             $("#body_table").append('<tr id="row' + i + '"><td>' + calle + '</td><td>' + barrio + '</td><td>' + telefono + '</td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">Quitar</button></td></tr>');
 
             i++;
@@ -151,7 +150,7 @@
                 var button_id = $(this).attr("id");
                 //cuando da click obtenemos el id del boton
                 $('#row' + button_id + '').remove(); //borra la fila
-                
+
             });
 
         });

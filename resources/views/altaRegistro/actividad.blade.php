@@ -30,7 +30,7 @@
         </div>
 
         <div class="col-sm">
-           
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_actividad" class="btn btn-success">Agregar Actividad</a>
             </div>
@@ -66,15 +66,14 @@
     <input type="text" class="form-control" aria-describedby="basic-addon1" id="nomina_productos"
         name="nomina_productos"><br>
 
-        
+
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
 
     <!--Incluimos el modal para editar los campos de una actividad -->
     @include('modales.editarActividad')
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+@push('js')
 
     <script type="text/javascript">
 
@@ -90,13 +89,13 @@
                 '<tr id="row_actividad' + m +'">'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="tipo_actividad' + m +'" name="tipos_actividades[]" readonly value="' + tipo_actividad +'"></td>'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="actividad' + m +'" name="actividades[]" readonly value="' + actividad +'"></td>'+
-                    '<td><button type="button" name="edit" id="'+ m +'" class="btn btn-warning btn-sm btn_edit_actividad" title="editar actividad"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + m +'" class="btn btn-danger btn-sm btn_remove_actividad" title="quitar actividad"><i class="fas fa-trash"></i></button></td>'+
+                    '<td><button type="button" name="edit" id="'+ m +'" class="btn btn-warning btn-sm btn_edit_actividad" title="editar actividad" data-toggle="modal" data-target="#modal_actividad"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + m +'" class="btn btn-danger btn-sm btn_remove_actividad" title="quitar actividad"><i class="fas fa-trash"></i></button></td>'+
                 '</tr>'
             );
 
 
             m++;
-
+        });
 
             $(document).on("click", ".btn_remove_actividad", function() {
 
@@ -108,31 +107,18 @@
             });
 
 
-            //Cargamos los inputs del modal con los datos de la fila de la tabla
-
-            $(document).on("click", ".btn_edit_actividad", function() {
-
-                //cuando da click al boton editar, obtenemos el id del boton
-                let button_id = $(this).attr("id");
-
-                //Recuperamos los valores de los campos pertenecientes a una fila
-               // let modal_tipo_actividad = $("#tipo_actividad"+ button_id).val();
-               // let modal_actividad = $("#actividad"+ button_id).val();
-
-                //Desplegamos el modal
-                $('#modal_actividad').modal('show');
-
-                //Enviamos los valores recuperados anteriormente a los inputs del modal
-               /* $('#modal_tipo_actividad').val(modal_tipo_actividad);
-                $('#modal_actividad').val(modal_actividad);
-                $('#numero_fila_actividad').val(button_id);*/
-
-            });
 
 
 
-        });
+
+
+
+
+
+
+
     </script>
+@endpush
 
 
 </fieldset>
