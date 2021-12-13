@@ -126,17 +126,16 @@
                 return false;
             }
             calle = $("#calle").val();
+            $("#calle").val()='';
             barrio = $("#barrio").val();
+            $("#barrio").val()='';
             //telefono = $("#nro_tel").val();
             entre_calle = $("#entre_calles").val();
+            $("#entre_calles").val()='';
             numero = $("#numero").val();
+            $("#numero").val()='';
             departamento = $("#dpto").val();
-            email = $("#email").val();
-            if(email=''){
-                $('#errors').show();
-                $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar su EMAIL.</li>");
-                return false;
-            }
+            $("#dpto").val()='';
 
             let valoresTelefonos = [];
             let telefono = "";
@@ -155,6 +154,25 @@
             for(i in valoresTelefonos){
                 telefono_aux = telefono_aux + valoresTelefonos[i] + '/';
             }
+
+            let valoresEmails = [];
+            let email = "";
+            $('.email_sucursal').each(function(){
+                email = $(this).val();
+                if(email != '')
+                    valoresEmails.push(telefono);
+                else{
+                    $('#errors').show();
+                    $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar al menos 1 (UN) EMAIL.</li>");
+                    return false;
+                }
+            });
+
+            let email_aux = '';
+            for(i in valoresEmails){
+                email_aux = email_aux + valoresEmails[i] + '/';
+            }
+
             $("#body_table").append(
                 '<tr id="row' + i +'">'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="calle' + i +'" name="calles[]" readonly value="' + calle +'"></td>'+
@@ -172,7 +190,7 @@
 
             //Limpiamos cada campo luego de presionar el botón Agregar Sucursal
 
-            document.getElementById("calle").value = "";
+            /*document.getElementById("calle").value = "";
             document.getElementById("numero").value = "";
 
             //document.getElementById("lote").value = "";
@@ -186,7 +204,7 @@
             //document.getElementById("manzana").value = "";
 
             document.getElementById("barrio").value = "";
-            document.getElementById("nro_tel").value = "";
+            document.getElementById("nro_tel").value = "";*/
 
         });
         $(document).on("click", ".btn_remove", function() {
