@@ -66,8 +66,8 @@
 
             <label for="telefono_sucursal">Teléfono:</label><br>
                 <input type="number" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" >
-                <div class="field_telefono_sucursal">
-
+                <div class="field_telefono_sucursal d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="javascript:void(0);" class="add_telefono_sucursal" title="Agregue un nuevo teléfono"><input type="button" value="Agregar Teléfono" class="btn btn-success"></a>
                 </div>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
