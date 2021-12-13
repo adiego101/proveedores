@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProveedoresController;
-
-
+use App\Models\Pais;
+use App\Models\Provincia;
+use App\Models\Localidad;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/nuevoRegistro', function () {
-    return view('nuevoRegistro');
+    $paises = Pais::all();
+    $provincias = Provincia::all();
+    $localidades = Localidad::all();
+    return view('nuevoRegistro', compact('paises', 'provincias', 'localidades'));
 });
 
 Route::get('/gestionarRegistros', function () {

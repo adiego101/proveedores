@@ -20,17 +20,23 @@
                 <label for="monoblock_real">Monoblock:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_real" name="monoblock_real"><br>
 
-                <!--En este caso, se deben recuperar las localidades de la BD -->
-                <label for="localidad_real">Localidad:</label><br>
-                <select class="form-control" aria-describedby="basic-addon1" id="localidad_real" name="localidad_real">
-                    <option selected value="M">Localidad 1</option>
-                    <option value="F">Localidad 2</option>
+                <!--En este caso, se deben recuperar los paises de la BD -->
+                <label for="pais_real">Pais:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="pais_real" name="pais_real">
+                    @foreach($paises as $pais)
+                    <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
+                    @endforeach
                 </select>
                 <br>
 
-                <label for="provincia_real">Provincia:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="provincia_real"
-                    name="provincia_real"  disabled><br>
+                <!--En este caso, se deben recuperar las localidades de la BD -->
+                <label for="localidad_real">Localidad:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="localidad_real" name="localidad_real">
+                    @foreach($localidades as $localidad)
+                    <option selected value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
+                    @endforeach
+                </select>
+                <br>
 
                 <label for="web_real">Página web:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese la página web"
@@ -65,12 +71,17 @@
                 <label for="barrio_real">Barrio:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_real" name="barrio_real"><br>
 
-                <label for="pais_real">Pais:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="pais_real"
-                    name="pais_real"  disabled><br>
+                <!--En este caso, se deben recuperar las provincias de la BD -->
+                <label for="provincia_real">Provincia:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="provincia_real" name="provincia_real">
+                    @foreach($provincias as $provincia)
+                    <option selected value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @endforeach
+                </select>
+                <br>
 
                 <label for="cp_real">Código Postal:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_real" name="cp_real" disabled><br>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_real" name="cp_real" placeholder="Ingrese el código postal"><br>
                 <br>
                 <br>
                 <br>

@@ -20,17 +20,23 @@
                 <label for="monoblock_legal">Monoblock:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_legal" name="monoblock_legal"><br>
 
-                <!--En este caso, se deben recuperar las localidades de la BD -->
-                <label for="localidad_legal">Localidad:</label><br>
-                <select class="form-control" aria-describedby="basic-addon1" id="localidad_legal" name="localidad_legal">
-                    <option selected value="M">Localidad 1</option>
-                    <option value="F">Localidad 2</option>
+                <!--En este caso, se deben recuperar los paises de la BD -->
+                <label for="pais_legal">Pais:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="pais_legal" name="pais_legal">
+                    @foreach($paises as $pais)
+                    <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
+                    @endforeach
                 </select>
                 <br>
 
-                <label for="provincia_legal">Provincia:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="provincia_legal"
-                    name="provincia_legal"  disabled><br>
+                <!--En este caso, se deben recuperar las localidades de la BD -->
+                <label for="localidad_legal">Localidad:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="localidad_legal" name="localidad_legal">
+                    @foreach($localidades as $localidad)
+                    <option selected value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
+                    @endforeach
+                </select>
+                <br>
 
                 <label for="representante_legal">Representante:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el nombre del representante legal" aria-describedby="basic-addon1" id="representante_legal" name="representante_legal" ><br>
@@ -72,12 +78,17 @@
                 <label for="barrio_legal">Barrio:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_legal" name="barrio_legal"><br>
 
-                <label for="pais_legal">Pais:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="pais_legal"
-                    name="pais_legal"  disabled><br>
+                <!--En este caso, se deben recuperar las provincias de la BD -->
+                <label for="provincia_legal">Provincia:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="provincia_legal" name="provincia_legal">
+                    @foreach($provincias as $provincia)
+                    <option selected value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @endforeach
+                </select>
+                <br>
 
                 <label for="cp_legal">Código Postal:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_legal" name="cp_legal" disabled><br>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_legal" name="cp_legal" placeholder="Ingrese el código postal"><br>
 
                 <label for="dni_legal">Dni:</label><br>
                 <input type="number" class="form-control" placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" >
