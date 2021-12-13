@@ -8,6 +8,9 @@ use App\Http\Controllers\ProveedoresController;
 use App\Models\Pais;
 use App\Models\Provincia;
 use App\Models\Localidad;
+use App\Models\Tipo_actividad;
+use App\Models\Actividad_economica;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +35,9 @@ Route::get('/nuevoRegistro', function () {
     $paises = Pais::all();
     $provincias = Provincia::all();
     $localidades = Localidad::all();
-    return view('nuevoRegistro', compact('paises', 'provincias', 'localidades'));
+    $tipos_actividades = Tipo_actividad::All();
+    $actividades = Actividad_economica::All();
+    return view('nuevoRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades'));
 });
 
 Route::get('/gestionarRegistros', function () {
@@ -69,6 +74,9 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 //Prueba generacion PDF
+
+Route::get('localidades/{provincia}', 'App\Http\Controllers\ProveedoresController@localidades');
+
 
 Route::get('/registro-alta', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');
 Route::get('/certificado-inscripcion', 'App\Http\Controllers\RupaeController@descargarCertificadoInscripcion');

@@ -6,7 +6,9 @@ use DataTables;
 use App\Models\Pago;
 use App\Models\Persona;
 use App\Models\Sucursal;
+use App\Models\Localidad;
 use App\Models\Proveedor;
+use App\Models\Provincia;
 use Illuminate\Http\Request;
 use App\Models\Sucursal_email;
 use App\Models\Proveedor_email;
@@ -434,6 +436,24 @@ class ProveedoresController extends Controller
         $proveedores_rupae->dado_de_baja = 1;
         $proveedores_rupae->save();
         return redirect()->back();
+
+
+    }
+
+    public function localidades($provincia, Request $request)
+    {
+        $provinciaid = DB::table('provincias')
+        ->where('nombre_provincia', $provincia)
+        ->first();
+        //Provincia::where('nombre_provincia',$provincia)->get();
+        //echo();
+
+        $localidades = Localidad::where('id_provincia', $provinciaid->id_provincia)->get();
+
+        return $localidades;
+        /*$localidades = Localidad::where('id_provincia','78')->orderBy('nombre_provincia');
+        //return response()->json($proveedores_rupae);
+        return $localidades;*/
 
 
     }
