@@ -110,7 +110,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <script type="text/javascript">
-
+        let error_encontrado=false;
         let nombre_sucursal;
         let calle;
         let barrio;
@@ -156,83 +156,80 @@
             for(i in valoresTelefonos){
                 telefono_aux = telefono_aux + valoresTelefonos[i] + '/';
             }
+            if(!error_econtrado){
+                $("#body_table").append(
+                    '<tr id="row' + i +'">'+
+                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="calle' + i +'" name="calles[]" readonly value="' + calle +'"></td>'+
+                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="barrio' + i +'" name="barrios[]" readonly value="' + barrio +'"></td>'+
+                        '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="nro_tel' + i +'" name="Telefonos_sucursales[]" value="'+telefono_aux+'" readonly></td>'+
+                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="entre_calles' + i +'" name="entreCalles[]" readonly value="'+ entre_calle +'"></td>'+
+                        '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="numero' + i +'" name="numeros[]" readonly value="'+numero+'"></td>'+
+                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dpto' + i +'" name="dptos[]" readonly value="'+ departamento +'"></td>'+
+                        '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email' + i +'" name="correos_electronicos[]" readonly value="'+ email +'"></td>'+
+                        '<td><button type="button" name="edit" id="'+ i +'" class="btn btn-warning btn-sm btn_edit" title="editar sucursal"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i +'" class="btn btn-danger btn-sm btn_remove" title="quitar sucursal"><i class="fas fa-trash"></i></button></td>'+
+                    '</tr>'
+                );
 
-            $("#body_table").append(
-                '<tr id="row' + i +'">'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="calle' + i +'" name="calles[]" readonly value="' + calle +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="barrio' + i +'" name="barrios[]" readonly value="' + barrio +'"></td>'+
-                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="nro_tel' + i +'" name="Telefonos_sucursales[]" value="'+telefono_aux+'" readonly></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="entre_calles' + i +'" name="entreCalles[]" readonly value="'+ entre_calle +'"></td>'+
-                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="numero' + i +'" name="numeros[]" readonly value="'+numero+'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dpto' + i +'" name="dptos[]" readonly value="'+ departamento +'"></td>'+
-                    '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email' + i +'" name="correos_electronicos[]" readonly value="'+ email +'"></td>'+
-                    '<td><button type="button" name="edit" id="'+ i +'" class="btn btn-warning btn-sm btn_edit" title="editar sucursal"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i +'" class="btn btn-danger btn-sm btn_remove" title="quitar sucursal"><i class="fas fa-trash"></i></button></td>'+
-                '</tr>'
-            );
+                i++;
 
-            i++;
+                //Limpiamos cada campo luego de presionar el botón Agregar Sucursal
 
-            //Limpiamos cada campo luego de presionar el botón Agregar Sucursal
+                document.getElementById("calle").value = "";
+                document.getElementById("numero").value = "";
 
-            document.getElementById("calle").value = "";
-            document.getElementById("numero").value = "";
+                //document.getElementById("lote").value = "";
+                document.getElementById("entre_calles").value = "";
+                //document.getElementById("monoblock").value = "";
+                //document.getElementById("localidad").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("dpto").value = "";
+                //document.getElementById("puerta").value = "";
+                //document.getElementById("oficina").value = "";
+                //document.getElementById("manzana").value = "";
 
-            //document.getElementById("lote").value = "";
-            document.getElementById("entre_calles").value = "";
-            //document.getElementById("monoblock").value = "";
-            //document.getElementById("localidad").value = "";
-            document.getElementById("email").value = "";
-            document.getElementById("dpto").value = "";
-            //document.getElementById("puerta").value = "";
-            //document.getElementById("oficina").value = "";
-            //document.getElementById("manzana").value = "";
+                document.getElementById("barrio").value = "";
+                document.getElementById("nro_tel").value = "";
 
-            document.getElementById("barrio").value = "";
-            document.getElementById("nro_tel").value = "";
+        });
+        $(document).on("click", ".btn_remove", function() {
 
+            //cuando da click al boton quitar, obtenemos el id del boton
+            var button_id = $(this).attr("id");
 
-
-            $(document).on("click", ".btn_remove", function() {
-
-                //cuando da click al boton quitar, obtenemos el id del boton
-                var button_id = $(this).attr("id");
-
-                //borra la fila
-                $("#row" + button_id + "").remove();
-            });
-
+            //borra la fila
+            $("#row" + button_id + "").remove();
+        });
 
 
-            //Cargamos los inputs del modal con los datos de la fila de la tabla
 
-            $(document).on("click", ".btn_edit", function() {
+        //Cargamos los inputs del modal con los datos de la fila de la tabla
 
-                //cuando da click al boton editar, obtenemos el id del boton
-                var button_id = $(this).attr("id");
+        $(document).on("click", ".btn_edit", function() {
 
-                //Recuperamos los valores de los campos pertenecientes a una fila
-                var modal_calle = $("#calle"+ button_id).val();
-                var modal_numero = $("#numero"+ button_id).val();
-                var modal_entre_calles = $("#entre_calles"+ button_id).val();
-                var modal_barrio = $("#barrio"+ button_id).val();
-                var modal_departamento = $("#dpto"+ button_id).val();
-                var modal_telefono = $("#nro_tel"+ button_id).val();
-                var modal_email = $("#email"+ button_id).val();
+            //cuando da click al boton editar, obtenemos el id del boton
+            var button_id = $(this).attr("id");
 
-                //Desplegamos el modal
-                $('#myModal').modal('show');
+            //Recuperamos los valores de los campos pertenecientes a una fila
+            var modal_calle = $("#calle"+ button_id).val();
+            var modal_numero = $("#numero"+ button_id).val();
+            var modal_entre_calles = $("#entre_calles"+ button_id).val();
+            var modal_barrio = $("#barrio"+ button_id).val();
+            var modal_departamento = $("#dpto"+ button_id).val();
+            var modal_telefono = $("#nro_tel"+ button_id).val();
+            var modal_email = $("#email"+ button_id).val();
 
-                //Enviamos los valores recuperados anteriormente a los inputs del modal
-                $('#modal_calle').val(modal_calle);
-                $('#modal_numero').val(modal_numero);
-                $('#modal_entre_calles').val(modal_entre_calles);
-                $('#modal_barrio').val(modal_barrio);
-                $('#modal_dpto').val(modal_departamento);
-                $('#modal_nro_tel').val(modal_telefono);
-                $('#modal_email').val(modal_email);
-                $('#numero_fila').val(button_id);
+            //Desplegamos el modal
+            $('#myModal').modal('show');
 
-            });
+            //Enviamos los valores recuperados anteriormente a los inputs del modal
+            $('#modal_calle').val(modal_calle);
+            $('#modal_numero').val(modal_numero);
+            $('#modal_entre_calles').val(modal_entre_calles);
+            $('#modal_barrio').val(modal_barrio);
+            $('#modal_dpto').val(modal_departamento);
+            $('#modal_nro_tel').val(modal_telefono);
+            $('#modal_email').val(modal_email);
+            $('#numero_fila').val(button_id);
 
         });
     </script>
