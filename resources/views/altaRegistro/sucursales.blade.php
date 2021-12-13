@@ -28,10 +28,11 @@
             <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock" name="monoblocks[]" /><br />
 
             <!--En este caso, se deben recuperar las localidades de la BD -->
-            <label for="localidad">Localidad:</label><br>
-                <select class="form-control" aria-describedby="basic-addon1" id="localidad" name="localidad">
-                    <option selected value="M">Localidad 1</option>
-                    <option value="F">Localidad 2</option>
+            <label for="localidad_sucursal">Localidad:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="localidad_sucursal" name="localidad_sucursal">
+                    @foreach($localidades as $localidad)
+                    <option selected value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
+                    @endforeach
                 </select>
                 <br>
 
