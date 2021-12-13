@@ -123,6 +123,7 @@
             nombre_sucursal=$('#nombre_sucursal').val();
             if(nombre_sucursal=''){
                 error_encontrado=true;
+                console.log("Nombre sucursal"+nombre_sucursal);
                 $('#errors').show();
                 $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar su NOMBRE.</li>");
                 return false;
@@ -176,6 +177,7 @@
             for(i in valoresEmails){
                 email_aux = email_aux + valoresEmails[i] + '/';
             }
+            
             if(!error_encontrado){
                 $("#body_table").append(
                     '<tr id="row' + i +'">'+
