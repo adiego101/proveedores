@@ -126,16 +126,16 @@
                 return false;
             }
             calle = $("#calle").val();
-            $("#calle").val()='';
+            $("#calle").val('');
             barrio = $("#barrio").val();
-            $("#barrio").val()='';
+            $("#barrio").val('');
             //telefono = $("#nro_tel").val();
             entre_calle = $("#entre_calles").val();
-            $("#entre_calles").val()='';
+            $("#entre_calles").val('');
             numero = $("#numero").val();
-            $("#numero").val()='';
+            $("#numero").val('');
             departamento = $("#dpto").val();
-            $("#dpto").val()='';
+            $("#dpto").val('');
 
             let valoresTelefonos = [];
             let telefono = "";
