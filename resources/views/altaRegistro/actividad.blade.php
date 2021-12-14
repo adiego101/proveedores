@@ -61,9 +61,11 @@
             <label for="producto_elaborado">Producto elaborado:</label><br>
             <input list="productos" name="producto_elaborado" id="producto_elaborado"  class="form-control" placeholder="Ingrese o seleccione el producto que produce">
             <datalist id="productos">
-                @foreach($productos as $producto)
-                <option value="{{$producto->producto_elaborado}}">{{$producto->producto_elaborado}}</option>
-                @endforeach
+                @forelse($productos as $producto)
+                    <option value="{{$producto->producto_elaborado}}">
+                @empty
+                    <option value=" ">
+                @endforelse
             </datalist>
             <br>
 
