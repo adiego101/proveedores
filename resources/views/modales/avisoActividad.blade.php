@@ -2,16 +2,16 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Atención - Actividad</h5>
+        <h1 class="modal-title">Atención - Actividad</h1>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p><strong>Importante:</strong> No puede tener mas de una actividad Primaria.</p>
+        <p><strong>Importante:</strong> Solo puede tener <strong>una</strong> actividad Primaria.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
