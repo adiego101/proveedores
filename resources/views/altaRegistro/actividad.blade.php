@@ -70,9 +70,10 @@
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
+      <!--Incluimos el modal para mostrar mensaje de aviso -->
 
-    <!--Incluimos el modal para editar los campos de una actividad -->
-    @include('modales.editarActividad')
+      @include('modales.avisoActividad')
+
 @push('js')
 
     <script type="text/javascript">
@@ -80,45 +81,59 @@
         let tipo_actividad;
         let actividad;
         let m = 1; //contador para asignar id al boton que borrara la fila
+        let contador = 0; //Contador para llevar el registro de la cantidad de actividades principales agregadas.
+
         $("#add_actividad").on("click", function(e) {
 
             tipo_actividad = $("#tipo_actividad").val();
             actividad = $("#actividad").val();
 
-            $("#body_table_actividad").append(
-                '<tr id="row_actividad' + m +'">'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="tipo_actividad' + m +'" name="tipos_actividades[]" readonly value="' + tipo_actividad +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="actividad' + m +'" name="actividades[]" readonly value="' + actividad +'"></td>'+
-                    '<td><button type="button" name="edit" id="'+ m +'" class="btn btn-warning btn-sm btn_edit_actividad" title="editar actividad" data-toggle="modal" data-target="#modal_actividad"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + m +'" class="btn btn-danger btn-sm btn_remove_actividad" title="quitar actividad"><i class="fas fa-trash"></i></button></td>'+
-                '</tr>'
-            );
+            if(tipo_actividad == 'Primaria'){
 
+                contador++;
+            }
 
-            m++;
+            if(tipo_actividad != 'Primaria' || contador <= 1){
+
+                $("#body_table_actividad").append(
+                    '<tr id="row_actividad' + m +'">'+
+                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="tipo_actividad' + m +'" name="tipos_actividades[]" readonly value="' + tipo_actividad +'"></td>'+
+                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="actividad' + m +'" name="actividades[]" readonly value="' + actividad +'"></td>'+
+                        '<td><button type="button" name="remove" id="' + m +'" class="btn btn-danger btn-sm btn_remove_actividad" title="quitar actividad"><i class="fas fa-trash"></i></button></td>'+
+                    '</tr>'
+                );
+
+                m++;
+
+            }else{
+          
+                //Desplegamos el modal
+                $('#aviso_actividad').modal('show');
+
+            }
         });
 
-            $(document).on("click", ".btn_remove_actividad", function() {
 
-                //cuando da click al boton quitar, obtenemos el id del boton
-                let button_id = $(this).attr("id");
+        $(document).on("click", ".btn_remove_actividad", function() {
 
-                //borra la fila
-                $("#row_actividad" + button_id + "").remove();
-            });
+            //cuando da click al boton quitar, obtenemos el id del boton
+            let button_id = $(this).attr("id");
 
+            //Obtenemos el tipo de actividad (valor) de la fila que se va a eliminar
+            var valor_tipo = $("#tipo_actividad" + button_id + "").val();
 
-
-
-
-
-
-
-
-
-
+            //Si el valor es Primaria, se setea el contador a 0 para que permita volver a agregar una nueva actividad primaria. En caso de que sea Secundaria, solamente borra la fila sin setear el contador para que no permita agregar mas de una actividad principal.
+            if(valor_tipo == 'Primaria'){
+                contador = 0;
+            }
+        
+            //borra la fila
+            $("#row_actividad" + button_id + "").remove();
+           
+        });
 
     </script>
-@endpush
 
+@endpush
 
 </fieldset>
