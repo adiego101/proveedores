@@ -10,6 +10,7 @@ use App\Models\Provincia;
 use App\Models\Localidad;
 use App\Models\Tipo_actividad;
 use App\Models\Actividad_economica;
+use App\Models\Producto;
 
 
 /*
@@ -37,7 +38,8 @@ Route::get('/nuevoRegistro', function () {
     $localidades = Localidad::all();
     $tipos_actividades = Tipo_actividad::All();
     $actividades = Actividad_economica::All();
-    return view('nuevoRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades'));
+    $productos = Producto::All();
+    return view('nuevoRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos'));
 });
 
 Route::get('/gestionarRegistros', function () {
