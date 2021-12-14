@@ -14,8 +14,8 @@
     <option selected value="Contribuyente Puro">Contribuyente Puro</option>
     <option value="Contribuyente Convenio Multilateral">Contribuyente Convenio Multilateral</option>
   </select>
-  <br>
 
+  <br>
 
   <div class="container">
     <div class="row">
@@ -26,12 +26,12 @@
       <div class="col-sm">
         <!--En este caso, se deben recuperar las localidades de la BD -->
         <label for="localidad_habilitacion">Localidad:</label><br>
-                <select class="form-control" aria-describedby="basic-addon1" id="localidad_habilitacion" name="localidad_habilitacion">
-                    @foreach($localidades as $localidad)
-                    <option selected value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
-                    @endforeach
-                </select>
-                <br>
+        <select class="form-control" aria-describedby="basic-addon1" id="localidad_habilitacion" name="localidad_habilitacion">
+        @foreach($localidades as $localidad)
+          <option selected value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
+        @endforeach
+        </select>
+        <br>
       </div>
     </div>
 
@@ -43,8 +43,14 @@
       </div>
 
       <div class="col-sm">
+        <!--En este caso, se deben recuperar las provincias de la BD -->
         <label for="provincia_inscrip_personas_jur">Provincia:</label><br>
-        <input type="text" class="form-control" placeholder="Ingrese la provincia correspondiente" aria-describedby="basic-addon1" id="provincia_inscrip_personas_jur" name="provincia_inscrip_personas_jur" ><br>
+        <select class="form-control" aria-describedby="basic-addon1" id="provincia_inscrip_personas_jur" name="provincia_inscrip_personas_jur">
+        @foreach($provincias as $provincia)
+          <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+        @endforeach
+        </select>
+        <br>
       </div>
 
     </div>
@@ -57,8 +63,14 @@
       </div>
 
       <div class="col-sm">
+        <!--En este caso, se deben recuperar las provincias de la BD -->
         <label for="provincia_registro_publico">Provincia:</label><br>
-        <input type="text" class="form-control" placeholder="Ingrese la provincia correspondiente" aria-describedby="basic-addon1" id="provincia_registro_publico" name="provincia_registro_publico" ><br>
+        <select class="form-control" aria-describedby="basic-addon1" id="provincia_registro_publico" name="provincia_registro_publico">
+        @foreach($provincias as $provincia)
+          <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+        @endforeach
+        </select>
+        <br>
       </div>
 
     </div>
@@ -71,26 +83,23 @@
       </div>
 
       <div class="col-sm">
+        <!--En este caso, se deben recuperar las provincias de la BD -->
         <label for="provincia_inspeccion_justicia">Provincia:</label><br>
-        <input type="text" class="form-control" placeholder="Ingrese la provincia correspondiente" aria-describedby="basic-addon1" id="provincia_inspeccion_justicia" name="provincia_inspeccion_justicia" ><br>
+        <select class="form-control" aria-describedby="basic-addon1" id="provincia_inspeccion_justicia" name="provincia_inspeccion_justicia">
+        @foreach($provincias as $provincia)
+          <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+        @endforeach
+        </select>
+        <br>
       </div>
 
     </div>
 
   </div>
-  <!-- CAMBIO POR NUEVO FORMATO DE DOMICILIO
-  <label for="domicilio-fiscal">Domicilio fiscal:</label><br>
-  <input type="text" class="form-control" placeholder="ingrese su domicilio fiscal" aria-describedby="basic-addon1" id="domicilio-fiscal" name="domicilio-fiscal" ><br>
 
-  En este caso, se deben recuperar las localidades de la BD
-  <label for="localidad-fiscal">Localidad fiscal:</label><br>
-  <select class="form-control" aria-describedby="basic-addon1" id="localidad-fiscal" name="localidad-fiscal">
-    <option selected value="M">Masculino</option>
-    <option value="F">Femenino</option>
-  </select>
   <br>
-  -->
-  <br>
+
   <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
   <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+
 </fieldset>
