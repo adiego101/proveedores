@@ -3,7 +3,7 @@
   <h1>Impuestos sobre ingresos brutos</h1><br>
 
   <label for="nro_ingresos_brutos">Número de ingresos brutos:</label><br>
-  <input type="number" class="form-control" placeholder="Ingrese el número de ingresos brutos" aria-describedby="basic-addon1" id="nro_ingresos_brutos" name="nro_ingresos_brutos" ><br>
+  <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de ingresos brutos" aria-describedby="basic-addon1" id="nro_ingresos_brutos" name="nro_ingresos_brutos" ><br>
 
   <label for="jurisdiccion">Jurisdicción:</label><br>
   <input type="text" class="form-control" placeholder="Ingrese su jurisdicción" aria-describedby="basic-addon1" id="jurisdiccion" name="jurisdiccion" ><br>
@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col-sm">
         <label for="nro_habilitacion_municipal">Número de habilitación municipal:</label><br>
-        <input type="number" class="form-control" placeholder="Ingrese el número de habilitación municipal" aria-describedby="basic-addon1" id="nro_habilitacion_municipal" name="nro_habilitacion_municipal" ><br>
+        <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de habilitación municipal" aria-describedby="basic-addon1" id="nro_habilitacion_municipal" name="nro_habilitacion_municipal" ><br>
       </div>
       <div class="col-sm">
         <!--En este caso, se deben recuperar las localidades de la BD -->
@@ -39,7 +39,7 @@
 
       <div class="col-sm">
         <label for="nro_inscripcion_personas_juridicas">Número de inscripción personas jurídicas:</label><br>
-        <input type="number" class="form-control" placeholder="Ingrese el número de inscripción de personas jurídicas" aria-describedby="basic-addon1" id="nro_inscripcion_personas_juridicas" name="nro_inscripcion_personas_juridicas" ><br>
+        <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de inscripción de personas jurídicas" aria-describedby="basic-addon1" id="nro_inscripcion_personas_juridicas" name="nro_inscripcion_personas_juridicas" ><br>
       </div>
 
       <div class="col-sm">

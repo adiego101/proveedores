@@ -42,16 +42,16 @@
     <h5>Registro de Pagos de inscripción y renovación:</h5><br>
 
     <label for="fecha-pago">Fecha:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago"
+    <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago"
         aria-describedby="basic-addon1" id="fecha-pago"><br>
 
     <label for="importe-pago">Importe:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1"
+    <input type="number" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1"
         id="importe-pago"><br>
 
-    <label for="observaciones-pago">Observaciones:</label><br>
+    <label for="observaciones_pago">Observaciones:</label><br>
     <input type="text" class="form-control" placeholder="Ingrese las observaciones del pago"
-        aria-describedby="basic-addon1" id="observaciones-pago"><br>
+        aria-describedby="basic-addon1" id="observaciones_pago"><br>
 
     <input type="button" value="Agregar" class="btn btn-outline-primary" id="agregar-pago">
     <div class="table table-bordered">
@@ -71,31 +71,31 @@
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
 
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+    @include('modales.editarPago')
 
 </fieldset>
-@include('modales.editarPago')
-@section('js')
+@push('js')
 
     <script type="text/javascript">
         let fecha;
         let importe;
-        let obsevarciones;
+        let observaciones_pago;
         $("#agregar-pago").on("click", function(e) {
             fecha = $('#fecha-pago').val();
-            $('#fecha-pago').val() = '';
+            $('#fecha-pago').val('');
             importe = $('#importe-pago').val();
-            $('#importe-pago').val() = '';
-            obsevarciones = $('#observaciones').val();
-            $('#observaciones').val() = '';
+            $('#importe-pago').val('');
+            observaciones_pago = $('#observaciones_pago').val();
+            $('#observaciones_pago').val('');
 
             $("#body_pagos_table").append(
                 '<tr id="row' + i + '">' +
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="fecha' + i +
+                '<td><input type="date" class="form-control" aria-describedby="basic-addon1" id="fecha' + i +
                 '" name="fechas-pagos[]" readonly value="' + fecha + '"></td>' +
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="importe' + i +
+                '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="importe' + i +
                 '" name="importes-pagos[]" readonly value="' + importe + '"></td>' +
                 '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="observaciones' +
-                i + '" name="observaciones-pagos[]" readonly value="' + observaciones + '"></td>' +
+                i + '" name="observaciones-pagos[]" readonly value="' + observaciones_pago + '"></td>' +
                 '<td><button type="button" name="edit" id="' + i +
                 '" class="btn btn-warning btn-sm btn_edit" title="editar pago"><i class="fas fa-edit"></i></button>' +
                 '<button type="button" name="remove" id="' + i +
@@ -103,7 +103,7 @@
                 '</td>' +
                 '</tr>'
             );
-        );}
+        });
             $(document).on("click", ".btn_remove", function() {
 
                 //cuando da click al boton quitar, obtenemos el id del boton
@@ -133,6 +133,25 @@
                 $('#modal_importe').val(modal_importe);
                 $('#modal_observaciones').val(modal_observaciones);
             });
-        );
+
+
+
     </script>
-@endsection
+
+<script type="text/javascript">
+    function valideKey(evt){
+
+        // code is the decimal ASCII representation of the pressed key.
+        var code = (evt.which) ? evt.which : evt.keyCode;
+
+        if(code==8) { // backspace.
+          return true;
+        } else if(code>=48 && code<=57) { // is a number.
+          return true;
+        } else{ // other keys.
+        console.log("no es un numero");
+          return false;
+        }
+    }
+    </script>
+@endpush

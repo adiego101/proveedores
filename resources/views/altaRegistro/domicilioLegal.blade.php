@@ -12,7 +12,7 @@
                 <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_legal" name="dpto_legal"><br>
 
                 <label for="lote_legal">Lote:</label><br>
-                <input type="number" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_legal" name="lote_legal"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_legal" name="lote_legal"><br>
 
                 <label for="entreCalles_legal">Entre Calles:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_legal" name="entreCalles_legal"><br>
@@ -47,7 +47,7 @@
 
                 </div>
                 <label for="telefono_legal">Teléfono:</label><br>
-                <input type="number" class="form-control" placeholder="Ingrese el número de teléfono"
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono"
                     aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" >
                 <div class="field_telefono_legal">
 
@@ -64,13 +64,13 @@
             <div class="col-sm">
 
                 <label for="numero_legal">Número:</label><br>
-                <input type="number" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_legal" name="numero_legal"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_legal" name="numero_legal"><br>
 
                 <label for="puerta_legal">Puerta:</label><br>
-                <input type="number" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_legal" name="puerta_legal"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_legal" name="puerta_legal"><br>
 
                 <label for="manzana_legal">Manzana:</label><br>
-                <input type="number" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_legal" name="manzana_legal"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_legal" name="manzana_legal"><br>
 
                 <label for="oficina_legal">Oficina:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_legal" name="oficina_legal"><br>
@@ -91,7 +91,7 @@
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_legal" name="cp_legal" placeholder="Ingrese el código postal"><br>
 
                 <label for="dni_legal">Dni:</label><br>
-                <input type="number" class="form-control" placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" >
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" >
                 <br>
                 <br>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -126,7 +126,7 @@
         var fieldHTML_telefono_legal = '<div>'+
                                  '<br>'+
                                     '<label for="telefono_legal">Teléfono:</label><br>'+
-                                    '<input type="number" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" >'+
+                                    '<input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" >'+
                                     '<a href="javascript:void(0);" class="remove_telefono_legal" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                  '<br>'+
                                 '</div>';
