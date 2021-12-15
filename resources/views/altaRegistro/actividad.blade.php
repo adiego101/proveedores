@@ -13,23 +13,27 @@
             <!--En este caso, se deben recuperar los tipos de actividad de la BD -->
             <label for="tipo_actividad">Tipo de Actividad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="tipo_actividad" name="tipo_actividad">
-                    @foreach($tipos_actividades as $tipo_actividad)
-                    <option value="{{$tipo_actividad->desc_tipo_actividad}}">{{$tipo_actividad->desc_tipo_actividad}}</option>
-                    @endforeach
+                    @forelse($tipos_actividades as $tipo_actividad)
+                        <option value="{{$tipo_actividad->desc_tipo_actividad}}">{{$tipo_actividad->desc_tipo_actividad}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
                 </select>
             <br />
-
-            <!--En este caso, se deben recuperar las actividades de la BD -->
-            <label for="actividad">Actividad:</label><br>
-                <select class="form-control" aria-describedby="basic-addon1" id="actividad" name="actividad">
-                    @foreach($actividades as $actividad)
-                    <option value="{{$actividad->desc_actividad}}">{{$actividad->desc_actividad}}</option>
-                    @endforeach
-                </select>
-                <br />
         </div>
 
         <div class="col-sm">
+
+            <!--En este caso, se deben recuperar las actividades de la BD -->
+            <label for="actividad">Actividad:</label><br>
+            <select class="form-control" aria-describedby="basic-addon1" id="actividad" name="actividad">
+                @forelse($actividades as $actividad)
+                    <option value="{{$actividad->desc_actividad}}">{{$actividad->desc_actividad}}</option>
+                @empty
+                    <option value=" "></option>
+                @endforelse
+            </select>
+            <br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_actividad" class="btn btn-success">Agregar Actividad</a>
@@ -52,6 +56,8 @@
     </div>
 
     <br />
+
+    <hr>
 
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
     <input type="text" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"><br>
@@ -108,13 +114,13 @@
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
-      <!--Incluimos el modal para mostrar mensaje de aviso -->
+    <!--Incluimos el modal para mostrar mensaje de aviso -->
 
-      @include('modales.avisoActividad')
+    @include('modales.avisoActividad')
 
-       <!--Incluimos el modal para editar un producto -->
+    <!--Incluimos el modal para editar un producto -->
 
-       @include('modales.editarProducto')
+    @include('modales.editarProducto')
 
 @push('js')
 
