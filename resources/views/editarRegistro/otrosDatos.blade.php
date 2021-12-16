@@ -6,29 +6,31 @@
             <h5>Calculo del indice de compra local</h5>
 
             <label for="porc_facturacion">Porcentaje de facturacion en Santa Cruz:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="porc_facturacion" name="porc_facturacion"
+            <input type="text" class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->porc_facturacion) ? $proveedor->porc_facturacion : '' }}" id="porc_facturacion" name="porc_facturacion"
                 ><br>
 
             <label for="porc_gasto">Porcentaje de Gastos en Santa Cruz:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="porc_gasto" name="porc_gasto"
+            <input type="text" class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->porc_gasto) ? $proveedor->porc_gasto : '' }}" id="porc_gasto" name="porc_gasto"
                 ><br>
 
             <label for="porc_mo">Porcentaje de Mano de Obra en Santa Cruz:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="porc_mo" name="porc_mo"
+            <input type="text" class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->porc_mo) ? $proveedor->porc_mo : '' }}" id="porc_mo" name="porc_mo"
                 ><br>
 
             <label for="antiguedad">Antiguedad en Santa Cruz:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="antiguedad" name="antiguedad"
+            <input type="text" class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->antiguedad) ? $proveedor->antiguedad : '' }}" id="antiguedad" name="antiguedad"
                 ><br>
 
             <label for="dom_fiscal">Domicilio Fiscal:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="dom_fiscal" name="dom_fiscal"
+            <input type="text" class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}"
+                    id="dom_fiscal" name="dom_fiscal"
                 ><br>
 
                 <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <input type="checkbox" id="valor_agregado" name="valor_agregado" value="0">
+                        <input type="checkbox" value="{{ isset($proveedor->valor_agregado) ? $proveedor->valor_agregado : '' }}"
+                    id="valor_agregado"  name="valor_agregado" value="0">
                         <label for="valor_agregado">Valor Agregado</label><br>
 
 
@@ -105,7 +107,7 @@
     <label for="tamaño">Tamaño de la Empresa:</label><br>
 
 
-    <select class="form-control" aria-describedby="basic-addon1" id="tamaño" name="tamaño">
+    <select class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->tamaño) ? $proveedor->tamaño : '' }}" id="tamaño" name="tamaño">
         <option selected value="micro">Micro</option>
         <option value="macro">Macro</option>
         <option value="mediana">Mediana</option>

@@ -23,6 +23,7 @@ use App\Models\Actividad_economica;
 use App\Models\Proveedor_domicilio;
 use App\Models\Actividades_proveedores;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Proveedores_tipos_proveedores;
 
 class ProveedoresController extends Controller
 {
@@ -35,7 +36,6 @@ class ProveedoresController extends Controller
 
     }
 
-
     public function idtipos_actividades($nombre_tipos_actividades)
     {
         $id_tipos_actividades = Tipo_actividad::where('desc_tipo_actividad', $nombre_tipos_actividades)->get();
@@ -43,7 +43,6 @@ class ProveedoresController extends Controller
         return $id_tipos_actividades;
 
     }
-
 
     public function idActividad_economica($nombre_actividad)
     {
@@ -57,17 +56,43 @@ class ProveedoresController extends Controller
     public function crear_registro(Request $request)
     {
 
-
-
         //try{
         //-------------------Carga Proveedor-------------------
         //return $request->input('localidad_real');
         $proveedores_rupae = new Proveedor($request->all());
         $proveedores_rupae->save();
 
+        //---------Tipo de Proveedor----------
+        if (isset($request->prov_provincial)) {
+            $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                'id_proveedor' => $proveedores_rupae->id_proveedor,
+                'id_tipo_proveedor' => '4',
+            ]);
+            $Proveedores_tipos_proveedores->save();
+        }
 
+        if (isset($request->prov_estado)) {
+            $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                'id_proveedor' => $proveedores_rupae->id_proveedor,
+                'id_tipo_proveedor' => '1',
+            ]);
 
-        //return "Fin";
+            $Proveedores_tipos_proveedores->save();}
+        if (isset($request->prov_minero)) {
+            $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                'id_proveedor' => $proveedores_rupae->id_proveedor,
+                'id_tipo_proveedor' => '2',
+            ]);
+            $Proveedores_tipos_proveedores->save();}
+
+        if (isset($request->prov_petrolero)) {
+            $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                'id_proveedor' => $proveedores_rupae->id_proveedor,
+                'id_tipo_proveedor' => '3',
+            ]);
+            $Proveedores_tipos_proveedores->save();}
+
+        return "Fin";
         //----------------------------------Carga Domicilio Real---------------------------------------------
 
         $domicilio_real = Proveedor_domicilio::create([
@@ -300,7 +325,6 @@ class ProveedoresController extends Controller
             var_dump($arraySize);
 
             //---------Carga de Actividades----------
-
 
             for ($i = 0; $i < $arraySize; $i++) {
                 $actividades_proveedores = Actividades_proveedores::create([
@@ -551,29 +575,27 @@ class ProveedoresController extends Controller
         return $select;
     }
 
-
-
 /*
-    public function getLocalidadesTabla($provincia, Request $request)
-    {
-        //obtenemos el id de la provincia
-        $provinciaid = DB::table('provincias')->where('nombre_provincia', $provincia)->first();
+public function getLocalidadesTabla($provincia, Request $request)
+{
+//obtenemos el id de la provincia
+$provinciaid = DB::table('provincias')->where('nombre_provincia', $provincia)->first();
 
-        //Obtenemos las localidades de la provincia seleccionada
-        $localidades = Localidad::where('id_provincia', $provinciaid->id_provincia)->orderby('nombre_localidad', 'asc')->get();
+//Obtenemos las localidades de la provincia seleccionada
+$localidades = Localidad::where('id_provincia', $provinciaid->id_provincia)->orderby('nombre_localidad', 'asc')->get();
 
-        //Calculamos el tamaño de las localidades
-        $max = sizeof($localidades);
+//Calculamos el tamaño de las localidades
+$max = sizeof($localidades);
 
-        //var_dump(json_decode(json_encode($localidades[0]["nombre_localidad"])));
+//var_dump(json_decode(json_encode($localidades[0]["nombre_localidad"])));
 
-        $select = '';
+$select = '';
 
-        for ($i = 0; $i < $max; $i++) {
-            $select = $select . '<option value=' . $localidades[$i]["nombre_localidad"] . '>' . $localidades[$i]["nombre_localidad"] . '</option>';
-        }
+for ($i = 0; $i < $max; $i++) {
+$select = $select . '<option value=' . $localidades[$i]["nombre_localidad"] . '>' . $localidades[$i]["nombre_localidad"] . '</option>';
+}
 
-        return $select;
-    }
-*/
+return $select;
+}
+ */
 }

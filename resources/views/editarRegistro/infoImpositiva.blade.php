@@ -8,7 +8,7 @@
 --}}
   <!--En este caso, se deben recuperar los datos de la BD -->
   <label for="tipo_de_sociedad">Tipo de sociedad:</label><br>
-  <select class="form-control" aria-describedby="basic-addon1" id="tipo_de_sociedad" name="tipo_de_sociedad">
+  <select class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->tipo_de_sociedad) ? $proveedor->tipo_de_sociedad : '' }}" id="tipo_de_sociedad" name="tipo_de_sociedad">
     <option selected value="UNIPERSONAL">UNIPERSONAL</option>
     <option value="SOCIEDAD ANONIMA">SOCIEDAD ANONIMA</option>
     <option value="SOCIEDAD DE RESPONSABILIDAD LIMITADA">SOCIEDAD DE RESPONSABILIDAD LIMITADA</option>
@@ -23,7 +23,7 @@
 
   <!--En este caso, se deben recuperar los datos de la BD -->
   <label for="situacion_iva">Situación IVA:</label><br>
-  <select class="form-control" aria-describedby="basic-addon1" id="situacion_iva" name="situacion_iva">
+  <select class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->situacion_iva) ? $proveedor->situacion_iva : '' }}" id="situacion_iva" name="situacion_iva">
     <option selected value="RESPONSABLE INSCRIPTO">RESPONSABLE INSCRIPTO</option>
     <option value="MONOTRIBUTISTA">MONOTRIBUTISTA</option>
     <option value="NO ALCANZADO">NO ALCANZADO</option>
@@ -32,7 +32,7 @@
   <br>
 
   <label for="exento_en_cod_de_actividad">Excento en código de actividad:</label><br>
-  <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el código de la actividad en la que se encuentra excento" id="exento_en_cod_de_actividad" name="exento_en_cod_de_actividad" ><br>
+  <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el código de la actividad en la que se encuentra excento" value="{{ isset($proveedor->exento_en_cod_de_actividad) ? $proveedor->exento_en_cod_de_actividad : '' }}" id="exento_en_cod_de_actividad" name="exento_en_cod_de_actividad" ><br>
 
   <!--En este caso, se deben recuperar las provincias de la BD -->
   <label for="en_la_provincia_de">En la provincia de:</label><br>
@@ -50,10 +50,11 @@
     <label>Corresponde retención:</label>
     <div class="form-check">
       <div class="col-sm">
-        <input type="radio" id="retencion" name="retencion" value="1" checked>SI
+        <input type="radio" value="{{ isset($proveedor->retencion) || $proveedor->retencion != 1 ? $proveedor->retencion : '' }}"
+            id="retencion" name="retencion" value="1" checked>SI
       </div>
       <div class="col-sm">
-        <input type="radio" id="retencion" name="retencion" value="0">NO
+        <input type="radio" value="{{ isset($proveedor->retencion) || $proveedor->retencion != 0  ? $proveedor->retencion : '' }}"  id="retencion" name="retencion" value="0">NO
       </div>
     </div>
   </div>
