@@ -72,7 +72,6 @@
                             <td>valor</td>
                         </tr>
                     </thead>
-                    <tbody id="body_ponderacion_table"></tbody>
                 </table>
             </div>
             <br>
@@ -96,7 +95,6 @@
                             <td>valor</td>
                         </tr>
                     </thead>
-                    <tbody id="body_jerarquia_table"></tbody>
                 </table>
             </div>
         </div>
