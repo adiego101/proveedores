@@ -72,13 +72,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class)->middleware(['can:admin_users']);
     Route::patch('/changePassword/{id}', 'App\Http\Controllers\UserController@changePassword')->name('changePassword');
+
+    Route::get('localidades/{provincia}', 'App\Http\Controllers\ProveedoresController@getLocalidades');
 });
 
 
 //Prueba generacion PDF
-
-Route::get('localidades/{provincia}', 'App\Http\Controllers\ProveedoresController@localidades');
-
-
 Route::get('/registro-alta', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');
 Route::get('/certificado-inscripcion', 'App\Http\Controllers\RupaeController@descargarCertificadoInscripcion');

@@ -440,22 +440,27 @@ class ProveedoresController extends Controller
 
     }
 
-    public function localidades($provincia, Request $request)
+    public function getLocalidades($provincia, Request $request)
     {
-        $provinciaid = DB::table('provincias')
-        ->where('nombre_provincia', $provincia)
-        ->first();
-        //Provincia::where('nombre_provincia',$provincia)->get();
-        //echo();
+        //obtenemos el id de la provincia
+        $provinciaid = DB::table('provincias')->where('nombre_provincia', $provincia)->first();
+        
+        //Obtenemos las localidades de la provincia seleccionada
+        $localidades = Localidad::where('id_provincia', $provinciaid->id_provincia)->orderby('nombre_localidad','asc')->get();
 
-        $localidades = Localidad::where('id_provincia', $provinciaid->id_provincia)->get();
+        //Calculamos el tamaño de las localidades
+        $max = sizeof($localidades);
+                
+        //var_dump(json_decode(json_encode($localidades[0]["nombre_localidad"])));
 
-        return $localidades;
-        /*$localidades = Localidad::where('id_provincia','78')->orderBy('nombre_provincia');
-        //return response()->json($proveedores_rupae);
-        return $localidades;*/
+        $select = '';
 
+        for($i = 0; $i < $max;$i++)
+        {
+            $select = $select.'<option value='.$localidades[$i]["nombre_localidad"].'>'.$localidades[$i]["nombre_localidad"].'</option>';
+        }
 
+        return $select;
     }
 
 

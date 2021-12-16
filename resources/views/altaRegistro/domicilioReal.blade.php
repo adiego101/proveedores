@@ -23,18 +23,18 @@
                 <!--En este caso, se deben recuperar los paises de la BD -->
                 <label for="pais_real">Pais:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="pais_real" name="pais_real">
-                    @foreach($paises as $pais)
-                    <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
-                    @endforeach
+                    @forelse($paises as $pais)
+                        <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
                 </select>
                 <br>
 
                 <!--En este caso, se deben recuperar las localidades de la BD -->
                 <label for="localidad_real">Localidad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="localidad_real" name="localidad_real">
-                    @foreach($localidades as $localidad)
-                    <option selected value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
-                    @endforeach
+                <option value=" ">Seleccione una localidad</option>
                 </select>
                 <br>
 
@@ -74,15 +74,14 @@
                 <!--En este caso, se deben recuperar las provincias de la BD -->
                 <label for="provincia_real">Provincia:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_real" name="provincia_real">
-                    @foreach($provincias as $provincia)
-                    <option selected value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                    @endforeach
+                    <option value=" ">Seleccione una provincia</option>
+                    @forelse($provincias as $provincia)
+                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
                 </select>
                 <br>
-
-                <div id="select2lista"></div>
-
-
 
                 <label for="cp_real">Código Postal:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_real" name="cp_real" placeholder="Ingrese el código postal"><br>
@@ -102,13 +101,12 @@
                 </div>
             </div>
         </div>
-
     </div>
+
     <br>
-        <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-        <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
-
+    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
+    <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
 
 <script type="text/javascript">
@@ -177,25 +175,23 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
--
 
 		$('#provincia_real').change(function(){
 			recargarLista();
 		});
 	})
 </script>
+
 <script type="text/javascript">
 	function recargarLista(){
 		$.ajax({
 			type:"GET",
 			url:"localidades/"+$('#provincia_real').val(),
 			success:function(r){
-				$('#select2lista').html(r);
+				$('#localidad_real').html(r);
 			}
 		});
 	}
 </script>
-
-
 
 </fieldset>
