@@ -23,18 +23,18 @@
                 <!--En este caso, se deben recuperar los paises de la BD -->
                 <label for="pais_fiscal">Pais:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="pais_fiscal" name="pais_fiscal">
-                    @foreach($paises as $pais)
-                    <option value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
-                    @endforeach
+                    @forelse($paises as $pais)
+                        <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
                 </select>
                 <br>
 
                 <!--En este caso, se deben recuperar las localidades de la BD -->
                 <label for="localidad_fiscal">Localidad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="localidad_fiscal" name="localidad_fiscal">
-                    @foreach($localidades as $localidad)
-                    <option value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
-                    @endforeach
+                <option value=" ">Seleccione una localidad</option>
                 </select>
                 <br>
 
@@ -74,9 +74,12 @@
                 <!--En este caso, se deben recuperar las provincias de la BD -->
                 <label for="provincia_fiscal">Provincia:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_fiscal" name="provincia_fiscal">
-                    @foreach($provincias as $provincia)
-                    <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                    @endforeach
+                    <option value=" ">Seleccione una provincia</option>
+                    @forelse($provincias as $provincia)
+                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
                 </select>
                 <br>
 
@@ -168,5 +171,27 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#provincia_fiscal').change(function(){
+			recargarListaFiscal();
+		});
+	})
+</script>
+
+<script type="text/javascript">
+	function recargarListaFiscal(){
+		$.ajax({
+			type:"GET",
+			url:"localidades/"+$('#provincia_fiscal').val(),
+			success:function(r){
+				$('#localidad_fiscal').html(r);
+			}
+		});
+	}
+</script>
+
 </fieldset>
 
