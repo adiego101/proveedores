@@ -65,24 +65,9 @@ class ProveedoresController extends Controller
         $proveedores_rupae = new Proveedor($request->all());
         $proveedores_rupae->save();
 
-        if (isset($request->domicilios_sede)) {
 
-            $arraySize = count($request->domicilios_sede);
-            var_dump($arraySize);
 
-            //---------Carga de Sede----------
-
-            for ($i = 0; $i < $arraySize; $i++) {
-                $Proveedor_sede = Proveedor_sede::create([
-                    'id_proveedor' => $proveedores_rupae->id_proveedor,
-                    'Domicilio' => $request->domicilios[$i],
-                    'Localidad' => $request->localidades[$i],
-                ]);
-                $Proveedor_sede->save();
-            }
-        }
-
-        return "Fin";
+        //return "Fin";
         //----------------------------------Carga Domicilio Real---------------------------------------------
 
         $domicilio_real = Proveedor_domicilio::create([
@@ -403,8 +388,8 @@ class ProveedoresController extends Controller
             for ($i = 0; $i < $arraySize; $i++) {
                 $Proveedor_sede = Proveedor_sede::create([
                     'id_proveedor' => $proveedores_rupae->id_proveedor,
-                    'poliza' => $request->domicilios_sede[$i],
-                    'agencia' => $request->localidades_sede[$i],
+                    'Domicilio' => $request->domicilios[$i],
+                    'Localidad' => $request->localidades[$i],
                 ]);
                 $Proveedor_sede->save();
             }
