@@ -31,13 +31,20 @@
   </select>
   <br>
 
-  <label for="excento_en_cod_de_actividad">Excento en código de actividad:</label><br>
-  <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el código de la actividad en la que se encuentra excento" id="excento_en_cod_de_actividad" name="excento_en_cod_de_actividad" ><br>
+  <label for="exento_en_cod_de_actividad">Excento en código de actividad:</label><br>
+  <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el código de la actividad en la que se encuentra excento" id="exento_en_cod_de_actividad" name="exento_en_cod_de_actividad" ><br>
 
-  <!--En este caso, se deben recuperar los datos de la BD -->
+  <!--En este caso, se deben recuperar las provincias de la BD -->
   <label for="en_la_provincia_de">En la provincia de:</label><br>
-  <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese la provincia en la que se encuentra excento" id="en_la_provincia_de" name="en_la_provincia_de" ><br>
-
+  <select class="form-control" aria-describedby="basic-addon1" id="en_la_provincia_de" name="en_la_provincia_de">
+    <option value=" ">Seleccione una provincia</option>
+    @forelse($provincias as $provincia)
+      <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+    @empty
+      <option value=" "></option>
+    @endforelse
+  </select>
+  <br>
 
   <div class="row">
     <label>Corresponde retención:</label>

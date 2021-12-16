@@ -1,6 +1,8 @@
 <fieldset>
 
-  <h1>Impuestos sobre ingresos brutos</h1><br>
+  <h1>Impuestos sobre ingresos brutos y habilitaciones</h1><br>
+
+  <h4>Ingresos brutos:</h4><br>
 
   <label for="nro_ingresos_brutos">Número de ingresos brutos:</label><br>
   <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de ingresos brutos" aria-describedby="basic-addon1" id="nro_ingresos_brutos" name="nro_ingresos_brutos" ><br>
@@ -17,24 +19,38 @@
 
   <br>
 
+  <hr>
+
+  <h4>Habilitaciones:</h4><br>
+
+  <label for="nro_habilitacion_municipal">Número de habilitación municipal:</label><br>
+  <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de habilitación municipal" aria-describedby="basic-addon1" id="nro_habilitacion_municipal" name="nro_habilitacion_municipal" ><br>
+
   <div class="container">
     <div class="row">
       <div class="col-sm">
-        <label for="nro_habilitacion_municipal">Número de habilitación municipal:</label><br>
-        <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de habilitación municipal" aria-describedby="basic-addon1" id="nro_habilitacion_municipal" name="nro_habilitacion_municipal" ><br>
+        <!--En este caso, se deben recuperar las provincias de la BD -->
+        <label for="provincia_habilitacion">Provincia:</label><br>
+        <select class="form-control" aria-describedby="basic-addon1" id="provincia_habilitacion" name="provincia_habilitacion">
+        <option value=" ">Seleccione una provincia</option>
+          @forelse($provincias as $provincia)
+            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+          @empty
+            <option value=" "></option>
+          @endforelse
+        </select>
+        <br>
       </div>
       <div class="col-sm">
         <!--En este caso, se deben recuperar las localidades de la BD -->
         <label for="localidad_habilitacion">Localidad:</label><br>
         <select class="form-control" aria-describedby="basic-addon1" id="localidad_habilitacion" name="localidad_habilitacion">
-        @foreach($localidades as $localidad)
-          <option selected value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
-        @endforeach
+          <option value=" ">Seleccione una localidad</option>
         </select>
         <br>
       </div>
     </div>
-
+<hr>
     <div class="row">
 
       <div class="col-sm">
@@ -101,5 +117,28 @@
 
   <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
   <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+
+
+
+  <script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#provincia_habilitacion').change(function(){
+			recargarListaHabilitacion();
+		});
+	})
+</script>
+
+<script type="text/javascript">
+	function recargarListaHabilitacion(){
+		$.ajax({
+			type:"GET",
+			url:"localidades/"+$('#provincia_habilitacion').val(),
+			success:function(r){
+				$('#localidad_habilitacion').html(r);
+			}
+		});
+	}
+</script>
 
 </fieldset>
