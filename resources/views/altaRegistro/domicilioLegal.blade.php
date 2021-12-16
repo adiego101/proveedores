@@ -23,18 +23,18 @@
                 <!--En este caso, se deben recuperar los paises de la BD -->
                 <label for="pais_legal">Pais:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="pais_legal" name="pais_legal">
-                    @foreach($paises as $pais)
-                    <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
-                    @endforeach
+                    @forelse($paises as $pais)
+                        <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
                 </select>
                 <br>
 
                 <!--En este caso, se deben recuperar las localidades de la BD -->
                 <label for="localidad_legal">Localidad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="localidad_legal" name="localidad_legal">
-                    @foreach($localidades as $localidad)
-                    <option selected value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
-                    @endforeach
+                <option value=" ">Seleccione una localidad</option>
                 </select>
                 <br>
 
@@ -81,9 +81,12 @@
                 <!--En este caso, se deben recuperar las provincias de la BD -->
                 <label for="provincia_legal">Provincia:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_legal" name="provincia_legal">
-                    @foreach($provincias as $provincia)
-                    <option selected value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                    @endforeach
+                <option value=" ">Seleccione una provincia</option>
+                    @forelse($provincias as $provincia)
+                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
                 </select>
                 <br>
 
@@ -174,6 +177,28 @@
             i--; //Decrementa el contador en 1
         });
     });
+</script>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#provincia_legal').change(function(){
+			recargarListaLegal();
+		});
+	})
+</script>
+
+<script type="text/javascript">
+	function recargarListaLegal(){
+		$.ajax({
+			type:"GET",
+			url:"localidades/"+$('#provincia_legal').val(),
+			success:function(r){
+				$('#localidad_legal').html(r);
+			}
+		});
+	}
 </script>
 
 </fieldset>

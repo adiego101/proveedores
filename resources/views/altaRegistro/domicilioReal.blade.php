@@ -177,13 +177,13 @@
 	$(document).ready(function(){
 
 		$('#provincia_real').change(function(){
-			recargarLista();
+			recargarListaReal();
 		});
 	})
 </script>
 
 <script type="text/javascript">
-	function recargarLista(){
+	function recargarListaReal(){
 		$.ajax({
 			type:"GET",
 			url:"localidades/"+$('#provincia_real').val(),
