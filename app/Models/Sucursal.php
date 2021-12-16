@@ -17,6 +17,7 @@ class Sucursal extends Model
                             'numero',
                             'lote',
                             'entre_calles',
+                            'id_localidad',
                             'monoblock',
                             'dpto',
                             'puerta',
@@ -25,7 +26,7 @@ class Sucursal extends Model
                             'barrio',
                             'codigo_postal'
                             ];
-    
+
     protected $hidden = ['id_sucursal'];
     protected $primaryKey = 'id_sucursal';
 

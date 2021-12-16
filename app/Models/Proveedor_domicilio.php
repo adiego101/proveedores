@@ -21,6 +21,7 @@ class Proveedor_domicilio extends Model
                             'numero',
                             'lote',
                             'entre_calles',
+                            'id_localidad',
                             'monoblock',
                             'dpto',
                             'puerta',

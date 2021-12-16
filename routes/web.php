@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('localidades/{provincia}', 'App\Http\Controllers\ProveedoresController@getLocalidades');
 });
 
+Route::get('idLocalidad/{nombre_localidad}', 'App\Http\Controllers\ProveedoresController@idLocalidad');
 
 //Prueba generacion PDF
 Route::get('/registro-alta', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');

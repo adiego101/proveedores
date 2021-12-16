@@ -38,10 +38,6 @@
                 </select>
                 <br>
 
-                <label for="web_fiscal">Página web:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la página web"
-                    aria-describedby="basic-addon1" id="web_fiscal" name="web_fiscal" ><br>
-
                 <label for="email_fiscal">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
                     aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" ><br>

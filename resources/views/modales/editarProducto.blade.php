@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="modal_producto_elaborado">Producto elaborado:</label><br>
-                            <input list="productos" name="modal_producto_elaborado" id="modal_producto_elaborado"  class="form-control" placeholder="Ingrese o seleccione el producto que produce">
+                            <input list="productos" name="modal_producto_elaborado" id="modal_producto_elaborado"  class="form-control" placeholder="Ingrese o seleccione el producto que produce" />
                             <datalist id="productos">
                                 @foreach($productos as $producto)
                                 <option value="{{$producto->producto_elaborado}}">{{$producto->producto_elaborado}}</option>

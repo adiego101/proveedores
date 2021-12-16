@@ -18,7 +18,6 @@ class Actividad_economica extends Model
                             'agrupamiento'
                             ];
 
-    protected $hidden = ['id_actividad_economica'];
     protected $primaryKey = 'id_actividad_economica';
 
     public function obtenerActividadesEconomicas(){
