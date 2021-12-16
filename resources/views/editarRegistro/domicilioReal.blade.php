@@ -5,97 +5,193 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <label for="calle-real">Calle:</label><br>
-                <input type="text" class="form-control" placeholder="Calle" aria-describedby="basic-addon1"
-                    id="calle-real" name="calle-real" value="{{isset($proveedor_domicilio->calle) ? $proveedor_domicilio->calle:''}}"><br>
+                <label for="calle_real">Calle:</label><br>
+                <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_real" name="calle_real"><br>
 
-                <label for="numero-real">Numero:</label><br>
-                <input type="number" class="form-control" placeholder="Numero" aria-describedby="basic-addon1"
-                    id="numero-real" name="numero-real" value="{{isset($proveedor_domicilio->numero) ? $proveedor_domicilio->numero:''}}"><br>
+                <label for="dpto_real">Departamento:</label><br>
+                <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_real" name="dpto_real"><br>
 
-                <label for="lote-real">Lote:</label><br>
-                <input type="text" class="form-control" placeholder="lote:" aria-describedby="basic-addon1"
-                    id="lote-real" name="lote-real" value="{{isset($proveedor_domicilio->lote) ? $proveedor_domicilio->lote:''}}"><br>
+                <label for="lote_real">Lote:</label><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_real" name="lote_real"><br>
 
-                <label for="entreCalles-real">Entre Calle:</label><br>
-                <input type="text" class="form-control" placeholder="Entre Calles:" aria-describedby="basic-addon1"
-                    id="entreCalles-real" name="entreCalles-real" value="{{isset($proveedor_domicilio->entre_calles) ? $proveedor_domicilio->entre_calles:''}}"><br>
+                <label for="entreCalles_real">Entre Calles:</label><br>
+                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_real" name="entreCalles_real"><br>
 
-                <label for="monoblock-real">Monoblock:</label><br>
-                <input type="text" class="form-control" placeholder="Monoblock:" aria-describedby="basic-addon1"
-                    id="monoblock-real" name="monoblock-real" value="{{isset($proveedor_domicilio->monoblock) ? $proveedor_domicilio->monoblock:''}}"><br>
+                <label for="monoblock_real">Monoblock:</label><br>
+                <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_real" name="monoblock_real"><br>
 
-                <!--En este caso, se deben recuperar las localidades de la BD -->
-                <label for="localidad-real">Localidad:</label><br>
-                <select class="form-control" aria-describedby="basic-addon1" id="localidad-real" name="localidad-real">
-                    <option selected value="M">Masculino</option>
-                    <option value="F">Femenino</option>
+                <!--En este caso, se deben recuperar los paises de la BD -->
+                <label for="pais_real">Pais:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="pais_real" name="pais_real">
+                    @forelse($paises as $pais)
+                        <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
                 </select>
                 <br>
-                <label for="provincia-real">Provincia:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="provincia-real"
-                    name="provincia-real"  disabled><br>
 
-                <label for="telefono-real">Teléfono:</label><br>
-                <input type="number" class="form-control" placeholder="ingrese su teléfono"
-                    aria-describedby="basic-addon1" id="telefono-real" name="telefono-real" ><br>
+                <!--En este caso, se deben recuperar las localidades de la BD -->
+                <label for="localidad_real">Localidad:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="localidad_real" name="localidad_real">
+                <option value=" ">Seleccione una localidad</option>
+                </select>
+                <br>
 
-                <label for="email-real">Correo electrónico:</label><br>
-                <input type="email" class="form-control" placeholder="ingrese su correo electrónico"
-                    aria-describedby="basic-addon1" id="email-real" name="email-real" value="{{isset($proveedor_domicilio->email) ? $proveedor_domicilio->email:''}}" ><br>
+                <label for="pagina_web">Página web:</label><br>
+                <input type="text" class="form-control" placeholder="Ingrese la página web"
+                    aria-describedby="basic-addon1" id="pagina_web" name="pagina_web" ><br>
 
+                <label for="email_real">Correo electrónico:</label><br>
+                <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
+                    aria-describedby="basic-addon1" id="email_real" name="email_real[]" ><br>
+                <div class="field_email_real">
 
+                </div>
+                <label for="telefono_real">Teléfono:</label><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" >
+                <div class="field_telefono_real">
 
+                </div>
             </div>
             <div class="col-sm">
-                <label for="dpto-real">Dpto:</label><br>
-                <input type="text" class="form-control" placeholder="Dpto" aria-describedby="basic-addon1"
-                    id="dpto-real" name="dpto-real" value="{{isset($proveedor_domicilio->dpto) ? $proveedor_domicilio->dpto:''}}"><br>
 
-                <label for="puerta-real">Puerta:</label><br>
-                <input type="number" class="form-control" placeholder="Puerta" aria-describedby="basic-addon1"
-                    id="puerta-real" name="puerta-real" value="{{isset($proveedor_domicilio->puerta) ? $proveedor_domicilio->puerta:''}}"><br>
+                <label for="numero_real">Número:</label><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_real" name="numero_real"><br>
 
-                <label for="oficina-real">Oficina:</label><br>
-                <input type="text" class="form-control" placeholder="Oficina:" aria-describedby="basic-addon1"
-                    id="oficina-real" name="oficina-real"><br>
+                <label for="puerta_real">Puerta:</label><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_real" name="puerta_real"><br>
 
-                <label for="manzana-real">Manzana:</label><br>
-                <input type="text" class="form-control" placeholder="Manzana:" aria-describedby="basic-addon1"
-                    id="manzana-real" name="manzana-real"><br>
+                <label for="manzana_real">Manzana:</label><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_real" name="manzana_real"><br>
 
-                <label for="barrio-real">Barrio:</label><br>
-                <input type="text" class="form-control" placeholder="Barrio:" aria-describedby="basic-addon1"
-                    id="barrio-real" name="barrio-real" value="{{isset($proveedor_domicilio->barrio) ? $proveedor_domicilio->barrio:''}}"><br>
+                <label for="oficina_real">Oficina:</label><br>
+                <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_real" name="oficina_real"><br>
 
+                <label for="barrio_real">Barrio:</label><br>
+                <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_real" name="barrio_real"><br>
 
+                <!--En este caso, se deben recuperar las provincias de la BD -->
+                <label for="provincia_real">Provincia:</label><br>
+                <select class="form-control" aria-describedby="basic-addon1" id="provincia_real" name="provincia_real">
+                    <option value=" ">Seleccione una provincia</option>
+                    @forelse($provincias as $provincia)
+                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
+                </select>
+                <br>
 
-                <label for="pais-real">Pais:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="pais-real"
-                    name="pais-real"  disabled><br>
-
-                <label for="cp-real">Código Postal:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp-real" name="cp-real"
-                     disabled><br>
-
-
-                <label for="web-real">Página web:</label><br>
-                <input type="text" class="form-control" placeholder="ingrese su página web"
-                    aria-describedby="basic-addon1" id="web-real" name="web-real" ><br>
-
-
+                <label for="cp_real">Código Postal:</label><br>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_real" name="cp_real" placeholder="Ingrese el código postal"><br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="javascript:void(0);" class="add_email_real" title="Agregue un nuevo correo"><input type="button" value="Agregar Correo" class="btn btn-success"></a>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="javascript:void(0);" class="add_telefono_real" title="Agregue un nuevo teléfono"><input type="button" value="Agregar Teléfono" class="btn btn-success"></a>
+                </div>
             </div>
         </div>
-
-
     </div>
 
-    <div class="row navbuttons pt-5">
-        <div class="col-6 col-sm-auto" id="btnPrevious">
-            <a class="btn btn-primary btnPrevious">Previous</a>
-        </div>
-        <div class="col-6 col-sm-auto" id="btnNext">
-            <a class="btn btn-primary btnNext">Next</a>
-        </div>
-    </div>
+    <br>
+
+    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
+    <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
+        var addTelefono_real = $('.add_telefono_real');
+        var wrapper_telefono_real = $('.field_telefono_real');
+
+
+        //Nuevo campo html (agregar un nuevo teléfono)
+        var fieldHTML_telefono_real = '<div>'+
+                                 '<br>'+
+                                    '<label for="telefono_real">Teléfono:</label><br>'+
+                                    '<input type="number" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" >'+
+                                    '<a href="javascript:void(0);" class="remove_telefono_real" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+                                 '<br>'+
+                                '</div>';
+
+
+        var x = 1; //Contador inicial, comienza en 1
+        $(addTelefono_real).click(function() {
+            if (x < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
+                x++; //Incrementa el contador en 1
+                $(wrapper_telefono_real).append(fieldHTML_telefono_real); // Agrega un nuevo campo html (telefono)
+            }
+        });
+        $(wrapper_telefono_real).on('click', '.remove_telefono_real', function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remueve un campo html (telefono)
+            x--; //Decrementa el contador en 1
+        });
+
+
+
+        var addEmail_real = $('.add_email_real');
+        var wrapper_email_real = $('.field_email_real');
+
+        //Nuevo campo html (agregar un nuevo correo)
+        var fieldHTML_email_real = '<div>'+
+                                    '<label for="email_real">Correo electrónico:</label><br>'+
+                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_real" name="email_real[]" >'+
+                                    '<a href="javascript:void(0);" class="remove_email_real" title="Elimine el correo"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+                                    '<br>'+
+                                    '<br>'+
+                                '</div>';
+
+
+
+        var i = 1; //Contador inicial, comienza en 1
+        $(addEmail_real).click(function() {
+            if (i < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
+                i++; //Incrementa el contador en 1
+                $(wrapper_email_real).append(fieldHTML_email_real); // Agrega un nuevo campo html (correo)
+            }
+        });
+        $(wrapper_email_real).on('click', '.remove_email_real', function(e) {
+            e.preventDefault();
+            $(this).parent('div').remove(); //Remueve un campo html (correo)
+            i--; //Decrementa el contador en 1
+        });
+    });
+
+
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#provincia_real').change(function(){
+			recargarListaReal();
+		});
+	})
+</script>
+
+<script type="text/javascript">
+	function recargarListaReal(){
+		$.ajax({
+			type:"GET",
+			url:"localidades/"+$('#provincia_real').val(),
+			success:function(r){
+				$('#localidad_real').html(r);
+			}
+		});
+	}
+</script>
+
 </fieldset>

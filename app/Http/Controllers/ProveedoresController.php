@@ -551,4 +551,29 @@ class ProveedoresController extends Controller
         return $select;
     }
 
+
+
+/*
+    public function getLocalidadesTabla($provincia, Request $request)
+    {
+        //obtenemos el id de la provincia
+        $provinciaid = DB::table('provincias')->where('nombre_provincia', $provincia)->first();
+
+        //Obtenemos las localidades de la provincia seleccionada
+        $localidades = Localidad::where('id_provincia', $provinciaid->id_provincia)->orderby('nombre_localidad', 'asc')->get();
+
+        //Calculamos el tamaño de las localidades
+        $max = sizeof($localidades);
+
+        //var_dump(json_decode(json_encode($localidades[0]["nombre_localidad"])));
+
+        $select = '';
+
+        for ($i = 0; $i < $max; $i++) {
+            $select = $select . '<option value=' . $localidades[$i]["nombre_localidad"] . '>' . $localidades[$i]["nombre_localidad"] . '</option>';
+        }
+
+        return $select;
+    }
+*/
 }

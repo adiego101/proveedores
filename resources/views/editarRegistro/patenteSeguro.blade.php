@@ -105,14 +105,14 @@
 <label for="servicio_personal_especializado">Utiliza como sede de la actividad económica que desarrolla algún inmueble que tribute impuesto inmobiliario en localidades de la Provincia de Santa Cruz</label><br>
 <br>
 
-<label for="domicilio_sede">Domicilio:</label><br />
-<input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio_sede" name="domicilios[]" /><br />
+<label for="domicilio">Domicilio:</label><br />
+<input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio" name="domicilios[]" /><br />
 
 <div class="row">
         <div class="col-sm">
             <!--En este caso, se deben recuperar las provincias de la BD -->
-            <label for="provincia_sede">Provincia:</label><br>
-            <select class="form-control" aria-describedby="basic-addon1" id="provincia_sede" name="provincia_sede">
+            <label for="provincia_seguro">Provincia:</label><br>
+            <select class="form-control" aria-describedby="basic-addon1" id="provincia_seguro" name="provincia_seguro">
             <option value=" ">Seleccione una provincia</option>
             @forelse($provincias as $provincia)
                 <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
@@ -125,8 +125,8 @@
 
         <div class="col-sm">
             <!--En este caso, se deben recuperar las localidades de la BD -->
-            <label for="localidad_sede">Localidad:</label><br>
-            <select class="form-control" aria-describedby="basic-addon1" id="localidad_sede" name="localidad_sede">
+            <label for="localidad_seguro">Localidad:</label><br>
+            <select class="form-control" aria-describedby="basic-addon1" id="localidad_seguro" name="localidad_seguro">
                 <option value=" ">Seleccione una localidad</option>
             </select>
             <br>
@@ -324,14 +324,14 @@
     let l = 1; //contador para asignar id al boton que borrara la fila
     $("#add_sede").on("click", function(e) {
 
-        domicilio = $("#domicilio_sede").val();
-        localidad = $("#localidad_sede").val();
+        domicilio = $("#domicilio").val();
+        localidad = $("#localidad").val();
 
 
         $("#body_table_sede").append(
             '<tr id="row_sede' + l +'">'+
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios[]" readonly value="' + domicilio +'"></td>'+
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades[]" readonly value="' + localidad +'"></td>'+
+                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="domicilio' + l +'" name="domicilios[]" readonly value="' + domicilio +'"></td>'+
+                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="localidad' + l +'" name="localidades[]" readonly value="' + localidad +'"></td>'+
                 '<td><button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button></td>'+
             '</tr>'
         );
@@ -339,9 +339,10 @@
 
         l++;
 
-        //Limpiamos cada campo luego de presionar el botón Agregar Sede
+        //Limpiamos cada campo luego de presionar el botón Agregar vehículo
 
-        document.getElementById("domicilio_sede").value = "";
+        document.getElementById("domicilio").value = "";
+        document.getElementById("localidad").value = "";
 
 
         $(document).on("click", ".btn_remove_sede", function() {
@@ -362,15 +363,15 @@
                 let button_id = $(this).attr("id");
 
                 //Recuperamos los valores de los campos pertenecientes a una fila
-                let modal_domicilio = $("#domicilio_sede"+ button_id).val();
-                let modal_localidad = $("#localidad_sede"+ button_id).val();
+                let modal_domicilio = $("#domicilio"+ button_id).val();
+                let modal_localidad = $("#localidad"+ button_id).val();
 
                 //Desplegamos el modal
                 $('#modal_sede').modal('show');
 
                 //Enviamos los valores recuperados anteriormente a los inputs del modal
-                $('#modal_domicilio_sede').val(modal_domicilio);
-                $('#modal_localidad_sede').val(modal_localidad);
+                $('#modal_domicilio').val(modal_domicilio);
+                $('#modal_localidad').val(modal_localidad);
                 $('#numero_fila_sede').val(button_id);
 
             });
@@ -382,7 +383,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
 
-            $('#provincia_sede').change(function(){
+            $('#provincia_seguro').change(function(){
                 recargarListaSeguro();
             });
         })
@@ -392,9 +393,9 @@
         function recargarListaSeguro(){
             $.ajax({
                 type:"GET",
-                url:"localidades/"+$('#provincia_sede').val(),
+                url:"localidades/"+$('#provincia_seguro').val(),
                 success:function(r){
-                    $('#localidad_sede').html(r);
+                    $('#localidad_seguro').html(r);
                 }
             });
         }
