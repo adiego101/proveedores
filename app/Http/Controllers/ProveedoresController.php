@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use DataTables;
 use App\Models\Pago;
+use App\Models\Pais;
 use App\Models\Persona;
 use App\Models\Producto;
 use App\Models\Sucursal;
 use App\Models\Localidad;
 use App\Models\Proveedor;
+use App\Models\Provincia;
 use Illuminate\Http\Request;
 use App\Models\Proveedor_sede;
 use App\Models\Sucursal_email;
@@ -22,6 +24,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Actividad_economica;
 use App\Models\Proveedor_domicilio;
 use App\Models\Actividades_proveedores;
+use App\Models\Ponderacion_compre_local;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Proveedores_tipos_proveedores;
 
@@ -493,7 +496,7 @@ class ProveedoresController extends Controller
         $proveedor_email_fiscal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'fiscal')
         ->get();
 
-        return $proveedor_email_fiscal;
+        //return $proveedor_email_fiscal;
 
         $proveedor_telefono_fiscal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'fiscal')
         ->get();
@@ -521,9 +524,11 @@ class ProveedoresController extends Controller
 
         $sucursales = Sucursal::where('id_proveedor', $id)->get();
 
-        $sucursales_email = Sucursal_email::where('id_proveedor', $id)->get();
+        //return $sucursales;
 
-        $sucursales_telefono = Sucursal_telefono::where('id_proveedor', $id)->get();
+        $sucursales_email = Sucursal_email::where('id_sucursal', $sucursales[0]->id_sucursal)->get();
+
+        $sucursales_telefono = Sucursal_telefono::where('id_sucursal', $sucursales[0]->id_sucursal)->get();
 
         $actividades = Actividades_proveedores::where('id_proveedor', $id)->get();
 
@@ -538,7 +543,15 @@ class ProveedoresController extends Controller
         $pagos = Pago::where('id_proveedor', $id)->get();
 
 
-        return view('editarRegistro', [
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+        $tipos_actividades = Tipo_actividad::All();
+        $actividades = Actividad_economica::All();
+        $productos = Producto::All();
+        $ponderaciones = Ponderacion_compre_local::All();
+
+        return view('editarRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones'), [
             'proveedor' => $proveedor,
             'proveedor_telefono_fiscal' => $proveedor_telefono_fiscal,
             'proveedor_domicilio_fiscal' => $proveedor_domicilio_fiscal,

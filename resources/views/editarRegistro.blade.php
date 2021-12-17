@@ -87,22 +87,22 @@
 
                         </div>
                         <div class="tab-pane fade" id="sucursales" role="tabpanel" aria-labelledby="nav-sucursales-tab">
-                            @include('editarRegistro.sucursales')
+                            {{--@include('editarRegistro.sucursales')--}}
                         </div>
                         <div class="tab-pane fade" id="infoImpositiva" role="tabpanel"
                             aria-labelledby="nav-infoImpositiva-tab">
-                            @include('editarRegistro.infoImpositiva')
+                            {{--@include('editarRegistro.infoImpositiva')--}}
                         </div>
                         <div class="tab-pane fade" id="ingresosbrutos" role="tabpanel"
                             aria-labelledby="nav-ingresosbrutos-tab">
-                            @include('editarRegistro.ingresosbrutos')
+                            {{--@include('editarRegistro.ingresosbrutos')--}}
                         </div>
                         <div class="tab-pane fade" id="domicilioFiscal" role="tabpanel"
                             aria-labelledby="nav-domicilioFiscal.blade-tab">
                             @include('editarRegistro.domicilioFiscal')
                         </div>
                         <div class="tab-pane fade" id="actividad" role="tabpanel" aria-labelledby="nav-actividad-tab">
-                            @include('editarRegistro.actividad')
+                           {{-- @include('editarRegistro.actividad')--}}
                         </div>
                         <div class="tab-pane fade" id="valorAgregado" role="tabpanel"
                             aria-labelledby="nav-valorAgregado-tab">
@@ -114,7 +114,7 @@
                             @include('editarRegistro.personalOcupado')
                         </div>
                         <div class="tab-pane fade" id="pagos" role="tabpanel" aria-labelledby="nav-pagos-tab">
-                            @include('editarRegistro.pagos')
+                            {{--@include('editarRegistro.pagos')--}}
                         </div>
 
                             <div class="tab-pane fade" id="otrosDatos" role="tabpanel"

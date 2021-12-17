@@ -40,8 +40,13 @@
     <label for="masa_salarial_bruta">Masa salarial bruta total en la Provincia de Santa Cruz:</label><br>
     <input type="number"  onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="masa_salarial_bruta" name="masa_salarial_bruta" placeholder="Ingrese la masa salarial bruta total en la Provincia de Santa Cruz" value="{{ isset($proveedor->masa_salarial_bruta) ? $proveedor->masa_salarial_bruta : '' }}"><br>
 
-    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-
-    <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+    <div class="row navbuttons pt-5">
+        <div class="col-6 col-sm-auto" id="btnPrevious">
+            <a class="btn btn-primary btnPrevious">Previous</a>
+        </div>
+        <div class="col-6 col-sm-auto" id="btnNext">
+            <a class="btn btn-primary btnNext">Next</a>
+        </div>
+    </div>
 
 </fieldset>
