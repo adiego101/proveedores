@@ -10,8 +10,6 @@
     <input type="text" class="form-control" placeholder="Ingrese el nombre de fantasía" aria-describedby="basic-addon1" id="nombre_fantasia"  name="nombre_fantasia"
         value="{{ isset($proveedor->nombre_fantasia) ? $proveedor->nombre_fantasia : '' }}" ><br>
 
-    <!-- El cuit se utiliza en esta primer etapa -->
-
     <label for="cuit">Cuit:</label><br>
     <input type="number" class="form-control"  onkeypress="return valideKey(event);" placeholder="Ingrese el número de cuit de la empresa" aria-describedby="basic-addon1" id="cuit" name="cuit"
         value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" ><br>

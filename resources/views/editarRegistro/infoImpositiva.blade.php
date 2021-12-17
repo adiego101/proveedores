@@ -1,12 +1,7 @@
-
 <fieldset>
 
   <h1>Información Impositiva</h1><br>
 
-  {{--<label for="cuit">Cuit:</label><br>
-  <input type="text" class="form-control" placeholder="Ingrese el número de cuit de la empresa" aria-describedby="basic-addon1" id="cuit" name="cuit" ><br>
---}}
-  <!--En este caso, se deben recuperar los datos de la BD -->
   <label for="tipo_de_sociedad">Tipo de sociedad:</label><br>
   <select class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->tipo_de_sociedad) ? $proveedor->tipo_de_sociedad : '' }}" id="tipo_de_sociedad" name="tipo_de_sociedad">
     <option selected value="UNIPERSONAL">UNIPERSONAL</option>
@@ -20,8 +15,6 @@
   </select>
   <br>
 
-
-  <!--En este caso, se deben recuperar los datos de la BD -->
   <label for="situacion_iva">Situación IVA:</label><br>
   <select class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->situacion_iva) ? $proveedor->situacion_iva : '' }}" id="situacion_iva" name="situacion_iva">
     <option selected value="RESPONSABLE INSCRIPTO">RESPONSABLE INSCRIPTO</option>
@@ -58,16 +51,10 @@
       </div>
     </div>
   </div>
-  <!-- NI EN EL FORMULARIO NI EN LA BASE DE DATOS SE SOLICITA UN MOTIVO DE EXCLUSION
-  <label for="motivo-exclusion">Motivo de la exclusión:</label><br>
-  <input type="text" class="form-control" aria-describedby="basic-addon1" placeholder="En caso de corresponder, indique el motivo" id="motivo-exclusion" name="motivo-exclusion"><br>
-  -->
+
   <br>
+
   <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
   <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
 </fieldset>
-
-
-
-

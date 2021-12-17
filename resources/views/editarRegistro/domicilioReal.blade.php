@@ -6,19 +6,19 @@
         <div class="row">
             <div class="col-sm">
                 <label for="calle_real">Calle:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_real" name="calle_real"><br>
+                <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_real" name="calle_real" value="{{ isset($proveedor_domicilio->calle) ? $proveedor_domicilio->calle : '' }}"><br>
 
                 <label for="dpto_real">Departamento:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_real" name="dpto_real"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_real" name="dpto_real" value="{{ isset($proveedor_domicilio->dpto) ? $proveedor_domicilio->dpto : '' }}"><br>
 
                 <label for="lote_real">Lote:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_real" name="lote_real"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_real" name="lote_real" value="{{ isset($proveedor_domicilio->lote) ? $proveedor_domicilio->lote : '' }}"><br>
 
                 <label for="entreCalles_real">Entre Calles:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_real" name="entreCalles_real"><br>
+                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_real" name="entreCalles_real" value="{{ isset($proveedor_domicilio->entre_calles) ? $proveedor_domicilio->entre_calles : '' }}"><br>
 
                 <label for="monoblock_real">Monoblock:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_real" name="monoblock_real"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_real" name="monoblock_real" value="{{ isset($proveedor_domicilio->monoblock) ? $proveedor_domicilio->monoblock : '' }}"><br>
 
                 <!--En este caso, se deben recuperar los paises de la BD -->
                 <label for="pais_real">Pais:</label><br>
@@ -40,7 +40,7 @@
 
                 <label for="pagina_web">Página web:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese la página web"
-                    aria-describedby="basic-addon1" id="pagina_web" name="pagina_web" ><br>
+                    aria-describedby="basic-addon1" id="pagina_web" name="pagina_web" value="{{ isset($proveedor->pagina_web) ? $proveedor->pagina_web : '' }}"><br>
 
                 <label for="email_real">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
@@ -57,19 +57,19 @@
             <div class="col-sm">
 
                 <label for="numero_real">Número:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_real" name="numero_real"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_real" name="numero_real" value="{{ isset($proveedor_domicilio->numero) ? $proveedor_domicilio->numero : '' }}"><br>
 
                 <label for="puerta_real">Puerta:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_real" name="puerta_real"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_real" name="puerta_real" value="{{ isset($proveedor_domicilio->puerta) ? $proveedor_domicilio->puerta : '' }}"><br>
 
                 <label for="manzana_real">Manzana:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_real" name="manzana_real"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_real" name="manzana_real" value="{{ isset($proveedor_domicilio->manzana) ? $proveedor_domicilio->manzana : '' }}"><br>
 
                 <label for="oficina_real">Oficina:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_real" name="oficina_real"><br>
+                <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_real" name="oficina_real" value="{{ isset($proveedor_domicilio->oficina) ? $proveedor_domicilio->oficina : '' }}"><br>
 
                 <label for="barrio_real">Barrio:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_real" name="barrio_real"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_real" name="barrio_real" value="{{ isset($proveedor_domicilio->barrio) ? $proveedor_domicilio->barrio : '' }}"><br>
 
                 <!--En este caso, se deben recuperar las provincias de la BD -->
                 <label for="provincia_real">Provincia:</label><br>
@@ -84,7 +84,7 @@
                 <br>
 
                 <label for="cp_real">Código Postal:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_real" name="cp_real" placeholder="Ingrese el código postal"><br>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_real" name="cp_real" placeholder="Ingrese el código postal" value="{{ isset($proveedor_domicilio->codigo_postal) ? $proveedor_domicilio->codigo_postal : '' }}"><br>
                 <br>
                 <br>
                 <br>

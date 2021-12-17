@@ -6,19 +6,19 @@
         <div class="row">
             <div class="col-sm">
                 <label for="calle_fiscal">Calle:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_fiscal" name="calle_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_fiscal" name="calle_fiscal" value="{{ isset($proveedor_domicilio->calle) ? $proveedor_domicilio->calle : '' }}"><br>
 
                 <label for="dpto_fiscal">Departamento:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_fiscal" name="dpto_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_fiscal" name="dpto_fiscal" value="{{ isset($proveedor_domicilio->dpto) ? $proveedor_domicilio->dpto : '' }}"><br>
 
                 <label for="lote_fiscal">Lote:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_fiscal" name="lote_fiscal"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_fiscal" name="lote_fiscal" value="{{ isset($proveedor_domicilio->lote) ? $proveedor_domicilio->lote : '' }}"><br>
 
                 <label for="entreCalles_fiscal">Entre Calles:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_fiscal" name="entreCalles_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_fiscal" name="entreCalles_fiscal" value="{{ isset($proveedor_domicilio->entre_calles) ? $proveedor_domicilio->entre_calles : '' }}"><br>
 
                 <label for="monoblock_fiscal">Monoblock:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_fiscal" name="monoblock_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_fiscal" name="monoblock_fiscal" value="{{ isset($proveedor_domicilio->monoblock) ? $proveedor_domicilio->monoblock : '' }}"><br>
 
                 <!--En este caso, se deben recuperar los paises de la BD -->
                 <label for="pais_fiscal">Pais:</label><br>
@@ -53,19 +53,19 @@
             <div class="col-sm">
 
                 <label for="numero_fiscal">Número:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_fiscal" name="numero_fiscal"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_fiscal" name="numero_fiscal" value="{{ isset($proveedor_domicilio->numero) ? $proveedor_domicilio->numero : '' }}"><br>
 
                 <label for="puerta_fiscal">Puerta:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_fiscal" name="puerta_fiscal"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_fiscal" name="puerta_fiscal" value="{{ isset($proveedor_domicilio->puerta) ? $proveedor_domicilio->puerta : '' }}"><br>
 
                 <label for="manzana_fiscal">Manzana:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_fiscal" name="manzana_fiscal"><br>
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_fiscal" name="manzana_fiscal" value="{{ isset($proveedor_domicilio->manzana) ? $proveedor_domicilio->manzana : '' }}"><br>
 
                 <label for="oficina_fiscal">Oficina:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_fiscal" name="oficina_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_fiscal" name="oficina_fiscal" value="{{ isset($proveedor_domicilio->oficina) ? $proveedor_domicilio->oficina : '' }}"><br>
 
                 <label for="barrio_fiscal">Barrio:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_fiscal" name="barrio_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_fiscal" name="barrio_fiscal" value="{{ isset($proveedor_domicilio->barrio) ? $proveedor_domicilio->barrio : '' }}"><br>
 
                 <!--En este caso, se deben recuperar las provincias de la BD -->
                 <label for="provincia_fiscal">Provincia:</label><br>
@@ -80,7 +80,7 @@
                 <br>
 
                 <label for="cp_fiscal">Código Postal:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_fiscal" name="cp_fiscal" placeholder="Ingrese el código postal"><br>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_fiscal" name="cp_fiscal" placeholder="Ingrese el código postal" value="{{ isset($proveedor_domicilio->codigo_postal) ? $proveedor_domicilio->codigo_postal : '' }}"><br>
                 <br>
             
                 
