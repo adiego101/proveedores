@@ -526,9 +526,9 @@ class ProveedoresController extends Controller
 
         //return $sucursales;
 
-        $sucursales_email = Sucursal_email::where('id_sucursal', $sucursales[0]->id_sucursal)->get();
+       // $sucursales_email = Sucursal_email::where('id_sucursal', $sucursales[0]->id_sucursal)->get();
 
-        $sucursales_telefono = Sucursal_telefono::where('id_sucursal', $sucursales[0]->id_sucursal)->get();
+       // $sucursales_telefono = Sucursal_telefono::where('id_sucursal', $sucursales[0]->id_sucursal)->get();
 
         $actividades = Actividades_proveedores::where('id_proveedor', $id)->get();
 
@@ -550,7 +550,7 @@ class ProveedoresController extends Controller
         $actividades = Actividad_economica::All();
         $productos = Producto::All();
         $ponderaciones = Ponderacion_compre_local::All();
-
+        
         return view('editarRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones'), [
             'proveedor' => $proveedor,
             'proveedor_telefono_fiscal' => $proveedor_telefono_fiscal,
@@ -564,8 +564,8 @@ class ProveedoresController extends Controller
             'proveedor_email_real' => $proveedor_email_real ,
             'proveedores_tipos_proveedores' => $proveedores_tipos_proveedores,
             'sucursales' => $sucursales,
-            'sucursales_email' => $sucursales_email,
-            'sucursales_telefono' => $sucursales_telefono,
+            //'sucursales_email' => $sucursales_email,
+            //'sucursales_telefono' => $sucursales_telefono,
             'actividades' => $actividades,
             'productos ' => $productos ,
             'patentes' => $patentes,

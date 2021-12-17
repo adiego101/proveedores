@@ -34,7 +34,7 @@
                 <!--En este caso, se deben recuperar las localidades de la BD -->
                 <label for="localidad_real">Localidad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="localidad_real" name="localidad_real">
-                <option value=" ">Seleccione una localidad</option>
+                <option value=" {{$localidades->where('id_localidad', )}}"></option>
                 </select>
                 <br>
 
@@ -47,10 +47,27 @@
                     aria-describedby="basic-addon1" id="email_real" name="email_real[]" ><br>
                 <div class="field_email_real">
 
+                    @forelse($proveedor_email_real as $email_real)
+
+                        <label for="email_real">Correo electrónico:</label><br>
+                        <input type="email"  onkeypress="return valideKey(event);" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_real" name="email_real[]" value="{{$email_real->email}}"> <br>
+                    @empty
+
+                    @endforelse
+
                 </div>
+
                 <label for="telefono_real">Teléfono:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" >
+                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" ><br>
                 <div class="field_telefono_real">
+
+                    @forelse($proveedor_telefono_real as $telefono_real)
+
+                        <label for="telefono_real">Teléfono:</label><br>
+                        <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" value="{{$telefono_real->nro_tel}}"> <br>
+                    @empty
+
+                    @endforelse
 
                 </div>
             </div>

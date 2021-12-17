@@ -41,12 +41,28 @@
                 <label for="email_fiscal">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
                     aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" ><br>
-                <div class="field_email_fiscal">
+                    <div class="field_email_fiscal">
 
-                </div>
+                        @forelse($proveedor_email_fiscal as $email_fiscal)
+
+                            <label for="email_fiscal">Correo electrónico:</label><br>
+                            <input type="email"  onkeypress="return valideKey(event);" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" value="{{$email_fiscal->email}}"> <br>
+                        @empty
+
+                        @endforelse
+
+                    </div>
                 <label for="telefono_fiscal">Teléfono:</label><br>
                 <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" >
                 <div class="field_telefono_fiscal">
+
+                    @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
+
+                        <label for="telefono_fiscal">Teléfono:</label><br>
+                        <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" value="{{$telefono_fiscal->nro_tel}}"> <br>
+                    @empty
+
+                    @endforelse
 
                 </div>
             </div>

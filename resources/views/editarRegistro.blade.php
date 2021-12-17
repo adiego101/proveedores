@@ -75,7 +75,7 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="datos-generales" role="tabpanel"
                             aria-labelledby="nav-datos-generales-tab">
-                            @include('editarRegistro.datosGenerales')
+                           @include('editarRegistro.datosGenerales')
                         </div>
                         <div class="tab-pane fade" id="domicilioReal" role="tabpanel"
                             aria-labelledby="nav-domicilioReal-tab">
@@ -99,19 +99,19 @@
                         </div>
                         <div class="tab-pane fade" id="domicilioFiscal" role="tabpanel"
                             aria-labelledby="nav-domicilioFiscal.blade-tab">
-                            @include('editarRegistro.domicilioFiscal')
+                             @include('editarRegistro.domicilioFiscal')
                         </div>
                         <div class="tab-pane fade" id="actividad" role="tabpanel" aria-labelledby="nav-actividad-tab">
                            {{-- @include('editarRegistro.actividad')--}}
                         </div>
                         <div class="tab-pane fade" id="valorAgregado" role="tabpanel"
                             aria-labelledby="nav-valorAgregado-tab">
-                            @include('editarRegistro.valorAgregado')
+                             @include('editarRegistro.valorAgregado')
 
                         </div>
                         <div class="tab-pane fade" id="personalOcupado" role="tabpanel"
                             aria-labelledby="nav-personalOcupado-tab">
-                            @include('editarRegistro.personalOcupado')
+                             @include('editarRegistro.personalOcupado')
                         </div>
                         <div class="tab-pane fade" id="pagos" role="tabpanel" aria-labelledby="nav-pagos-tab">
                             {{--@include('editarRegistro.pagos')--}}

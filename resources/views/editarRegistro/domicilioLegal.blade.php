@@ -45,15 +45,31 @@
                 <label for="email_legal">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
                     aria-describedby="basic-addon1" id="email_legal" name="email_legal[]" ><br>
-                <div class="field_email_legal">
+                    <div class="field_email_legal">
 
-                </div>
+                        @forelse($proveedor_email_legal as $email_legal)
+
+                            <label for="email_legal">Correo electrónico:</label><br>
+                            <input type="email"  onkeypress="return valideKey(event);" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_legal" name="email_legal[]" value="{{$email_legal->email}}"> <br>
+                        @empty
+
+                        @endforelse
+
+                    </div>
                 <label for="telefono_legal">Teléfono:</label><br>
                 <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono"
                     aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" >
-                <div class="field_telefono_legal">
+                    <div class="field_telefono_legal">
 
-                </div>
+                        @forelse($proveedor_telefono_legal as $telefono_legal)
+
+                            <label for="telefono_legal">Teléfono:</label><br>
+                            <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" value="{{$telefono_legal->nro_tel}}"> <br>
+                        @empty
+
+                        @endforelse
+
+                    </div>
             </div>
             <div class="col-sm">
 
