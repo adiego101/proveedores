@@ -13,6 +13,7 @@ class Sucursal_telefono extends Model
     protected $fillable = [
                             'nro_tel',
                             'cod_area_tel',
+                            'id_sucursal',
                             'tipo_medio',
                             'desc_telefono',
                             'tipo_telefono',

@@ -102,8 +102,8 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                 <!--   <th>Calle</th>
+                    <th>Nombre sucursal</th>
+                 <!--<th>Calle</th>
                     <th>Número</th>
                     <th>Departamento</th>
                     <th>Puerta</th>
@@ -145,38 +145,52 @@
 <script type="text/javascript">
 
     let nombre_sucursal;
-    let calle;
-    let barrio;
-    let telefono;
     let email;
-    let entre_calle;
+    let telefono;
+    let calle;
     let numero;
     let departamento;
+    let puerta;
+    let lote;
+    let manzana;
+    let entre_calle;
+    let oficina;
+    let monoblock;
+    let barrio;
+    let codigo_postal;
+    let pais;
+    let provincia;
+    let localidad_sucursal;
     let i_sucursal = 1; //contador para asignar id al boton que borrara la fila
 
     $("#add_sucursal").on("click", function(e) {
 
+        //Campos que se muestran en la tabla
         nombre_sucursal = $("#nombre_sucursal").val();
-
-        calle = $("#calle_sucursal").val();
-
-        barrio = $("#barrio_sucursal").val();
-
+        email = $("#email_sucursal").val();
         telefono = $("#telefono_sucursal").val();
 
-        email = $("#email_sucursal").val();
-
-        entre_calle = $("#entre_calles_sucursal").val();
-
+        //Campos ocultos (hidden)
+        calle = $("#calle_sucursal").val();
         numero = $("#numero_sucursal").val();
-
         departamento = $("#dpto_sucursal").val();
+        puerta = $("#puerta_sucursal").val();
+        lote = $("#lote_sucursal").val();
+        manzana = $("#manzana_sucursal").val();
+        entre_calle = $("#entre_calles_sucursal").val();
+        oficina = $("#oficina_sucursal").val();
+        monoblock = $("#monoblock_sucursal").val();
+        barrio = $("#barrio_sucursal").val();
+        codigo_postal = $("#codigo_postal_sucursal").val();
+        pais = $("#pais_sucursal").val();
+        provincia = $("#provincia_sucursal").val();
+        localidad_sucursal = $("#localidad_sucursal").val();
+        /*console.log(pais);
+        console.log(provincia);
+        console.log(localidad_sucursal);*/
 
-  
 
       /*  let error_encontrado=false;
-
-
 
         nombre_sucursal=$('#nombre_sucursal').val();
         console.log("Nombre sucursal a agregar**"+nombre_sucursal);
@@ -255,14 +269,26 @@
 
             $("#body_table_sucursal").append(
                 '<tr id="row_sucursal' + i_sucursal +'">'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="calle_sucursal' + i_sucursal +'" name="calles[]" readonly value="' + calle +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="barrio_sucursal' + i_sucursal +'" name="barrios[]" readonly value="' + barrio +'"></td>'+
-                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="telefono_sucursal' + i_sucursal +'" name="Telefonos_sucursales[]" readonly value="' + telefono +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="entre_calles_sucursal' + i_sucursal +'" name="entreCalles[]" readonly value="'+ entre_calle +'"></td>'+
-                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="numero_sucursal' + i_sucursal +'" name="numeros[]" readonly value="'+numero+'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dpto_sucursal' + i_sucursal +'" name="dptos[]" readonly value="'+ departamento +'"></td>'+
+                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="nombre_sucursal' + i_sucursal +'" readonly value="' + nombre_sucursal +'" /></td>'+
                     '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email_sucursal' + i_sucursal +'" name="correos_electronicos[]" readonly value="'+ email +'"></td>'+
-                    '<td><button type="button" name="edit" id="'+ i_sucursal +'" class="btn btn-warning btn-sm btn_edit_sucursal" title="editar sucursal"><i_sucursal class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i_sucursal +'" class="btn btn-danger btn-sm btn_remove_sucursal" title="quitar sucursal"><i_sucursal class="fas fa-trash"></i></button></td>'+
+                    '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="telefono_sucursal' + i_sucursal +'" name="Telefonos_sucursales[]" readonly value="' + telefono +'"></td>'+
+                    '<td>'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="calle_sucursal' + i_sucursal +'" name="calles[]" readonly value="' + calle +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="numero_sucursal' + i_sucursal +'" name="numeros[]" readonly value="'+numero+'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="dpto_sucursal' + i_sucursal +'" name="dptos[]" readonly value="'+ departamento +'">'+
+                    '<input type="hidden"  class="form-control" aria-describedby="basic-addon1" id="puerta_sucursal' + i_sucursal +'" name="puertas[]" readonly value="'+ puerta +'">'+
+                    '<input type="hidden"  class="form-control" aria-describedby="basic-addon1" id="lote_sucursal' + i_sucursal +'" name="lotes[]" readonly value="'+ lote +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="manzana_sucursal' + i_sucursal +'" name="manzanas[]" readonly value="'+ manzana +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="entre_calles_sucursal' + i_sucursal +'" name="entreCalles[]" readonly value="'+ entre_calle +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="oficina_sucursal' + i_sucursal +'" name="oficinas[]" readonly value="'+ oficina +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="monoblock_sucursal' + i_sucursal +'" name="monoblocks[]" readonly value="'+ monoblock +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="barrio_sucursal' + i_sucursal +'" name="barrios[]" readonly value="' + barrio +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="pais_sucursal' + i_sucursal +'" name="paises[]" readonly value="' + pais +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sucursal' + i_sucursal +'" name="provincias[]" readonly value="' + provincia +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sucursal' + i_sucursal +'" name="localidades[]" readonly value="' + localidad_sucursal +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="codigo_postal_sucursal' + i_sucursal +'" name="codigo_postal" readonly value="' + codigo_postal +'">'+
+                    '<button type="button" name="edit" id="'+ i_sucursal +'" class="btn btn-warning btn-sm btn_edit_sucursal" title="editar sucursal"><i_sucursal class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i_sucursal +'" class="btn btn-danger btn-sm btn_remove_sucursal" title="quitar sucursal"><i_sucursal class="fas fa-trash"></i></button>'+
+                    '</td>'+
                 '</tr>'
             );
 
@@ -314,25 +340,45 @@
         let button_id = $(this).attr("id");
 
         //Recuperamos los valores de los campos pertenecientes a una fila
+        let modal_nombre_sucursal = $("#nombre_sucursal"+ button_id).val();
+        let modal_email = $("#email_sucursal"+ button_id).val();
+        let modal_telefono = $("#telefono_sucursal"+ button_id).val();
         let modal_calle = $("#calle_sucursal"+ button_id).val();
         let modal_numero = $("#numero_sucursal"+ button_id).val();
-        let modal_entre_calles = $("#entre_calles_sucursal"+ button_id).val();
-        let modal_barrio = $("#barrio_sucursal"+ button_id).val();
         let modal_departamento = $("#dpto_sucursal"+ button_id).val();
-        let modal_telefono = $("#telefono_sucursal"+ button_id).val();
-        let modal_email = $("#email_sucursal"+ button_id).val();
+        let modal_puerta = $("#puerta_sucursal"+ button_id).val();
+        let modal_lote = $("#lote_sucursal"+ button_id).val();
+        let modal_manzana = $("#manzana_sucursal"+ button_id).val();
+        let modal_entre_calles = $("#entre_calles_sucursal"+ button_id).val();
+        let modal_oficina = $("#oficina_sucursal"+ button_id).val();
+        let modal_monoblock = $("#monoblock_sucursal"+ button_id).val();
+        let modal_barrio = $("#barrio_sucursal"+ button_id).val();
+        let modal_codigo_postal = $("#codigo_postal_sucursal"+ button_id).val();
+        let modal_pais = $("#pais_sucursal"+ button_id).val();
+        let modal_provincia = $("#provincia_sucursal"+ button_id).val();
+        let modal_localidad_sucursal = $("#localidad_sucursal"+ button_id).val();
 
         //Desplegamos el modal
         $('#modal_sucursal').modal('show');
 
         //Enviamos los valores recuperados anteriormente a los inputs del modal
+        $('#modal_nombre_sucursal').val(modal_nombre_sucursal);
         $('#modal_calle_sucursal').val(modal_calle);
-        $('#modal_numero_sucursal').val(modal_numero);
-        $('#modal_entre_calles_sucursal').val(modal_entre_calles);
-        $('#modal_barrio_sucursal').val(modal_barrio);
         $('#modal_dpto_sucursal').val(modal_departamento);
-        $('#modal_telefono_sucursal').val(modal_telefono);
+        $('#modal_lote_sucursal').val(modal_lote);
+        $('#modal_entre_calles_sucursal').val(modal_entre_calles);
+        $('#modal_monoblock_sucursal').val(modal_monoblock);
+        $('#modal_pais_sucursal').val(modal_pais);
+        $('#modal_localidad_sucursal').val(modal_localidad_sucursal);
         $('#modal_email_sucursal').val(modal_email);
+        $('#modal_numero_sucursal').val(modal_numero);
+        $('#modal_puerta_sucursal').val(modal_puerta);
+        $('#modal_manzana_sucursal').val(modal_manzana);
+        $('#modal_oficina_sucursal').val(modal_oficina);
+        $('#modal_barrio_sucursal').val(modal_barrio);
+        $('#modal_provincia_sucursal').val(modal_provincia);
+        $('#modal_codigo_postal_sucursal').val(modal_codigo_postal);
+        $('#modal_telefono_sucursal').val(modal_telefono);
         $('#numero_fila_sucursal').val(button_id);
 
     });

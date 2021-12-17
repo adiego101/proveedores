@@ -13,6 +13,7 @@ class Sucursal_email extends Model
 
     protected $fillable = [
                             'email',
+                            'id_sucursal',
                             'desc_email',
                             'tipo_email',
                             'nro_orden_email',

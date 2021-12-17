@@ -87,22 +87,22 @@
 
                         </div>
                         <div class="tab-pane fade" id="sucursales" role="tabpanel" aria-labelledby="nav-sucursales-tab">
-                            @include('editarRegistro.sucursales')
+                            {{--@include('editarRegistro.sucursales')--}}
                         </div>
                         <div class="tab-pane fade" id="infoImpositiva" role="tabpanel"
                             aria-labelledby="nav-infoImpositiva-tab">
-                            @include('editarRegistro.infoImpositiva')
+                            {{--@include('editarRegistro.infoImpositiva')--}}
                         </div>
                         <div class="tab-pane fade" id="ingresosbrutos" role="tabpanel"
                             aria-labelledby="nav-ingresosbrutos-tab">
-                            @include('editarRegistro.ingresosbrutos')
+                            {{--@include('editarRegistro.ingresosbrutos')--}}
                         </div>
                         <div class="tab-pane fade" id="domicilioFiscal" role="tabpanel"
                             aria-labelledby="nav-domicilioFiscal.blade-tab">
                             @include('editarRegistro.domicilioFiscal')
                         </div>
                         <div class="tab-pane fade" id="actividad" role="tabpanel" aria-labelledby="nav-actividad-tab">
-                            @include('editarRegistro.actividad')
+                           {{-- @include('editarRegistro.actividad')--}}
                         </div>
                         <div class="tab-pane fade" id="valorAgregado" role="tabpanel"
                             aria-labelledby="nav-valorAgregado-tab">
@@ -114,7 +114,7 @@
                             @include('editarRegistro.personalOcupado')
                         </div>
                         <div class="tab-pane fade" id="pagos" role="tabpanel" aria-labelledby="nav-pagos-tab">
-                            @include('editarRegistro.pagos')
+                            {{--@include('editarRegistro.pagos')--}}
                         </div>
 
                             <div class="tab-pane fade" id="otrosDatos" role="tabpanel"
@@ -149,6 +149,40 @@ $('.btnPrevious').click(function() {
     $('.nav-tabs .active').parent().prev('li').find('a').trigger('click');
 })
     </script>
+<script type="text/javascript">
+    function valideKey(evt){
 
+        // El código es la representación decimal ASCII de la clave presionada.
+        var code = (evt.which) ? evt.which : evt.keyCode;
+
+        if(code==8) { // espacio.
+          return true;
+        } else if(code>=48 && code<=57) { // es un numero.
+          return true;
+        } else{ // otras teclas
+        console.log("no es un numero");
+          return false;
+        }
+    }
+    </script>
+
+<script>
+
+$('input[type="checkbox"]').on('change', function(){
+    this.value = this.checked ? 1 : 0;
+     console.log(this.value);
+ }).change();
+</script>
 
 @endpush
+
+@push('css')
+    <style>
+        .progress-bar {
+            background-color: #17a2b8;
+            color: #000;
+        }
+
+    </style>
+@endpush
+
