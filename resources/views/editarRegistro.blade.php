@@ -149,6 +149,40 @@ $('.btnPrevious').click(function() {
     $('.nav-tabs .active').parent().prev('li').find('a').trigger('click');
 })
     </script>
+<script type="text/javascript">
+    function valideKey(evt){
 
+        // El código es la representación decimal ASCII de la clave presionada.
+        var code = (evt.which) ? evt.which : evt.keyCode;
+
+        if(code==8) { // espacio.
+          return true;
+        } else if(code>=48 && code<=57) { // es un numero.
+          return true;
+        } else{ // otras teclas
+        console.log("no es un numero");
+          return false;
+        }
+    }
+    </script>
+
+<script>
+
+$('input[type="checkbox"]').on('change', function(){
+    this.value = this.checked ? 1 : 0;
+     console.log(this.value);
+ }).change();
+</script>
 
 @endpush
+
+@push('css')
+    <style>
+        .progress-bar {
+            background-color: #17a2b8;
+            color: #000;
+        }
+
+    </style>
+@endpush
+

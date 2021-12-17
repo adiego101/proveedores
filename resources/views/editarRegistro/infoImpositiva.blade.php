@@ -56,10 +56,10 @@
 
   <div class="row navbuttons pt-5">
     <div class="col-6 col-sm-auto" id="btnPrevious">
-        <a class="btn btn-primary btnPrevious">Previous</a>
+        <a class="btn btn-primary btnPrevious">Anterior</a>
     </div>
     <div class="col-6 col-sm-auto" id="btnNext">
-        <a class="btn btn-primary btnNext">Next</a>
+        <a class="btn btn-primary btnNext">Siguiente</a>
     </div>
 </div>
 </fieldset>
