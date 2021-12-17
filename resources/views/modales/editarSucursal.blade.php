@@ -111,28 +111,49 @@
 $(document).on("click", ".btn_edit_modal_sucursal", function() {
 
             //Obtenemos el numero de la fila que queremos modificar
-            var id_filasu = $("#numero_fila_sucursal").val();
+            var id_fila_sucursal = $("#numero_fila_sucursal").val();
 
             //Recuperamos los valores de los campos del modal
-            var modal_calle = $("#modal_calle_sucursal").val();
-            var modal_numero = $("#modal_numero_sucursal").val();
-            var modal_entre_calles = $("#modal_entre_calles_sucursal").val();
-            var modal_barrio = $("#modal_barrio_sucursal").val();
-            var modal_departamento = $("#modal_dpto_sucursal").val();
-            var modal_telefono = $("#modal_telefono_sucursal").val();
-            var modal_email = $("#modal_email_sucursal").val();
+            var modal_nombre_sucursal = $('#modal_nombre_sucursal').val();
+            var modal_calle = $('#modal_calle_sucursal').val();
+            var modal_departamento = $('#modal_dpto_sucursal').val();
+            var modal_lote = $('#modal_lote_sucursal').val();
+            var modal_entre_calles = $('#modal_entre_calles_sucursal').val();
+            var modal_monoblock = $('#modal_monoblock_sucursal').val();
+            var modal_pais = $('#modal_pais_sucursal').val();
+            var modal_localidad_sucursal = $('#modal_localidad_sucursal').val();
+            var modal_email = $('#modal_email_sucursal').val();
+            var modal_numero = $('#modal_numero_sucursal').val();
+            var modal_puerta = $('#modal_puerta_sucursal').val();
+            var modal_manzana = $('#modal_manzana_sucursal').val();
+            var modal_oficina = $('#modal_oficina_sucursal').val();
+            var modal_barrio = $('#modal_barrio_sucursal').val();
+            var modal_provincia = $('#modal_provincia_sucursal').val();
+            var modal_codigo_postal = $('#modal_codigo_postal_sucursal').val();
+            var modal_telefono = $('#modal_telefono_sucursal').val();
+   
 
             //Ocultamos el modal
             $('#modal_sucursal').modal('hide');
 
             //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-            $('#calle_sucursal'+id_filasu).val(modal_calle);
-            $('#numero_sucursal'+id_filasu).val(modal_numero);
-            $('#entre_calles_sucursal'+id_filasu).val(modal_entre_calles);
-            $('#barrio_sucursal'+id_filasu).val(modal_barrio);
-            $('#dpto_sucursal'+id_filasu).val(modal_departamento);
-            $('#telefono_sucursal'+id_filasu).val(modal_telefono);
-            $('#email_sucursal'+id_filasu).val(modal_email);
+            $('#nombre_sucursal'+id_fila_sucursal).val(modal_nombre_sucursal);
+            $('#calle_sucursal'+id_fila_sucursal).val(modal_calle);
+            $('#dpto_sucursal'+id_fila_sucursal).val(modal_departamento);
+            $('#lote_sucursal'+id_fila_sucursal).val(modal_lote);
+            $('#entre_calles_sucursal'+id_fila_sucursal).val(modal_entre_calles);
+            $('#monoblock_sucursal'+id_fila_sucursal).val(modal_monoblock);
+            $('#pais_sucursal'+id_fila_sucursal).val(modal_pais);
+            $('#localidad_sucursal'+id_fila_sucursal).val(modal_localidad_sucursal);
+            $('#email_sucursal'+id_fila_sucursal).val(modal_email);
+            $('#numero_sucursal'+id_fila_sucursal).val(modal_numero);
+            $('#puerta_sucursal'+id_fila_sucursal).val(modal_puerta);
+            $('#manzana_sucursal'+id_fila_sucursal).val(modal_manzana);
+            $('#oficina_sucursal'+id_fila_sucursal).val(modal_oficina);
+            $('#barrio_sucursal'+id_fila_sucursal).val(modal_barrio);
+            $('#provincia_sucursal'+id_fila_sucursal).val(modal_provincia);
+            $('#codigo_postal_sucursal'+id_fila_sucursal).val(modal_codigo_postal);
+            $('#telefono_sucursal'+id_fila_sucursal).val(modal_telefono);
 
         });
 </script>
