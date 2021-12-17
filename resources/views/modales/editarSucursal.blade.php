@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div id="modal_sucursal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <!-- Contenido del Modal-->
         <div class="modal-content">
             <div class="modal-header">

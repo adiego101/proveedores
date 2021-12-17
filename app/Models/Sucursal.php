@@ -27,7 +27,7 @@ class Sucursal extends Model
                             'codigo_postal'
                             ];
 
-    protected $hidden = ['id_sucursal'];
+    //protected $hidden = ['id_sucursal'];
     protected $primaryKey = 'id_sucursal';
 
     public function obtenerSucursales(){

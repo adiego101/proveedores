@@ -20,7 +20,7 @@ class Pago extends Model
                             'observaciones',
                             ];
 
-    protected $hidden = ['id_pagos'];
+    //protected $hidden = ['id_pagos'];
 
     public function obtenerPagos(){
 

@@ -32,7 +32,7 @@ class Proveedor_domicilio extends Model
                             ];
 
 
-    protected $hidden = ['id_proveedor_domicilio'];
+    //protected $hidden = ['id_proveedor_domicilio'];
 
     public function obtenerDomicilio_proveedors(){
 

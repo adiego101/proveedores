@@ -20,7 +20,7 @@ class Proveedor_patente extends Model
                             'inscripto_en',
                             ];
 
-    protected $hidden = ['id_proveedor_patente'];
+    //protected $hidden = ['id_proveedor_patente'];
 
     public function obtenerProveedoresPatentes(){
 

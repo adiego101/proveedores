@@ -102,13 +102,23 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Calle</th>
-                    <th>Barrio</th>
-                    <th>Teléfono</th>
-                    <th>Entre calle</th>
+                    <th>Nombre</th>
+                 <!--   <th>Calle</th>
                     <th>Número</th>
                     <th>Departamento</th>
-                    <th>email</th>
+                    <th>Puerta</th>
+                    <th>Lote</th>
+                    <th>Manzana</th>
+                    <th>Entre calles</th>
+                    <th>Oficina</th>
+                    <th>Monoblock</th>
+                    <th>Barrio</th>
+                    <th>Pais</th>
+                    <th>Provincia</th>
+                    <th>Localidad</th>
+                    <th>Código Postal</th>-->
+                    <th>Correo electrónico</th>
+                    <th>Teléfono</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -145,6 +155,24 @@
     let i_sucursal = 1; //contador para asignar id al boton que borrara la fila
 
     $("#add_sucursal").on("click", function(e) {
+
+        nombre_sucursal = $("#nombre_sucursal").val();
+
+        calle = $("#calle_sucursal").val();
+
+        barrio = $("#barrio_sucursal").val();
+
+        telefono = $("#telefono_sucursal").val();
+
+        email = $("#email_sucursal").val();
+
+        entre_calle = $("#entre_calles_sucursal").val();
+
+        numero = $("#numero_sucursal").val();
+
+        departamento = $("#dpto_sucursal").val();
+
+  
 
       /*  let error_encontrado=false;
 

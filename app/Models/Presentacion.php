@@ -17,7 +17,7 @@ class Presentacion extends Model
                             'desc_presentacion',
                             ];
 
-    protected $hidden = ['id_presentacion'];
+    //protected $hidden = ['id_presentacion'];
 
     public function obtenerPresentaciones(){
 

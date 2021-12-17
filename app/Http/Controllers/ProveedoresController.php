@@ -62,6 +62,9 @@ class ProveedoresController extends Controller
         $proveedores_rupae = new Proveedor($request->all());
         $proveedores_rupae->save();
 
+        //return "Fin";
+
+
         //---------Tipo de Proveedor----------
         if (isset($request->prov_provincial)) {
             $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
@@ -92,7 +95,6 @@ class ProveedoresController extends Controller
             ]);
             $Proveedores_tipos_proveedores->save();}
 
-        return "Fin";
         //----------------------------------Carga Domicilio Real---------------------------------------------
 
         $domicilio_real = Proveedor_domicilio::create([
@@ -257,7 +259,7 @@ class ProveedoresController extends Controller
 
         //---------Contador de Email_fiscal----------
 
-        $arraySize = count($request->email_legal);
+        $arraySize = count($request->email_fiscal);
 
         for ($i = 0; $i < $arraySize; $i++) {
             //---------Carga de Email_fiscal----------
@@ -485,17 +487,79 @@ class ProveedoresController extends Controller
             ->where('id_proveedor', $id)
             ->first();
 
-        $proveedor_email = DB::table('proveedores_emails')
-            ->where('id_proveedor', $id)
+        $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
             ->first();
 
-        $proveedor_domicilio = DB::table('proveedores_domicilios')
-            ->where('id_proveedor', $id)
-            ->first();
+        $proveedor_email_fiscal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'fiscal')
+        ->get();
 
-        return view('editarRegistro', ['proveedor' => $proveedor,
-            'proveedor_email' => $proveedor_email,
-            'proveedor_domicilio' => $proveedor_domicilio]);
+        return $proveedor_email_fiscal;
+
+        $proveedor_telefono_fiscal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'fiscal')
+        ->get();
+
+
+        $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
+        ->first();
+
+        $proveedor_email_legal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'legal')
+        ->get();
+
+        $proveedor_telefono_legal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'legal')
+        ->get();
+
+        $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
+        ->first();
+
+        $proveedor_email_real = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'real')
+        ->get();
+
+        $proveedor_telefono_real = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'real')
+        ->get();
+
+        $proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $id)->get();
+
+        $sucursales = Sucursal::where('id_proveedor', $id)->get();
+
+        $sucursales_email = Sucursal_email::where('id_proveedor', $id)->get();
+
+        $sucursales_telefono = Sucursal_telefono::where('id_proveedor', $id)->get();
+
+        $actividades = Actividades_proveedores::where('id_proveedor', $id)->get();
+
+        $productos = Producto::where('id_proveedor', $id)->get();
+
+        $patentes = Proveedor_patente::where('id_proveedor', $id)->get();
+
+        $seguros = Proveedor_seguro::where('id_proveedor', $id)->get();
+
+        $sedes = Proveedor_sede::where('id_proveedor', $id)->get();
+
+        $pagos = Pago::where('id_proveedor', $id)->get();
+
+
+        return view('editarRegistro', [
+            'proveedor' => $proveedor,
+            'proveedor_telefono_fiscal' => $proveedor_telefono_fiscal,
+            'proveedor_domicilio_fiscal' => $proveedor_domicilio_fiscal,
+            'proveedor_email_fiscal' => $proveedor_email_fiscal ,
+            'proveedor_telefono_legal' => $proveedor_telefono_legal,
+            'proveedor_domicilio_legal' => $proveedor_domicilio_legal,
+            'proveedor_email_legal' => $proveedor_email_legal ,
+            'proveedor_telefono_real' => $proveedor_telefono_real,
+            'proveedor_domicilio_real' => $proveedor_domicilio_real,
+            'proveedor_email_real' => $proveedor_email_real ,
+            'proveedores_tipos_proveedores' => $proveedores_tipos_proveedores,
+            'sucursales' => $sucursales,
+            'sucursales_email' => $sucursales_email,
+            'sucursales_telefono' => $sucursales_telefono,
+            'actividades' => $actividades,
+            'productos ' => $productos ,
+            'patentes' => $patentes,
+            'seguros' => $seguros,
+            'sedes' => $sedes,
+            'pagos' => $pagos,
+        ]);
     }
 
     public function editarProveedor($id, Request $request)
@@ -508,9 +572,16 @@ class ProveedoresController extends Controller
             ->where('id_proveedor', $id)
             ->first();
 
-        $proveedor_domicilio = DB::table('proveedores_domicilios')
-            ->where('id_proveedor', $id)
+        $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
             ->first();
+
+        $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
+        ->first();
+
+        $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
+        ->first();
+
+
 
         $proveedores_rupae = Proveedor::find($id);
         //return response()->json($proveedores_rupae);

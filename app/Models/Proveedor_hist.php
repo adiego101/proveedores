@@ -72,7 +72,7 @@ class Proveedor_hist extends Model
                             'observaciones',
                             ];
 
-    protected $hidden = ['id_proveedor'];
+    //protected $hidden = ['id_proveedor'];
     protected $primaryKey = 'id_proveedor';
 
     public function obtenerProveedoresHist(){

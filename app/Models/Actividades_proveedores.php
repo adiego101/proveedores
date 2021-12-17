@@ -17,7 +17,7 @@ class Actividades_proveedores extends Model
                             'id_tipo_actividad',
                             ];
 
-    protected $hidden = ['id_actividad_proveedor'];
+    //protected $hidden = ['id_actividad_proveedor'];
     protected $primaryKey = 'id_actividad_proveedor';
 
     public function obtenerActividades_proveedores(){

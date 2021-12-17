@@ -17,7 +17,7 @@ class Subsistema extends Model
                             'desc_subsistema',
                             ];
 
-    protected $hidden = ['id_subsistema'];
+    //protected $hidden = ['id_subsistema'];
 
     public function obtenerSubsistemas(){
 

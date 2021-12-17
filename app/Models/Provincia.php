@@ -16,7 +16,7 @@ class Provincia extends Model
                             'nombre_provincia',
                             ];
 
-    //protected $hidden = ['id_provincia'];
+    ////protected $hidden = ['id_provincia'];
 
     public function obtenerProvincias(){
 

@@ -73,7 +73,7 @@ class Proveedor extends Model
                             ];
 
     protected $primaryKey = 'id_proveedor';
-    protected $hidden = ['id_proveedor'];
+    //protected $hidden = ['id_proveedor'];
 
     public function obtenerProveedores(){
 
