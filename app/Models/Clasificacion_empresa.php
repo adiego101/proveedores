@@ -18,7 +18,7 @@ class Clasificacion_empresa extends Model
                             'fact_max_2018',
                             ];
 
-    protected $hidden = ['id_clasificacion_empresa'];
+    //protected $hidden = ['id_clasificacion_empresa'];
 
     public function obtenerClasificacionesEmpresas(){
 

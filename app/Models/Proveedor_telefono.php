@@ -21,7 +21,7 @@ class Proveedor_telefono extends Model
                             'nro_orden_telefono'
                             ];
 
-    protected $hidden = ['id_proveedor_telefono'];
+    //protected $hidden = ['id_proveedor_telefono'];
 
     public function obtenerProveedor_telefonos(){
 

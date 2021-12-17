@@ -13,8 +13,8 @@ class Tamanio_empresa extends Model
     protected $fillable = [
                             'desc_tamanio_empresa',
                             ];
-                            
-    protected $hidden = ['id_tamanio_empresa'];
+
+    //protected $hidden = ['id_tamanio_empresa'];
 
     public function obtenerTamaniosEmpresas(){
 

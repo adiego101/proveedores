@@ -38,10 +38,6 @@
                 </select>
                 <br>
 
-                <label for="web_fiscal">Página web:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la página web"
-                    aria-describedby="basic-addon1" id="web_fiscal" name="web_fiscal" ><br>
-
                 <label for="email_fiscal">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
                     aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" ><br>
@@ -86,10 +82,8 @@
                 <label for="cp_fiscal">Código Postal:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_fiscal" name="cp_fiscal" placeholder="Ingrese el código postal"><br>
                 <br>
-                <br>
-                <br>
-                <br>
-                <br>
+            
+                
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_email_fiscal" title="Agregue un nuevo correo"><input type="button" value="Agregar Correo" class="btn btn-success"></a>
                 </div>

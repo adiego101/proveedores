@@ -18,8 +18,8 @@ class Sucursal_telefono extends Model
                             'tipo_telefono',
                             'nro_orden_telefono'
                             ];
-                            
-    protected $hidden = ['id_sucursal_telefono'];
+
+    //protected $hidden = ['id_sucursal_telefono'];
     protected $primaryKey = 'id_sucursal_telefono';
 
     public function obtenerProveedor_telefonos(){

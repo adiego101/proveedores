@@ -17,7 +17,7 @@ class Presentacion_estado extends Model
                             'desc_presentacion_estado',
                             ];
 
-    protected $hidden = ['id_presentacion_estado'];
+    //protected $hidden = ['id_presentacion_estado'];
 
     public function obtenerPresentacionesEstados(){
 

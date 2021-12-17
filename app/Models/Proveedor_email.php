@@ -20,7 +20,7 @@ class Proveedor_email extends Model
                             'nro_orden_email',
                             ];
 
-    protected $hidden = ['id_proveedor_email'];
+    //protected $hidden = ['id_proveedor_email'];
 
     public function obtenerEmails(){
 

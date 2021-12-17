@@ -20,7 +20,7 @@ class Persona extends Model
                             'genero_persona',
                             ];
 
-    protected $hidden = ['id_persona'];
+    //protected $hidden = ['id_persona'];
 
     public function obtenerPersonas(){
 

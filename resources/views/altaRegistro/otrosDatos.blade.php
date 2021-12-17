@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col col-sm-6">
             <h5>Calculo del indice de compra local</h5>
-    
+
             <label for="porc_facturacion">Porcentaje de facturacion en Santa Cruz:</label><br>
             <input type="text" class="form-control" aria-describedby="basic-addon1" id="porc_facturacion" name="porc_facturacion"
                 ><br>
@@ -20,7 +20,7 @@
             <label for="antiguedad">Antiguedad en Santa Cruz:</label><br>
             <input type="text" class="form-control" aria-describedby="basic-addon1" id="antiguedad" name="antiguedad"
                 ><br>
-            
+
             <label for="dom_fiscal">Domicilio Fiscal:</label><br>
             <input type="text" class="form-control" aria-describedby="basic-addon1" id="dom_fiscal" name="dom_fiscal"
                 ><br>
@@ -28,8 +28,9 @@
                 <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <input type="checkbox" id="valor_agregado" value="valor_agregado">
+                        <input type="checkbox" id="valor_agregado" name="valor_agregado" value="0">
                         <label for="valor_agregado">Valor Agregado</label><br>
+
 
                     </div>
                 </div>
@@ -79,7 +80,7 @@
             <div>
                 <table class="table table-sm table-hover">
                     <thead>
-                        <tr>   
+                        <tr>
                             <th>JERARQUÍA</th>
                             <th>ÍNDICE</th>
                         </tr>

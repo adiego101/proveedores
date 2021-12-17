@@ -38,9 +38,9 @@
                 </select>
                 <br>
 
-                <label for="web_real">Página web:</label><br>
+                <label for="pagina_web">Página web:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese la página web"
-                    aria-describedby="basic-addon1" id="web_real" name="web_real" ><br>
+                    aria-describedby="basic-addon1" id="pagina_web" name="pagina_web" ><br>
 
                 <label for="email_real">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"

@@ -21,6 +21,7 @@ class Proveedor_domicilio extends Model
                             'numero',
                             'lote',
                             'entre_calles',
+                            'id_localidad',
                             'monoblock',
                             'dpto',
                             'puerta',
@@ -31,7 +32,7 @@ class Proveedor_domicilio extends Model
                             ];
 
 
-    protected $hidden = ['id_proveedor_domicilio'];
+    //protected $hidden = ['id_proveedor_domicilio'];
 
     public function obtenerDomicilio_proveedors(){
 

@@ -13,8 +13,8 @@ class Sector extends Model
     protected $fillable = [
                             'desc_sector',
                             ];
-                            
-    protected $hidden = ['id_sector'];
+
+    //protected $hidden = ['id_sector'];
 
     public function obtenerSectores(){
 

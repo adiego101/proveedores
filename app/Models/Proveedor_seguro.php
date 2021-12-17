@@ -20,7 +20,7 @@ class Proveedor_seguro extends Model
                             'vigencia_hasta',
                             ];
 
-    protected $hidden = ['id_proveedor_seguro'];
+    //protected $hidden = ['id_proveedor_seguro'];
 
     public function obtenerProveedoresSeguros(){
 

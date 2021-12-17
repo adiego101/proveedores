@@ -13,8 +13,8 @@ class Pais extends Model
     protected $fillable = [
                             'nombre_pais',
                             ];
-                            
-    protected $hidden = ['id_pais'];
+
+    //protected $hidden = ['id_pais'];
     protected $primaryKey = 'id_pais';
 
     public function obtenerPaises(){

@@ -8,8 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Localidad extends Model
 {
     use HasFactory;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
 
     protected $table = "localidades";
+
     protected $primaryKey = 'id_localidad';
 
     protected $fillable = [
@@ -20,7 +26,6 @@ class Localidad extends Model
                             'flg_user_generated',
                             ];
 
-    protected $hidden = ['id_localidad'];
 
     public function obtenerLocalidades(){
 

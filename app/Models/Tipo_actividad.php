@@ -16,7 +16,7 @@ class Tipo_actividad extends Model
                             'desc_tipo_actividad',
                             ];
 
-    protected $hidden = ['id_tipo_actividad'];
+    //protected $hidden = ['id_tipo_actividad'];
 
     public function obtenerTiposActividades(){
 

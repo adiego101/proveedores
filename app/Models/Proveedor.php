@@ -61,7 +61,6 @@ class Proveedor extends Model
                             'fecha_inscripcion',
                             'tipo_inscripcion',
                             'nro_inscripcion',
-                            'tipo_proveedor',
                             'fecha_baja',
                             'motivo_baja',
                             'porc_facturacion',
@@ -74,7 +73,7 @@ class Proveedor extends Model
                             ];
 
     protected $primaryKey = 'id_proveedor';
-    protected $hidden = ['id_proveedor'];
+    //protected $hidden = ['id_proveedor'];
 
     public function obtenerProveedores(){
 

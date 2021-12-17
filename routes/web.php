@@ -76,8 +76,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/changePassword/{id}', 'App\Http\Controllers\UserController@changePassword')->name('changePassword');
 
     Route::get('localidades/{provincia}', 'App\Http\Controllers\ProveedoresController@getLocalidades');
+    //Route::get('localidades_tabla/{provincia}', 'App\Http\Controllers\ProveedoresController@getLocalidadesTabla');
 });
 
+
+Route::get('Registro/{id}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId');
+
+Route::get('idLocalidad/{nombre_localidad}', 'App\Http\Controllers\ProveedoresController@idLocalidad');
 
 //Prueba generacion PDF
 Route::get('/registro-alta', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');

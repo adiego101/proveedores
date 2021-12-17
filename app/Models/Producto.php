@@ -16,10 +16,10 @@ class Producto extends Model
                             'producto_elaborado',
                             'rnpa',
                             'Producida_unidad',
+                            'id_proveedor',
                             'capacidad_produccion_total',
                             ];
 
-    protected $hidden = ['id_producto'];
 
 
     public function obtenerProductos(){

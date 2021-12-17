@@ -11,13 +11,13 @@
 
                     <div class="row">
                         <div class="col-sm">
-                            <label for="modal_domicilio">Domicilio:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="modal_domicilio" name="domicilios[]" /><br />
+                            <label for="modal_domicilio_sede">Domicilio:</label><br />
+                            <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="modal_domicilio_sede" name="domicilios[]" /><br />
                         </div>
 
                         <div class="col-sm">
-                            <label for="modal_localidad">Localidad:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese la localidad" aria-describedby="basic-addon1" id="modal_localidad" name="localidades[]" /><br />
+                            <label for="modal_localidad_sede">Localidad:</label><br />
+                            <input type="text" class="form-control" placeholder="Ingrese la localidad" aria-describedby="basic-addon1" id="modal_localidad_sede" name="localidades[]" /><br />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -41,15 +41,15 @@
                 var id_fila = $("#numero_fila_sede").val();
 
                 //Recuperamos los valores de los campos del modal
-                var modal_domicilio = $("#modal_domicilio").val();
-                var modal_localidad = $("#modal_localidad").val();
+                var modal_domicilio = $("#modal_domicilio_sede").val();
+                var modal_localidad = $("#modal_localidad_sede").val();
 
                 //Ocultamos el modal
                 $('#modal_sede').modal('hide');
 
                 //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                $('#domicilio'+id_fila).val(modal_domicilio);
-                $('#localidad'+id_fila).val(modal_localidad);
+                $('#domicilio_sede'+id_fila).val(modal_domicilio);
+                $('#localidad_sede'+id_fila).val(modal_localidad);
 
             });
 </script>

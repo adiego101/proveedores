@@ -19,7 +19,7 @@ class Sucursal_email extends Model
                             ];
 
     protected $primaryKey = 'id_sucursal_email';
-    protected $hidden = ['id_sucursal_email'];
+    //protected $hidden = ['id_sucursal_email'];
 
     public function obtenerEmails(){
 
