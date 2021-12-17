@@ -43,62 +43,113 @@
         </div>
         <div class="col col-sm-2"></div>
         <div class="col col-sm-4">
-            <div>
-                <table class="table table-sm table-hover">
-                    <thead>
-                        <tr>
-                            <th text-align="center" colspan="2">PONDERACIÓN</th>
-                        </tr>
-                        <tr>
-                            <th>Facturación</th>
-                            <td><input type="text" class="form-control" aria-describedby="basic-addon1" id="facturacion_ponderacion" name="facturacion_ponderacion" readonly value="{{isset($ponderaciones->desc_ponderacion) && $ponderaciones->desc_ponderacion=='Facturacion'? $ponderaciones->valor_ponderacion:''}}"></td>
-                        </tr>
-                        <tr>
-                            <th>Gastos</th>
-                            <td><input type="text" class="form-control" aria-describedby="basic-addon1" id="gastos_ponderacion" name="gastos_ponderacion" readonly value="{{isset($ponderaciones->desc_ponderacion) && $ponderaciones->desc_ponderacion=='Gastos'? $ponderaciones->valor_ponderacion:''}}"></td>
-                        </tr>
-                        <tr>
-                            <th>Mano de Obra</th>
-                            <td><input type="text" class="form-control" aria-describedby="basic-addon1" id="mano_obra_ponderacion" name="mano_obra_ponderacion" readonly value="{{isset($ponderaciones->desc_ponderacion) && $ponderaciones->desc_ponderacion=='Mano_Obra'? $ponderaciones->valor_ponderacion:''}}"></td>
-                        </tr>
-                        <tr>
-                            <th>Antiguedad</th>
-                            <td><input type="text" class="form-control" aria-describedby="basic-addon1" id="antiguedad_ponderacion" name="antiguedad_ponderacion" readonly value="{{isset($ponderaciones->desc_ponderacion) && $ponderaciones->desc_ponderacion=='Antiguedad'? $ponderaciones->valor_ponderacion:''}}"></td>
-                        </tr>
-                        <tr>
-                            <th>Dom Fiscal</th>
-                            <td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dom_fiscal_ponderacion" name="dom_fiscal_ponderacion" readonly value="{{isset($ponderaciones->desc_ponderacion) && $ponderaciones->desc_ponderacion=='Dom_fiscal'? $ponderaciones->valor_ponderacion:''}}"></td>
-                        </tr>
-                        <tr>
-                            <th>Valor Agregado</th>
-                            <td><input type="text" class="form-control" aria-describedby="basic-addon1" id="valor_agregado_ponderacion" name="valor_agregado_ponderacion" readonly value="{{isset($ponderaciones->desc_ponderacion) && $ponderaciones->desc_ponderacion=='Valor_Agregado'? $ponderaciones->valor_ponderacion:''}}"></td>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+            @if(isset($ponderaciones))
+                <div>
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th text-align="center" colspan="2">PONDERACIÓN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($ponderaciones as $ponderacion)
+                                @switch($ponderacion->desc_ponderacion)
+                                    @case ('Facturacion')
+                                        <tr>
+                                            <th>Facturación</th>
+                                            <td>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" id="facturacion_ponderacion" name="facturacion_ponderacion" readonly value="{{$ponderacion->valor_ponderacion}}">
+                                            </td>
+                                        </tr>
+                                    @break
+                                    @case ('Gastos')
+                                        <tr>
+                                            <th>Gastos</th>
+                                            <td>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" id="gastos_ponderacion" name="gastos_ponderacion" readonly value="{{$ponderacion->valor_ponderacion}}">
+                                            </td>
+                                        </tr>
+                                    @break
+                                    @case ('Mano_Obra')
+                                        <tr>
+                                            <th>Mano de Obra</th>
+                                            <td>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" id="mano_obra_ponderacion" name="mano_obra_ponderacion" readonly value="{{$ponderacion->valor_ponderacion}}">
+                                            </td>
+                                        </tr>
+                                    @break
+                                    @case ('Antiguedad')
+                                        <tr>
+                                            <th>Antiguedad</th>
+                                            <td>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" id="antiguedad_ponderacion" name="antiguedad_ponderacion" readonly value="{{$ponderacion->valor_ponderacion}}">
+                                            </td>
+                                        </tr>
+                                    @break
+                                    @case ('Dom_fiscal')
+                                        <tr>
+                                            <th>Dom Fiscal</th>
+                                            <td>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" id="dom_fiscal_ponderacion" name="dom_fiscal_ponderacion" readonly value="{{$ponderacion->valor_ponderacion}}">
+                                            </td>
+                                        </tr>
+                                    @break
+                                    @case ('Valor_Agregado')
+                                        <tr>
+                                            <th>Valor Agregado</th>
+                                            <td>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" id="valor_agregado_ponderacion" name="valor_agregado_ponderacion" readonly value="{{$ponderacion->valor_ponderacion}}">
+                                            </td>
+                                        </tr>
+                                    @break
+                                @endswitch
+                            @endforeach
+                    </table>
+                </div>
+            @endif
             <br>
-            <div>
-                <table class="table table-sm table-hover">
-                    <thead>
-                        <tr>
-                            <th>JERARQUÍA</th>
-                            <th>ÍNDICE</th>
-                        </tr>
-                        <tr>
-                            <th>LOCAL</th>
-                            <td><input type="text" class="form-control" aria-describedby="basic-addon1" id="local_jerarquia" name="local_jerarquia" readonly value="{{isset($ponderaciones->desc_ponderacion) && $ponderaciones->desc_ponderacion=='Local'? $ponderaciones->valor_ponderacion:''}}"></td>
-                        </tr>
-                        <tr>
-                            <th>INTERMEDIO</th>
-                            <td><input type="text" class="form-control" aria-describedby="basic-addon1" id="intermedio_jerarquia" name="intermedio_jerarquia" readonly value="{{isset($ponderaciones->desc_ponderacion) && $ponderaciones->desc_ponderacion=='Intermedio'? $ponderaciones->valor_ponderacion:''}}"></td>
-                        </tr>
-                        <tr>
-                            <th>FORANEO</th>
-                            <td><input type="text" class="form-control" aria-describedby="basic-addon1" id="foraneo_jerarquia" name="foraneo_jerarquia" readonly value="{{isset($ponderaciones->desc_ponderacion) && $ponderaciones->desc_ponderacion=='Foraneo'? $ponderaciones->valor_ponderacion:''}}""></td>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+            @if(isset($jerarquias))
+                <div>
+                    <table class="table table-sm table-hover">
+                        <thead>
+                            <tr>
+                                <th>JERARQUÍA</th>
+                                <th>ÍNDICE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($jerarquias as $jerarquia)
+                                @switch($jerarquia->desc_jerarquia_compre_local)
+                                    @case ('Local')
+                                        <tr>
+                                            <th>LOCAL</th>
+                                            <td>
+                                                <input type="text" class="form-control" aria-describedby="basic-addon1" id="local_jerarquia" name="local_jerarquia" readonly value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
+                                            </td>
+                                        </tr>
+                                    @break
+                                    @case ('Intermedio')
+                                        <tr>
+                                            <th>INTERMEDIO</th>
+                                            <td>
+                                            <input type="text" class="form-control" aria-describedby="basic-addon1" id="intermedio_jerarquia" name="intermedio_jerarquia" readonly value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
+                                            </td>
+                                        </tr>
+                                    @break
+                                    @case ('Foráneo')
+                                        <tr>
+                                            <th>FORANEO</th>
+                                            <td>
+                                            <input type="text" class="form-control" aria-describedby="basic-addon1" id="foraneo_jerarquia" name="foraneo_jerarquia" readonly value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
+                                            </td>
+                                        </tr>
+                                    @break
+                                @endswitch
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
         </div>
     </div>
     <h5>Proveedor Santacruceño</h5>
@@ -130,6 +181,7 @@
             let dom_fiscal = $("#dom_fiscal").val();
             let antiguedad = $("#antiguedad").val();
             let valor_agregado = $("#valor_agregado").val();
+            console.log($("#facturacion_ponderacion").val());
             if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='' && valor_agregado!=''){
                 let facturacion_ponderacion = $("#facturacion_ponderacion").val();
                 let gastos_ponderacion = $("#gastos_ponderacion").val();

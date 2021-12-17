@@ -10,6 +10,7 @@ use App\Models\Provincia;
 use App\Models\Localidad;
 use App\Models\Tipo_actividad;
 use App\Models\Actividad_economica;
+use App\Models\Jerarquia_compre_local;
 use App\Models\Producto;
 use App\Models\Ponderacion_compre_local;
 
@@ -41,7 +42,8 @@ Route::get('/nuevoRegistro', function () {
     $actividades = Actividad_economica::All();
     $productos = Producto::All();
     $ponderaciones = Ponderacion_compre_local::All();
-    return view('nuevoRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones'));
+    $jerarquias = Jerarquia_compre_local::All();
+    return view('nuevoRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones', 'jerarquias'));
 });
 
 Route::get('/gestionarRegistros', function () {
