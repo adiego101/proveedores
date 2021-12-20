@@ -44,7 +44,7 @@
     <div class="form-check">
       <div class="col-sm">
         <input type="radio" value="{{ isset($proveedor->retencion) || $proveedor->retencion != 1 ? $proveedor->retencion : '' }}"
-            id="retencion" name="retencion" value="1" checked>SI
+            id="retencion" name="retencion" value="1" >SI
       </div>
       <div class="col-sm">
         <input type="radio" value="{{ isset($proveedor->retencion) || $proveedor->retencion != 0  ? $proveedor->retencion : '' }}"  id="retencion" name="retencion" value="0">NO

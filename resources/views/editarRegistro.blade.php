@@ -26,6 +26,10 @@
                     href="#domicilioLegal">Domicilio Legal</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link " id="domicilioFiscal-tab" data-toggle="tab"
+                    href="#domicilioFiscal">Domicilio fiscal</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link " id="sucursales-tab" data-toggle="tab"
                     href="#sucursales">Sucursales</a>
             </li>
@@ -37,10 +41,7 @@
                 <a class="nav-link " id="ingresosbrutos-tab" data-toggle="tab"
                     href="#ingresosbrutos">Impuestos sobre ingresos brutos</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " id="domicilioFiscal-tab" data-toggle="tab"
-                    href="#domicilioFiscal">Domicilio fiscal</a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link " id="actividad-tab" data-toggle="tab"
                     href="#actividad">Actividad</a>

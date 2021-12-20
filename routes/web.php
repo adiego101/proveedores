@@ -89,5 +89,6 @@ Route::get('Registro/{id}', 'App\Http\Controllers\ProveedoresController@obtenerP
 Route::get('idLocalidad/{nombre_localidad}', 'App\Http\Controllers\ProveedoresController@idLocalidad');
 
 //Prueba generacion PDF
-Route::get('/registro-alta', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');
-Route::get('/certificado-inscripcion', 'App\Http\Controllers\RupaeController@descargarCertificadoInscripcion');
+//Route::get('/registro-alta', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');
+Route::get('/registro-alta/{id}', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');
+Route::get('/certificado-inscripcion/{id}', 'App\Http\Controllers\RupaeController@descargarCertificadoInscripcion');

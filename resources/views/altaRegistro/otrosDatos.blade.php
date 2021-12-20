@@ -157,12 +157,12 @@
     <label for="tamaño">Tamaño de la Empresa:</label><br>
 
 
-    <select class="form-control" aria-describedby="basic-addon1" id="tamaño" name="tamaño">
-        <option selected value="micro">Micro</option>
-        <option value="macro">Macro</option>
-        <option value="mediana">Mediana</option>
-        <option value="grande">Grande</option>
-
+    <select class="form-control" aria-describedby="basic-addon1" id="id_tamanio_empresa" name="id_tamanio_empresa">
+        <option selected value="1">Micro</option>
+        <option value="2">Pequeña</option>
+        <option value="3">Mediana</option>
+        <option value="4">Grande</option>
+        <option value="5">Otros</option>
     </select><br>
 
 

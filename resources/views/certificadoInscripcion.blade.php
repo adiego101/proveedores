@@ -127,8 +127,8 @@ $date = Carbon::now()->format("d/m/Y");
     <br>
             <span><u>Certificado de Inscripción</u></span>
             <label for="" class="txt-right">Cuit Nº: {{$data['cuit']}}</label><br><br>
-            <label for="">Nombre del establecimiento: {{$data['nombre_establecimiento']}}</label><br><br>
-            <label for="">Nombre del propietario o razón social: {{$data['nombre_propietario_RazonSocial']}}</label><br><br>
+            <label for="">Nombre del establecimiento: {{$data['nombre_fantasia']}}</label><br><br>
+            <label for="">Nombre del propietario o razón social: {{$data['razon_social']}}</label><br><br>
             <label for="">Actividad principal: {{$data['actividad_principal']}}</label><br><br>
             <label for="">Actividad secundaria: {{$data['actividad_secundaria']}}</label><br><br>
             <label for="">Calle o ruta: {{$data['calle_ruta']}}</label><br><br>
@@ -162,8 +162,8 @@ $date = Carbon::now()->format("d/m/Y");
             <br>
             <span><u>Certificado de Inscripción</u></span>
             <label for="" class="txt-right">Cuit Nº: {{$data['cuit']}}</label><br><br>
-            <label for="">Nombre del establecimiento: {{$data['nombre_establecimiento']}}</label><br><br>
-            <label for="">Nombre del propietario o razón social: {{$data['nombre_propietario_RazonSocial']}}</label><br><br>
+            <label for="">Nombre del establecimiento: {{$data['nombre_fantasia']}}</label><br><br>
+            <label for="">Nombre del propietario o razón social: {{$data['razon_social']}}</label><br><br>
             <label for="">Actividad principal: {{$data['actividad_principal']}}</label><br><br>
             <label for="">Actividad secundaria: {{$data['actividad_secundaria']}}</label><br><br>
             <label for="">Calle o ruta: {{$data['calle_ruta']}}</label><br><br>
