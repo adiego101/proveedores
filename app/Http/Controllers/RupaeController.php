@@ -104,10 +104,13 @@ class RupaeController extends Controller
 
 //Prueba generacion PDF
 
-public function descargarRegistroAlta()
+public function descargarRegistroAlta($id)
 {
+    $proveedor = Proveedor::find($id);
+
     $data = [
-        'titulo' => 'pdf'
+        'titulo' => 'Registro alta',
+
     ];
 
     return PDF::loadView('registroAlta', array('data'=> $data))
@@ -115,18 +118,20 @@ public function descargarRegistroAlta()
 }
 
 
-public function descargarCertificadoInscripcion()
+public function descargarCertificadoInscripcion($id)
 {
+    $proveedor = Proveedor::find($id);
+
     $data = [
-        'titulo' => 'pdf',
-        'cuit' => '123456789',
-        'nombre_establecimiento' => 'Establecimiento de Prueba',
-        'nombre_propietario_RazonSocial' => 'Gobierno Santa Cruz',
+        'titulo' => 'Certificado inscripción',
+        'cuit' => $proveedor->cuit,
+        'nombre_fantasia' => $proveedor->nombre_fantasia,
+        'razon_social' => $proveedor->razon_social,
         'actividad_principal' => 'Desarrollo',
         'actividad_secundaria' => 'Mantenimiento',
         'calle_ruta' => 'calle 1',
         'telefono' => '2966 - 665544',
-        'fecha_inscripcion' => '08/11/2021',
+        'fecha_inscripcion' => $proveedor->created_at,
         'localidad' => 'Rio Gallegos'
 
     ];

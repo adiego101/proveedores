@@ -34,7 +34,7 @@
                 <!--En este caso, se deben recuperar las localidades de la BD -->
                 <label for="localidad_fiscal">Localidad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="localidad_fiscal" name="localidad_fiscal">
-                <option value=" ">Seleccione una localidad</option>
+                <option value="{{isset($proveedor_localidades_fiscal->nombre_localidad) ? $proveedor_localidades_fiscal->nombre_localidad : '' }}">{{isset($proveedor_localidades_fiscal->nombre_localidad) ? $proveedor_localidades_fiscal->nombre_localidad : 'Seleccione una localidad' }}</option>
                 </select>
                 <br>
 
@@ -88,7 +88,7 @@
                 <!--En este caso, se deben recuperar las provincias de la BD -->
                 <label for="provincia_fiscal">Provincia:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_fiscal" name="provincia_fiscal">
-                    <option value=" ">Seleccione una provincia</option>
+                <option value="{{isset($proveedor_provincias_fiscal->nombre_provincia) ? $proveedor_provincias_fiscal->nombre_provincia : '' }}">{{isset($proveedor_provincias_fiscal->nombre_provincia) ? $proveedor_provincias_fiscal->nombre_provincia : 'Seleccione una provincia' }}</option>
                     @forelse($provincias as $provincia)
                         <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
                     @empty
