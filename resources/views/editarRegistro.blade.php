@@ -87,15 +87,15 @@
 
                         </div>
                         <div class="tab-pane fade" id="sucursales" role="tabpanel" aria-labelledby="nav-sucursales-tab">
-                            {{--@include('editarRegistro.sucursales')--}}
+                            @include('editarRegistro.sucursales')
                         </div>
                         <div class="tab-pane fade" id="infoImpositiva" role="tabpanel"
                             aria-labelledby="nav-infoImpositiva-tab">
-                            {{--@include('editarRegistro.infoImpositiva')--}}
+                            @include('editarRegistro.infoImpositiva')
                         </div>
                         <div class="tab-pane fade" id="ingresosbrutos" role="tabpanel"
                             aria-labelledby="nav-ingresosbrutos-tab">
-                            {{--@include('editarRegistro.ingresosbrutos')--}}
+                            @include('editarRegistro.Impuestosingresosbrutos')
                         </div>
                         <div class="tab-pane fade" id="domicilioFiscal" role="tabpanel"
                             aria-labelledby="nav-domicilioFiscal.blade-tab">

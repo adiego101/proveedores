@@ -42,9 +42,9 @@
                 <label for="representante_legal">Representante:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el nombre del representante legal" aria-describedby="basic-addon1" id="representante_legal" name="representante_legal" ><br>
 
-                <label for="email_legal">Correo electrónico:</label><br>
+                {{--<label for="email_legal">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
-                    aria-describedby="basic-addon1" id="email_legal" name="email_legal[]" ><br>
+                    aria-describedby="basic-addon1" id="email_legal" name="email_legal[]" ><br>--}}
                     <div class="field_email_legal">
 
                         @forelse($proveedor_email_legal as $email_legal)
@@ -56,9 +56,9 @@
                         @endforelse
 
                     </div>
-                <label for="telefono_legal">Teléfono:</label><br>
+                {{--<label for="telefono_legal">Teléfono:</label><br>
                 <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono"
-                    aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" >
+                    aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" >--}}
                     <div class="field_telefono_legal">
 
                         @forelse($proveedor_telefono_legal as $telefono_legal)

@@ -42,9 +42,9 @@
                 <input type="text" class="form-control" placeholder="Ingrese la página web"
                     aria-describedby="basic-addon1" id="pagina_web" name="pagina_web" value="{{ isset($proveedor->pagina_web) ? $proveedor->pagina_web : '' }}"><br>
 
-                <label for="email_real">Correo electrónico:</label><br>
+                {{--<label for="email_real">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
-                    aria-describedby="basic-addon1" id="email_real" name="email_real[]" ><br>
+                    aria-describedby="basic-addon1" id="email_real" name="email_real[]" ><br>--}}
                 <div class="field_email_real">
 
                     @forelse($proveedor_email_real as $email_real)
@@ -57,8 +57,9 @@
 
                 </div>
 
-                <label for="telefono_real">Teléfono:</label><br>
+                {{--<label for="telefono_real">Teléfono:</label><br>
                 <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" ><br>
+                --}}
                 <div class="field_telefono_real">
 
                     @forelse($proveedor_telefono_real as $telefono_real)
