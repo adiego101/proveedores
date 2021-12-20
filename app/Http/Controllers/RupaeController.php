@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proveedor;
+use App\Models\Proveedor_domicilio;
+use App\Models\Proveedor_telefono;
+use App\Models\Localidad;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -122,6 +125,12 @@ public function descargarCertificadoInscripcion($id)
 {
     $proveedor = Proveedor::find($id);
 
+    $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')->first();
+
+    $proveedor_telefono_real = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'real')->first();
+
+    $proveedor_localidad_real = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->first();
+
     $data = [
         'titulo' => 'Certificado inscripción',
         'cuit' => $proveedor->cuit,
@@ -129,10 +138,10 @@ public function descargarCertificadoInscripcion($id)
         'razon_social' => $proveedor->razon_social,
         'actividad_principal' => 'Desarrollo',
         'actividad_secundaria' => 'Mantenimiento',
-        'calle_ruta' => 'calle 1',
-        'telefono' => '2966 - 665544',
+        'calle_ruta' => $proveedor_domicilio_real->calle.' '.$proveedor_domicilio_real->numero,
+        'telefono' =>  $proveedor_telefono_real->nro_tel,
         'fecha_inscripcion' => $proveedor->created_at,
-        'localidad' => 'Rio Gallegos'
+        'localidad' => $proveedor_localidad_real->nombre_localidad
 
     ];
 

@@ -17,8 +17,8 @@
         <div class="row navbuttons pt-5">
             <div class="col-6 col-sm-auto" id="btnNext">
                 <a class="btn btn-primary btnNext">Siguiente</a>
-                <a href="{{url('registro-alta/'.$id)}}" class="btn btn-success">Descargar Registro alta {{$id}}</a>
-                <a href="{{url('certificado-inscripcion/'.$id)}}" class="btn btn-warning">Descargar Certificado inscripción {{$id}}</a>
+                <a href="{{url('registro-alta/'.$id)}}" class="btn btn-success">Descargar Registro alta</a>
+                <a href="{{url('certificado-inscripcion/'.$id)}}" class="btn btn-warning">Descargar Certificado inscripción</a>
             </div>
         </div>
 </fieldset>
