@@ -34,7 +34,7 @@
                 <!--En este caso, se deben recuperar las localidades de la BD -->
                 <label for="localidad_real">Localidad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="localidad_real" name="localidad_real">
-                <option value=" {{$localidades->where('id_localidad', )}}"></option>
+                <option value="{{$proveedor_localidades_real->nombre_localidad}}">{{$proveedor_localidades_real->nombre_localidad}}</option>
                 </select>
                 <br>
 
@@ -92,7 +92,7 @@
                 <!--En este caso, se deben recuperar las provincias de la BD -->
                 <label for="provincia_real">Provincia:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_real" name="provincia_real">
-                    <option value=" ">Seleccione una provincia</option>
+                <option value="{{$proveedor_provincias_real->nombre_provincia}}">{{$proveedor_provincias_real->nombre_provincia}}</option>
                     @forelse($provincias as $provincia)
                         <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
                     @empty
@@ -201,13 +201,13 @@
 	$(document).ready(function(){
 
 		$('#provincia_real').change(function(){
-			recargarListaReal();
+			recargarListaRealEdit();
 		});
 	})
 </script>
 
 <script type="text/javascript">
-	function recargarListaReal(){
+	function recargarListaRealEdit(){
 		$.ajax({
 			type:"GET",
 			url:"localidades/"+$('#provincia_real').val(),

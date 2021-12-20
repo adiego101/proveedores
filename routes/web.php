@@ -78,6 +78,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/changePassword/{id}', 'App\Http\Controllers\UserController@changePassword')->name('changePassword');
 
     Route::get('localidades/{provincia}', 'App\Http\Controllers\ProveedoresController@getLocalidades');
+
+    Route::get('modificarRegistro/localidades/{provincia}', 'App\Http\Controllers\ProveedoresController@getLocalidades');
     //Route::get('localidades_tabla/{provincia}', 'App\Http\Controllers\ProveedoresController@getLocalidadesTabla');
 });
 
