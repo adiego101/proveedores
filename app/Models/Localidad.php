@@ -44,4 +44,8 @@ class Localidad extends Model
     public function provincia(){
         return $this->belongsTo(Provincia::class, 'id_provincia', 'id_provincia');
     }
+
+    public function sucursales(){
+        return $this->hasMany(Sucursal::class, 'id_localidad', 'id_localidad');
+    }
 }

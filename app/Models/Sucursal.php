@@ -41,14 +41,18 @@ class Sucursal extends Model
     }
 
     public function telefonos(){
-        return $this->hasMany(Sucursal_telefono::class, 'id_sucursal', 'id_telefono');
+        return $this->hasMany(Sucursal_telefono::class, 'id_sucursal', 'id_sucursal_telefono');
     }
 
     public function emails(){
-        return $this->hasMany(Sucursal_email::class, 'id_sucursal', 'id_email');
+        return $this->hasMany(Sucursal_email::class, 'id_sucursal', 'id_sucursal');
     }
 
     public function proveedor(){
         return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
+    }
+
+    public function localidad(){
+        return $this->belongsTo(Localidad::class, 'id_localidad', 'id_localidad');
     }
 }

@@ -650,9 +650,7 @@ class ProveedoresController extends Controller
 
     public function obtenerProveedorRupaeId($id)
     {
-        $proveedor = DB::table('proveedores')
-            ->where('id_proveedor', $id)
-            ->first();
+        $proveedor = Proveedor::findOrFail($id);
 
         $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
             ->first();
@@ -798,9 +796,7 @@ class ProveedoresController extends Controller
 
     public function editarProveedor($id, Request $request)
     {
-        $proveedor = DB::table('proveedores')
-            ->where('id_proveedor', $id)
-            ->first();
+        $proveedor = Proveedor::findOrFail($id)->with('sucursales')->get();
 
         $proveedor_email = DB::table('proveedores_emails')
             ->where('id_proveedor', $id)
