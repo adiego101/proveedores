@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Proveedor;
 use App\Models\Proveedor_domicilio;
 use App\Models\Proveedor_telefono;
+use App\Models\Actividades_proveedores;
+use App\Models\Tipo_actividad;
 use App\Models\Localidad;
 use Illuminate\Http\Request;
 use PDF;
@@ -131,12 +133,17 @@ public function descargarCertificadoInscripcion($id)
 
     $proveedor_localidad_real = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->first();
 
+    $proveedor_actividad_id = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 1)->first();
+
+    $proveedor_tipo_actividad = Tipo_actividad::where('id_tipo_actividad', $proveedor_actividad_id->id_tipo_actividad)->first();
+
+
     $data = [
         'titulo' => 'Certificado inscripción',
         'cuit' => $proveedor->cuit,
         'nombre_fantasia' => $proveedor->nombre_fantasia,
         'razon_social' => $proveedor->razon_social,
-        'actividad_principal' => 'Desarrollo',
+        'actividad_principal' => $proveedor_tipo_actividad->desc_tipo_actividad, //FALTA RECUPERAR
         'actividad_secundaria' => 'Mantenimiento',
         'calle_ruta' => $proveedor_domicilio_real->calle.' '.$proveedor_domicilio_real->numero,
         'telefono' =>  $proveedor_telefono_real->nro_tel,
