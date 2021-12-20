@@ -34,7 +34,7 @@
                 <!--En este caso, se deben recuperar las localidades de la BD -->
                 <label for="localidad_legal">Localidad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="localidad_legal" name="localidad_legal">
-                <option value="{{$proveedor_localidades_legal->nombre_localidad}}">{{$proveedor_localidades_legal->nombre_localidad}}</option>
+                <option value="{{isset($proveedor_localidades_legal->nombre_localidad) ? $proveedor_localidades_legal->nombre_localidad : '' }}">{{isset($proveedor_localidades_legal->nombre_localidad) ? $proveedor_localidades_legal->nombre_localidad : 'Seleccione una localidad' }}</option>
                 </select>
                 <br>
 
@@ -91,7 +91,7 @@
                 <!--En este caso, se deben recuperar las provincias de la BD -->
                 <label for="provincia_legal">Provincia:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_legal" name="provincia_legal">
-                <option value="{{$proveedor_provincias_legal->nombre_provincia}}">{{$proveedor_provincias_legal->nombre_provincia}}</option>
+                <option value="{{isset($proveedor_provincias_legal->nombre_provincia) ? $proveedor_provincias_legal->nombre_provincia : '' }}">{{isset($proveedor_provincias_legal->nombre_provincia) ? $proveedor_provincias_legal->nombre_provincia : 'Seleccione una provincia' }}</option>
                     @forelse($provincias as $provincia)
                         <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
                     @empty
