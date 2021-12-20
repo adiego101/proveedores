@@ -122,7 +122,46 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="body_table_sucursal"></tbody>
+            <tbody id="body_table_sucursal">
+            @if(isset($proveedor) && $proveedor->sucursales->isNotEmpty()))
+                    @foreach($proveedor->sucursales as $sucursal)
+                        <tr id="row_sucursal' + i_sucursal +'">
+                            <td><input type="text" class="form-control" aria-describedby="basic-addon1" id="nombre_sucursal' + i_sucursal +'" readonly value="{{$sucursal->nombre_sucursal}}" /></td>
+                            <td>
+                            @if(isset($sucursal->emails))
+                                @foreach($sucursal->emails as $email)
+                                    {{$email->email}}
+                                @endforeach
+                            @endif
+                            </td>
+                            <td>
+                                @if(isset($sucursal->telefonos))
+                                    @foreach($sucursal->telefonos as $telefono)
+                                        {{$telefono->telefono}}
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td>
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="calle_sucursal' + i_sucursal +'" name="calles[]" readonly value="{{$sucursal->calle}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="numero_sucursal' + i_sucursal +'" name="numeros[]" readonly value="{{$sucursal->numero}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="dpto_sucursal' + i_sucursal +'" name="dptos[]" readonly value="{{$sucursal->dpto}}">
+                                <input type="hidden"  class="form-control" aria-describedby="basic-addon1" id="puerta_sucursal' + i_sucursal +'" name="puertas[]" readonly value="{{$sucursal->puerta}}">
+                                <input type="hidden"  class="form-control" aria-describedby="basic-addon1" id="lote_sucursal' + i_sucursal +'" name="lotes[]" readonly value="{{$sucursal->lote}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="manzana_sucursal' + i_sucursal +'" name="manzanas[]" readonly value="{{$sucursal->manzana}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="entre_calles_sucursal' + i_sucursal +'" name="entreCalles[]" readonly value="{{$sucursal->entre_calles}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="oficina_sucursal' + i_sucursal +'" name="oficinas[]" readonly value="{{$sucursal->oficina}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="monoblock_sucursal' + i_sucursal +'" name="monoblocks[]" readonly value="{{$sucursal->monoblock}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="barrio_sucursal' + i_sucursal +'" name="barrios[]" readonly value="{{$sucursal->barrio}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="pais_sucursal' + i_sucursal +'" name="paises[]" readonly value="{{$sucursal->localidad->provincia->pais->nombre_pais}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sucursal' + i_sucursal +'" name="provincias[]" readonly value="{{$sucursal->localidad->provincia->nombre_provincia}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sucursal' + i_sucursal +'" name="localidades[]" readonly value="{{$sucursal->localidad->provincia->nombre_provincia}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="codigo_postal_sucursal' + i_sucursal +'" name="codigo_postal" readonly value="{{$sucursal->codigo_postal}}">
+                                <button type="button" name="edit" id="'+ i_sucursal +'" class="btn btn-warning btn-sm btn_edit_sucursal" title="editar sucursal"><i_sucursal class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i_sucursal +'" class="btn btn-danger btn-sm btn_remove_sucursal" title="quitar sucursal"><i_sucursal class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
         </table>
     </div>
 
