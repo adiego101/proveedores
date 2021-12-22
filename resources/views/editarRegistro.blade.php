@@ -59,6 +59,10 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link " id="patente-tab" data-toggle="tab" href="#patente">Patente y Seguro</a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link " id="otrosDatos-tab" data-toggle="tab" href="#otrosDatos">Otros
                     Datos</a>
             </li>
@@ -103,7 +107,7 @@
                              @include('editarRegistro.domicilioFiscal')
                         </div>
                         <div class="tab-pane fade" id="actividad" role="tabpanel" aria-labelledby="nav-actividad-tab">
-                           {{-- @include('editarRegistro.actividad')--}}
+                            @include('editarRegistro.actividad')
                         </div>
                         <div class="tab-pane fade" id="valorAgregado" role="tabpanel"
                             aria-labelledby="nav-valorAgregado-tab">
@@ -115,7 +119,11 @@
                              @include('editarRegistro.personalOcupado')
                         </div>
                         <div class="tab-pane fade" id="pagos" role="tabpanel" aria-labelledby="nav-pagos-tab">
-                            {{--@include('editarRegistro.pagos')--}}
+                            @include('editarRegistro.pagos')
+                        </div>
+
+                        <div class="tab-pane fade" id="patente" role="tabpanel" aria-labelledby="nav-patente-tab">
+                            @include('editarRegistro.patenteSeguro')
                         </div>
 
                             <div class="tab-pane fade" id="otrosDatos" role="tabpanel"
@@ -125,10 +133,11 @@
 
 
 
-
-
-
-                        <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="btn-group">
+                <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
+            </div>
+        </div>
 
     </form>
     @yield('datos')

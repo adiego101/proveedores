@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div id="modal_baja" class="modal fade" role="dialog">
+<div id="modal_baja_patente" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Contenido del Modal-->
         <div class="modal-content">
@@ -8,13 +8,13 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>¿Está seguro que desea dar de baja la empresa?</p>
+                <p>¿Está seguro que desea dar de baja la Patente?</p>
                 <p>Esta operación <b>NO</b> podrá deshacerse.</p>
             </div>
             <div class="modal-footer">
 
-                <input type="hidden" id="demo">
-                <button type="button" class="btn btn-danger btn_baja_modal">Baja</button>
+                <input type="hidden" id="baja_patente">
+                <button type="button" class="btn btn-danger btn_baja_patente">Baja</button>
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
@@ -28,23 +28,24 @@
 <script type="text/javascript">
     //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
-    $(document).on("click", ".btn_baja_modal", function() {
+    $(document).on("click", ".btn_baja_patente", function() {
 
         //Obtenemos el numero de la fila que queremos modificar
-        let id = $("#demo").val();
+        let id = $("#baja_patente").val();
 
         $.ajax({
             type: "GET",
             //Si colocamos un numero (id) funciona sin problemas... VER
-            url: "bajaRegistro/"+id,
+            url: "bajaPatente/"+id,
         });
 
         //se recarga la tabla para que desaparesca la fila dada de baja
-        $('.yajra-datatable').DataTable().ajax.reload();
+        $('.yajra-vehiculos').DataTable().ajax.reload();
         location.reload();
         //Ocultamos el modal
-        $('#modal_baja').modal('hide');
+        $('#modal_baja_patente').modal('hide');
 
     });
+
 </script>
 @endpush

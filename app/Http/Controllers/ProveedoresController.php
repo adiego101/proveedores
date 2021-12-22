@@ -2,32 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Actividades_proveedores;
-use App\Models\Actividad_economica;
-use App\Models\Jerarquia_compre_local;
-use App\Models\Localidad;
+use DataTables;
 use App\Models\Pago;
 use App\Models\Pais;
 use App\Models\Persona;
-use App\Models\Ponderacion_compre_local;
 use App\Models\Producto;
-use App\Models\Proveedor;
-use App\Models\Proveedores_tipos_proveedores;
-use App\Models\Proveedor_domicilio;
-use App\Models\Proveedor_email;
-use App\Models\Proveedor_patente;
-use App\Models\Proveedor_sede;
-use App\Models\Proveedor_seguro;
-use App\Models\Proveedor_telefono;
-use App\Models\Provincia;
 use App\Models\Sucursal;
-use App\Models\Sucursal_email;
-use App\Models\Sucursal_telefono;
-use App\Models\Tipo_actividad;
-use DataTables;
+use App\Models\Localidad;
+use App\Models\Proveedor;
+use App\Models\Provincia;
 use Illuminate\Http\Request;
+use App\Models\Proveedor_sede;
+use App\Models\Sucursal_email;
+use App\Models\Tipo_actividad;
+use App\Models\Proveedor_email;
+use App\Models\Proveedor_seguro;
+use App\Models\Proveedor_patente;
+use App\Models\Sucursal_telefono;
+use App\Models\Proveedor_telefono;
 use Illuminate\Support\Facades\DB;
+use App\Models\Actividad_economica;
+use App\Models\Proveedor_domicilio;
+use Illuminate\Support\Facades\Log;
+use App\Models\Jerarquia_compre_local;
+use App\Models\Actividades_proveedores;
+use App\Models\Ponderacion_compre_local;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Proveedores_tipos_proveedores;
 
 class ProveedoresController extends Controller
 {
@@ -60,7 +61,7 @@ class ProveedoresController extends Controller
     public function crear_registro(Request $request)
     {
 
-        //try{
+        try{
         $cuit = Proveedor::where('cuit',$request->cuit)->exists();
         $dado_de_baja = Proveedor::where('cuit',$request->cuit)->where('dado_de_baja','0')->get();
         //return $dado_de_baja->isEmpty();
@@ -459,14 +460,14 @@ class ProveedoresController extends Controller
     else{
     return Redirect::back()
     ->withErrors(['El Cuil Ingresado ya existe, la operación no pudo completarse']);}
-        //}
-        /*catch (\Exception $e)
+        }
+        catch (\Exception $e)
     {
     Log::error('Error inesperado.' . $e->getMessage());
 
     return Redirect::back()
     ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
-    }*/
+    }
 
     }
 
@@ -489,6 +490,110 @@ class ProveedoresController extends Controller
                 ->make(true);
         }
     }
+
+    public function getSucursales(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $data = Sucursal::where('id_proveedor', $id)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="modificarSucursal/' . "$row->id_sucursal" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+    public function getPagos(Request $request, $id)
+    {
+        //if ($request->ajax()) {
+            $data = Pago::where('id_proveedor', $id)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="modificarPago/' . "$row->id_pagos" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPago(' . $row->id_pagos . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        //}
+    }
+
+    public function getActividades(Request $request, $id)
+    {
+        //if ($request->ajax()) {
+            $data = Actividades_proveedores::where('id_proveedor', $id)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="modificarActividad/' . "$row->id_actividad_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaActividad(' . $row->id_actividad_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        //}
+    }
+    public function getProductos(Request $request, $id)
+    {
+        //if ($request->ajax()) {
+            $data = Producto::where('id_proveedor', $id)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="modificarProducto/' . "$row->id_producto" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaProducto(' . $row->id_producto . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        //}
+    }
+    public function getPatentes(Request $request, $id)
+    {
+        //if ($request->ajax()) {
+            $data = Proveedor_patente::where('id_proveedor', $id)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="modificarPatente/' . "$row->id_proveedor_patente" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPatente(' . $row->id_proveedor_patente . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        //}
+    }
+
+    public function getSeguros(Request $request, $id)
+    {
+        //if ($request->ajax()) {
+            $data = Proveedor_seguro::where('id_proveedor', $id)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="modificarSeguros/' . "$row->id_proveedor_seguro" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSeguro(' . $row->id_proveedor_seguro . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        //}
+    }
+
+    public function getSedes(Request $request, $id)
+    {
+        //if ($request->ajax()) {
+            $data = Proveedor_sede::where('id_proveedor', $id)->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="modificarSede/' . "$row->id_proveedor_sede" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSede(' . $row->id_proveedor_sede . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        //}
+    }
+
 
     /*public function obtenerDatosProveedor($id){
     $proveedores_rupae = new Proveedor_rupae();

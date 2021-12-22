@@ -75,10 +75,10 @@
         @include('altaRegistro.otrosDatos')
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <div class="btn-group">
-                        <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
-
-                    </div> </div>
+            <div class="btn-group">
+                <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
+            </div> 
+        </div>
 
 
     </form>

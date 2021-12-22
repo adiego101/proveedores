@@ -87,6 +87,15 @@ Route::group(['middleware' => ['auth']], function() {
 Route::get('Registro/{id}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId');
 
 Route::get('idLocalidad/{nombre_localidad}', 'App\Http\Controllers\ProveedoresController@idLocalidad');
+Route::get('sucursales/{id}', 'App\Http\Controllers\ProveedoresController@getSucursales')->name('sucursales.list');
+Route::get('pagos/{id}', 'App\Http\Controllers\ProveedoresController@getPagos')->name('pagos.list');
+
+Route::get('actividades/{id}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
+Route::get('productos/{id}', 'App\Http\Controllers\ProveedoresController@getProductos')->name('productos.list');
+Route::get('patentes/{id}', 'App\Http\Controllers\ProveedoresController@getPatentes')->name('patentes.list');
+Route::get('seguros/{id}', 'App\Http\Controllers\ProveedoresController@getSeguros')->name('seguros.list');
+Route::get('sedes/{id}', 'App\Http\Controllers\ProveedoresController@getSedes')->name('sedes.list');
+
 
 //Prueba generacion PDF
 //Route::get('/registro-alta', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');

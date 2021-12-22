@@ -21,35 +21,28 @@
 
     <h4>Registro de Pagos de inscripción y renovación:</h4><br>
 
-    <label for="fecha_pago">Fecha:</label><br>
-    <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago"
-        aria-describedby="basic-addon1" id="fecha_pago"><br>
-
-    <label for="importe_pago">Importe:</label><br>
-    <input type="number" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="importe_pago"><br>
-
-    <label for="observaciones_pago">Observaciones:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese las observaciones del pago"
-        aria-describedby="basic-addon1" id="observaciones_pago"><br>
-
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a id="add_pago" class="btn btn-success">Agregar Pago</a>
-    </div>
-    <br>
-
     <div>
-        <table class="table table-hover">
+
+        <table style="width:100%" class="yajra-pagos table table-hover  table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>Fecha</th>
-                    <th>Importe</th>
-                    <th>Observaciones</th>
+                    <th>fecha</th>
+                    <th>importe</th>
+                    <th>observaciones</th>
+                    {{--<th>Correo electrónico</th>
+                        <th>Teléfono</th>--}}
                     <th>Acciones</th>
+                  <!--  <th>Username</th>
+                    <th>Phone</th>
+                    <th>DOB</th> -->
                 </tr>
             </thead>
-            <tbody id="body_table_pago"></tbody>
+            <tbody>
+            </tbody>
         </table>
     </div>
+
+
 
     <div class="row navbuttons pt-5">
     <div class="col-6 col-sm-auto" id="btnPrevious">
@@ -61,83 +54,71 @@
 </div>
 
     <!--Incluimos el modal para editar los campos de un pago-->
-    @include('modales.editarPago')
+    @include('modales.modalBajaPago')
 
 </fieldset>
 
 @push('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
+  $(function () {
 
-        let fecha;
-        let importe;
-        let observaciones_pago;
-        let indice = 1;
+    console.log({{$id}});
 
-        $("#add_pago").on("click", function(e) {
+    var table = $('.yajra-pagos').DataTable({
+    language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('pagos/'.$id) }}",
+        columns: [
+            {data: 'fecha', name: 'fecha'},
+            {data: 'importe', name: 'importe'},
+            {data: 'observaciones', name: 'observaciones'},
+            //{data: 'cuit', name: 'cuit'},
+            //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
+            {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+            },
+        ]
+    });
 
-            fecha = $('#fecha_pago').val();
-            importe = $('#importe_pago').val();
-            observaciones_pago = $('#observaciones_pago').val();
+  });
 
-            $("#body_table_pago").append(
-                '<tr id="row_pago' + indice + '">' +
-                '<td><input type="date" class="form-control" aria-describedby="basic-addon1" id="fecha_pago' + indice +
-                '" name="fechas_pagos[]" readonly value="' + fecha + '"></td>' +
-                '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="importe_pago' + indice +
-                '" name="importes_pagos[]" readonly value="' + importe + '"></td>' +
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="observaciones_pago' + indice + '" name="observaciones_pagos[]" readonly value="' + observaciones_pago + '"></td>' +
-                '<td><button type="button" name="edit" id="' + indice +
-                '" class="btn btn-warning btn-sm btn_edit_pago" title="editar pago"><indice class="fas fa-edit"></i></button>' +
-                '<button type="button" name="remove" id="' + indice +
-                '" class="btn btn-danger btn-sm btn_remove_pago" title="quitar pago"><indice class="fas fa-trash"></i></button>' +
-                '</td>' +
-                '</tr>'
-            );
+    //Funciones a implementar
 
-            indice++;
+    function bajaPago(id_registro) {
 
-            //Limpiamos cada campo luego de presionar el botón Agregar Pago
-
-            document.getElementById("fecha_pago").value = "";
-            document.getElementById("importe_pago").value = "";
-            document.getElementById("observaciones_pago").value = "";
-
-        });
-
-
-        $(document).on("click", ".btn_remove_pago", function() {
-
-            //cuando da click al boton quitar, obtenemos el id del boton
-            let button_id = $(this).attr("id");
-
-            //borra la fila
-            $("#row_pago" + button_id + "").remove();
-        });
-
-
-        //Cargamos los inputs del modal con los datos de la fila de la tabla
-
-        $(document).on("click", ".btn_edit_pago", function() {
-
-            //cuando da click al boton editar, obtenemos el id del boton
-            let button_id = $(this).attr("id");
-            //Recuperamos los valores de los campos pertenecientes a una fila
-            let modal_fecha = $("#fecha_pago" + button_id).val();
-            let modal_importe = $("#importe_pago" + button_id).val();
-            let modal_observaciones = $("#observaciones_pago" + button_id).val();
-
-            //Desplegamos el modal
-            $('#modal_pago').modal('show');
-
-            //Enviamos los valores recuperados anteriormente a los inputs del modal
-            $('#modal_fecha').val(modal_fecha);
-            $('#modal_importe').val(modal_importe);
-            $('#modal_observaciones').val(modal_observaciones);
-            $('#numero_fila_pago').val(button_id);
-
-        });
-
-    </script>
+//Desplegamos el modal
+$('#modal_baja_pago').modal('show');
+$('#baja_pago').val(id_registro);
+}
+</script>
 
 @endpush

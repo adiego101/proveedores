@@ -152,7 +152,6 @@
             @endif
         </div>
     </div>
-    <h5>Proveedor Santacruceño</h5>
 
     <label for="tamaño">Tamaño de la Empresa:</label><br>
 

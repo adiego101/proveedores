@@ -244,6 +244,8 @@ return [
             'icon' => 'fas fa-fw fa-building',
             'label_color' => 'success',
         ],
+       //DESCOMENTAR DESPÚES DE LA EXPOSICIÓN
+       /*
         [
             'text' => 'Dar de baja',
             'url' => '/baja',
@@ -262,6 +264,8 @@ return [
             'icon' => 'far fa-fw fa-file-pdf',
             'label_color' => 'success',
         ],
+        */
+
         [
             'text' => 'Cambiar Contraseña',
             'url' => '/Cambiar_contraseña',

@@ -9,54 +9,31 @@
     name="facturacion_anual_alcanzada"
         value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
 
-    <div class="row">
-        <div class="col-sm">
-            <!--En este caso, se deben recuperar los tipos de actividad de la BD -->
-            <label for="tipo_actividad">Tipo de Actividad:</label><br>
-                <select class="form-control" aria-describedby="basic-addon1" id="tipo_actividad" name="tipo_actividad">
-                    @forelse($tipos_actividades as $tipo_actividad)
-                        <option value="{{$tipo_actividad->desc_tipo_actividad}}">{{$tipo_actividad->desc_tipo_actividad}}</option>
-                    @empty
-                        <option value=" "></option>
-                    @endforelse
-                </select>
-            <br />
+
+        <div>
+
+            <table style="width:100%" class="yajra-actividades table table-hover  table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th>id_actividad_economica</th>
+                        <th>id_tipo_actividad</th>
+                        {{--<th>Correo electrónico</th>
+                            <th>Teléfono</th>--}}
+                            <th>Acciones</th>
+                      <!--  <th>Username</th>
+                        <th>Phone</th>
+                        <th>DOB</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
-
-        <div class="col-sm">
-
-            <!--En este caso, se deben recuperar las actividades de la BD -->
-            <label for="actividad">Actividad:</label><br>
-            <select class="form-control" aria-describedby="basic-addon1" id="actividad" name="actividad">
-                @forelse($actividades as $actividad)
-                    <option value="{{$actividad->desc_actividad}}">{{$actividad->desc_actividad}}</option>
-                @empty
-                    <option value=" "></option>
-                @endforelse
-            </select>
-            <br />
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <a id="add_actividad" class="btn btn-success">Agregar Actividad</a>
-            </div>
-        </div>
-    </div>
-    <br>
-
-    <div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Tipo de Actividad</th>
-                    <th>Actividad</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="body_table_actividad"></tbody>
-        </table>
-    </div>
 
     <br />
+
+    @include('modales.modalBajaActividad')
+
 
     <hr>
 
@@ -64,52 +41,31 @@
     <input type="text" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"
         value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}"><br>
 
-    <div class="row">
-        <div class="col-sm">
-            <label for="producto_elaborado">Producto elaborado:</label><br>
-            <input list="productos" name="producto_elaborado" id="producto_elaborado"  class="form-control" placeholder="Ingrese o seleccione el producto que produce">
-            <datalist id="productos">
-                @forelse($productos as $producto)
-                    <option value="{{$producto->producto_elaborado}}">
-                @empty
-                    <option value=" ">
-                @endforelse
-            </datalist>
-            <br>
+        <div>
 
-            <label for="rnpa">RNPA:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="rnpa"
-            name="rnpa" placeholder="Ingrese el RNPA"><br>
+            <table style="width:100%" class="yajra-productos table table-hover  table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th>producto_elaborado</th>
+                        <th>rnpa</th>
+
+                        <th>Producida_unidad</th>
+
+                        <th>capacidad_produccion_total</th>
+
+                        {{--<th>Correo electrónico</th>
+                            <th>Teléfono</th>--}}
+                            <th>Acciones</th>
+                      <!--  <th>Username</th>
+                        <th>Phone</th>
+                        <th>DOB</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
-
-        <div class="col-sm">
-            <label for="unidad_producida">Unidad producida:</label><br>
-            <input type="number" class="form-control" aria-describedby="basic-addon1" id="unidad_producida"
-            name="unidad_producida" placeholder="Ingrese la cantidad de unidades producidas"><br>
-
-            <label for="produccion_total">Capacidad de producción total:</label><br>
-            <input type="number" class="form-control" aria-describedby="basic-addon1" id="produccion_total" name="produccion_total" placeholder="Ingrese la producción total"><br>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <a id="add_producto" class="btn btn-success">Agregar Producto</a>
-            </div>
-        </div>
-    </div>
-    <br>
-    <div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Unidades producidas</th>
-                    <th>RNPA</th>
-                    <th>Capacidad producción</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="body_table_producto"></tbody>
-        </table>
-    </div>
+        @include('modales.modalBajaProducto')
 
     <br />
 <div class="row navbuttons pt-5">
@@ -129,143 +85,126 @@
     @include('modales.editarProducto')
 
 @push('js')
-
-    <script type="text/javascript">
-
-        let tipo_actividad;
-        let actividad;
-        let m = 1; //contador para asignar id al boton que borrara la fila
-        let contador = 0; //Contador para llevar el registro de la cantidad de actividades principales agregadas.
-
-        $("#add_actividad").on("click", function(e) {
-
-            tipo_actividad = $("#tipo_actividad").val();
-            actividad = $("#actividad").val();
-
-            if(tipo_actividad == 'Primaria'){
-
-                contador++;
-            }
-
-            if(tipo_actividad != 'Primaria' || contador <= 1){
-
-                $("#body_table_actividad").append(
-                    '<tr id="row_actividad' + m +'">'+
-                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="tipo_actividad' + m +'" name="tipos_actividades[]" readonly value="' + tipo_actividad +'"></td>'+
-                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="actividad' + m +'" name="actividades[]" readonly value="' + actividad +'"></td>'+
-                        '<td><button type="button" name="remove" id="' + m +'" class="btn btn-danger btn-sm btn_remove_actividad" title="quitar actividad"><i class="fas fa-trash"></i></button></td>'+
-                    '</tr>'
-                );
-
-                m++;
-
-            }else{
-
-                //Desplegamos el modal
-                $('#aviso_actividad').modal('show');
-
-            }
-        });
-
-
-        $(document).on("click", ".btn_remove_actividad", function() {
-
-            //cuando da click al boton quitar, obtenemos el id del boton
-            let button_id = $(this).attr("id");
-
-            //Obtenemos el tipo de actividad (valor) de la fila que se va a eliminar
-            var valor_tipo = $("#tipo_actividad" + button_id + "").val();
-
-            //Si el valor es Primaria, se setea el contador a 0 para que permita volver a agregar una nueva actividad primaria. En caso de que sea Secundaria, solamente borra la fila sin setear el contador para que no permita agregar mas de una actividad principal.
-            if(valor_tipo == 'Primaria'){
-                contador = 0;
-            }
-
-            //borra la fila
-            $("#row_actividad" + button_id + "").remove();
-
-        });
-
-    </script>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
 
-let producto_elaborado;
-let unidad_producida;
-let rnpa;
-let produccion_total;
-let n = 1; //contador para asignar id al boton que borrara la fila
+  $(function () {
 
-$("#add_producto").on("click", function(e) {
+    console.log({{$id}});
 
-    producto_elaborado = $("#producto_elaborado").val();
-    unidad_producida = $("#unidad_producida").val();
-    rnpa = $("#rnpa").val();
-    produccion_total = $("#produccion_total").val();
+    var table = $('.yajra-productos').DataTable({
+    language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('productos/'.$id) }}",
+        columns: [
+            {data: 'producto_elaborado', name: 'producto_elaborado'},
+            {data: 'rnpa', name: 'rnpa'},
+            {data: 'Producida_unidad', name: 'Producida_unidad'},
+            {data: 'capacidad_produccion_total', name: 'capacidad_produccion_total'},
+
+            //{data: 'cuit', name: 'cuit'},
+            //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
+            {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+            },
+        ]
+    });
+
+  });
+
+  $(function () {
+
+    console.log({{$id}});
+
+    var table = $('.yajra-actividades').DataTable({
+    language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('actividades/'.$id) }}",
+        columns: [
+            {data: 'id_actividad_economica', name: 'id_actividad_economica'},
+            {data: 'id_tipo_actividad', name: 'id_tipo_actividad'},
+            //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
+            {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+            },
+        ]
+    });
+
+  });
+
+    //Funciones a implementar
+
+    function verRegistro() {
+
+        return  alert("Retornar vista para visualizar un registro!");
+    }
 
 
-    $("#body_table_producto").append(
-        '<tr id="row_producto' + n +'">'+
-            '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="producto_elaborado' + n +'" name="productos[]" readonly value="' + producto_elaborado +'"></td>'+
-            '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="unidad_producida' + n +'" name="unidades[]" readonly value="' + unidad_producida +'"></td>'+
-            '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="rnpa' + n +'" name="rnpas[]" readonly value="' + rnpa +'"></td>'+
-            '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="produccion_total' + n +'" name="producciones[]" readonly value="' + produccion_total +'"></td>'+
-            '<td><button type="button" name="edit" id="'+ n +'" class="btn btn-warning btn-sm btn_edit_producto" title="editar producto"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + n +'" class="btn btn-danger btn-sm btn_remove_producto" title="quitar producto"><i class="fas fa-trash"></i></button></td>'+
-        '</tr>'
-    );
+    function bajaActividad(id_registro) {
 
-    n++;
+         //Desplegamos el modal
+         $('#modalBajaActividad').modal('show');
+         $('#baja_actividad').val(id_registro);
+    }
 
-    //Limpiamos cada campo luego de presionar el botón Agregar vehículo
+    function bajaProducto(id_registro) {
 
-    document.getElementById("producto_elaborado").value = "";
-    document.getElementById("unidad_producida").value = "";
-    document.getElementById("rnpa").value = "";
-    document.getElementById("produccion_total").value = "";
-
-});
-
-
-$(document).on("click", ".btn_remove_producto", function() {
-
-    //cuando da click al boton quitar, obtenemos el id del boton
-    let button_id = $(this).attr("id");
-
-    //borra la fila
-    $("#row_producto" + button_id + "").remove();
-
-});
-
-
-//Cargamos los inputs del modal con los datos de la fila de la tabla
-
-$(document).on("click", ".btn_edit_producto", function() {
-
-    //cuando da click al boton editar, obtenemos el id del boton
-    let button_id = $(this).attr("id");
-
-    //Recuperamos los valores de los campos pertenecientes a una fila
-    let modal_producto_elaborado = $("#producto_elaborado"+ button_id).val();
-    let modal_unidad_producida = $("#unidad_producida"+ button_id).val();
-    let modal_rnpa = $("#rnpa"+ button_id).val();
-    let modal_produccion_total = $("#produccion_total"+ button_id).val();
-
-    //Desplegamos el modal
-    $('#modal_producto').modal('show');
-
-    //Enviamos los valores recuperados anteriormente a los inputs del modal
-    $('#modal_producto_elaborado').val(modal_producto_elaborado);
-    $('#modal_unidad_producida').val(modal_unidad_producida);
-    $('#modal_rnpa').val(modal_rnpa);
-    $('#modal_produccion_total').val(modal_produccion_total);
-    $('#numero_fila_producto').val(button_id);
-
-});
-
+//Desplegamos el modal
+$('#modal_baja_producto').modal('show');
+$('#baja_producto').val(id_registro);
+}
 </script>
-
 @endpush
 
 </fieldset>

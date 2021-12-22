@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedor;
-use App\Models\Proveedor_domicilio;
-use App\Models\Proveedor_telefono;
-use App\Models\Actividades_proveedores;
-use App\Models\Tipo_actividad;
-use App\Models\Localidad;
-use Illuminate\Http\Request;
 use PDF;
+use App\Models\Localidad;
+use App\Models\Proveedor;
+use Illuminate\Http\Request;
+use App\Models\Tipo_actividad;
+use App\Models\Proveedor_telefono;
+use App\Models\Actividad_economica;
+use App\Models\Proveedor_domicilio;
+use App\Models\Actividades_proveedores;
 
 class RupaeController extends Controller
 {
@@ -137,14 +138,25 @@ public function descargarCertificadoInscripcion($id)
 
     $proveedor_tipo_actividad = Tipo_actividad::where('id_tipo_actividad', $proveedor_actividad_id->id_tipo_actividad)->first();
 
+    $Actividad_economica = Actividad_economica::where('id_actividad_economica', $proveedor_actividad_id->id_tipo_actividad)->first();
+
+    $proveedor_actividad_secundaria = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 2)->get();
+    $actividades_Secundarias = "";
+
+    foreach( $proveedor_actividad_secundaria as $actividad_secundaria){
+
+        $Actividad_economica2 = Actividad_economica::where('id_actividad_economica', $actividad_secundaria->id_tipo_actividad)->first();
+
+        $actividades_Secundarias = $Actividad_economica2->cod_actividad.",".$actividades_Secundarias;
+    }
 
     $data = [
         'titulo' => 'Certificado inscripción',
         'cuit' => $proveedor->cuit,
         'nombre_fantasia' => $proveedor->nombre_fantasia,
         'razon_social' => $proveedor->razon_social,
-        'actividad_principal' => $proveedor_tipo_actividad->desc_tipo_actividad, //FALTA RECUPERAR
-        'actividad_secundaria' => 'Mantenimiento',
+        'actividad_principal' => $Actividad_economica->desc_actividad, //FALTA RECUPERAR
+        'actividad_secundaria' => $actividades_Secundarias,
         'calle_ruta' => $proveedor_domicilio_real->calle.' '.$proveedor_domicilio_real->numero,
         'telefono' =>  $proveedor_telefono_real->nro_tel,
         'fecha_inscripcion' => $proveedor->created_at,
