@@ -1,4 +1,3 @@
-
 <fieldset>
 
 <div class="row">
@@ -11,23 +10,21 @@
 <label for="vehiculos_afectados">Posee vehículos afectados a la actividad económica que desarrolla</label><br>
 <br>
 
-<!-- SE DEBEN ELIMINAR LOS ATRIBUTOS NAME DE CADA CAMPO Y SOLO DEJARLOS EN EL APPEND JS, PORQUE SINO AL ENVIAR LOS DATOS A LA BD SE ALMACENA SIEMPRE UN VALOR NULO AL PRINCIPIO. -->
-
     <div class="row">
         <div class="col-sm">
             <label for="marca_vehiculo">Marca:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca_vehiculo" name="marcas[]" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca_vehiculo" /><br />
 
             <label for="dominio_vehiculo">Dominio:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio_vehiculo" name="dominios[]" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio_vehiculo" /><br />
         </div>
 
         <div class="col-sm">
             <label for="modelo_vehiculo">Modelo:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo_vehiculo" name="modelos[]" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo_vehiculo" /><br />
 
             <label for="inscripto_en_vehiculo">Inscripto en:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en_vehiculo" name="inscriptos[]" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en_vehiculo" /><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_vehiculo" class="btn btn-success">Agregar Vehículo</a>
@@ -61,18 +58,18 @@
     <div class="row">
         <div class="col-sm">
             <label for="poliza">Poliza:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="poliza" name="polizas[]" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="poliza" /><br />
 
             <label for="asegurado">Asegurado:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" name="asegurados[]" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" /><br />
         </div>
 
         <div class="col-sm">
             <label for="agencia">Agencia:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" name="agencias[]" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" /><br />
 
             <label for="vigencia">Vigencia hasta:</label><br />
-            <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia" name="vigencias[]" /><br />
+            <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia" /><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_seguro" class="btn btn-success">Agregar Seguro</a>
@@ -106,7 +103,7 @@
 <br>
 
 <label for="domicilio_sede">Domicilio:</label><br />
-<input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio_sede" name="domicilios_sedes[]" /><br />
+<input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio_sede" /><br />
 
 <div class="row">
         <div class="col-sm">
@@ -126,7 +123,7 @@
         <div class="col-sm">
             <!--En este caso, se deben recuperar las localidades_sedes de la BD -->
             <label for="localidad_sede">Localidad:</label><br>
-            <select class="form-control" aria-describedby="basic-addon1" id="localidad_sede" name="localidades_sedes[]">
+            <select class="form-control" aria-describedby="basic-addon1" id="localidad_sede" name="localidad_sede">
                 <option value=" ">Seleccione una localidad</option>
             </select>
             <br>
@@ -202,44 +199,44 @@
             document.getElementById("modelo_vehiculo").value = "";
             document.getElementById("dominio_vehiculo").value = "";
             document.getElementById("inscripto_en_vehiculo").value = "";
+        });
 
 
-            $(document).on("click", ".btn_remove_vehiculo", function() {
+        $(document).on("click", ".btn_remove_vehiculo", function() {
 
-                //cuando da click al boton quitar, obtenemos el id del boton
-                let button_id = $(this).attr("id");
+            //cuando da click al boton quitar, obtenemos el id del boton
+            let button_id = $(this).attr("id");
 
-                //borra la fila
-                $("#row_vehiculo" + button_id + "").remove();
-            });
+            //borra la fila
+            $("#row_vehiculo" + button_id + "").remove();
+        });
 
 
-              //Cargamos los inputs del modal con los datos de la fila de la tabla
+        //Cargamos los inputs del modal con los datos de la fila de la tabla
 
-              $(document).on("click", ".btn_edit_vehiculo", function() {
+        $(document).on("click", ".btn_edit_vehiculo", function() {
 
-                //cuando da click al boton editar, obtenemos el id del boton
-                let button_id = $(this).attr("id");
+            //cuando da click al boton editar, obtenemos el id del boton
+            let button_id = $(this).attr("id");
 
-                //Recuperamos los valores de los campos pertenecientes a una fila
-                let modal_marca = $("#marca_vehiculo"+ button_id).val();
-                let modal_modelo = $("#modelo_vehiculo"+ button_id).val();
-                let modal_dominio = $("#dominio_vehiculo"+ button_id).val();
-                let modal_inscripto = $("#inscripto_en_vehiculo"+ button_id).val();
+            //Recuperamos los valores de los campos pertenecientes a una fila
+            let modal_marca = $("#marca_vehiculo"+ button_id).val();
+            let modal_modelo = $("#modelo_vehiculo"+ button_id).val();
+            let modal_dominio = $("#dominio_vehiculo"+ button_id).val();
+            let modal_inscripto = $("#inscripto_en_vehiculo"+ button_id).val();
 
-                //Desplegamos el modal
-                $('#modal_vehiculo').modal('show');
+            //Desplegamos el modal
+            $('#modal_vehiculo').modal('show');
 
-                //Enviamos los valores recuperados anteriormente a los inputs del modal
-                $('#modal_marca_vehiculo').val(modal_marca);
-                $('#modal_modelo_vehiculo').val(modal_modelo);
-                $('#modal_dominio_vehiculo').val(modal_dominio);
-                $('#modal_inscripto_en_vehiculo').val(modal_inscripto);
-                $('#numero_fila_vehiculo').val(button_id);
-
-            });
+            //Enviamos los valores recuperados anteriormente a los inputs del modal
+            $('#modal_marca_vehiculo').val(modal_marca);
+            $('#modal_modelo_vehiculo').val(modal_modelo);
+            $('#modal_dominio_vehiculo').val(modal_dominio);
+            $('#modal_inscripto_en_vehiculo').val(modal_inscripto);
+            $('#numero_fila_vehiculo').val(button_id);
 
         });
+
     </script>
 
     <script type="text/javascript">
@@ -277,43 +274,44 @@
             document.getElementById("asegurado").value = "";
             document.getElementById("vigencia").value = "";
 
-
-            $(document).on("click", ".btn_remove_seguro", function() {
-
-                //cuando da click al boton quitar, obtenemos el id del boton
-                let button_id = $(this).attr("id");
-
-                //borra la fila
-                $("#row_seguro" + button_id + "").remove();
-            });
+        });
 
 
-            //Cargamos los inputs del modal con los datos de la fila de la tabla
+        $(document).on("click", ".btn_remove_seguro", function() {
 
-            $(document).on("click", ".btn_edit_seguro", function() {
+            //cuando da click al boton quitar, obtenemos el id del boton
+            let button_id = $(this).attr("id");
 
-                //cuando da click al boton editar, obtenemos el id del boton
-                let button_id = $(this).attr("id");
+            //borra la fila
+            $("#row_seguro" + button_id + "").remove();
+        });
 
-                //Recuperamos los valores de los campos pertenecientes a una fila
-                let modal_poliza = $("#poliza"+ button_id).val();
-                let modal_agencia = $("#agencia"+ button_id).val();
-                let modal_asegurado = $("#asegurado"+ button_id).val();
-                let modal_vigencia = $("#vigencia"+ button_id).val();
 
-                //Desplegamos el modal
-                $('#modal_seguro').modal('show');
+        //Cargamos los inputs del modal con los datos de la fila de la tabla
 
-                //Enviamos los valores recuperados anteriormente a los inputs del modal
-                $('#modal_poliza').val(modal_poliza);
-                $('#modal_agencia').val(modal_agencia);
-                $('#modal_asegurado').val(modal_asegurado);
-                $('#modal_vigencia').val(modal_vigencia);
-                $('#numero_fila_seguro').val(button_id);
+        $(document).on("click", ".btn_edit_seguro", function() {
 
-            });
+            //cuando da click al boton editar, obtenemos el id del boton
+            let button_id = $(this).attr("id");
+
+            //Recuperamos los valores de los campos pertenecientes a una fila
+            let modal_poliza = $("#poliza"+ button_id).val();
+            let modal_agencia = $("#agencia"+ button_id).val();
+            let modal_asegurado = $("#asegurado"+ button_id).val();
+            let modal_vigencia = $("#vigencia"+ button_id).val();
+
+            //Desplegamos el modal
+            $('#modal_seguro').modal('show');
+
+            //Enviamos los valores recuperados anteriormente a los inputs del modal
+            $('#modal_poliza').val(modal_poliza);
+            $('#modal_agencia').val(modal_agencia);
+            $('#modal_asegurado').val(modal_asegurado);
+            $('#modal_vigencia').val(modal_vigencia);
+            $('#numero_fila_seguro').val(button_id);
 
         });
+
     </script>
 
 
@@ -343,39 +341,40 @@
 
         document.getElementById("domicilio_sede").value = "";
 
-
-        $(document).on("click", ".btn_remove_sede", function() {
-
-            //cuando da click al boton quitar, obtenemos el id del boton
-            let button_id = $(this).attr("id");
-
-            //borra la fila
-            $("#row_sede" + button_id + "").remove();
-        });
+    });
 
 
-        //Cargamos los inputs del modal con los datos de la fila de la tabla
+    $(document).on("click", ".btn_remove_sede", function() {
 
-        $(document).on("click", ".btn_edit_sede", function() {
+        //cuando da click al boton quitar, obtenemos el id del boton
+        let button_id = $(this).attr("id");
 
-                //cuando da click al boton editar, obtenemos el id del boton
-                let button_id = $(this).attr("id");
+        //borra la fila
+        $("#row_sede" + button_id + "").remove();
+    });
 
-                //Recuperamos los valores de los campos pertenecientes a una fila
-                let modal_domicilio = $("#domicilio_sede"+ button_id).val();
-                let modal_localidad = $("#localidad_sede"+ button_id).val();
 
-                //Desplegamos el modal
-                $('#modal_sede').modal('show');
+    //Cargamos los inputs del modal con los datos de la fila de la tabla
 
-                //Enviamos los valores recuperados anteriormente a los inputs del modal
-                $('#modal_domicilio_sede').val(modal_domicilio);
-                $('#modal_localidad_sede').val(modal_localidad);
-                $('#numero_fila_sede').val(button_id);
+    $(document).on("click", ".btn_edit_sede", function() {
 
-            });
+        //cuando da click al boton editar, obtenemos el id del boton
+        let button_id = $(this).attr("id");
+
+        //Recuperamos los valores de los campos pertenecientes a una fila
+        let modal_domicilio = $("#domicilio_sede"+ button_id).val();
+        let modal_localidad = $("#localidad_sede"+ button_id).val();
+
+        //Desplegamos el modal
+        $('#modal_sede').modal('show');
+
+        //Enviamos los valores recuperados anteriormente a los inputs del modal
+        $('#modal_domicilio_sede').val(modal_domicilio);
+        $('#modal_localidad_sede').val(modal_localidad);
+        $('#numero_fila_sede').val(button_id);
 
     });
+
     </script>
 
 
@@ -399,6 +398,5 @@
             });
         }
     </script>
-
 
 </fieldset>
