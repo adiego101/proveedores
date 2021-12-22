@@ -299,7 +299,7 @@ class ProveedoresController extends Controller
                 //----------------Carga de Sucursal---------------
 
                 $sucursal = new Sucursal();
-                $sucursal->nombre_sucursal = $proveedores_rupae->nombre_sucursal;
+                $sucursal->nombre_sucursal = $request->nombres_sucursales[$i];
                 $sucursal->id_proveedor = $proveedores_rupae->id_proveedor;
                 $sucursal->calle = $request->calles[$i];
                 $sucursal->numero = $request->numeros[$i];
