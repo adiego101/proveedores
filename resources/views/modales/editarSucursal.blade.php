@@ -10,28 +10,25 @@
             <div class="modal-body">
 
                 <label for="modal_nombre_sucursal">Nombre Sucursal:</label><br />
-                <input type="text" class="form-control" placeholder="Ingrese el nombre de la sucursal" aria-describedby="basic-addon1" id="modal_nombre_sucursal" /><br />
+                <input type="text" class="form-control" placeholder="Ingrese el nombre de la sucursal" aria-describedby="basic-addon1" id="modal_nombre_sucursal" maxlength="50"/><br />
 
                 <div class="row">
                     <div class="col-sm">
                         <label for="modal_calle_sucursal">Calle:</label><br />
-                        <input type="text" class="form-control" placeholder="Calle" aria-describedby="basic-addon1"
-                            id="modal_calle_sucursal"/><br />
+                        <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="modal_calle_sucursal" maxlength="40"/><br />
 
                         <label for="modal_dpto_sucursal">Departamento:</label><br />
-                        <input type="text" class="form-control" placeholder="Departamento" aria-describedby="basic-addon1"
-                            id="modal_dpto_sucursal" /><br />
+                        <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="modal_dpto_sucursal" maxlength="10"/><br />
 
                         <label for="modal_lote_sucursal">Lote:</label><br />
-                        <input type="text" class="form-control" placeholder="Lote" aria-describedby="basic-addon1" id="modal_lote_sucursal" name="lotes[]" /><br />
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="modal_lote_sucursal" name="lotes[]" maxlength="3"/><br />
 
                         <label for="modal_entre_calles_sucursal">Entre Calles:</label><br />
-                        <input type="text" class="form-control" placeholder="Entre Calles" aria-describedby="basic-addon1" id="modal_entre_calles_sucursal" /><br />
+                        <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="modal_entre_calles_sucursal" maxlength="50"/><br />
 
                         <label for="modal_monoblock_sucursal">Monoblock:</label><br />
-                        <input type="text" class="form-control" placeholder="Monoblock" aria-describedby="basic-addon1" id="modal_monoblock_sucursal" name="monoblocks[]" /><br />
+                        <input type="text" class="form-control" placeholder="Monoblock" aria-describedby="basic-addon1" id="modal_monoblock_sucursal" name="monoblocks[]" maxlength="10"/><br />
 
-                        <!--En este caso, se deben recuperar los paises de la BD -->
                         <label for="modal_pais_sucursal">Pais:</label><br>
                         <select class="form-control" aria-describedby="basic-addon1" id="modal_pais_sucursal" name="modal_pais_sucursal">
                             @forelse($paises as $pais)
@@ -42,39 +39,35 @@
                         </select>
                         <br>
 
-                        <!--En este caso, se deben recuperar las localidades de la BD -->
                         <label for="modal_localidad_sucursal">Localidad:</label><br>
                         <select class="form-control" aria-describedby="basic-addon1" id="modal_localidad_sucursal" name="modal_localidad_sucursal">
-                        <option value=" ">Seleccione una localidad</option>
+                            <option value=" ">Seleccione una localidad</option>
                         </select>
                         <br>
 
                         <label for="modal_email_sucursal">Correo electrónico:</label><br>
-                        <input id="modal_email_sucursal" type="email" class="form-control email_sucursal" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1"><br>
-
+                        <input id="modal_email_sucursal" type="email" class="form-control email_sucursal" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" maxlength="30"><br>
                     </div>
 
                     <div class="col-sm">
-
                         <label for="modal_numero_sucursal">Numero:</label><br />
-                        <input type="number" class="form-control" placeholder="Numero" aria-describedby="basic-addon1" id="modal_numero_sucursal" /><br />
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="modal_numero_sucursal" maxlength="4"/><br />
 
                         <label for="modal_puerta_sucursal">Puerta:</label><br />
-                        <input type="number" class="form-control" placeholder="Puerta" aria-describedby="basic-addon1" id="modal_puerta_sucursal" name="puertas[]" /><br />
+                        <input type="text" class="form-control" placeholder="Ingrese la puerta" aria-describedby="basic-addon1" id="modal_puerta_sucursal" name="puertas[]" maxlength="4"/><br />
 
                         <label for="modal_manzana_sucursal">Manzana:</label><br />
-                        <input type="number" class="form-control" placeholder="Manzana" aria-describedby="basic-addon1" id="modal_manzana_sucursal" name="manzanas[]" /><br />
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="modal_manzana_sucursal" name="manzanas[]" maxlength="3"/><br />
 
                         <label for="modal_oficina_sucursal">Oficina:</label><br />
-                        <input type="text" class="form-control" placeholder="Oficina" aria-describedby="basic-addon1" id="modal_oficina_sucursal" name="oficinas[]" /><br />
+                        <input type="text" class="form-control" placeholder="Oficina" aria-describedby="basic-addon1" id="modal_oficina_sucursal" name="oficinas[]" maxlength="4"/><br />
 
                         <label for="modal_barrio_sucursal">Barrio:</label><br />
-                        <input type="text" class="form-control" placeholder="Barrio" aria-describedby="basic-addon1" id="modal_barrio_sucursal" /><br />
+                        <input type="text" class="form-control" placeholder="Barrio" aria-describedby="basic-addon1" id="modal_barrio_sucursal" maxlength="20"/><br />
 
-                        <!--En este caso, se deben recuperar las provincias de la BD -->
                         <label for="modal_provincia_sucursal">Provincia:</label><br>
                         <select class="form-control" aria-describedby="basic-addon1" id="modal_provincia_sucursal" name="modal_provincia_sucursal">
-                        <option value=" ">Seleccione una provincia</option>
+                            <option value=" ">Seleccione una provincia</option>
                             @forelse($provincias as $provincia)
                                 <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
                             @empty
@@ -84,13 +77,11 @@
                         <br>
 
                         <label for="modal_codigo_postal_sucursal">Código Postal:</label><br>
-                        <input type="text" class="form-control" aria-describedby="basic-addon1" id="modal_codigo_postal_sucursal" name="modal_codigo_postal_sucursal" placeholder="Ingrese el código postal"><br>
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="modal_codigo_postal_sucursal" name="modal_codigo_postal_sucursal" placeholder="Ingrese el código postal" maxlength="4"><br>
 
                         <label for="modal_telefono_sucursal">Teléfono:</label><br>
-                        <input type="number" id="modal_telefono_sucursal" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" >
-
+                        <input type="text" onkeypress="return valideKey(event);" id="modal_telefono_sucursal" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" maxlength="14">
                     </div>
-
                 </div>
 
                 <div class="modal-footer">
