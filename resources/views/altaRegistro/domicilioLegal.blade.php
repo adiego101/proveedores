@@ -38,13 +38,13 @@
 
                <label for="email_legal">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
-                    aria-describedby="basic-addon1" id="email_legal" name="email_legal[]" maxlength="30"><br>
+                    aria-describedby="basic-addon1" id="email_legal" name="email_legal" maxlength="30"><br>
                 <div class="field_email_legal">
 
                 </div>
-                
+
                 <label for="telefono_legal">Teléfono:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14">
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal" maxlength="14">
                 <div class="field_telefono_legal">
 
                 </div>

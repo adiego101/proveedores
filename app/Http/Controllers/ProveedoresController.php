@@ -61,7 +61,6 @@ class ProveedoresController extends Controller
     public function crear_registro(Request $request)
     {
 
-
         //try{
         $cuit = Proveedor::where('cuit',$request->cuit)->exists();
         $dado_de_baja = Proveedor::where('cuit',$request->cuit)->where('dado_de_baja','0')->get();
@@ -510,6 +509,15 @@ class ProveedoresController extends Controller
         }
     }
 
+    public function editarSucursal($id)
+    {
+            $sucursal = Sucursal::where('id_sucursal', $id)->get();
+            $sucursal_email = Sucursal_email::where('id_sucursal', $id)->get();
+            $sucursal_telefono = Sucursal_telefono::where('id_sucursal', $id)->get();
+            return view('ediciones.sucursales', compact('sucursal', 'sucursal_email', 'sucursal_telefono'));
+
+    }
+
     public function getPagos(Request $request, $id)
     {
         //if ($request->ajax()) {
@@ -527,6 +535,14 @@ class ProveedoresController extends Controller
                 ->make(true);
         //}
     }
+    public function editarPago($id)
+    {
+            $pago = Pago::where('id_pagos', $id)->get();
+
+            return view('ediciones.pagos', compact('pago'));
+
+    }
+
 
     public function getActividades(Request $request, $id)
     {
@@ -545,6 +561,14 @@ class ProveedoresController extends Controller
                 ->make(true);
         //}
     }
+
+    public function editarActividad($id)
+    {
+            $actividad = Actividades_proveedores::where('id_actividad_proveedor', $id)->get();
+            return view('ediciones.actividad', compact('actividad'));
+
+    }
+
     public function getProductos(Request $request, $id)
     {
         //if ($request->ajax()) {
@@ -562,6 +586,14 @@ class ProveedoresController extends Controller
                 ->make(true);
         //}
     }
+
+    public function editarProductos($id)
+    {
+            $producto = Producto::where('id_producto', $id)->get();
+            return view('ediciones.producto', compact('producto'));
+
+    }
+
     public function getPatentes(Request $request, $id)
     {
         //if ($request->ajax()) {
@@ -578,6 +610,13 @@ class ProveedoresController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         //}
+    }
+
+    public function editarPatentes($id)
+    {
+            $pantente = Patentes::where('id_proveedor_patente', $id)->get();
+            return view('ediciones.pantente', compact('pantente'));
+
     }
 
     public function getSeguros(Request $request, $id)
@@ -598,6 +637,13 @@ class ProveedoresController extends Controller
         //}
     }
 
+    public function editarSeguros($id)
+    {
+            $seguro = Proveedor_seguro::where('id_proveedor_seguro', $id)->get();
+            return view('ediciones.seguro', compact('seguro'));
+
+    }
+
     public function getSedes(Request $request, $id)
     {
         //if ($request->ajax()) {
@@ -614,6 +660,13 @@ class ProveedoresController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         //}
+    }
+
+    public function editarSede($id)
+    {
+            $sede = Proveedor_sede::where('id_proveedor_sede', $id)->get();
+            return view('ediciones.sede', compact('sede'));
+
     }
 
 

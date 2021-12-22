@@ -12,12 +12,12 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="modal_domicilio_sede">Domicilio:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="modal_domicilio_sede" name="domicilios[]" /><br />
+                            <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="modal_domicilio_sede" name="modal_domicilio_sede" /><br />
                         </div>
 
                         <div class="col-sm">
                             <label for="modal_localidad_sede">Localidad:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese la localidad" aria-describedby="basic-addon1" id="modal_localidad_sede" name="localidades[]" /><br />
+                            <input type="text" class="form-control" placeholder="Ingrese la localidad" aria-describedby="basic-addon1" id="modal_localidad_sede" name="modal_localidad_sede" /><br />
                         </div>
                     </div>
                     <div class="modal-footer">

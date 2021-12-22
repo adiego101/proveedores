@@ -17,13 +17,13 @@
             <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_sucursal" maxlength="10"/><br />
 
             <label for="lote_sucursal">Lote:</label><br />
-            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_sucursal" name="lotes[]" maxlength="3"/><br />
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_sucursal" name="lote_sucursal" maxlength="3"/><br />
 
             <label for="entre_calles_sucursal">Entre Calles:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entre_calles_sucursal" maxlength="50"/><br />
 
             <label for="monoblock_sucursal">Monoblock:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_sucursal" name="monoblocks[]" maxlength="10"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_sucursal" name="monoblock_sucursal" maxlength="10"/><br />
 
             <label for="pais_sucursal">Pais:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="pais_sucursal" name="pais_sucursal">
@@ -53,13 +53,13 @@
             <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_sucursal" maxlength="4"/><br />
 
             <label for="puerta_sucursal">Puerta:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la puerta" aria-describedby="basic-addon1" id="puerta_sucursal" name="puertas[]" maxlength="4"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese la puerta" aria-describedby="basic-addon1" id="puerta_sucursal" name="puerta_sucursal" maxlength="4"/><br />
 
             <label for="manzana_sucursal">Manzana:</label><br />
-            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_sucursal" name="manzanas[]" maxlength="3"/><br />
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_sucursal" name="manzana_sucursal" maxlength="3"/><br />
 
             <label for="oficina_sucursal">Oficina:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_sucursal" name="oficinas[]" maxlength="4"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_sucursal" name="oficina_sucursal" maxlength="4"/><br />
 
             <label for="barrio_sucursal">Barrio:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_sucursal" maxlength="20"/><br />

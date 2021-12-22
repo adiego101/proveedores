@@ -12,18 +12,18 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="modal_poliza">Poliza:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="modal_poliza" name="polizas[]" /><br />
+                            <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="modal_poliza" name="modal_poliza" /><br />
 
                             <label for="modal_asegurado">Asegurado:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="modal_asegurado" name="asegurados[]" /><br />
+                            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="modal_asegurado" name="modal_asegurado" /><br />
                         </div>
 
                         <div class="col-sm">
                             <label for="modal_agencia">Agencia:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="modal_agencia" name="agencias[]" /><br />
+                            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="modal_agencia" name="modal_agencia" /><br />
 
                             <label for="modal_vigencia_hasta">Vigencia hasta:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="modal_vigencia_hasta" name="vigentes[]" /><br />
+                            <input type="text" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="modal_vigencia_hasta" name="modal_vigencia_hasta" /><br />
                         </div>
                     </div>
                     <div class="modal-footer">

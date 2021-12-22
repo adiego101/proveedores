@@ -21,13 +21,13 @@
                         <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="modal_dpto_sucursal" maxlength="10"/><br />
 
                         <label for="modal_lote_sucursal">Lote:</label><br />
-                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="modal_lote_sucursal" name="lotes[]" maxlength="3"/><br />
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="modal_lote_sucursal" name="modal_lote_sucursal" maxlength="3"/><br />
 
                         <label for="modal_entre_calles_sucursal">Entre Calles:</label><br />
                         <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="modal_entre_calles_sucursal" maxlength="50"/><br />
 
                         <label for="modal_monoblock_sucursal">Monoblock:</label><br />
-                        <input type="text" class="form-control" placeholder="Monoblock" aria-describedby="basic-addon1" id="modal_monoblock_sucursal" name="monoblocks[]" maxlength="10"/><br />
+                        <input type="text" class="form-control" placeholder="Monoblock" aria-describedby="basic-addon1" id="modal_monoblock_sucursal" name="modal_monoblock_sucursal" maxlength="10"/><br />
 
                         <label for="modal_pais_sucursal">Pais:</label><br>
                         <select class="form-control" aria-describedby="basic-addon1" id="modal_pais_sucursal" name="modal_pais_sucursal">
@@ -54,13 +54,13 @@
                         <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="modal_numero_sucursal" maxlength="4"/><br />
 
                         <label for="modal_puerta_sucursal">Puerta:</label><br />
-                        <input type="text" class="form-control" placeholder="Ingrese la puerta" aria-describedby="basic-addon1" id="modal_puerta_sucursal" name="puertas[]" maxlength="4"/><br />
+                        <input type="text" class="form-control" placeholder="Ingrese la puerta" aria-describedby="basic-addon1" id="modal_puerta_sucursal" name="modal_puerta_sucursal" maxlength="4"/><br />
 
                         <label for="modal_manzana_sucursal">Manzana:</label><br />
-                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="modal_manzana_sucursal" name="manzanas[]" maxlength="3"/><br />
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="modal_manzana_sucursal" name="modal_manzana_sucursal" maxlength="3"/><br />
 
                         <label for="modal_oficina_sucursal">Oficina:</label><br />
-                        <input type="text" class="form-control" placeholder="Oficina" aria-describedby="basic-addon1" id="modal_oficina_sucursal" name="oficinas[]" maxlength="4"/><br />
+                        <input type="text" class="form-control" placeholder="Oficina" aria-describedby="basic-addon1" id="modal_oficina_sucursal" name="modal_oficina_sucursal" maxlength="4"/><br />
 
                         <label for="modal_barrio_sucursal">Barrio:</label><br />
                         <input type="text" class="form-control" placeholder="Barrio" aria-describedby="basic-addon1" id="modal_barrio_sucursal" maxlength="20"/><br />
@@ -122,7 +122,7 @@ $(document).on("click", ".btn_edit_modal_sucursal", function() {
             var modal_provincia = $('#modal_provincia_sucursal').val();
             var modal_codigo_postal = $('#modal_codigo_postal_sucursal').val();
             var modal_telefono = $('#modal_telefono_sucursal').val();
-   
+
 
             //Ocultamos el modal
             $('#modal_sucursal').modal('hide');

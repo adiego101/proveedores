@@ -12,18 +12,18 @@
                     <div class="row">
                             <div class="col-sm">
                                 <label for="modal_marca_vehiculo">Marca:</label><br />
-                                <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="modal_marca_vehiculo" name="marcas[]" /><br />
+                                <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="modal_marca_vehiculo" name="modal_marca_vehiculo" /><br />
 
                                 <label for="modal_dominio_vehiculo">Dominio:</label><br />
-                                <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="modal_dominio_vehiculo" name="dominios[]" /><br />
+                                <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="modal_dominio_vehiculo" name="modal_dominio_vehiculo" /><br />
                             </div>
 
                             <div class="col-sm">
                                 <label for="modal_modelo_vehiculo">Modelo:</label><br />
-                                <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modal_modelo_vehiculo" name="modelos[]" /><br />
+                                <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modal_modelo_vehiculo" name="modal_modelo_vehiculo" /><br />
 
                                 <label for="modal_inscripto_en_vehiculo">Inscripto en:</label><br />
-                                <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="modal_inscripto_en_vehiculo" name="inscriptos[]" /><br />
+                                <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="modal_inscripto_en_vehiculo" name="modal_inscripto_en_vehiculo" /><br />
                             </div>
 
                     </div>
