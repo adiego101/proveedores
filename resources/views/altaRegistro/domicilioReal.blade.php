@@ -42,13 +42,13 @@
 
                 <label for="email_real">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
-                    aria-describedby="basic-addon1" id="email_real" name="email_real" maxlength="30"><br>
+                    aria-describedby="basic-addon1" id="email_real" name="email_real[]" maxlength="30"><br>
                 <div class="field_email_real">
 
                 </div>
 
                 <label for="telefono_real">Teléfono:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real" maxlength="14">
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14">
                 <div class="field_telefono_real">
 
                 </div>

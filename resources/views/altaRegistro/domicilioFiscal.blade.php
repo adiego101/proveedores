@@ -38,13 +38,13 @@
 
                 <label for="email_fiscal">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
-                    aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal" maxlength="30"><br>
+                    aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" maxlength="30"><br>
                 <div class="field_email_fiscal">
 
                 </div>
 
                 <label for="telefono_fiscal">Teléfono:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal" maxlength="14">
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14">
                 <div class="field_telefono_fiscal">
 
                 </div>

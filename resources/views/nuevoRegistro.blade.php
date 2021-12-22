@@ -61,9 +61,6 @@
     <form id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
         @csrf
         @include('altaRegistro.datosGenerales')
-        @include('altaRegistro.patenteSeguro')
-
-        @include('altaRegistro.pagos')
 
         @include('altaRegistro.domicilioReal')
         @include('altaRegistro.domicilioLegal')
@@ -72,8 +69,13 @@
         @include('altaRegistro.infoImpositiva')
         @include('altaRegistro.Impuestosingresosbrutos')
         @include('altaRegistro.actividad')
+        @include('altaRegistro.pagos')
+
         @include('altaRegistro.valorAgregado')
         @include('altaRegistro.personalOcupado')
+        @include('altaRegistro.pagos')
+
+        @include('altaRegistro.patenteSeguro')
         @include('altaRegistro.otrosDatos')
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
