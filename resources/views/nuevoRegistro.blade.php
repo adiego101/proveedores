@@ -73,7 +73,6 @@
 
         @include('altaRegistro.valorAgregado')
         @include('altaRegistro.personalOcupado')
-        @include('altaRegistro.pagos')
 
         @include('altaRegistro.patenteSeguro')
         @include('altaRegistro.otrosDatos')

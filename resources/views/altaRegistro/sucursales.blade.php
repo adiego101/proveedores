@@ -247,7 +247,7 @@
 
             $("#body_table_sucursal").append(
                 '<tr id="row_sucursal' + i_sucursal +'">'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="nombre_sucursal' + i_sucursal +'" readonly value="' + nombre_sucursal +'" maxlength="50"/></td>'+
+                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="nombre_sucursal' + i_sucursal +'" name="nombres_sucursales[]"  readonly value="' + nombre_sucursal +'" maxlength="50"/></td>'+
                     '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email_sucursal' + i_sucursal +'" name="correos_electronicos[]" readonly value="'+ email +'" maxlength="30"></td>'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="telefono_sucursal' + i_sucursal +'" name="Telefonos_sucursales[]" readonly value="' + telefono +'" maxlength="14"></td>'+
                     '<td>'+
@@ -264,7 +264,7 @@
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="pais_sucursal' + i_sucursal +'" name="paises[]" readonly value="' + pais +'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sucursal' + i_sucursal +'" name="provincias[]" readonly value="' + provincia +'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sucursal' + i_sucursal +'" name="localidades[]" readonly value="' + localidad_sucursal +'">'+
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="codigo_postal_sucursal' + i_sucursal +'" name="codigo_postal" readonly value="' + codigo_postal +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="codigo_postal_sucursal' + i_sucursal +'" name="codigos_postales[]" readonly value="' + codigo_postal +'">'+
                     '<button type="button" name="edit" id="'+ i_sucursal +'" class="btn btn-warning btn-sm btn_edit_sucursal" title="editar sucursal"><i_sucursal class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i_sucursal +'" class="btn btn-danger btn-sm btn_remove_sucursal" title="quitar sucursal"><i_sucursal class="fas fa-trash"></i></button>'+
                     '</td>'+
                 '</tr>'
