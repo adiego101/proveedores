@@ -8,20 +8,16 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-
                 <div class="row">
                     <div class="col-sm">
                         <label for="modal_fecha">Fecha:</label><br />
-                        <input type="date" class="form-control" placeholder="Fecha" aria-describedby="basic-addon1"
-                            id="modal_fecha" /><br />
+                        <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago" aria-describedby="basic-addon1" id="modal_fecha" /><br />
 
                         <label for="modal_importe">Importe:</label><br />
-                        <input type="text" class="form-control" placeholder="Importe" aria-describedby="basic-addon1"
-                            id="modal_importe" /><br />
+                        <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="modal_importe" maxlength="9" /><br />
 
                         <label for="modal_observaciones">Observaciones:</label><br />
-                        <input type="text" class="form-control" placeholder="Observaciones"
-                            aria-describedby="basic-addon1" id="modal_observaciones" /><br />
+                        <input type="text" class="form-control" placeholder="Ingrese las observaciones del pago" aria-describedby="basic-addon1" id="modal_observaciones" maxlength="50" /><br />
                     </div>
                 </div>
                 <div class="modal-footer">

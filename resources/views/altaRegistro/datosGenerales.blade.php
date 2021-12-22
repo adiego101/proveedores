@@ -3,27 +3,25 @@
     <h1>Datos generales</h1><br>
 
     <label for="razon_social">Razón social:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese la razón social" aria-describedby="basic-addon1" id="razon_social" name="razon_social"  autofocus><br>
+    <input type="text" class="form-control" placeholder="Ingrese la razón social" aria-describedby="basic-addon1" id="razon_social" name="razon_social" maxlength="50" autofocus><br>
 
     <label for="nombre_fantasia">Nombre de fantasía:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese el nombre de fantasía" aria-describedby="basic-addon1" id="nombre_fantasia" name="nombre_fantasia" ><br>
-
-    <!-- El cuit se utiliza en esta primer etapa -->
+    <input type="text" class="form-control" placeholder="Ingrese el nombre de fantasía" aria-describedby="basic-addon1" id="nombre_fantasia" name="nombre_fantasia" maxlength="50"><br>
 
     <label for="cuit">Cuit:</label><br>
-    <input type="number" class="form-control"  onkeypress="return valideKey(event);" placeholder="Ingrese el número de cuit de la empresa" aria-describedby="basic-addon1" id="cuit" name="cuit" ><br>
-    <br>
+    <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el número de cuit de la empresa (sin guiones medios)" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="11"><br>
 
     <hr>
+
     <label for="representante_legal">Representante Legal:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese el nombre del representante legal" aria-describedby="basic-addon1" id="representante_legal" name="representante_legal" ><br>
+    <input type="text" class="form-control" placeholder="Ingrese el nombre completo del representante legal" aria-describedby="basic-addon1" id="representante_legal" name="representante_legal" maxlength="50"><br>
 
     <label for="dni_legal">Dni:</label><br>
-    <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" >
+    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="8">
     <br>
 
     <label for="observaciones">Observaciones:</label><br>
-    <textarea id="observaciones" name="observaciones" class="form-control" placeholder="ingrese las observaciones que considere necesarias"></textarea>
+    <textarea id="observaciones" name="observaciones" class="form-control" placeholder="ingrese las observaciones que considere necesarias" maxlength="200"></textarea>
     <br>
 
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />

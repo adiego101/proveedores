@@ -6,21 +6,20 @@
         <div class="row">
             <div class="col-sm">
                 <label for="calle_fiscal">Calle:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_fiscal" name="calle_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_fiscal" name="calle_fiscal" maxlength="40"><br>
 
                 <label for="dpto_fiscal">Departamento:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_fiscal" name="dpto_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_fiscal" name="dpto_fiscal" maxlength="10"><br>
 
                 <label for="lote_fiscal">Lote:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_fiscal" name="lote_fiscal"><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_fiscal" name="lote_fiscal" maxlength="3"><br>
 
                 <label for="entreCalles_fiscal">Entre Calles:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_fiscal" name="entreCalles_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_fiscal" name="entreCalles_fiscal" maxlength="50"><br>
 
                 <label for="monoblock_fiscal">Monoblock:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_fiscal" name="monoblock_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_fiscal" name="monoblock_fiscal" maxlength="10"><br>
 
-                <!--En este caso, se deben recuperar los paises de la BD -->
                 <label for="pais_fiscal">Pais:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="pais_fiscal" name="pais_fiscal">
                     @forelse($paises as $pais)
@@ -31,21 +30,21 @@
                 </select>
                 <br>
 
-                <!--En este caso, se deben recuperar las localidades de la BD -->
                 <label for="localidad_fiscal">Localidad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="localidad_fiscal" name="localidad_fiscal">
-                <option value=" ">Seleccione una localidad</option>
+                    <option value=" ">Seleccione una localidad</option>
                 </select>
                 <br>
 
                 <label for="email_fiscal">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
-                    aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" ><br>
+                    aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" maxlength="30"><br>
                 <div class="field_email_fiscal">
 
                 </div>
+
                 <label for="telefono_fiscal">Teléfono:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" >
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14">
                 <div class="field_telefono_fiscal">
 
                 </div>
@@ -53,21 +52,20 @@
             <div class="col-sm">
 
                 <label for="numero_fiscal">Número:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_fiscal" name="numero_fiscal"><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_fiscal" name="numero_fiscal" maxlength="4"><br>
 
                 <label for="puerta_fiscal">Puerta:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_fiscal" name="puerta_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_fiscal" name="puerta_fiscal" maxlength="4"><br>
 
                 <label for="manzana_fiscal">Manzana:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_fiscal" name="manzana_fiscal"><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_fiscal" name="manzana_fiscal" maxlength="3"><br>
 
                 <label for="oficina_fiscal">Oficina:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_fiscal" name="oficina_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_fiscal" name="oficina_fiscal" maxlength="4"><br>
 
                 <label for="barrio_fiscal">Barrio:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_fiscal" name="barrio_fiscal"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_fiscal" name="barrio_fiscal" maxlength="20"><br>
 
-                <!--En este caso, se deben recuperar las provincias de la BD -->
                 <label for="provincia_fiscal">Provincia:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_fiscal" name="provincia_fiscal">
                     <option value=" ">Seleccione una provincia</option>
@@ -80,10 +78,9 @@
                 <br>
 
                 <label for="cp_fiscal">Código Postal:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_fiscal" name="cp_fiscal" placeholder="Ingrese el código postal"><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="cp_fiscal" name="cp_fiscal" placeholder="Ingrese el código postal" maxlength="4"><br>
                 <br>
             
-                
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_email_fiscal" title="Agregue un nuevo correo"><input type="button" value="Agregar Correo" class="btn btn-success"></a>
                 </div>
@@ -103,7 +100,6 @@
 
 
 
-
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -116,7 +112,7 @@
         var fieldHTML_telefono_fiscal = '<div>'+
                                  '<br>'+
                                     '<label for="telefono_fiscal">Teléfono:</label><br>'+
-                                    '<input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" >'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14">'+
                                     '<a href="javascript:void(0);" class="remove_telefono_fiscal" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                  '<br>'+
                                 '</div>';
@@ -129,6 +125,7 @@
                 $(wrapper_telefono_fiscal).append(fieldHTML_telefono_fiscal); // Agrega un nuevo campo html (telefono)
             }
         });
+
         $(wrapper_telefono_fiscal).on('click', '.remove_telefono_fiscal', function(e) {
             e.preventDefault();
             $(this).parent('div').remove(); //Remueve un campo html (telefono)
@@ -143,7 +140,7 @@
         //Nuevo campo html (agregar un nuevo correo)
         var fieldHTML_email_fiscal = '<div>'+
                                     '<label for="email_fiscal">Correo electrónico:</label><br>'+
-                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" >'+
+                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" maxlength="30">'+
                                     '<a href="javascript:void(0);" class="remove_email_fiscal" title="Elimine el correo"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                     '<br>'+
                                     '<br>'+
@@ -158,6 +155,7 @@
                 $(wrapper_email_fiscal).append(fieldHTML_email_fiscal); // Agrega un nuevo campo html (correo)
             }
         });
+
         $(wrapper_email_fiscal).on('click', '.remove_email_fiscal', function(e) {
             e.preventDefault();
             $(this).parent('div').remove(); //Remueve un campo html (correo)
@@ -165,6 +163,7 @@
         });
     });
 </script>
+
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -188,4 +187,3 @@
 </script>
 
 </fieldset>
-

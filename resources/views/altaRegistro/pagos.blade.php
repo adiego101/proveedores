@@ -13,7 +13,7 @@
     <label for="prov_petrolero">Proveedor Petrolero</label><br>
 
     <input type="checkbox" id="prov_provincial" value="0" name="prov_provincial">
-    <label for="prov_provincial">Proveedor Provincial</label><br>
+    <label for="prov_provincial">Productor Provincial</label><br>
 
     <br>
 
@@ -26,11 +26,11 @@
         aria-describedby="basic-addon1" id="fecha_pago"><br>
 
     <label for="importe_pago">Importe:</label><br>
-    <input type="number" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="importe_pago"><br>
+    <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="importe_pago" maxlength="9"><br>
 
     <label for="observaciones_pago">Observaciones:</label><br>
     <input type="text" class="form-control" placeholder="Ingrese las observaciones del pago"
-        aria-describedby="basic-addon1" id="observaciones_pago"><br>
+        aria-describedby="basic-addon1" id="observaciones_pago" maxlength="50"><br>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a id="add_pago" class="btn btn-success">Agregar Pago</a>
@@ -78,9 +78,9 @@
                 '<tr id="row_pago' + indice + '">' +
                 '<td><input type="date" class="form-control" aria-describedby="basic-addon1" id="fecha_pago' + indice +
                 '" name="fechas_pagos[]" readonly value="' + fecha + '"></td>' +
-                '<td><input type="number" class="form-control" aria-describedby="basic-addon1" id="importe_pago' + indice +
-                '" name="importes_pagos[]" readonly value="' + importe + '"></td>' +
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="observaciones_pago' + indice + '" name="observaciones_pagos[]" readonly value="' + observaciones_pago + '"></td>' +
+                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="importe_pago' + indice +
+                '" name="importes_pagos[]" readonly value="' + importe + '" maxlength="9"></td>' +
+                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="observaciones_pago' + indice + '" name="observaciones_pagos[]" readonly value="' + observaciones_pago + '" maxlength="50"></td>' +
                 '<td><button type="button" name="edit" id="' + indice +
                 '" class="btn btn-warning btn-sm btn_edit_pago" title="editar pago"><indice class="fas fa-edit"></i></button>' +
                 '<button type="button" name="remove" id="' + indice +
