@@ -61,7 +61,7 @@ class ProveedoresController extends Controller
     public function crear_registro(Request $request)
     {
 
-        try{
+        //try{
         $cuit = Proveedor::where('cuit',$request->cuit)->exists();
         $dado_de_baja = Proveedor::where('cuit',$request->cuit)->where('dado_de_baja','0')->get();
         //return $dado_de_baja->isEmpty();
@@ -304,13 +304,13 @@ class ProveedoresController extends Controller
                 $sucursal->calle = $request->calles[$i];
                 $sucursal->numero = $request->numeros[$i];
                 $sucursal->dpto = $request->dptos[$i];
-                $sucursal->barrio = $request->lote[$i];
+                $sucursal->lote = $request->lotes[$i];
                 $sucursal->entre_calles = $request->entreCalles[$i];
-                $sucursal->monoblock = $request->monoblock[$i];
-                $sucursal->id_localidad = $request->localidad_sucursal[$i];
-                $sucursal->puerta = $request->puerta[$i];
-                $sucursal->oficina = $request->oficina[$i];
-                $sucursal->manzana = $request->manzana[$i];
+                $sucursal->monoblock = $request->monoblocks[$i];
+                $sucursal->id_localidad = $request->localidades[$i];
+                $sucursal->puerta = $request->puertas[$i];
+                $sucursal->oficina = $request->oficinas[$i];
+                $sucursal->manzana = $request->manzanas[$i];
                 $sucursal->codigo_postal = $request->codigo_postal[$i];
                 $sucursal->barrio = $request->barrios[$i];
 
@@ -400,7 +400,7 @@ class ProveedoresController extends Controller
         //---------Contador de Polizas----------
         if (isset($request->polizas)) {
 
-            $arraySize = count($request->polizas);
+            $arraySize = count($request->vigencias);
             var_dump($arraySize);
 
             //---------Carga de Polizas----------
@@ -411,7 +411,7 @@ class ProveedoresController extends Controller
                     'poliza' => $request->polizas[$i],
                     'agencia' => $request->agencias[$i],
                     'asegurado' => $request->asegurados[$i],
-                    'vigencia_hasta' => $request->vigentes[$i],
+                    'vigencia_hasta' => $request->vigencias[$i],
 
                 ]);
                 $Proveedor_seguro->save();
@@ -460,14 +460,14 @@ class ProveedoresController extends Controller
     else{
     return Redirect::back()
     ->withErrors(['El Cuil Ingresado ya existe, la operación no pudo completarse']);}
-        }
-        catch (\Exception $e)
+        //}
+        /*catch (\Exception $e)
     {
     Log::error('Error inesperado.' . $e->getMessage());
 
     return Redirect::back()
     ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
-    }
+    }*/
 
     }
 

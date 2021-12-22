@@ -71,8 +71,8 @@
             <label for="agencia">Agencia:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" name="agencias[]" /><br />
 
-            <label for="vigencia_hasta">Vigencia hasta:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia_hasta" name="vigentes[]" /><br />
+            <label for="vigencia">Vigencia hasta:</label><br />
+            <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia" name="vigencias[]" /><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_seguro" class="btn btn-success">Agregar Seguro</a>
@@ -254,7 +254,7 @@
             poliza = $("#poliza").val();
             agencia = $("#agencia").val();
             asegurado = $("#asegurado").val();
-            vigencia = $("#vigencia_hasta").val();
+            vigencia = $("#vigencia").val();
 
 
             $("#body_table_seguro").append(
@@ -262,7 +262,7 @@
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="poliza' + k +'" name="polizas[]" readonly value="' + poliza +'"></td>'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="agencia' + k +'" name="agencias[]" readonly value="' + agencia +'"></td>'+
                     '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="asegurado' + k +'" name="asegurados[]" readonly value="' + asegurado +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="vigencia_hasta' + k +'" name="vigencias[]" readonly value="'+ vigencia +'"></td>'+
+                    '<td><input type="date" class="form-control" aria-describedby="basic-addon1" id="vigencia' + k +'" name="vigencias[]" readonly value="'+ vigencia +'"></td>'+
                     '<td><button type="button" name="edit" id="'+ k +'" class="btn btn-warning btn-sm btn_edit_seguro" title="editar seguro"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + k +'" class="btn btn-danger btn-sm btn_remove_seguro" title="quitar seguro"><i class="fas fa-trash"></i></button></td>'+
                 '</tr>'
             );
@@ -275,7 +275,7 @@
             document.getElementById("poliza").value = "";
             document.getElementById("agencia").value = "";
             document.getElementById("asegurado").value = "";
-            document.getElementById("vigencia_hasta").value = "";
+            document.getElementById("vigencia").value = "";
 
 
             $(document).on("click", ".btn_remove_seguro", function() {
@@ -299,7 +299,7 @@
                 let modal_poliza = $("#poliza"+ button_id).val();
                 let modal_agencia = $("#agencia"+ button_id).val();
                 let modal_asegurado = $("#asegurado"+ button_id).val();
-                let modal_vigencia = $("#vigencia_hasta"+ button_id).val();
+                let modal_vigencia = $("#vigencia"+ button_id).val();
 
                 //Desplegamos el modal
                 $('#modal_seguro').modal('show');
@@ -308,7 +308,7 @@
                 $('#modal_poliza').val(modal_poliza);
                 $('#modal_agencia').val(modal_agencia);
                 $('#modal_asegurado').val(modal_asegurado);
-                $('#modal_vigencia_hasta').val(modal_vigencia);
+                $('#modal_vigencia').val(modal_vigencia);
                 $('#numero_fila_seguro').val(button_id);
 
             });
