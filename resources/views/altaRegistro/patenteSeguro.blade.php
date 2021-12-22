@@ -106,7 +106,7 @@
 <br>
 
 <label for="domicilio_sede">Domicilio:</label><br />
-<input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio_sede" name="domicilios[]" /><br />
+<input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio_sede" name="domicilios_sedes[]" /><br />
 
 <div class="row">
         <div class="col-sm">
@@ -124,9 +124,9 @@
         </div>
 
         <div class="col-sm">
-            <!--En este caso, se deben recuperar las localidades de la BD -->
+            <!--En este caso, se deben recuperar las localidades_sedes de la BD -->
             <label for="localidad_sede">Localidad:</label><br>
-            <select class="form-control" aria-describedby="basic-addon1" id="localidad_sede" name="localidad_sede">
+            <select class="form-control" aria-describedby="basic-addon1" id="localidad_sede" name="localidades_sedes[]">
                 <option value=" ">Seleccione una localidad</option>
             </select>
             <br>
@@ -330,8 +330,8 @@
 
         $("#body_table_sede").append(
             '<tr id="row_sede' + l +'">'+
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios[]" readonly value="' + domicilio +'"></td>'+
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades[]" readonly value="' + localidad +'"></td>'+
+                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'"></td>'+
+                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + localidad +'"></td>'+
                 '<td><button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button></td>'+
             '</tr>'
         );

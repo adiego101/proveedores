@@ -61,6 +61,7 @@ class ProveedoresController extends Controller
     public function crear_registro(Request $request)
     {
 
+
         //try{
         $cuit = Proveedor::where('cuit',$request->cuit)->exists();
         $dado_de_baja = Proveedor::where('cuit',$request->cuit)->where('dado_de_baja','0')->get();
@@ -377,9 +378,9 @@ class ProveedoresController extends Controller
         }
 
         //---------Contador de Patentes----------
-        if (isset($request->marcas)) {
+        if (isset($request->dominios)) {
 
-            $arraySize = count($request->marcas);
+            $arraySize = count($request->dominios);
             var_dump($arraySize);
 
             //---------Carga de Patentes----------
@@ -398,7 +399,7 @@ class ProveedoresController extends Controller
             }
         }
         //---------Contador de Polizas----------
-        if (isset($request->polizas)) {
+        if (isset($request->vigencias)) {
 
             $arraySize = count($request->vigencias);
             var_dump($arraySize);
@@ -419,9 +420,9 @@ class ProveedoresController extends Controller
         }
 
         //---------Contador de Sede----------
-        if (isset($request->domicilios_sede)) {
+        if (isset($request->domicilios_sedes)) {
 
-            $arraySize = count($request->domicilios_sede);
+            $arraySize = count($request->domicilios_sedes);
             var_dump($arraySize);
 
             //---------Carga de Sede----------
@@ -429,8 +430,8 @@ class ProveedoresController extends Controller
             for ($i = 0; $i < $arraySize; $i++) {
                 $Proveedor_sede = Proveedor_sede::create([
                     'id_proveedor' => $proveedores_rupae->id_proveedor,
-                    'Domicilio' => $request->domicilios[$i],
-                    'Localidad' => $request->localidades[$i],
+                    'Domicilio' => $request->domicilios_sedes[$i],
+                    'Localidad' => $request->localidades_sedes[$i],
                 ]);
                 $Proveedor_sede->save();
             }
@@ -495,10 +496,13 @@ class ProveedoresController extends Controller
     {
         if ($request->ajax()) {
             $data = Sucursal::where('id_proveedor', $id)->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarSucursal/' . "$row->id_sucursal" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    $url = url('modificarSucursal/' . $row->id_sucursal);
+
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -510,10 +514,13 @@ class ProveedoresController extends Controller
     {
         //if ($request->ajax()) {
             $data = Pago::where('id_proveedor', $id)->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarPago/' . "$row->id_pagos" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPago(' . $row->id_pagos . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    $url = url('modificarPago/' . $row->id_pagos);
+
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPago(' . $row->id_pagos . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -525,10 +532,13 @@ class ProveedoresController extends Controller
     {
         //if ($request->ajax()) {
             $data = Actividades_proveedores::where('id_proveedor', $id)->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarActividad/' . "$row->id_actividad_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaActividad(' . $row->id_actividad_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    $url = url('modificarActividad/' . $row->id_actividad_proveedor);
+
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaActividad(' . $row->id_actividad_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -539,10 +549,13 @@ class ProveedoresController extends Controller
     {
         //if ($request->ajax()) {
             $data = Producto::where('id_proveedor', $id)->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarProducto/' . "$row->id_producto" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaProducto(' . $row->id_producto . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    $url = url('modificarProducto/' . $row->id_producto);
+
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaProducto(' . $row->id_producto . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -553,10 +566,13 @@ class ProveedoresController extends Controller
     {
         //if ($request->ajax()) {
             $data = Proveedor_patente::where('id_proveedor', $id)->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarPatente/' . "$row->id_proveedor_patente" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPatente(' . $row->id_proveedor_patente . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    $url = url('modificarPatente/' . $row->id_proveedor_patente);
+
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPatente(' . $row->id_proveedor_patente . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -568,10 +584,13 @@ class ProveedoresController extends Controller
     {
         //if ($request->ajax()) {
             $data = Proveedor_seguro::where('id_proveedor', $id)->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarSeguros/' . "$row->id_proveedor_seguro" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSeguro(' . $row->id_proveedor_seguro . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    $url = url('modificarSeguros/' . $row->id_proveedor_seguro);
+
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSeguro(' . $row->id_proveedor_seguro . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -583,10 +602,13 @@ class ProveedoresController extends Controller
     {
         //if ($request->ajax()) {
             $data = Proveedor_sede::where('id_proveedor', $id)->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarSede/' . "$row->id_proveedor_sede" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSede(' . $row->id_proveedor_sede . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    $url = url('modificarSede/' . $row->id_proveedor_sede);
+
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSede(' . $row->id_proveedor_sede . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

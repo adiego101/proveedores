@@ -38,9 +38,6 @@
                 </select>
                 <br>
 
-                <!--FALTA VALIDAR -->
-                <label for="representante_legal">Representante:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el nombre del representante legal" aria-describedby="basic-addon1" id="representante_legal" name="representante_legal" ><br>
 
                 {{--<label for="email_legal">Correo electrónico:</label><br>
                 <input type="email" class="form-control" placeholder="ejemplo@dominio.com"
@@ -103,11 +100,7 @@
                 <label for="cp_legal">Código Postal:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_legal" name="cp_legal" placeholder="Ingrese el código postal" value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicilio_legal->codigo_postal : '' }}"><br>
 
-                <!--FALTA VALIDAR -->
-                <label for="dni_legal">Dni:</label><br>
-                <input type="number"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" >
-                <br>
-                <br>
+
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_email_legal" title="Agregue un nuevo correo"><input type="button" value="Agregar Correo" class="btn btn-success"></a>
                 </div>
