@@ -34,7 +34,6 @@
                 <!--En este caso, se deben recuperar las localidades de la BD -->
                 <label for="localidad_legal">Localidad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="localidad_legal" name="localidad_legal">
-                <option value="{{isset($proveedor_localidades_legal->nombre_localidad) ? $proveedor_localidades_legal->nombre_localidad : '' }}">{{isset($proveedor_localidades_legal->nombre_localidad) ? $proveedor_localidades_legal->nombre_localidad : 'Seleccione una localidad' }}</option>
                 </select>
                 <br>
 
@@ -90,8 +89,17 @@
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_legal" name="provincia_legal">
                 <option value="{{isset($proveedor_provincias_legal->nombre_provincia) ? $proveedor_provincias_legal->nombre_provincia : '' }}">{{isset($proveedor_provincias_legal->nombre_provincia) ? $proveedor_provincias_legal->nombre_provincia : 'Seleccione una provincia' }}</option>
                     @forelse($provincias as $provincia)
-                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                    @empty
+                            @if ($provincia->id_provincia == $provinciaidLegal)
+
+                            <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+                        @else
+
+                            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+
+                        @endif
+                         @empty
                         <option value=" "></option>
                     @endforelse
                 </select>
@@ -127,6 +135,9 @@
 
 
 
+
+
+@push('js')
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -209,6 +220,18 @@
 			}
 		});
 	}
+
+
+    function recargarListaLegal2(){
+        $.ajax({
+            type:"GET",
+            url:"{{url('localidadSelect/'.$proveedor_domicilio_legal->id_localidad)}}",
+            success:function(r){
+                $('#localidad_legal').html(r);
+            }
+        });
+    }
 </script>
+@endpush
 
 </fieldset>

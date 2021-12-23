@@ -31,17 +31,21 @@
     $(document).on("click", ".btn_bajaActividad", function() {
 
         //Obtenemos el numero de la fila que queremos modificar
-        let id = $("#baja").val();
+        let id = $("#baja_actividad").val();
+
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             //Si colocamos un numero (id) funciona sin problemas... VER
-            url: "bajaActividad/"+id,
+            url: "{{url('bajaActividades/')}}/"+id,
+            success: function() {
+                 // En caso de que se ejecute
+                 $('.yajra-actividades').DataTable().ajax.reload();
+        }
         });
 
+
         //se recarga la tabla para que desaparesca la fila dada de baja
-        $('.yajra-actividades').DataTable().ajax.reload();
-        location.reload();
         //Ocultamos el modal
         $('#modalBajaActividad').modal('hide');
 

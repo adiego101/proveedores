@@ -29,8 +29,10 @@
                 <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <input type="checkbox" value="{{ isset($proveedor->valor_agregado) ? $proveedor->valor_agregado : '' }}"
-                    id="valor_agregado"  name="valor_agregado" value="0">
+                        <input type="checkbox" @if (isset($proveedor->valor_agregado) ? $proveedor->valor_agregado : '0') checked
+                        value="1"
+                    @else value="0" @endif
+                    id="valor_agregado"  name="valor_agregado">
                         <label for="valor_agregado">Valor Agregado</label><br>
 
 
@@ -159,11 +161,11 @@
 
 
     <select class="form-control" aria-describedby="basic-addon1" id="id_tamanio_empresa" name="id_tamanio_empresa">
-        <option selected value="1">Micro</option>
-        <option value="2">Pequeña</option>
-        <option value="3">Mediana</option>
-        <option value="4">Grande</option>
-        <option value="5">Otros</option>
+        <option {{ ($proveedor->id_tamanio_empresa=="1") ? "selected"  : "" }} value="1">Micro</option>
+        <option {{ ($proveedor->id_tamanio_empresa=="2") ? "selected"  : "" }} value="2">Pequeña</option>
+        <option {{ ($proveedor->id_tamanio_empresa=="3") ? "selected"  : "" }} value="3">Mediana</option>
+        <option {{ ($proveedor->id_tamanio_empresa=="4") ? "selected"  : "" }} value="4">Grande</option>
+        <option {{ ($proveedor->id_tamanio_empresa=="5") ? "selected"  : "" }} value="5">Otros</option>
     </select><br>
 
 
@@ -251,7 +253,10 @@
                 else
                     $("#valor_indice").val('');
             });
+
+
         });
+
         function calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado) {
             let facturacion_ponderacion = $("#facturacion_ponderacion").val();
             let gastos_ponderacion = $("#gastos_ponderacion").val();
@@ -298,5 +303,18 @@
                                                     dom_fiscal*dom_fiscal_ponderacion+
                                                     valor_agregado*valor_agregado_ponderacion);
         }
+
+        function calcular(){
+            let porc_facturacion = $("#porc_facturacion").val();
+                let porc_gasto = $("#porc_gasto").val();
+                let porc_mo = $("#porc_mo").val();
+                let dom_fiscal = $("#dom_fiscal").val();
+                let antiguedad = $("#antiguedad").val();
+                let valor_agregado = $("#valor_agregado").val();
+                calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
+
+    }
+
+
     </script>
 @endpush

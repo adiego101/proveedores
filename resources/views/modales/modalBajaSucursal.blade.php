@@ -33,15 +33,18 @@
         //Obtenemos el numero de la fila que queremos modificar
         let id = $("#baja").val();
 
+
         $.ajax({
-            type: "GET",
+            type: "POST",
             //Si colocamos un numero (id) funciona sin problemas... VER
-            url: "bajaSucursal/"+id,
+            url: "{{url('bajaSucursales/')}}/"+id,
+            success: function() {
+                 // En caso de que se ejecute
+                 $('.yajra-datatable').DataTable().ajax.reload();
+        }
         });
 
         //se recarga la tabla para que desaparesca la fila dada de baja
-        $('.yajra-datatable').DataTable().ajax.reload();
-        location.reload();
         //Ocultamos el modal
         $('#modalBajaSucursal').modal('hide');
 

@@ -90,8 +90,17 @@
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_fiscal" name="provincia_fiscal">
                 <option value="{{isset($proveedor_provincias_fiscal->nombre_provincia) ? $proveedor_provincias_fiscal->nombre_provincia : '' }}">{{isset($proveedor_provincias_fiscal->nombre_provincia) ? $proveedor_provincias_fiscal->nombre_provincia : 'Seleccione una provincia' }}</option>
                     @forelse($provincias as $provincia)
-                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                    @empty
+                            @if ($provincia->id_provincia == $provinciaidFiscal)
+
+                            <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+                        @else
+
+                            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+
+                        @endif
+                        @empty
                         <option value=" "></option>
                     @endforelse
                 </select>
@@ -128,6 +137,8 @@
 
 
 
+
+@push('js')
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -209,7 +220,16 @@
 			}
 		});
 	}
+    function recargarListaFiscal2(){
+        $.ajax({
+            type:"GET",
+            url:"{{url('localidadSelect/'.$proveedor_domicilio_fiscal->id_localidad)}}",
+            success:function(r){
+                $('#localidad_fiscal').html(r);
+            }
+        });
+    }
 </script>
-
+@endpush
 </fieldset>
 

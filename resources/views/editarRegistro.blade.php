@@ -182,6 +182,16 @@ $('input[type="checkbox"]').on('change', function(){
     this.value = this.checked ? 1 : 0;
      console.log(this.value);
  }).change();
+
+ window.onload = function(){
+        recargarListaLegal2();
+        recargarListaRealEdit2();
+        recargarListaFiscal2();
+        recargarListaHabilitacion2();
+        calcular();
+
+        };
+
 </script>
 
 @endpush

@@ -3,7 +3,19 @@
 
 @endsection
 @section('js')
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    </script>
+
 @endsection
+
+@push('header')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+@endpush
 
 @section('content_header')
 <div class="container ">
@@ -21,7 +33,7 @@
                     @endif
 
                     @yield('content2')
-                        
+
                 </div>
         </div>
     </div>

@@ -33,15 +33,19 @@
         //Obtenemos el numero de la fila que queremos modificar
         let id = $("#baja_patente").val();
 
+
         $.ajax({
-            type: "GET",
+            type: "POST",
             //Si colocamos un numero (id) funciona sin problemas... VER
-            url: "bajaPatente/"+id,
+            url: "{{url('bajaPatentes/')}}/"+id,
+            success: function() {
+                 // En caso de que se ejecute
+                 $('.yajra-vehiculos').DataTable().ajax.reload();
+        }
         });
 
+
         //se recarga la tabla para que desaparesca la fila dada de baja
-        $('.yajra-vehiculos').DataTable().ajax.reload();
-        location.reload();
         //Ocultamos el modal
         $('#modal_baja_patente').modal('hide');
 

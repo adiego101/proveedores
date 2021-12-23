@@ -34,14 +34,18 @@
         let id = $("#baja_pago").val();
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             //Si colocamos un numero (id) funciona sin problemas... VER
-            url: "bajaPago/"+id,
+            url: "{{url('bajaPagos/')}}/"+id,
+            success: function() {
+                 // En caso de que se ejecute
+                 $('.yajra-pagos').DataTable().ajax.reload();
+        }
         });
 
         //se recarga la tabla para que desaparesca la fila dada de baja
-        $('.yajra-pagos').DataTable().ajax.reload();
-        location.reload();
+        //$('.yajra-pagos').DataTable().ajax.reload();
+        //location.reload();
         //Ocultamos el modal
         $('#modal_baja_pago').modal('hide');
 

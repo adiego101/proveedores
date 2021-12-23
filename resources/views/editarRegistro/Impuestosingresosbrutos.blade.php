@@ -12,9 +12,9 @@
 
    <!--En este caso, se deben recuperar los datos de la BD -->
    <label for="tipo_contribuyente">Tipo de contribuyente:</label><br>
-  <select class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->tipo_contribuyente) ? $proveedor->tipo_contribuyente : '' }}" id="tipo_contribuyente" name="tipo_contribuyente">
-    <option selected value="Contribuyente Puro">Contribuyente Puro</option>
-    <option value="Contribuyente Convenio Multilateral">Contribuyente Convenio Multilateral</option>
+  <select class="form-control" aria-describedby="basic-addon1"  id="tipo_contribuyente" name="tipo_contribuyente">
+    <option {{ ($proveedor->tipo_contribuyente=="Contribuyente Puro") ? "selected"  : "" }} value="Contribuyente Puro">Contribuyente Puro</option>
+    <option {{ ($proveedor->tipo_contribuyente=="Contribuyente Convenio Multilateral") ? "selected"  : "" }} value="Contribuyente Convenio Multilateral">Contribuyente Convenio Multilateral</option>
   </select>
 
   <br>
@@ -35,8 +35,16 @@
         <select class="form-control" aria-describedby="basic-addon1" id="provincia_habilitacion" name="provincia_habilitacion">
         <option value=" ">Seleccione una provincia</option>
           @forelse($provincias as $provincia)
-            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-          @empty
+          @if ($provincia->id_provincia == $localidades->where("id_localidad",$proveedor->localidad_habilitacion)->first()->id_provincia )
+
+          <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+      @else
+
+          <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+
+      @endif           @empty
             <option value=" "></option>
           @endforelse
         </select>
@@ -67,8 +75,16 @@
                     id="provincia_inscrip_personas_jur" name="provincia_inscrip_personas_jur">
         <option value=" ">Seleccione una provincia</option>
         @foreach($provincias as $provincia)
-          <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-        @endforeach
+        @if ($provincia->nombre_provincia ==$proveedor->provincia_inscrip_personas_jur )
+
+        <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+    @else
+
+        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+
+    @endif         @endforeach
         </select>
         <br>
       </div>
@@ -89,8 +105,16 @@
         <select class="form-control" aria-describedby="basic-addon1" id="provincia_registro_publico" name="provincia_registro_publico">
         <option value=" ">Seleccione una provincia</option>
         @foreach($provincias as $provincia)
-          <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-        @endforeach
+        @if ($provincia->nombre_provincia ==$proveedor->provincia_registro_publico )
+
+        <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+    @else
+
+        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+
+    @endif             @endforeach
         </select>
         <br>
       </div>
@@ -110,8 +134,16 @@
         <select class="form-control" aria-describedby="basic-addon1" id="provincia_inspeccion_justicia" name="provincia_inspeccion_justicia">
         <option value=" ">Seleccione una provincia</option>
         @foreach($provincias as $provincia)
-          <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-        @endforeach
+        @if ($provincia->nombre_provincia ==$proveedor->provincia_inspeccion_justicia )
+
+        <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+    @else
+
+        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+
+    @endif          @endforeach
         </select>
         <br>
       </div>
@@ -150,6 +182,15 @@
 				$('#localidad_habilitacion').html(r);
 			}
 		});
+	}
+    function recargarListaHabilitacion2(){
+        $.ajax({
+            type:"GET",
+            url:"{{url('localidadSelect/'.$proveedor->localidad_habilitacion)}}",
+            success:function(r){
+                $('#localidad_habilitacion').html(r);
+            }
+        });
 	}
 </script>
 

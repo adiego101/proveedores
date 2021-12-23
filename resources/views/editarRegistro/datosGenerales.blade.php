@@ -22,18 +22,18 @@
 
     <label for="representante_legal">Representante:</label><br>
     <input type="text" class="form-control" placeholder="Ingrese el nombre del representante legal"
-        aria-describedby="basic-addon1" id="representante_legal" value="Ver como recuperar valor, relacion muchos a muchos"  name="representante_legal"><br>
+        aria-describedby="basic-addon1" id="representante_legal" value="{{ isset($persona->nombre_persona) ? $persona->nombre_persona : '' }}"  name="representante_legal"><br>
 
     <!--FALTA VALIDAR -->
     <label for="dni_legal">Dni:</label><br>
     <input type="number" onkeypress="return valideKey(event);" class="form-control"
-    value=""
-        placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal"
+
+        placeholder="Ingrese el dni del representante legal" value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-describedby="basic-addon1" id="dni_legal"
         name="dni_legal">
     <br>
     <label for="observaciones">Observaciones:</label><br>
-    <textarea id="observaciones" value="{{ isset($proveedor->observaciones) ? $proveedor->observaciones : '' }}"  name="representante_legal" name="observaciones" class="form-control"
-        placeholder="ingrese las observaciones que considere necesarias"></textarea>
+    <textarea id="observaciones"  name="representante_legal" name="observaciones" class="form-control"
+        placeholder="ingrese las observaciones que considere necesarias">{{ isset($proveedor->observaciones) ? $proveedor->observaciones : '' }}</textarea>
     <br>
     <br>
 

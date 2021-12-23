@@ -3,24 +3,24 @@
   <h1>Información Impositiva</h1><br>
 
   <label for="tipo_de_sociedad">Tipo de sociedad:</label><br>
-  <select class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->tipo_de_sociedad) ? $proveedor->tipo_de_sociedad : '' }}" id="tipo_de_sociedad" name="tipo_de_sociedad">
-    <option selected value="UNIPERSONAL">UNIPERSONAL</option>
-    <option value="SOCIEDAD ANONIMA">SOCIEDAD ANONIMA</option>
-    <option value="SOCIEDAD DE RESPONSABILIDAD LIMITADA">SOCIEDAD DE RESPONSABILIDAD LIMITADA</option>
-    <option value="SOCIEDAD DE HECHO">SOCIEDAD DE HECHO</option>
-    <option value="SOCIEDAD DEL EXTERIOR INSCRIPTA EN EL PAIS">SOCIEDAD DEL EXTERIOR INSCRIPTA EN EL PAIS</option>
-    <option value="SOCIEDAD DEL EXTERIOR NO INSCRIPTA EN EL PAIS">SOCIEDAD DEL EXTERIOR NO INSCRIPTA EN EL PAIS</option>
-    <option value="COOPERATIVA">COOPERATIVA</option>
-    <option value="OTRAS SOCIEDADES">OTRAS SOCIEDADES</option>
+  <select class="form-control" aria-describedby="basic-addon1"  id="tipo_de_sociedad" name="tipo_de_sociedad">
+    <option {{ ($proveedor->tipo_de_sociedad=="UNIPERSONAL") ? "selected"  : "" }} value="UNIPERSONAL">UNIPERSONAL</option>
+    <option {{ ($proveedor->tipo_de_sociedad=="SOCIEDAD ANONIMA") ? "selected"  : "" }} value="SOCIEDAD ANONIMA">SOCIEDAD ANONIMA</option>
+    <option {{ ($proveedor->tipo_de_sociedad=="SOCIEDAD DE RESPONSABILIDAD LIMITADA") ? "selected"  : "" }} value="SOCIEDAD DE RESPONSABILIDAD LIMITADA">SOCIEDAD DE RESPONSABILIDAD LIMITADA</option>
+    <option {{ ($proveedor->tipo_de_sociedad=="SOCIEDAD DE HECHO") ? "selected"  : "" }} value="SOCIEDAD DE HECHO">SOCIEDAD DE HECHO</option>
+    <option {{ ($proveedor->tipo_de_sociedad=="SOCIEDAD DEL EXTERIOR INSCRIPTA EN EL PAIS") ? "selected"  : "" }} value="SOCIEDAD DEL EXTERIOR INSCRIPTA EN EL PAIS">SOCIEDAD DEL EXTERIOR INSCRIPTA EN EL PAIS</option>
+    <option {{ ($proveedor->tipo_de_sociedad=="SOCIEDAD DEL EXTERIOR NO INSCRIPTA EN EL PAIS") ? "selected"  : "" }} value="SOCIEDAD DEL EXTERIOR NO INSCRIPTA EN EL PAIS">SOCIEDAD DEL EXTERIOR NO INSCRIPTA EN EL PAIS</option>
+    <option {{ ($proveedor->tipo_de_sociedad=="COOPERATIVA") ? "selected"  : "" }} value="COOPERATIVA">COOPERATIVA</option>
+    <option {{ ($proveedor->tipo_de_sociedad=="OTRAS SOCIEDADES") ? "selected"  : "" }} value="OTRAS SOCIEDADES">OTRAS SOCIEDADES</option>
   </select>
   <br>
 
   <label for="situacion_iva">Situación IVA:</label><br>
-  <select class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->situacion_iva) ? $proveedor->situacion_iva : '' }}" id="situacion_iva" name="situacion_iva">
-    <option selected value="RESPONSABLE INSCRIPTO">RESPONSABLE INSCRIPTO</option>
-    <option value="MONOTRIBUTISTA">MONOTRIBUTISTA</option>
-    <option value="NO ALCANZADO">NO ALCANZADO</option>
-    <option value="OTROS">OTROS</option>
+  <select class="form-control" aria-describedby="basic-addon1" id="situacion_iva" name="situacion_iva">
+    <option  {{ ($proveedor->situacion_iva=="RESPONSABLE INSCRIPTO") ? "selected"  : "" }} value="RESPONSABLE INSCRIPTO">RESPONSABLE INSCRIPTO</option>
+    <option  {{ ($proveedor->situacion_iva=="MONOTRIBUTISTA") ? "selected"  : "" }} value="MONOTRIBUTISTA">MONOTRIBUTISTA</option>
+    <option  {{ ($proveedor->situacion_iva=="NO ALCANZADO") ? "selected"  : "" }} value="NO ALCANZADO">NO ALCANZADO</option>
+    <option  {{ ($proveedor->situacion_iva=="OTROS") ? "selected"  : "" }} value="OTROS">OTROS</option>
   </select>
   <br>
 
@@ -32,8 +32,16 @@
   <select class="form-control" aria-describedby="basic-addon1" id="en_la_provincia_de" name="en_la_provincia_de">
     <option value=" ">Seleccione una provincia</option>
     @forelse($provincias as $provincia)
-      <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-    @empty
+    @if ($provincia->nombre_provincia ==$proveedor->en_la_provincia_de )
+
+    <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+@else
+
+    <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+
+@endif    @empty
       <option value=" "></option>
     @endforelse
   </select>
@@ -43,11 +51,11 @@
     <label>Corresponde retención:</label>
     <div class="form-check">
       <div class="col-sm">
-        <input type="radio" value="{{ isset($proveedor->retencion) || $proveedor->retencion != 1 ? $proveedor->retencion : '' }}"
+        <input type="radio" {{ ($proveedor->retencion=="1") ? "checked"  : "" }}
             id="retencion" name="retencion" value="1" >SI
       </div>
       <div class="col-sm">
-        <input type="radio" value="{{ isset($proveedor->retencion) || $proveedor->retencion != 0  ? $proveedor->retencion : '' }}"  id="retencion" name="retencion" value="0">NO
+        <input type="radio" {{ ($proveedor->retencion=="0") ? "checked"  : "" }}  id="retencion" name="retencion" value="0">NO
       </div>
     </div>
   </div>

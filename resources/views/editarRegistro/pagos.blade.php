@@ -1,18 +1,18 @@
 <fieldset>
-    <h1>Pagos</h1>
+    <h1>{{($proveedores_tipos_proveedores->where('id_tipo_proveedor',"1")->isEmpty())}}</h1>
     <br>
     <h4>Tipo de Proveedor:</h4><br>
 
-    <input type="checkbox" id="prov_estado" value="0" name="prov_estado">
+    <input  {{ !($proveedores_tipos_proveedores->where('id_tipo_proveedor',"1")->isEmpty()) ? "checked"  : "" }} type="checkbox" id="prov_estado" value="0" name="prov_estado">
     <label for="prov_estado">Proveedor del Estado</label><br>
 
-    <input type="checkbox" id="prov_minero" value="0" name="prov_minero">
+    <input {{ !($proveedores_tipos_proveedores->where('id_tipo_proveedor',"2")->isEmpty()) ? "checked"  : "" }} type="checkbox" id="prov_minero" value="0" name="prov_minero">
     <label for="prov_minero">Proveedor Minero</label><br>
 
-    <input type="checkbox" id="prov_petrolero" value="0" name="prov_petrolero">
+    <input {{ !($proveedores_tipos_proveedores->where('id_tipo_proveedor',"3")->isEmpty()) ? "checked"  : "" }} type="checkbox" id="prov_petrolero" value="0" name="prov_petrolero">
     <label for="prov_petrolero">Proveedor Petrolero</label><br>
 
-    <input type="checkbox" id="prov_provincial" value="0" name="prov_provincial">
+    <input  {{ !($proveedores_tipos_proveedores->where('id_tipo_proveedor',"4")->isEmpty()) ? "checked"  : "" }} type="checkbox" id="prov_provincial" value="0" name="prov_provincial">
     <label for="prov_provincial">Proveedor Provincial</label><br>
 
     <br>

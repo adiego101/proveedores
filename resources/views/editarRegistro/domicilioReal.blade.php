@@ -32,9 +32,9 @@
                 <br>
 
                 <!--En este caso, se deben recuperar las localidades de la BD -->
+
                 <label for="localidad_real">Localidad:</label><br>
-                <select class="form-control" aria-describedby="basic-addon1" id="localidad_real" name="localidad_real">
-                <option value="{{isset($proveedor_localidades_real->nombre_localidad) ? $proveedor_localidades_real->nombre_localidad : '' }}">{{isset($proveedor_localidades_real->nombre_localidad) ? $proveedor_localidades_real->nombre_localidad : 'Seleccione una localidad' }}</option>
+                <select class="form-control"  aria-describedby="basic-addon1" id="localidad_real" name="localidad_real">
                 </select>
                 <br>
 
@@ -94,8 +94,16 @@
                 <select class="form-control" aria-describedby="basic-addon1" id="provincia_real" name="provincia_real">
                 <option value="{{isset($proveedor_provincias_real->nombre_provincia) ? $proveedor_provincias_real->nombre_provincia : '' }}">{{isset($proveedor_provincias_real->nombre_provincia) ? $proveedor_provincias_real->nombre_provincia : 'Seleccione una provincia' }}</option>
                     @forelse($provincias as $provincia)
-                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                    @empty
+                    @if ($provincia->id_provincia == $provinciaidReal)
+
+                    <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+                @else
+
+                    <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+
+
+                @endif                    @empty
                         <option value=" "></option>
                     @endforelse
                 </select>
@@ -131,6 +139,7 @@
         <a class="btn btn-primary btnNext">Siguiente</a>
     </div>
 </div>
+@push('js')
 
 
 <script type="text/javascript">
@@ -198,6 +207,19 @@
 </script>
 
 <script type="text/javascript">
+  window.onload = function(){
+        console.log("localidad real");
+        };
+    function recargarListaRealEdit2(){
+        $.ajax({
+            type:"GET",
+            url:"{{url('localidadSelect/'.$proveedor_domicilio_real->id_localidad)}}",
+            success:function(r){
+                $('#localidad_real').html(r);
+            }
+        });
+    };
+
 	$(document).ready(function(){
 
 		$('#provincia_real').change(function(){
@@ -216,6 +238,9 @@
 			}
 		});
 	}
+
+
 </script>
 
+@endpush
 </fieldset>

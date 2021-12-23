@@ -10,7 +10,7 @@ class Proveedor_patente extends Model
     use HasFactory;
 
     protected $table = "proveedores_patentes";
-    protected $primaryKey = 'id_proveedores_patentes';
+    protected $primaryKey = 'id_proveedor_patente';
 
     protected $fillable = [
                             'dominio',

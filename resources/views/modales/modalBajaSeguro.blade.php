@@ -34,14 +34,17 @@
         let id = $("#baja_seguro").val();
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             //Si colocamos un numero (id) funciona sin problemas... VER
-            url: "bajaSeguro/"+id,
+            url: "{{url('bajaSeguros/')}}/"+id,
+            success: function() {
+                 // En caso de que se ejecute
+                 $('.yajra-seguros').DataTable().ajax.reload();
+        }
         });
 
         //se recarga la tabla para que desaparesca la fila dada de baja
         $('.yajra-seguros').DataTable().ajax.reload();
-        location.reload();
         //Ocultamos el modal
         $('#modal_baja_seguro').modal('hide');
 
