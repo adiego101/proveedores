@@ -481,7 +481,7 @@ class ProveedoresController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaRegistro(' . $row->id_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaRegistro(' . $row->id_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -1039,9 +1039,6 @@ class ProveedoresController extends Controller
 
         $provinciaidReal =  $provinciaidReal[0]->id_provincia;
 
-
-
-
         $proveedor_email_real = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'real')
             ->get();
 
@@ -1073,29 +1070,94 @@ class ProveedoresController extends Controller
         $ponderaciones = Ponderacion_compre_local::All();
         $jerarquias = Jerarquia_compre_local::All();
 
-        return view('editarRegistro', compact('persona','provinciaidReal','provinciaidLegal','provinciaidFiscal','paises', 'jerarquias', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones'), [
-            'proveedor' => $proveedor,
-            'id' => $id,
-            'proveedor_telefono_fiscal' => $proveedor_telefono_fiscal,
-            'proveedor_domicilio_fiscal' => $proveedor_domicilio_fiscal,
-            'proveedor_email_fiscal' => $proveedor_email_fiscal,
-            'proveedor_telefono_legal' => $proveedor_telefono_legal,
-            'proveedor_domicilio_legal' => $proveedor_domicilio_legal,
-            'proveedor_email_legal' => $proveedor_email_legal,
-            'proveedor_telefono_real' => $proveedor_telefono_real,
-            'proveedor_domicilio_real' => $proveedor_domicilio_real,
-            'proveedor_email_real' => $proveedor_email_real,
-            'proveedores_tipos_proveedores' => $proveedores_tipos_proveedores,
-            'sucursales' => $sucursales,
-            //'sucursales_email' => $sucursales_email,
-            //'sucursales_telefono' => $sucursales_telefono,
-            'actividades' => $actividades,
-            'productos ' => $productos,
-            'patentes' => $patentes,
-            'seguros' => $seguros,
-            'sedes' => $sedes,
-            'pagos' => $pagos,
-        ]);
+        $mode = "edit";
+
+        return view('editarRegistro', compact('persona', 'mode',
+        'provinciaidReal','provinciaidLegal','provinciaidFiscal','paises', 'jerarquias', 'provincias','localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones','proveedor',
+        'id' ,'proveedor_telefono_fiscal','proveedor_domicilio_fiscal' ,'proveedor_email_fiscal' ,'proveedor_telefono_legal' ,'proveedor_domicilio_legal' ,
+        'proveedor_email_legal' ,'proveedor_telefono_real' ,'proveedor_domicilio_real' ,'proveedor_email_real' ,'proveedores_tipos_proveedores',
+        'sucursales', 'actividades' ,'productos' ,'patentes' ,'seguros' , 'sedes', 'pagos')
+        );
+    }
+
+    public function verProveedorRupaeId($id)
+    {
+        $proveedor = Proveedor::findOrFail($id);
+
+        $persona = $proveedor->personas()->get();
+        $persona = $persona[0];
+        $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
+            ->first();
+
+        $provinciaidFiscal = Localidad::where('id_localidad', $proveedor_domicilio_fiscal->id_localidad)->get();
+
+        $provinciaidFiscal =  $provinciaidFiscal[0]->id_provincia;
+
+        $proveedor_email_fiscal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'fiscal')
+            ->get();
+
+        $proveedor_telefono_fiscal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'fiscal')
+            ->get();
+
+        $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
+            ->first();
+
+        $provinciaidLegal = Localidad::where('id_localidad', $proveedor_domicilio_legal->id_localidad)->get();
+
+        $provinciaidLegal =  $provinciaidLegal[0]->id_provincia;
+
+        $proveedor_email_legal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'legal')
+            ->get();
+
+        $proveedor_telefono_legal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'legal')
+            ->get();
+
+        $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
+            ->first();
+
+        $provinciaidReal = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->get();
+
+        $provinciaidReal =  $provinciaidReal[0]->id_provincia;
+
+        $proveedor_email_real = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'real')
+            ->get();
+
+        $proveedor_telefono_real = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'real')
+            ->get();
+
+        $proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $id)->get();
+
+        $sucursales = Sucursal::where('id_proveedor', $id)->get();
+
+        $actividades = Actividades_proveedores::where('id_proveedor', $id)->get();
+
+        $productos = Producto::where('id_proveedor', $id)->get();
+
+        $patentes = Proveedor_patente::where('id_proveedor', $id)->get();
+
+        $seguros = Proveedor_seguro::where('id_proveedor', $id)->get();
+
+        $sedes = Proveedor_sede::where('id_proveedor', $id)->get();
+
+        $pagos = Pago::where('id_proveedor', $id)->get();
+
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+        $tipos_actividades = Tipo_actividad::All();
+        $actividades = Actividad_economica::All();
+        $productos = Producto::All();
+        $ponderaciones = Ponderacion_compre_local::All();
+        $jerarquias = Jerarquia_compre_local::All();
+        $mode = "show";
+
+
+        return view('verRegistro', compact('persona', 'mode',
+        'provinciaidReal','provinciaidLegal','provinciaidFiscal','paises', 'jerarquias', 'provincias','localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones','proveedor',
+        'id' ,'proveedor_telefono_fiscal','proveedor_domicilio_fiscal' ,'proveedor_email_fiscal' ,'proveedor_telefono_legal' ,'proveedor_domicilio_legal' ,
+        'proveedor_email_legal' ,'proveedor_telefono_real' ,'proveedor_domicilio_real' ,'proveedor_email_real' ,'proveedores_tipos_proveedores',
+        'sucursales', 'actividades' ,'productos' ,'patentes' ,'seguros' , 'sedes', 'pagos')
+        );
     }
 
     public function editarProveedor($id, Request $request)

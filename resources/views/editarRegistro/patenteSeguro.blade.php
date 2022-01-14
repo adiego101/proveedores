@@ -7,7 +7,8 @@
 
 <br/>
 
-<input type="checkbox" id="vehiculos_afectados" name="vehiculos_afectados" value="0">
+<input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="vehiculos_afectados" name="vehiculos_afectados"
+value="0">
 <label for="vehiculos_afectados">Posee vehículos afectados a la actividad económica que desarrolla</label><br>
 <br>
 
@@ -38,7 +39,8 @@
 
     <hr>
 
-<input type="checkbox" id="seguros_sta_cruz"  name="seguros_sta_cruz" value="0">
+<input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="seguros_sta_cruz"  name="seguros_sta_cruz"
+value="0">
 <label for="seguros_sta_cruz">Posee seguros contratados con promotores residentes en nuestra provincia</label><br>
 <br>
 
@@ -66,7 +68,8 @@
 
     <hr>
 
-<input type="checkbox" id="servicio_personal_especializado" name="servicio_personal_especializado"  value="0">
+<input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="servicio_personal_especializado" name="servicio_personal_especializado"
+value="0">
 <label for="servicio_personal_especializado">Utiliza como sede de la actividad económica que desarrolla algún inmueble que tribute impuesto inmobiliario en localidades de la Provincia de Santa Cruz</label><br>
 <br>
 

@@ -7,7 +7,8 @@
     <label for="facturacion_anual_alcanzada">Facturación anual alcanzada:</label><br>
     <input type="text" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada"
     name="facturacion_anual_alcanzada"
-        value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
+     @if ( $mode == "show") readonly @endif
+value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
 
 
         <div>
@@ -39,7 +40,8 @@
 
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
     <input type="text" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"
-        value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}"><br>
+        @if ( $mode == "show") readonly @endif
+value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}"><br>
 
         <div>
 
