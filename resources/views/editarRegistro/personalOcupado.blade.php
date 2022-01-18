@@ -50,7 +50,7 @@ value="{{ isset($proveedor->cant_empleados_domicilio_sta_cruz) ? $proveedor->can
     <input type="number"  onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="masa_salarial_bruta" name="masa_salarial_bruta" placeholder="Ingrese la masa salarial bruta total en la Provincia de Santa Cruz" @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->masa_salarial_bruta) ? $proveedor->masa_salarial_bruta : '' }}"><br>
 
-    <div class="row navbuttons pt-5">
+    <div class="row navbuttons ">
         <div class="col-6 col-sm-auto" id="btnPrevious">
             <a class="btn btn-primary btnPrevious">Anterior</a>
         </div>

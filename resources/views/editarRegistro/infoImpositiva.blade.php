@@ -81,7 +81,7 @@ value="0">NO
 
   <br>
 
-  <div class="row navbuttons pt-5">
+  <div class="row navbuttons ">
     <div class="col-6 col-sm-auto" id="btnPrevious">
         <a class="btn btn-primary btnPrevious">Anterior</a>
     </div>

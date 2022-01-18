@@ -42,13 +42,9 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
     <br>
     <br>
 
-    <div class="row navbuttons pt-5">
+    <div class="row navbuttons">
         <div class="col-6 col-sm-auto" id="btnNext">
             <a class="btn btn-primary btnNext">Siguiente</a>
 
-            <!--DEJAR COMENTADO HASTA LA EXPOSICION -->
-            <!-- <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-success">Descargar Registro alta</a>
-                <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-warning">Descargar Certificado inscripción</a> -->
-        </div>
     </div>
 </fieldset>

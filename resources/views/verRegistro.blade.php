@@ -69,6 +69,8 @@
 
         </ul>
 
+
+
         <br>
         <!-- -->
 
@@ -127,6 +129,14 @@
                                 @include('editarRegistro.otrosDatos') </div>
                         </div>
     @yield('datos')
+    <br>
+
+     <!--DEJAR COMENTADO HASTA LA EXPOSICION -->
+     @if ( $mode == "show")
+     <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-success">Descargar Registro alta</a>
+        <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-warning">Descargar Certificado inscripción</a>
+        @endif
+    </div>
 
 @endsection
 
