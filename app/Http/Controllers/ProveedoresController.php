@@ -498,8 +498,9 @@ class ProveedoresController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $url = url('editarSucursales/' . $row->id_sucursal);
+                    $url2 = url('verSucursales/' . $row->id_sucursal);
 
-                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -586,8 +587,9 @@ class ProveedoresController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $url = url('editarPagos/' . $row->id_pagos);
+                $url2 = url('verPagos/' . $row->id_pagos);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPago(' . $row->id_pagos . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPago(' . $row->id_pagos . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])
@@ -641,8 +643,9 @@ class ProveedoresController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $url = url('editarActividades/' . $row->id_actividad_proveedor);
+                $url2 = url('verActividades/' . $row->id_actividad_proveedor);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaActividad(' . $row->id_actividad_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaActividad(' . $row->id_actividad_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])
@@ -730,8 +733,9 @@ class ProveedoresController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $url = url('editarProductos/' . $row->id_producto);
+                $url2 = url('verProductos/' . $row->id_producto);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaProducto(' . $row->id_producto . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaProducto(' . $row->id_producto . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])
@@ -789,8 +793,9 @@ class ProveedoresController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $url = url('editarPatentes/' . $row->id_proveedor_patente);
+                $url2 = url('verPatentes/' . $row->id_proveedor_patente);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPatente(' . $row->id_proveedor_patente . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPatente(' . $row->id_proveedor_patente . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])
@@ -841,8 +846,9 @@ class ProveedoresController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $url = url('editarSeguros/' . $row->id_proveedor_seguro);
+                $url2 = url('verSeguros/' . $row->id_proveedor_seguro);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSeguro(' . $row->id_proveedor_seguro . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSeguro(' . $row->id_proveedor_seguro . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])
@@ -895,8 +901,9 @@ class ProveedoresController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 $url = url('editarSedes/' . $row->id_proveedor_sede);
+                $url2 = url('verSedes/' . $row->id_proveedor_sede);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a onclick="verRegistro();" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSede(' . $row->id_proveedor_sede . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSede(' . $row->id_proveedor_sede . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                 return $actionBtn;
             })
             ->rawColumns(['action'])

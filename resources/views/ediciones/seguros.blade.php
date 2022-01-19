@@ -18,18 +18,18 @@
     <div class="row">
         <div class="col-sm">
             <label for="poliza">Poliza:</label><br />
-            <input type="text" value="{{ isset($seguro->poliza) ? $seguro->poliza : '' }}" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="poliza" name="poliza" /><br />
+            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($seguro->poliza) ? $seguro->poliza : '' }}" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="poliza" name="poliza" /><br />
 
             <label for="asegurado">Asegurado:</label><br />
-            <input type="text" value="{{ isset($seguro->asegurado) ? $seguro->asegurado : '' }}" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" name="asegurado" /><br />
+            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($seguro->asegurado) ? $seguro->asegurado : '' }}" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" name="asegurado" /><br />
         </div>
 
         <div class="col-sm">
             <label for="agencia">Agencia:</label><br />
-            <input type="text" value="{{ isset($seguro->agencia) ? $seguro->agencia : '' }}" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" name="agencia" /><br />
+            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($seguro->agencia) ? $seguro->agencia : '' }}" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" name="agencia" /><br />
 
             <label for="vigencia_hasta">Vigencia hasta:</label><br />
-            <input type="date" value="{{ isset($seguro->vigencia_hasta) ? date('Y-m-d',strtotime($seguro->vigencia_hasta)) : '' }}" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia_hasta" name="vigencia_hasta" /><br />
+            <input @if ( $mode == "show") readonly @endif type="date" value="{{ isset($seguro->vigencia_hasta) ? date('Y-m-d',strtotime($seguro->vigencia_hasta)) : '' }}" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia_hasta" name="vigencia_hasta" /><br />
 
 
         </div>

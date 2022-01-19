@@ -35,7 +35,7 @@
 
             <!--En este caso, se deben recuperar las actividades de la BD -->
             <label for="actividad">Actividad:</label><br>
-            <select @if ( $mode == "show") disable @endif class="form-control" aria-describedby="basic-addon1" id="actividad_1" name="actividad_1">
+            <select @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="actividad_1" name="actividad_1">
 
                 @forelse($actividades as $actividad2)
                     @if($actividad2->id_actividad_economica == $actividad->id_actividad_economica)
