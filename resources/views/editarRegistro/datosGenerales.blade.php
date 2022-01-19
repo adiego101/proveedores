@@ -37,7 +37,7 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
         name="dni_legal">
     <br>
     <label for="observaciones">Observaciones:</label><br>
-    <textarea id="observaciones"  name="representante_legal" readonly name="observaciones" class="form-control"
+    <textarea id="observaciones"  name="representante_legal" @if ( $mode == "show") readonly @endif name="observaciones" class="form-control"
         placeholder="ingrese las observaciones que considere necesarias">{{ isset($proveedor->observaciones) ? $proveedor->observaciones : '' }}</textarea>
     <br>
     <br>

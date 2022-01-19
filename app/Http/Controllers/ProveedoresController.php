@@ -520,7 +520,28 @@ class ProveedoresController extends Controller
         $paises = Pais::all();
         $provincias = Provincia::all();
         $localidades = Localidad::all();
-        return view('ediciones.sucursales', compact('provinciaid','sucursal', 'sucursal_email', 'sucursal_telefono','paises','provincias','localidades'));
+        $mode = "edit";
+
+        return view('ediciones.sucursales', compact('provinciaid','mode','sucursal', 'sucursal_email', 'sucursal_telefono','paises','provincias','localidades'));
+
+    }
+
+    public function verSucursales($id)
+    {
+        $sucursal = Sucursal::where('id_sucursal', $id)->get();
+        $sucursal_email = Sucursal_email::where('id_sucursal', $id)->get();
+        $sucursal_telefono = Sucursal_telefono::where('id_sucursal', $id)->get();
+        $sucursal_email = $sucursal_email[0];
+        $sucursal = $sucursal[0];
+        $sucursal_telefono = $sucursal_telefono[0];
+        $provinciaid = Localidad::where('id_localidad', $sucursal->id_localidad)->get();
+        $provinciaid = $provinciaid[0]->id_provincia;
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+        $mode = "show";
+
+        return view('ediciones.sucursales', compact('provinciaid','mode','sucursal', 'sucursal_email', 'sucursal_telefono','paises','provincias','localidades'));
 
     }
 
@@ -576,8 +597,20 @@ class ProveedoresController extends Controller
     public function editarPagos($id)
     {
         $pago = Pago::where('id_pagos', $id)->get();
+        $mode = "edit";
 
-        return view('ediciones.pagos', (['pago' => $pago[0]]));
+
+        return view('ediciones.pagos',compact('mode'), (['pago' => $pago[0]]));
+
+    }
+
+    public function verPagos($id)
+    {
+        $pago = Pago::where('id_pagos', $id)->get();
+        $mode = "show";
+
+
+        return view('ediciones.pagos',compact('mode'), (['pago' => $pago[0]]));
 
     }
 
@@ -623,7 +656,21 @@ class ProveedoresController extends Controller
         $actividades = Actividad_economica::All();
         $actividad = Actividades_proveedores::where('id_actividad_proveedor', $id)->get();
         $actividad = $actividad[0];
-        return view('ediciones.actividades', compact('actividad', 'tipos_actividades', 'actividades'));
+        $mode = "edit";
+
+        return view('ediciones.actividades', compact('mode','actividad', 'tipos_actividades', 'actividades'));
+
+    }
+
+    public function verActividades($id)
+    {
+        $tipos_actividades = Tipo_actividad::All();
+        $actividades = Actividad_economica::All();
+        $actividad = Actividades_proveedores::where('id_actividad_proveedor', $id)->get();
+        $actividad = $actividad[0];
+        $mode = "show";
+
+        return view('ediciones.actividades', compact('mode','actividad', 'tipos_actividades', 'actividades'));
 
     }
 
@@ -697,8 +744,21 @@ class ProveedoresController extends Controller
         $producto = Producto::where('id_producto', $id)->get();
         $producto = $producto[0];
         $productos = Producto::All();
+        $mode = "edit";
 
-        return view('ediciones.producto', compact('producto','productos'));
+
+        return view('ediciones.producto', compact('mode','producto','productos'));
+
+    }
+    public function verProductos($id)
+    {
+        $producto = Producto::where('id_producto', $id)->get();
+        $producto = $producto[0];
+        $productos = Producto::All();
+        $mode = "show";
+
+
+        return view('ediciones.producto', compact('mode','producto','productos'));
 
     }
 
@@ -742,7 +802,17 @@ class ProveedoresController extends Controller
     {
         $patente = Proveedor_patente::where('id_proveedor_patente', $id)->get();
         $patente = $patente[0];
-        return view('ediciones.patentes', compact('patente'));
+        $mode = "edit";
+        return view('ediciones.patentes', compact('mode','patente'));
+
+    }
+
+    public function verPatentes($id)
+    {
+        $patente = Proveedor_patente::where('id_proveedor_patente', $id)->get();
+        $patente = $patente[0];
+        $mode = "show";
+        return view('ediciones.patentes', compact('mode','patente'));
 
     }
 
@@ -784,7 +854,19 @@ class ProveedoresController extends Controller
     {
         $seguro = Proveedor_seguro::where('id_proveedor_seguro', $id)->get();
         $seguro = $seguro[0];
-        return view('ediciones.seguros', compact('seguro'));
+        $mode = "edit";
+
+        return view('ediciones.seguros', compact('mode','seguro'));
+
+    }
+
+    public function verSeguros($id)
+    {
+        $seguro = Proveedor_seguro::where('id_proveedor_seguro', $id)->get();
+        $seguro = $seguro[0];
+        $mode = "show";
+
+        return view('ediciones.seguros', compact('mode','seguro'));
 
     }
 
@@ -831,7 +913,22 @@ class ProveedoresController extends Controller
         $localidades = Localidad::all();
         $provinciaid = Localidad::where('id_localidad', $sede->Localidad)->get();
         $provinciaid = $provinciaid[0]->id_provincia;
-        return view('ediciones.sedes', compact('sede','provincias','localidades','paises','provinciaid'));
+        $mode = "edit";
+        return view('ediciones.sedes', compact('sede','mode','provincias','localidades','paises','provinciaid'));
+
+    }
+
+    public function verSedes($id)
+    {
+        $sede = Proveedor_sede::where('id_proveedor_sede', $id)->get();
+        $sede = $sede[0];
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+        $provinciaid = Localidad::where('id_localidad', $sede->Localidad)->get();
+        $provinciaid = $provinciaid[0]->id_provincia;
+        $mode = "show";
+        return view('ediciones.sedes', compact('sede','mode','provincias','localidades','paises','provinciaid'));
 
     }
 

@@ -182,11 +182,19 @@
 
             $("#body_table_vehiculo").append(
                 '<tr id="row_vehiculo' + j +'">'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="marca_vehiculo' + j +'" name="marcas[]" readonly value="' + marca +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="modelo_vehiculo' + j +'" name="modelos[]" readonly value="' + modelo +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dominio_vehiculo' + j +'" name="dominios[]" readonly value="' + dominio +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="inscripto_en_vehiculo' + j +'" name="inscriptos[]" readonly value="'+ inscripto_en +'"></td>'+
-                    '<td><button type="button" name="edit" id="'+ j +'" class="btn btn-warning btn-sm btn_edit_vehiculo" title="editar vehículo"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + j +'" class="btn btn-danger btn-sm btn_remove_vehiculo" title="quitar vehículo"><i class="fas fa-trash"></i></button></td>'+
+                    '<td> <div id="marca_vehiculo_text' + j +'">' + marca +'</div></td>'+
+                    '<td> <div id="modelo_vehiculo_text' + j +'">' + modelo +'</div></td>'+
+                    '<td> <div id="dominio_vehiculo_text' + j +'">' + dominio +'</div></td>'+
+                    '<td> <div id="inscripto_en_vehiculo_text' + j +'">' + inscripto_en +'</div></td>'+
+                    '<>'+
+
+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="marca_vehiculo' + j +'" name="marcas[]" readonly value="' + marca +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="modelo_vehiculo' + j +'" name="modelos[]" readonly value="' + modelo +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="dominio_vehiculo' + j +'" name="dominios[]" readonly value="' + dominio +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="inscripto_en_vehiculo' + j +'" name="inscriptos[]" readonly value="'+ inscripto_en +'">'+
+                    '<button type="button" name="edit" id="'+ j +'" class="btn btn-warning btn-sm btn_edit_vehiculo" title="editar vehículo"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + j +'" class="btn btn-danger btn-sm btn_remove_vehiculo" title="quitar vehículo"><i class="fas fa-trash"></i></button>'+
+                    '</td>'+
                 '</tr>'
             );
 

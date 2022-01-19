@@ -1,8 +1,12 @@
 @extends('layouts')
 
 @section('content2')
+@if ( $mode != "show")
+
 <form action="{{ route('seguros.guardar', ['id' => $seguro->id_proveedor_seguro]) }}"  method="POST">
     @csrf
+    @endif
+
 <fieldset>
 
         <h1>Seguro</h1>
@@ -31,11 +35,15 @@
         </div>
     </div>
 </fieldset>
+@if ( $mode != "show")
+
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
         <button type="submit" name="guardarSeguro" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
     </div>
 </div>
 </form>
+@endif
+
 
 @endsection

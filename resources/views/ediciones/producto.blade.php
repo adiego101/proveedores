@@ -1,8 +1,12 @@
 @extends('layouts')
 
 @section('content2')
+@if ( $mode != "show")
+
 <form action="{{ route('productos.guardar', ['id' => $producto->id_producto]) }}"  method="POST">
     @csrf
+    @endif
+
 <fieldset>
     <div class="row">
         <div class="col-sm">
@@ -35,11 +39,15 @@
     </div>
     <br>
 </fieldset>
+@if ( $mode != "show")
+
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
         <button type="submit" name="guardarproducto" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
     </div>
 </div>
 </form>
+@endif
+
 
 @endsection

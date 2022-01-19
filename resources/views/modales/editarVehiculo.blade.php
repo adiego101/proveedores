@@ -62,5 +62,11 @@
                 $('#modelo_vehiculo'+id_fila).val(modal_modelo);
                 $('#inscripto_en_vehiculo'+id_fila).val(modal_inscripto);
 
+                //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+                $('#marca_vehiculo_text'+id_fila).text(modal_marca);
+                $('#dominio_vehiculo_text'+id_fila).text(modal_dominio);
+                $('#modelo_vehiculo_text'+id_fila).text(modal_modelo);
+                $('#inscripto_en_vehiculo_text'+id_fila).text(modal_inscripto);
+
             });
 </script>

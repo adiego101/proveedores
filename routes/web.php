@@ -125,6 +125,14 @@ Route::post('guardarPatentes/{id}', 'App\Http\Controllers\ProveedoresController@
 Route::post('guardarSeguros/{id}', 'App\Http\Controllers\ProveedoresController@guardarSeguros')->name('seguros.guardar');
 Route::post('guardarSedes/{id}', 'App\Http\Controllers\ProveedoresController@guardarSedes')->name('sedes.guardar');
 
+Route::get('verSucursales/{id}', 'App\Http\Controllers\ProveedoresController@verSucursales')->name('sucursales.ver');
+Route::get('verPagos/{id}', 'App\Http\Controllers\ProveedoresController@verPagos')->name('pagos.ver');
+Route::get('verActividades/{id}', 'App\Http\Controllers\ProveedoresController@verActividades')->name('actividades.ver');
+Route::get('verProductos/{id}', 'App\Http\Controllers\ProveedoresController@verProductos')->name('productos.ver');
+Route::get('verPatentes/{id}', 'App\Http\Controllers\ProveedoresController@verPatentes')->name('patentes.ver');
+Route::get('verSeguros/{id}', 'App\Http\Controllers\ProveedoresController@verSeguros')->name('seguros.ver');
+Route::get('verSedes/{id}', 'App\Http\Controllers\ProveedoresController@verSedes')->name('sedes.ver');
+
 
 
 
