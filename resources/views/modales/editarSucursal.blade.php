@@ -127,7 +127,7 @@ $(document).on("click", ".btn_edit_modal_sucursal", function() {
             //Ocultamos el modal
             $('#modal_sucursal').modal('hide');
 
-            //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
+            //Enviamos los valores recuperados anteriormente del modal, a los inputs ocultos de la tabla
             $('#nombre_sucursal'+id_fila_sucursal).val(modal_nombre_sucursal);
             $('#calle_sucursal'+id_fila_sucursal).val(modal_calle);
             $('#dpto_sucursal'+id_fila_sucursal).val(modal_departamento);
@@ -146,6 +146,10 @@ $(document).on("click", ".btn_edit_modal_sucursal", function() {
             $('#codigo_postal_sucursal'+id_fila_sucursal).val(modal_codigo_postal);
             $('#telefono_sucursal'+id_fila_sucursal).val(modal_telefono);
 
+         //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+            $('#nombre_sucursal_text'+id_fila_sucursal).text(modal_nombre_sucursal);
+            $('#email_sucursal_text'+id_fila_sucursal).text(modal_email);
+            $('#telefono_sucursal_text'+id_fila_sucursal).text(modal_telefono);
         });
 </script>
 

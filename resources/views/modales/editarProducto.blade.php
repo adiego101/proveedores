@@ -69,5 +69,11 @@
                 $('#unidad_producida'+id_fila).val(modal_unidad_producida);
                 $('#produccion_total'+id_fila).val(modal_produccion_total);
 
+                //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+                $('#producto_elaborado_text'+id_fila).text(modal_producto_elaborado);
+                $('#rnpa_text'+id_fila).text(modal_rnpa);
+                $('#unidad_producida_text'+id_fila).text(modal_unidad_producida);
+                $('#produccion_total_text'+id_fila).text(modal_produccion_total);
+
             });
 </script>

@@ -145,9 +145,13 @@
 
                 $("#body_table_actividad").append(
                     '<tr id="row_actividad' + m +'">'+
-                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="tipo_actividad' + m +'" name="tipos_actividades[]" readonly value="' + tipo_actividad +'"></td>'+
-                        '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="actividad' + m +'" name="actividades[]" readonly value="' + actividad +'"></td>'+
-                        '<td><button type="button" name="remove" id="' + m +'" class="btn btn-danger btn-sm btn_remove_actividad" title="quitar actividad"><i class="fas fa-trash"></i></button></td>'+
+                        '<td>' + tipo_actividad +'</td>'+
+                        '<td>' + actividad +'</td>'+
+                        '<td>'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="tipo_actividad' + m +'" name="tipos_actividades[]" readonly value="' + tipo_actividad +'">'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="actividad' + m +'" name="actividades[]" readonly value="' + actividad +'">'+
+                        '<button type="button" name="remove" id="' + m +'" class="btn btn-danger btn-sm btn_remove_actividad" title="quitar actividad"><i class="fas fa-trash"></i></button>'+
+                        '</td>'+
                     '</tr>'
                 );
 
@@ -202,11 +206,17 @@ $("#add_producto").on("click", function(e) {
 
     $("#body_table_producto").append(
         '<tr id="row_producto' + n +'">'+
-            '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="producto_elaborado' + n +'" name="productos[]" readonly value="' + producto_elaborado +'"></td>'+
-            '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="unidad_producida' + n +'" name="unidades[]" readonly value="' + unidad_producida +'"></td>'+
-            '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="rnpa' + n +'" name="rnpas[]" readonly value="' + rnpa +'"></td>'+
-            '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="produccion_total' + n +'" name="producciones[]" readonly value="' + produccion_total +'"></td>'+
-            '<td><button type="button" name="edit" id="'+ n +'" class="btn btn-warning btn-sm btn_edit_producto" title="editar producto"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + n +'" class="btn btn-danger btn-sm btn_remove_producto" title="quitar producto"><i class="fas fa-trash"></i></button></td>'+
+            '<td> <div id="producto_elaborado_text' + n +'">' + producto_elaborado +'</div></td>'+
+            '<td> <div id="unidad_producida_text' + n +'">' + unidad_producida +'</div></td>'+
+            '<td> <div id="rnpa_text' + n +'">' + rnpa +'</div></td>'+
+            '<td> <div id="produccion_total_text' + n +'">' + produccion_total +'</div></td>'+
+            '<td>'+
+            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="producto_elaborado' + n +'" name="productos[]" readonly value="' + producto_elaborado +'">'+
+            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="unidad_producida' + n +'" name="unidades[]" readonly value="' + unidad_producida +'">'+
+            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="rnpa' + n +'" name="rnpas[]" readonly value="' + rnpa +'">'+
+            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="produccion_total' + n +'" name="producciones[]" readonly value="' + produccion_total +'">'+
+            '<button type="button" name="edit" id="'+ n +'" class="btn btn-warning btn-sm btn_edit_producto" title="editar producto"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + n +'" class="btn btn-danger btn-sm btn_remove_producto" title="quitar producto"><i class="fas fa-trash"></i></button>'+
+            '</td>'+
         '</tr>'
     );
 

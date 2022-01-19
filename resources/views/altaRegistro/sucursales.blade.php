@@ -247,10 +247,13 @@
 
             $("#body_table_sucursal").append(
                 '<tr id="row_sucursal' + i_sucursal +'">'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="nombre_sucursal' + i_sucursal +'" name="nombres_sucursales[]"  readonly value="' + nombre_sucursal +'" maxlength="50"/></td>'+
-                    '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email_sucursal' + i_sucursal +'" name="correos_electronicos[]" readonly value="'+ email +'" maxlength="30"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="telefono_sucursal' + i_sucursal +'" name="Telefonos_sucursales[]" readonly value="' + telefono +'" maxlength="14"></td>'+
+                    '<td> <div id="nombre_sucursal_text' + i_sucursal +'">' + nombre_sucursal +'</div></td>'+
+                    '<td> <div id="email_sucursal_text' + i_sucursal +'">' + email +'</div></td>'+
+                    '<td> <div id="telefono_sucursal_text' + i_sucursal +'">' + telefono +'</div></td>'+
                     '<td>'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="nombre_sucursal' + i_sucursal +'" name="nombres_sucursales[]"  readonly value="' + nombre_sucursal +'" maxlength="50"/>'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="email_sucursal' + i_sucursal +'" name="correos_electronicos[]" readonly value="'+ email +'" maxlength="30">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="telefono_sucursal' + i_sucursal +'" name="Telefonos_sucursales[]" readonly value="' + telefono +'" maxlength="14">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="calle_sucursal' + i_sucursal +'" name="calles[]" readonly value="' + calle +'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="numero_sucursal' + i_sucursal +'" name="numeros[]" readonly value="'+numero+'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="dpto_sucursal' + i_sucursal +'" name="dptos[]" readonly value="'+ departamento +'">'+
