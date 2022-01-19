@@ -66,6 +66,7 @@
         let fecha;
         let importe;
         let observaciones_pago;
+        let fecha_clasica;
         let indice = 1;
 
         $("#add_pago").on("click", function(e) {
@@ -73,19 +74,21 @@
             fecha = $('#fecha_pago').val();
             importe = $('#importe_pago').val();
             observaciones_pago = $('#observaciones_pago').val();
+            
+            fecha_clasica = fecha.split('-').reverse().join('/');
 
             $("#body_table_pago").append(
                 '<tr id="row_pago' + indice + '">' +
-                '<td><input type="date" class="form-control" aria-describedby="basic-addon1" id="fecha_pago' + indice +
-                '" name="fechas_pagos[]" readonly value="' + fecha + '"></td>' +
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="importe_pago' + indice +
-                '" name="importes_pagos[]" readonly value="' + importe + '" maxlength="9"></td>' +
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="observaciones_pago' + indice + '" name="observaciones_pagos[]" readonly value="' + observaciones_pago + '" maxlength="50"></td>' +
-                '<td><button type="button" name="edit" id="' + indice +
-                '" class="btn btn-warning btn-sm btn_edit_pago" title="editar pago"><indice class="fas fa-edit"></i></button>' +
-                '<button type="button" name="remove" id="' + indice +
-                '" class="btn btn-danger btn-sm btn_remove_pago" title="quitar pago"><indice class="fas fa-trash"></i></button>' +
-                '</td>' +
+                    '<td> <div id="fecha_pago_text' + indice + '">' + fecha_clasica +'</div></td>'+
+                    '<td> <div id="importe_pago_text' + indice + '">' + importe +'</div></td>'+
+                    '<td> <div id="observaciones_pago_text' + indice + '">' + observaciones_pago +'</div></td>'+
+                    '<td>'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="fecha_pago' + indice + '" name="fechas_pagos[]" readonly value="' + fecha + '">' +
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="importe_pago' + indice + '" name="importes_pagos[]" readonly value="' + importe + '" maxlength="9">' +
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="observaciones_pago' + indice + '" name="observaciones_pagos[]" readonly value="' + observaciones_pago + '" maxlength="50">' +
+                    '<button type="button" name="edit" id="' + indice + '" class="btn btn-warning btn-sm btn_edit_pago" title="editar pago"><indice class="fas fa-edit"></i></button>' +
+                    '<button type="button" name="remove" id="' + indice + '" class="btn btn-danger btn-sm btn_remove_pago" title="quitar pago"><indice class="fas fa-trash"></i></button>' +
+                    '</td>' +
                 '</tr>'
             );
 

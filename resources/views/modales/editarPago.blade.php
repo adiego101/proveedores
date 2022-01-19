@@ -54,6 +54,12 @@
             $('#importe_pago' + id_filapago).val(modal_importe);
             $('#observaciones_pago' + id_filapago).val(modal_observaciones);
 
+            //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+            var modal_fecha_clasica = modal_fecha.split('-').reverse().join('/');
+            $('#fecha_pago_text' + id_filapago).text(modal_fecha_clasica);
+            $('#importe_pago_text' + id_filapago).text(modal_importe);
+            $('#observaciones_pago_text' + id_filapago).text(modal_observaciones);
+
         });
     </script>
 @endpush
