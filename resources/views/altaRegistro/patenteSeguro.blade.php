@@ -186,9 +186,7 @@
                     '<td> <div id="modelo_vehiculo_text' + j +'">' + modelo +'</div></td>'+
                     '<td> <div id="dominio_vehiculo_text' + j +'">' + dominio +'</div></td>'+
                     '<td> <div id="inscripto_en_vehiculo_text' + j +'">' + inscripto_en +'</div></td>'+
-                    '<>'+
-
-
+                    '<td>'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="marca_vehiculo' + j +'" name="marcas[]" readonly value="' + marca +'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="modelo_vehiculo' + j +'" name="modelos[]" readonly value="' + modelo +'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="dominio_vehiculo' + j +'" name="dominios[]" readonly value="' + dominio +'">'+
@@ -253,6 +251,7 @@
         let agencia;
         let asegurado;
         let vigencia;
+        let vigencia_clasica;
         let k = 1; //contador para asignar id al boton que borrara la fila
         $("#add_seguro").on("click", function(e) {
 
@@ -261,14 +260,21 @@
             asegurado = $("#asegurado").val();
             vigencia = $("#vigencia").val();
 
+            vigencia_clasica = vigencia.split('-').reverse().join('/');
 
             $("#body_table_seguro").append(
                 '<tr id="row_seguro' + k +'">'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="poliza' + k +'" name="polizas[]" readonly value="' + poliza +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="agencia' + k +'" name="agencias[]" readonly value="' + agencia +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="asegurado' + k +'" name="asegurados[]" readonly value="' + asegurado +'"></td>'+
-                    '<td><input type="date" class="form-control" aria-describedby="basic-addon1" id="vigencia' + k +'" name="vigencias[]" readonly value="'+ vigencia +'"></td>'+
-                    '<td><button type="button" name="edit" id="'+ k +'" class="btn btn-warning btn-sm btn_edit_seguro" title="editar seguro"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + k +'" class="btn btn-danger btn-sm btn_remove_seguro" title="quitar seguro"><i class="fas fa-trash"></i></button></td>'+
+                    '<td> <div id="poliza_text' + k +'">' + poliza +'</div></td>'+
+                    '<td> <div id="agencia_text' + k +'">' + agencia +'</div></td>'+
+                    '<td> <div id="asegurado_text' + k +'">' + asegurado +'</div></td>'+
+                    '<td> <div id="vigencia_text' + k +'">' + vigencia_clasica +'</div></td>'+
+                    '<td>'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="poliza' + k +'" name="polizas[]" readonly value="' + poliza +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="agencia' + k +'" name="agencias[]" readonly value="' + agencia +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="asegurado' + k +'" name="asegurados[]" readonly value="' + asegurado +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="vigencia' + k +'" name="vigencias[]" readonly value="'+ vigencia +'">'+
+                    '<button type="button" name="edit" id="'+ k +'" class="btn btn-warning btn-sm btn_edit_seguro" title="editar seguro"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + k +'" class="btn btn-danger btn-sm btn_remove_seguro" title="quitar seguro"><i class="fas fa-trash"></i></button>'+
+                    '</td>'+
                 '</tr>'
             );
 
@@ -336,9 +342,13 @@
 
         $("#body_table_sede").append(
             '<tr id="row_sede' + l +'">'+
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'"></td>'+
-                '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + localidad +'"></td>'+
-                '<td><button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button></td>'+
+                '<td> <div id="domicilio_sede_text' + l +'">' + domicilio +'</div></td>'+
+                '<td> <div id="localidad_sede_text' + l +'">' + localidad +'</div></td>'+
+                '<td>'+
+                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'">'+
+                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + localidad +'">'+
+                '<button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button>'+
+                '</td>'+
             '</tr>'
         );
 

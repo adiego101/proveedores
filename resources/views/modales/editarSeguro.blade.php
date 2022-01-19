@@ -22,8 +22,8 @@
                             <label for="modal_agencia">Agencia:</label><br />
                             <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="modal_agencia" name="modal_agencia" /><br />
 
-                            <label for="modal_vigencia_hasta">Vigencia hasta:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="modal_vigencia_hasta" name="modal_vigencia_hasta" /><br />
+                            <label for="modal_vigencia">Vigencia hasta:</label><br />
+                            <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="modal_vigencia" name="modal_vigencia" /><br />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -50,7 +50,7 @@
                 var modal_poliza = $("#modal_poliza").val();
                 var modal_asegurado = $("#modal_asegurado").val();
                 var modal_agencia = $("#modal_agencia").val();
-                var modal_vigencia = $("#modal_vigencia_hasta").val();
+                var modal_vigencia = $("#modal_vigencia").val();
 
                 //Ocultamos el modal
                 $('#modal_seguro').modal('hide');
@@ -59,7 +59,14 @@
                 $('#poliza'+id_fila).val(modal_poliza);
                 $('#asegurado'+id_fila).val(modal_asegurado);
                 $('#agencia'+id_fila).val(modal_agencia);
-                $('#vigencia_hasta'+id_fila).val(modal_vigencia);
+                $('#vigencia'+id_fila).val(modal_vigencia);
+
+                //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+                var modal_vigencia_clasica = modal_vigencia.split('-').reverse().join('/');
+                $('#poliza_text'+id_fila).text(modal_poliza);
+                $('#asegurado_text'+id_fila).text(modal_asegurado);
+                $('#agencia_text'+id_fila).text(modal_agencia);
+                $('#vigencia_text'+id_fila).text(modal_vigencia_clasica);
 
             });
 </script>

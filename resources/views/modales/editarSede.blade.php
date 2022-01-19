@@ -51,5 +51,9 @@
                 $('#domicilio_sede'+id_fila).val(modal_domicilio);
                 $('#localidad_sede'+id_fila).val(modal_localidad);
 
+                //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+                $('#domicilio_sede_text'+id_fila).text(modal_domicilio);
+                $('#localidad_sede_text'+id_fila).text(modal_localidad);
+
             });
 </script>

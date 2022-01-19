@@ -66,7 +66,7 @@
         let fecha;
         let importe;
         let observaciones_pago;
-        let fecha_clasica;
+        let fecha_clasica_pago;
         let indice = 1;
 
         $("#add_pago").on("click", function(e) {
@@ -75,11 +75,11 @@
             importe = $('#importe_pago').val();
             observaciones_pago = $('#observaciones_pago').val();
             
-            fecha_clasica = fecha.split('-').reverse().join('/');
+            fecha_clasica_pago = fecha.split('-').reverse().join('/');
 
             $("#body_table_pago").append(
                 '<tr id="row_pago' + indice + '">' +
-                    '<td> <div id="fecha_pago_text' + indice + '">' + fecha_clasica +'</div></td>'+
+                    '<td> <div id="fecha_pago_text' + indice + '">' + fecha_clasica_pago +'</div></td>'+
                     '<td> <div id="importe_pago_text' + indice + '">' + importe +'</div></td>'+
                     '<td> <div id="observaciones_pago_text' + indice + '">' + observaciones_pago +'</div></td>'+
                     '<td>'+
