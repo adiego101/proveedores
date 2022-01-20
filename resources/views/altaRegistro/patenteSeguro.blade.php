@@ -139,6 +139,7 @@
             <thead>
                 <tr>
                     <th>Domicilio</th>
+                    <th>Provincia</th>
                     <th>Localidad</th>
                     <th>Acciones</th>
                 </tr>
@@ -344,6 +345,7 @@
         $("#body_table_sede").append(
             '<tr id="row_sede' + l +'">'+
                 '<td> <div id="domicilio_sede_text' + l +'">' + domicilio +'</div></td>'+
+                '<td> <div id="provincia_sede_text' + l +'">' + provincia +'</div></td>'+
                 '<td> <div id="localidad_sede_text' + l +'">' + localidad +'</div></td>'+
                 '<td>'+
                 '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'">'+

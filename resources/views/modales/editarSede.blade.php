@@ -23,8 +23,16 @@
                     </select>
                     <br>
                             
-                    <label for="modal_localidad_sede">Localidad:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese la localidad" aria-describedby="basic-addon1" id="modal_localidad_sede" name="modal_localidad_sede" /><br />
+                    <label for="modal_localidad_sede">Localidad:</label><br>
+                    <select class="form-control" aria-describedby="basic-addon1" id="modal_localidad_sede" name="modal_localidad_sede">
+                        <option value=" ">Seleccione una localidad</option>
+                        @forelse($localidades as $localidad)
+                            <option value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
+                        @empty
+                            <option value=" "></option>
+                        @endforelse
+                    </select>
+                    <br>
                  
                     <div class="modal-footer">
                         <input id="numero_fila_sede" name="numero_fila_sede" type="hidden">
@@ -36,6 +44,7 @@
         </div>
     </div>
 
+@push('js')
 
 <script type="text/javascript">
 
@@ -49,6 +58,7 @@
                 //Recuperamos los valores de los campos del modal
                 var modal_domicilio = $("#modal_domicilio_sede").val();
                 var modal_localidad = $("#modal_localidad_sede").val();
+                var modal_provincia = $("#modal_provincia_sede").val();
 
                 //Ocultamos el modal
                 $('#modal_sede').modal('hide');
@@ -56,10 +66,37 @@
                 //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
                 $('#domicilio_sede'+id_fila).val(modal_domicilio);
                 $('#localidad_sede'+id_fila).val(modal_localidad);
+                $('#provincia_sede'+id_fila).val(modal_provincia);
 
                 //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
                 $('#domicilio_sede_text'+id_fila).text(modal_domicilio);
                 $('#localidad_sede_text'+id_fila).text(modal_localidad);
+                $('#provincia_sede_text'+id_fila).text(modal_provincia);
 
             });
 </script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#modal_provincia_sede').change(function(){
+			recargarListaSedeModal();
+		});
+	})
+
+</script>
+
+<script type="text/javascript">
+	function recargarListaSedeModal(){
+		$.ajax({
+			type:"GET",
+			url:"localidades/"+$('#modal_provincia_sede').val(),
+			success:function(r){
+				$('#modal_localidad_sede').html(r);
+			}
+		});
+	}
+</script>
+
+@endpush
+
