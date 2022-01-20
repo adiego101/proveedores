@@ -310,7 +310,7 @@ class ProveedoresController extends Controller
                     $sucursal->puerta = $request->puertas[$i];
                     $sucursal->oficina = $request->oficinas[$i];
                     $sucursal->manzana = $request->manzanas[$i];
-                    $sucursal->codigo_postal = $request->codigo_postal[$i];
+                    $sucursal->codigo_postal = $request->codigos_postales[$i];
                     $sucursal->barrio = $request->barrios[$i];
 
                     $sucursal->save();
@@ -513,11 +513,26 @@ class ProveedoresController extends Controller
         $sucursal = Sucursal::where('id_sucursal', $id)->get();
         $sucursal_email = Sucursal_email::where('id_sucursal', $id)->get();
         $sucursal_telefono = Sucursal_telefono::where('id_sucursal', $id)->get();
+        if(empty($sucursal_email[0])){
+            $sucursal_email = "";
+        }
+        else{
         $sucursal_email = $sucursal_email[0];
+        }
         $sucursal = $sucursal[0];
-        $sucursal_telefono = $sucursal_telefono[0];
+        if (empty($sucursal_telefono[0])) {
+            $sucursal_telefono = "";
+        } else {
+            $sucursal_telefono = $sucursal_telefono[0];
+        }
+
         $provinciaid = Localidad::where('id_localidad', $sucursal->id_localidad)->get();
-        $provinciaid = $provinciaid[0]->id_provincia;
+        if ( empty($provinciaid[0]->id_provincia)) {
+            $provinciaid = "";
+        } else {
+            $provinciaid = $provinciaid[0]->id_provincia;
+        }
+
         $paises = Pais::all();
         $provincias = Provincia::all();
         $localidades = Localidad::all();
