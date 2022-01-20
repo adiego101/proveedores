@@ -164,14 +164,8 @@ $(document).on("click", ".btn_edit_modal_sucursal", function() {
 		$('#modal_provincia_sucursal').change(function(){
 			recargarListaSucursalModal();
 		});
-
-        $('#modal_sucursal').onload(function(){
-			recargarListaSucursalModal();
-		});
 	})
 
-    
-    
 </script>
 
 <script type="text/javascript">

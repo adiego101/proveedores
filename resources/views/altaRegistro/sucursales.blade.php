@@ -164,10 +164,12 @@
         provincia = $("#provincia_sucursal").val();
         localidad_sucursal = $("#localidad_sucursal").val();
         
+        /*
         console.log(pais);
         console.log(provincia);
         console.log(localidad_sucursal);
         console.log($('#localidad_sucursal option:selected').html());
+        */
 
       /*  let error_encontrado=false;
 
@@ -339,7 +341,6 @@
         let modal_pais = $("#pais_sucursal"+ button_id).val();
         let modal_provincia = $("#provincia_sucursal"+ button_id).val();
         let modal_localidad_sucursal_id = $("#localidad_sucursal"+ button_id).val();
-        let modal_localidad_sucursal_texto = $('#localidad_sucursal option:selected').html();
 
         //Desplegamos el modal
         $('#modal_sucursal').modal('show');
@@ -353,7 +354,6 @@
         $('#modal_monoblock_sucursal').val(modal_monoblock);
         $('#modal_pais_sucursal').val(modal_pais);
         $('#modal_localidad_sucursal').val(modal_localidad_sucursal_id);
-        //$('#modal_localidad_sucursal').val(modal_localidad_sucursal_texto);
         $('#modal_email_sucursal').val(modal_email);
         $('#modal_numero_sucursal').val(modal_numero);
         $('#modal_puerta_sucursal').val(modal_puerta);
