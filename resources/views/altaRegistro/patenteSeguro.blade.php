@@ -333,12 +333,13 @@
 
     let domicilio;
     let localidad;
+    let provincia;
     let l = 1; //contador para asignar id al boton que borrara la fila
     $("#add_sede").on("click", function(e) {
 
         domicilio = $("#domicilio_sede").val();
         localidad = $("#localidad_sede").val();
-
+        provincia = $("#provincia_sede").val();
 
         $("#body_table_sede").append(
             '<tr id="row_sede' + l +'">'+
@@ -347,6 +348,7 @@
                 '<td>'+
                 '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'">'+
                 '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + localidad +'">'+
+                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sede' + l +'" name="provincias_sedes[]" readonly value="' + provincia +'">'+
                 '<button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button>'+
                 '</td>'+
             '</tr>'
@@ -382,6 +384,7 @@
         //Recuperamos los valores de los campos pertenecientes a una fila
         let modal_domicilio = $("#domicilio_sede"+ button_id).val();
         let modal_localidad = $("#localidad_sede"+ button_id).val();
+        let modal_provincia = $("#provincia_sede"+ button_id).val();
 
         //Desplegamos el modal
         $('#modal_sede').modal('show');
@@ -389,6 +392,7 @@
         //Enviamos los valores recuperados anteriormente a los inputs del modal
         $('#modal_domicilio_sede').val(modal_domicilio);
         $('#modal_localidad_sede').val(modal_localidad);
+        $('#modal_provincia_sede').val(modal_provincia);
         $('#numero_fila_sede').val(button_id);
 
     });

@@ -78,7 +78,7 @@
     },
         processing: true,
         serverSide: true,
-        ajax: "{{ url('sucursales/'.$id) }}",
+        ajax: "{{ url('sucursales/'.$id.'/'.$mode) }}",
         columns: [
             {data: 'nombre_sucursal', name: 'nombre_sucursal'},
             //{data: 'cuit', name: 'cuit'},

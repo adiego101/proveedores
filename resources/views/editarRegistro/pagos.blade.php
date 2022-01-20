@@ -97,7 +97,7 @@ value="0" name="prov_provincial">
     },
         processing: true,
         serverSide: true,
-        ajax: "{{ url('pagos/'.$id) }}",
+        ajax: "{{ url('pagos/'.$id.'/'.$mode) }}",
         columns: [
             {data: 'fecha', name: 'fecha'},
             {data: 'importe', name: 'importe'},

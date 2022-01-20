@@ -9,17 +9,23 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="row">
-                        <div class="col-sm">
-                            <label for="modal_domicilio_sede">Domicilio:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="modal_domicilio_sede" name="modal_domicilio_sede" /><br />
-                        </div>
+                    <label for="modal_domicilio_sede">Domicilio:</label><br />
+                    <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="modal_domicilio_sede" name="modal_domicilio_sede" /><br />
 
-                        <div class="col-sm">
-                            <label for="modal_localidad_sede">Localidad:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese la localidad" aria-describedby="basic-addon1" id="modal_localidad_sede" name="modal_localidad_sede" /><br />
-                        </div>
-                    </div>
+                    <label for="modal_provincia_sede">Provincia:</label><br>
+                    <select class="form-control" aria-describedby="basic-addon1" id="modal_provincia_sede" name="modal_provincia_sede">
+                        <option value=" ">Seleccione una provincia</option>
+                        @forelse($provincias as $provincia)
+                            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                        @empty
+                            <option value=" "></option>
+                        @endforelse
+                    </select>
+                    <br>
+                            
+                    <label for="modal_localidad_sede">Localidad:</label><br />
+                    <input type="text" class="form-control" placeholder="Ingrese la localidad" aria-describedby="basic-addon1" id="modal_localidad_sede" name="modal_localidad_sede" /><br />
+                 
                     <div class="modal-footer">
                         <input id="numero_fila_sede" name="numero_fila_sede" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>

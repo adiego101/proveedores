@@ -489,19 +489,30 @@ class ProveedoresController extends Controller
         }
     }
 
-    public function getSucursales(Request $request, $id)
+    public function getSucursales(Request $request, $id, $mode)
     {
         if ($request->ajax()) {
             $data = Sucursal::where('id_proveedor', $id)->get();
 
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function ($row) {
+                ->addColumn('action', function ($row) use ($mode) {
                     $url = url('editarSucursales/' . $row->id_sucursal);
                     $url2 = url('verSucursales/' . $row->id_sucursal);
 
-                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
-                    return $actionBtn;
+                    if ($mode == "show") {
+                        $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                        <i class="fas fa-eye"></i></a>';
+                        return $actionBtn;
+                    } else {
+                        $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                        <i class="fas fa-edit"></i></a> <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
+                        <i class="fas fa-exclamation-circle"></i></a>';
+                        return $actionBtn;
+                    }
+
+
+
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -593,19 +604,30 @@ class ProveedoresController extends Controller
 
     }
 
-    public function getPagos(Request $request, $id)
+    public function getPagos(Request $request, $id, $mode = null)
     {
         //if ($request->ajax()) {
         $data = Pago::where('id_proveedor', $id)->get();
 
         return Datatables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function ($row) {
+            ->addColumn('action', function ($row) use ($mode) {
                 $url = url('editarPagos/' . $row->id_pagos);
                 $url2 = url('verPagos/' . $row->id_pagos);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPago(' . $row->id_pagos . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
-                return $actionBtn;
+                if ($mode == "show") {
+                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    <i class="fas fa-eye"></i></a>';
+                    return $actionBtn;
+                } else {
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    <i class="fas fa-edit"></i></a> <a onclick="bajaPago(' . $row->id_pagos . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
+                    <i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                }
+
+
+
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -649,19 +671,27 @@ class ProveedoresController extends Controller
 
     }
 
-    public function getActividades(Request $request, $id)
+    public function getActividades(Request $request, $id, $mode = null)
     {
         //if ($request->ajax()) {
         $data = Actividades_proveedores::where('id_proveedor', $id)->get();
 
         return Datatables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function ($row) {
+            ->addColumn('action', function ($row) use ($mode){
                 $url = url('editarActividades/' . $row->id_actividad_proveedor);
                 $url2 = url('verActividades/' . $row->id_actividad_proveedor);
+                if ($mode == "show") {
+                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    <i class="fas fa-eye"></i></a> ';
+                    return $actionBtn;                } else {
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    <i class="fas fa-edit"></i></a> <a onclick="bajaActividad(' . $row->id_actividad_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
+                    <i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                }
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaActividad(' . $row->id_actividad_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
-                return $actionBtn;
+
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -739,19 +769,29 @@ class ProveedoresController extends Controller
 
     }
 
-    public function getProductos(Request $request, $id)
+    public function getProductos(Request $request, $id, $mode = null)
     {
         //if ($request->ajax()) {
         $data = Producto::where('id_proveedor', $id)->get();
 
         return Datatables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function ($row) {
+            ->addColumn('action', function ($row) use ($mode) {
                 $url = url('editarProductos/' . $row->id_producto);
                 $url2 = url('verProductos/' . $row->id_producto);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaProducto(' . $row->id_producto . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
-                return $actionBtn;
+                if ($mode == "show") {
+                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    <i class="fas fa-eye"></i></a>';
+                    return $actionBtn;
+                } else {
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    <i class="fas fa-edit"></i></a> <a onclick="bajaProducto(' . $row->id_producto . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
+                    <i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                }
+
+
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -799,19 +839,30 @@ class ProveedoresController extends Controller
 
     }
 
-    public function getPatentes(Request $request, $id)
+    public function getPatentes(Request $request, $id, $mode =null)
     {
         //if ($request->ajax()) {
         $data = Proveedor_patente::where('id_proveedor', $id)->get();
 
         return Datatables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function ($row) {
+            ->addColumn('action', function ($row) use ($mode) {
                 $url = url('editarPatentes/' . $row->id_proveedor_patente);
                 $url2 = url('verPatentes/' . $row->id_proveedor_patente);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaPatente(' . $row->id_proveedor_patente . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
-                return $actionBtn;
+                if ($mode == "show") {
+                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    <i class="fas fa-eye"></i></a>';
+                    return $actionBtn;
+                } else {
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    <i class="fas fa-edit"></i></a>
+                    <a onclick="bajaPatente(' . $row->id_proveedor_patente . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                 }
+
+
+
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -852,19 +903,31 @@ class ProveedoresController extends Controller
 
     }
 
-    public function getSeguros(Request $request, $id)
+    public function getSeguros(Request $request, $id,$mode = null)
     {
         //if ($request->ajax()) {
         $data = Proveedor_seguro::where('id_proveedor', $id)->get();
-
         return Datatables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function ($row) {
+            ->addColumn('action', function ($row) use ($mode) {
                 $url = url('editarSeguros/' . $row->id_proveedor_seguro);
                 $url2 = url('verSeguros/' . $row->id_proveedor_seguro);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSeguro(' . $row->id_proveedor_seguro . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
-                return $actionBtn;
+                if ($mode == "show") {
+                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    <i class="fas fa-eye"></i></a>';
+                    return $actionBtn;
+                } else {
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    <i class="fas fa-edit"></i></a>
+
+                    <a onclick="bajaSeguro(' . $row->id_proveedor_seguro . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
+                    <i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+                }
+
+
+
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -907,19 +970,29 @@ class ProveedoresController extends Controller
 
     }
 
-    public function getSedes(Request $request, $id)
+    public function getSedes(Request $request, $id, $mode = null)
     {
         //if ($request->ajax()) {
         $data = Proveedor_sede::where('id_proveedor', $id)->get();
 
         return Datatables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function ($row) {
+            ->addColumn('action', function ($row) use ($mode) {
                 $url = url('editarSedes/' . $row->id_proveedor_sede);
                 $url2 = url('verSedes/' . $row->id_proveedor_sede);
 
-                $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaSede(' . $row->id_proveedor_sede . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
-                return $actionBtn;
+                if ($mode=="show") {
+                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    <i class="fas fa-eye"></i></a> ';
+                    return $actionBtn;
+                } else {
+                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    <i class="fas fa-edit"></i></a>
+                    <a onclick="bajaSede(' . $row->id_proveedor_sede . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;                }
+
+
+
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -1199,7 +1272,7 @@ class ProveedoresController extends Controller
         );
     }
 
-    public function verProveedorRupaeId($id)
+    public function verProveedorRupaeId($id,$tab = null)
     {
         $proveedor = Proveedor::findOrFail($id);
 
@@ -1271,7 +1344,7 @@ class ProveedoresController extends Controller
         $mode = "show";
 
 
-        return view('verRegistro', compact('persona', 'mode',
+        return view('verRegistro', compact('tab','persona', 'mode',
         'provinciaidReal','provinciaidLegal','provinciaidFiscal','paises', 'jerarquias', 'provincias','localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones','proveedor',
         'id' ,'proveedor_telefono_fiscal','proveedor_domicilio_fiscal' ,'proveedor_email_fiscal' ,'proveedor_telefono_legal' ,'proveedor_domicilio_legal' ,
         'proveedor_email_legal' ,'proveedor_telefono_real' ,'proveedor_domicilio_real' ,'proveedor_email_real' ,'proveedores_tipos_proveedores',

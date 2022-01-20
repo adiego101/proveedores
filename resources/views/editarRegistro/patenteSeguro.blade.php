@@ -144,7 +144,7 @@ value="0">
     },
         processing: true,
         serverSide: true,
-        ajax: "{{ url('patentes/'.$id) }}",
+        ajax: "{{ url('patentes/'.$id.'/'.$mode) }}",
         columns: [
             {data: 'dominio', name: 'dominio'},
             {data: 'marca', name: 'marca'},
@@ -202,7 +202,7 @@ $('#baja_patente').val(id_registro);
       },
           processing: true,
           serverSide: true,
-          ajax: "{{ url('seguros/'.$id) }}",
+          ajax: "{{ url('seguros/'.$id.'/'.$mode) }}",
           columns: [
               {data: 'poliza', name: 'poliza'},
               {data: 'agencia', name: 'agencia'},
@@ -261,7 +261,7 @@ $('#baja_patente').val(id_registro);
       },
           processing: true,
           serverSide: true,
-          ajax: "{{ url('sedes/'.$id) }}",
+          ajax: "{{ url('sedes/'.$id.'/'.$mode) }}",
           columns: [
               {data: 'Domicilio', name: 'Domicilio'},
               {data: 'Localidad', name: 'Localidad'},

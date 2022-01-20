@@ -122,7 +122,7 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}"><br>
     },
         processing: true,
         serverSide: true,
-        ajax: "{{ url('productos/'.$id) }}",
+        ajax: "{{ url('productos/'.$id.'/'.$mode) }}",
         columns: [
             {data: 'producto_elaborado', name: 'producto_elaborado'},
             {data: 'rnpa', name: 'rnpa'},
@@ -169,7 +169,7 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}"><br>
     },
         processing: true,
         serverSide: true,
-        ajax: "{{ url('actividades/'.$id) }}",
+        ajax: "{{ url('actividades/'.$id.'/'.$mode) }}",
         columns: [
             {data: 'id_actividad_economica', name: 'id_actividad_economica'},
             {data: 'id_tipo_actividad', name: 'id_tipo_actividad'},

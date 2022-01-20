@@ -23,9 +23,9 @@
 
 </fieldset>
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $pago->id_proveedor, 'tab' => "pago"]) }}">atras</a>
 
 @if ( $mode != "show")
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $pago->id_proveedor, 'tab' => "pago"]) }}">atras</a>
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
@@ -33,6 +33,9 @@
     </div>
 </div>
 </form>
+@else
+<a class="btn btn-secondary" style="float: left" href="{{ route('verRegistro', ['id' => $pago->id_proveedor, 'tab' => "pago"]) }}">atras</a>
+
 @endif
 
 @endsection

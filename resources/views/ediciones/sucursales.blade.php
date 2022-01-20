@@ -111,7 +111,6 @@
                 </div> -->
             <br>
 </fieldset>
-<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $sucursal->id_proveedor, 'tab' => "sucursal"]) }}">atras</a>
 
 @push('js')
 <script type="text/javascript">
@@ -149,6 +148,7 @@
 </script>
 @endpush
 @if ( $mode != "show")
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $sucursal->id_proveedor, 'tab' => "sucursal"]) }}">atras</a>
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
@@ -156,6 +156,9 @@
     </div>
 </div>
 </form>
+@else
+<a class="btn btn-secondary" style="float: left" href="{{ route('verRegistro', ['id' => $sucursal->id_proveedor, 'tab' => "sucursal"]) }}">atras</a>
+
 @endif
 
 

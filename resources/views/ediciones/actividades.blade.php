@@ -54,15 +54,20 @@
     <br>
 </fieldset>
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $actividad->id_proveedor, 'tab' => "actividad"]) }}">atras</a>
 
 @if ( $mode != "show")
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $actividad->id_proveedor, 'tab' => "actividad"]) }}">atras</a>
+
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <div class="btn-group">
         <button type="submit" name="guardarActividades" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
     </div>
 </div>
 </form>
+
+@else
+<a class="btn btn-secondary" style="float: left" href="{{ route('verRegistro', ['id' => $actividad->id_proveedor, 'tab' => "actividad"]) }}">atras</a>
+
 @endif
 
 @endsection
