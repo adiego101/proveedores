@@ -334,23 +334,23 @@
 
     let domicilio;
     let localidad;
-    let provincia;
+    let provincia_sede;
     let l = 1; //contador para asignar id al boton que borrara la fila
     $("#add_sede").on("click", function(e) {
 
         domicilio = $("#domicilio_sede").val();
         localidad = $("#localidad_sede").val();
-        provincia = $("#provincia_sede").val();
+        provincia_sede = $("#provincia_sede").val();
 
         $("#body_table_sede").append(
             '<tr id="row_sede' + l +'">'+
                 '<td> <div id="domicilio_sede_text' + l +'">' + domicilio +'</div></td>'+
-                '<td> <div id="provincia_sede_text' + l +'">' + provincia +'</div></td>'+
+                '<td> <div id="provincia_sede_text' + l +'">' + provincia_sede +'</div></td>'+
                 '<td> <div id="localidad_sede_text' + l +'">' + localidad +'</div></td>'+
                 '<td>'+
                 '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'">'+
                 '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + localidad +'">'+
-                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sede' + l +'" name="provincias_sedes[]" readonly value="' + provincia +'">'+
+                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sede' + l +'" name="provincias_sedes[]" readonly value="' + provincia_sede +'">'+
                 '<button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button>'+
                 '</td>'+
             '</tr>'
