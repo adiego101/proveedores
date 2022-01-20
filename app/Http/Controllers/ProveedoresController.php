@@ -538,7 +538,7 @@ class ProveedoresController extends Controller
         $localidades = Localidad::all();
         $mode = "edit";
 
-        return view('ediciones.sucursales', compact('provinciaid','mode','sucursal', 'sucursal_email', 'sucursal_telefono','paises','provincias','localidades'));
+        return view('ediciones.sucursales', compact( 'provinciaid','mode','sucursal', 'sucursal_email', 'sucursal_telefono','paises','provincias','localidades'));
 
     }
 
@@ -1116,7 +1116,7 @@ class ProveedoresController extends Controller
         ]);
     }
 
-    public function obtenerProveedorRupaeId($id)
+    public function obtenerProveedorRupaeId($id,$tab = null)
     {
         $proveedor = Proveedor::findOrFail($id);
 
@@ -1191,7 +1191,7 @@ class ProveedoresController extends Controller
 
         $mode = "edit";
 
-        return view('editarRegistro', compact('persona', 'mode',
+        return view('editarRegistro', compact('tab','persona', 'mode',
         'provinciaidReal','provinciaidLegal','provinciaidFiscal','paises', 'jerarquias', 'provincias','localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones','proveedor',
         'id' ,'proveedor_telefono_fiscal','proveedor_domicilio_fiscal' ,'proveedor_email_fiscal' ,'proveedor_telefono_legal' ,'proveedor_domicilio_legal' ,
         'proveedor_email_legal' ,'proveedor_telefono_real' ,'proveedor_domicilio_real' ,'proveedor_email_real' ,'proveedores_tipos_proveedores',

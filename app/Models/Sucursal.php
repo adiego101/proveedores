@@ -17,6 +17,7 @@ class Sucursal extends Model
                             'numero',
                             'lote',
                             'entre_calles',
+                            'id_proveedor',
                             'id_localidad',
                             'monoblock',
                             'dpto',

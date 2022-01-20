@@ -14,7 +14,7 @@
     <nav>
         <ul class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
             <li class="nav-item">
-                <a class=" nav-link active" id="datos-generales-tab" data-toggle="tab"
+                <a class=" nav-link @if(empty($tab)){{"active"}} @endif" id="datos-generales-tab" data-toggle="tab"
                     href="#datos-generales">Datos Generales</a>
             </li>
             <li class="nav-item">
@@ -30,7 +30,7 @@
                     href="#domicilioFiscal">Domicilio fiscal</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " id="sucursales-tab" data-toggle="tab"
+                <a class="nav-link @if($tab =="sucursal"){{"active"}} @endif" id="sucursales-tab" data-toggle="tab"
                     href="#sucursales">Sucursales</a>
             </li>
             <li class="nav-item">
@@ -43,7 +43,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link " id="actividad-tab" data-toggle="tab"
+                <a class="nav-link @if($tab =="actividad"){{"active"}} @endif" id="actividad-tab" data-toggle="tab"
                     href="#actividad">Actividad</a>
             </li>
             <li class="nav-item">
@@ -55,11 +55,11 @@
                     href="#personalOcupado">Personal Ocupado</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " id="pagos-tab" data-toggle="tab" href="#pagos">Pagos</a>
+                <a class="nav-link @if($tab =="pago"){{"active"}} @endif" id="pagos-tab" data-toggle="tab" href="#pagos">Pagos</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link " id="patente-tab" data-toggle="tab" href="#patente">Patente y Seguro</a>
+                <a class="nav-link @if($tab =="patente"){{"active"}} @endif " id="patente-tab" data-toggle="tab" href="#patente">Patente y Seguro</a>
             </li>
 
             <li class="nav-item">
@@ -78,7 +78,7 @@
         @csrf
 
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="datos-generales" role="tabpanel"
+                        <div class="tab-pane fade  @if(empty($tab)){{"show active"}} @endif" id="datos-generales" role="tabpanel"
                             aria-labelledby="nav-datos-generales-tab">
                            @include('editarRegistro.datosGenerales')
                         </div>
@@ -91,7 +91,7 @@
                             @include('editarRegistro.domicilioLegal')
 
                         </div>
-                        <div class="tab-pane fade" id="sucursales" role="tabpanel" aria-labelledby="nav-sucursales-tab">
+                        <div class="tab-pane fade @if($tab =="sucursal"){{"show active"}} @endif" id="sucursales" role="tabpanel" aria-labelledby="nav-sucursales-tab">
                             @include('editarRegistro.sucursales')
                         </div>
                         <div class="tab-pane fade" id="infoImpositiva" role="tabpanel"
@@ -106,7 +106,7 @@
                             aria-labelledby="nav-domicilioFiscal.blade-tab">
                              @include('editarRegistro.domicilioFiscal')
                         </div>
-                        <div class="tab-pane fade" id="actividad" role="tabpanel" aria-labelledby="nav-actividad-tab">
+                        <div class="tab-pane fade @if($tab =="actividad"){{"show active"}} @endif " id="actividad" role="tabpanel" aria-labelledby="nav-actividad-tab">
                             @include('editarRegistro.actividad')
                         </div>
                         <div class="tab-pane fade" id="valorAgregado" role="tabpanel"
@@ -118,11 +118,11 @@
                             aria-labelledby="nav-personalOcupado-tab">
                              @include('editarRegistro.personalOcupado')
                         </div>
-                        <div class="tab-pane fade" id="pagos" role="tabpanel" aria-labelledby="nav-pagos-tab">
+                        <div class="tab-pane fade  @if($tab =="pago"){{"show active"}} @endif" id="pagos" role="tabpanel" aria-labelledby="nav-pagos-tab">
                             @include('editarRegistro.pagos')
                         </div>
 
-                        <div class="tab-pane fade" id="patente" role="tabpanel" aria-labelledby="nav-patente-tab">
+                        <div class="tab-pane fade  @if($tab =="patente"){{"show active"}} @endif" id="patente" role="tabpanel" aria-labelledby="nav-patente-tab">
                             @include('editarRegistro.patenteSeguro')
                         </div>
 

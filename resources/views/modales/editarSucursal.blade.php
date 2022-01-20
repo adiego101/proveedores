@@ -42,6 +42,11 @@
                         <label for="modal_localidad_sucursal">Localidad:</label><br>
                         <select class="form-control" aria-describedby="basic-addon1" id="modal_localidad_sucursal" name="modal_localidad_sucursal">
                             <option value=" ">Seleccione una localidad</option>
+                            @forelse($localidades as $localidad)
+                                <option value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
+                            @empty
+                                <option value=" "></option>
+                            @endforelse
                         </select>
                         <br>
 
@@ -159,7 +164,14 @@ $(document).on("click", ".btn_edit_modal_sucursal", function() {
 		$('#modal_provincia_sucursal').change(function(){
 			recargarListaSucursalModal();
 		});
+
+        $('#modal_sucursal').onload(function(){
+			recargarListaSucursalModal();
+		});
 	})
+
+    
+    
 </script>
 
 <script type="text/javascript">

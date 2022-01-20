@@ -110,8 +110,9 @@
                     <a href="javascript:void(0);" class="add_telefono" title="Agregue un nuevo teléfono"> <input @if ( $mode == "show") readonly @endif  type="button" value="Agregar Teléfono" class="btn btn-success"></a>
                 </div> -->
             <br>
-
 </fieldset>
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $sucursal->id_proveedor, 'tab' => "sucursal"]) }}">atras</a>
+
 @push('js')
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -156,6 +157,8 @@
 </div>
 </form>
 @endif
+
+
 
 
 @endsection

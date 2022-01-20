@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/crear_registro', [ProveedoresController::class, 'crear_registro'])->name('crear_registro');
     //Levanta las vistas para editar (del formulario)
-    Route::get('modificarRegistro/{id}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId');
+    Route::get('modificarRegistro/{id}/{tab?}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId')->name('modificarRegistro');
     //Llama al metodo que realiza las modificaciones en la BD
     Route::post('editarProveedor/{id}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId');
 

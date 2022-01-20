@@ -36,6 +36,9 @@
     </div>
 
 </fieldset>
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $patente->id_proveedor, 'tab' => "patente"]) }}">atras</a>
+
 @if ( $mode != "show")
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">

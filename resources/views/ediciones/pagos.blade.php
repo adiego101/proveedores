@@ -22,6 +22,9 @@
         aria-describedby="basic-addon1" id="observaciones" value="{{ isset($pago->observaciones) ? $pago->observaciones : '' }}" name="observaciones"><br>
 
 </fieldset>
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $pago->id_proveedor, 'tab' => "pago"]) }}">atras</a>
+
 @if ( $mode != "show")
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
