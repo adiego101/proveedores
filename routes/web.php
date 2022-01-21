@@ -53,6 +53,12 @@ Route::get('/baja', function () {
     return view('bajaRegistro');
 });
 
+Route::get('/actualizarFormulas', function () {
+    $ponderaciones = Ponderacion_compre_local::All();
+    $jerarquias = Jerarquia_compre_local::All();
+    return view('actualizarFormulas', compact('ponderaciones', 'jerarquias'));
+});
+
 Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
 
 //Ruta para editar los registros, se llama desde el boton "editar" de la tabla.

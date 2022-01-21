@@ -267,6 +267,13 @@ return [
         */
 
         [
+            'text' => 'Actualizar Formulas',
+            'url' => '/actualizarFormulas',
+            'icon' => 'fas fa-fw fa-building',
+            'label_color' => 'success',
+        ],
+
+        [
             'text' => 'Cambiar Contraseña',
             'url' => '/Cambiar_contraseña',
             'icon' => 'fas fa-key',
