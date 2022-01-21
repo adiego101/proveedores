@@ -9,23 +9,22 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="row">
-                        <div class="col-sm">
-                            <label for="modal_poliza">Poliza:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="modal_poliza" name="modal_poliza" /><br />
+                    <label for="modal_poliza">Poliza:</label><br />
+                    <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="modal_poliza" name="modal_poliza" maxlength="20"/>
+                    <br />
 
-                            <label for="modal_asegurado">Asegurado:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="modal_asegurado" name="modal_asegurado" /><br />
-                        </div>
+                    <label for="modal_agencia">Agencia:</label><br />
+                    <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="modal_agencia" name="modal_agencia" maxlength="20"/>
+                    <br />
 
-                        <div class="col-sm">
-                            <label for="modal_agencia">Agencia:</label><br />
-                            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="modal_agencia" name="modal_agencia" /><br />
-
-                            <label for="modal_vigencia">Vigencia hasta:</label><br />
-                            <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="modal_vigencia" name="modal_vigencia" /><br />
-                        </div>
-                    </div>
+                    <label for="modal_asegurado">Asegurado:</label><br />
+                    <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="modal_asegurado" name="modal_asegurado" maxlength="20"/>
+                    <br />
+                     
+                    <label for="modal_vigencia">Vigencia hasta:</label><br />
+                    <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="modal_vigencia" name="modal_vigencia" />
+                    <br />
+                    
                     <div class="modal-footer">
                         <input id="numero_fila_seguro" name="numero_fila_seguro" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
