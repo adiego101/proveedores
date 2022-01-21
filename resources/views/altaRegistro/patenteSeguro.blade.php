@@ -13,18 +13,18 @@
     <div class="row">
         <div class="col-sm">
             <label for="marca_vehiculo">Marca:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca_vehiculo" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca_vehiculo" maxlength="20"/><br />
 
             <label for="dominio_vehiculo">Dominio:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio_vehiculo" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio_vehiculo" maxlength="7"/><br />
         </div>
 
         <div class="col-sm">
             <label for="modelo_vehiculo">Modelo:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo_vehiculo" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo_vehiculo" maxlength="20"/><br />
 
             <label for="inscripto_en_vehiculo">Inscripto en:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en_vehiculo" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en_vehiculo" maxlength="20"/><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_vehiculo" class="btn btn-success">Agregar Vehículo</a>
@@ -58,15 +58,15 @@
     <div class="row">
         <div class="col-sm">
             <label for="poliza">Poliza:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="poliza" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="poliza" maxlength="20"/><br />
 
             <label for="asegurado">Asegurado:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" maxlength="20"/><br />
         </div>
 
         <div class="col-sm">
             <label for="agencia">Agencia:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" /><br />
+            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" maxlength="20"/><br />
 
             <label for="vigencia">Vigencia hasta:</label><br />
             <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia" /><br />
@@ -103,11 +103,10 @@
 <br>
 
 <label for="domicilio_sede">Domicilio:</label><br />
-<input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio_sede" /><br />
+<input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio_sede" maxlength="20"/><br />
 
 <div class="row">
         <div class="col-sm">
-            <!--En este caso, se deben recuperar las provincias de la BD -->
             <label for="provincia_sede">Provincia:</label><br>
             <select class="form-control" aria-describedby="basic-addon1" id="provincia_sede" name="provincia_sede">
             <option value=" ">Seleccione una provincia</option>
@@ -121,7 +120,6 @@
         </div>
 
         <div class="col-sm">
-            <!--En este caso, se deben recuperar las localidades_sedes de la BD -->
             <label for="localidad_sede">Localidad:</label><br>
             <select class="form-control" aria-describedby="basic-addon1" id="localidad_sede" name="localidad_sede">
                 <option value=" ">Seleccione una localidad</option>

@@ -3,45 +3,41 @@
     <br>
     <div class="row">
         <div class="col col-sm-6">
-            <h5>Calculo del indice de compra local</h5>
+            <h5>Cálculo del índice de compra local</h5>
 
-            <label for="porc_facturacion">Porcentaje de facturacion en Santa Cruz:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="porc_facturacion" name="porc_facturacion"
-                ><br>
+            <label for="porc_facturacion">Porcentaje de facturación en Santa Cruz:</label><br>
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="porc_facturacion" name="porc_facturacion" placeholder="Ingrese el porcentaje de facturación" maxlength="9"><br>
 
             <label for="porc_gasto">Porcentaje de Gastos en Santa Cruz:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="porc_gasto" name="porc_gasto"
-                ><br>
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="porc_gasto" name="porc_gasto" placeholder="Ingrese el porcentaje de gastos" maxlength="9"><br>
 
             <label for="porc_mo">Porcentaje de Mano de Obra en Santa Cruz:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="porc_mo" name="porc_mo"
-                ><br>
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="porc_mo" name="porc_mo" placeholder="Ingrese el porcentaje de mano de obra" maxlength="9"><br>
 
             <label for="antiguedad">Antiguedad en Santa Cruz:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="antiguedad" name="antiguedad"
-                ><br>
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="antiguedad" name="antiguedad" placeholder="Ingrese la antiguedad en Santa Cruz" maxlength="3"><br>
 
             <label for="dom_fiscal">Domicilio Fiscal:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="dom_fiscal" name="dom_fiscal"
-                ><br>
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="dom_fiscal" name="dom_fiscal" placeholder="Ingrese el domicilio fiscal" maxlength="9"><br>
 
-                <div class="container">
+            <div class="container">
                 <div class="row">
                     <div class="col-sm">
                         <input type="checkbox" id="valor_agregado" name="valor_agregado" value="0">
                         <label for="valor_agregado">Valor Agregado</label><br>
-
-
                     </div>
                 </div>
-            </div><br>
+            </div>
+            
+            <br>
 
-            <label for="valor-indice">Valor del indice:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="valor_indice" name="valor_indice"
-                disabled>
+            <label for="valor_indice">Valor del índice:</label><br>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" id="valor_indice" name="valor_indice" disabled>
             <br>
         </div>
+
         <div class="col col-sm-2"></div>
+
         <div class="col col-sm-4">
             @if(isset($ponderaciones))
                 <div>
@@ -138,7 +134,7 @@
                                     @break
                                     @case ('Foráneo')
                                         <tr>
-                                            <th>FORANEO</th>
+                                            <th>FORÁNEO</th>
                                             <td>
                                             <input type="text" class="form-control" aria-describedby="basic-addon1" id="foraneo_jerarquia" name="foraneo_jerarquia" readonly value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                                             </td>
@@ -162,16 +158,17 @@
         <option value="3">Mediana</option>
         <option value="4">Grande</option>
         <option value="5">Otros</option>
-    </select><br>
-
+    </select>
+    
+    <br>
 
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-
     <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
 
 </fieldset>
 
 @push('js')
+
     <script type="text/javascript">
         $("#document").ready(function(){
             $("#porc_facturacion").change(function() {
@@ -295,4 +292,5 @@
                                                     valor_agregado*valor_agregado_ponderacion);
         }
     </script>
+
 @endpush
