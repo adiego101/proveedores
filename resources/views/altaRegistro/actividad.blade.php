@@ -5,12 +5,10 @@
 
 <br/>
     <label for="facturacion_anual_alcanzada">Facturación anual alcanzada:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada"
-    name="facturacion_anual_alcanzada"><br>
+    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada" name="facturacion_anual_alcanzada" maxlength="9"><br>
 
     <div class="row">
         <div class="col-sm">
-            <!--En este caso, se deben recuperar los tipos de actividad de la BD -->
             <label for="tipo_actividad">Tipo de Actividad:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="tipo_actividad" name="tipo_actividad">
                     @forelse($tipos_actividades as $tipo_actividad)
@@ -23,8 +21,6 @@
         </div>
 
         <div class="col-sm">
-
-            <!--En este caso, se deben recuperar las actividades de la BD -->
             <label for="actividad">Actividad:</label><br>
             <select class="form-control" aria-describedby="basic-addon1" id="actividad" name="actividad">
                 @forelse($actividades as $actividad)
@@ -60,7 +56,7 @@
     <hr>
 
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"><br>
+    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="20"><br>
 
     <div class="row">
         <div class="col-sm">
@@ -77,16 +73,15 @@
 
             <label for="rnpa">RNPA:</label><br>
             <input type="text" class="form-control" aria-describedby="basic-addon1" id="rnpa"
-            name="rnpa" placeholder="Ingrese el RNPA"><br>
+            name="rnpa" placeholder="Ingrese el RNPA" maxlength="20"><br>
         </div>
 
         <div class="col-sm">
             <label for="unidad_producida">Unidad producida:</label><br>
-            <input type="number" class="form-control" aria-describedby="basic-addon1" id="unidad_producida"
-            name="unidad_producida" placeholder="Ingrese la cantidad de unidades producidas"><br>
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="unidad_producida" name="unidad_producida" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9"><br>
 
             <label for="produccion_total">Capacidad de producción total:</label><br>
-            <input type="number" class="form-control" aria-describedby="basic-addon1" id="produccion_total" name="produccion_total" placeholder="Ingrese la producción total"><br>
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="produccion_total" name="produccion_total" placeholder="Ingrese la producción total" maxlength="9"><br>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_producto" class="btn btn-success">Agregar Producto</a>
