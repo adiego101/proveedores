@@ -8,6 +8,8 @@
 
 <h2>Ponderación:</h2>
 
+<form id="actualizar_formulas" action="{{ route('actualizar_formulas') }}"  method="POST">
+@csrf
 <div class="container">
     <div class="row">
     @foreach($ponderaciones as $ponderacion)
@@ -55,17 +57,64 @@
 
     <hr>
 
-<h2>Jerarquía e Índice:</h2>
+    <h2>Jerarquía e Índice:</h2>
 
-    <div class="container">
-        <label for="actualizar_local">Local:</label><br>
-        <input type="text" class="form-control" placeholder="Ingrese el rango del índice local" aria-describedby="basic-addon1" id="actualizar_local" name="actualizar_local" maxlength="40"><br>
+    <div class="container">  
+    @foreach($jerarquias as $jerarquia)
+        @switch($jerarquia->desc_jerarquia_compre_local)
+            @case ('Local')
+            <h3>Local:</h3>
+            <div class="row">
+                <div class="col-sm">
+                  
+                    <label for="local_inicial">valor inicial:</label><br>
+                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice local inicial" aria-describedby="basic-addon1" id="local_inicial" name="local_inicial" maxlength="40" value="{{$jerarquia->valor_desde}}"><br>
+                </div>
+                
+                <div class="col-sm">
+                    <label for="local_final">valor final:</label><br>
+                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice local final" aria-describedby="basic-addon1" id="local_final" name="local_final" maxlength="40" value="{{$jerarquia->valor_hasta}}"><br>
+                </div>
+            </div>
+                 
+            @break
+            @case ('Intermedio')
 
-        <label for="actualizar_intermedio">Intermedio:</label><br>
-        <input type="text" class="form-control" placeholder="Ingrese el rango del índice intermedio" aria-describedby="basic-addon1" id="actualizar_intermedio" name="actualizar_intermedio" maxlength="10"><br>
+            <h3>Intermedio:</h3>
+            <div class="row">
+                <div class="col-sm">
+                  
+                    <label for="intermedio_inicial">valor inicial:</label><br>
+                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice intermedio inicial" aria-describedby="basic-addon1" id="intermedio_inicial" name="intermedio_inicial" maxlength="10" value="{{$jerarquia->valor_desde}}"> 
+                </div>
+                
+                <div class="col-sm">
+                    <label for="intermedio_final">valor final:</label><br>
+                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice intermedio final" aria-describedby="basic-addon1" id="intermedio_final" name="intermedio_final" maxlength="10" value="{{$jerarquia->valor_hasta}}"> 
+                </div>
+            </div>
 
-        <label for="actualizar_foraneo">Foráneo:</label><br>
-        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el rango del índice foráneo" aria-describedby="basic-addon1" id="actualizar_foraneo" name="actualizar_foraneo" maxlength="3"><br>
+            @break
+            @case ('Foráneo')
+
+            <br>
+            <h3>Foráneo:</h3>
+            <div class="row">
+                <div class="col-sm">
+                  
+                    <label for="foraneo_inicial">valor inicial:</label><br>
+                    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el rango del índice foráneo inicial" aria-describedby="basic-addon1" id="foraneo_inicial" name="foraneo_inicial" maxlength="3" value="{{$jerarquia->valor_desde}}"><br>
+                </div>
+                
+                <div class="col-sm">
+                    <label for="foraneo_final">valor final:</label><br>
+                    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el rango del índice foráneo final" aria-describedby="basic-addon1" id="foraneo_final" name="foraneo_final" maxlength="3" value="{{$jerarquia->valor_hasta}}"><br> 
+                </div>
+            </div>
+                       
+            @break
+        @endswitch
+    @endforeach
     </div>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -73,5 +122,7 @@
             <button type="submit" name="actualizar" class="btn btn-success"> {{ 'Actualizar' }} </button>
         </div>
     </div>
+    
+</form>
 
 @endsection

@@ -59,6 +59,8 @@ Route::get('/actualizarFormulas', function () {
     return view('actualizarFormulas', compact('ponderaciones', 'jerarquias'));
 });
 
+Route::post('/actualizar_formulas', [ProveedoresController::class, 'actualizar_formulas'])->name('actualizar_formulas');
+
 Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
 
 //Ruta para editar los registros, se llama desde el boton "editar" de la tabla.
