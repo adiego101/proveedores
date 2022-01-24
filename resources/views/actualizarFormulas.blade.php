@@ -27,37 +27,37 @@
             @case ('Facturacion')
             <div class="col-sm">                  
                 <label for="actualizar_facturacion">Facturación:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de facturación" aria-describedby="basic-addon1" id="actualizar_facturacion" name="actualizar_facturacion" value="{{$ponderacion->valor_ponderacion}}"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de facturación" aria-describedby="basic-addon1" id="actualizar_facturacion" name="actualizar_facturacion" maxlength="4" value="{{$ponderacion->valor_ponderacion}}"><br>
 
             @break
             @case ('Gastos')
 
                 <label for="actualizar_gastos">Gastos:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el porcentaje de gastos" aria-describedby="basic-addon1" id="actualizar_gastos" name="actualizar_gastos" value="{{$ponderacion->valor_ponderacion}}"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de gastos" aria-describedby="basic-addon1" id="actualizar_gastos" name="actualizar_gastos" maxlength="4" value="{{$ponderacion->valor_ponderacion}}"><br>
                                   
             @break
             @case ('Mano_Obra')
 
                 <label for="actualizar_obra">Mano de Obra:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de mano de obra" aria-describedby="basic-addon1" id="actualizar_obra" name="actualizar_obra" value="{{$ponderacion->valor_ponderacion}}"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de mano de obra" aria-describedby="basic-addon1" id="actualizar_obra" name="actualizar_obra" maxlength="4" value="{{$ponderacion->valor_ponderacion}}"><br>
             </div>                 
             @break
             @case ('Antiguedad')
             <div class="col-sm">
                 <label for="actualizar_antiguedad">Antiguedad:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la antiguedad en Santa Cruz" aria-describedby="basic-addon1" id="actualizar_antiguedad" name="actualizar_antiguedad" value="{{$ponderacion->valor_ponderacion}}"><br>
+                <input type="text" class="form-control" placeholder="Ingrese la antiguedad en Santa Cruz" aria-describedby="basic-addon1" id="actualizar_antiguedad" name="actualizar_antiguedad" maxlength="4" value="{{$ponderacion->valor_ponderacion}}"><br>
                                      
             @break
             @case ('Dom_fiscal')
 
                 <label for="actualizar_domicilio">Domicilio Fiscal:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el domicilio fiscal" aria-describedby="basic-addon1" id="actualizar_domicilio" name="actualizar_domicilio" value="{{$ponderacion->valor_ponderacion}}"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el domicilio fiscal" aria-describedby="basic-addon1" id="actualizar_domicilio" name="actualizar_domicilio" maxlength="4" value="{{$ponderacion->valor_ponderacion}}"><br>
                                       
             @break
             @case ('Valor_Agregado')
 
                 <label for="actualizar_agregado">Valor Agregado:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el valor agregado" aria-describedby="basic-addon1" id="actualizar_agregado" name="actualizar_agregado" value="{{$ponderacion->valor_ponderacion}}"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el valor agregado" aria-describedby="basic-addon1" id="actualizar_agregado" name="actualizar_agregado" maxlength="4" value="{{$ponderacion->valor_ponderacion}}"><br>
             </div>                  
             @break
         @endswitch
@@ -80,12 +80,12 @@
                 <div class="col-sm">
                   
                     <label for="local_inicial">valor inicial:</label><br>
-                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice local inicial" aria-describedby="basic-addon1" id="local_inicial" name="local_inicial" maxlength="40" value="{{$jerarquia->valor_desde}}"><br>
+                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice local inicial" aria-describedby="basic-addon1" id="local_inicial" name="local_inicial" maxlength="3" value="{{$jerarquia->valor_desde}}"><br>
                 </div>
                 
                 <div class="col-sm">
                     <label for="local_final">valor final:</label><br>
-                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice local final" aria-describedby="basic-addon1" id="local_final" name="local_final" maxlength="40" value="{{$jerarquia->valor_hasta}}"><br>
+                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice local final" aria-describedby="basic-addon1" id="local_final" name="local_final" maxlength="3" value="{{$jerarquia->valor_hasta}}"><br>
                 </div>
             </div>
                  
@@ -97,12 +97,12 @@
                 <div class="col-sm">
                   
                     <label for="intermedio_inicial">valor inicial:</label><br>
-                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice intermedio inicial" aria-describedby="basic-addon1" id="intermedio_inicial" name="intermedio_inicial" maxlength="10" value="{{$jerarquia->valor_desde}}"> 
+                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice intermedio inicial" aria-describedby="basic-addon1" id="intermedio_inicial" name="intermedio_inicial" maxlength="3" value="{{$jerarquia->valor_desde}}"> 
                 </div>
                 
                 <div class="col-sm">
                     <label for="intermedio_final">valor final:</label><br>
-                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice intermedio final" aria-describedby="basic-addon1" id="intermedio_final" name="intermedio_final" maxlength="10" value="{{$jerarquia->valor_hasta}}"> 
+                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice intermedio final" aria-describedby="basic-addon1" id="intermedio_final" name="intermedio_final" maxlength="3" value="{{$jerarquia->valor_hasta}}"> 
                 </div>
             </div>
 
@@ -115,12 +115,12 @@
                 <div class="col-sm">
                   
                     <label for="foraneo_inicial">valor inicial:</label><br>
-                    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el rango del índice foráneo inicial" aria-describedby="basic-addon1" id="foraneo_inicial" name="foraneo_inicial" maxlength="3" value="{{$jerarquia->valor_desde}}"><br>
+                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice foráneo inicial" aria-describedby="basic-addon1" id="foraneo_inicial" name="foraneo_inicial" maxlength="3" value="{{$jerarquia->valor_desde}}"><br>
                 </div>
                 
                 <div class="col-sm">
                     <label for="foraneo_final">valor final:</label><br>
-                    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el rango del índice foráneo final" aria-describedby="basic-addon1" id="foraneo_final" name="foraneo_final" maxlength="3" value="{{$jerarquia->valor_hasta}}"><br> 
+                    <input type="text" class="form-control" placeholder="Ingrese el rango del índice foráneo final" aria-describedby="basic-addon1" id="foraneo_final" name="foraneo_final" maxlength="3" value="{{$jerarquia->valor_hasta}}"><br> 
                 </div>
             </div>
                        
