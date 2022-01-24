@@ -17,12 +17,9 @@
     <table class="table table-hover yajra-datatable">
         <thead>
             <tr>
-                <th>Nombre de fantasia</th>
+                <th>Nombre de fantasía</th>
+                <th>Razón Social</th>
                 <th>cuit</th>
-                <th>Provincia</th>
-              <!--  <th>Username</th>
-                <th>Phone</th>
-                <th>DOB</th> -->
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -76,8 +73,8 @@
         ajax: "{{ route('registros.list') }}",
         columns: [
             {data: 'nombre_fantasia', name: 'nombre_fantasia'},
+            {data: 'razon_social', name: 'razon_social'},
             {data: 'cuit', name: 'cuit'},
-            {data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
             {
                 data: 'action',
                 name: 'action',
