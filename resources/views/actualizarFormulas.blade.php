@@ -2,6 +2,15 @@
 
 @section('content2')
 
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{session('success')}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
 <h1>Actualizar Fórmulas</h1>
 
 <br>
@@ -12,6 +21,7 @@
 @csrf
 <div class="container">
     <div class="row">
+    @if(isset($ponderaciones))
     @foreach($ponderaciones as $ponderacion)
         @switch($ponderacion->desc_ponderacion)
             @case ('Facturacion')
@@ -52,6 +62,7 @@
             @break
         @endswitch
     @endforeach
+    @endif
     </div>
 </div>
 
@@ -60,6 +71,7 @@
     <h2>Jerarquía e Índice:</h2>
 
     <div class="container">  
+    @if(isset($jerarquias))
     @foreach($jerarquias as $jerarquia)
         @switch($jerarquia->desc_jerarquia_compre_local)
             @case ('Local')
@@ -115,6 +127,7 @@
             @break
         @endswitch
     @endforeach
+    @endif
     </div>
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -122,7 +135,7 @@
             <button type="submit" name="actualizar" class="btn btn-success"> {{ 'Actualizar' }} </button>
         </div>
     </div>
-    
+
 </form>
 
 @endsection

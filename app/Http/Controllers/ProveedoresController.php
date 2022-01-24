@@ -1487,4 +1487,62 @@ $select = $select . '<option value=' . $localidades[$i]["nombre_localidad"] . '>
 return $select;
 }
  */
+
+public function actualizar_formulas(Request $request)
+    {
+        $facturacion = Ponderacion_compre_local::find(1);
+        $facturacion->update([
+            'valor_ponderacion' => $request->actualizar_facturacion,
+        ]);
+
+        $gastos = Ponderacion_compre_local::find(2);
+        $gastos->update([
+            'valor_ponderacion' => $request->actualizar_gastos,
+        ]);
+
+        $mano_obra = Ponderacion_compre_local::find(3);
+        $mano_obra->update([
+            'valor_ponderacion' => $request->actualizar_obra,
+        ]);
+
+
+        $antiguedad = Ponderacion_compre_local::find(4);
+        $antiguedad->update([
+            'valor_ponderacion' => $request->actualizar_antiguedad,
+        ]);
+
+        $domicilio = Ponderacion_compre_local::find(5);
+        $domicilio->update([
+            'valor_ponderacion' => $request->actualizar_domicilio,
+        ]);
+
+        $valor_agregado = Ponderacion_compre_local::find(6);
+        $valor_agregado->update([
+            'valor_ponderacion' => $request->actualizar_agregado,
+        ]);
+
+
+
+        $local = Jerarquia_compre_local::find(1);
+        $local->update([
+            'valor_desde' => $request->local_inicial,
+            'valor_hasta' => $request->local_final,
+        ]);
+
+        $intermedio = Jerarquia_compre_local::find(2);
+        $intermedio->update([
+            'valor_desde' => $request->intermedio_inicial,
+            'valor_hasta' => $request->intermedio_final,
+        ]);
+
+        $foraneo = Jerarquia_compre_local::find(3);
+        $foraneo->update([
+            'valor_desde' => $request->foraneo_inicial,
+            'valor_hasta' => $request->foraneo_final,
+        ]);
+
+        return redirect()->back()->withSuccess('Los valores de las fórmulas se han actualizado satisfactoriamente !');
+
+    }
+
 }
