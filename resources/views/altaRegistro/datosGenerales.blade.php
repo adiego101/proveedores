@@ -21,7 +21,7 @@
     <br>
 
     <label for="observaciones">Observaciones:</label><br>
-    <textarea id="observaciones" name="observaciones" class="form-control" placeholder="ingrese las observaciones que considere necesarias" maxlength="200"></textarea>
+    <textarea id="observaciones" name="observaciones" class="form-control" placeholder="Ingrese las observaciones que considere necesarias" maxlength="200"></textarea>
     <br>
 
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
