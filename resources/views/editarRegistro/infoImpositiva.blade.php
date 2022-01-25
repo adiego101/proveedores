@@ -37,29 +37,19 @@ value="OTROS">OTROS</option>
   <br>
 
   <label for="exento_en_cod_de_actividad">Excento en código de actividad:</label><br>
-  <input  @if ( $mode == "show") readonly @endif type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el código de la actividad en la que se encuentra excento"
-value="{{ isset($proveedor->exento_en_cod_de_actividad) ? $proveedor->exento_en_cod_de_actividad : '' }}" id="exento_en_cod_de_actividad" name="exento_en_cod_de_actividad" ><br>
+  <input  @if ( $mode == "show") readonly @endif type="text" class="form-control" aria-describedby="basic-addon1" placeholder="Ingrese el código de la actividad en la que se encuentra excento" value="{{ isset($proveedor->exento_en_cod_de_actividad) ? $proveedor->exento_en_cod_de_actividad : '' }}" id="exento_en_cod_de_actividad" name="exento_en_cod_de_actividad" maxlength="20"><br>
 
-  <!--En este caso, se deben recuperar las provincias de la BD -->
   <label for="en_la_provincia_de">En la provincia de:</label><br>
   <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="en_la_provincia_de" name="en_la_provincia_de">
-    <option
-value=" ">Seleccione una provincia</option>
+    <option value=" ">Seleccione una provincia</option>
     @forelse($provincias as $provincia)
-    @if ($provincia->nombre_provincia ==$proveedor->en_la_provincia_de )
-
-    <option selected="selected"
-value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-
-@else
-
-    <option
-value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-
-
-@endif    @empty
-      <option
-value=" "></option>
+        @if ($provincia->nombre_provincia ==$proveedor->en_la_provincia_de )
+            <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+        @else
+            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+        @endif    
+    @empty
+      <option value=" "></option>
     @endforelse
   </select>
   <br>
@@ -68,13 +58,10 @@ value=" "></option>
     <label>Corresponde retención:</label>
     <div class="form-check">
       <div class="col-sm">
-        <input  @if ( $mode == "show") disabled @endif type="radio" {{ ($proveedor->retencion=="1") ? "checked"  : "" }}
-            id="retencion" name="retencion"
-value="1" >SI
+        <input  @if ( $mode == "show") disabled @endif type="radio" {{ ($proveedor->retencion=="1") ? "checked"  : "" }} id="retencion" name="retencion" value="1" >SI
       </div>
       <div class="col-sm">
-        <input  @if ( $mode == "show") disabled @endif type="radio" {{ ($proveedor->retencion=="0") ? "checked"  : "" }}  id="retencion" name="retencion"
-value="0">NO
+        <input  @if ( $mode == "show") disabled @endif type="radio" {{ ($proveedor->retencion=="0") ? "checked"  : "" }}  id="retencion" name="retencion" value="0" >NO
       </div>
     </div>
   </div>
@@ -89,4 +76,5 @@ value="0">NO
         <a class="btn btn-primary btnNext">Siguiente</a>
     </div>
 </div>
+
 </fieldset>

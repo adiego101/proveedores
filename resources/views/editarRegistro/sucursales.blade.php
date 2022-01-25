@@ -1,6 +1,6 @@
 <fieldset>
 <!-- SE DEBEN ELIMINAR LOS ATRIBUTOS NAME DE CADA CAMPO Y SOLO DEJARLOS EN EL APPEND JS, PORQUE SINO AL ENVIAR LOS DATOS A LA BD SE ALMACENA SIEMPRE UN VALOR NULO AL PRINCIPIO. -->
-<h2 class="mb-4">Gestionar Sucursales:</h2>
+<h2 class="mb-4">Sucursales:</h2>
 <div>
 
     <table style="width:100%" class="yajra-datatable table table-hover  table-striped table-condensed">
