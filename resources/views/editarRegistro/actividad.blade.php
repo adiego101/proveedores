@@ -5,11 +5,10 @@
 
 <br/>
     <label for="facturacion_anual_alcanzada">Facturación anual alcanzada:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada"
-    name="facturacion_anual_alcanzada"
+    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada"
+    name="facturacion_anual_alcanzada" maxlength="9"
      @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
-
 
         <div>
 
@@ -39,9 +38,9 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
     <hr>
 
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"
+    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"
         @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}"><br>
+value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
 
         <div>
 
@@ -195,18 +194,21 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}"><br>
 
     function bajaActividad(id_registro) {
 
-         //Desplegamos el modal
-         $('#modalBajaActividad').modal('show');
-         $('#baja_actividad').val(id_registro);
+        //Desplegamos el modal
+        $('#modalBajaActividad').modal('show');
+        $('#baja_actividad').val(id_registro);
     }
+
 
     function bajaProducto(id_registro) {
 
-//Desplegamos el modal
-$('#modal_baja_producto').modal('show');
-$('#baja_producto').val(id_registro);
-}
+        //Desplegamos el modal
+        $('#modal_baja_producto').modal('show');
+        $('#baja_producto').val(id_registro);
+    }
+    
 </script>
+
 @endpush
 
 </fieldset>

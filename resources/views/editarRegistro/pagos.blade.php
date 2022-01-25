@@ -17,7 +17,7 @@ value="0" name="prov_petrolero">
 
     <input @if ( $mode == "show") onclick="return false" @endif    {{ !($proveedores_tipos_proveedores->where('id_tipo_proveedor',"4")->isEmpty()) ? "checked"  : "" }} type="checkbox" id="prov_provincial"
 value="0" name="prov_provincial">
-    <label for="prov_provincial">Proveedor Provincial</label><br>
+    <label for="prov_provincial">Productor Provincial</label><br>
 
     <br>
 

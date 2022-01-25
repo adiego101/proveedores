@@ -14,28 +14,20 @@
 <br/>
 
 <label for="Domicilio">Domicilio:</label><br />
-<input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($sede->Domicilio) ? $sede->Domicilio : '' }}" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" /><br />
+<input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($sede->Domicilio) ? $sede->Domicilio : '' }}" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="20"/><br />
 
 <div class="row">
         <div class="col-sm">
-            <!--En este caso, se deben recuperar las provincias de la BD -->
             <label for="provincia_sede">Provincia:</label><br>
             <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="provincia_sede" name="provincia_sede">
             {{--<option value=" ">Seleccione una provincia</option>--}}
 
             @forelse($provincias as $provincia)
-
                 @if ($provincia->id_provincia == $provinciaid)
-
                     <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-
                 @else
-
                     <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-
-
                 @endif
-
             @empty
                 <option value=" "></option>
             @endforelse
@@ -44,7 +36,6 @@
         </div>
 
         <div class="col-sm">
-            <!--En este caso, se deben recuperar las localidades_sedes de la BD -->
             <label for="Localidad">Localidad:</label><br>
             <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad">
                 <option value=" ">Seleccione una localidad</option>
@@ -107,8 +98,8 @@ window.onload = function(){
             });
         }
 
-
 </script>
+
 @endpush
 
 @endsection

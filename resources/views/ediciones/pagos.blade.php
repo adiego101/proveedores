@@ -14,12 +14,10 @@
         aria-describedby="basic-addon1" id="fecha" value="{{ isset($pago->fecha) ? date('Y-m-d',strtotime($pago->fecha)) : '' }}" name="fecha"><br>
 
     <label for="importe">Importe:</label><br>
-    <input @if ( $mode == "show") readonly @endif type="number" class="form-control" {{--onkeypress="return valideKey(event);"--}}
-        placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" value="{{ isset($pago->importe) ? $pago->importe : '' }}" id="importe" name="importe"><br>
+    <input @if ( $mode == "show") readonly @endif type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" value="{{ isset($pago->importe) ? $pago->importe : '' }}" id="importe" name="importe" maxlength="9"><br>
 
     <label for="observaciones">Observaciones:</label><br>
-    <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese las observaciones del pago"
-        aria-describedby="basic-addon1" id="observaciones" value="{{ isset($pago->observaciones) ? $pago->observaciones : '' }}" name="observaciones"><br>
+    <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese las observaciones del pago" aria-describedby="basic-addon1" id="observaciones" value="{{ isset($pago->observaciones) ? $pago->observaciones : '' }}" name="observaciones" maxlength="50"><br>
 
 </fieldset>
 

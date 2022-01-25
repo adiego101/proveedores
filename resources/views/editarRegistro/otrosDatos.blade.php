@@ -3,33 +3,27 @@
     <br>
     <div class="row">
         <div class="col col-sm-6">
-            <h5>Calculo del indice de compra local</h5>
+            <h5>Cálculo del índice de compra local</h5>
 
             <label for="porc_facturacion">Porcentaje de facturacion en Santa Cruz:</label><br>
-            <input  @if ( $mode == "show") readonly @endif type="text" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_facturacion) ? $proveedor->porc_facturacion : '' }}" id="porc_facturacion" name="porc_facturacion"
-                ><br>
+            <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
+value="{{ isset($proveedor->porc_facturacion) ? $proveedor->porc_facturacion : '' }}" id="porc_facturacion" name="porc_facturacion" maxlength="9"><br>
 
             <label for="porc_gasto">Porcentaje de Gastos en Santa Cruz:</label><br>
-            <input  @if ( $mode == "show") readonly @endif type="text" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_gasto) ? $proveedor->porc_gasto : '' }}" id="porc_gasto" name="porc_gasto"
-                ><br>
+            <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
+value="{{ isset($proveedor->porc_gasto) ? $proveedor->porc_gasto : '' }}" id="porc_gasto" name="porc_gasto" maxlength="9"><br>
 
             <label for="porc_mo">Porcentaje de Mano de Obra en Santa Cruz:</label><br>
-            <input  @if ( $mode == "show") readonly @endif type="text" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_mo) ? $proveedor->porc_mo : '' }}" id="porc_mo" name="porc_mo"
-                ><br>
+            <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
+value="{{ isset($proveedor->porc_mo) ? $proveedor->porc_mo : '' }}" id="porc_mo" name="porc_mo" maxlength="9"><br>
 
             <label for="antiguedad">Antiguedad en Santa Cruz:</label><br>
-            <input  @if ( $mode == "show") readonly @endif type="text" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->antiguedad) ? $proveedor->antiguedad : '' }}" id="antiguedad" name="antiguedad"
-                ><br>
+            <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
+value="{{ isset($proveedor->antiguedad) ? $proveedor->antiguedad : '' }}" id="antiguedad" name="antiguedad" maxlength="3"><br>
 
             <label for="dom_fiscal">Domicilio Fiscal:</label><br>
-            <input  @if ( $mode == "show") readonly @endif type="text" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}"
-                    id="dom_fiscal" name="dom_fiscal"
-                ><br>
+            <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
+value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}" id="dom_fiscal" name="dom_fiscal" maxlength="9"><br>
 
                 <div class="container">
                 <div class="row">
@@ -48,8 +42,7 @@ value="0" @endif
             </div><br>
 
             <label for="valor-indice">Valor del indice:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="valor_indice" name="valor_indice"
-                disabled>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" id="valor_indice" name="valor_indice" disabled>
             <br>
         </div>
         <div class="col col-sm-2"></div>
@@ -336,6 +329,6 @@ value="5">Otros</option>
 
     }
 
-
     </script>
+
 @endpush
