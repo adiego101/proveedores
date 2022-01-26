@@ -20,6 +20,7 @@
                 <th>Nombre de fantasía</th>
                 <th>Razón Social</th>
                 <th>cuit</th>
+                <th>Dada de baja</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -75,6 +76,14 @@
             {data: 'nombre_fantasia', name: 'nombre_fantasia'},
             {data: 'razon_social', name: 'razon_social'},
             {data: 'cuit', name: 'cuit'},
+            {data: 'dado_de_baja', 
+            render: function(data){
+                    if (data === 0)
+                        return 'No';
+                    else
+                        return 'Si';
+                }
+            },
             {
                 data: 'action',
                 name: 'action',

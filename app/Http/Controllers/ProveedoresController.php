@@ -477,7 +477,8 @@ class ProveedoresController extends Controller
     public function getProveedores(Request $request)
     {
         if ($request->ajax()) {
-            $data = Proveedor::latest()->where('dado_de_baja', 0)->get();
+            //$data = Proveedor::latest()->where('dado_de_baja', 0)->get();
+            $data = Proveedor::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
