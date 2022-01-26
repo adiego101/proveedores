@@ -82,7 +82,7 @@
                     if (data === 0)
                         return 'No';
                     else
-                        return 'Si';
+                        return '<div style="background-color:yellow;">Si</div>';
                 }
             },
             {
