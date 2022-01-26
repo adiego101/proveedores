@@ -482,7 +482,15 @@ class ProveedoresController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-success btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaRegistro(' . $row->id_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    if ($row->dado_de_baja == 0)
+                    {
+                        $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaRegistro(' . $row->id_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    }
+                    else
+                    {
+                        $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a>';
+                    }
+
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -1408,6 +1416,18 @@ class ProveedoresController extends Controller
         $proveedores_rupae = Proveedor::find($request->id);
         //return response()->json($proveedores_rupae);
         $proveedores_rupae->dado_de_baja = 1;
+        $proveedores_rupae->save();
+        return redirect()->back();
+
+    }
+
+
+    public function dar_alta_id(Request $request)
+    {
+
+        $proveedores_rupae = Proveedor::find($request->id);
+        //return response()->json($proveedores_rupae);
+        $proveedores_rupae->dado_de_baja = 0;
         $proveedores_rupae->save();
         return redirect()->back();
 

@@ -29,10 +29,11 @@
     </table>
 <!--</div>-->
 
-    <!--Incluimos el modal para dar de baja un registro -->
-    <!-- Falta incluir el modal -->
+<!--Incluimos el modal para dar de baja un registro -->
 @include('modalBajaRegistro')
 
+<!--Incluimos el modal para dar de alta un registro -->
+@include('modalAltaRegistro')
 
 </body>
 </html>
@@ -95,21 +96,21 @@
 
   });
 
-    //Funciones a implementar
-
-    function verRegistro() {
-
-        return  alert("Retornar vista para visualizar un registro!");
-    }
-
-
+   
     function bajaRegistro(id_registro) {
 
-         //Desplegamos el modal
-         $('#modal_baja').modal('show');
-         $('#demo').val(id_registro);
+        //Desplegamos el modal
+        $('#modal_baja').modal('show');
+        $('#id_baja').val(id_registro);
     }
-</script>
 
+    function altaRegistro(id_registro) {
+
+        //Desplegamos el modal
+        $('#modal_alta').modal('show');
+        $('#id_alta').val(id_registro);
+    }
+
+</script>
 
 @endpush

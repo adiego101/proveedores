@@ -81,6 +81,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('bajaRegistro/{id}', 'App\Http\Controllers\ProveedoresController@dar_baja_id');
 
+    Route::get('altaRegistro/{id}', 'App\Http\Controllers\ProveedoresController@dar_alta_id');
+
     Route::post('/dar_baja', 'App\Http\Controllers\ProveedoresController@dar_baja');
 
     Route::resource('roles', RoleController::class);
