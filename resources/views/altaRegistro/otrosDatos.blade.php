@@ -163,7 +163,6 @@
     <br>
 
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-    <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
 
 </fieldset>
 
