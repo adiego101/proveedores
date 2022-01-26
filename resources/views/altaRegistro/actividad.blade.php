@@ -24,7 +24,7 @@
             <label for="actividad">Actividad:</label><br>
             <select class="form-control" aria-describedby="basic-addon1" id="actividad" name="actividad">
                 @forelse($actividades as $actividad)
-                    <option value="{{$actividad->desc_actividad}}">{{$actividad->desc_actividad}}</option>
+                    <option value="{{$actividad->desc_actividad}}">{{$actividad->cod_actividad}} - {{$actividad->desc_actividad}}</option>
                 @empty
                     <option value=" "></option>
                 @endforelse
@@ -123,13 +123,17 @@
 
         let tipo_actividad;
         let actividad;
+        let codigo_actividad;
         let m = 1; //contador para asignar id al boton que borrara la fila
         let contador = 0; //Contador para llevar el registro de la cantidad de actividades principales agregadas.
 
         $("#add_actividad").on("click", function(e) {
 
             tipo_actividad = $("#tipo_actividad").val();
+            //Valor que se almacena en el array del input y que se envia a la BD (actividad)
             actividad = $("#actividad").val();
+            //Valor que se muestra solamente en el texto de la tabla (cod + actividad)
+            codigo_actividad = $('#actividad option:selected').html();
 
             if(tipo_actividad == 'Primaria'){
 
@@ -141,7 +145,7 @@
                 $("#body_table_actividad").append(
                     '<tr id="row_actividad' + m +'">'+
                         '<td>' + tipo_actividad +'</td>'+
-                        '<td>' + actividad +'</td>'+
+                        '<td>' + codigo_actividad +'</td>'+
                         '<td>'+
                         '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="tipo_actividad' + m +'" name="tipos_actividades[]" readonly value="' + tipo_actividad +'">'+
                         '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="actividad' + m +'" name="actividades[]" readonly value="' + actividad +'">'+
