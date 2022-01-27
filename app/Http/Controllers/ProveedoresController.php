@@ -1210,12 +1210,14 @@ class ProveedoresController extends Controller
 
         $provinciaidFiscal = Localidad::where('id_localidad', $proveedor_domicilio_fiscal->id_localidad)->get();
 
-        $provinciaidFiscal =  $provinciaidFiscal[0]->id_provincia;
+        if ($provinciaidFiscal->isEmpty()) {
+            $provinciaidFiscal =  "";
+        } else {
+            $provinciaidFiscal =  $provinciaidFiscal[0]->id_provincia;
+        }
 
         $proveedor_email_fiscal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'fiscal')
             ->get();
-
-        //return $proveedor_email_fiscal;
 
         $proveedor_telefono_fiscal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'fiscal')
             ->get();
@@ -1225,7 +1227,11 @@ class ProveedoresController extends Controller
 
         $provinciaidLegal = Localidad::where('id_localidad', $proveedor_domicilio_legal->id_localidad)->get();
 
-        $provinciaidLegal =  $provinciaidLegal[0]->id_provincia;
+        if ($provinciaidLegal->isEmpty()) {
+            $provinciaidLegal =  "";
+        } else {
+            $provinciaidLegal =  $provinciaidLegal[0]->id_provincia;
+        }
 
         $proveedor_email_legal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'legal')
             ->get();
@@ -1238,7 +1244,11 @@ class ProveedoresController extends Controller
 
         $provinciaidReal = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->get();
 
-        $provinciaidReal =  $provinciaidReal[0]->id_provincia;
+        if ($provinciaidReal->isEmpty()) {
+            $provinciaidReal =  "";
+        } else {
+            $provinciaidReal =  $provinciaidReal[0]->id_provincia;
+        }
 
         $proveedor_email_real = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'real')
             ->get();
@@ -1292,7 +1302,11 @@ class ProveedoresController extends Controller
 
         $provinciaidFiscal = Localidad::where('id_localidad', $proveedor_domicilio_fiscal->id_localidad)->get();
 
-        $provinciaidFiscal =  $provinciaidFiscal[0]->id_provincia;
+        if ($provinciaidFiscal->isEmpty()) {
+            $provinciaidFiscal =  "";
+        } else {
+            $provinciaidFiscal =  $provinciaidFiscal[0]->id_provincia;
+        }
 
         $proveedor_email_fiscal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'fiscal')
             ->get();
@@ -1305,7 +1319,11 @@ class ProveedoresController extends Controller
 
         $provinciaidLegal = Localidad::where('id_localidad', $proveedor_domicilio_legal->id_localidad)->get();
 
-        $provinciaidLegal =  $provinciaidLegal[0]->id_provincia;
+        if ($provinciaidLegal->isEmpty()) {
+            $provinciaidLegal =  "";
+        } else {
+            $provinciaidLegal =  $provinciaidLegal[0]->id_provincia;
+        }
 
         $proveedor_email_legal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'legal')
             ->get();
@@ -1318,7 +1336,12 @@ class ProveedoresController extends Controller
 
         $provinciaidReal = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->get();
 
-        $provinciaidReal =  $provinciaidReal[0]->id_provincia;
+        if ($provinciaidReal->isEmpty()) {
+            $provinciaidReal =  "";
+        } else {
+            $provinciaidReal =  $provinciaidReal[0]->id_provincia;
+        }
+
 
         $proveedor_email_real = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'real')
             ->get();

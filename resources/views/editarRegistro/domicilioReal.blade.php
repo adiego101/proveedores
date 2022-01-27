@@ -103,7 +103,7 @@ value="{{ isset($proveedor_domicilio_real->barrio) ? $proveedor_domicilio_real->
                             <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
                         @else
                             <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                        @endif                    
+                        @endif
                     @empty
                         <option value=" "></option>
                     @endforelse
@@ -238,7 +238,7 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
 	function recargarListaRealEdit(){
 		$.ajax({
 			type:"GET",
-			url:"localidades/"+$('#provincia_real').val(),
+            url:"{{url('localidades')}}/"+$('#provincia_real').val(),
 			success:function(r){
 				$('#localidad_real').html(r);
 			}
