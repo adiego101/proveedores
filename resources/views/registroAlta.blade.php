@@ -191,7 +191,7 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
                 <br>
                 <hr>
                 <br>
-                <label for="">Retención: {{ $data['proveedor']['retencion'] ? "Si" : 'No' }} </label><br>
+                <label for="">Retención: {{ isset($data['proveedor']['retencion']) ? "Si" : "No" }} </label><br>
                 <label for="">Juridicción: {{isset($data['proveedor']['jurisdiccion']) ? $data['proveedor']['jurisdiccion'] : ''}}</label><br>
                 <br>
                 <br>
@@ -204,7 +204,7 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
                 <hr>
                 <label for="">Antiguedad en provincia: {{isset($data['proveedor']['antiguedad']) ? $data['proveedor']['antiguedad'] : ''}}</label><br>
                 <label for="">Domicilio fiscal en la provincia: {{isset($data['proveedor']['dom_fiscal']) ? $data['proveedor']['dom_fiscal'] : ''}}</label><br>
-                <label for="">Valor agregado:  {{ $data['proveedor']['valor_agregado'] ? "Si" : 'No' }} </label><br>
+                <label for="">Valor agregado:  {{isset($data['proveedor']['valor_agregado']) ? "Si" : "No" }} </label><br>
 
                 <label for="">Proveedor: {{"FALTA DEFINIR CAMPO"}} </label><br>
 
