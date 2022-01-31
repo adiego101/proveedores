@@ -1,18 +1,11 @@
 <?php
 
-//use Carbon\Carbon;
-
-//$date = Carbon::now()->format("d/m/Y");
-
-/*AVERIGUAR SI EL CAMPO VALIDO HASTA TIENE UNA DURACION DE 1 AÑO O 3.
-ADEMAS, VER SI ESE CAMPO DEBE TOMAR LA FECHA DE INSCRIPCION O BIEN A PARTIR DE
-CUANDO SE GENERA EL PDF ? PARA MI, DEBE SER TOMANDO COMO REFERENCIA LA FECHA DE 
-INSCRIPCION*/
-//$anioSiguiente = date("d/m/Y", strtotime('+1 year'));
+//AVERIGUAR SI EL CAMPO 'VALIDO HASTA' TIENE UNA DURACION DE 1 AÑO O 3.
 
 //Recuperamos la fecha de inscripcion desde la BD
 //La fecha original tiene el formato YYYY-mm-dd H:i:s
 $fechaOriginalInscripcion = $data['fecha_inscripcion'];
+
 //Cambiamos el formato por dd/mm/YYYY H:i:s
 $timestamp = strtotime($fechaOriginalInscripcion); 
 $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
@@ -152,7 +145,7 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
             <label for="">Teléfono: {{$data['telefono']}}</label>
             <label for="" class="txt-right">Localidad / Paraje: {{$data['localidad']}}</label><br><br>
             <label for="">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label>
-            <label for="" class="txt-right"><b>Válido hasta:</b>  <?php echo $fechaValidoHasta; ?></label>
+            <label for="" class="txt-right"><b>Válido hasta:</b> {{$fechaValidoHasta}}</label>
 
 
             <br>
@@ -187,7 +180,7 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
             <label for="">Teléfono: {{$data['telefono']}}</label>
             <label for="" class="txt-right">Localidad / Paraje: {{$data['localidad']}}</label><br><br>
             <label for="">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label>
-            <label for="" class="txt-right"><b>Válido hasta:</b>  <?php echo $fechaValidoHasta; ?></label>
+            <label for="" class="txt-right"><b>Válido hasta:</b>  {{$fechaValidoHasta}}</label>
 
             <br>
             <br>
