@@ -2,7 +2,16 @@
 
 use Carbon\Carbon;
 
+//Fecha actual, en la que se genera el documento
 $date = Carbon::now()->format("d/m/Y H:i:s");
+
+//Recuperamos la fecha de inscripcion desde la BD
+//La fecha original tiene el formato YYYY-mm-dd H:i:s
+$fechaOriginalInscripcion = $data['fecha_inscripcion'];
+
+//Cambiamos el formato por dd/mm/YYYY H:i:s
+$timestamp = strtotime($fechaOriginalInscripcion); 
+$fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
 ?>
 
 <html>
@@ -163,11 +172,11 @@ $date = Carbon::now()->format("d/m/Y H:i:s");
                 <br>
                 <br>
                 <br>
-                <label for="">Rio Gallegos</label>
-                <?php echo $date; ?>
+                <label for="">Rio Gallegos, </label>
+                {{$date}}
         </div>
         <div style="width: 50%; float:right">
-            <label for="calle">Fecha de Inscripción: {{$data['fecha_inscripcion']}}</label><br>
+            <label for="calle">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label><br>
             <label for="numero">Cuit: {{$data['proveedor']['cuit']}}</label><br>
             <br>
             <span class="titulo">Datos del Domicilio Legal:</span><br>
