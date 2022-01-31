@@ -234,7 +234,8 @@ public function descargarCertificadoInscripcion($id)
         'cuit' => $proveedor->cuit,
         'nombre_fantasia' => $proveedor->nombre_fantasia,
         'razon_social' => $proveedor->razon_social,
-        'actividad_principal' => $Actividad_economica->desc_actividad, //FALTA RECUPERAR
+        'cod_actividad_principal' => $Actividad_economica->cod_actividad,
+        'actividad_principal' => $Actividad_economica->desc_actividad,
         'actividad_secundaria' => $actividades_Secundarias,
         'calle_ruta' => $proveedor_domicilio_real->calle.' '.$proveedor_domicilio_real->numero,
         'telefono' =>  $proveedor_telefono_real->nro_tel,

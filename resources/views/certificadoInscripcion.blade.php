@@ -139,7 +139,7 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
             <label for="" class="txt-right">Cuit Nº: {{$data['cuit']}}</label><br><br>
             <label for="">Nombre del establecimiento: {{$data['nombre_fantasia']}}</label><br><br>
             <label for="">Nombre del propietario o razón social: {{$data['razon_social']}}</label><br><br>
-            <label for="">Actividad principal: {{$data['actividad_principal']}}</label><br><br>
+            <label for="">Actividad principal: {{$data['cod_actividad_principal']}} - {{$data['actividad_principal']}}</label><br><br>
             <label for="">Actividad secundaria: {{$data['actividad_secundaria']}}</label><br><br>
             <label for="">Calle o ruta: {{$data['calle_ruta']}}</label><br><br>
             <label for="">Teléfono: {{$data['telefono']}}</label>
@@ -174,7 +174,7 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
             <label for="" class="txt-right">Cuit Nº: {{$data['cuit']}}</label><br><br>
             <label for="">Nombre del establecimiento: {{$data['nombre_fantasia']}}</label><br><br>
             <label for="">Nombre del propietario o razón social: {{$data['razon_social']}}</label><br><br>
-            <label for="">Actividad principal: {{$data['actividad_principal']}}</label><br><br>
+            <label for="">Actividad principal: {{$data['cod_actividad_principal']}} - {{$data['actividad_principal']}}</label><br><br>
             <label for="">Actividad secundaria: {{$data['actividad_secundaria']}}</label><br><br>
             <label for="">Calle o ruta: {{$data['calle_ruta']}}</label><br><br>
             <label for="">Teléfono: {{$data['telefono']}}</label>
