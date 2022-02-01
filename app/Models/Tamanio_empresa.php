@@ -29,4 +29,8 @@ class Tamanio_empresa extends Model
     public function clasificaciones_empresas(){
         return $this->hasMany(Clasificacion_empresa::class, 'id_tamanio_empresa', 'id_tamanio_empresa');
     }
+
+    public function proveedores(){
+        return $this->hasMany(Proveedor::class, 'id_tamanio_empresa', 'id_tamanio_empresa');
+    }
 }

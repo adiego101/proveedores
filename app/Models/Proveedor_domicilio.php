@@ -46,13 +46,13 @@ class Proveedor_domicilio extends Model
 
 
     public function proveedor(){
-        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor_domicilio');
+        return $this->belongsTo(Proveedor::class, 'id_proveedor');
     }
     /*public function proveedor(){
         return $this->belongsTo(Proveedor::class);
     }*/
 
     public function localidad(){
-        return $this->belongsTo(Localidad::class, 'id_localidad', 'id_localidad');
+        return $this->belongsTo(Localidad::class, 'id_localidad');
     }
 }
