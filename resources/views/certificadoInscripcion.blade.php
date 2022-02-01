@@ -1,8 +1,18 @@
 <?php
 
-use Carbon\Carbon;
+//AVERIGUAR SI EL CAMPO 'VALIDO HASTA' TIENE UNA DURACION DE 1 AÑO O 3.
 
-$date = Carbon::now()->format("d/m/Y");
+//Recuperamos la fecha de inscripcion desde la BD
+//La fecha original tiene el formato YYYY-mm-dd H:i:s
+$fechaOriginalInscripcion = $data['fecha_inscripcion'];
+
+//Cambiamos el formato por dd/mm/YYYY H:i:s
+$timestamp = strtotime($fechaOriginalInscripcion); 
+$fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
+
+//Tomamos la fecha de inscripcion y le aumentamos un año (para el campo valido hasta)
+$anioSiguiente = strtotime($fechaOriginalInscripcion.'+1 year'); 
+$fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
 ?>
 
 <html>
@@ -126,16 +136,16 @@ $date = Carbon::now()->format("d/m/Y");
     <br>
     <br>
             <span><u>Certificado de Inscripción</u></span>
-            <label for="" class="txt-right">Cuit Nº: {{$data['cuit']}}</label><br><br>
-            <label for="">Nombre del establecimiento: {{$data['nombre_fantasia']}}</label><br><br>
-            <label for="">Nombre del propietario o razón social: {{$data['razon_social']}}</label><br><br>
-            <label for="">Actividad principal: {{$data['actividad_principal']}}</label><br><br>
-            <label for="">Actividad secundaria: {{$data['actividad_secundaria']}}</label><br><br>
-            <label for="">Calle o ruta: {{$data['calle_ruta']}}</label><br><br>
-            <label for="">Teléfono: {{$data['telefono']}}</label>
-            <label for="" class="txt-right">Localidad / Paraje: {{$data['localidad']}}</label><br><br>
-            <label for="">Fecha de Inscripción: {{$data['fecha_inscripcion']}}</label>
-            <label for="" class="txt-right"><b>Válido hasta:</b>  <?php echo $date; ?></label>
+            <label for="" class="txt-right">Cuit Nº: {{isset($data['cuit']) ? $data['cuit'] : ''}}</label><br><br>
+            <label for="">Nombre del establecimiento: {{isset($data['nombre_fantasia']) ? $data['nombre_fantasia'] : ''}}</label><br><br>
+            <label for="">Nombre del propietario o razón social: {{isset($data['razon_social']) ? $data['razon_social'] : ''}}</label><br><br>
+            <label for="">Actividad principal: {{isset($data['cod_actividad_principal']) ? $data['cod_actividad_principal'] : ''}} - {{isset($data['actividad_principal']) ? $data['actividad_principal'] : ''}}</label><br><br>
+            <label for="">Actividad secundaria: {{isset($data['actividad_secundaria']) ? $data['actividad_secundaria'] : ''}}</label><br><br>
+            <label for="">Calle o ruta: {{isset($data['calle_ruta']) ? $data['calle_ruta'] : ''}}</label><br><br>
+            <label for="">Teléfono: {{isset($data['telefono']) ? $data['telefono'] : ''}}</label>
+            <label for="" class="txt-right">Localidad / Paraje: {{isset($data['localidad']) ? $data['localidad'] : ''}}</label><br><br>
+            <label for="">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label>
+            <label for="" class="txt-right"><b>Válido hasta:</b> {{$fechaValidoHasta}}</label>
 
 
             <br>
@@ -161,16 +171,16 @@ $date = Carbon::now()->format("d/m/Y");
             <br>
             <br>
             <span><u>Certificado de Inscripción</u></span>
-            <label for="" class="txt-right">Cuit Nº: {{$data['cuit']}}</label><br><br>
-            <label for="">Nombre del establecimiento: {{$data['nombre_fantasia']}}</label><br><br>
-            <label for="">Nombre del propietario o razón social: {{$data['razon_social']}}</label><br><br>
-            <label for="">Actividad principal: {{$data['actividad_principal']}}</label><br><br>
-            <label for="">Actividad secundaria: {{$data['actividad_secundaria']}}</label><br><br>
-            <label for="">Calle o ruta: {{$data['calle_ruta']}}</label><br><br>
-            <label for="">Teléfono: {{$data['telefono']}}</label>
-            <label for="" class="txt-right">Localidad / Paraje: {{$data['localidad']}}</label><br><br>
-            <label for="">Fecha de Inscripción: {{$data['fecha_inscripcion']}}</label>
-            <label for="" class="txt-right"><b>Válido hasta:</b>  <?php echo $date; ?></label>
+            <label for="" class="txt-right">Cuit Nº: {{isset($data['cuit']) ? $data['cuit'] : ''}}</label><br><br>
+            <label for="">Nombre del establecimiento: {{isset($data['nombre_fantasia']) ? $data['nombre_fantasia'] : ''}}</label><br><br>
+            <label for="">Nombre del propietario o razón social: {{isset($data['razon_social']) ? $data['razon_social'] : ''}}</label><br><br>
+            <label for="">Actividad principal: {{isset($data['cod_actividad_principal']) ? $data['cod_actividad_principal'] : ''}} - {{isset($data['actividad_principal']) ? $data['actividad_principal'] : ''}}</label><br><br>
+            <label for="">Actividad secundaria: {{isset($data['actividad_secundaria']) ? $data['actividad_secundaria'] : ''}}</label><br><br>
+            <label for="">Calle o ruta: {{isset($data['calle_ruta']) ? $data['calle_ruta'] : ''}}</label><br><br>
+            <label for="">Teléfono: {{isset($data['telefono']) ? $data['telefono'] : ''}}</label>
+            <label for="" class="txt-right">Localidad / Paraje: {{isset($data['localidad']) ? $data['localidad'] : ''}}</label><br><br>
+            <label for="">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label>
+            <label for="" class="txt-right"><b>Válido hasta:</b> {{$fechaValidoHasta}}</label>
 
             <br>
             <br>

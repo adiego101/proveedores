@@ -184,7 +184,7 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
 
 
         var i = 1; //Contador inicial, comienza en 1
-        
+
         $(addEmail_legal).click(function() {
             if (i < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
                 i++; //Incrementa el contador en 1
@@ -213,7 +213,7 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
 	function recargarListaLegal(){
 		$.ajax({
 			type:"GET",
-			url:"localidades/"+$('#provincia_legal').val(),
+            url:"{{url('localidades')}}/"+$('#provincia_legal').val(),
 			success:function(r){
 				$('#localidad_legal').html(r);
 			}
