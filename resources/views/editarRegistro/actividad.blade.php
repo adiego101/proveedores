@@ -10,6 +10,9 @@
      @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
 
+<a class="btn btn-secondary" style="float: left" href="{{ route('actividades.nuevo', ['id' => $id]) }}">+</a>
+<br>
+<hr>
         <div>
 
             <table style="width:100%" class="yajra-actividades table table-hover  table-striped table-condensed">
@@ -42,6 +45,9 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
         @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
 
+<a class="btn btn-secondary" style="float: left" href="{{ route('productos.nuevo', ['id' => $id]) }}">+</a>
+<br>
+<hr>
         <div>
 
             <table style="width:100%" class="yajra-productos table table-hover  table-striped table-condensed">
@@ -206,7 +212,7 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
         $('#modal_baja_producto').modal('show');
         $('#baja_producto').val(id_registro);
     }
-    
+
 </script>
 
 @endpush

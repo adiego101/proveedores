@@ -33,43 +33,45 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/nuevoRegistro', function () {
-    $paises = Pais::all();
-    $provincias = Provincia::all();
-    $localidades = Localidad::all();
-    $tipos_actividades = Tipo_actividad::All();
-    $actividades = Actividad_economica::All();
-    $productos = Producto::All();
-    $ponderaciones = Ponderacion_compre_local::All();
-    $jerarquias = Jerarquia_compre_local::All();
-    return view('nuevoRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones', 'jerarquias'));
-});
-
-Route::get('/gestionarRegistros', function () {
-    return view('gestionarRegistros');
-});
-
-Route::get('/baja', function () {
-    return view('bajaRegistro');
-});
-
-Route::get('/actualizarFormulas', function () {
-    $ponderaciones = Ponderacion_compre_local::All();
-    $jerarquias = Jerarquia_compre_local::All();
-    return view('actualizarFormulas', compact('ponderaciones', 'jerarquias'));
-});
-
-Route::post('/actualizar_formulas', [ProveedoresController::class, 'actualizar_formulas'])->name('actualizar_formulas');
-
-Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
-
-//Ruta para editar los registros, se llama desde el boton "editar" de la tabla.
-
-Route::get('/Cambiar_contraseña', function () {
-    return view('CambiarContraseña');
-});
 
 Route::group(['middleware' => ['auth']], function () {
+
+
+    Route::get('/nuevoRegistro', function () {
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+        $tipos_actividades = Tipo_actividad::All();
+        $actividades = Actividad_economica::All();
+        $productos = Producto::All();
+        $ponderaciones = Ponderacion_compre_local::All();
+        $jerarquias = Jerarquia_compre_local::All();
+        return view('nuevoRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones', 'jerarquias'));
+    });
+
+    Route::get('/gestionarRegistros', function () {
+        return view('gestionarRegistros');
+    });
+
+    Route::get('/baja', function () {
+        return view('bajaRegistro');
+    });
+
+    Route::get('/actualizarFormulas', function () {
+        $ponderaciones = Ponderacion_compre_local::All();
+        $jerarquias = Jerarquia_compre_local::All();
+        return view('actualizarFormulas', compact('ponderaciones', 'jerarquias'));
+    });
+
+    Route::post('/actualizar_formulas', [ProveedoresController::class, 'actualizar_formulas'])->name('actualizar_formulas');
+
+    Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
+
+    //Ruta para editar los registros, se llama desde el boton "editar" de la tabla.
+
+    Route::get('/Cambiar_contraseña', function () {
+        return view('CambiarContraseña');
+    });
 
     Route::post('/crear_registro', [ProveedoresController::class, 'crear_registro'])->name('crear_registro');
     //Levanta las vistas para editar (del formulario)
@@ -130,6 +132,23 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('guardarPatentes/{id}', 'App\Http\Controllers\ProveedoresController@guardarPatentes')->name('patentes.guardar');
     Route::post('guardarSeguros/{id}', 'App\Http\Controllers\ProveedoresController@guardarSeguros')->name('seguros.guardar');
     Route::post('guardarSedes/{id}', 'App\Http\Controllers\ProveedoresController@guardarSedes')->name('sedes.guardar');
+
+    Route::get('nuevoSucursales/{id}', 'App\Http\Controllers\ProveedoresController@nuevoSucursales')->name('sucursales.nuevo');
+    Route::get('nuevoPagos/{id}', 'App\Http\Controllers\ProveedoresController@nuevoPagos')->name('pagos.nuevo');
+    Route::get('nuevoActividades/{id}', 'App\Http\Controllers\ProveedoresController@nuevoActividades')->name('actividades.nuevo');
+    Route::get('nuevoProductos/{id}', 'App\Http\Controllers\ProveedoresController@nuevoProductos')->name('productos.nuevo');
+    Route::get('nuevoPatentes/{id}', 'App\Http\Controllers\ProveedoresController@nuevoPatentes')->name('patentes.nuevo');
+    Route::get('nuevoSeguros/{id}', 'App\Http\Controllers\ProveedoresController@nuevoSeguros')->name('seguros.nuevo');
+    Route::get('nuevoSedes/{id}', 'App\Http\Controllers\ProveedoresController@nuevoSedes')->name('sedes.nuevo');
+
+
+    Route::post('crearSucursales/{id}', 'App\Http\Controllers\ProveedoresController@crearSucursales')->name('sucursales.crear');
+    Route::post('crearPagos/{id}', 'App\Http\Controllers\ProveedoresController@crearPagos')->name('pagos.crear');
+    Route::post('crearActividades/{id}', 'App\Http\Controllers\ProveedoresController@crearActividades')->name('actividades.crear');
+    Route::post('crearProductos/{id}', 'App\Http\Controllers\ProveedoresController@crearProductos')->name('productos.crear');
+    Route::post('crearPatentes/{id}', 'App\Http\Controllers\ProveedoresController@crearPatentes')->name('patentes.crear');
+    Route::post('crearSeguros/{id}', 'App\Http\Controllers\ProveedoresController@crearSeguros')->name('seguros.crear');
+    Route::post('crearSedes/{id}', 'App\Http\Controllers\ProveedoresController@crearSedes')->name('sedes.crear');
 
     Route::get('verSucursales/{id}', 'App\Http\Controllers\ProveedoresController@verSucursales')->name('sucursales.ver');
     Route::get('verPagos/{id}', 'App\Http\Controllers\ProveedoresController@verPagos')->name('pagos.ver');

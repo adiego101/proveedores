@@ -613,6 +613,44 @@ class ProveedoresController extends Controller
 
     }
 
+    public function crearSucursales($id, Request $request)
+    {
+        //----------------Carga de Sucursal---------------
+
+        $sucursal = new Sucursal($request->all());
+        $sucursal->id_proveedor = $id;
+        $sucursal->save();
+
+        //----------------Carga de email Sucursal---------------
+        if (isset($request->email)) {
+            $sucursal_email = new Sucursal_email();
+            $sucursal_email->id_sucursal = $sucursal->id_sucursal;
+            $sucursal_email->email = $request->email;
+            $sucursal_email->save();
+        }
+        //----------------Carga de telefono Sucursal---------------
+        if (isset($request->nro_tel)) {
+
+            $sucursal_telefono = new Sucursal_telefono();
+            $sucursal_telefono->id_sucursal = $sucursal->id_sucursal;
+            $sucursal_telefono->nro_tel = $request->nro_tel;
+            $sucursal_telefono->save();
+        }
+        $sucursal->save();
+        return redirect()->back()->with('message', 'Sucursal Creada Correctamente');
+    }
+
+    public function nuevoSucursales($id)
+    {
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+        $mode = "create";
+
+        return view('ediciones.sucursales', compact( 'id','mode','paises','provincias','localidades'));
+
+    }
+
     public function getPagos(Request $request, $id, $mode = null)
     {
         //if ($request->ajax()) {
@@ -672,6 +710,25 @@ class ProveedoresController extends Controller
 
     }
 
+    public function crearPagos($id, Request $request)
+    {
+
+        $pago = new Pago($request->all());
+        $pago->id_proveedor = $id;
+        $pago->save();
+        return redirect()->back()->with('message', 'Pago Creado Correctamente');
+
+    }
+
+    public function nuevoPagos($id)
+    {
+        $mode = "create";
+
+        return view('ediciones.pagos', compact( 'id','mode'));
+
+    }
+
+
     public function bajaPagos($id)
     {
         $pago = Pago::findOrFail($id)->delete();
@@ -728,6 +785,40 @@ class ProveedoresController extends Controller
         $mode = "show";
 
         return view('ediciones.actividades', compact('mode','actividad', 'tipos_actividades', 'actividades'));
+
+    }
+
+    public function crearActividades($id, Request $request)
+    {
+
+        if($request->tipo_actividad == "PRIMARIA"){
+        if (Actividades_proveedores::where('id_actividad_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
+
+            return Redirect::back()
+                ->withErrors(['Ya existe una actividad primaria, la operación no pudo completarse']);
+            }
+            else {
+            $actividad = new Actividades_proveedores($request->all());
+            $actividad->id_proveedor = $id;
+            $actividad->id_actividad_economica = $id;
+            $actividad->id_tipo_actividad = $id;
+
+            $actividad->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Actividad Creada Correctamente');
+        }
+    }
+    }
+
+    public function nuevoActividades($id)
+    {
+        $tipos_actividades = Tipo_actividad::All();
+        $actividades = Actividad_economica::All();
+        $mode = "create";
+
+        return view('ediciones.actividades', compact( 'id','actividades', 'tipos_actividades','mode'));
 
     }
 
@@ -836,6 +927,27 @@ class ProveedoresController extends Controller
         return "success";
     }
 
+    public function crearProductos($id, Request $request)
+    {
+            $producto = new Producto($request->all());
+            $producto->id_proveedor = $id;
+            $producto->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Producto Creada Correctamente');
+    }
+
+    public function nuevoProductos($id)
+    {
+        $productos = Producto::All();
+
+        $mode = "create";
+
+        return view('ediciones.producto', compact('mode','id','productos'));
+
+    }
+
     public function guardarProductos($id, Request $request)
     {
         $producto = Producto::find($id);
@@ -900,6 +1012,25 @@ class ProveedoresController extends Controller
     {
         Proveedor_patente::findOrFail($id)->delete();
         return "success";
+    }
+
+    public function crearPatentes($id, Request $request)
+    {
+            $patente = new Proveedor_patente($request->all());
+            $patente->id_proveedor = $id;
+            $patente->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Patente Creada Correctamente');
+    }
+
+    public function nuevoPatentes($id)
+    {
+        $mode = "create";
+
+        return view('ediciones.patentes', compact('mode','id'));
+
     }
 
     public function guardarPatentes($id, Request $request)
@@ -967,6 +1098,25 @@ class ProveedoresController extends Controller
     {
         Proveedor_seguro::findOrFail($id)->delete();
         return "success";
+    }
+
+    public function crearSeguros($id, Request $request)
+    {
+            $seguro = new Proveedor_seguro($request->all());
+            $seguro->id_proveedor = $id;
+            $seguro->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Seguro Creado Correctamente');
+    }
+
+    public function nuevoSeguros($id)
+    {
+        $mode = "create";
+
+        return view('ediciones.seguros', compact('mode','id'));
+
     }
 
     public function guardarSeguros($id, Request $request)
@@ -1040,6 +1190,29 @@ class ProveedoresController extends Controller
     {
         Proveedor_sede::findOrFail($id)->delete();
         return "success";
+    }
+
+    public function crearSedes($id, Request $request)
+    {
+            $sede = new Proveedor_sede($request->all());
+            $sede->id_proveedor = $id;
+            $sede->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Sede Creado Correctamente');
+    }
+
+    public function nuevoSedes($id)
+    {
+        $mode = "create";
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+
+
+        return view('ediciones.sedes', compact('id','mode','provincias','localidades','paises'));
+
     }
 
     public function guardarSedes($id, Request $request)

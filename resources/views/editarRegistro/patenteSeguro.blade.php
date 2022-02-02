@@ -16,6 +16,9 @@ value="0">
 
 
 <br>
+<a class="btn btn-secondary" style="float: left" href="{{ route('patentes.nuevo', ['id' => $id]) }}">+</a>
+<br>
+<hr>
 <div>
 
     <table style="width:100%" class="yajra-vehiculos table table-hover  table-striped table-condensed">
@@ -46,6 +49,9 @@ value="0">
 
 
 <br>
+<a class="btn btn-secondary" style="float: left" href="{{ route('seguros.nuevo', ['id' => $id]) }}">+</a>
+<br>
+<hr>
 <div>
 
     <table style="width:100%" class="yajra-seguros table table-hover  table-striped table-condensed">
@@ -74,6 +80,9 @@ value="0">
 <br>
 
 <br>
+<a class="btn btn-secondary" style="float: left" href="{{ route('sedes.nuevo', ['id' => $id]) }}">+</a>
+<br>
+<hr>
 
     <div>
 

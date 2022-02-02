@@ -2,8 +2,16 @@
 
 @section('content2')
 @if ( $mode != "show")
+@if ($mode != "edit")
+
+<form action="{{ route('productos.crear', ['id' => $id]) }}"  method="POST">
+
+@else
 
 <form action="{{ route('productos.guardar', ['id' => $producto->id_producto]) }}"  method="POST">
+
+@endif
+
     @csrf
     @endif
 
@@ -42,11 +50,21 @@
 
 
 @if ( $mode != "show")
+
+@if ($mode != "edit")
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $id, 'tab' => "actividad"]) }}">atras</a>
+
+@else
 <a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $producto->id_proveedor, 'tab' => "actividad"]) }}">atras</a>
+
+@endif
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
+
         <button type="submit" name="guardarproducto" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
+
     </div>
 </div>
 </form>

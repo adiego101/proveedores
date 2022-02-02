@@ -1,9 +1,16 @@
 <fieldset>
 <!-- SE DEBEN ELIMINAR LOS ATRIBUTOS NAME DE CADA CAMPO Y SOLO DEJARLOS EN EL APPEND JS, PORQUE SINO AL ENVIAR LOS DATOS A LA BD SE ALMACENA SIEMPRE UN VALOR NULO AL PRINCIPIO. -->
-<h2 class="mb-4">Sucursales:</h2>
+<h2 class="mb-4">Sucursales</h2>
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('sucursales.nuevo', ['id' => $id]) }}">+</a>
+<br>
+<hr>
+
+
 <div>
 
     <table style="width:100%" class="yajra-datatable table table-hover  table-striped table-condensed">
+
         <thead>
             <tr>
                 <th>Nombre sucursal</th>
@@ -23,7 +30,7 @@
     <!--Incluimos el modal para dar de baja un registro -->
     <!-- Falta incluir el modal -->
 @include('modales.modalBajaSucursal')
-    <br/>
+    <br>
 
     <div class="row navbuttons ">
         <div class="col-6 col-sm-auto" id="btnPrevious">
