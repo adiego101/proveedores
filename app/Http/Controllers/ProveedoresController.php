@@ -791,17 +791,29 @@ class ProveedoresController extends Controller
     public function crearActividades($id, Request $request)
     {
 
-        if($request->tipo_actividad == "PRIMARIA"){
-        if (Actividades_proveedores::where('id_actividad_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
+        if($request->tipo_actividad == "Primaria"){
+        if (Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
 
             return Redirect::back()
                 ->withErrors(['Ya existe una actividad primaria, la operación no pudo completarse']);
             }
             else {
-            $actividad = new Actividades_proveedores($request->all());
+            $actividad = new Actividades_proveedores();
             $actividad->id_proveedor = $id;
-            $actividad->id_actividad_economica = $id;
-            $actividad->id_tipo_actividad = $id;
+            $actividad->id_actividad_economica = $this->idActividad_economica($request->actividad_1);
+            $actividad->id_tipo_actividad = $this->idtipos_actividades($request->tipo_actividad);
+
+            $actividad->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Actividad Creada Correctamente');
+        }}
+        else{
+            $actividad = new Actividades_proveedores();
+            $actividad->id_proveedor = $id;
+            $actividad->id_actividad_economica = $this->idActividad_economica($request->actividad_1);
+            $actividad->id_tipo_actividad = $this->idtipos_actividades($request->tipo_actividad);
 
             $actividad->save();
 
@@ -809,7 +821,7 @@ class ProveedoresController extends Controller
 
             return redirect()->back()->with('message', 'Actividad Creada Correctamente');
         }
-    }
+
     }
 
     public function nuevoActividades($id)
