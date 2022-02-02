@@ -33,6 +33,6 @@ class Pago extends Model
     }
 
     public function proveedor(){
-        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
+        return $this->belongsTo(Proveedor::class, 'id_proveedor');
     }
 }

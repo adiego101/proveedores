@@ -14,6 +14,9 @@ use App\Models\Tipo_actividad;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Exports\ProveedoresExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -163,4 +166,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/registro-alta/{id}', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');
     Route::get('/certificado-inscripcion/{id}', 'App\Http\Controllers\RupaeController@descargarCertificadoInscripcion');
 
+    Route::get('/excel', function () {
+        /*ini_set('memory_limit','1024M');
+        set_time_limit(0);*/
+        return Excel::download(new ProveedoresExport, 'proveedores.xlsx');
+    });
 });

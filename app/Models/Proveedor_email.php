@@ -33,6 +33,6 @@ class Proveedor_email extends Model
     }
 
     public function proveedor(){
-        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor_email');
+        return $this->belongsTo(Proveedor::class, 'id_proveedor');
     }
 }

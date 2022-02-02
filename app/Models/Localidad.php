@@ -38,7 +38,7 @@ class Localidad extends Model
     }
 
     public function domicilios(){
-        return $this->hasMany(Domicilio::class, 'id_domicilio', 'id_domicilio');
+        return $this->hasMany(Domicilio::class, 'id_localidad', 'id_localidad');
     }
 
     public function provincia(){

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 //use Illuminate\Support\Facades\DB;
 
 class Proveedor extends Model
@@ -98,16 +99,21 @@ class Proveedor extends Model
     }*/
 
     public function domicilios(){
-       return $this->hasMany(Proveedor_domicilio::class,'id_proveedor', 'id_proveedor_domicilio');
+       return $this->hasMany(Proveedor_domicilio::class,'id_proveedor');
     }
     public function telefonos(){
-        return $this->hasMany(Proveedor_telefono::class, 'id_proveedor', 'id_proveedor_telefono');
+        return $this->hasMany(Proveedor_telefono::class, 'id_proveedor');
     }
 
     public function personas(){
         return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
                     ->withPivot('rol_persona_proveedor')
                     ->withTimestamps();
+    }
+
+    public function representantes(){
+        return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
+                    ->wherePivot('rol_persona_proveedor', 'representante');
     }
 
     public function actividades_economicas(){
@@ -118,10 +124,38 @@ class Proveedor extends Model
         return $this->belongsToMany(Tipo_actividad::class, 'actividades_proveedores', 'id_proveedor', 'id_tipo_actividad');
     }
 
+    public function actividades_primarias(){
+        $collection = new Collection();
+        $actividades = $this->actividades_economicas;
+        foreach($actividades as $actividad)
+            foreach($actividad->tipos_actividades as $tipo_actividad)
+                if($tipo_actividad->desc_tipo_actividad=='Primaria')
+                    $collection->add($actividad);
+        return $collection;
+    }
 
+    public function actividades_secundarias(){
+        $collection = new Collection();
+        $actividades = $this->actividades_economicas;
+        foreach($actividades as $actividad)
+            foreach($actividad->tipos_actividades as $tipo_actividad)
+                if($tipo_actividad->desc_tipo_actividad=='Secundaria')
+                    $collection->add($actividad);
+        return $collection;
+    }
+
+    public function otras_actividades(){
+        $collection = new Collection();
+        $actividades = $this->actividades_economicas;
+        foreach($actividades as $actividad)
+            foreach($actividad->tipos_actividades as $tipo_actividad)
+                if($tipo_actividad->desc_tipo_actividad!='Primaria' && $tipo_actividad->desc_tipo_actividad!='Secundaria')
+                    $collection->add($actividad);
+        return $collection;
+    }
 
     public function emails(){
-        return $this->hasMany(Proveedor_email::class, 'id_proveedor', 'id_proveedor_email');
+        return $this->hasMany(Proveedor_email::class, 'id_proveedor');
     }
 
 
@@ -146,9 +180,28 @@ class Proveedor extends Model
         return $this->hasMany(Pago::class, 'id_pagos', 'id_pagos');
     }
 
+    public function ultimo_pago(){
+        return $this->hasOne(Pago::class, 'id_proveedor')
+                    ->latest();
+    }
+
+    /*public function indices(){
+        return $this->hasMany(ProveedorIndiceCompreLocal::class, 'id_proveedor', 'id_proveedor');
+    }
+
+    public function ultimo_indice(){
+        return $this->hasMany(ProveedorIndiceCompreLocal::class, 'id_proveedor', 'id_proveedor')
+                    ->latest()
+                    ->first();
+    }*/
+
     public function presentaciones_estados(){
         return $this->belongsToMany(Presentacion_estado::class, 'proveedores_presentaciones', 'id_presentacion_estado', 'id_proveedor')
                     ->withPivot('fecha_presentacion','ubic_presentacion')
                     ->withTimestamps();
+    }
+
+    public function tamanio_empresa(){
+        return $this->belongsTo(Tamanio_empresa::class, 'id_tamanio_empresa', 'id_tamanio_empresa');
     }
 }
