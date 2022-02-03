@@ -1,11 +1,12 @@
 <fieldset>
 <!-- SE DEBEN ELIMINAR LOS ATRIBUTOS NAME DE CADA CAMPO Y SOLO DEJARLOS EN EL APPEND JS, PORQUE SINO AL ENVIAR LOS DATOS A LA BD SE ALMACENA SIEMPRE UN VALOR NULO AL PRINCIPIO. -->
 <h2 class="mb-4">Sucursales</h2>
+@if ($mode == "edit")
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('sucursales.nuevo', ['id' => $id]) }}">+</a>
+<a class="btn btn-secondary" style="float: left" href="{{ route('sucursales.nuevo', ['id' => $id]) }}" title="Agregar sucursal">+</a>
 <br>
 <hr>
-
+@endif
 
 <div>
 

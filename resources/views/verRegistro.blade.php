@@ -178,34 +178,13 @@ $('input[type="checkbox"]').on('change', function(){
  }).change();
 
  window.onload = function(){
-        if(!$('#provincia_legal').val() === " "){
-        recargarListaLegal2();
-        }
-        else{
-            console.log("recargarListaLegal2 no se ejecuto")
-        }
+    calcular();
 
-        if(!$('#provincia_real').val() === " "){
-            recargarListaRealEdit2();
-        }
-        else{
-            console.log("recargarListaRealEdit2 no se ejecuto")
-        }
 
-        if(!$('#provincia_fiscal').val() === " "){
-            recargarListaFiscal2();
-        }
-        else{
-            console.log("recargarListaFiscal2 no se ejecuto")
-        }
-
-        if(!$('#provincia_habilitacion').val() === " "){
-        recargarListaHabilitacion2();
-        }
-        else{
-            console.log("recargarListaHabilitacion2 no se ejecuto")
-        }
-        calcular();
+recargarListaRealEdit2();
+recargarListaFiscal2();
+recargarListaLegal2();
+recargarListaHabilitacion2();
 
         };
 

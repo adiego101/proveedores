@@ -9,10 +9,12 @@
     name="facturacion_anual_alcanzada" maxlength="9"
      @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
+@if ($mode == "edit")
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('actividades.nuevo', ['id' => $id]) }}">+</a>
+<a class="btn btn-secondary" style="float: left" href="{{ route('actividades.nuevo', ['id' => $id]) }}" title="Agregar actividad">+</a>
 <br>
 <hr>
+@endif
         <div>
 
             <table style="width:100%" class="yajra-actividades table table-hover  table-striped table-condensed">
@@ -44,10 +46,12 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
     <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"
         @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
+@if ($mode == "edit")
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('productos.nuevo', ['id' => $id]) }}">+</a>
+<a class="btn btn-secondary" style="float: left" href="{{ route('productos.nuevo', ['id' => $id]) }}" title="Agregar producto">+</a>
 <br>
 <hr>
+@endif
         <div>
 
             <table style="width:100%" class="yajra-productos table table-hover  table-striped table-condensed">

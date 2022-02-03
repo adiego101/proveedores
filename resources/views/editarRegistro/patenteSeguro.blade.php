@@ -16,9 +16,13 @@ value="0">
 
 
 <br>
-<a class="btn btn-secondary" style="float: left" href="{{ route('patentes.nuevo', ['id' => $id]) }}">+</a>
+@if ($mode == "edit")
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('patentes.nuevo', ['id' => $id]) }}" title="Agregar vehiculo">+</a>
 <br>
 <hr>
+    @endif
+
 <div>
 
     <table style="width:100%" class="yajra-vehiculos table table-hover  table-striped table-condensed">
@@ -49,10 +53,15 @@ value="0">
 
 
 <br>
-<a class="btn btn-secondary" style="float: left" href="{{ route('seguros.nuevo', ['id' => $id]) }}">+</a>
+@if ($mode == "edit")
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('seguros.nuevo', ['id' => $id]) }}" title="Agregar seguro">+</a>
 <br>
 <hr>
+@endif
 <div>
+
+
 
     <table style="width:100%" class="yajra-seguros table table-hover  table-striped table-condensed">
         <thead>
@@ -80,9 +89,12 @@ value="0">
 <br>
 
 <br>
-<a class="btn btn-secondary" style="float: left" href="{{ route('sedes.nuevo', ['id' => $id]) }}">+</a>
+@if ($mode == "edit")
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('sedes.nuevo', ['id' => $id]) }}" title="Agregar sede">+</a>
 <br>
 <hr>
+@endif
 
     <div>
 
