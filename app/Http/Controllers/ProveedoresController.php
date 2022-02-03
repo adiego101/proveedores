@@ -1388,7 +1388,15 @@ class ProveedoresController extends Controller
         $proveedor = Proveedor::findOrFail($id);
 
         $persona = $proveedor->personas()->get();
-        $persona = $persona[0];
+
+        if ($persona->isEmpty()) {
+            $persona =  "";
+
+        }
+        else{
+            $persona = $persona[0];
+        }
+
         //return $persona;
         $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
             ->first();
@@ -1479,19 +1487,34 @@ class ProveedoresController extends Controller
     public function verProveedorRupaeId($id,$tab = null)
     {
         $proveedor = Proveedor::findOrFail($id);
-
         $persona = $proveedor->personas()->get();
-        $persona = $persona[0];
+
+        if ($persona->isEmpty()) {
+            $persona =  "";
+
+        }
+        else{
+            $persona = $persona[0];
+        }
         $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
-            ->first();
-
-        $provinciaidFiscal = Localidad::where('id_localidad', $proveedor_domicilio_fiscal->id_localidad)->get();
-
-        if ($provinciaidFiscal->isEmpty()) {
+        ->first();
+        if (empty($proveedor_domicilio_fiscal)) {
+            $proveedor_domicilio_fiscal =  "";
             $provinciaidFiscal =  "";
         } else {
-            $provinciaidFiscal =  $provinciaidFiscal[0]->id_provincia;
+            $provinciaidFiscal = Localidad::where('id_localidad', $proveedor_domicilio_fiscal->id_localidad)->get();
+
+
+            if ($provinciaidFiscal->isEmpty()) {
+                $provinciaidFiscal =  "";
+            } else {
+                $provinciaidFiscal =  $provinciaidFiscal[0]->id_provincia;
+            }
         }
+
+
+
+
 
         $proveedor_email_fiscal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'fiscal')
             ->get();

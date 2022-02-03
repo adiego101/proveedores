@@ -226,7 +226,7 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
     function recargarListaFiscal2(){
         $.ajax({
             type:"GET",
-            url:"{{url('localidadSelect/'.$proveedor_domicilio_fiscal->id_localidad)}}",
+            url:"{{url('localidadSelect/')}}/{{isset($proveedor_domicilio_fiscal->id_localidad) ? $proveedor_domicilio_fiscal->id_localidad : ''}}",
             success:function(r){
                 $('#localidad_fiscal').html(r);
             }
