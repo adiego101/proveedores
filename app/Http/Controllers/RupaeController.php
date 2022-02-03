@@ -117,7 +117,14 @@ public function descargarRegistroAlta($id)
     $proveedor = Proveedor::find($id);
 
     $persona = $proveedor->personas()->get();
-    $persona = $persona[0];
+
+    if ($persona->isEmpty()) {
+        $persona =  "";
+
+    }
+    else{
+        $persona = $persona[0];
+    }
 
     $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')->first();
 
@@ -127,16 +134,27 @@ public function descargarRegistroAlta($id)
 
     $proveedor_actividad_id = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 1)->first();
 
-    $proveedor_tipo_actividad = Tipo_actividad::where('id_tipo_actividad', $proveedor_actividad_id->id_tipo_actividad)->first();
+    if (empty($proveedor_actividad_id)) {
+        $proveedor_tipo_actividad = "";
+    } else {
+        $proveedor_tipo_actividad = Tipo_actividad::where('id_tipo_actividad', $proveedor_actividad_id->id_tipo_actividad)->first();
+    }
+
 
     $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
     ->first();
 
     $provinciaLegal = Localidad::where('id_localidad', $proveedor_domicilio_legal->id_localidad)->get();
 
-    $provinciaLegal =  $provinciaLegal[0]->id_provincia;
 
-    $provinciaLegal = Provincia::where('id_provincia', $provinciaLegal)->first();
+
+    if ($provinciaLegal->isEmpty()) {
+        $provinciaLegal =  "";
+    } else {
+        $provinciaLegal =  $provinciaLegal[0]->id_provincia;
+
+        $provinciaLegal = Provincia::where('id_provincia', $provinciaLegal)->first();
+    }
 
     $proveedor_localidad_legal = Localidad::where('id_localidad', $proveedor_domicilio_legal->id_localidad)->first();
 
@@ -150,16 +168,26 @@ public function descargarRegistroAlta($id)
 
     $provinciaReal = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->get();
 
-    $provinciaReal =  $provinciaReal[0]->id_provincia;
+    if ($provinciaReal->isEmpty()) {
+        $provinciaReal =  "";
+    } else {
+        $provinciaReal =  $provinciaReal[0]->id_provincia;
 
-    $provinciaReal = Provincia::where('id_provincia', $provinciaReal)->first();
+        $provinciaReal = Provincia::where('id_provincia', $provinciaReal)->first();
+    }
+
+
 
     $proveedor_email_real = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'real')
         ->first();
 
 
-
-    $Actividad_economica = Actividad_economica::where('id_actividad_economica', $proveedor_actividad_id->id_tipo_actividad)->first();
+        if (empty($proveedor_actividad_id)) {
+            $Actividad_economica = "";
+        } else {
+            $Actividad_economica = Actividad_economica::where('id_actividad_economica', $proveedor_actividad_id->id_tipo_actividad)->first();
+            $Actividad_economica =$Actividad_economica->desc_actividad;
+        }
 
     $proveedor_actividad_secundaria = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 2)->get();
     $actividades_Secundarias = "";
@@ -177,22 +205,22 @@ public function descargarRegistroAlta($id)
         'cuit' => $proveedor->cuit,
         'nombre_fantasia' => $proveedor->nombre_fantasia,
         'razon_social' => $proveedor->razon_social,
-        'actividad_principal' => $Actividad_economica->desc_actividad, //FALTA RECUPERAR
+        'actividad_principal' => $Actividad_economica, //FALTA RECUPERAR
         'actividad_secundaria' => $actividades_Secundarias,
         'calle_ruta_real' => $proveedor_domicilio_real->calle.' '.$proveedor_domicilio_real->numero,
 
-        'telefono_real' =>  $proveedor_telefono_real->nro_tel,
-        'localidad_real' => $proveedor_localidad_real->nombre_localidad,
-        'provincia_real' => $provinciaReal->nombre_provincia,
-        'email_real' => $proveedor_email_real->email,
+        'telefono_real' =>  isset($proveedor_telefono_real->nro_tel) ? $proveedor_telefono_real->nro_tel : '',
+        'localidad_real' => isset($proveedor_localidad_real->nombre_localidad) ? $proveedor_localidad_real->nombre_localidad : '',
+        'provincia_real' => isset($provinciaReal->nombre_provincia) ? $provinciaReal->nombre_provincia : '',
+        'email_real' => isset($proveedor_email_real->email) ? $proveedor_email_real->email : '',
 
         'calle_ruta_legal' => $proveedor_domicilio_legal->calle.' '.$proveedor_domicilio_legal->numero,
-        'telefono_legal' =>  $proveedor_telefono_legal->nro_tel,
-        'provincia_legal' => $provinciaLegal->nombre_provincia,
-        'email_legal' => $proveedor_email_legal->email,
+        'telefono_legal' =>  isset($proveedor_telefono_legal->nro_tel) ? $proveedor_telefono_legal->nro_tel : '',
+        'provincia_legal' => isset($provinciaLegal->nombre_provincia) ? $provinciaLegal->nombre_provincia : '',
+        'email_legal' => isset($proveedor_email_legal->email) ? $proveedor_email_legal->email : '',
         'representante_legal' => $persona,
 
-        'localidad_legal' => $proveedor_localidad_legal->nombre_localidad,
+        'localidad_legal' => isset($proveedor_localidad_legal->nombre_localidad) ? $proveedor_localidad_legal->nombre_localidad : '',
         'fecha_inscripcion' => $proveedor->created_at,
 
     ];
@@ -214,12 +242,19 @@ public function descargarCertificadoInscripcion($id)
     $proveedor_localidad_real = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->first();
 
     $proveedor_actividad_id = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 1)->first();
+    if (empty($proveedor_actividad_id)) {
+        $proveedor_tipo_actividad = "";
+        $Actividad_economica = "";
 
-    $proveedor_tipo_actividad = Tipo_actividad::where('id_tipo_actividad', $proveedor_actividad_id->id_tipo_actividad)->first();
+    } else {
+        $proveedor_tipo_actividad = Tipo_actividad::where('id_tipo_actividad', $proveedor_actividad_id->id_tipo_actividad)->first();
+        $Actividad_economica = Actividad_economica::where('id_actividad_economica', $proveedor_actividad_id->id_tipo_actividad)->first();
 
-    $Actividad_economica = Actividad_economica::where('id_actividad_economica', $proveedor_actividad_id->id_tipo_actividad)->first();
+    }
+
 
     $proveedor_actividad_secundaria = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 2)->get();
+
     $actividades_Secundarias = "";
 
     foreach( $proveedor_actividad_secundaria as $actividad_secundaria){
@@ -234,13 +269,13 @@ public function descargarCertificadoInscripcion($id)
         'cuit' => $proveedor->cuit,
         'nombre_fantasia' => $proveedor->nombre_fantasia,
         'razon_social' => $proveedor->razon_social,
-        'cod_actividad_principal' => $Actividad_economica->cod_actividad,
-        'actividad_principal' => $Actividad_economica->desc_actividad,
-        'actividad_secundaria' => $actividades_Secundarias,
+        'cod_actividad_principal' => isset($Actividad_economica->cod_actividad) ? $Actividad_economica->cod_actividad : '',
+        'actividad_principal' => isset($Actividad_economica->desc_actividad) ? $Actividad_economica->desc_actividad : '',
+        'actividad_secundaria' => isset($actividades_Secundarias) ? $actividades_Secundarias : '',
         'calle_ruta' => $proveedor_domicilio_real->calle.' '.$proveedor_domicilio_real->numero,
-        'telefono' =>  $proveedor_telefono_real->nro_tel,
+        'telefono' => isset($proveedor_telefono_real->nro_tel) ? $proveedor_telefono_real->nro_tel : '',
         'fecha_inscripcion' => $proveedor->created_at,
-        'localidad' => $proveedor_localidad_real->nombre_localidad
+        'localidad' =>  isset($proveedor_localidad_real->nombre_localidad) ? $proveedor_localidad_real->nombre_localidad : ''
 
     ];
 
