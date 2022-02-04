@@ -18,7 +18,7 @@
 
 <fieldset>
 
-<h1>Patente</h1>
+<h1>Vehículo</h1>
 
 <br/>
 
