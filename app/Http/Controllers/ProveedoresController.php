@@ -706,7 +706,7 @@ class ProveedoresController extends Controller
 
         $pago = $pago->fill($request->all());
         $pago->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos del Pago fueron modificados correctamente');
 
     }
 
@@ -860,7 +860,7 @@ class ProveedoresController extends Controller
 
             // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
 
-            return redirect()->back();
+            return redirect()->back()->with('message', 'Los datos de la Actividad fueron modificados correctamente');
             }
             else {
             $actividad = Actividades_proveedores::find($id);
@@ -875,7 +875,7 @@ class ProveedoresController extends Controller
 
             // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
 
-            return redirect()->back();
+            return redirect()->back()->with('message', 'Los datos de la Actividad fueron modificados correctamente');
         }
 
 
@@ -947,7 +947,7 @@ class ProveedoresController extends Controller
 
             // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
 
-            return redirect()->back()->with('message', 'Producto Creada Correctamente');
+            return redirect()->back()->with('message', 'Producto Creado Correctamente');
     }
 
     public function nuevoProductos($id)
@@ -968,7 +968,7 @@ class ProveedoresController extends Controller
         $productos = Producto::All();
 
         $producto->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos del Producto fueron modificados correctamente');
 
     }
 
@@ -1051,7 +1051,7 @@ class ProveedoresController extends Controller
 
         $patente = $patente->fill($request->all());
         $patente->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos de la Patente fueron modificados correctamente');
 
     }
 
@@ -1137,7 +1137,7 @@ class ProveedoresController extends Controller
 
         $seguro = $seguro->fill($request->all());
         $seguro->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos del Seguro fueron modificados correctamente');
 
     }
 
