@@ -1212,7 +1212,7 @@ class ProveedoresController extends Controller
 
             // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
 
-            return redirect()->back()->with('message', 'Sede Creado Correctamente');
+            return redirect()->back()->with('message', 'Sede creada correctamente');
     }
 
     public function nuevoSedes($id)
@@ -1233,7 +1233,7 @@ class ProveedoresController extends Controller
 
         $sede = $sede->fill($request->all());
         $sede->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos de la Sede fueron modificados correctamente');
 
     }
 
