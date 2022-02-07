@@ -593,24 +593,45 @@ class ProveedoresController extends Controller
     public function guardarSucursales($id, Request $request)
     {
         $sucursal = Sucursal::find($id);
-        $sucursal_email = Sucursal_email::where('id_sucursal', $id)->firstOrFail();
 
-        $sucursal_email->update([
-            'email' => $request->email,
-        ]);
+        $sucursal_email = Sucursal_email::where('id_sucursal', $id)->first();
+        //return response()->json($sucursal_email);
+        if (!empty($sucursal_email)) {
+            $sucursal_email->update([
+                'email' => $request->email,
+            ]);
 
-        $sucursal_email->save();
+            $sucursal_email->save();
+        } else {
+            //----------------Carga de email Sucursal---------------
+            if (isset($request->email)) {
+                $sucursal_email = new Sucursal_email();
+                $sucursal_email->id_sucursal = $sucursal->id_sucursal;
+                $sucursal_email->email = $request->email;
+                $sucursal_email->save();
+            }
+        }
+        $sucursal_telefono = Sucursal_telefono::where('id_sucursal', $id)->first();
 
-        $sucursal_telefono = Sucursal_telefono::where('id_sucursal', $id)->firstOrFail();
-        $sucursal_telefono->update([
-            'nro_tel' => $request->nro_tel,
-        ]);
-        $sucursal_telefono->save();
+        if (!empty($sucursal_telefono)) {
+            $sucursal_telefono->update([
+                'nro_tel' => $request->nro_tel,
+            ]);
+            $sucursal_telefono->save();
+        } else {
+             //----------------Carga de telefono Sucursal---------------
+            if (isset($request->nro_tel)) {
+
+                $sucursal_telefono = new Sucursal_telefono();
+                $sucursal_telefono->id_sucursal = $sucursal->id_sucursal;
+                $sucursal_telefono->nro_tel = $request->nro_tel;
+                $sucursal_telefono->save();
+            }
+        }
 
         $sucursal = $sucursal->fill($request->all());
         $sucursal->save();
-        return redirect()->back();
-
+        return redirect()->back()->with('message', 'Los datos de la Sucursal fueron modificados correctamente');
     }
 
     public function crearSucursales($id, Request $request)
