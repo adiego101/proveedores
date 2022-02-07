@@ -1,33 +1,31 @@
 @extends('layouts')
-
-@section('content2')
-<!DOCTYPE html>
-<html>
-<head>
+@push('head')
     <title>Gestionar Registros</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-</head>
-<body>
+@endpush
+@section('content2')
+
 
 <!--<div class="container mt-5">-->
     <h2 class="mb-4">Gestionar Registros:</h2>
-    <table class="table table-hover yajra-datatable">
-        <thead>
-            <tr>
-                <th>Nombre de fantasía</th>
+    <div class="table container-fluid overflow-auto" id="tabla">
+
+        <table id="tabla_consulta" style="width:100%" class="table table-hover yajra-datatable table-striped table-condensed">
+            <thead class="bg-info" align="center">
+                <tr>
+                <th align="center">Nombre de fantasía</th>
                <!-- <th>Razón Social</th>-->
-                <th>cuit</th>
-                <th>Dada de baja</th>
-                <th>Acciones</th>
+                <th align="center">CUIT</th>
+                <th align="center">Dada de baja</th>
+                <th align="center">Acciones</th>
             </tr>
         </thead>
-        <tbody>
-        </tbody>
+
     </table>
-<!--</div>-->
+</div>
 
 <!--Incluimos el modal para dar de baja un registro -->
 @include('modalBajaRegistro')
@@ -35,8 +33,7 @@
 <!--Incluimos el modal para dar de alta un registro -->
 @include('modalAltaRegistro')
 
-</body>
-</html>
+
 @endsection
 
 @push('js')
@@ -77,7 +74,7 @@
             {data: 'nombre_fantasia', name: 'nombre_fantasia'},
            // {data: 'razon_social', name: 'razon_social'},
             {data: 'cuit', name: 'cuit'},
-            {data: 'dado_de_baja', 
+            {data: 'dado_de_baja',
             render: function(data){
                     if (data === 0)
                         return 'No';
@@ -96,7 +93,7 @@
 
   });
 
-   
+
     function bajaRegistro(id_registro) {
 
         //Desplegamos el modal

@@ -32,11 +32,19 @@
             {{--<option value=" ">Seleccione una provincia</option>--}}
 
             @forelse($provincias as $provincia)
-                @if ($provincia->id_provincia == $provinciaid)
-                    <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                @else
-                    <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                @endif
+            @if (isset($provinciaid))
+            @if ($provincia->id_provincia == $provinciaid)
+            <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+        @else
+            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+        @endif
+
+            @else
+
+            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+            @endif
+
+
             @empty
                 <option value=" "></option>
             @endforelse
@@ -84,7 +92,6 @@
 <script type="text/javascript">
 
 window.onload = function(){
-    //console.log("{{url('localidadSelect/'.$sede->Localidad)}}");
     recargarLista();
         };
 
@@ -100,7 +107,7 @@ window.onload = function(){
     function recargarLista(){
         $.ajax({
             type:"GET",
-            url:"{{url('localidadSelect/'.$sede->Localidad)}}",
+            url:"{{url('localidadSelect/')}}/{{isset($sede->Localidad) ? $sede->Localidad : ''}}",
             success:function(r){
                 $('#Localidad').html(r);
             }
