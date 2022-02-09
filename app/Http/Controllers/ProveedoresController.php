@@ -2,32 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Actividades_proveedores;
-use App\Models\Actividad_economica;
-use App\Models\Jerarquia_compre_local;
-use App\Models\Localidad;
+use DataTables;
 use App\Models\Pago;
 use App\Models\Pais;
 use App\Models\Persona;
-use App\Models\Ponderacion_compre_local;
 use App\Models\Producto;
-use App\Models\Proveedor;
-use App\Models\Proveedores_tipos_proveedores;
-use App\Models\Proveedor_domicilio;
-use App\Models\Proveedor_email;
-use App\Models\Proveedor_patente;
-use App\Models\Proveedor_sede;
-use App\Models\Proveedor_seguro;
-use App\Models\Proveedor_telefono;
-use App\Models\Provincia;
 use App\Models\Sucursal;
-use App\Models\Sucursal_email;
-use App\Models\Sucursal_telefono;
-use App\Models\Tipo_actividad;
-use DataTables;
+use App\Models\Localidad;
+use App\Models\Proveedor;
+use App\Models\Provincia;
 use Illuminate\Http\Request;
+use App\Models\Proveedor_sede;
+use App\Models\Sucursal_email;
+use App\Models\Tipo_actividad;
+use App\Models\Proveedor_email;
+use App\Models\Proveedor_seguro;
+use App\Models\Proveedor_patente;
+use App\Models\Sucursal_telefono;
+use App\Models\Proveedor_telefono;
 use Illuminate\Support\Facades\DB;
+use App\Models\Actividad_economica;
+use App\Models\Proveedor_domicilio;
+use App\Models\Jerarquia_compre_local;
+use App\Models\Actividades_proveedores;
+use App\Models\Ponderacion_compre_local;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Proveedores_tipos_proveedores;
+use App\Http\Controllers\ProveedoresController;
 
 class ProveedoresController extends Controller
 {
@@ -761,7 +762,11 @@ class ProveedoresController extends Controller
     public function getActividades(Request $request, $id, $mode = null)
     {
         //if ($request->ajax()) {
-        $data = Actividades_proveedores::where('id_proveedor', $id)->get();
+        $data = Actividades_proveedores::where('id_proveedor', $id)
+        ->join('actividades_economicas', 'actividades_proveedores.id_actividad_economica', '=', 'actividades_economicas.id_actividad_economica')
+        ->join('tipos_actividades', 'actividades_proveedores.id_tipo_actividad', '=', 'tipos_actividades.id_tipo_actividad')
+        ->select('actividades_proveedores.id_actividad_economica','actividades_proveedores.id_actividad_proveedor','actividades_proveedores.id_tipo_actividad','actividades_economicas.desc_actividad','actividades_economicas.cod_actividad','tipos_actividades.desc_tipo_actividad')
+        ->get();
 
         return Datatables::of($data)
             ->addIndexColumn()
