@@ -8,24 +8,21 @@
 @endpush
 @section('content2')
 
-
-<!--<div class="container mt-5">-->
     <h2 class="mb-4">Gestionar Registros:</h2>
-    <div class="table container-fluid overflow-auto" id="tabla">
 
-        <table id="tabla_consulta" style="width:100%" class="table table-hover yajra-datatable table-striped table-condensed">
+    <div class="table container-fluid overflow-auto" id="tabla">
+        <table id="tabla_consulta" style="width:100%" class="table table-hover yajra-datatable">
             <thead class="bg-info" align="center">
                 <tr>
-                <th align="center">Nombre de fantasía</th>
-               <!-- <th>Razón Social</th>-->
-                <th align="center">CUIT</th>
-                <th align="center">Dada de baja</th>
-                <th align="center">Acciones</th>
-            </tr>
-        </thead>
-
-    </table>
-</div>
+                    <th align="center">Nombre de fantasía</th>
+                    <!-- <th>Razón Social</th>-->
+                    <th align="center">CUIT</th>
+                    <th align="center">Dada de baja</th>
+                    <th align="center">Acciones</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 
 <!--Incluimos el modal para dar de baja un registro -->
 @include('modalBajaRegistro')
