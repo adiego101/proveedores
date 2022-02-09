@@ -127,10 +127,19 @@
 
         var x = 1; //Contador inicial, comienza en 1
         $(addTelefono_real).click(function() {
-            if (x < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
-                x++; //Incrementa el contador en 1
-                $(wrapper_telefono_real).append(fieldHTML_telefono_real); // Agrega un nuevo campo html (telefono)
+
+            //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
+            let tel = document.getElementById('telefono_real').value;
+            
+            //Si el campo teléfono se encuentra vacío, no permite agregar un segundo campo.
+            if (tel.length != 0){
+       
+                if (x < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    x++; //Incrementa el contador en 1
+                    $(wrapper_telefono_real).append(fieldHTML_telefono_real); // Agrega un nuevo campo html (telefono)
+                }
             }
+
         });
         $(wrapper_telefono_real).on('click', '.remove_telefono_real', function(e) {
             e.preventDefault();
