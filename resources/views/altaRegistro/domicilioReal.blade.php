@@ -113,34 +113,59 @@
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
         var addTelefono_real = $('.add_telefono_real');
         var wrapper_telefono_real = $('.field_telefono_real');
+        var x = 1; //Contador inicial, comienza en 1
 
+        $(addTelefono_real).click(function() {
 
-        //Nuevo campo html (agregar un nuevo teléfono)
-        var fieldHTML_telefono_real = '<div>'+
+            //Nuevo campo html (agregar un nuevo teléfono)
+            var fieldHTML_telefono_real = '<div>'+
                                  '<br>'+
-                                    '<label for="telefono_real">Teléfono:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14">'+
+                                    '<label for="telefono_real' + x +'">Teléfono:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real' + x +'" name="telefono_real[]" maxlength="14">'+
                                     '<a href="javascript:void(0);" class="remove_telefono_real" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                  '<br>'+
                                 '</div>';
 
+            if(x == 1){
+                
+                //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
+                let tel = document.getElementById('telefono_real').value;
 
-        var x = 1; //Contador inicial, comienza en 1
-        $(addTelefono_real).click(function() {
+                //Si el campo teléfono no se encuentra vacío, permite agregar un segundo campo.
+                if (tel.length != 0){
 
-            //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
-            let tel = document.getElementById('telefono_real').value;
-            
-            //Si el campo teléfono se encuentra vacío, no permite agregar un segundo campo.
-            if (tel.length != 0){
-       
-                if (x < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    x++; //Incrementa el contador en 1
-                    $(wrapper_telefono_real).append(fieldHTML_telefono_real); // Agrega un nuevo campo html (telefono)
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (x < maxField) { 
+
+                        x++; //Incrementa el contador en 1
+
+                        $(wrapper_telefono_real).append(fieldHTML_telefono_real); // Agrega un nuevo campo html (telefono)
+                    }
+                }
+
+            } else{
+                
+                var y = x - 1;
+
+                //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
+                var tel_dinamico = document.getElementById('telefono_real'+y).value;
+              
+                //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
+                if (tel_dinamico.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (x < maxField) { 
+
+                        x++; //Incrementa el contador en 1
+                        
+                        $(wrapper_telefono_real).append(fieldHTML_telefono_real); // Agrega un nuevo campo html (telefono)
+                    }
                 }
             }
 
         });
+
+
         $(wrapper_telefono_real).on('click', '.remove_telefono_real', function(e) {
             e.preventDefault();
             $(this).parent('div').remove(); //Remueve un campo html (telefono)
