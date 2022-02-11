@@ -129,10 +129,10 @@
             if(x == 1){
                 
                 //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
-                let tel = document.getElementById('telefono_real').value;
+                let tel_real = document.getElementById('telefono_real').value;
 
                 //Si el campo teléfono no se encuentra vacío, permite agregar un segundo campo.
-                if (tel.length != 0){
+                if (tel_real.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
                     if (x < maxField) { 
@@ -143,15 +143,15 @@
                     }
                 }
 
-            } else{
+            } else {
                 
                 var y = x - 1;
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
-                var tel_dinamico = document.getElementById('telefono_real'+y).value;
+                var tel_real_dinamico = document.getElementById('telefono_real' + y).value;
               
                 //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
-                if (tel_dinamico.length != 0){
+                if (tel_real_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
                     if (x < maxField) { 
@@ -175,24 +175,59 @@
 
         var addEmail_real = $('.add_email_real');
         var wrapper_email_real = $('.field_email_real');
+        var i = 1; //Contador inicial, comienza en 1
+        
+        $(addEmail_real).click(function() {
 
-        //Nuevo campo html (agregar un nuevo correo)
-        var fieldHTML_email_real = '<div>'+
-                                    '<label for="email_real">Correo electrónico:</label><br>'+
-                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_real" name="email_real[]" maxlength="30">'+
+            //Nuevo campo html (agregar un nuevo correo)
+            var fieldHTML_email_real = '<div>'+
+                                    '<label for="email_real' + i +'">Correo electrónico:</label><br>'+
+                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_real' + i +'" name="email_real[]" maxlength="30">'+
                                     '<a href="javascript:void(0);" class="remove_email_real" title="Elimine el correo"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                     '<br>'+
                                     '<br>'+
                                 '</div>';
 
+            if(i == 1){
 
-        var i = 1; //Contador inicial, comienza en 1
-        $(addEmail_real).click(function() {
-            if (i < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
-                i++; //Incrementa el contador en 1
-                $(wrapper_email_real).append(fieldHTML_email_real); // Agrega un nuevo campo html (correo)
+                //Obtenemos el valor del campo, al clickear el botón Agregar Correo
+                let email_real = document.getElementById('email_real').value;
+
+                //Si el campo email no se encuentra vacío, permite agregar un segundo campo.
+                if (email_real.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (i < maxField) { 
+
+                        i++; //Incrementa el contador en 1
+
+                        $(wrapper_email_real).append(fieldHTML_email_real); // Agrega un nuevo campo html (correo)
+                    }
+                }
+
+            } else {
+                
+                var y = i - 1;
+
+                //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Correo
+                var email_real_dinamico = document.getElementById('email_real' + y).value;
+              
+                //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
+                if (email_real_dinamico.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (i < maxField) { 
+
+                        i++; //Incrementa el contador en 1
+                        
+                        $(wrapper_email_real).append(fieldHTML_email_real); // Agrega un nuevo campo html (correo)
+                    }
+                }
             }
+
         });
+
+
         $(wrapper_email_real).on('click', '.remove_email_real', function(e) {
             e.preventDefault();
             $(this).parent('div').remove(); //Remueve un campo html (correo)
