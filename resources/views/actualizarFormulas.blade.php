@@ -27,37 +27,37 @@
             @case ('Facturacion')
             <div class="col-sm">                  
                 <label for="actualizar_facturacion">Facturación:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de facturación" aria-describedby="basic-addon1" id="actualizar_facturacion" name="actualizar_facturacion" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" required><br>
+                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de facturación" aria-describedby="basic-addon1" id="actualizar_facturacion" name="actualizar_facturacion" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
 
             @break
             @case ('Gastos')
 
                 <label for="actualizar_gastos">Gastos:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de gastos" aria-describedby="basic-addon1" id="actualizar_gastos" name="actualizar_gastos" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" required><br>
+                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de gastos" aria-describedby="basic-addon1" id="actualizar_gastos" name="actualizar_gastos" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
                                   
             @break
             @case ('Mano_Obra')
 
                 <label for="actualizar_obra">Mano de Obra:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de mano de obra" aria-describedby="basic-addon1" id="actualizar_obra" name="actualizar_obra" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" required><br>
+                <input type="text" class="form-control" placeholder="Ingrese el porcentaje de mano de obra" aria-describedby="basic-addon1" id="actualizar_obra" name="actualizar_obra" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
             </div>                 
             @break
             @case ('Antiguedad')
             <div class="col-sm">
                 <label for="actualizar_antiguedad">Antiguedad:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la antiguedad en Santa Cruz" aria-describedby="basic-addon1" id="actualizar_antiguedad" name="actualizar_antiguedad" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" required><br>
+                <input type="text" class="form-control" placeholder="Ingrese la antiguedad en Santa Cruz" aria-describedby="basic-addon1" id="actualizar_antiguedad" name="actualizar_antiguedad" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
                                      
             @break
             @case ('Dom_fiscal')
 
                 <label for="actualizar_domicilio">Domicilio Fiscal:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el domicilio fiscal" aria-describedby="basic-addon1" id="actualizar_domicilio" name="actualizar_domicilio" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" required><br>
+                <input type="text" class="form-control" placeholder="Ingrese el domicilio fiscal" aria-describedby="basic-addon1" id="actualizar_domicilio" name="actualizar_domicilio" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
                                       
             @break
             @case ('Valor_Agregado')
 
                 <label for="actualizar_agregado">Valor Agregado:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el valor agregado" aria-describedby="basic-addon1" id="actualizar_agregado" name="actualizar_agregado" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" required><br>
+                <input type="text" class="form-control" placeholder="Ingrese el valor agregado" aria-describedby="basic-addon1" id="actualizar_agregado" name="actualizar_agregado" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
             </div>                  
             @break
         @endswitch
@@ -178,11 +178,11 @@
             comodin_formulas = false;
             texto_formulas ="El rango del índice intermedio inicial NO puede ser mayor o igual al rango del índice intermedio final";
         } 
-       /* else if (local_inicial  >= local_final) 
+        else if (local_inicial  >= local_final && local_final != 100) 
         {
             comodin_formulas = false;
             texto_formulas ="El rango del índice local inicial NO puede ser mayor o igual al rango del índice local final";
-        }*/
+        }
 
 
         if (!comodin_formulas)
