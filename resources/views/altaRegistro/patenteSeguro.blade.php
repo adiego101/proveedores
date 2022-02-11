@@ -57,8 +57,8 @@
 
     <div class="row">
         <div class="col-sm">
-            <label for="poliza">Poliza:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="poliza" maxlength="20"/><br />
+            <label for="poliza">Póliza:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese la póliza" aria-describedby="basic-addon1" id="poliza" maxlength="20"/><br />
 
             <label for="asegurado">Asegurado:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" maxlength="20"/><br />
@@ -81,7 +81,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Poliza</th>
+                    <th>Póliza</th>
                     <th>Agencia</th>
                     <th>Asegurado</th>
                     <th>Vigencia hasta</th>

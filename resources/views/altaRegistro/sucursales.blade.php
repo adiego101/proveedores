@@ -25,7 +25,7 @@
             <label for="monoblock_sucursal">Monoblock:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_sucursal" name="monoblock_sucursal" maxlength="10"/><br />
 
-            <label for="pais_sucursal">Pais:</label><br>
+            <label for="pais_sucursal">País:</label><br>
                 <select class="form-control" aria-describedby="basic-addon1" id="pais_sucursal" name="pais_sucursal">
                     @forelse($paises as $pais)
                         <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
