@@ -186,5 +186,11 @@ $('input[type="checkbox"]').on('change', function(){
             color: #000;
         }
 
+        input:hover:invalid:required {
+
+            border: 2px solid red;
+        }
+
     </style>
+
 @endpush

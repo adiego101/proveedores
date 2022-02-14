@@ -3,7 +3,16 @@
 @section('content2')
 @if ( $mode != "show")
 
+@if ($mode != "edit")
+
+<form action="{{ route('seguros.crear', ['id' => $id]) }}"  method="POST">
+
+@else
+
 <form action="{{ route('seguros.guardar', ['id' => $seguro->id_proveedor_seguro]) }}"  method="POST">
+
+@endif
+
     @csrf
     @endif
 
@@ -38,11 +47,27 @@
 
 
 @if ( $mode != "show")
+
+@if ($mode != "edit")
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $id, 'tab' => "patente"]) }}">atras</a>
+
+@else
 <a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $seguro->id_proveedor, 'tab' => "patente"]) }}">atras</a>
+
+@endif
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
+        @if ($mode != "edit")
+
+        <button type="submit" name="crearSeguro" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
+
+        @else
+
         <button type="submit" name="guardarSeguro" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
+
+        @endif
     </div>
 </div>
 </form>

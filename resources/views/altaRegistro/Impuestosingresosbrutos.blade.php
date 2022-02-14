@@ -8,7 +8,7 @@
   <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de ingresos brutos" aria-describedby="basic-addon1" id="nro_ingresos_brutos" name="nro_ingresos_brutos" maxlength="9"><br>
 
   <label for="jurisdiccion">Jurisdicción:</label><br>
-  <input type="text" class="form-control" placeholder="Ingrese su jurisdicción" aria-describedby="basic-addon1" id="jurisdiccion" name="jurisdiccion" maxlength="20"><br>
+  <input type="text" class="form-control" placeholder="Ingrese su jurisdicción" aria-describedby="basic-addon1" id="jurisdiccion" name="jurisdiccion" maxlength="40"><br>
 
   <label for="tipo_contribuyente">Tipo de contribuyente:</label><br>
   <select class="form-control" aria-describedby="basic-addon1" id="tipo_contribuyente" name="tipo_contribuyente">

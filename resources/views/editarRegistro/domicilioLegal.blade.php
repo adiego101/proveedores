@@ -224,7 +224,7 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
     function recargarListaLegal2(){
         $.ajax({
             type:"GET",
-            url:"{{url('localidadSelect/'.$proveedor_domicilio_legal->id_localidad)}}",
+            url:"{{url('localidadSelect/')}}/{{isset($proveedor_domicilio_legal->id_localidad) ? $proveedor_domicilio_legal->id_localidad : ''}}",
             success:function(r){
                 $('#localidad_legal').html(r);
             }

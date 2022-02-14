@@ -2,32 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Actividades_proveedores;
-use App\Models\Actividad_economica;
-use App\Models\Jerarquia_compre_local;
-use App\Models\Localidad;
+use DataTables;
 use App\Models\Pago;
 use App\Models\Pais;
 use App\Models\Persona;
-use App\Models\Ponderacion_compre_local;
 use App\Models\Producto;
-use App\Models\Proveedor;
-use App\Models\Proveedores_tipos_proveedores;
-use App\Models\Proveedor_domicilio;
-use App\Models\Proveedor_email;
-use App\Models\Proveedor_patente;
-use App\Models\Proveedor_sede;
-use App\Models\Proveedor_seguro;
-use App\Models\Proveedor_telefono;
-use App\Models\Provincia;
 use App\Models\Sucursal;
-use App\Models\Sucursal_email;
-use App\Models\Sucursal_telefono;
-use App\Models\Tipo_actividad;
-use DataTables;
+use App\Models\Localidad;
+use App\Models\Proveedor;
+use App\Models\Provincia;
 use Illuminate\Http\Request;
+use App\Models\Proveedor_sede;
+use App\Models\Sucursal_email;
+use App\Models\Tipo_actividad;
+use App\Models\Proveedor_email;
+use App\Models\Proveedor_seguro;
+use App\Models\Proveedor_patente;
+use App\Models\Sucursal_telefono;
+use App\Models\Proveedor_telefono;
 use Illuminate\Support\Facades\DB;
+use App\Models\Actividad_economica;
+use App\Models\Proveedor_domicilio;
+use App\Models\Jerarquia_compre_local;
+use App\Models\Actividades_proveedores;
+use App\Models\Ponderacion_compre_local;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Proveedores_tipos_proveedores;
+use App\Http\Controllers\ProveedoresController;
 
 class ProveedoresController extends Controller
 {
@@ -593,23 +594,82 @@ class ProveedoresController extends Controller
     public function guardarSucursales($id, Request $request)
     {
         $sucursal = Sucursal::find($id);
-        $sucursal_email = Sucursal_email::where('id_sucursal', $id)->firstOrFail();
 
-        $sucursal_email->update([
-            'email' => $request->email,
-        ]);
+        $sucursal_email = Sucursal_email::where('id_sucursal', $id)->first();
+        //return response()->json($sucursal_email);
+        if (!empty($sucursal_email)) {
+            $sucursal_email->update([
+                'email' => $request->email,
+            ]);
 
-        $sucursal_email->save();
+            $sucursal_email->save();
+        } else {
+            //----------------Carga de email Sucursal---------------
+            if (isset($request->email)) {
+                $sucursal_email = new Sucursal_email();
+                $sucursal_email->id_sucursal = $sucursal->id_sucursal;
+                $sucursal_email->email = $request->email;
+                $sucursal_email->save();
+            }
+        }
+        $sucursal_telefono = Sucursal_telefono::where('id_sucursal', $id)->first();
 
-        $sucursal_telefono = Sucursal_telefono::where('id_sucursal', $id)->firstOrFail();
-        $sucursal_telefono->update([
-            'nro_tel' => $request->nro_tel,
-        ]);
-        $sucursal_telefono->save();
+        if (!empty($sucursal_telefono)) {
+            $sucursal_telefono->update([
+                'nro_tel' => $request->nro_tel,
+            ]);
+            $sucursal_telefono->save();
+        } else {
+             //----------------Carga de telefono Sucursal---------------
+            if (isset($request->nro_tel)) {
+
+                $sucursal_telefono = new Sucursal_telefono();
+                $sucursal_telefono->id_sucursal = $sucursal->id_sucursal;
+                $sucursal_telefono->nro_tel = $request->nro_tel;
+                $sucursal_telefono->save();
+            }
+        }
 
         $sucursal = $sucursal->fill($request->all());
         $sucursal->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos de la Sucursal fueron modificados correctamente');
+    }
+
+    public function crearSucursales($id, Request $request)
+    {
+        //----------------Carga de Sucursal---------------
+
+        $sucursal = new Sucursal($request->all());
+        $sucursal->id_proveedor = $id;
+        $sucursal->save();
+
+        //----------------Carga de email Sucursal---------------
+        if (isset($request->email)) {
+            $sucursal_email = new Sucursal_email();
+            $sucursal_email->id_sucursal = $sucursal->id_sucursal;
+            $sucursal_email->email = $request->email;
+            $sucursal_email->save();
+        }
+        //----------------Carga de telefono Sucursal---------------
+        if (isset($request->nro_tel)) {
+
+            $sucursal_telefono = new Sucursal_telefono();
+            $sucursal_telefono->id_sucursal = $sucursal->id_sucursal;
+            $sucursal_telefono->nro_tel = $request->nro_tel;
+            $sucursal_telefono->save();
+        }
+        $sucursal->save();
+        return redirect()->back()->with('message', 'Sucursal Creada Correctamente');
+    }
+
+    public function nuevoSucursales($id)
+    {
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+        $mode = "create";
+
+        return view('ediciones.sucursales', compact( 'id','mode','paises','provincias','localidades'));
 
     }
 
@@ -668,9 +728,28 @@ class ProveedoresController extends Controller
 
         $pago = $pago->fill($request->all());
         $pago->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos del Pago fueron modificados correctamente');
 
     }
+
+    public function crearPagos($id, Request $request)
+    {
+
+        $pago = new Pago($request->all());
+        $pago->id_proveedor = $id;
+        $pago->save();
+        return redirect()->back()->with('message', 'Pago Creado Correctamente');
+
+    }
+
+    public function nuevoPagos($id)
+    {
+        $mode = "create";
+
+        return view('ediciones.pagos', compact( 'id','mode'));
+
+    }
+
 
     public function bajaPagos($id)
     {
@@ -683,7 +762,11 @@ class ProveedoresController extends Controller
     public function getActividades(Request $request, $id, $mode = null)
     {
         //if ($request->ajax()) {
-        $data = Actividades_proveedores::where('id_proveedor', $id)->get();
+        $data = Actividades_proveedores::where('id_proveedor', $id)
+        ->join('actividades_economicas', 'actividades_proveedores.id_actividad_economica', '=', 'actividades_economicas.id_actividad_economica')
+        ->join('tipos_actividades', 'actividades_proveedores.id_tipo_actividad', '=', 'tipos_actividades.id_tipo_actividad')
+        ->select('actividades_proveedores.id_actividad_economica','actividades_proveedores.id_actividad_proveedor','actividades_proveedores.id_tipo_actividad','actividades_economicas.desc_actividad','actividades_economicas.cod_actividad','tipos_actividades.desc_tipo_actividad')
+        ->get();
 
         return Datatables::of($data)
             ->addIndexColumn()
@@ -731,6 +814,52 @@ class ProveedoresController extends Controller
 
     }
 
+    public function crearActividades($id, Request $request)
+    {
+
+        if($request->tipo_actividad == "Primaria"){
+        if (Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
+
+            return Redirect::back()
+                ->withErrors(['Ya existe una actividad primaria, la operación no pudo completarse']);
+            }
+            else {
+            $actividad = new Actividades_proveedores();
+            $actividad->id_proveedor = $id;
+            $actividad->id_actividad_economica = $this->idActividad_economica($request->actividad_1);
+            $actividad->id_tipo_actividad = $this->idtipos_actividades($request->tipo_actividad);
+
+            $actividad->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Actividad Creada Correctamente');
+        }}
+        else{
+            $actividad = new Actividades_proveedores();
+            $actividad->id_proveedor = $id;
+            $actividad->id_actividad_economica = $this->idActividad_economica($request->actividad_1);
+            $actividad->id_tipo_actividad = $this->idtipos_actividades($request->tipo_actividad);
+
+            $actividad->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Actividad Creada Correctamente');
+        }
+
+    }
+
+    public function nuevoActividades($id)
+    {
+        $tipos_actividades = Tipo_actividad::All();
+        $actividades = Actividad_economica::All();
+        $mode = "create";
+
+        return view('ediciones.actividades', compact( 'id','actividades', 'tipos_actividades','mode'));
+
+    }
+
     public function bajaActividades($id)
     {
         if (Actividades_proveedores::where('id_actividad_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
@@ -757,7 +886,7 @@ class ProveedoresController extends Controller
 
             // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
 
-            return redirect()->back();
+            return redirect()->back()->with('message', 'Los datos de la Actividad fueron modificados correctamente');
             }
             else {
             $actividad = Actividades_proveedores::find($id);
@@ -772,7 +901,7 @@ class ProveedoresController extends Controller
 
             // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
 
-            return redirect()->back();
+            return redirect()->back()->with('message', 'Los datos de la Actividad fueron modificados correctamente');
         }
 
 
@@ -836,6 +965,27 @@ class ProveedoresController extends Controller
         return "success";
     }
 
+    public function crearProductos($id, Request $request)
+    {
+            $producto = new Producto($request->all());
+            $producto->id_proveedor = $id;
+            $producto->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Producto Creado Correctamente');
+    }
+
+    public function nuevoProductos($id)
+    {
+        $productos = Producto::All();
+
+        $mode = "create";
+
+        return view('ediciones.producto', compact('mode','id','productos'));
+
+    }
+
     public function guardarProductos($id, Request $request)
     {
         $producto = Producto::find($id);
@@ -844,7 +994,7 @@ class ProveedoresController extends Controller
         $productos = Producto::All();
 
         $producto->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos del Producto fueron modificados correctamente');
 
     }
 
@@ -902,13 +1052,32 @@ class ProveedoresController extends Controller
         return "success";
     }
 
+    public function crearPatentes($id, Request $request)
+    {
+            $patente = new Proveedor_patente($request->all());
+            $patente->id_proveedor = $id;
+            $patente->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Patente Creada Correctamente');
+    }
+
+    public function nuevoPatentes($id)
+    {
+        $mode = "create";
+
+        return view('ediciones.patentes', compact('mode','id'));
+
+    }
+
     public function guardarPatentes($id, Request $request)
     {
         $patente = Proveedor_patente::find($id);
 
         $patente = $patente->fill($request->all());
         $patente->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos de la Patente fueron modificados correctamente');
 
     }
 
@@ -969,13 +1138,32 @@ class ProveedoresController extends Controller
         return "success";
     }
 
+    public function crearSeguros($id, Request $request)
+    {
+            $seguro = new Proveedor_seguro($request->all());
+            $seguro->id_proveedor = $id;
+            $seguro->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Seguro Creado Correctamente');
+    }
+
+    public function nuevoSeguros($id)
+    {
+        $mode = "create";
+
+        return view('ediciones.seguros', compact('mode','id'));
+
+    }
+
     public function guardarSeguros($id, Request $request)
     {
         $seguro = Proveedor_seguro::find($id);
 
         $seguro = $seguro->fill($request->all());
         $seguro->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos del Seguro fueron modificados correctamente');
 
     }
 
@@ -1042,13 +1230,36 @@ class ProveedoresController extends Controller
         return "success";
     }
 
+    public function crearSedes($id, Request $request)
+    {
+            $sede = new Proveedor_sede($request->all());
+            $sede->id_proveedor = $id;
+            $sede->save();
+
+            // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
+
+            return redirect()->back()->with('message', 'Sede creada correctamente');
+    }
+
+    public function nuevoSedes($id)
+    {
+        $mode = "create";
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+
+
+        return view('ediciones.sedes', compact('id','mode','provincias','localidades','paises'));
+
+    }
+
     public function guardarSedes($id, Request $request)
     {
         $sede = Proveedor_sede::find($id);
 
         $sede = $sede->fill($request->all());
         $sede->save();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Los datos de la Sede fueron modificados correctamente');
 
     }
 
@@ -1203,7 +1414,15 @@ class ProveedoresController extends Controller
         $proveedor = Proveedor::findOrFail($id);
 
         $persona = $proveedor->personas()->get();
-        $persona = $persona[0];
+
+        if ($persona->isEmpty()) {
+            $persona =  "";
+
+        }
+        else{
+            $persona = $persona[0];
+        }
+
         //return $persona;
         $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
             ->first();
@@ -1294,19 +1513,34 @@ class ProveedoresController extends Controller
     public function verProveedorRupaeId($id,$tab = null)
     {
         $proveedor = Proveedor::findOrFail($id);
-
         $persona = $proveedor->personas()->get();
-        $persona = $persona[0];
+
+        if ($persona->isEmpty()) {
+            $persona =  "";
+
+        }
+        else{
+            $persona = $persona[0];
+        }
         $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
-            ->first();
-
-        $provinciaidFiscal = Localidad::where('id_localidad', $proveedor_domicilio_fiscal->id_localidad)->get();
-
-        if ($provinciaidFiscal->isEmpty()) {
+        ->first();
+        if (empty($proveedor_domicilio_fiscal)) {
+            $proveedor_domicilio_fiscal =  "";
             $provinciaidFiscal =  "";
         } else {
-            $provinciaidFiscal =  $provinciaidFiscal[0]->id_provincia;
+            $provinciaidFiscal = Localidad::where('id_localidad', $proveedor_domicilio_fiscal->id_localidad)->get();
+
+
+            if ($provinciaidFiscal->isEmpty()) {
+                $provinciaidFiscal =  "";
+            } else {
+                $provinciaidFiscal =  $provinciaidFiscal[0]->id_provincia;
+            }
         }
+
+
+
+
 
         $proveedor_email_fiscal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'fiscal')
             ->get();

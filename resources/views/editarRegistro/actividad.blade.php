@@ -9,17 +9,27 @@
     name="facturacion_anual_alcanzada" maxlength="9"
      @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
+@if ($mode == "edit")
 
+<a class="btn btn-secondary" style="float: left" href="{{ route('actividades.nuevo', ['id' => $id]) }}" title="Agregar actividad">+</a>
+<br>
+<hr>
+@endif
         <div>
 
             <table style="width:100%" class="yajra-actividades table table-hover  table-striped table-condensed">
                 <thead>
                     <tr>
-                        <th>id_actividad_economica</th>
-                        <th>id_tipo_actividad</th>
+
+                        <th>Codigo</th>
+                        <th>Actividad Economica</th>
+                        <th>Tipo Actividad</th>
+
                         {{--<th>Correo electrónico</th>
                             <th>Teléfono</th>--}}
+
                             <th>Acciones</th>
+
                       <!--  <th>Username</th>
                         <th>Phone</th>
                         <th>DOB</th> -->
@@ -41,7 +51,12 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
     <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"
         @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
+@if ($mode == "edit")
 
+<a class="btn btn-secondary" style="float: left" href="{{ route('productos.nuevo', ['id' => $id]) }}" title="Agregar producto">+</a>
+<br>
+<hr>
+@endif
         <div>
 
             <table style="width:100%" class="yajra-productos table table-hover  table-striped table-condensed">
@@ -127,7 +142,6 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
             {data: 'rnpa', name: 'rnpa'},
             {data: 'Producida_unidad', name: 'Producida_unidad'},
             {data: 'capacidad_produccion_total', name: 'capacidad_produccion_total'},
-
             //{data: 'cuit', name: 'cuit'},
             //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
             {
@@ -170,8 +184,10 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
         serverSide: true,
         ajax: "{{ url('actividades/'.$id.'/'.$mode) }}",
         columns: [
-            {data: 'id_actividad_economica', name: 'id_actividad_economica'},
-            {data: 'id_tipo_actividad', name: 'id_tipo_actividad'},
+            {data: 'cod_actividad', name: 'cod_actividad'},
+            {data: 'desc_actividad', name: 'desc_actividad'},
+            {data: 'desc_tipo_actividad', name: 'desc_tipo_actividad'},
+
             //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
             {
                 data: 'action',
@@ -206,7 +222,7 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
         $('#modal_baja_producto').modal('show');
         $('#baja_producto').val(id_registro);
     }
-    
+
 </script>
 
 @endpush

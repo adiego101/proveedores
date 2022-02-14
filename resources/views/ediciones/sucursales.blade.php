@@ -2,10 +2,17 @@
 
 @section('content2')
 @if ( $mode != "show")
+@if ($mode != "edit")
+
+<form action="{{ route('sucursales.crear', ['id' => $id]) }}"  method="POST">
+
+@else
 
 <form action="{{ route('sucursales.guardar', ['id' => $sucursal->id_sucursal]) }}"  method="POST">
-    @csrf
-    @endif
+
+@endif
+@csrf
+@endif
 
     <fieldset>
     <div class="row">
@@ -79,15 +86,26 @@
             <label for="provincia">Provincia:</label><br>
             <select  @if ( $mode == "show") disabled @endif  class="form-control" value="{{ isset($sucursal->poliza) ? $sucursal->poliza : '' }}" aria-describedby="basic-addon1" id="provincia" name="provincia">
             <option value=" ">Seleccione una provincia</option>
-            @forelse($provincias as $provincia)
-                @if ($provincia->id_provincia == $provinciaid)
-                    <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                @if ($mode == "create")
+                    @forelse($provincias as $provincia)
+                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
                 @else
-                    <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @forelse($provincias as $provincia)
+
+                    @if ($provincia->id_provincia == $provinciaid)
+                        <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @else
+                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
                 @endif
-            @empty
+
+                @empty
                 <option value=" "></option>
-            @endforelse
+                @endforelse
+                @endif
+
             </select>
             <br>
 
@@ -111,7 +129,9 @@
 		});
 	})
     window.onload = function(){
-    recargarListaSucursal2();
+
+        {{isset($sucursal->id_localidad) ? 'recargarListaSucursal2();' : ''}}
+
         };
 </script>
 
@@ -129,7 +149,7 @@
     function recargarListaSucursal2(){
         $.ajax({
             type:"GET",
-            url:"{{url('localidadSelect/'.$sucursal->id_localidad)}}",
+            url:"{{url('localidadSelect/')}}/{{isset($sucursal->id_localidad) ? $sucursal->id_localidad : ''}}",
             success:function(r){
                 $('#id_localidad').html(r);
             }
@@ -138,11 +158,20 @@
 </script>
 @endpush
 @if ( $mode != "show")
+
+@if ($mode != "edit")
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $id, 'tab' => "sucursal"]) }}">atras</a>
+
+@else
 <a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $sucursal->id_proveedor, 'tab' => "sucursal"]) }}">atras</a>
+
+@endif
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
-        <button type="submit" name="guardarPago" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
+
+        <button type="submit" name="guardarSucursal" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
     </div>
 </div>
 </form>

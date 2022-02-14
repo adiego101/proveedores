@@ -3,13 +3,22 @@
 @section('content2')
 @if ( $mode != "show")
 
+@if ($mode != "edit")
+
+<form action="{{ route('patentes.crear', ['id' => $id]) }}"  method="POST">
+
+@else
+
 <form action="{{ route('patentes.guardar', ['id' => $patente->id_proveedor_patente]) }}"  method="POST">
+
+@endif
+
     @csrf
     @endif
 
 <fieldset>
 
-<h1>Patente</h1>
+<h1>Vehículo</h1>
 
 <br/>
 
@@ -36,11 +45,21 @@
 
 
 @if ( $mode != "show")
+
+@if ($mode != "edit")
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $id, 'tab' => "patente"]) }}">atras</a>
+
+@else
 <a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $patente->id_proveedor, 'tab' => "patente"]) }}">atras</a>
+
+@endif
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
+
         <button type="submit" name="guardarPatente" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
+
     </div>
 </div>
 </form>

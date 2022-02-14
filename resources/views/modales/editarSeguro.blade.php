@@ -9,16 +9,16 @@
                 </div>
                 <div class="modal-body">
 
-                    <label for="modal_poliza">Poliza:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="modal_poliza" name="modal_poliza" maxlength="20"/>
+                    <label for="modal_poliza">Póliza:</label><br />
+                    <input type="text" class="form-control" placeholder="Ingrese la póliza" aria-describedby="basic-addon1" id="modal_poliza" name="modal_poliza" maxlength="20"/>
                     <br />
 
                     <label for="modal_agencia">Agencia:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="modal_agencia" name="modal_agencia" maxlength="20"/>
+                    <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="modal_agencia" name="modal_agencia" maxlength="40"/>
                     <br />
 
                     <label for="modal_asegurado">Asegurado:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="modal_asegurado" name="modal_asegurado" maxlength="20"/>
+                    <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="modal_asegurado" name="modal_asegurado" maxlength="40"/>
                     <br />
                      
                     <label for="modal_vigencia">Vigencia hasta:</label><br />

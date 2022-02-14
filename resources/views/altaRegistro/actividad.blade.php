@@ -56,7 +56,7 @@
     <hr>
 
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="20"><br>
+    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="8"><br>
 
     <div class="row">
         <div class="col-sm">
@@ -73,7 +73,7 @@
 
             <label for="rnpa">RNPA:</label><br>
             <input type="text" class="form-control" aria-describedby="basic-addon1" id="rnpa"
-            name="rnpa" placeholder="Ingrese el RNPA" maxlength="20"><br>
+            name="rnpa" placeholder="Ingrese el RNPA" maxlength="8"><br>
         </div>
 
         <div class="col-sm">

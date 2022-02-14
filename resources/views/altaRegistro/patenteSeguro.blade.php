@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-sm">
             <label for="marca_vehiculo">Marca:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca_vehiculo" maxlength="20"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca_vehiculo" maxlength="40"/><br />
 
             <label for="dominio_vehiculo">Dominio:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio_vehiculo" maxlength="7"/><br />
@@ -21,7 +21,7 @@
 
         <div class="col-sm">
             <label for="modelo_vehiculo">Modelo:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo_vehiculo" maxlength="20"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo_vehiculo" maxlength="40"/><br />
 
             <label for="inscripto_en_vehiculo">Inscripto en:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en_vehiculo" maxlength="20"/><br />
@@ -57,16 +57,16 @@
 
     <div class="row">
         <div class="col-sm">
-            <label for="poliza">Poliza:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la poliza" aria-describedby="basic-addon1" id="poliza" maxlength="20"/><br />
+            <label for="poliza">Póliza:</label><br />
+            <input type="text" class="form-control" placeholder="Ingrese la póliza" aria-describedby="basic-addon1" id="poliza" maxlength="20"/><br />
 
             <label for="asegurado">Asegurado:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" maxlength="20"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" maxlength="40"/><br />
         </div>
 
         <div class="col-sm">
             <label for="agencia">Agencia:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" maxlength="20"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" maxlength="40"/><br />
 
             <label for="vigencia">Vigencia hasta:</label><br />
             <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia" /><br />
@@ -81,7 +81,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Poliza</th>
+                    <th>Póliza</th>
                     <th>Agencia</th>
                     <th>Asegurado</th>
                     <th>Vigencia hasta</th>
@@ -103,7 +103,7 @@
 <br>
 
 <label for="domicilio_sede">Domicilio:</label><br />
-<input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio_sede" maxlength="20"/><br />
+<input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio_sede" maxlength="50"/><br />
 
 <div class="row">
         <div class="col-sm">

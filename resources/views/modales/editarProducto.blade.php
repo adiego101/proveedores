@@ -21,7 +21,7 @@
                     <br>
 
                     <label for="modal_rnpa">RNPA:</label><br>
-                    <input type="text" class="form-control" aria-describedby="basic-addon1" id="modal_rnpa" name="modal_rnpa" placeholder="Ingrese el RNPA" maxlength="20"><br>
+                    <input type="text" class="form-control" aria-describedby="basic-addon1" id="modal_rnpa" name="modal_rnpa" placeholder="Ingrese el RNPA" maxlength="8"><br>
                  
                     <label for="modal_unidad_producida">Unidad producida:</label><br>
                     <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="modal_unidad_producida"

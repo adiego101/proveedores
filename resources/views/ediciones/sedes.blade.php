@@ -3,7 +3,16 @@
 @section('content2')
 @if ( $mode != "show")
 
+@if ($mode != "edit")
+
+<form action="{{ route('sedes.crear', ['id' => $id]) }}"  method="POST">
+
+@else
+
 <form action="{{ route('sedes.guardar', ['id' => $sede->id_proveedor_sede]) }}"  method="POST">
+
+@endif
+
     @csrf
     @endif
 
@@ -23,11 +32,19 @@
             {{--<option value=" ">Seleccione una provincia</option>--}}
 
             @forelse($provincias as $provincia)
-                @if ($provincia->id_provincia == $provinciaid)
-                    <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                @else
-                    <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-                @endif
+            @if (isset($provinciaid))
+            @if ($provincia->id_provincia == $provinciaid)
+            <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+        @else
+            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+        @endif
+
+            @else
+
+            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+            @endif
+
+
             @empty
                 <option value=" "></option>
             @endforelse
@@ -48,11 +65,21 @@
 
 
 @if ( $mode != "show")
+
+@if ($mode != "edit")
+
+<a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $id, 'tab' => "patente"]) }}">atras</a>
+
+@else
 <a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $sede->id_proveedor, 'tab' => "patente"]) }}">atras</a>
+
+@endif
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
+
         <button type="submit" name="guardarSede" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
+
     </div>
 </div>
 </form>
@@ -65,7 +92,6 @@
 <script type="text/javascript">
 
 window.onload = function(){
-    //console.log("{{url('localidadSelect/'.$sede->Localidad)}}");
     recargarLista();
         };
 
@@ -81,7 +107,7 @@ window.onload = function(){
     function recargarLista(){
         $.ajax({
             type:"GET",
-            url:"{{url('localidadSelect/'.$sede->Localidad)}}",
+            url:"{{url('localidadSelect/')}}/{{isset($sede->Localidad) ? $sede->Localidad : ''}}",
             success:function(r){
                 $('#Localidad').html(r);
             }

@@ -25,6 +25,16 @@ value="0" name="prov_provincial">
 
     <h4>Registro de Pagos de inscripción y renovación:</h4><br>
 
+    @if ($mode == "edit")
+
+    <a class="btn btn-secondary" style="float: left" href="{{ route('pagos.nuevo', ['id' => $id]) }}" title="Agregar pago">+</a>
+    <br>
+    <hr>
+
+    @endif
+
+
+
     <div>
 
         <table style="width:100%" class="yajra-pagos table table-hover  table-striped table-condensed">
