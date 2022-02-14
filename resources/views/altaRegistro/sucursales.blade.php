@@ -11,16 +11,16 @@
     <div class="row">
         <div class="col-sm">
             <label for="calle_sucursal">Calle:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_sucursal" maxlength="40"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_sucursal" maxlength="50"/><br />
 
             <label for="dpto_sucursal">Departamento:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_sucursal" maxlength="10"/><br />
 
             <label for="lote_sucursal">Lote:</label><br />
-            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_sucursal" name="lote_sucursal" maxlength="3"/><br />
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_sucursal" name="lote_sucursal" maxlength="4"/><br />
 
             <label for="entre_calles_sucursal">Entre Calles:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entre_calles_sucursal" maxlength="50"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entre_calles_sucursal" maxlength="70"/><br />
 
             <label for="monoblock_sucursal">Monoblock:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_sucursal" name="monoblock_sucursal" maxlength="10"/><br />
@@ -42,7 +42,7 @@
                 <br>
 
                 <label for="email_sucursal">Correo electrónico:</label><br>
-                <input id="email_sucursal" type="email" class="form-control email_sucursal" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" maxlength="30"><br>
+                <input id="email_sucursal" type="email" class="form-control email_sucursal" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" maxlength="50"><br>
                 <div class="field_email_sucursal">
 
                 </div>
@@ -50,19 +50,19 @@
 
         <div class="col-sm">
             <label for="numero_sucursal">Número:</label><br />
-            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_sucursal" maxlength="4"/><br />
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_sucursal" maxlength="5"/><br />
 
             <label for="puerta_sucursal">Puerta:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese la puerta" aria-describedby="basic-addon1" id="puerta_sucursal" name="puerta_sucursal" maxlength="4"/><br />
 
             <label for="manzana_sucursal">Manzana:</label><br />
-            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_sucursal" name="manzana_sucursal" maxlength="3"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_sucursal" name="manzana_sucursal" maxlength="5"/><br />
 
             <label for="oficina_sucursal">Oficina:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_sucursal" name="oficina_sucursal" maxlength="4"/><br />
 
             <label for="barrio_sucursal">Barrio:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_sucursal" maxlength="20"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_sucursal" maxlength="50"/><br />
 
             <label for="provincia_sucursal">Provincia:</label><br>
             <select class="form-control" aria-describedby="basic-addon1" id="provincia_sucursal" name="provincia_sucursal">
@@ -76,7 +76,7 @@
             <br>
 
             <label for="codigo_postal_sucursal">Código Postal:</label><br>
-            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="codigo_postal_sucursal" name="codigo_postal" placeholder="Ingrese el código postal" maxlength="4"><br>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" id="codigo_postal_sucursal" name="codigo_postal" placeholder="Ingrese el código postal" maxlength="8"><br>
 
             <label for="telefono_sucursal">Teléfono:</label><br>
             <input type="text" onkeypress="return valideKey(event);" id="telefono_sucursal" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" maxlength="14">
