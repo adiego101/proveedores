@@ -16,6 +16,7 @@
     @csrf
 @endif
 <fieldset>
+
     <h1>Pagos</h1>
 
     <label for="fecha">Fecha:</label><br>
@@ -38,19 +39,21 @@
 <a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $id, 'tab' => "pago"]) }}">atras</a>
 
 @else
+
 <a class="btn btn-secondary" style="float: left" href="{{ route('modificarRegistro', ['id' => $pago->id_proveedor, 'tab' => "pago"]) }}">atras</a>
 
 @endif
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
-
         <button type="submit" name="guardarPago" class="btn btn-success"> {{ 'Guardar' }} </button>
-
     </div>
 </div>
+
 </form>
+
 @else
+
 <a class="btn btn-secondary" style="float: left" href="{{ route('verRegistro', ['id' => $pago->id_proveedor, 'tab' => "pago"]) }}">atras</a>
 
 @endif

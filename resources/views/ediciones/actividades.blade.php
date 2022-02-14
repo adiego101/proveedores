@@ -79,14 +79,9 @@
 
 @endif
 
-
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
      <div class="btn-group">
-
-
-         <button type="submit" name="guardarActividades" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
-
-
+        <button type="submit" name="guardarActividades" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
     </div>
 </div>
 

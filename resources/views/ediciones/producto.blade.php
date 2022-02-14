@@ -32,7 +32,7 @@
             <br>
 
             <label for="rnpa">RNPA:</label><br>
-            <input @if ( $mode == "show") readonly @endif type="text" class="form-control" value="{{ isset($producto->rnpa) ? $producto->rnpa : '' }}" aria-describedby="basic-addon1" id="rnpa" name="rnpa" placeholder="Ingrese el RNPA" maxlength="20"><br>
+            <input @if ( $mode == "show") readonly @endif type="text" class="form-control" value="{{ isset($producto->rnpa) ? $producto->rnpa : '' }}" aria-describedby="basic-addon1" id="rnpa" name="rnpa" placeholder="Ingrese el RNPA" maxlength="8"><br>
         </div>
 
         <div class="col-sm">

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-sm">
                 <label for="calle_fiscal">Calle:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_fiscal" name="calle_fiscal" @if ( $mode == "show") readonly @endif maxlength="40"
+                <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_fiscal" name="calle_fiscal" @if ( $mode == "show") readonly @endif maxlength="50"
 value="{{ isset($proveedor_domicilio_fiscal->calle) ? $proveedor_domicilio_fiscal->calle : '' }}"><br>
 
                 <label for="dpto_fiscal">Departamento:</label><br>
@@ -15,10 +15,10 @@ value="{{ isset($proveedor_domicilio_fiscal->dpto) ? $proveedor_domicilio_fiscal
 
                 <label for="lote_fiscal">Lote:</label><br>
                 <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_fiscal" name="lote_fiscal" @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor_domicilio_fiscal->lote) ? $proveedor_domicilio_fiscal->lote : '' }}" maxlength="3"><br>
+value="{{ isset($proveedor_domicilio_fiscal->lote) ? $proveedor_domicilio_fiscal->lote : '' }}" maxlength="4"><br>
 
                 <label for="entreCalles_fiscal">Entre Calles:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_fiscal" name="entreCalles_fiscal" @if ( $mode == "show") readonly @endif maxlength="50"
+                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_fiscal" name="entreCalles_fiscal" @if ( $mode == "show") readonly @endif maxlength="70"
 value="{{ isset($proveedor_domicilio_fiscal->entre_calles) ? $proveedor_domicilio_fiscal->entre_calles : '' }}"><br>
 
                 <label for="monoblock_fiscal">Monoblock:</label><br>
@@ -46,10 +46,10 @@ value="{{ isset($proveedor_domicilio_fiscal->monoblock) ? $proveedor_domicilio_f
                         @forelse($proveedor_email_fiscal as $email_fiscal)
 
                             <label for="email_fiscal">Correo electrónico:</label><br>
-                            <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" @if ( $mode == "show") readonly @endif value="{{$email_fiscal->email}}" maxlength="30"> <br>
+                            <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" @if ( $mode == "show") readonly @endif value="{{$email_fiscal->email}}" maxlength="50"> <br>
                         @empty
                             <label for="email_fiscal">Correo electrónico:</label><br>
-                            <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" maxlength="30"> <br>
+                            <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" maxlength="50"> <br>
                         @endforelse
 
                     </div>
@@ -71,22 +71,22 @@ value="{{ isset($proveedor_domicilio_fiscal->monoblock) ? $proveedor_domicilio_f
 
                 <label for="numero_fiscal">Número:</label><br>
                 <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_fiscal" name="numero_fiscal" @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor_domicilio_fiscal->numero) ? $proveedor_domicilio_fiscal->numero : '' }}" maxlength="4"><br>
+value="{{ isset($proveedor_domicilio_fiscal->numero) ? $proveedor_domicilio_fiscal->numero : '' }}" maxlength="5"><br>
 
                 <label for="puerta_fiscal">Puerta:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_fiscal" name="puerta_fiscal" @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor_domicilio_fiscal->puerta) ? $proveedor_domicilio_fiscal->puerta : '' }}" maxlength="4"><br>
 
                 <label for="manzana_fiscal">Manzana:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_fiscal" name="manzana_fiscal" @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor_domicilio_fiscal->manzana) ? $proveedor_domicilio_fiscal->manzana : '' }}" maxlength="3"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_fiscal" name="manzana_fiscal" @if ( $mode == "show") readonly @endif
+value="{{ isset($proveedor_domicilio_fiscal->manzana) ? $proveedor_domicilio_fiscal->manzana : '' }}" maxlength="5"><br>
 
                 <label for="oficina_fiscal">Oficina:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_fiscal" name="oficina_fiscal" @if ( $mode == "show") readonly @endif maxlength="4"
 value="{{ isset($proveedor_domicilio_fiscal->oficina) ? $proveedor_domicilio_fiscal->oficina : '' }}"><br>
 
                 <label for="barrio_fiscal">Barrio:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_fiscal" name="barrio_fiscal" @if ( $mode == "show") readonly @endif maxlength="20"
+                <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_fiscal" name="barrio_fiscal" @if ( $mode == "show") readonly @endif maxlength="50"
 value="{{ isset($proveedor_domicilio_fiscal->barrio) ? $proveedor_domicilio_fiscal->barrio : '' }}"><br>
 
                 <label for="provincia_fiscal">Provincia:</label><br>
@@ -105,7 +105,7 @@ value="{{ isset($proveedor_domicilio_fiscal->barrio) ? $proveedor_domicilio_fisc
                 <br>
 
                 <label for="cp_fiscal">Código Postal:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="cp_fiscal" name="cp_fiscal" placeholder="Ingrese el código postal" @if ( $mode == "show") readonly @endif maxlength="4"
+                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_fiscal" name="cp_fiscal" placeholder="Ingrese el código postal" @if ( $mode == "show") readonly @endif maxlength="8"
 value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicilio_fiscal->codigo_postal : '' }}"><br>
                 <br>
 
@@ -179,7 +179,7 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
         //Nuevo campo html (agregar un nuevo correo)
         var fieldHTML_email_fiscal = '<div>'+
                                     '<label for="email_fiscal">Correo electrónico:</label><br>'+
-                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" maxlength="30">'+
+                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" maxlength="50">'+
                                     '<a href="javascript:void(0);" class="remove_email_fiscal" title="Elimine el correo"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                     '<br>'+
                                     '<br>'+

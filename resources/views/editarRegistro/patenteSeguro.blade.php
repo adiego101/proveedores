@@ -12,9 +12,6 @@ value="0">
 <label for="vehiculos_afectados">Posee vehículos afectados a la actividad económica que desarrolla</label><br>
 <br>
 
-<!-- SE DEBEN ELIMINAR LOS ATRIBUTOS NAME DE CADA CAMPO Y SOLO DEJARLOS EN EL APPEND JS, PORQUE SINO AL ENVIAR LOS DATOS A LA BD SE ALMACENA SIEMPRE UN VALOR NULO AL PRINCIPIO. -->
-
-
 <br>
 @if ($mode == "edit")
 
@@ -29,10 +26,10 @@ value="0">
         <thead>
             <tr>
                 <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Dominio</th>
-                    <th>Inscripto en</th>
-                    <th>Acciones</th>
+                <th>Modelo</th>
+                <th>Dominio</th>
+                <th>Inscripto en</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -66,7 +63,7 @@ value="0">
     <table style="width:100%" class="yajra-seguros table table-hover  table-striped table-condensed">
         <thead>
             <tr>
-                <th>Poliza</th>
+                <th>Póliza</th>
                 <th>Agencia</th>
                 <th>Asegurado</th>
                 <th>Vigencia hasta</th>

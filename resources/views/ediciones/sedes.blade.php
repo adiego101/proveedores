@@ -23,7 +23,7 @@
 <br/>
 
 <label for="Domicilio">Domicilio:</label><br />
-<input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($sede->Domicilio) ? $sede->Domicilio : '' }}" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="20"/><br />
+<input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($sede->Domicilio) ? $sede->Domicilio : '' }}" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="50"/><br />
 
 <div class="row">
         <div class="col-sm">
@@ -77,18 +77,20 @@
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
-
         <button type="submit" name="guardarSede" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
-
     </div>
 </div>
+
 </form>
+
 @else
+
 <a class="btn btn-secondary" style="float: left" href="{{ route('verRegistro', ['id' => $sede->id_proveedor, 'tab' => "patente"]) }}">atras</a>
 
 @endif
 
 @push('js')
+
 <script type="text/javascript">
 
 window.onload = function(){
@@ -104,6 +106,7 @@ window.onload = function(){
 </script>
 
 <script type="text/javascript">
+
     function recargarLista(){
         $.ajax({
             type:"GET",
