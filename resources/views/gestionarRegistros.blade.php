@@ -15,9 +15,9 @@
             <thead class="bg-info" align="center">
                 <tr>
                     <th align="center">Nombre de fantasía</th>
-                    <!-- <th>Razón Social</th>-->
+                    <th align="center">Razón Social</th>
                     <th align="center">CUIT</th>
-                    <th align="center">Dada de baja</th>
+                    <!--<th align="center">Dada de baja</th>-->
                     <th align="center">Acciones</th>
                 </tr>
             </thead>
@@ -68,17 +68,41 @@
         serverSide: true,
         ajax: "{{ route('registros.list') }}",
         columns: [
-            {data: 'nombre_fantasia', name: 'nombre_fantasia'},
-           // {data: 'razon_social', name: 'razon_social'},
-            {data: 'cuit', name: 'cuit'},
-            {data: 'dado_de_baja',
+            {data: 'nombre_fantasia', 
+            render: function (data, type, row){
+                
+                if (row['dado_de_baja'] === 0)
+                        return data;
+                    else
+                        return '<div style="color:red;">'+data+'</div>';
+            }
+            },
+            {data: 'razon_social', 
+            render: function (data, type, row){
+                
+                if (row['dado_de_baja'] === 0)
+                        return data;
+                    else
+                        return '<div style="color:red;">'+data+'</div>';
+            }
+            },
+           {data: 'cuit', 
+            render: function (data, type, row){
+                
+                if (row['dado_de_baja'] === 0)
+                        return data;
+                    else
+                        return '<div style="color:red;">'+data+'</div>';
+            }
+            },
+            /*{data: 'dado_de_baja',
             render: function(data){
                     if (data === 0)
                         return 'No';
                     else
                         return '<div style="background-color:yellow;">Si</div>';
                 }
-            },
+            },*/
             {
                 data: 'action',
                 name: 'action',
