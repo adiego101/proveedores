@@ -10,7 +10,7 @@
                 <div class="modal-body">
 
                     <label for="modal_domicilio_sede">Domicilio:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="modal_domicilio_sede" name="modal_domicilio_sede" maxlength="20"/><br />
+                    <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="modal_domicilio_sede" name="modal_domicilio_sede" maxlength="50"/><br />
 
                     <label for="modal_provincia_sede">Provincia:</label><br>
                     <select class="form-control" aria-describedby="basic-addon1" id="modal_provincia_sede" name="modal_provincia_sede">
@@ -99,4 +99,3 @@
 </script>
 
 @endpush
-
