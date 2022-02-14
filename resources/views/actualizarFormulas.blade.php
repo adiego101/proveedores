@@ -183,6 +183,16 @@
             comodin_formulas = false;
             texto_formulas ="El rango del índice local inicial NO puede ser mayor o igual al rango del índice local final";
         }
+        else if (foraneo_final  >= intermedio_inicial) 
+        {
+            comodin_formulas = false;
+            texto_formulas ="El rango del índice foráneo final NO puede ser mayor o igual al rango del índice intermedio inicial";
+        }
+        else if (intermedio_final  >= local_inicial) 
+        {
+            comodin_formulas = false;
+            texto_formulas ="El rango del índice intermedio final NO puede ser mayor o igual al rango del índice local inicial";
+        }
 
 
         if (!comodin_formulas)
