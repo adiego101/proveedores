@@ -11,11 +11,11 @@ use App\Models\Ponderacion_compre_local;
 use App\Models\Producto;
 use App\Models\Provincia;
 use App\Models\Tipo_actividad;
+use App\Models\Sector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-use App\Exports\ProveedoresExport;
-use Maatwebsite\Excel\Facades\Excel;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -150,6 +150,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/excel', function () {
         /*ini_set('memory_limit','1024M');
         set_time_limit(0);*/
-        return Excel::download(new ProveedoresExport, 'proveedores.xlsx');
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $sectores = Sector::all();
+        $actividades_economicas=Actividad_economica::all();
+        return view('exportarExcel',compact('paises','provincias','sectores','actividades_economicas'));
     });
+
+    Route::get('/exportar', 'App\Http\Controllers\ExportController@exportar')->name('exportar');
 });

@@ -272,6 +272,12 @@ return [
             'icon' => 'fas fa-fw fa-building',
             'label_color' => 'success',
         ],
+        [
+            'text' => 'Descargar Excel',
+            'url' => '/excel',
+            'icon' => 'fas fa-fw fa-download',
+            'label_color' => 'success',
+        ],
 
         [
             'text' => 'Cambiar Contraseña',
@@ -309,8 +315,9 @@ return [
         ],
 
         ],
+        
     ],
-
+    
     ],
 
     /*
