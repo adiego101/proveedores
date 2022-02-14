@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-//use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Log;
 
 class Proveedor extends Model
 {
@@ -101,8 +103,61 @@ class Proveedor extends Model
     public function domicilios(){
        return $this->hasMany(Proveedor_domicilio::class,'id_proveedor');
     }
+
+    public function domicilio_real(){
+        return $this->hasOne(Proveedor_domicilio::class,'id_proveedor')
+                    ->with(['localidad','localidad.provincia','localidad.provincia.pais'])
+                    ->where('tipo_domicilio', '=', 'real');
+    }
+
+    public function domicilio_legal(){
+        return $this->hasOne(Proveedor_domicilio::class,'id_proveedor')
+                    ->with(['localidad','localidad.provincia','localidad.provincia.pais'])
+                    ->where('tipo_domicilio', '=', 'legal');
+    }
+
+    public function domicilio_fiscal(){
+        return $this->hasOne(Proveedor_domicilio::class,'id_proveedor')
+                    ->with(['localidad','localidad.provincia','localidad.provincia.pais'])
+                    ->where('tipo_domicilio', '=', 'fiscal');
+    }
+
+    /*public function domicilios_real(){
+        DB::connection()->enableQueryLog();
+        $domicilios_real = $this ->select('id_proveedor')
+                                ->with(['domicilios:id_proveedor,tipo_domicilio,nro_orden_domicilio,calle,numero,lote,entre_calles,monoblock,dpto,puerta,oficina,manzana,barrio,codigo_postal',
+                                        'domicilios.localidad:id_localidad,codigo_localidad,nombre_localidad,nombre_departamento',
+                                        'domicilios.localidad.provincia:nombre_provincia',
+                                        'domicilios.localidad.provincia.pais:nombre_pais'])
+                                ->whereHas('domicilios', function (Builder $query) {
+                                    $query  ->where('tipo_domicilio', '=', 'real')
+                                            ->where('id_proveedor','=',$this->id_proveedor);
+                                })
+                                ->get();
+        $this   ->domicilios 
+                ->where('tipo_domicilio', '=', 'real');
+        $queries = DB::getQueryLog();
+        Log::info($queries);
+        return; //$domicilios_real;
+    }*/
+
     public function telefonos(){
         return $this->hasMany(Proveedor_telefono::class, 'id_proveedor');
+    }
+
+    public function telefonos_real(){
+        return $this->hasMany(Proveedor_telefono::class,'id_proveedor')
+                    ->where('tipo_telefono', '=', 'real');
+    }
+
+    public function telefonos_legal(){
+        return $this->hasMany(Proveedor_telefono::class,'id_proveedor')
+                    ->where('tipo_telefono', '=', 'legal');
+    }
+
+    public function telefonos_fiscal(){
+        return $this->hasMany(Proveedor_telefono::class,'id_proveedor')
+                    ->where('tipo_telefono', '=', 'fiscal');
     }
 
     public function personas(){
@@ -124,41 +179,89 @@ class Proveedor extends Model
         return $this->belongsToMany(Tipo_actividad::class, 'actividades_proveedores', 'id_proveedor', 'id_tipo_actividad');
     }
 
-    public function actividades_primarias(){
-        $collection = new Collection();
-        $actividades = $this->actividades_economicas;
-        foreach($actividades as $actividad)
-            foreach($actividad->tipos_actividades as $tipo_actividad)
-                if($tipo_actividad->desc_tipo_actividad=='Primaria')
-                    $collection->add($actividad);
-        return $collection;
+    /*public function actividades_primarias(){
+        Log::info('proveedor => '.$this->id_proveedor);
+        $actividades_primarias = $this  ->select('id_proveedor')
+                                        ->with(['actividades_economicas:cod_actividad,desc_actividad,descl_actividad,agrupamiento','actividades_economicas.sector'])
+                                        //->with(['actividades_economicas','actividades_economicas.sector'])
+                                        ->whereHas('tipos_actividades', function (Builder $query) {
+                                            $query  ->where('desc_tipo_actividad', '=', 'Primaria')
+                                                    ->where('id_proveedor','=',$this->id_proveedor);
+                                        })
+                                        ->get();
+        return $actividades_primarias;
     }
-
     public function actividades_secundarias(){
-        $collection = new Collection();
-        $actividades = $this->actividades_economicas;
-        foreach($actividades as $actividad)
-            foreach($actividad->tipos_actividades as $tipo_actividad)
-                if($tipo_actividad->desc_tipo_actividad=='Secundaria')
-                    $collection->add($actividad);
-        return $collection;
+        Log::info('proveedor => '.$this->id_proveedor);
+        $actividades_secundarias = $this  ->select('id_proveedor')
+                                        ->with(['actividades_economicas:cod_actividad,desc_actividad,descl_actividad,agrupamiento','actividades_economicas.sector'])
+                                        //->with(['actividades_economicas','actividades_economicas.sector'])
+                                        ->whereHas('tipos_actividades', function (Builder $query) {
+                                            $query  ->where('desc_tipo_actividad', '=', 'Secundaria')
+                                                    ->where('id_proveedor','=',$this->id_proveedor);
+                                        })
+                                        ->get();
+        return $actividades_secundarias;
     }
 
     public function otras_actividades(){
-        $collection = new Collection();
-        $actividades = $this->actividades_economicas;
-        foreach($actividades as $actividad)
-            foreach($actividad->tipos_actividades as $tipo_actividad)
-                if($tipo_actividad->desc_tipo_actividad!='Primaria' && $tipo_actividad->desc_tipo_actividad!='Secundaria')
-                    $collection->add($actividad);
-        return $collection;
+        Log::info('proveedor => '.$this->id_proveedor);
+        $otras_actividades = $this  ->select('id_proveedor')
+                                        ->with(['actividades_economicas:cod_actividad,desc_actividad,descl_actividad,agrupamiento','actividades_economicas.sector'])
+                                        //->with(['actividades_economicas','actividades_economicas.sector'])
+                                        ->whereHas('tipos_actividades', function (Builder $query) {
+                                            $query  ->where('desc_tipo_actividad', '<>', 'Primaria')
+                                                    ->where('desc_tipo_actividad', '<>', 'Secundaria')
+                                                    ->where('id_proveedor','=',$this->id_proveedor);
+                                        })
+                                        ->get();
+        return $otras_actividades;
+    }
+*/
+
+    public function actividades_primarias(){
+        return $this->belongsToMany(Actividad_economica::class, 'actividades_proveedores', 'id_proveedor', 'id_actividad_economica')
+                    ->whereHas('tipos_actividades', function ($query) {
+                        $query->where('desc_tipo_actividad', '=', 'Primaria');
+                    })
+                    ->with('sector');
+    }
+    
+    public function actividades_secundarias(){
+        return $this->belongsToMany(Actividad_economica::class, 'actividades_proveedores', 'id_proveedor', 'id_actividad_economica')
+                    ->whereHas('tipos_actividades', function ($query) {
+                        $query->where('desc_tipo_actividad', '=', 'Secundaria');
+                    })
+                    ->with('sector');
+    }
+
+    public function otras_actividades(){
+        return $this->belongsToMany(Actividad_economica::class, 'actividades_proveedores', 'id_proveedor', 'id_actividad_economica')
+                    ->whereHas('tipos_actividades', function ($query) {
+                        $query  ->where('desc_tipo_actividad', '<>', 'Primaria')
+                                ->where('desc_tipo_actividad', '<>', 'Secundaria');
+                    })
+                    ->with('sector');
     }
 
     public function emails(){
         return $this->hasMany(Proveedor_email::class, 'id_proveedor');
     }
 
+    public function emails_real(){
+        return $this->hasMany(Proveedor_email::class,'id_proveedor')
+                    ->where('tipo_email', '=', 'real');
+    }
 
+    public function emails_legal(){
+        return $this->hasMany(Proveedor_email::class,'id_proveedor')
+                    ->where('tipo_email', '=', 'legal');
+    }
+
+    public function emails_fiscal(){
+        return $this->hasMany(Proveedor_email::class,'id_proveedor')
+                    ->where('tipo_email', '=', 'fiscal');
+    }
 
     public function sucursales(){
         return $this->hasMany(Sucursal::class, 'id_proveedor', 'id_proveedor');
