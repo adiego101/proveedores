@@ -247,6 +247,8 @@
                 '</tr>'
             );*/
 
+        if(nombre_sucursal.length != 0){
+
             $("#body_table_sucursal").append(
                 '<tr id="row_sucursal' + i_sucursal +'">'+
                     '<td> <div id="nombre_sucursal_text' + i_sucursal +'">' + nombre_sucursal +'</div></td>'+
@@ -295,7 +297,12 @@
             document.getElementById("codigo_postal_sucursal").value = "";
             document.getElementById("email_sucursal").value = "";
             document.getElementById("telefono_sucursal").value = "";
+        
+        } else {
 
+            /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
+            window.alert("El nombre de la sucursal NO puede estar vacio");
+        }
             /*if(error_encontrado){
             $('#errors').focus();
             return false;
