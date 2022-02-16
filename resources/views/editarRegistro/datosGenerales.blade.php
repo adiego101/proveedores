@@ -20,8 +20,8 @@ value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="11"><br
     <hr>
     <!--FALTA VALIDAR -->
     <br>
-
-    <label for="representante_legal">Representante Legal:</label><br>
+    <label for="representante_legal">Representante Legal:
+    </label><br>
     <input type="text" class="form-control" placeholder="Ingrese el nombre completo del representante legal" aria-describedby="basic-addon1" id="representante_legal" @if ( $mode == "show") readonly @endif
 value="{{ isset($persona->nombre_persona) ? $persona->nombre_persona : '' }}" maxlength="50" name="representante_legal"><br>
 
@@ -32,7 +32,7 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
     <br>
 
     <label for="observaciones">Observaciones:</label><br>
-    <textarea id="observaciones"  name="representante_legal" @if ( $mode == "show") readonly @endif name="observaciones" class="form-control" placeholder="Ingrese las observaciones que considere necesarias" maxlength="200">{{ isset($proveedor->observaciones) ? $proveedor->observaciones : '' }}</textarea>
+    <textarea id="observaciones"   @if ( $mode == "show") readonly @endif name="observaciones" class="form-control" placeholder="Ingrese las observaciones que considere necesarias" maxlength="200">{{ isset($proveedor->observaciones) ? $proveedor->observaciones : '' }}</textarea>
     <br>
     <br>
 
@@ -40,5 +40,5 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
         <div class="col-6 col-sm-auto" id="btnNext">
         <a class="btn btn-primary btnNext">Siguiente</a>
     </div>
-    
+
 </fieldset>

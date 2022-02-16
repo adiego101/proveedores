@@ -67,7 +67,7 @@ class ProveedoresController extends Controller
         //return $dado_de_baja->isEmpty();
         //return empty($dado_de_baja);
         //return $cuit;
-        if (!$cuit || $dado_de_baja->isEmpty()) {
+        if (!$cuit /*|| $dado_de_baja->isEmpty()*/) {
 
             $id_tamanio_empresa = $request->id_tamanio_empresa;
 
@@ -455,10 +455,18 @@ class ProveedoresController extends Controller
                 }
             }
 
-            return redirect()->back()->with('message', 'Registro Creado Correctamente');
+            return redirect()->back()->with('message', 'Registro creado correctamente');
         } else {
-            return Redirect::back()
-                ->withErrors(['El Cuil Ingresado ya existe, la operación no pudo completarse']);}
+
+            $proveedor = Proveedor::where('cuit', $request->cuit)->first();
+
+            return redirect()->route('modificarRegistro',['id' =>$proveedor->id_proveedor ]);
+           //$this->obtenerProveedorRupaeId();
+
+            /*return Redirect::back()
+                ->withErrors(['El CUIT ingresado ya existe, la operación no pudo completarse']);
+*/
+            }
         //}
         /*catch (\Exception $e)
     {
@@ -490,6 +498,8 @@ class ProveedoresController extends Controller
                     else
                     {
                         $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a>';
+
+                        /*$actionBtn = '<a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a>';*/
                     }
 
                     return $actionBtn;
@@ -1620,22 +1630,138 @@ class ProveedoresController extends Controller
 
     public function editarProveedor($id, Request $request)
     {
-        $proveedor = Proveedor::findOrFail($id)->with('sucursales')->get();
+        $proveedor = Proveedor::find($id);
+
         $persona = $proveedor->personas()->get();
-        $persona = $persona[0];
+
+        if ($persona->isEmpty()) {
+
+            if($request->dni_legal || $request->representante_legal){
+            $persona = Persona::create([
+                'dni_persona' => $request->dni_legal,
+                //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                'nombre_persona' => $request->representante_legal,
+                //'apellido_persona'=>$proveedores_rupae->apellido_persona,
+                //'genero_persona'=>$proveedores_rupae->genero_persona,
+            ]);
+            $persona->save();
+            $proveedor->personas()->attach($persona);
+
+            //$persona =  "";
+            }
+            else{
+                $persona = "";
+            }
+        }
+        else{
+            $persona = $proveedor->personas()->first();
+            $persona->update([
+                'dni_persona' => $request->dni_legal,
+                //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                'nombre_persona' => $request->representante_legal,
+                //'apellido_persona'=>$proveedores_rupae->apellido_persona,
+                //'genero_persona'=>$proveedores_rupae->genero_persona,
+            ]);
+            $persona->save();
+
+        }
+        $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
+        ->get();
+        if ($proveedor_domicilio_real->isEmpty()) {
+
+            if($request->input('calle_real')){
+                $proveedor_domicilio_real = Proveedor_domicilio::create([
+                    'tipo_domicilio' => 'real',
+                    //'nro_orden_domicilio',
+                    'calle' => $request->input('calle_real'),
+                    'id_proveedor' => $proveedores_rupae->id_proveedor,
+                    'numero' => $request->input('numero_real'),
+                    'dpto' => $request->input('dpto_real'),
+                    'puerta' => $request->input('puerta_real'),
+                    'lote' => $request->input('lote_real'),
+                    'manzana' => $request->input('manzana_real'),
+                    'entre_calles' => $request->input('entreCalles_real'),
+                    'oficina' => $request->input('oficina_real'),
+                    'monoblock' => $request->input('monoblock_real'),
+                    'barrio' => $request->input('barrio_real'),
+                    'id_localidad' => $request->input('localidad_real'),
+                    'codigo_postal' => $request->input('cp_real'),
+                ]);
+                $proveedor_domicilio_real->save();
+            }
+            else{
+                $proveedor_domicilio_real = "";
+            }
+        }
+        else{
+            $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
+            ->first();
+
+            $proveedor_domicilio_real->update([
+                'tipo_domicilio' => 'real',
+                //'nro_orden_domicilio',
+                'calle' => $request->input('calle_real'),
+                'id_proveedor' => $proveedor->id_proveedor,
+                'numero' => $request->input('numero_real'),
+                'dpto' => $request->input('dpto_real'),
+                'puerta' => $request->input('puerta_real'),
+                'lote' => $request->input('lote_real'),
+                'manzana' => $request->input('manzana_real'),
+                'entre_calles' => $request->input('entreCalles_real'),
+                'oficina' => $request->input('oficina_real'),
+                'monoblock' => $request->input('monoblock_real'),
+                'barrio' => $request->input('barrio_real'),
+                'id_localidad' => $request->input('localidad_real'),
+                'codigo_postal' => $request->input('cp_real'),
+            ]);
+            $proveedor_domicilio_real->save();
+
+        }
+
 
         $proveedor_email = DB::table('proveedores_emails')
             ->where('id_proveedor', $id)
             ->first();
 
-        $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
-            ->first();
+            //----------------------------------Carga Domicilio Real---------------------------------------------
 
-        $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
-            ->first();
 
-        $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
-            ->first();
+            //---------Contador de Telefono_Real----------
+/*
+            $arraySize = count($request->telefono_real);
+
+            for ($i = 0; $i < $arraySize; $i++) {
+                //---------Carga de Telefonos_Real----------
+
+                $telefono_real = Proveedor_telefono::create([
+                    'nro_tel' => $request->telefono_real[$i],
+                    'id_proveedor' => $proveedores_rupae->id_proveedor,
+                    //'cod_area_tel' =>,
+                    //'tipo_medio'=>,
+                    //'desc_telefono'=>,
+                    'tipo_telefono' => 'real',
+                    //'nro_orden_telefono'=>,
+                ]);
+                $telefono_real->save();
+            }
+
+            //---------Contador de Email_Real----------
+
+            $arraySize = count($request->email_real);
+
+            for ($i = 0; $i < $arraySize; $i++) {
+                //---------Carga de Email_Real----------
+
+                $email_real = Proveedor_email::create([
+                    'email' => $request->email_real[$i],
+                    'id_proveedor' => $proveedores_rupae->id_proveedor,
+                    'tipo_email' => 'real',
+                ]);
+                $email_real->save();
+            }
+*/
+
+
 
         $proveedores_rupae = Proveedor::find($id);
         //return response()->json($proveedores_rupae);
