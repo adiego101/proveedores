@@ -144,26 +144,59 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
         var addTelefono_fiscal = $('.add_telefono_fiscal');
         var wrapper_telefono_fiscal = $('.field_telefono_fiscal');
+        var x = 1; //Contador inicial, comienza en 1
 
+        $(addTelefono_fiscal).click(function() {
 
-        //Nuevo campo html (agregar un nuevo teléfono)
-        var fieldHTML_telefono_fiscal = '<div>'+
+            //Nuevo campo html (agregar un nuevo teléfono)
+            var fieldHTML_telefono_fiscal = '<div>'+
                                  '<br>'+
-                                    '<label for="telefono_fiscal">Teléfono:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14">'+
+                                    '<label for="telefono_fiscal' + x +'">Teléfono:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal' + x +'" name="telefono_fiscal[]" maxlength="14">'+
                                     '<a href="javascript:void(0);" class="remove_telefono_fiscal" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                  '<br>'+
                                 '</div>';
 
 
-        var x = 1; //Contador inicial, comienza en 1
+            if(x == 1){
+                
+                //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
+                let tel_fiscal = document.getElementById('telefono_fiscal').value;
 
-        $(addTelefono_fiscal).click(function() {
-            if (x < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
-                x++; //Incrementa el contador en 1
-                $(wrapper_telefono_fiscal).append(fieldHTML_telefono_fiscal); // Agrega un nuevo campo html (telefono)
+                //Si el campo teléfono no se encuentra vacío, permite agregar un segundo campo.
+                if (tel_fiscal.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (x < maxField) { 
+
+                        x++; //Incrementa el contador en 1
+
+                        $(wrapper_telefono_fiscal).append(fieldHTML_telefono_fiscal); // Agrega un nuevo campo html (telefono)
+                    }
+                }
+
+            } else {
+                
+                var y = x - 1;
+
+                //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
+                var tel_fiscal_dinamico = document.getElementById('telefono_fiscal' + y).value;
+              
+                //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
+                if (tel_fiscal_dinamico.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (x < maxField) { 
+
+                        x++; //Incrementa el contador en 1
+                        
+                        $(wrapper_telefono_fiscal).append(fieldHTML_telefono_fiscal); // Agrega un nuevo campo html (telefono)
+                    }
+                }
             }
+
         });
+
 
         $(wrapper_telefono_fiscal).on('click', '.remove_telefono_fiscal', function(e) {
             e.preventDefault();
@@ -175,11 +208,14 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
 
         var addEmail_fiscal = $('.add_email_fiscal');
         var wrapper_email_fiscal = $('.field_email_fiscal');
+        var i = 1; //Contador inicial, comienza en 1
 
-        //Nuevo campo html (agregar un nuevo correo)
-        var fieldHTML_email_fiscal = '<div>'+
-                                    '<label for="email_fiscal">Correo electrónico:</label><br>'+
-                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal" name="email_fiscal[]" maxlength="50">'+
+        $(addEmail_fiscal).click(function() {
+
+            //Nuevo campo html (agregar un nuevo correo)
+            var fieldHTML_email_fiscal = '<div>'+
+                                    '<label for="email_fiscal' + i +'">Correo electrónico:</label><br>'+
+                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_fiscal' + i +'" name="email_fiscal[]" maxlength="50">'+
                                     '<a href="javascript:void(0);" class="remove_email_fiscal" title="Elimine el correo"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                     '<br>'+
                                     '<br>'+
@@ -187,21 +223,54 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
 
 
 
-        var i = 1; //Contador inicial, comienza en 1
+            if(i == 1){
 
-        $(addEmail_fiscal).click(function() {
-            if (i < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
-                i++; //Incrementa el contador en 1
-                $(wrapper_email_fiscal).append(fieldHTML_email_fiscal); // Agrega un nuevo campo html (correo)
+                //Obtenemos el valor del campo, al clickear el botón Agregar Correo
+                let email_fiscal = document.getElementById('email_fiscal').value;
+
+                //Si el campo email no se encuentra vacío, permite agregar un segundo campo.
+                if (email_fiscal.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (i < maxField) { 
+
+                        i++; //Incrementa el contador en 1
+
+                        $(wrapper_email_fiscal).append(fieldHTML_email_fiscal); // Agrega un nuevo campo html (correo)
+                    }
+                }
+
+            } else {
+
+                var y = i - 1;
+
+                //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Correo
+                var email_fiscal_dinamico = document.getElementById('email_fiscal' + y).value;
+
+                //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
+                if (email_fiscal_dinamico.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (i < maxField) { 
+
+                        i++; //Incrementa el contador en 1
+                        
+                        $(wrapper_email_fiscal).append(fieldHTML_email_fiscal); // Agrega un nuevo campo html (correo)
+                    }
+                }
             }
+
         });
+
 
         $(wrapper_email_fiscal).on('click', '.remove_email_fiscal', function(e) {
             e.preventDefault();
             $(this).parent('div').remove(); //Remueve un campo html (correo)
             i--; //Decrementa el contador en 1
         });
+
     });
+    
 </script>
 
 <script type="text/javascript">

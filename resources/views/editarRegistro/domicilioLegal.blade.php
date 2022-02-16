@@ -142,26 +142,61 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
         var addTelefono_legal = $('.add_telefono_legal');
         var wrapper_telefono_legal = $('.field_telefono_legal');
+        var x = 1; //Contador inicial, comienza en 1
 
+        $(addTelefono_legal).click(function() {
 
-        //Nuevo campo html (agregar un nuevo teléfono)
-        var fieldHTML_telefono_legal = '<div>'+
+            //Nuevo campo html (agregar un nuevo teléfono)
+            var fieldHTML_telefono_legal = '<div>'+
                                  '<br>'+
-                                    '<label for="telefono_legal">Teléfono:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14">'+
+                                    '<label for="telefono_legal' + x +'">Teléfono:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal' + x +'" name="telefono_legal[]" maxlength="14">'+
                                     '<a href="javascript:void(0);" class="remove_telefono_legal" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                  '<br>'+
                                 '</div>';
 
 
-        var x = 1; //Contador inicial, comienza en 1
 
-        $(addTelefono_legal).click(function() {
-            if (x < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
-                x++; //Incrementa el contador en 1
-                $(wrapper_telefono_legal).append(fieldHTML_telefono_legal); // Agrega un nuevo campo html (telefono)
+            if(x == 1){
+                
+                //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
+                let tel_legal = document.getElementById('telefono_legal').value;
+
+                //Si el campo teléfono no se encuentra vacío, permite agregar un segundo campo.
+                if (tel_legal.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (x < maxField) { 
+
+                        x++; //Incrementa el contador en 1
+
+                        $(wrapper_telefono_legal).append(fieldHTML_telefono_legal); // Agrega un nuevo campo html (telefono)
+                    }
+                }
+
+            } else {
+                
+                var y = x - 1;
+
+                //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
+                var tel_legal_dinamico = document.getElementById('telefono_legal' + y).value;
+              
+                //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
+                if (tel_legal_dinamico.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (x < maxField) { 
+
+                        x++; //Incrementa el contador en 1
+                        
+                        $(wrapper_telefono_legal).append(fieldHTML_telefono_legal); // Agrega un nuevo campo html (telefono)
+                    }
+                }
             }
+           
         });
+
+
         $(wrapper_telefono_legal).on('click', '.remove_telefono_legal', function(e) {
             e.preventDefault();
             $(this).parent('div').remove(); //Remueve un campo html (telefono)
@@ -172,31 +207,68 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
 
         var addEmail_legal = $('.add_email_legal');
         var wrapper_email_legal = $('.field_email_legal');
+        var i = 1; //Contador inicial, comienza en 1
 
-        //Nuevo campo html (agregar un nuevo correo)
-        var fieldHTML_email_legal = '<div>'+
-                                    '<label for="email_legal">Correo electrónico:</label><br>'+
-                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_legal" name="email_legal[]" maxlength="50">'+
+        $(addEmail_legal).click(function() {
+
+            //Nuevo campo html (agregar un nuevo correo)
+            var fieldHTML_email_legal = '<div>'+
+                                    '<label for="email_legal' + i +'">Correo electrónico:</label><br>'+
+                                    '<input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_legal' + i +'" name="email_legal[]" maxlength="50">'+
                                     '<a href="javascript:void(0);" class="remove_email_legal" title="Elimine el correo"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                     '<br>'+
                                     '<br>'+
                                 '</div>';
 
 
-        var i = 1; //Contador inicial, comienza en 1
+            if(i == 1){
 
-        $(addEmail_legal).click(function() {
-            if (i < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
-                i++; //Incrementa el contador en 1
-                $(wrapper_email_legal).append(fieldHTML_email_legal); // Agrega un nuevo campo html (correo)
+                //Obtenemos el valor del campo, al clickear el botón Agregar Correo
+                let email_legal = document.getElementById('email_legal').value;
+
+                //Si el campo email no se encuentra vacío, permite agregar un segundo campo.
+                if (email_legal.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (i < maxField) { 
+
+                        i++; //Incrementa el contador en 1
+
+                        $(wrapper_email_legal).append(fieldHTML_email_legal); // Agrega un nuevo campo html (correo)
+                    }
+                }
+
+            } else {
+
+                var y = i - 1;
+
+                //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Correo
+                var email_legal_dinamico = document.getElementById('email_legal' + y).value;
+
+                //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
+                if (email_legal_dinamico.length != 0){
+
+                    //Verifica el numero maximo de campos a agregar, con el limite establecido
+                    if (i < maxField) { 
+
+                        i++; //Incrementa el contador en 1
+                        
+                        $(wrapper_email_legal).append(fieldHTML_email_legal); // Agrega un nuevo campo html (correo)
+                    }
+                }
             }
+
         });
+
+
         $(wrapper_email_legal).on('click', '.remove_email_legal', function(e) {
             e.preventDefault();
             $(this).parent('div').remove(); //Remueve un campo html (correo)
             i--; //Decrementa el contador en 1
         });
+
     });
+
 </script>
 
 
