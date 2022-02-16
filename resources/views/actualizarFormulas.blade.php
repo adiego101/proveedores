@@ -168,27 +168,35 @@
         let local_inicial = document.getElementById('local_inicial').value;
         let local_final = document.getElementById('local_final').value;
 
-        if (foraneo_inicial  >= foraneo_final) 
+        //Transformamos los valores obtenidos a numeros enteros (Casting)
+        let foraneo_inicial_entero = parseInt(foraneo_inicial);
+        let foraneo_final_entero = parseInt(foraneo_final);
+        let intermedio_inicial_entero = parseInt(intermedio_inicial);
+        let intermedio_final_entero = parseInt(intermedio_final);
+        let local_inicial_entero = parseInt(local_inicial);
+        let local_final_entero = parseInt(local_final);
+
+        if (foraneo_inicial_entero  >= foraneo_final_entero) 
         {
             comodin_formulas = false;
             texto_formulas = "El rango del índice foráneo inicial NO puede ser mayor o igual al rango del índice foráneo final";
         }
-        else if (intermedio_inicial  >= intermedio_final) 
+        else if (intermedio_inicial_entero  >= intermedio_final_entero) 
         {
             comodin_formulas = false;
             texto_formulas ="El rango del índice intermedio inicial NO puede ser mayor o igual al rango del índice intermedio final";
         } 
-        else if (local_inicial  >= local_final && local_final != 100) 
+        else if (local_inicial_entero  >= local_final_entero) 
         {
             comodin_formulas = false;
             texto_formulas ="El rango del índice local inicial NO puede ser mayor o igual al rango del índice local final";
         }
-        else if (foraneo_final  >= intermedio_inicial) 
+        else if (foraneo_final_entero  >= intermedio_inicial_entero) 
         {
             comodin_formulas = false;
             texto_formulas ="El rango del índice foráneo final NO puede ser mayor o igual al rango del índice intermedio inicial";
         }
-        else if (intermedio_final  >= local_inicial) 
+        else if (intermedio_final_entero  >= local_inicial_entero) 
         {
             comodin_formulas = false;
             texto_formulas ="El rango del índice intermedio final NO puede ser mayor o igual al rango del índice local inicial";
@@ -200,9 +208,10 @@
             //Desplegamos el modal
             $('#modal_validar_formulario_formulas').modal('show');
 
-            //Enviamos los valores recuperados anteriormente a los inputs del modal
+            //Enviamos los valores recuperados anteriormente al input del modal
             $('#modal_aviso_formulas').text(texto_formulas);
         }
+
 
         if (comodin_formulas)
         {
