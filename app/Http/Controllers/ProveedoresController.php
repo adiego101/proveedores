@@ -1800,7 +1800,7 @@ class ProveedoresController extends Controller
                 $email_real = Proveedor_email::where('id_proveedor_email', $j->id_proveedor_email)->first();
 
                 $email_real->update([
-                    'email' => $request->email_real[$i]
+                    'email' => $request->email_real[$i],
                 ]);
                 $email_real->save();
                 $i++;
@@ -1926,7 +1926,7 @@ class ProveedoresController extends Controller
                 $telefono_legal = Proveedor_telefono::where('id_proveedor_telefono', $k->id_proveedor_telefono)->first();
 
                 $telefono_legal->update([
-                    'nro_tel' => $request->telefono_legal[$i]
+                    'nro_tel' => $request->telefono_legal[$i],
                 ]);
                 $telefono_legal->save();
                 $i++;
@@ -1961,7 +1961,7 @@ class ProveedoresController extends Controller
                 $email_legal = Proveedor_email::where('id_proveedor_email', $j->id_proveedor_email)->first();
 
                 $email_legal->update([
-                    'email' => $request->email_legal[$i]
+                    'email' => $request->email_legal[$i],
                 ]);
                 $email_legal->save();
                 $i++;
@@ -2087,7 +2087,7 @@ class ProveedoresController extends Controller
                 $telefono_fiscal = Proveedor_telefono::where('id_proveedor_telefono', $k->id_proveedor_telefono)->first();
 
                 $telefono_fiscal->update([
-                    'nro_tel' => $request->telefono_fiscal[$i]
+                    'nro_tel' => $request->telefono_fiscal[$i],
                 ]);
                 $telefono_fiscal->save();
                 $i++;
@@ -2122,7 +2122,7 @@ class ProveedoresController extends Controller
                 $email_fiscal = Proveedor_email::where('id_proveedor_email', $j->id_proveedor_email)->first();
 
                 $email_fiscal->update([
-                    'email' => $request->email_fiscal[$i]
+                    'email' => $request->email_fiscal[$i],
                 ]);
                 $email_fiscal->save();
                 $i++;
@@ -2149,9 +2149,80 @@ class ProveedoresController extends Controller
 
             }
 
-        $proveedor_email = DB::table('proveedores_emails')
-            ->where('id_proveedor', $id)
-            ->first();
+            //---------Tipo de Proveedor ----------
+            if (isset($request->prov_provincial)) {
+                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor' ,$proveedor->id_proveedor)->where('id_tipo_proveedor' , '4')->get();
+                if($Proveedores_tipos_proveedores->isEmpty()){
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_tipo_proveedor' => '4',
+                    ]);
+                    $Proveedores_tipos_proveedores->save();
+                }
+            }
+            else{
+                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor' , '4')->get();
+                if(!$Proveedores_tipos_proveedores->isEmpty()){
+                    Proveedores_tipos_proveedores::where('id_proveedor' , $proveedor->id_proveedor)->where('id_tipo_proveedor' , '4')->delete();
+                 }
+
+            }
+
+            if (isset($request->prov_estado)) {
+                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor' ,$proveedor->id_proveedor)->where('id_tipo_proveedor' , '1')->get();
+                if($Proveedores_tipos_proveedores->isEmpty()){
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_tipo_proveedor' => '1',
+                    ]);
+                    $Proveedores_tipos_proveedores->save();
+                }
+            }
+            else{
+                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor' , '1')->get();
+                if(!$Proveedores_tipos_proveedores->isEmpty()){
+                    Proveedores_tipos_proveedores::where('id_proveedor' , $proveedor->id_proveedor)->where('id_tipo_proveedor' , '1')->delete();
+                 }
+
+            }
+
+            if (isset($request->prov_minero)) {
+                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor' ,$proveedor->id_proveedor)->where('id_tipo_proveedor' , '2')->get();
+                if($Proveedores_tipos_proveedores->isEmpty()){
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_tipo_proveedor' => '2',
+                    ]);
+                    $Proveedores_tipos_proveedores->save();
+                }
+            }
+            else{
+                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor' , '2')->get();
+                if(!$Proveedores_tipos_proveedores->isEmpty()){
+                    Proveedores_tipos_proveedores::where('id_proveedor' , $proveedor->id_proveedor)->where('id_tipo_proveedor' , '2')->delete();
+                 }
+
+            }
+
+            if (isset($request->prov_petrolero)) {
+                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor' ,$proveedor->id_proveedor)->where('id_tipo_proveedor' , '3')->get();
+                if($Proveedores_tipos_proveedores->isEmpty()){
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_tipo_proveedor' => '3',
+                    ]);
+                    $Proveedores_tipos_proveedores->save();
+                }
+            }
+            else{
+                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor' , '3')->get();
+                if(!$Proveedores_tipos_proveedores->isEmpty()){
+                    Proveedores_tipos_proveedores::where('id_proveedor' , $proveedor->id_proveedor)->where('id_tipo_proveedor' , '3')->delete();
+                 }
+
+            }
+
+
 
         $proveedores_rupae = Proveedor::find($id);
         //return response()->json($proveedores_rupae);
