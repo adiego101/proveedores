@@ -55,7 +55,12 @@
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
     <!--Incluimos el modal para editar los campos de un pago-->
+
     @include('modales.editarPago')
+
+    <!--Incluimos el modal para validar un pago -->
+
+    @include('modales.validarPago')
 
 </fieldset>
 
@@ -104,7 +109,8 @@
             } else {
 
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
-                window.alert("Los campos NO pueden estar vacios");
+               //Desplegamos el modal
+               $('#modal_validar_pago').modal('show');
             }
 
         });

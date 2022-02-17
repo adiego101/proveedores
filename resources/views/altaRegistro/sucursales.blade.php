@@ -114,6 +114,10 @@
 
     @include('modales.editarSucursal')
 
+    <!--Incluimos el modal para validar una sucursal -->
+
+    @include('modales.validarSucursal')
+
 </fieldset>
 
 
@@ -301,7 +305,8 @@
         } else {
 
             /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
-            window.alert("El nombre de la sucursal NO puede estar vacio");
+            //Desplegamos el modal
+            $('#modal_validar_sucursal').modal('show');
         }
             /*if(error_encontrado){
             $('#errors').focus();

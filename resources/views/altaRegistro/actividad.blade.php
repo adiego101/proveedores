@@ -109,13 +109,17 @@
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
-    <!--Incluimos el modal para mostrar mensaje de aviso -->
+    <!--Incluimos el modal para validar una actividad -->
 
-    @include('modales.avisoActividad')
+    @include('modales.validarActividad')
 
     <!--Incluimos el modal para editar un producto -->
 
     @include('modales.editarProducto')
+
+    <!--Incluimos el modal para validar un producto -->
+
+    @include('modales.validarProducto')
 
 @push('js')
 
@@ -159,7 +163,7 @@
             }else{
           
                 //Desplegamos el modal
-                $('#aviso_actividad').modal('show');
+                $('#modal_validar_actividad').modal('show');
 
             }
         });
@@ -232,7 +236,9 @@ $("#add_producto").on("click", function(e) {
     } else {
 
         /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
-        window.alert("Los campos NO pueden estar vacios");
+        //Desplegamos el modal
+        $('#modal_validar_producto').modal('show');
+
     }
   
 });

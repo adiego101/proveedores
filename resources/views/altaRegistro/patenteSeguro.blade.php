@@ -164,6 +164,16 @@
     @include('modales.editarSede')
 
 
+    <!--Incluimos el modal para validar un vehiculo -->
+    @include('modales.validarVehiculo')
+
+    <!--Incluimos el modal para validar un seguro -->
+    @include('modales.validarSeguro')
+
+    <!--Incluimos el modal para validar una sede -->
+    @include('modales.validarSede')
+
+
     <script type="text/javascript">
 
         let marca;
@@ -209,7 +219,8 @@
             } else {
 
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
-                window.alert("Los campos NO pueden estar vacios");
+                //Desplegamos el modal
+                $('#modal_validar_vehiculo').modal('show');
             }
 
         });
@@ -300,7 +311,8 @@
             } else {
 
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
-                window.alert("Los campos NO pueden estar vacios");
+                //Desplegamos el modal
+                $('#modal_validar_seguro').modal('show');
             }
 
         });
@@ -390,7 +402,8 @@
         } else {
 
             /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
-            window.alert("Los campos NO pueden estar vacios");
+            //Desplegamos el modal
+            $('#modal_validar_sede').modal('show');
         }
 
     });
