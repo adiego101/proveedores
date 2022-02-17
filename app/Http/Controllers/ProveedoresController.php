@@ -2228,7 +2228,7 @@ class ProveedoresController extends Controller
         //return response()->json($proveedores_rupae);
         $proveedores_rupae = $proveedores_rupae->fill($request->all());
         $proveedores_rupae->save();
-        return redirect()->back();
+        return redirect()->back()->withSuccess('Los datos del registro se han modificado satisfactoriamente !');
 
     }
 
