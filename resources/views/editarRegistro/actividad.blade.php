@@ -75,9 +75,10 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
         <a class="btn btn-primary btnNext">Siguiente</a>
     </div>
 </div>
-    <!--Incluimos el modal para mostrar mensaje de aviso -->
 
-    @include('modales.avisoActividad')
+    <!--Incluimos el modal para validar una actividad -->
+
+    @include('modales.validarActividad')
 
     <!--Incluimos el modal para editar un producto -->
 
