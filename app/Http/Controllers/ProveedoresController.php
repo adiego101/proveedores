@@ -1070,7 +1070,7 @@ class ProveedoresController extends Controller
 
             // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
 
-            return redirect()->back()->with('message', 'Patente Creada Correctamente');
+            return redirect()->back()->with('message', 'Vehículo creado correctamente');
     }
 
     public function nuevoPatentes($id)
@@ -1087,7 +1087,7 @@ class ProveedoresController extends Controller
 
         $patente = $patente->fill($request->all());
         $patente->save();
-        return redirect()->back()->with('message', 'Los datos de la Patente fueron modificados correctamente');
+        return redirect()->back()->with('message', 'Los datos del Vehículo fueron modificados correctamente');
 
     }
 
