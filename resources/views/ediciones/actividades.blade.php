@@ -48,12 +48,12 @@
             <select @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="actividad_1" name="actividad_1">
             @forelse($actividades as $actividad2)
             @if ($mode == "create")
-            <option value="{{$actividad2->desc_actividad}}">{{$actividad2->desc_actividad}}</option>
+            <option value="{{$actividad2->desc_actividad}}">{{$actividad2->cod_actividad}} - {{$actividad2->desc_actividad}}</option>
             @else
             @if($actividad2->id_actividad_economica == $actividad->id_actividad_economica)
-                    <option selected="selected" value="{{$actividad2->desc_actividad}}">{{$actividad2->desc_actividad}}</option>
+                    <option selected="selected" value="{{$actividad2->desc_actividad}}">{{$actividad2->cod_actividad}} - {{$actividad2->desc_actividad}}</option>
                 @else
-                    <option value="{{$actividad2->desc_actividad}}">{{$actividad2->desc_actividad}}</option>
+                    <option value="{{$actividad2->desc_actividad}}">{{$actividad2->cod_actividad}} - {{$actividad2->desc_actividad}}</option>
                 @endif
             @endif
 
