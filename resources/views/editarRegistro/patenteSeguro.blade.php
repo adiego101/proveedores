@@ -164,13 +164,11 @@ value="0">
         serverSide: true,
         ajax: "{{ url('patentes/'.$id.'/'.$mode) }}",
         columns: [
-            {data: 'dominio', name: 'dominio'},
             {data: 'marca', name: 'marca'},
             {data: 'modelo', name: 'modelo'},
+            {data: 'dominio', name: 'dominio'},
             {data: 'inscripto_en', name: 'inscripto_en'},
 
-            //{data: 'cuit', name: 'cuit'},
-            //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
             {
                 data: 'action',
                 name: 'action',
