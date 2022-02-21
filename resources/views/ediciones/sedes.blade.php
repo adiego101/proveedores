@@ -23,28 +23,23 @@
 <br/>
 
 <label for="Domicilio">Domicilio:</label><br />
-<input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($sede->Domicilio) ? $sede->Domicilio : '' }}" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="50"/><br />
+<input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($sede->Domicilio) ? $sede->Domicilio : '' }}" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="50" required/><br />
 
 <div class="row">
         <div class="col-sm">
             <label for="provincia_sede">Provincia:</label><br>
-            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="provincia_sede" name="provincia_sede">
-            {{--<option value=" ">Seleccione una provincia</option>--}}
-
+            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="provincia_sede" name="provincia_sede" required>
+            <option value="">Seleccione una provincia</option>
             @forelse($provincias as $provincia)
-            @if (isset($provinciaid))
-            @if ($provincia->id_provincia == $provinciaid)
-            <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-        @else
-            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-        @endif
-
-            @else
-
-            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-            @endif
-
-
+                @if (isset($provinciaid))
+                    @if ($provincia->id_provincia == $provinciaid)
+                        <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @else
+                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @endif
+                @else
+                    <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                @endif
             @empty
                 <option value=" "></option>
             @endforelse
@@ -54,8 +49,8 @@
 
         <div class="col-sm">
             <label for="Localidad">Localidad:</label><br>
-            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad">
-                <option value=" ">Seleccione una localidad</option>
+            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad" required>
+                <option value="">Seleccione una localidad</option>
             </select>
             <br>
 
