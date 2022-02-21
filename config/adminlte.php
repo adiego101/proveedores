@@ -231,6 +231,13 @@ return [
 
         ['header' => 'Funciones Principales'],
 
+        [
+            'text' => 'Nuevo Registro Cuit',
+            'url' => '/nuevoRegistroCuit',
+            'icon' => 'fas fa-fw fa-plus-circle',
+            'label_color' => 'success',
+        ],
+
 
         [
             'text' => 'Nuevo Registro',
@@ -315,9 +322,9 @@ return [
         ],
 
         ],
-        
+
     ],
-    
+
     ],
 
     /*
