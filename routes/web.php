@@ -50,7 +50,17 @@ Route::group(['middleware' => ['auth']], function () {
         $ponderaciones = Ponderacion_compre_local::All();
         $jerarquias = Jerarquia_compre_local::All();
         return view('nuevoRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones', 'jerarquias'));
-    });
+    })->name('nuevoRegistro');
+
+
+
+    Route::get('/nuevoRegistroCuit', function () {
+
+        return view('nuevoRegistroCuit');
+    })->name('nuevoRegistroCuit');
+
+
+
 
     Route::get('/gestionarRegistros', function () {
         return view('gestionarRegistros');
@@ -65,6 +75,8 @@ Route::group(['middleware' => ['auth']], function () {
         $jerarquias = Jerarquia_compre_local::All();
         return view('actualizarFormulas', compact('ponderaciones', 'jerarquias'));
     });
+
+    Route::post('/crear_registro_cuit', [ProveedoresController::class, 'crear_registro_cuit'])->name('crear_registro_cuit');
 
     Route::post('/actualizar_formulas', [ProveedoresController::class, 'actualizar_formulas'])->name('actualizar_formulas');
 

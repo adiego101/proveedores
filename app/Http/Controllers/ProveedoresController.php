@@ -57,6 +57,28 @@ class ProveedoresController extends Controller
 
     }
 
+    public function crear_registro_cuit(Request $request)
+    {
+
+        //try{
+        $cuit = Proveedor::where('cuit', $request->cuit)->exists();
+        $dado_de_baja = Proveedor::where('cuit', $request->cuit)->where('dado_de_baja', '0')->get();
+        //return $dado_de_baja->isEmpty();
+        //return empty($dado_de_baja);
+        //return $cuit;
+        if (!$cuit /*|| $dado_de_baja->isEmpty()*/) {
+            return redirect()->route('nuevoRegistro');
+
+        }
+        else{
+
+            $proveedor = Proveedor::where('cuit', $request->cuit)->first();
+
+            return redirect()->route('modificarRegistro',['id' =>$proveedor->id_proveedor ]);
+
+        }
+    }
+
     //Carga Completa de Proveedor
     public function crear_registro(Request $request)
     {
