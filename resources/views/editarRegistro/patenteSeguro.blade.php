@@ -223,10 +223,18 @@ $('#baja_patente').val(id_registro);
               {data: 'poliza', name: 'poliza'},
               {data: 'agencia', name: 'agencia'},
               {data: 'asegurado', name: 'asegurado'},
-
-              {data: 'vigencia_hasta', name: 'vigencia_hasta'},
-              //{data: 'cuit', name: 'cuit'},
-              //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
+              {data: 'vigencia_hasta', 
+    
+                render: function(data){
+                    
+                    let fecha_sin_hora_seguros = data.split(' ')[0];
+                    let fecha_local_seguros = fecha_sin_hora_seguros.split('-').reverse().join('/');
+                  
+                    return fecha_local_seguros;
+                }
+              
+              },
+            
               {
                   data: 'action',
                   name: 'action',
