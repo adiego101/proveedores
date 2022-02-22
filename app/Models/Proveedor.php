@@ -134,7 +134,7 @@ class Proveedor extends Model
                                             ->where('id_proveedor','=',$this->id_proveedor);
                                 })
                                 ->get();
-        $this   ->domicilios 
+        $this   ->domicilios
                 ->where('tipo_domicilio', '=', 'real');
         $queries = DB::getQueryLog();
         Log::info($queries);
@@ -226,7 +226,7 @@ class Proveedor extends Model
                     })
                     ->with('sector');
     }
-    
+
     public function actividades_secundarias(){
         return $this->belongsToMany(Actividad_economica::class, 'actividades_proveedores', 'id_proveedor', 'id_actividad_economica')
                     ->whereHas('tipos_actividades', function ($query) {

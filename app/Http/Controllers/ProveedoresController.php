@@ -539,7 +539,7 @@ class ProveedoresController extends Controller
                         ->get();
             Log::info('sucursal editar'.$data);
         if ($request->ajax()) {
-            
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) use ($mode) {
@@ -1239,8 +1239,12 @@ class ProveedoresController extends Controller
         $paises = Pais::all();
         $provincias = Provincia::all();
         $localidades = Localidad::all();
-        $provinciaid = Localidad::where('id_localidad', $sede->Localidad)->get();
-        $provinciaid = $provinciaid[0]->id_provincia;
+        $provinciaid = Localidad::where('id_localidad', $sucursal->id_localidad)->get();
+        if ( empty($provinciaid[0]->id_provincia)) {
+            $provinciaid = "";
+        } else {
+            $provinciaid = $provinciaid[0]->id_provincia;
+        }
         $mode = "edit";
         return view('ediciones.sedes', compact('sede','mode','provincias','localidades','paises','provinciaid'));
 
@@ -2253,6 +2257,20 @@ class ProveedoresController extends Controller
         $proveedores_rupae = Proveedor::find($id);
         //return response()->json($proveedores_rupae);
         $proveedores_rupae = $proveedores_rupae->fill($request->all());
+        $proveedores_rupae->valor_agregado = $request->valor_agregado;
+
+        $proveedores_rupae->servicio_atencion_cliente = $request->servicio_atencion_cliente;
+        $proveedores_rupae->servicio_post_venta = $request->servicio_post_venta;
+        $proveedores_rupae->servicio_personal_especializado = $request->servicio_personal_especializado;
+        $proveedores_rupae->servicio_entrega_a_domicilio = $request->servicio_entrega_a_domicilio;
+        $proveedores_rupae->servicio_capacitacion_personal = $request->servicio_capacitacion_personal;
+        $proveedores_rupae->producto_transformacion_significativa = $request->producto_transformacion_significativa;
+        $proveedores_rupae->producto_compra_y_vende_unic = $request->producto_compra_y_vende_unic;
+        $proveedores_rupae->producto_post_venta = $request->producto_post_venta;
+        $proveedores_rupae->producto_venta_asistida = $request->producto_venta_asistida;
+        $proveedores_rupae->producto_garantia = $request->producto_garantia;
+
+
         $proveedores_rupae->save();
         return redirect()->back()->withSuccess('Los datos del registro se han modificado satisfactoriamente !');
 
