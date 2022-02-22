@@ -81,6 +81,12 @@
             observaciones_pago = $('#observaciones_pago').val();
             fecha_clasica_pago = fecha.split('-').reverse().join('/');
 
+            //Obtenemos los campos obligatorios para aplicarles estilos css
+            let fecha_css = document.getElementById("fecha_pago");
+            let importe_css = document.getElementById("importe_pago");
+            let observaciones_pago_css = document.getElementById("observaciones_pago");
+
+
             if(fecha.length != 0 && importe.length != 0 && observaciones_pago.length != 0){
 
                 $("#body_table_pago").append(
@@ -106,7 +112,15 @@
                 document.getElementById("importe_pago").value = "";
                 document.getElementById("observaciones_pago").value = "";
 
+                fecha_css.style.border = '1px solid #DFDFDF';
+                importe_css.style.border = '1px solid #DFDFDF';
+                observaciones_pago_css.style.border = '1px solid #DFDFDF';
+
             } else {
+
+                fecha_css.style.border = '2px dashed red';
+                importe_css.style.border = '2px dashed red';
+                observaciones_pago_css.style.border = '2px dashed red';
 
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                //Desplegamos el modal

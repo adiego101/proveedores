@@ -228,7 +228,12 @@
     <style>
         input:invalid:required {
 
-            border: 2px solid red;
+            border: 1px dashed red;
+        }
+
+        input:hover:invalid:required {
+
+            border: 2px dashed red;
         }
     </style>
 @endpush

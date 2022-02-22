@@ -28,12 +28,12 @@ value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}" id="do
                 <div class="container">
                 <div class="row">
                     <div class="col-sm">
-                        <input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" @if (isset($proveedor->valor_agregado) ? $proveedor->valor_agregado : '0') checked
+                        <input id="valor_agregado"  name="valor_agregado" @if ( $mode == "show") onclick="return false" @endif    type="checkbox" @if (isset($proveedor->valor_agregado) ? $proveedor->valor_agregado : '0') checked
 
 value="1"
                     @else
 value="0" @endif
-                    id="valor_agregado"  name="valor_agregado">
+>
                         <label for="valor_agregado">Valor Agregado</label><br>
 
 

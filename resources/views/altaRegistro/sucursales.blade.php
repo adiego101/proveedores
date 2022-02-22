@@ -167,6 +167,7 @@
         provincia = $("#provincia_sucursal").val();
         localidad_sucursal = $("#localidad_sucursal").val();
         
+
         /*
         console.log(pais);
         console.log(provincia);
@@ -251,7 +252,15 @@
                 '</tr>'
             );*/
 
-        if(nombre_sucursal.length != 0){
+        //Obtenemos los campos obligatorios para aplicarles estilos css
+        let nombre_css = document.getElementById("nombre_sucursal");
+        let email_css = document.getElementById("email_sucursal");
+        let telefono_css = document.getElementById("telefono_sucursal");
+        //let pais_css = document.getElementById("nombre_sucursal");
+        let provincia_css = document.getElementById("provincia_sucursal");
+        let localidad_css = document.getElementById("localidad_sucursal");
+        
+        if(nombre_sucursal.length != 0 && email.length != 0 && telefono.length != 0 && pais != " " && provincia != " " && localidad_sucursal != " "){
 
             $("#body_table_sucursal").append(
                 '<tr id="row_sucursal' + i_sucursal +'">'+
@@ -301,12 +310,25 @@
             document.getElementById("codigo_postal_sucursal").value = "";
             document.getElementById("email_sucursal").value = "";
             document.getElementById("telefono_sucursal").value = "";
-        
-        } else {
 
+            nombre_css.style.border = '1px solid #DFDFDF';
+            email_css.style.border = '1px solid #DFDFDF';
+            telefono_css.style.border = '1px solid #DFDFDF';
+            provincia_css.style.border = '1px solid #DFDFDF';
+            localidad_css.style.border = '1px solid #DFDFDF';
+   
+        } else {
+            
+            nombre_css.style.border = '2px dashed red';
+            email_css.style.border = '2px dashed red';
+            telefono_css.style.border = '2px dashed red';
+            provincia_css.style.border = '2px dashed red';
+            localidad_css.style.border = '2px dashed red';
+            
             /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
             //Desplegamos el modal
             $('#modal_validar_sucursal').modal('show');
+            
         }
             /*if(error_encontrado){
             $('#errors').focus();
