@@ -534,12 +534,11 @@ class ProveedoresController extends Controller
     }
 
     public function getSucursales(Request $request, $id, $mode)
-    {   $data = Sucursal::with(['telefonos','emails'])
+    {   
+        if ($request->ajax()) {
+            $data = Sucursal::with(['telefonos','emails'])
                         ->where('id_proveedor', $id)
                         ->get();
-            Log::info('sucursal editar'.$data);
-        if ($request->ajax()) {
-            
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) use ($mode) {

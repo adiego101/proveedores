@@ -94,7 +94,8 @@
                 render: {
                     _: '[/ ].email'
                 }, 
-                defaultContent: ""
+                defaultContent: "",
+                searchable: false
             },
             {   data: null, 
                 name: 'telefonos',

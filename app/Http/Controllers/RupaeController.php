@@ -115,6 +115,8 @@ class RupaeController extends Controller
 public function descargarRegistroAlta($id)
 {
     $proveedor = Proveedor::find($id);
+    if($proveedor->nro_rupae_proveedor==null)
+        $this->asignarNroRupaeProveedor($proveedor);
 
     $persona = $proveedor->personas()->get();
 
@@ -235,6 +237,9 @@ public function descargarCertificadoInscripcion($id)
 {
     $proveedor = Proveedor::find($id);
 
+    if($proveedor->nro_rupae_proveedor==null)
+        $this->asignarNroRupaeProveedor($proveedor);
+
     $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')->first();
 
     $proveedor_telefono_real = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'real')->first();
@@ -283,5 +288,24 @@ public function descargarCertificadoInscripcion($id)
         ->stream('certificado-inscripcion.pdf');
 }
 
+    public function asignarNroRupaeProveedor($proveedor){
+        //asigna numero de registro
+        $max_numero_registro = Proveedor::max('nro_rupae_proveedor');
+        if($max_numero_registro==null)
+                $max_numero_registro = 0;
+        do{
+            $error_numero_registro=false;
+            try{
+                $proveedor->nro_rupae_proveedor = $max_numero_registro+1;
+                $proveedor->save();
+            }
+            catch(\Exception $e){
+                Log::error('Error inesperado '.$e->getMessage());
+                $max_numero_registro+=1;
+                $error_numero_registro=true;    
+            }
+        }
+        while($error_numero_registro);
+    }
 
 }
