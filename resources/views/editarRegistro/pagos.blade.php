@@ -109,11 +109,20 @@ value="0" name="prov_provincial">
         serverSide: true,
         ajax: "{{ url('pagos/'.$id.'/'.$mode) }}",
         columns: [
-            {data: 'fecha', name: 'fecha'},
+            {data: 'fecha', 
+        
+                render: function(data){
+
+                    let fecha_sin_hora_pagos = data.split(' ')[0];
+                    let fecha_local_pagos = fecha_sin_hora_pagos.split('-').reverse().join('/');
+                  
+                    return fecha_local_pagos;
+                }
+            },
+
+
             {data: 'importe', name: 'importe'},
             {data: 'observaciones', name: 'observaciones'},
-            //{data: 'cuit', name: 'cuit'},
-            //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
             {
                 data: 'action',
                 name: 'action',
