@@ -30,6 +30,8 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Proveedores_tipos_proveedores;
 use App\Http\Controllers\ProveedoresController;
 
+use Illuminate\Support\Facades\Log;
+
 class ProveedoresController extends Controller
 {
 
@@ -500,10 +502,12 @@ class ProveedoresController extends Controller
     }
 
     public function getSucursales(Request $request, $id, $mode)
-    {
+    {   $data = Sucursal::with(['telefonos','emails'])
+                        ->where('id_proveedor', $id)
+                        ->get();
+            Log::info('sucursal editar'.$data);
         if ($request->ajax()) {
-            $data = Sucursal::where('id_proveedor', $id)->get();
-
+            
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) use ($mode) {

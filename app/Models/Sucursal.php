@@ -42,7 +42,7 @@ class Sucursal extends Model
     }
 
     public function telefonos(){
-        return $this->hasMany(Sucursal_telefono::class, 'id_sucursal', 'id_sucursal_telefono');
+        return $this->hasMany(Sucursal_telefono::class, 'id_sucursal', 'id_sucursal');
     }
 
     public function emails(){

@@ -15,8 +15,8 @@
         <thead>
             <tr>
                 <th>Nombre sucursal</th>
-                {{--<th>Correo electrónico</th>
-                    <th>Teléfono</th>--}}
+                <th>Correo electrónico</th>
+                    <th>Teléfono</th>
                     <th>Acciones</th>
               <!--  <th>Username</th>
                 <th>Phone</th>
@@ -88,7 +88,36 @@
         serverSide: true,
         ajax: "{{ url('sucursales/'.$id.'/'.$mode) }}",
         columns: [
-            {data: 'nombre_sucursal', name: 'nombre_sucursal'},
+            {   data: 'nombre_sucursal', 
+                name: 'nombre_sucursal'
+            },
+            {   data: 'emails', 
+                name: 'emails',
+                render: {
+                    _: '[/ ].email'
+                }, 
+                defaultContent: ""
+            },
+            {   data: null, 
+                name: 'telefonos',
+                render: function (data, type, row) {
+                    let cellData = '';
+                    for (let index = 0; index < row.telefonos.length; index++) {
+                        if(row.telefonos[index].tipo_medio!=null)
+                            cellData += row.telefonos[index].tipo_medio+':';
+                        if(row.telefonos[index].cod_area_tel!=null)
+                            cellData += row.telefonos[index].cod_area_tel+'-';
+                        if(row.telefonos[index].nro_tel!=null)
+                            if(index==row.telefonos.length-1)
+                                cellData += row.telefonos[index].nro_tel;
+                            else
+                                cellData += row.telefonos[index].nro_tel+'/';
+                    }
+                    return cellData;
+                }, 
+                defaultContent: "",
+                searchable: false
+            },
             //{data: 'cuit', name: 'cuit'},
             //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
             {
