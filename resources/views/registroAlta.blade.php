@@ -115,7 +115,11 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
             <table>
                 <tr>
                     <td colspan="2">
-                        <h1><u>Inscripción Rupae Nº {{"FALTA DEFINIR CAMPO"}}</u></h1>
+                        <h1><u>Inscripción Rupae Nº 
+                                {{isset($data['proveedor']['nro_rupae_proveedor']) && strlen($data['proveedor']['nro_rupae_proveedor'])<5 ? substr(str_repeat(0, 5).$data['proveedor']['nro_rupae_proveedor'], - 5) : ''}}
+                                {{isset($data['proveedor']['nro_rupae_proveedor']) && strlen($data['proveedor']['nro_rupae_proveedor'])>=5 ? $data['proveedor']['nro_rupae_proveedor']: ''}}
+                            </u>
+                        </h1>
                     </td>
                 </tr>
                 <tr>
