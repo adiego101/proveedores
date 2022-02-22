@@ -301,7 +301,7 @@ public function descargarCertificadoInscripcion($id)
             }
             catch(\Exception $e){
                 Log::error('Error inesperado '.$e->getMessage());
-                $max_numero_registro+=1;
+                $max_numero_registro=Proveedor::max('nro_rupae_proveedor');
                 $error_numero_registro=true;    
             }
         }
