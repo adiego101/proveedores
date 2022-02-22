@@ -37,6 +37,7 @@ value="{{ isset($proveedor_domicilio_real->monoblock) ? $proveedor_domicilio_rea
 
                 <label for="localidad_real">Localidad:</label><br>
                 <select class="form-control"  @if ( $mode == "show") disabled @endif   aria-describedby="basic-addon1" id="localidad_real" name="localidad_real">
+                    <option value=" ">Seleccione una localidad</option>
                 </select>
                 <br>
 
