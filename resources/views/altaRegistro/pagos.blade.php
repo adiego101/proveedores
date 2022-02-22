@@ -55,7 +55,12 @@
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
     <!--Incluimos el modal para editar los campos de un pago-->
+
     @include('modales.editarPago')
+
+    <!--Incluimos el modal para validar un pago -->
+
+    @include('modales.validarPago')
 
 </fieldset>
 
@@ -74,31 +79,39 @@
             fecha = $('#fecha_pago').val();
             importe = $('#importe_pago').val();
             observaciones_pago = $('#observaciones_pago').val();
-            
             fecha_clasica_pago = fecha.split('-').reverse().join('/');
 
-            $("#body_table_pago").append(
-                '<tr id="row_pago' + indice + '">' +
-                    '<td> <div id="fecha_pago_text' + indice + '">' + fecha_clasica_pago +'</div></td>'+
-                    '<td> <div id="importe_pago_text' + indice + '">' + importe +'</div></td>'+
-                    '<td> <div id="observaciones_pago_text' + indice + '">' + observaciones_pago +'</div></td>'+
-                    '<td>'+
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="fecha_pago' + indice + '" name="fechas_pagos[]" readonly value="' + fecha + '">' +
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="importe_pago' + indice + '" name="importes_pagos[]" readonly value="' + importe + '">' +
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="observaciones_pago' + indice + '" name="observaciones_pagos[]" readonly value="' + observaciones_pago + '">' +
-                    '<button type="button" name="edit" id="' + indice + '" class="btn btn-warning btn-sm btn_edit_pago" title="editar pago"><indice class="fas fa-edit"></i></button>' +
-                    '<button type="button" name="remove" id="' + indice + '" class="btn btn-danger btn-sm btn_remove_pago" title="quitar pago"><indice class="fas fa-trash"></i></button>' +
-                    '</td>' +
-                '</tr>'
-            );
+            if(fecha.length != 0 && importe.length != 0 && observaciones_pago.length != 0){
 
-            indice++;
+                $("#body_table_pago").append(
+                    '<tr id="row_pago' + indice + '">' +
+                        '<td> <div id="fecha_pago_text' + indice + '">' + fecha_clasica_pago +'</div></td>'+
+                        '<td> <div id="importe_pago_text' + indice + '">' + importe +'</div></td>'+
+                        '<td> <div id="observaciones_pago_text' + indice + '">' + observaciones_pago +'</div></td>'+
+                        '<td>'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="fecha_pago' + indice + '" name="fechas_pagos[]" readonly value="' + fecha + '">' +
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="importe_pago' + indice + '" name="importes_pagos[]" readonly value="' + importe + '">' +
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="observaciones_pago' + indice + '" name="observaciones_pagos[]" readonly value="' + observaciones_pago + '">' +
+                        '<button type="button" name="edit" id="' + indice + '" class="btn btn-warning btn-sm btn_edit_pago" title="editar pago"><indice class="fas fa-edit"></i></button>' +
+                        '<button type="button" name="remove" id="' + indice + '" class="btn btn-danger btn-sm btn_remove_pago" title="quitar pago"><indice class="fas fa-trash"></i></button>' +
+                        '</td>' +
+                    '</tr>'
+                );
 
-            //Limpiamos cada campo luego de presionar el botón Agregar Pago
+                indice++;
 
-            document.getElementById("fecha_pago").value = "";
-            document.getElementById("importe_pago").value = "";
-            document.getElementById("observaciones_pago").value = "";
+                //Limpiamos cada campo luego de presionar el botón Agregar Pago
+
+                document.getElementById("fecha_pago").value = "";
+                document.getElementById("importe_pago").value = "";
+                document.getElementById("observaciones_pago").value = "";
+
+            } else {
+
+                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
+               //Desplegamos el modal
+               $('#modal_validar_pago').modal('show');
+            }
 
         });
 

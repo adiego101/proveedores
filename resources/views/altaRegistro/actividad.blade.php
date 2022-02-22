@@ -109,13 +109,17 @@
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
-    <!--Incluimos el modal para mostrar mensaje de aviso -->
+    <!--Incluimos el modal para validar una actividad -->
 
-    @include('modales.avisoActividad')
+    @include('modales.validarActividad')
 
     <!--Incluimos el modal para editar un producto -->
 
     @include('modales.editarProducto')
+
+    <!--Incluimos el modal para validar un producto -->
+
+    @include('modales.validarProducto')
 
 @push('js')
 
@@ -159,7 +163,7 @@
             }else{
           
                 //Desplegamos el modal
-                $('#aviso_actividad').modal('show');
+                $('#modal_validar_actividad').modal('show');
 
             }
         });
@@ -202,31 +206,40 @@ $("#add_producto").on("click", function(e) {
     rnpa = $("#rnpa").val();
     produccion_total = $("#produccion_total").val();
 
+    if(producto_elaborado.length != 0 && unidad_producida.length != 0 && rnpa.length != 0 && produccion_total.length != 0){
 
-    $("#body_table_producto").append(
-        '<tr id="row_producto' + n +'">'+
-            '<td> <div id="producto_elaborado_text' + n +'">' + producto_elaborado +'</div></td>'+
-            '<td> <div id="unidad_producida_text' + n +'">' + unidad_producida +'</div></td>'+
-            '<td> <div id="rnpa_text' + n +'">' + rnpa +'</div></td>'+
-            '<td> <div id="produccion_total_text' + n +'">' + produccion_total +'</div></td>'+
-            '<td>'+
-            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="producto_elaborado' + n +'" name="productos[]" readonly value="' + producto_elaborado +'">'+
-            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="unidad_producida' + n +'" name="unidades[]" readonly value="' + unidad_producida +'">'+
-            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="rnpa' + n +'" name="rnpas[]" readonly value="' + rnpa +'">'+
-            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="produccion_total' + n +'" name="producciones[]" readonly value="' + produccion_total +'">'+
-            '<button type="button" name="edit" id="'+ n +'" class="btn btn-warning btn-sm btn_edit_producto" title="editar producto"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + n +'" class="btn btn-danger btn-sm btn_remove_producto" title="quitar producto"><i class="fas fa-trash"></i></button>'+
-            '</td>'+
-        '</tr>'
-    );
+        $("#body_table_producto").append(
+            '<tr id="row_producto' + n +'">'+
+                '<td> <div id="producto_elaborado_text' + n +'">' + producto_elaborado +'</div></td>'+
+                '<td> <div id="unidad_producida_text' + n +'">' + unidad_producida +'</div></td>'+
+                '<td> <div id="rnpa_text' + n +'">' + rnpa +'</div></td>'+
+                '<td> <div id="produccion_total_text' + n +'">' + produccion_total +'</div></td>'+
+                '<td>'+
+                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="producto_elaborado' + n +'" name="productos[]" readonly value="' + producto_elaborado +'">'+
+                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="unidad_producida' + n +'" name="unidades[]" readonly value="' + unidad_producida +'">'+
+                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="rnpa' + n +'" name="rnpas[]" readonly value="' + rnpa +'">'+
+                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="produccion_total' + n +'" name="producciones[]" readonly value="' + produccion_total +'">'+
+                '<button type="button" name="edit" id="'+ n +'" class="btn btn-warning btn-sm btn_edit_producto" title="editar producto"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + n +'" class="btn btn-danger btn-sm btn_remove_producto" title="quitar producto"><i class="fas fa-trash"></i></button>'+
+                '</td>'+
+            '</tr>'
+        );
 
-    n++;
+        n++;
 
-    //Limpiamos cada campo luego de presionar el botón Agregar vehículo
+        //Limpiamos cada campo luego de presionar el botón Agregar vehículo
 
-    document.getElementById("producto_elaborado").value = "";
-    document.getElementById("unidad_producida").value = "";
-    document.getElementById("rnpa").value = "";
-    document.getElementById("produccion_total").value = "";
+        document.getElementById("producto_elaborado").value = "";
+        document.getElementById("unidad_producida").value = "";
+        document.getElementById("rnpa").value = "";
+        document.getElementById("produccion_total").value = "";
+
+    } else {
+
+        /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
+        //Desplegamos el modal
+        $('#modal_validar_producto').modal('show');
+
+    }
   
 });
 

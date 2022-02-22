@@ -164,6 +164,16 @@
     @include('modales.editarSede')
 
 
+    <!--Incluimos el modal para validar un vehiculo -->
+    @include('modales.validarVehiculo')
+
+    <!--Incluimos el modal para validar un seguro -->
+    @include('modales.validarSeguro')
+
+    <!--Incluimos el modal para validar una sede -->
+    @include('modales.validarSede')
+
+
     <script type="text/javascript">
 
         let marca;
@@ -178,32 +188,41 @@
             dominio = $("#dominio_vehiculo").val();
             inscripto_en = $("#inscripto_en_vehiculo").val();
 
+            if(marca.length != 0 && modelo.length != 0 && dominio.length != 0 && inscripto_en.length != 0){
 
-            $("#body_table_vehiculo").append(
-                '<tr id="row_vehiculo' + j +'">'+
-                    '<td> <div id="marca_vehiculo_text' + j +'">' + marca +'</div></td>'+
-                    '<td> <div id="modelo_vehiculo_text' + j +'">' + modelo +'</div></td>'+
-                    '<td> <div id="dominio_vehiculo_text' + j +'">' + dominio +'</div></td>'+
-                    '<td> <div id="inscripto_en_vehiculo_text' + j +'">' + inscripto_en +'</div></td>'+
-                    '<td>'+
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="marca_vehiculo' + j +'" name="marcas[]" readonly value="' + marca +'">'+
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="modelo_vehiculo' + j +'" name="modelos[]" readonly value="' + modelo +'">'+
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="dominio_vehiculo' + j +'" name="dominios[]" readonly value="' + dominio +'">'+
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="inscripto_en_vehiculo' + j +'" name="inscriptos[]" readonly value="'+ inscripto_en +'">'+
-                    '<button type="button" name="edit" id="'+ j +'" class="btn btn-warning btn-sm btn_edit_vehiculo" title="editar vehículo"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + j +'" class="btn btn-danger btn-sm btn_remove_vehiculo" title="quitar vehículo"><i class="fas fa-trash"></i></button>'+
-                    '</td>'+
-                '</tr>'
-            );
+                $("#body_table_vehiculo").append(
+                    '<tr id="row_vehiculo' + j +'">'+
+                        '<td> <div id="marca_vehiculo_text' + j +'">' + marca +'</div></td>'+
+                        '<td> <div id="modelo_vehiculo_text' + j +'">' + modelo +'</div></td>'+
+                        '<td> <div id="dominio_vehiculo_text' + j +'">' + dominio +'</div></td>'+
+                        '<td> <div id="inscripto_en_vehiculo_text' + j +'">' + inscripto_en +'</div></td>'+
+                        '<td>'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="marca_vehiculo' + j +'" name="marcas[]" readonly value="' + marca +'">'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="modelo_vehiculo' + j +'" name="modelos[]" readonly value="' + modelo +'">'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="dominio_vehiculo' + j +'" name="dominios[]" readonly value="' + dominio +'">'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="inscripto_en_vehiculo' + j +'" name="inscriptos[]" readonly value="'+ inscripto_en +'">'+
+                        '<button type="button" name="edit" id="'+ j +'" class="btn btn-warning btn-sm btn_edit_vehiculo" title="editar vehículo"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + j +'" class="btn btn-danger btn-sm btn_remove_vehiculo" title="quitar vehículo"><i class="fas fa-trash"></i></button>'+
+                        '</td>'+
+                    '</tr>'
+                );
 
 
-            j++;
+                j++;
 
-            //Limpiamos cada campo luego de presionar el botón Agregar vehículo
+                //Limpiamos cada campo luego de presionar el botón Agregar vehículo
 
-            document.getElementById("marca_vehiculo").value = "";
-            document.getElementById("modelo_vehiculo").value = "";
-            document.getElementById("dominio_vehiculo").value = "";
-            document.getElementById("inscripto_en_vehiculo").value = "";
+                document.getElementById("marca_vehiculo").value = "";
+                document.getElementById("modelo_vehiculo").value = "";
+                document.getElementById("dominio_vehiculo").value = "";
+                document.getElementById("inscripto_en_vehiculo").value = "";
+
+            } else {
+
+                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
+                //Desplegamos el modal
+                $('#modal_validar_vehiculo').modal('show');
+            }
+
         });
 
 
@@ -261,31 +280,40 @@
 
             vigencia_clasica = vigencia.split('-').reverse().join('/');
 
-            $("#body_table_seguro").append(
-                '<tr id="row_seguro' + k +'">'+
-                    '<td> <div id="poliza_text' + k +'">' + poliza +'</div></td>'+
-                    '<td> <div id="agencia_text' + k +'">' + agencia +'</div></td>'+
-                    '<td> <div id="asegurado_text' + k +'">' + asegurado +'</div></td>'+
-                    '<td> <div id="vigencia_text' + k +'">' + vigencia_clasica +'</div></td>'+
-                    '<td>'+
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="poliza' + k +'" name="polizas[]" readonly value="' + poliza +'">'+
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="agencia' + k +'" name="agencias[]" readonly value="' + agencia +'">'+
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="asegurado' + k +'" name="asegurados[]" readonly value="' + asegurado +'">'+
-                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="vigencia' + k +'" name="vigencias[]" readonly value="'+ vigencia +'">'+
-                    '<button type="button" name="edit" id="'+ k +'" class="btn btn-warning btn-sm btn_edit_seguro" title="editar seguro"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + k +'" class="btn btn-danger btn-sm btn_remove_seguro" title="quitar seguro"><i class="fas fa-trash"></i></button>'+
-                    '</td>'+
-                '</tr>'
-            );
+            if(poliza.length != 0 && agencia.length != 0 && asegurado.length != 0 && vigencia.length != 0){
+
+                $("#body_table_seguro").append(
+                    '<tr id="row_seguro' + k +'">'+
+                        '<td> <div id="poliza_text' + k +'">' + poliza +'</div></td>'+
+                        '<td> <div id="agencia_text' + k +'">' + agencia +'</div></td>'+
+                        '<td> <div id="asegurado_text' + k +'">' + asegurado +'</div></td>'+
+                        '<td> <div id="vigencia_text' + k +'">' + vigencia_clasica +'</div></td>'+
+                        '<td>'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="poliza' + k +'" name="polizas[]" readonly value="' + poliza +'">'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="agencia' + k +'" name="agencias[]" readonly value="' + agencia +'">'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="asegurado' + k +'" name="asegurados[]" readonly value="' + asegurado +'">'+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="vigencia' + k +'" name="vigencias[]" readonly value="'+ vigencia +'">'+
+                        '<button type="button" name="edit" id="'+ k +'" class="btn btn-warning btn-sm btn_edit_seguro" title="editar seguro"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + k +'" class="btn btn-danger btn-sm btn_remove_seguro" title="quitar seguro"><i class="fas fa-trash"></i></button>'+
+                        '</td>'+
+                    '</tr>'
+                );
 
 
-            k++;
+                k++;
 
-            //Limpiamos cada campo luego de presionar el botón Agregar vehículo
+                //Limpiamos cada campo luego de presionar el botón Agregar vehículo
 
-            document.getElementById("poliza").value = "";
-            document.getElementById("agencia").value = "";
-            document.getElementById("asegurado").value = "";
-            document.getElementById("vigencia").value = "";
+                document.getElementById("poliza").value = "";
+                document.getElementById("agencia").value = "";
+                document.getElementById("asegurado").value = "";
+                document.getElementById("vigencia").value = "";
+
+            } else {
+
+                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
+                //Desplegamos el modal
+                $('#modal_validar_seguro').modal('show');
+            }
 
         });
 
@@ -340,6 +368,16 @@
         localidad = $("#localidad_sede").val();
         provincia_sede = $("#provincia_sede").val();
 
+        console.log("Provincia: "+provincia_sede);
+        console.log("localidad: "+localidad);
+        if(localidad != " "){
+            console.log("No es vacio");
+        }else{
+            console.log("Es vacio");
+        }
+
+        if(domicilio.length != 0 && localidad != " " && provincia_sede != " "){
+
         $("#body_table_sede").append(
             '<tr id="row_sede' + l +'">'+
                 '<td> <div id="domicilio_sede_text' + l +'">' + domicilio +'</div></td>'+
@@ -360,6 +398,13 @@
         //Limpiamos cada campo luego de presionar el botón Agregar Sede
 
         document.getElementById("domicilio_sede").value = "";
+
+        } else {
+
+            /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
+            //Desplegamos el modal
+            $('#modal_validar_sede').modal('show');
+        }
 
     });
 

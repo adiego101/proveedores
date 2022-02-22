@@ -5,11 +5,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    {{--
-    <div class="alert alert-info" role="alert">
-        Modifique los campos que se presentan continuación
-        y presione el botón <b>Siguiente</b>, para continuar la modificación de los datos.
-    </div>--}}
+
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{session('success')}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
 
     <nav>
         <ul class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">

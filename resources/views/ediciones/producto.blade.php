@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-sm">
             <label for="producto_elaborado">Producto elaborado:</label><br>
-            <input @if ( $mode == "show") readonly @endif list="productos" name="producto_elaborado" id="producto_elaborado" value="{{ isset($producto->producto_elaborado) ? $producto->producto_elaborado : '' }}"  class="form-control" placeholder="Ingrese o seleccione el producto que produce">
+            <input @if ( $mode == "show") readonly @endif list="productos" name="producto_elaborado" id="producto_elaborado" value="{{ isset($producto->producto_elaborado) ? $producto->producto_elaborado : '' }}"  class="form-control" placeholder="Ingrese o seleccione el producto que produce" required>
             <datalist id="productos">
                 @forelse($productos as $producto2)
 
@@ -32,7 +32,7 @@
             <br>
 
             <label for="rnpa">RNPA:</label><br>
-            <input @if ( $mode == "show") readonly @endif type="text" class="form-control" value="{{ isset($producto->rnpa) ? $producto->rnpa : '' }}" aria-describedby="basic-addon1" id="rnpa" name="rnpa" placeholder="Ingrese el RNPA" maxlength="20"><br>
+            <input @if ( $mode == "show") readonly @endif type="text" class="form-control" value="{{ isset($producto->rnpa) ? $producto->rnpa : '' }}" aria-describedby="basic-addon1" id="rnpa" name="rnpa" placeholder="Ingrese el RNPA" maxlength="8" required><br>
         </div>
 
         <div class="col-sm">

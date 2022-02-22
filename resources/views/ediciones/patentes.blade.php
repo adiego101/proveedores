@@ -25,18 +25,18 @@
     <div class="row">
         <div class="col-sm">
             <label for="marca">Marca:</label><br />
-            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($patente->marca) ? $patente->marca : '' }}" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca" name="marca" maxlength="20"/><br />
+            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($patente->marca) ? $patente->marca : '' }}" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca" name="marca" maxlength="40" required/><br />
 
             <label for="dominio">Dominio:</label><br />
-            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($patente->dominio) ? $patente->dominio : '' }}" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio" name="dominio" maxlength="7"/><br />
+            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($patente->dominio) ? $patente->dominio : '' }}" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio" name="dominio" maxlength="7" required/><br />
         </div>
 
         <div class="col-sm">
             <label for="modelo">Modelo:</label><br />
-            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($patente->modelo) ? $patente->modelo : '' }}" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo" name="modelo" maxlength="20"/><br />
+            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($patente->modelo) ? $patente->modelo : '' }}" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo" name="modelo" maxlength="40" required/><br />
 
             <label for="inscripto_en">Inscripto en:</label><br />
-            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($patente->inscripto_en) ? $patente->inscripto_en : '' }}" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en" name="inscripto_en" maxlength="20"/><br />
+            <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($patente->inscripto_en) ? $patente->inscripto_en : '' }}" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en" name="inscripto_en" maxlength="20" required/><br />
 
         </div>
     </div>

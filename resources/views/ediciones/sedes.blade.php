@@ -23,28 +23,23 @@
 <br/>
 
 <label for="Domicilio">Domicilio:</label><br />
-<input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($sede->Domicilio) ? $sede->Domicilio : '' }}" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="20"/><br />
+<input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($sede->Domicilio) ? $sede->Domicilio : '' }}" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="50" required/><br />
 
 <div class="row">
         <div class="col-sm">
             <label for="provincia_sede">Provincia:</label><br>
-            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="provincia_sede" name="provincia_sede">
-            {{--<option value=" ">Seleccione una provincia</option>--}}
-
+            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="provincia_sede" name="provincia_sede" required>
+            <option value="">Seleccione una provincia</option>
             @forelse($provincias as $provincia)
-            @if (isset($provinciaid))
-            @if ($provincia->id_provincia == $provinciaid)
-            <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-        @else
-            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-        @endif
-
-            @else
-
-            <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
-            @endif
-
-
+                @if (isset($provinciaid))
+                    @if ($provincia->id_provincia == $provinciaid)
+                        <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @else
+                        <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                    @endif
+                @else
+                    <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                @endif
             @empty
                 <option value=" "></option>
             @endforelse
@@ -54,8 +49,8 @@
 
         <div class="col-sm">
             <label for="Localidad">Localidad:</label><br>
-            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad">
-                <option value=" ">Seleccione una localidad</option>
+            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad" required>
+                <option value="">Seleccione una localidad</option>
             </select>
             <br>
 
@@ -77,18 +72,20 @@
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group">
-
         <button type="submit" name="guardarSede" class="btn btn-success"> {{ 'Guardar Cambios' }} </button>
-
     </div>
 </div>
+
 </form>
+
 @else
+
 <a class="btn btn-secondary" style="float: left" href="{{ route('verRegistro', ['id' => $sede->id_proveedor, 'tab' => "patente"]) }}">atras</a>
 
 @endif
 
 @push('js')
+
 <script type="text/javascript">
 
 window.onload = function(){
@@ -104,6 +101,7 @@ window.onload = function(){
 </script>
 
 <script type="text/javascript">
+
     function recargarLista(){
         $.ajax({
             type:"GET",

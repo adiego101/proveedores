@@ -20,19 +20,10 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
             <table style="width:100%" class="yajra-actividades table table-hover  table-striped table-condensed">
                 <thead>
                     <tr>
-
-                        <th>Codigo</th>
-                        <th>Actividad Economica</th>
+                        <th>Código</th>
+                        <th>Actividad Económica</th>
                         <th>Tipo Actividad</th>
-
-                        {{--<th>Correo electrónico</th>
-                            <th>Teléfono</th>--}}
-
-                            <th>Acciones</th>
-
-                      <!--  <th>Username</th>
-                        <th>Phone</th>
-                        <th>DOB</th> -->
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,7 +41,7 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
     <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"
         @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
+value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
 @if ($mode == "edit")
 
 <a class="btn btn-secondary" style="float: left" href="{{ route('productos.nuevo', ['id' => $id]) }}" title="Agregar producto">+</a>
@@ -62,19 +53,11 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
             <table style="width:100%" class="yajra-productos table table-hover  table-striped table-condensed">
                 <thead>
                     <tr>
-                        <th>producto_elaborado</th>
-                        <th>rnpa</th>
-
-                        <th>Producida_unidad</th>
-
-                        <th>capacidad_produccion_total</th>
-
-                        {{--<th>Correo electrónico</th>
-                            <th>Teléfono</th>--}}
-                            <th>Acciones</th>
-                      <!--  <th>Username</th>
-                        <th>Phone</th>
-                        <th>DOB</th> -->
+                        <th>Producto</th>
+                        <th>RNPA</th>
+                        <th>Unidades producidas</th>
+                        <th>Capacidad producción</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,9 +75,10 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="20"><br>
         <a class="btn btn-primary btnNext">Siguiente</a>
     </div>
 </div>
-    <!--Incluimos el modal para mostrar mensaje de aviso -->
 
-    @include('modales.avisoActividad')
+    <!--Incluimos el modal para validar una actividad -->
+
+    @include('modales.validarActividad')
 
     <!--Incluimos el modal para editar un producto -->
 

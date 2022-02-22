@@ -1,5 +1,5 @@
 <fieldset>
-<!-- SE DEBEN ELIMINAR LOS ATRIBUTOS NAME DE CADA CAMPO Y SOLO DEJARLOS EN EL APPEND JS, PORQUE SINO AL ENVIAR LOS DATOS A LA BD SE ALMACENA SIEMPRE UN VALOR NULO AL PRINCIPIO. -->
+
 <h2 class="mb-4">Sucursales</h2>
 @if ($mode == "edit")
 
@@ -11,7 +11,6 @@
 <div>
 
     <table style="width:100%" class="yajra-datatable table table-hover  table-striped table-condensed">
-
         <thead>
             <tr>
                 <th>Nombre sucursal</th>
@@ -46,12 +45,11 @@
 
     {{--@include('modales.editarSucursal')--}}
 
-
-
 </fieldset>
 
 
 @push('js')
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
@@ -146,6 +144,5 @@
          $('#baja').val(id_sucursal);
     }
 </script>
-
 
 @endpush

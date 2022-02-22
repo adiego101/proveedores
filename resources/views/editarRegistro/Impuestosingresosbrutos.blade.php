@@ -9,7 +9,7 @@
 
   <label for="jurisdiccion">Jurisdicción:</label><br>
   <input @if ( $mode == "show") readonly @endif  type="text" class="form-control" placeholder="Ingrese su jurisdicción" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->jurisdiccion) ? $proveedor->jurisdiccion : '' }}" id="jurisdiccion" name="jurisdiccion" maxlength="20"><br>
+value="{{ isset($proveedor->jurisdiccion) ? $proveedor->jurisdiccion : '' }}" id="jurisdiccion" name="jurisdiccion" maxlength="40"><br>
 
   <label for="tipo_contribuyente">Tipo de contribuyente:</label><br>
   <select @if ( $mode == "show") disabled @endif  class="form-control" aria-describedby="basic-addon1"  id="tipo_contribuyente" name="tipo_contribuyente">
