@@ -539,12 +539,9 @@ class ProveedoresController extends Controller
             $data = Sucursal::with(['telefonos','emails'])
                         ->where('id_proveedor', $id)
                         ->get();
-<<<<<<< HEAD
             Log::info('sucursal editar'.$data);
         if ($request->ajax()) {
 
-=======
->>>>>>> 7569b04bf78191be0e07d2f16a53d0ea28541983
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) use ($mode) {
@@ -569,7 +566,7 @@ class ProveedoresController extends Controller
                 ->make(true);
         }
     }
-
+}
     public function editarSucursales($id)
     {
         $sucursal = Sucursal::where('id_sucursal', $id)->get();
