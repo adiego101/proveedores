@@ -188,6 +188,12 @@
             dominio = $("#dominio_vehiculo").val();
             inscripto_en = $("#inscripto_en_vehiculo").val();
 
+            //Obtenemos los campos obligatorios para aplicarles estilos css
+            let marca_css = document.getElementById("marca_vehiculo");
+            let modelo_css = document.getElementById("modelo_vehiculo");
+            let dominio_css = document.getElementById("dominio_vehiculo");
+            let inscripto_en_css = document.getElementById("inscripto_en_vehiculo");
+
             if(marca.length != 0 && modelo.length != 0 && dominio.length != 0 && inscripto_en.length != 0){
 
                 $("#body_table_vehiculo").append(
@@ -216,7 +222,17 @@
                 document.getElementById("dominio_vehiculo").value = "";
                 document.getElementById("inscripto_en_vehiculo").value = "";
 
+                marca_css.style.border = '1px solid #DFDFDF';
+                modelo_css.style.border = '1px solid #DFDFDF';
+                dominio_css.style.border = '1px solid #DFDFDF';
+                inscripto_en_css.style.border = '1px solid #DFDFDF';
+
             } else {
+
+                marca_css.style.border = '2px dashed red';
+                modelo_css.style.border = '2px dashed red';
+                dominio_css.style.border = '2px dashed red';
+                inscripto_en_css.style.border = '2px dashed red';
 
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
@@ -280,6 +296,12 @@
 
             vigencia_clasica = vigencia.split('-').reverse().join('/');
 
+            //Obtenemos los campos obligatorios para aplicarles estilos css
+            let poliza_css = document.getElementById("poliza");
+            let agencia_css = document.getElementById("agencia");
+            let asegurado_css = document.getElementById("asegurado");
+            let vigencia_css = document.getElementById("vigencia");
+
             if(poliza.length != 0 && agencia.length != 0 && asegurado.length != 0 && vigencia.length != 0){
 
                 $("#body_table_seguro").append(
@@ -308,7 +330,17 @@
                 document.getElementById("asegurado").value = "";
                 document.getElementById("vigencia").value = "";
 
+                poliza_css.style.border = '1px solid #DFDFDF';
+                agencia_css.style.border = '1px solid #DFDFDF';
+                asegurado_css.style.border = '1px solid #DFDFDF';
+                vigencia_css.style.border = '1px solid #DFDFDF';
+            
             } else {
+
+                poliza_css.style.border = '2px dashed red';
+                agencia_css.style.border = '2px dashed red';
+                asegurado_css.style.border = '2px dashed red';
+                vigencia_css.style.border = '2px dashed red';
 
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
@@ -368,13 +400,18 @@
         localidad = $("#localidad_sede").val();
         provincia_sede = $("#provincia_sede").val();
 
-        console.log("Provincia: "+provincia_sede);
+        /*console.log("Provincia: "+provincia_sede);
         console.log("localidad: "+localidad);
         if(localidad != " "){
             console.log("No es vacio");
         }else{
             console.log("Es vacio");
-        }
+        }*/
+
+        //Obtenemos los campos obligatorios para aplicarles estilos css
+        let domicilio_sede_css = document.getElementById("domicilio_sede");
+        let localidad_sede_css = document.getElementById("localidad_sede");
+        let provincia_sede_css = document.getElementById("provincia_sede");
 
         if(domicilio.length != 0 && localidad != " " && provincia_sede != " "){
 
@@ -399,7 +436,15 @@
 
         document.getElementById("domicilio_sede").value = "";
 
+        domicilio_sede_css.style.border = '1px solid #DFDFDF';
+        localidad_sede_css.style.border = '1px solid #DFDFDF';
+        provincia_sede_css.style.border = '1px solid #DFDFDF';
+
         } else {
+
+            domicilio_sede_css.style.border = '2px dashed red';
+            localidad_sede_css.style.border = '2px dashed red';
+            provincia_sede_css.style.border = '2px dashed red';
 
             /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
             //Desplegamos el modal
