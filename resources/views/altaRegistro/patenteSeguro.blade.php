@@ -27,7 +27,7 @@
             <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en_vehiculo" maxlength="20"/><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <a id="add_vehiculo" class="btn btn-success">Agregar Vehículo</a>
+                <button id="add_vehiculo" class="btn btn-success" disabled>Agregar Vehículo</button>
             </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
             <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia" /><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <a id="add_seguro" class="btn btn-success">Agregar Seguro</a>
+                <button id="add_seguro" class="btn btn-success" disabled>Agregar Seguro</button>
             </div>
         </div>
     </div>
@@ -127,7 +127,7 @@
             <br>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <a id="add_sede" class="btn btn-success">Agregar sede</a>
+                <button id="add_sede" class="btn btn-success" disabled>Agregar sede</button>
             </div>
         </div>
     </div>
@@ -172,6 +172,26 @@
 
     <!--Incluimos el modal para validar una sede -->
     @include('modales.validarSede')
+
+
+    <script type="text/javascript">
+
+        var checkbox_vehiculo = document.getElementById('vehiculos_afectados');
+        var button_vehiculo = document.getElementById('add_vehiculo');
+        checkbox_vehiculo.addEventListener("change", validaCheckboxVehiculo, false);
+        function validaCheckboxVehiculo()
+        {
+            var checked_vehiculo = checkbox_vehiculo.checked;
+            if(checked_vehiculo){
+         
+                button_vehiculo.disabled = false; 
+            }else{
+          
+                button_vehiculo.disabled = true; 
+            }
+        }
+        
+    </script>
 
 
     <script type="text/javascript">
@@ -277,6 +297,26 @@
 
         });
 
+    </script>
+
+
+    <script type="text/javascript">
+
+        var checkbox_seguro = document.getElementById('seguros_sta_cruz');
+        var button_seguro = document.getElementById('add_seguro');
+        checkbox_seguro.addEventListener("change", validaCheckboxSeguro, false);
+        function validaCheckboxSeguro()
+        {
+            var checked_seguro = checkbox_seguro.checked;
+            if(checked_seguro){
+         
+                button_seguro.disabled = false; 
+            }else{
+          
+                button_seguro.disabled = true; 
+            }
+        }
+        
     </script>
 
     <script type="text/javascript">
@@ -385,6 +425,26 @@
 
         });
 
+    </script>
+
+
+    <script type="text/javascript">
+
+        var checkbox_sede = document.getElementById('servicio_personal_especializado');
+        var button_sede = document.getElementById('add_sede');
+        checkbox_sede.addEventListener("change", validaCheckboxSede, false);
+        function validaCheckboxSede()
+        {
+            var checked_sede = checkbox_sede.checked;
+            if(checked_sede){
+         
+                button_sede.disabled = false; 
+            }else{
+          
+                button_sede.disabled = true; 
+            }
+        }
+        
     </script>
 
 
