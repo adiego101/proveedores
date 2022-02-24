@@ -38,34 +38,44 @@
 
 <script type="text/javascript">
 
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
+//Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
-    $(document).on("click", ".btn_edit_modal", function() {
+$(document).on("click", ".btn_edit_modal", function(event) {
 
-                //Obtenemos el numero de la fila que queremos modificar
-                var id_fila = $("#numero_fila_seguro").val();
+    //Obtenemos el numero de la fila que queremos modificar
+    var id_fila = $("#numero_fila_seguro").val();
 
-                //Recuperamos los valores de los campos del modal
-                var modal_poliza = $("#modal_poliza").val();
-                var modal_asegurado = $("#modal_asegurado").val();
-                var modal_agencia = $("#modal_agencia").val();
-                var modal_vigencia = $("#modal_vigencia").val();
+    //Recuperamos los valores de los campos del modal
+    var modal_poliza = $("#modal_poliza").val();
+    var modal_asegurado = $("#modal_asegurado").val();
+    var modal_agencia = $("#modal_agencia").val();
+    var modal_vigencia = $("#modal_vigencia").val();
 
-                //Ocultamos el modal
-                $('#modal_seguro').modal('hide');
+    //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
+    if(modal_poliza.length != 0 && modal_asegurado.length != 0 && modal_agencia.length != 0 && modal_vigencia.length != 0){
 
-                //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                $('#poliza'+id_fila).val(modal_poliza);
-                $('#asegurado'+id_fila).val(modal_asegurado);
-                $('#agencia'+id_fila).val(modal_agencia);
-                $('#vigencia'+id_fila).val(modal_vigencia);
+        //Ocultamos el modal
+        $('#modal_seguro').modal('hide');
 
-                //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
-                var modal_vigencia_clasica = modal_vigencia.split('-').reverse().join('/');
-                $('#poliza_text'+id_fila).text(modal_poliza);
-                $('#asegurado_text'+id_fila).text(modal_asegurado);
-                $('#agencia_text'+id_fila).text(modal_agencia);
-                $('#vigencia_text'+id_fila).text(modal_vigencia_clasica);
+        //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
+        $('#poliza'+id_fila).val(modal_poliza);
+        $('#asegurado'+id_fila).val(modal_asegurado);
+        $('#agencia'+id_fila).val(modal_agencia);
+        $('#vigencia'+id_fila).val(modal_vigencia);
 
-            });
+        //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+        var modal_vigencia_clasica = modal_vigencia.split('-').reverse().join('/');
+        $('#poliza_text'+id_fila).text(modal_poliza);
+        $('#asegurado_text'+id_fila).text(modal_asegurado);
+        $('#agencia_text'+id_fila).text(modal_agencia);
+        $('#vigencia_text'+id_fila).text(modal_vigencia_clasica);
+
+    } else {
+
+            //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
+            event.preventDefault();
+
+    }
+
+});
 </script>
