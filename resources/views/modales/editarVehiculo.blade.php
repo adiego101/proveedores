@@ -34,33 +34,42 @@
 
 <script type="text/javascript">
 
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
+//Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
-    $(document).on("click", ".btn_edit_modal", function() {
+$(document).on("click", ".btn_edit_modal", function(event) {
 
-                //Obtenemos el numero de la fila que queremos modificar
-                var id_fila = $("#numero_fila_vehiculo").val();
+    //Obtenemos el numero de la fila que queremos modificar
+    var id_fila = $("#numero_fila_vehiculo").val();
 
-                //Recuperamos los valores de los campos del modal
-                var modal_marca = $("#modal_marca_vehiculo").val();
-                var modal_dominio = $("#modal_dominio_vehiculo").val();
-                var modal_modelo = $("#modal_modelo_vehiculo").val();
-                var modal_inscripto = $("#modal_inscripto_en_vehiculo").val();
+    //Recuperamos los valores de los campos del modal
+    var modal_marca = $("#modal_marca_vehiculo").val();
+    var modal_dominio = $("#modal_dominio_vehiculo").val();
+    var modal_modelo = $("#modal_modelo_vehiculo").val();
+    var modal_inscripto = $("#modal_inscripto_en_vehiculo").val();
 
-                //Ocultamos el modal
-                $('#modal_vehiculo').modal('hide');
+    //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
+    if(modal_marca.length != 0 && modal_dominio.length != 0 && modal_modelo.length != 0 && modal_inscripto.length != 0){
 
-                //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                $('#marca_vehiculo'+id_fila).val(modal_marca);
-                $('#dominio_vehiculo'+id_fila).val(modal_dominio);
-                $('#modelo_vehiculo'+id_fila).val(modal_modelo);
-                $('#inscripto_en_vehiculo'+id_fila).val(modal_inscripto);
+        //Ocultamos el modal
+        $('#modal_vehiculo').modal('hide');
 
-                //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
-                $('#marca_vehiculo_text'+id_fila).text(modal_marca);
-                $('#dominio_vehiculo_text'+id_fila).text(modal_dominio);
-                $('#modelo_vehiculo_text'+id_fila).text(modal_modelo);
-                $('#inscripto_en_vehiculo_text'+id_fila).text(modal_inscripto);
+        //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
+        $('#marca_vehiculo'+id_fila).val(modal_marca);
+        $('#dominio_vehiculo'+id_fila).val(modal_dominio);
+        $('#modelo_vehiculo'+id_fila).val(modal_modelo);
+        $('#inscripto_en_vehiculo'+id_fila).val(modal_inscripto);
 
-            });
+        //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+        $('#marca_vehiculo_text'+id_fila).text(modal_marca);
+        $('#dominio_vehiculo_text'+id_fila).text(modal_dominio);
+        $('#modelo_vehiculo_text'+id_fila).text(modal_modelo);
+        $('#inscripto_en_vehiculo_text'+id_fila).text(modal_inscripto);
+
+    }else{
+
+        //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
+        event.preventDefault();
+    }
+
+});
 </script>
