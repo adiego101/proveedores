@@ -46,6 +46,11 @@
             var modal_importe = $("#modal_importe").val();
             var modal_observaciones = $("#modal_observaciones").val();
 
+            //Obtenemos los campos obligatorios para aplicarles estilos css
+            let modal_fecha_css = document.getElementById("modal_fecha");
+            let modal_importe_css = document.getElementById("modal_importe");
+            let modal_observaciones_css = document.getElementById("modal_observaciones");
+
             //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
             if(modal_fecha.length != 0 && modal_importe.length != 0 && modal_observaciones.length != 0){
 
@@ -63,10 +68,18 @@
                 $('#importe_pago_text' + id_filapago).text(modal_importe);
                 $('#observaciones_pago_text' + id_filapago).text(modal_observaciones);
 
+                modal_fecha_css.style.border = '1px solid #DFDFDF';
+                modal_importe_css.style.border = '1px solid #DFDFDF';
+                modal_observaciones_css.style.border = '1px solid #DFDFDF';
+
             }else{
 
                 //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
                 event.preventDefault();
+
+                modal_fecha_css.style.border = '2px dashed red';
+                modal_importe_css.style.border = '2px dashed red';
+                modal_observaciones_css.style.border = '2px dashed red';
             }
 
         });

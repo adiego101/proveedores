@@ -60,6 +60,11 @@ $(document).on("click", ".btn_edit_modal", function(event) {
     var modal_localidad = $("#modal_localidad_sede").val();
     var modal_provincia = $("#modal_provincia_sede").val();
 
+    //Obtenemos los campos obligatorios para aplicarles estilos css
+    let modal_domicilio_css = document.getElementById("modal_domicilio_sede");
+    let modal_localidad_css = document.getElementById("modal_localidad_sede");
+    let modal_provincia_css = document.getElementById("modal_provincia_sede");
+
     //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
     if(modal_domicilio.length != 0 && modal_localidad != " " && modal_provincia != " "){
 
@@ -76,10 +81,18 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         $('#localidad_sede_text'+id_fila).text(modal_localidad);
         $('#provincia_sede_text'+id_fila).text(modal_provincia);
 
+        modal_domicilio_css.style.border = '1px solid #DFDFDF';
+        modal_localidad_css.style.border = '1px solid #DFDFDF';
+        modal_provincia_css.style.border = '1px solid #DFDFDF';
+
     } else {
 
             //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
             event.preventDefault();
+
+            modal_domicilio_css.style.border = '2px dashed red';
+            modal_localidad_css.style.border = '2px dashed red';
+            modal_provincia_css.style.border = '2px dashed red';
 
     }
 

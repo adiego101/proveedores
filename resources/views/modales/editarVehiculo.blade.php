@@ -47,6 +47,12 @@ $(document).on("click", ".btn_edit_modal", function(event) {
     var modal_modelo = $("#modal_modelo_vehiculo").val();
     var modal_inscripto = $("#modal_inscripto_en_vehiculo").val();
 
+    //Obtenemos los campos obligatorios para aplicarles estilos css
+    let modal_marca_css = document.getElementById("modal_marca_vehiculo");
+    let modal_dominio_css = document.getElementById("modal_dominio_vehiculo");
+    let modal_modelo_css = document.getElementById("modal_modelo_vehiculo");
+    let modal_inscripto_css = document.getElementById("modal_inscripto_en_vehiculo");
+
     //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
     if(modal_marca.length != 0 && modal_dominio.length != 0 && modal_modelo.length != 0 && modal_inscripto.length != 0){
 
@@ -65,10 +71,20 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         $('#modelo_vehiculo_text'+id_fila).text(modal_modelo);
         $('#inscripto_en_vehiculo_text'+id_fila).text(modal_inscripto);
 
+        modal_marca_css.style.border = '1px solid #DFDFDF';
+        modal_dominio_css.style.border = '1px solid #DFDFDF';
+        modal_modelo_css.style.border = '1px solid #DFDFDF';
+        modal_inscripto_css.style.border = '1px solid #DFDFDF';
+
     }else{
 
         //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
         event.preventDefault();
+
+        modal_marca_css.style.border = '2px dashed red';
+        modal_dominio_css.style.border = '2px dashed red';
+        modal_modelo_css.style.border = '2px dashed red';
+        modal_inscripto_css.style.border = '2px dashed red';
     }
 
 });

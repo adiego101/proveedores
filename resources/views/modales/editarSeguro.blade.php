@@ -51,6 +51,12 @@ $(document).on("click", ".btn_edit_modal", function(event) {
     var modal_agencia = $("#modal_agencia").val();
     var modal_vigencia = $("#modal_vigencia").val();
 
+    //Obtenemos los campos obligatorios para aplicarles estilos css
+    let modal_poliza_css = document.getElementById("modal_poliza");
+    let modal_asegurado_css = document.getElementById("modal_asegurado");
+    let modal_agencia_css = document.getElementById("modal_agencia");
+    let modal_vigencia_css = document.getElementById("modal_vigencia");
+
     //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
     if(modal_poliza.length != 0 && modal_asegurado.length != 0 && modal_agencia.length != 0 && modal_vigencia.length != 0){
 
@@ -70,10 +76,20 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         $('#agencia_text'+id_fila).text(modal_agencia);
         $('#vigencia_text'+id_fila).text(modal_vigencia_clasica);
 
+        modal_poliza_css.style.border = '1px solid #DFDFDF';
+        modal_asegurado_css.style.border = '1px solid #DFDFDF';
+        modal_agencia_css.style.border = '1px solid #DFDFDF';
+        modal_vigencia_css.style.border = '1px solid #DFDFDF';
+
     } else {
 
             //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
             event.preventDefault();
+
+            modal_poliza_css.style.border = '2px dashed red';
+            modal_asegurado_css.style.border = '2px dashed red';
+            modal_agencia_css.style.border = '2px dashed red';
+            modal_vigencia_css.style.border = '2px dashed red';
 
     }
 
