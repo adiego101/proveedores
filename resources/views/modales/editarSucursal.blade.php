@@ -10,7 +10,7 @@
             <div class="modal-body">
 
                 <label for="modal_nombre_sucursal">Nombre Sucursal:</label><br />
-                <input type="text" class="form-control" placeholder="Ingrese el nombre de la sucursal" aria-describedby="basic-addon1" id="modal_nombre_sucursal" maxlength="50" required/><br />
+                <input type="text" class="form-control" placeholder="Ingrese el nombre de la sucursal" aria-describedby="basic-addon1" id="modal_nombre_sucursal" maxlength="50"/><br />
 
                 <div class="row">
                     <div class="col-sm">
@@ -51,7 +51,7 @@
                         <br>
 
                         <label for="modal_email_sucursal">Correo electrónico:</label><br>
-                        <input id="modal_email_sucursal" type="email" class="form-control email_sucursal" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" maxlength="50" required><br>
+                        <input id="modal_email_sucursal" type="email" class="form-control email_sucursal" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" maxlength="50"><br>
                     </div>
 
                     <div class="col-sm">
@@ -85,7 +85,7 @@
                         <input type="text" class="form-control" aria-describedby="basic-addon1" id="modal_codigo_postal_sucursal" name="modal_codigo_postal_sucursal" placeholder="Ingrese el código postal" maxlength="8"><br>
 
                         <label for="modal_telefono_sucursal">Teléfono:</label><br>
-                        <input type="text" onkeypress="return valideKey(event);" id="modal_telefono_sucursal" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" maxlength="14" required>
+                        <input type="text" onkeypress="return valideKey(event);" id="modal_telefono_sucursal" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" maxlength="14">
                     </div>
                 </div>
 

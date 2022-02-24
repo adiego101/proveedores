@@ -11,13 +11,13 @@
                 <div class="row">
                     <div class="col-sm">
                         <label for="modal_fecha">Fecha:</label><br />
-                        <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago" aria-describedby="basic-addon1" id="modal_fecha" /><br />
+                        <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago" aria-describedby="basic-addon1" id="modal_fecha"/><br />
 
                         <label for="modal_importe">Importe:</label><br />
-                        <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="modal_importe" maxlength="9" /><br />
+                        <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="modal_importe" maxlength="9"/><br />
 
                         <label for="modal_observaciones">Observaciones:</label><br />
-                        <input type="text" class="form-control" placeholder="Ingrese las observaciones del pago" aria-describedby="basic-addon1" id="modal_observaciones" maxlength="50" /><br />
+                        <input type="text" class="form-control" placeholder="Ingrese las observaciones del pago" aria-describedby="basic-addon1" id="modal_observaciones" maxlength="50"/><br />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -32,11 +32,11 @@
 
 @push('js')
 
-
     <script type="text/javascript">
+        
         //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
-        $(document).on("click", ".btn_edit_modal", function() {
+        $(document).on("click", ".btn_edit_modal", function(event) {
 
             //Obtenemos el numero de la fila que queremos modificar
             var id_filapago = $("#numero_fila_pago").val();
@@ -46,19 +46,28 @@
             var modal_importe = $("#modal_importe").val();
             var modal_observaciones = $("#modal_observaciones").val();
 
-            //Ocultamos el modal
-            $('#modal_pago').modal('hide');
+            //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
+            if(modal_fecha.length != 0 && modal_importe.length != 0 && modal_observaciones.length != 0){
 
-            //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-            $('#fecha_pago' + id_filapago).val(modal_fecha);
-            $('#importe_pago' + id_filapago).val(modal_importe);
-            $('#observaciones_pago' + id_filapago).val(modal_observaciones);
+                //Ocultamos el modal
+                $('#modal_pago').modal('hide');
 
-            //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
-            var modal_fecha_clasica_pago = modal_fecha.split('-').reverse().join('/');
-            $('#fecha_pago_text' + id_filapago).text(modal_fecha_clasica_pago);
-            $('#importe_pago_text' + id_filapago).text(modal_importe);
-            $('#observaciones_pago_text' + id_filapago).text(modal_observaciones);
+                //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
+                $('#fecha_pago' + id_filapago).val(modal_fecha);
+                $('#importe_pago' + id_filapago).val(modal_importe);
+                $('#observaciones_pago' + id_filapago).val(modal_observaciones);
+
+                //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+                var modal_fecha_clasica_pago = modal_fecha.split('-').reverse().join('/');
+                $('#fecha_pago_text' + id_filapago).text(modal_fecha_clasica_pago);
+                $('#importe_pago_text' + id_filapago).text(modal_importe);
+                $('#observaciones_pago_text' + id_filapago).text(modal_observaciones);
+
+            }else{
+
+                //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
+                event.preventDefault();
+            }
 
         });
     </script>
