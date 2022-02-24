@@ -48,32 +48,43 @@
 
 <script type="text/javascript">
 
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
+//Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
-    $(document).on("click", ".btn_edit_modal", function() {
+$(document).on("click", ".btn_edit_modal", function(event) {
 
-                //Obtenemos el numero de la fila que queremos modificar
-                var id_fila = $("#numero_fila_sede").val();
+    //Obtenemos el numero de la fila que queremos modificar
+    var id_fila = $("#numero_fila_sede").val();
 
-                //Recuperamos los valores de los campos del modal
-                var modal_domicilio = $("#modal_domicilio_sede").val();
-                var modal_localidad = $("#modal_localidad_sede").val();
-                var modal_provincia = $("#modal_provincia_sede").val();
+    //Recuperamos los valores de los campos del modal
+    var modal_domicilio = $("#modal_domicilio_sede").val();
+    var modal_localidad = $("#modal_localidad_sede").val();
+    var modal_provincia = $("#modal_provincia_sede").val();
 
-                //Ocultamos el modal
-                $('#modal_sede').modal('hide');
+    //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
+    if(modal_domicilio.length != 0 && modal_localidad != " " && modal_provincia != " "){
 
-                //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                $('#domicilio_sede'+id_fila).val(modal_domicilio);
-                $('#localidad_sede'+id_fila).val(modal_localidad);
-                $('#provincia_sede'+id_fila).val(modal_provincia);
+        //Ocultamos el modal
+        $('#modal_sede').modal('hide');
 
-                //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
-                $('#domicilio_sede_text'+id_fila).text(modal_domicilio);
-                $('#localidad_sede_text'+id_fila).text(modal_localidad);
-                $('#provincia_sede_text'+id_fila).text(modal_provincia);
+        //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
+        $('#domicilio_sede'+id_fila).val(modal_domicilio);
+        $('#localidad_sede'+id_fila).val(modal_localidad);
+        $('#provincia_sede'+id_fila).val(modal_provincia);
 
-            });
+        //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+        $('#domicilio_sede_text'+id_fila).text(modal_domicilio);
+        $('#localidad_sede_text'+id_fila).text(modal_localidad);
+        $('#provincia_sede_text'+id_fila).text(modal_provincia);
+
+    } else {
+
+            //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
+            event.preventDefault();
+
+    }
+
+});
+
 </script>
 
 <script type="text/javascript">
