@@ -27,7 +27,7 @@
             <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en_vehiculo" maxlength="20"/><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button id="add_vehiculo" class="btn btn-success" disabled>Agregar Vehículo</button>
+                <input type="button" id="add_vehiculo" class="btn btn-success" value="Agregar Vehículo" disabled></input>
             </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
             <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia" /><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button id="add_seguro" class="btn btn-success" disabled>Agregar Seguro</button>
+                <input type="button" id="add_seguro" class="btn btn-success" value="Agregar Seguro" disabled></input>
             </div>
         </div>
     </div>
@@ -127,7 +127,7 @@
             <br>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button id="add_sede" class="btn btn-success" disabled>Agregar sede</button>
+                <input type="button" id="add_sede" class="btn btn-success" value="Agregar Sede" disabled></input>
             </div>
         </div>
     </div>
@@ -173,6 +173,7 @@
     <!--Incluimos el modal para validar una sede -->
     @include('modales.validarSede')
 
+    @push('js')
 
     <script type="text/javascript">
 
@@ -570,5 +571,7 @@
             });
         }
     </script>
+
+    @endpush
 
 </fieldset>
