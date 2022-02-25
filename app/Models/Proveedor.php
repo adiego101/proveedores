@@ -72,6 +72,7 @@ class Proveedor extends Model
                             'antiguedad',
                             'dom_fiscal',
                             'valor_agregado',
+                            'id_tamanio_empresa',
                             'observaciones',
                             ];
 

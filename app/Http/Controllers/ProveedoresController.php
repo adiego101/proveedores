@@ -93,12 +93,12 @@ class ProveedoresController extends Controller
         //return $cuit;
         if (!$cuit /*|| $dado_de_baja->isEmpty()*/) {
 
-            $id_tamanio_empresa = $request->id_tamanio_empresa;
+            //$id_tamanio_empresa = $request->id_tamanio_empresa;
 
             //-------------------Carga Proveedor-------------------
             //return $request->input('retencion');
             $proveedores_rupae = new Proveedor($request->all());
-            $proveedores_rupae->id_tamanio_empresa = $id_tamanio_empresa;
+            //$proveedores_rupae->id_tamanio_empresa = $id_tamanio_empresa;
 
             $proveedores_rupae->save();
 
