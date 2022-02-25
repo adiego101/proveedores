@@ -1241,7 +1241,7 @@ class ProveedoresController extends Controller
         $paises = Pais::all();
         $provincias = Provincia::all();
         $localidades = Localidad::all();
-        $provinciaid = Localidad::where('id_localidad', $sucursal->id_localidad)->get();
+        $provinciaid = Localidad::where('id_localidad', $sede->Localidad)->get();
         if ( empty($provinciaid[0]->id_provincia)) {
             $provinciaid = "";
         } else {
