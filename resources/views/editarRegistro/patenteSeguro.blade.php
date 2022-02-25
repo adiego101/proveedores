@@ -312,4 +312,45 @@ $('#baja_patente').val(id_registro);
   }
   </script>
 
+
+
+ <!--   <script type="text/javascript">
+
+  
+        $(function () {
+            var table_vehiculos = $('.yajra-vehiculos').DataTable();
+
+            if (!table_vehiculos.data().any() ) {
+                console.log('El datatable vehiculos no tiene registros');
+            }else{
+                console.log('El datatable vehiculos tiene registros');
+            }
+    
+        });
+
+
+        $(function () {
+            var table_seguros = $('.yajra-seguros').DataTable();
+
+            if (!table_seguros.data().any() ) {
+                console.log('El datatable seguros no tiene registros');
+            }else{
+                console.log('El datatable seguros tiene registros');
+            }
+    
+        });
+
+
+        $(function () {
+            var table_sedes = $('.yajra-sedes').DataTable();
+
+            if (!table_sedes.data().any() ) {
+                console.log('El datatable sedes no tiene registros');
+            }else{
+                console.log('El datatable sedes tiene registros');
+            }
+    
+        });
+    </script> -->
+
 @endpush
