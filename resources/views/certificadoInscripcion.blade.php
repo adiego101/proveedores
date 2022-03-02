@@ -4,7 +4,7 @@
 
 //Recuperamos la fecha de inscripcion desde la BD
 //La fecha original tiene el formato YYYY-mm-dd H:i:s
-$fechaOriginalInscripcion = $data['fecha_inscripcion'];
+$fechaOriginalInscripcion = htmlspecialchars($data['fecha_inscripcion']);
 
 //Cambiamos el formato por dd/mm/YYYY H:i:s
 $timestamp = strtotime($fechaOriginalInscripcion); 

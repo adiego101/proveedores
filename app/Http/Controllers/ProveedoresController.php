@@ -1670,9 +1670,9 @@ class ProveedoresController extends Controller
 
             if($request->dni_legal || $request->representante_legal){
             $persona = Persona::create([
-                'dni_persona' => $request->dni_legal,
+                'dni_persona' => htmlspecialchars($request->dni_legal),
                 //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                'nombre_persona' => $request->representante_legal,
+                'nombre_persona' => htmlspecialchars($request->representante_legal),
                 //'apellido_persona'=>$proveedores_rupae->apellido_persona,
                 //'genero_persona'=>$proveedores_rupae->genero_persona,
             ]);
@@ -1688,9 +1688,9 @@ class ProveedoresController extends Controller
         else{
             $persona = $proveedor->personas()->first();
             $persona->update([
-                'dni_persona' => $request->dni_legal,
+                'dni_persona' => htmlspecialchars($request->dni_legal),
                 //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                'nombre_persona' => $request->representante_legal,
+                'nombre_persona' => htmlspecialchars($request->representante_legal),
                 //'apellido_persona'=>$proveedores_rupae->apellido_persona,
                 //'genero_persona'=>$proveedores_rupae->genero_persona,
             ]);
@@ -1707,19 +1707,19 @@ class ProveedoresController extends Controller
                 $proveedor_domicilio_real = Proveedor_domicilio::create([
                     'tipo_domicilio' => 'real',
                     //'nro_orden_domicilio',
-                    'calle' => $request->input('calle_real'),
-                    'id_proveedor' => $proveedor->id_proveedor,
-                    'numero' => $request->input('numero_real'),
-                    'dpto' => $request->input('dpto_real'),
-                    'puerta' => $request->input('puerta_real'),
-                    'lote' => $request->input('lote_real'),
-                    'manzana' => $request->input('manzana_real'),
-                    'entre_calles' => $request->input('entreCalles_real'),
-                    'oficina' => $request->input('oficina_real'),
-                    'monoblock' => $request->input('monoblock_real'),
-                    'barrio' => $request->input('barrio_real'),
+                    'calle' => htmlspecialchars($request->input('calle_real')),
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
+                    'numero' => htmlspecialchars($request->input('numero_real')),
+                    'dpto' => htmlspecialchars($request->input('dpto_real')),
+                    'puerta' => htmlspecialchars($request->input('puerta_real')),
+                    'lote' => htmlspecialchars($request->input('lote_real')),
+                    'manzana' => htmlspecialchars($request->input('manzana_real')),
+                    'entre_calles' => htmlspecialchars($request->input('entreCalles_real')),
+                    'oficina' => htmlspecialchars($request->input('oficina_real')),
+                    'monoblock' => htmlspecialchars($request->input('monoblock_real')),
+                    'barrio' => htmlspecialchars($request->input('barrio_real')),
                     'id_localidad' => $request->input('localidad_real'),
-                    'codigo_postal' => $request->input('cp_real'),
+                    'codigo_postal' => htmlspecialchars($request->input('cp_real')),
                 ]);
                 $proveedor_domicilio_real->save();
 
@@ -1732,7 +1732,7 @@ class ProveedoresController extends Controller
 
                 $telefono_real = Proveedor_telefono::create([
                     'nro_tel' => $request->telefono_real[$i],
-                    'id_proveedor' => $proveedor->id_proveedor,
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                     //'cod_area_tel' =>,
                     //'tipo_medio'=>,
                     //'desc_telefono'=>,
@@ -1750,8 +1750,8 @@ class ProveedoresController extends Controller
                 //---------Carga de Email_Real----------
 
                 $email_real = Proveedor_email::create([
-                    'email' => $request->email_real[$i],
-                    'id_proveedor' => $proveedor->id_proveedor,
+                    'email' => htmlspecialchars($request->email_real[$i]),
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                     'tipo_email' => 'real',
                 ]);
                 $email_real->save();
@@ -1769,19 +1769,19 @@ class ProveedoresController extends Controller
             $proveedor_domicilio_real->update([
                 'tipo_domicilio' => 'real',
                 //'nro_orden_domicilio',
-                'calle' => $request->input('calle_real'),
-                'id_proveedor' => $proveedor->id_proveedor,
+                'calle' => htmlspecialchars($request->input('calle_real')),
+                'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                 'numero' => $request->input('numero_real'),
-                'dpto' => $request->input('dpto_real'),
-                'puerta' => $request->input('puerta_real'),
-                'lote' => $request->input('lote_real'),
-                'manzana' => $request->input('manzana_real'),
-                'entre_calles' => $request->input('entreCalles_real'),
-                'oficina' => $request->input('oficina_real'),
-                'monoblock' => $request->input('monoblock_real'),
-                'barrio' => $request->input('barrio_real'),
+                'dpto' => htmlspecialchars($request->input('dpto_real')),
+                'puerta' => htmlspecialchars($request->input('puerta_real')),
+                'lote' => htmlspecialchars($request->input('lote_real')),
+                'manzana' => htmlspecialchars($request->input('manzana_real')),
+                'entre_calles' => htmlspecialchars($request->input('entreCalles_real')),
+                'oficina' => htmlspecialchars($request->input('oficina_real')),
+                'monoblock' => htmlspecialchars($request->input('monoblock_real')),
+                'barrio' => htmlspecialchars($request->input('barrio_real')),
                 'id_localidad' => $request->input('localidad_real'),
-                'codigo_postal' => $request->input('cp_real'),
+                'codigo_postal' => htmlspecialchars($request->input('cp_real')),
             ]);
             $proveedor_domicilio_real->save();
 
@@ -1811,7 +1811,7 @@ class ProveedoresController extends Controller
 
                     $telefono_real = Proveedor_telefono::create([
                         'nro_tel' => $request->telefono_real[$i],
-                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                         //'cod_area_tel' =>,
                         //'tipo_medio'=>,
                         //'desc_telefono'=>,
@@ -1832,7 +1832,7 @@ class ProveedoresController extends Controller
                 $email_real = Proveedor_email::where('id_proveedor_email', $j->id_proveedor_email)->first();
 
                 $email_real->update([
-                    'email' => $request->email_real[$i],
+                    'email' => htmlspecialchars($request->email_real[$i]),
                 ]);
                 $email_real->save();
                 $i++;
@@ -1846,8 +1846,8 @@ class ProveedoresController extends Controller
 
             for ($i; $i < $arraySize ; $i++) {
                 $email_real = Proveedor_email::create([
-                    'email' => $request->email_real[$i],
-                    'id_proveedor' => $proveedor->id_proveedor,
+                    'email' => htmlspecialchars($request->email_real[$i]),
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                     'tipo_email' => 'real',
                 ]);
                 $email_real->save();
@@ -1868,19 +1868,19 @@ class ProveedoresController extends Controller
                 $proveedor_domicilio_legal = Proveedor_domicilio::create([
                     'tipo_domicilio' => 'legal',
                     //'nro_orden_domicilio',
-                    'calle' => $request->input('calle_legal'),
-                    'id_proveedor' => $proveedor->id_proveedor,
-                    'numero' => $request->input('numero_legal'),
-                    'dpto' => $request->input('dpto_legal'),
-                    'puerta' => $request->input('puerta_legal'),
-                    'lote' => $request->input('lote_legal'),
-                    'manzana' => $request->input('manzana_legal'),
-                    'entre_calles' => $request->input('entreCalles_legal'),
-                    'oficina' => $request->input('oficina_legal'),
-                    'monoblock' => $request->input('monoblock_legal'),
-                    'barrio' => $request->input('barrio_legal'),
+                    'calle' => htmlspecialchars($request->input('calle_legal')),
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
+                    'numero' => htmlspecialchars($request->input('numero_legal')),
+                    'dpto' => htmlspecialchars($request->input('dpto_legal')),
+                    'puerta' => htmlspecialchars($request->input('puerta_legal')),
+                    'lote' => htmlspecialchars($request->input('lote_legal')),
+                    'manzana' => htmlspecialchars($request->input('manzana_legal')),
+                    'entre_calles' => htmlspecialchars($request->input('entreCalles_legal')),
+                    'oficina' => htmlspecialchars($request->input('oficina_legal')),
+                    'monoblock' => htmlspecialchars($request->input('monoblock_legal')),
+                    'barrio' => htmlspecialchars($request->input('barrio_legal')),
                     'id_localidad' => $request->input('localidad_legal'),
-                    'codigo_postal' => $request->input('cp_legal'),
+                    'codigo_postal' => htmlspecialchars($request->input('cp_legal')),
                 ]);
                 $proveedor_domicilio_legal->save();
 
@@ -1893,7 +1893,7 @@ class ProveedoresController extends Controller
 
                 $telefono_legal = Proveedor_telefono::create([
                     'nro_tel' => $request->telefono_legal[$i],
-                    'id_proveedor' => $proveedor->id_proveedor,
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                     //'cod_area_tel' =>,
                     //'tipo_medio'=>,
                     //'desc_telefono'=>,
@@ -1911,8 +1911,8 @@ class ProveedoresController extends Controller
                 //---------Carga de Email_Legal----------
 
                 $email_legal = Proveedor_email::create([
-                    'email' => $request->email_legal[$i],
-                    'id_proveedor' => $proveedor->id_proveedor,
+                    'email' => htmlspecialchars($request->email_legal[$i]),
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                     'tipo_email' => 'legal',
                 ]);
                 $email_legal->save();
@@ -1930,19 +1930,19 @@ class ProveedoresController extends Controller
             $proveedor_domicilio_legal->update([
                 'tipo_domicilio' => 'legal',
                 //'nro_orden_domicilio',
-                'calle' => $request->input('calle_legal'),
-                'id_proveedor' => $proveedor->id_proveedor,
+                'calle' => htmlspecialchars($request->input('calle_legal')),
+                'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                 'numero' => $request->input('numero_legal'),
-                'dpto' => $request->input('dpto_legal'),
-                'puerta' => $request->input('puerta_legal'),
-                'lote' => $request->input('lote_legal'),
-                'manzana' => $request->input('manzana_legal'),
-                'entre_calles' => $request->input('entreCalles_legal'),
-                'oficina' => $request->input('oficina_legal'),
-                'monoblock' => $request->input('monoblock_legal'),
-                'barrio' => $request->input('barrio_legal'),
+                'dpto' => htmlspecialchars($request->input('dpto_legal')),
+                'puerta' => htmlspecialchars($request->input('puerta_legal')),
+                'lote' => htmlspecialchars($request->input('lote_legal')),
+                'manzana' => htmlspecialchars($request->input('manzana_legal')),
+                'entre_calles' => htmlspecialchars($request->input('entreCalles_legal')),
+                'oficina' => htmlspecialchars($request->input('oficina_legal')),
+                'monoblock' => htmlspecialchars($request->input('monoblock_legal')),
+                'barrio' => htmlspecialchars($request->input('barrio_legal')),
                 'id_localidad' => $request->input('localidad_legal'),
-                'codigo_postal' => $request->input('cp_legal'),
+                'codigo_postal' => htmlspecialchars($request->input('cp_legal')),
             ]);
             $proveedor_domicilio_legal->save();
 
@@ -1972,7 +1972,7 @@ class ProveedoresController extends Controller
 
                     $telefono_legal = Proveedor_telefono::create([
                         'nro_tel' => $request->telefono_legal[$i],
-                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                         //'cod_area_tel' =>,
                         //'tipo_medio'=>,
                         //'desc_telefono'=>,
@@ -1993,7 +1993,7 @@ class ProveedoresController extends Controller
                 $email_legal = Proveedor_email::where('id_proveedor_email', $j->id_proveedor_email)->first();
 
                 $email_legal->update([
-                    'email' => $request->email_legal[$i],
+                    'email' => htmlspecialchars($request->email_legal[$i]),
                 ]);
                 $email_legal->save();
                 $i++;
@@ -2007,8 +2007,8 @@ class ProveedoresController extends Controller
 
             for ($i; $i < $arraySize ; $i++) {
                 $email_legal = Proveedor_email::create([
-                    'email' => $request->email_legal[$i],
-                    'id_proveedor' => $proveedor->id_proveedor,
+                    'email' => htmlspecialchars($request->email_legal[$i]),
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                     'tipo_email' => 'legal',
                 ]);
                 $email_legal->save();
@@ -2029,19 +2029,19 @@ class ProveedoresController extends Controller
                 $proveedor_domicilio_fiscal = Proveedor_domicilio::create([
                     'tipo_domicilio' => 'fiscal',
                     //'nro_orden_domicilio',
-                    'calle' => $request->input('calle_fiscal'),
-                    'id_proveedor' => $proveedor->id_proveedor,
-                    'numero' => $request->input('numero_fiscal'),
-                    'dpto' => $request->input('dpto_fiscal'),
-                    'puerta' => $request->input('puerta_fiscal'),
-                    'lote' => $request->input('lote_fiscal'),
-                    'manzana' => $request->input('manzana_fiscal'),
-                    'entre_calles' => $request->input('entreCalles_fiscal'),
-                    'oficina' => $request->input('oficina_fiscal'),
-                    'monoblock' => $request->input('monoblock_fiscal'),
-                    'barrio' => $request->input('barrio_fiscal'),
+                    'calle' => htmlspecialchars($request->input('calle_fiscal')),
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
+                    'numero' => htmlspecialchars($request->input('numero_fiscal')),
+                    'dpto' => htmlspecialchars($request->input('dpto_fiscal')),
+                    'puerta' => htmlspecialchars($request->input('puerta_fiscal')),
+                    'lote' => htmlspecialchars($request->input('lote_fiscal')),
+                    'manzana' => htmlspecialchars($request->input('manzana_fiscal')),
+                    'entre_calles' => htmlspecialchars($request->input('entreCalles_fiscal')),
+                    'oficina' => htmlspecialchars($request->input('oficina_fiscal')),
+                    'monoblock' => htmlspecialchars($request->input('monoblock_fiscal')),
+                    'barrio' => htmlspecialchars($request->input('barrio_fiscal')),
                     'id_localidad' => $request->input('localidad_fiscal'),
-                    'codigo_postal' => $request->input('cp_fiscal'),
+                    'codigo_postal' => htmlspecialchars($request->input('cp_fiscal')),
                 ]);
                 $proveedor_domicilio_fiscal->save();
 
@@ -2054,7 +2054,7 @@ class ProveedoresController extends Controller
 
                 $telefono_fiscal = Proveedor_telefono::create([
                     'nro_tel' => $request->telefono_fiscal[$i],
-                    'id_proveedor' => $proveedor->id_proveedor,
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                     //'cod_area_tel' =>,
                     //'tipo_medio'=>,
                     //'desc_telefono'=>,
@@ -2072,8 +2072,8 @@ class ProveedoresController extends Controller
                 //---------Carga de Email_Fiscal----------
 
                 $email_fiscal = Proveedor_email::create([
-                    'email' => $request->email_fiscal[$i],
-                    'id_proveedor' => $proveedor->id_proveedor,
+                    'email' => htmlspecialchars($request->email_fiscal[$i]),
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                     'tipo_email' => 'fiscal',
                 ]);
                 $email_fiscal->save();
@@ -2091,19 +2091,19 @@ class ProveedoresController extends Controller
             $proveedor_domicilio_fiscal->update([
                 'tipo_domicilio' => 'fiscal',
                 //'nro_orden_domicilio',
-                'calle' => $request->input('calle_fiscal'),
-                'id_proveedor' => $proveedor->id_proveedor,
+                'calle' => htmlspecialchars($request->input('calle_fiscal')),
+                'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                 'numero' => $request->input('numero_fiscal'),
-                'dpto' => $request->input('dpto_fiscal'),
-                'puerta' => $request->input('puerta_fiscal'),
-                'lote' => $request->input('lote_fiscal'),
-                'manzana' => $request->input('manzana_fiscal'),
-                'entre_calles' => $request->input('entreCalles_fiscal'),
-                'oficina' => $request->input('oficina_fiscal'),
-                'monoblock' => $request->input('monoblock_fiscal'),
-                'barrio' => $request->input('barrio_fiscal'),
+                'dpto' => htmlspecialchars($request->input('dpto_fiscal')),
+                'puerta' => htmlspecialchars($request->input('puerta_fiscal')),
+                'lote' => htmlspecialchars($request->input('lote_fiscal')),
+                'manzana' => htmlspecialchars($request->input('manzana_fiscal')),
+                'entre_calles' => htmlspecialchars($request->input('entreCalles_fiscal')),
+                'oficina' => htmlspecialchars($request->input('oficina_fiscal')),
+                'monoblock' => htmlspecialchars($request->input('monoblock_fiscal')),
+                'barrio' => htmlspecialchars($request->input('barrio_fiscal')),
                 'id_localidad' => $request->input('localidad_fiscal'),
-                'codigo_postal' => $request->input('cp_fiscal'),
+                'codigo_postal' => htmlspecialchars($request->input('cp_fiscal')),
             ]);
             $proveedor_domicilio_fiscal->save();
 
@@ -2133,7 +2133,7 @@ class ProveedoresController extends Controller
 
                     $telefono_fiscal = Proveedor_telefono::create([
                         'nro_tel' => $request->telefono_fiscal[$i],
-                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                         //'cod_area_tel' =>,
                         //'tipo_medio'=>,
                         //'desc_telefono'=>,
@@ -2154,7 +2154,7 @@ class ProveedoresController extends Controller
                 $email_fiscal = Proveedor_email::where('id_proveedor_email', $j->id_proveedor_email)->first();
 
                 $email_fiscal->update([
-                    'email' => $request->email_fiscal[$i],
+                    'email' => htmlspecialchars($request->email_fiscal[$i]),
                 ]);
                 $email_fiscal->save();
                 $i++;
@@ -2168,8 +2168,8 @@ class ProveedoresController extends Controller
 
             for ($i; $i < $arraySize ; $i++) {
                 $email_fiscal = Proveedor_email::create([
-                    'email' => $request->email_fiscal[$i],
-                    'id_proveedor' => $proveedor->id_proveedor,
+                    'email' => htmlspecialchars($request->email_fiscal[$i]),
+                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                     'tipo_email' => 'fiscal',
                 ]);
                 $email_fiscal->save();
@@ -2186,7 +2186,7 @@ class ProveedoresController extends Controller
                 $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor' ,$proveedor->id_proveedor)->where('id_tipo_proveedor' , '4')->get();
                 if($Proveedores_tipos_proveedores->isEmpty()){
                     $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                         'id_tipo_proveedor' => '4',
                     ]);
                     $Proveedores_tipos_proveedores->save();
@@ -2204,7 +2204,7 @@ class ProveedoresController extends Controller
                 $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor' ,$proveedor->id_proveedor)->where('id_tipo_proveedor' , '1')->get();
                 if($Proveedores_tipos_proveedores->isEmpty()){
                     $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                         'id_tipo_proveedor' => '1',
                     ]);
                     $Proveedores_tipos_proveedores->save();
@@ -2222,7 +2222,7 @@ class ProveedoresController extends Controller
                 $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor' ,$proveedor->id_proveedor)->where('id_tipo_proveedor' , '2')->get();
                 if($Proveedores_tipos_proveedores->isEmpty()){
                     $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                         'id_tipo_proveedor' => '2',
                     ]);
                     $Proveedores_tipos_proveedores->save();
@@ -2240,7 +2240,7 @@ class ProveedoresController extends Controller
                 $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor' ,$proveedor->id_proveedor)->where('id_tipo_proveedor' , '3')->get();
                 if($Proveedores_tipos_proveedores->isEmpty()){
                     $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => $proveedor->id_proveedor,
+                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
                         'id_tipo_proveedor' => '3',
                     ]);
                     $Proveedores_tipos_proveedores->save();
@@ -2280,8 +2280,8 @@ class ProveedoresController extends Controller
 
     public function dar_baja(Request $request)
     {
-
-        $proveedores_rupae = Proveedor::find($request->id);
+        $id_proveedor = htmlspecialchars($request->id);
+        $proveedores_rupae = Proveedor::find($id_proveedor);
         //return response()->json($proveedores_rupae);
         $proveedores_rupae->dado_de_baja = 1;
         $proveedores_rupae->save();
@@ -2302,8 +2302,8 @@ class ProveedoresController extends Controller
 
     public function dar_baja_id(Request $request)
     {
-
-        $proveedores_rupae = Proveedor::find($request->id);
+        $id_proveedor = htmlspecialchars($request->id);
+        $proveedores_rupae = Proveedor::find($id_proveedor);
         //return response()->json($proveedores_rupae);
         $proveedores_rupae->dado_de_baja = 1;
         $proveedores_rupae->save();
@@ -2314,8 +2314,8 @@ class ProveedoresController extends Controller
 
     public function dar_alta_id(Request $request)
     {
-
-        $proveedores_rupae = Proveedor::find($request->id);
+        $id_proveedor = htmlspecialchars($request->id);
+        $proveedores_rupae = Proveedor::find($id_proveedor);
         //return response()->json($proveedores_rupae);
         $proveedores_rupae->dado_de_baja = 0;
         $proveedores_rupae->save();
@@ -2403,53 +2403,53 @@ public function actualizar_formulas(Request $request)
     {
         $facturacion = Ponderacion_compre_local::find(1);
         $facturacion->update([
-            'valor_ponderacion' => $request->actualizar_facturacion,
+            'valor_ponderacion' => htmlspecialchars($request->actualizar_facturacion),
         ]);
 
         $gastos = Ponderacion_compre_local::find(2);
         $gastos->update([
-            'valor_ponderacion' => $request->actualizar_gastos,
+            'valor_ponderacion' => htmlspecialchars($request->actualizar_gastos),
         ]);
 
         $mano_obra = Ponderacion_compre_local::find(3);
         $mano_obra->update([
-            'valor_ponderacion' => $request->actualizar_obra,
+            'valor_ponderacion' => htmlspecialchars($request->actualizar_obra),
         ]);
 
 
         $antiguedad = Ponderacion_compre_local::find(4);
         $antiguedad->update([
-            'valor_ponderacion' => $request->actualizar_antiguedad,
+            'valor_ponderacion' => htmlspecialchars($request->actualizar_antiguedad),
         ]);
 
         $domicilio = Ponderacion_compre_local::find(5);
         $domicilio->update([
-            'valor_ponderacion' => $request->actualizar_domicilio,
+            'valor_ponderacion' => htmlspecialchars($request->actualizar_domicilio),
         ]);
 
         $valor_agregado = Ponderacion_compre_local::find(6);
         $valor_agregado->update([
-            'valor_ponderacion' => $request->actualizar_agregado,
+            'valor_ponderacion' => htmlspecialchars($request->actualizar_agregado),
         ]);
 
 
 
         $local = Jerarquia_compre_local::find(1);
         $local->update([
-            'valor_desde' => $request->local_inicial,
-            'valor_hasta' => $request->local_final,
+            'valor_desde' => htmlspecialchars($request->local_inicial),
+            'valor_hasta' => htmlspecialchars($request->local_final),
         ]);
 
         $intermedio = Jerarquia_compre_local::find(2);
         $intermedio->update([
-            'valor_desde' => $request->intermedio_inicial,
-            'valor_hasta' => $request->intermedio_final,
+            'valor_desde' => htmlspecialchars($request->intermedio_inicial),
+            'valor_hasta' => htmlspecialchars($request->intermedio_final),
         ]);
 
         $foraneo = Jerarquia_compre_local::find(3);
         $foraneo->update([
-            'valor_desde' => $request->foraneo_inicial,
-            'valor_hasta' => $request->foraneo_final,
+            'valor_desde' => htmlspecialchars($request->foraneo_inicial),
+            'valor_hasta' => htmlspecialchars($request->foraneo_final),
         ]);
 
         return redirect()->back()->withSuccess('Los valores de las fórmulas se han actualizado satisfactoriamente !');
