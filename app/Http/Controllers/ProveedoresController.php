@@ -2399,60 +2399,68 @@ return $select;
 }
  */
 
-public function actualizar_formulas(Request $request)
+    public function actualizar_formulas(Request $request)
     {
-        $facturacion = Ponderacion_compre_local::find(1);
-        $facturacion->update([
-            'valor_ponderacion' => htmlspecialchars($request->actualizar_facturacion),
-        ]);
+        try{
 
-        $gastos = Ponderacion_compre_local::find(2);
-        $gastos->update([
-            'valor_ponderacion' => htmlspecialchars($request->actualizar_gastos),
-        ]);
+            $facturacion = Ponderacion_compre_local::find(1);
+            $facturacion->update([
+                'valor_ponderacion' => htmlspecialchars($request->actualizar_facturacion),
+            ]);
 
-        $mano_obra = Ponderacion_compre_local::find(3);
-        $mano_obra->update([
-            'valor_ponderacion' => htmlspecialchars($request->actualizar_obra),
-        ]);
+            $gastos = Ponderacion_compre_local::find(2);
+            $gastos->update([
+                'valor_ponderacion' => htmlspecialchars($request->actualizar_gastos),
+            ]);
 
-
-        $antiguedad = Ponderacion_compre_local::find(4);
-        $antiguedad->update([
-            'valor_ponderacion' => htmlspecialchars($request->actualizar_antiguedad),
-        ]);
-
-        $domicilio = Ponderacion_compre_local::find(5);
-        $domicilio->update([
-            'valor_ponderacion' => htmlspecialchars($request->actualizar_domicilio),
-        ]);
-
-        $valor_agregado = Ponderacion_compre_local::find(6);
-        $valor_agregado->update([
-            'valor_ponderacion' => htmlspecialchars($request->actualizar_agregado),
-        ]);
+            $mano_obra = Ponderacion_compre_local::find(3);
+            $mano_obra->update([
+                'valor_ponderacion' => htmlspecialchars($request->actualizar_obra),
+            ]);
 
 
+            $antiguedad = Ponderacion_compre_local::find(4);
+            $antiguedad->update([
+                'valor_ponderacion' => htmlspecialchars($request->actualizar_antiguedad),
+            ]);
 
-        $local = Jerarquia_compre_local::find(1);
-        $local->update([
-            'valor_desde' => htmlspecialchars($request->local_inicial),
-            'valor_hasta' => htmlspecialchars($request->local_final),
-        ]);
+            $domicilio = Ponderacion_compre_local::find(5);
+            $domicilio->update([
+                'valor_ponderacion' => htmlspecialchars($request->actualizar_domicilio),
+            ]);
 
-        $intermedio = Jerarquia_compre_local::find(2);
-        $intermedio->update([
-            'valor_desde' => htmlspecialchars($request->intermedio_inicial),
-            'valor_hasta' => htmlspecialchars($request->intermedio_final),
-        ]);
+            $valor_agregado = Ponderacion_compre_local::find(6);
+            $valor_agregado->update([
+                'valor_ponderacion' => htmlspecialchars($request->actualizar_agregado),
+            ]);
 
-        $foraneo = Jerarquia_compre_local::find(3);
-        $foraneo->update([
-            'valor_desde' => htmlspecialchars($request->foraneo_inicial),
-            'valor_hasta' => htmlspecialchars($request->foraneo_final),
-        ]);
 
-        return redirect()->back()->withSuccess('Los valores de las fórmulas se han actualizado satisfactoriamente !');
+
+            $local = Jerarquia_compre_local::find(1);
+            $local->update([
+                'valor_desde' => htmlspecialchars($request->local_inicial),
+                'valor_hasta' => htmlspecialchars($request->local_final),
+            ]);
+
+            $intermedio = Jerarquia_compre_local::find(2);
+            $intermedio->update([
+                'valor_desde' => htmlspecialchars($request->intermedio_inicial),
+                'valor_hasta' => htmlspecialchars($request->intermedio_final),
+            ]);
+
+            $foraneo = Jerarquia_compre_local::find(3);
+            $foraneo->update([
+                'valor_desde' => htmlspecialchars($request->foraneo_inicial),
+                'valor_hasta' => htmlspecialchars($request->foraneo_final),
+            ]);
+
+            return redirect()->back()->withSuccess('Los valores de las fórmulas se han actualizado satisfactoriamente.');
+
+        } catch(\Illuminate\Database\QueryException $ex){ 
+            //dd($ex->getMessage());
+            $message = "Los valores introducidos en los campos de Ponderación deben ser menores a 10.";
+            return redirect()->back()->withErrors($message);
+        }
 
     }
 
