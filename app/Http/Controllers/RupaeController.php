@@ -13,6 +13,7 @@ use App\Models\Proveedor_telefono;
 use App\Models\Actividad_economica;
 use App\Models\Proveedor_domicilio;
 use App\Models\Actividades_proveedores;
+use Illuminate\Support\Facades\Storage;
 
 class RupaeController extends Controller
 {
@@ -115,9 +116,11 @@ class RupaeController extends Controller
 public function descargarRegistroAlta($id)
 {
     $proveedor = Proveedor::find($id);
-    if($proveedor->nro_rupae_proveedor==null)
+    if($proveedor->nro_rupae_proveedor==null){
         $this->asignarNroRupaeProveedor($proveedor);
 
+    }
+    $idAlta = $proveedor->nro_rupae_proveedor;
     $persona = $proveedor->personas()->get();
 
     if ($persona->isEmpty()) {
@@ -227,15 +230,24 @@ public function descargarRegistroAlta($id)
 
     ];
 
-
+/*
     return PDF::loadView('registroAlta', array('data'=> $data))
-        ->stream('registro-alta.pdf');
+        ->stream('registro-alta.pdf');*/
+        $dompdf = PDF::loadView('registroAlta', array('data'=> $data));
+        // return storage_path('app/public/');
+        $dompdf->save(storage_path('app/public/') . 'registro-alta_'.$idAlta.'.pdf');
+        return $dompdf->stream('registro-alta_'.$idAlta.'.pdf');
 }
 
 
 public function descargarCertificadoInscripcion($id)
 {
     $proveedor = Proveedor::find($id);
+
+    // crea una ID única con un número aleatorio como prefijo, más seguro que un prefijo estático uniqid (rand (), true)
+    $idInscripcion = uniqid (rand ());
+
+    return $idInscripcion;
 
     if($proveedor->nro_rupae_proveedor==null)
         $this->asignarNroRupaeProveedor($proveedor);
@@ -284,8 +296,22 @@ public function descargarCertificadoInscripcion($id)
 
     ];
 
-    return PDF::loadView('certificadoInscripcion', array('data'=> $data))
-        ->stream('certificado-inscripcion.pdf');
+    /*return PDF::loadView('certificadoInscripcion', array('data'=> $data))
+        ->stream('certificado-inscripcion.pdf');*/
+
+        //return PDF::loadView('certificadoInscripcion', array('data'=> $data))
+        //->save(storage_path('app/public/') . 'certificado-inscripcion.pdf');
+
+        //$dompdf = App::make("dompdf.wrapper");
+        $dompdf = PDF::loadView('certificadoInscripcion', array('data'=> $data));
+        // return storage_path('app/public/');
+        $dompdf->save(storage_path('app/public/') . 'certificado-inscripcion_'.$idInscripcion.'.pdf');
+        return $dompdf->stream('certificado-inscripcion_'.$idInscripcion.'.pdf');
+
+        //return PDF::loadFile(public_path().'/certificado-inscripcion.pdf')->save('/path-to/my_stored_file.pdf')->stream('download.pdf');
+
+        //return $content;
+
 }
 
     public function asignarNroRupaeProveedor($proveedor){
@@ -302,7 +328,7 @@ public function descargarCertificadoInscripcion($id)
             catch(\Exception $e){
                 Log::error('Error inesperado '.$e->getMessage());
                 $max_numero_registro=Proveedor::max('nro_rupae_proveedor');
-                $error_numero_registro=true;    
+                $error_numero_registro=true;
             }
         }
         while($error_numero_registro);
