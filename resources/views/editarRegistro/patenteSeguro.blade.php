@@ -7,12 +7,13 @@
 
 <br/>
 
-<input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="vehiculos_afectados" name="vehiculos_afectados"
+<!-- <input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="vehiculos_afectados" name="vehiculos_afectados"
 value="0">
 <label for="vehiculos_afectados">Posee vehículos afectados a la actividad económica que desarrolla</label><br>
-<br>
+<br> -->
 
-<br>
+<h4>Vehículos:</h4><br>
+
 @if ($mode == "edit")
 
 <a class="btn btn-secondary" style="float: left" href="{{ route('patentes.nuevo', ['id' => $id]) }}" title="Agregar vehiculo">+</a>
@@ -43,13 +44,13 @@ value="0">
 
     <hr>
 
-<input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="seguros_sta_cruz"  name="seguros_sta_cruz"
+<!-- <input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="seguros_sta_cruz"  name="seguros_sta_cruz"
 value="0">
 <label for="seguros_sta_cruz">Posee seguros contratados con promotores residentes en nuestra provincia</label><br>
-<br>
+<br> -->
 
+<h4>Seguros:</h4><br>
 
-<br>
 @if ($mode == "edit")
 
 <a class="btn btn-secondary" style="float: left" href="{{ route('seguros.nuevo', ['id' => $id]) }}" title="Agregar seguro">+</a>
@@ -80,12 +81,13 @@ value="0">
 
     <hr>
 
-<input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="servicio_personal_especializado" name="servicio_personal_especializado"
+<!-- <input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="servicio_personal_especializado" name="servicio_personal_especializado"
 value="0">
 <label for="servicio_personal_especializado">Utiliza como sede de la actividad económica que desarrolla algún inmueble que tribute impuesto inmobiliario en localidades de la Provincia de Santa Cruz</label><br>
-<br>
+<br> -->
 
-<br>
+<h4>Sedes:</h4><br>
+
 @if ($mode == "edit")
 
 <a class="btn btn-secondary" style="float: left" href="{{ route('sedes.nuevo', ['id' => $id]) }}" title="Agregar sede">+</a>
@@ -120,10 +122,6 @@ value="0">
         <a class="btn btn-primary btnNext">Siguiente</a>
     </div>
 </div>
-
-
-
-
 
 </fieldset>
 
@@ -311,46 +309,5 @@ $('#baja_patente').val(id_registro);
   $('#baja_sede').val(id_registro);
   }
   </script>
-
-
-
- <!--   <script type="text/javascript">
-
-  
-        $(function () {
-            var table_vehiculos = $('.yajra-vehiculos').DataTable();
-
-            if (!table_vehiculos.data().any() ) {
-                console.log('El datatable vehiculos no tiene registros');
-            }else{
-                console.log('El datatable vehiculos tiene registros');
-            }
-    
-        });
-
-
-        $(function () {
-            var table_seguros = $('.yajra-seguros').DataTable();
-
-            if (!table_seguros.data().any() ) {
-                console.log('El datatable seguros no tiene registros');
-            }else{
-                console.log('El datatable seguros tiene registros');
-            }
-    
-        });
-
-
-        $(function () {
-            var table_sedes = $('.yajra-sedes').DataTable();
-
-            if (!table_sedes.data().any() ) {
-                console.log('El datatable sedes no tiene registros');
-            }else{
-                console.log('El datatable sedes tiene registros');
-            }
-    
-        });
-    </script> -->
 
 @endpush
