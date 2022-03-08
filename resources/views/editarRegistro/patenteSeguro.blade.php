@@ -286,9 +286,7 @@ $('#baja_patente').val(id_registro);
           ajax: "{{ url('sedes/'.$id.'/'.$mode) }}",
           columns: [
               {data: 'Domicilio', name: 'Domicilio'},
-              {data: 'Localidad', name: 'Localidad'},
-              //{data: 'cuit', name: 'cuit'},
-              //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
+              {data: 'nombre_localidad', name: 'nombre_localidad'},
               {
                   data: 'action',
                   name: 'action',
@@ -300,14 +298,14 @@ $('#baja_patente').val(id_registro);
 
     });
 
-      //Funciones a implementar
+   
 
-      function bajaSede(id_registro) {
+    function bajaSede(id_registro) {
 
-  //Desplegamos el modal
-  $('#modal_baja_sede').modal('show');
-  $('#baja_sede').val(id_registro);
-  }
+        //Desplegamos el modal
+        $('#modal_baja_sede').modal('show');
+        $('#baja_sede').val(id_registro);
+    }
   </script>
 
 @endpush

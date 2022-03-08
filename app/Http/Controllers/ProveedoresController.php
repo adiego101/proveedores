@@ -1208,7 +1208,9 @@ class ProveedoresController extends Controller
     public function getSedes(Request $request, $id, $mode = null)
     {
         //if ($request->ajax()) {
-        $data = Proveedor_sede::where('id_proveedor', $id)->get();
+        //$data = Proveedor_sede::where('id_proveedor', $id)->get();
+
+        $data = Proveedor_sede::join("localidades","localidades.id_localidad", "=", "proveedores_sede.Localidad")->where("proveedores_sede.id_proveedor", "=", $id)->select("proveedores_sede.id_proveedor_sede","proveedores_sede.Domicilio","localidades.nombre_localidad")->get();
 
         return Datatables::of($data)
             ->addIndexColumn()
