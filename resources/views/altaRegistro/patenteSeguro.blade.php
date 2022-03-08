@@ -452,15 +452,17 @@
     <script type="text/javascript">
 
     let domicilio;
-    let localidad;
+    let id_localidad;
+    let valor_localidad;
     let provincia_sede;
     let l = 1; //contador para asignar id al boton que borrara la fila
     $("#add_sede").on("click", function(e) {
 
         domicilio = $("#domicilio_sede").val();
-        localidad = $("#localidad_sede").val();
+        id_localidad = $("#localidad_sede").val(); // Capturamos el valor del select (el id)
+        valor_localidad = $("#localidad_sede").find('option:selected').text(); // Capturamos el texto del option seleccionado
         provincia_sede = $("#provincia_sede").val();
-
+        
         /*console.log("Provincia: "+provincia_sede);
         console.log("localidad: "+localidad);
         if(localidad != " "){
@@ -474,16 +476,16 @@
         let localidad_sede_css = document.getElementById("localidad_sede");
         let provincia_sede_css = document.getElementById("provincia_sede");
 
-        if(domicilio.length != 0 && localidad != " " && provincia_sede != " "){
+        if(domicilio.length != 0 && id_localidad != " " && provincia_sede != " "){
 
         $("#body_table_sede").append(
             '<tr id="row_sede' + l +'">'+
                 '<td> <div id="domicilio_sede_text' + l +'">' + domicilio +'</div></td>'+
                 '<td> <div id="provincia_sede_text' + l +'">' + provincia_sede +'</div></td>'+
-                '<td> <div id="localidad_sede_text' + l +'">' + localidad +'</div></td>'+
+                '<td> <div id="localidad_sede_text' + l +'">' + valor_localidad +'</div></td>'+
                 '<td>'+
                 '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'">'+
-                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + localidad +'">'+
+                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + id_localidad +'">'+
                 '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sede' + l +'" name="provincias_sedes[]" readonly value="' + provincia_sede +'">'+
                 '<button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button>'+
                 '</td>'+
