@@ -138,11 +138,13 @@
 
 </form>
 
-@endsection
 
 <!--Incluimos el modal para validar los campos -->
 
 @include('modales.validarFormularioFormulas')
+
+@endsection
+
 
 @push('js')
 

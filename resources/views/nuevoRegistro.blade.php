@@ -87,11 +87,12 @@
     </form>
     @yield('datos')
 
+    <!--Incluimos el modal para validar los campos -->
+
+    @include('modales.validarFormularioAlta')
+
 @endsection
 
-<!--Incluimos el modal para validar los campos -->
-
-@include('modales.validarFormularioAlta')
 
 @push('js')
 
