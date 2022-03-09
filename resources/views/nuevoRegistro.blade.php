@@ -194,7 +194,7 @@ $('input[type="checkbox"]').on('change', function(){
 
         input:hover:invalid:required {
 
-            border: 2px dashed red;
+            background-color: rgb(255, 76, 76);
         }
 
     </style>
