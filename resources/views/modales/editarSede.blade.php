@@ -37,7 +37,7 @@
                     <div class="modal-footer">
                         <input id="numero_fila_sede" name="numero_fila_sede" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
-                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-outline-danger btn_cancel_modal" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -88,14 +88,40 @@ $(document).on("click", ".btn_edit_modal", function(event) {
 
     } else {
 
-            //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
-            event.preventDefault();
+        //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
+        event.preventDefault();
+
+        if(modal_domicilio.length == 0){
 
             modal_domicilio_css.style.border = '2px dashed red';
+        }
+
+        if(modal_localidad_id == " "){
+
             modal_localidad_css.style.border = '2px dashed red';
+        }
+
+        if(modal_provincia == " "){
+
             modal_provincia_css.style.border = '2px dashed red';
+        }
 
     }
+
+});
+
+
+
+$(document).on("click", ".btn_cancel_modal", function(event) {
+
+    //Obtenemos los campos obligatorios para aplicarles estilos css
+    let modal_domicilio_css = document.getElementById("modal_domicilio_sede");
+    let modal_localidad_css = document.getElementById("modal_localidad_sede");
+    let modal_provincia_css = document.getElementById("modal_provincia_sede");
+
+    modal_domicilio_css.style.border = '1px solid #DFDFDF';
+    modal_localidad_css.style.border = '1px solid #DFDFDF';
+    modal_provincia_css.style.border = '1px solid #DFDFDF';
 
 });
 

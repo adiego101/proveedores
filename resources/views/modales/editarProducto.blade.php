@@ -90,10 +90,26 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
         event.preventDefault();
 
-        modal_producto_elaborado_css.style.border = '2px dashed red';
-        modal_rnpa_css.style.border = '2px dashed red';
-        modal_unidad_producida_css.style.border = '2px dashed red';
-        modal_produccion_total_css.style.border = '2px dashed red';
+        if(modal_producto_elaborado.length == 0){
+
+            modal_producto_elaborado_css.style.border = '2px dashed red';
+        }
+
+        if(modal_rnpa.length == 0){
+
+            modal_rnpa_css.style.border = '2px dashed red';
+        }
+
+        if(modal_unidad_producida.length == 0){
+
+            modal_unidad_producida_css.style.border = '2px dashed red';
+        }
+
+        if(modal_produccion_total.length == 0){
+
+            modal_produccion_total_css.style.border = '2px dashed red';
+        }
+
     }
 
 });

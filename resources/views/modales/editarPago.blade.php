@@ -77,9 +77,20 @@
                 //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
                 event.preventDefault();
 
-                modal_fecha_css.style.border = '2px dashed red';
-                modal_importe_css.style.border = '2px dashed red';
-                modal_observaciones_css.style.border = '2px dashed red';
+                if(modal_fecha.length == 0){
+
+                    modal_fecha_css.style.border = '2px dashed red';
+                }
+
+                if(modal_importe.length == 0){
+
+                    modal_importe_css.style.border = '2px dashed red';
+                }
+
+                if(modal_observaciones.length == 0){
+
+                    modal_observaciones_css.style.border = '2px dashed red';
+                }
             }
 
         });

@@ -177,11 +177,30 @@ $(document).on("click", ".btn_edit_modal_sucursal", function(event) {
         //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
         event.preventDefault();
 
-        modal_nombre_css.style.border = '2px dashed red';
-        modal_email_css.style.border = '2px dashed red';
-        modal_telefono_css.style.border = '2px dashed red';
-        modal_provincia_css.style.border = '2px dashed red';
-        modal_localidad_css.style.border = '2px dashed red';
+        if(modal_nombre_sucursal.length == 0){
+      
+            modal_nombre_css.style.border = '2px dashed red';
+        }
+
+        if(modal_email.length == 0){
+         
+            modal_email_css.style.border = '2px dashed red';
+        }
+
+        if(modal_telefono.length == 0){
+        
+            modal_telefono_css.style.border = '2px dashed red';
+        }
+
+        if(modal_provincia == " "){
+            
+            modal_provincia_css.style.border = '2px dashed red';
+        }
+        
+        if(modal_localidad_sucursal == " "){
+          
+            modal_localidad_css.style.border = '2px dashed red';
+        }
     }
 });
 </script>

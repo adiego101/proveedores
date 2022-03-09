@@ -24,7 +24,7 @@
                     <div class="modal-footer">
                         <input id="numero_fila_vehiculo" name="numero_fila_vehiculo" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
-                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-outline-danger btn_cancel_modal" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -81,11 +81,44 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
         event.preventDefault();
 
-        modal_marca_css.style.border = '2px dashed red';
-        modal_dominio_css.style.border = '2px dashed red';
-        modal_modelo_css.style.border = '2px dashed red';
-        modal_inscripto_css.style.border = '2px dashed red';
+        if(modal_marca.length == 0){
+
+            modal_marca_css.style.border = '2px dashed red';
+        }
+
+        if(modal_dominio.length == 0){
+
+            modal_dominio_css.style.border = '2px dashed red';
+        }
+
+        if(modal_modelo.length == 0){
+
+            modal_modelo_css.style.border = '2px dashed red';
+        }
+
+        if(modal_inscripto.length == 0){
+
+            modal_inscripto_css.style.border = '2px dashed red';
+        }
     }
 
 });
+
+
+
+$(document).on("click", ".btn_cancel_modal", function(event) {
+
+    //Obtenemos los campos obligatorios para aplicarles estilos css
+    let modal_marca_css = document.getElementById("modal_marca_vehiculo");
+    let modal_dominio_css = document.getElementById("modal_dominio_vehiculo");
+    let modal_modelo_css = document.getElementById("modal_modelo_vehiculo");
+    let modal_inscripto_css = document.getElementById("modal_inscripto_en_vehiculo");
+
+    modal_marca_css.style.border = '1px solid #DFDFDF';
+    modal_dominio_css.style.border = '1px solid #DFDFDF';
+    modal_modelo_css.style.border = '1px solid #DFDFDF';
+    modal_inscripto_css.style.border = '1px solid #DFDFDF';
+
+});
+
 </script>
