@@ -92,7 +92,7 @@
                 <div class="modal-footer">
                     <input id="numero_fila_sucursal" name="numero_fila_sucursal" type="hidden">
                     <button type="button" name="edit" class="btn btn-success btn_edit_modal_sucursal">Editar</button>
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-outline-danger btn_cancel_modal" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -203,6 +203,27 @@ $(document).on("click", ".btn_edit_modal_sucursal", function(event) {
         }
     }
 });
+
+
+
+$(document).on("click", ".btn_cancel_modal", function(event) {
+
+    //Obtenemos los campos obligatorios para aplicarles estilos css
+    let modal_nombre_css = document.getElementById("modal_nombre_sucursal");
+    let modal_email_css = document.getElementById("modal_email_sucursal");
+    let modal_telefono_css = document.getElementById("modal_telefono_sucursal");
+    //let modal_pais_css = document.getElementById("modal_nombre_sucursal");
+    let modal_provincia_css = document.getElementById("modal_provincia_sucursal");
+    let modal_localidad_css = document.getElementById("modal_localidad_sucursal");
+
+    modal_nombre_css.style.border = '1px solid #DFDFDF';
+    modal_email_css.style.border = '1px solid #DFDFDF';
+    modal_telefono_css.style.border = '1px solid #DFDFDF';
+    modal_provincia_css.style.border = '1px solid #DFDFDF';
+    modal_localidad_css.style.border = '1px solid #DFDFDF';
+
+});
+
 </script>
 
 <script type="text/javascript">

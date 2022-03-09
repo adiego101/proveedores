@@ -33,7 +33,7 @@
                     <div class="modal-footer">
                         <input id="numero_fila_producto" name="numero_fila_producto" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
-                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-outline-danger btn_cancel_modal" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -113,4 +113,22 @@ $(document).on("click", ".btn_edit_modal", function(event) {
     }
 
 });
+
+
+
+$(document).on("click", ".btn_cancel_modal", function(event) {
+
+    //Obtenemos los campos obligatorios para aplicarles estilos css
+    let modal_producto_elaborado_css = document.getElementById("modal_producto_elaborado");
+    let modal_rnpa_css = document.getElementById("modal_rnpa");
+    let modal_unidad_producida_css = document.getElementById("modal_unidad_producida");
+    let modal_produccion_total_css = document.getElementById("modal_produccion_total");
+
+    modal_producto_elaborado_css.style.border = '1px solid #DFDFDF';
+    modal_rnpa_css.style.border = '1px solid #DFDFDF';
+    modal_unidad_producida_css.style.border = '1px solid #DFDFDF';
+    modal_produccion_total_css.style.border = '1px solid #DFDFDF';
+
+});
+
 </script>

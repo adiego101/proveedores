@@ -23,7 +23,7 @@
                 <div class="modal-footer">
                     <input id="numero_fila_pago" name="numero_fila_pago" type="hidden">
                     <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-outline-danger btn_cancel_modal" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -94,5 +94,21 @@
             }
 
         });
+
+
+
+        $(document).on("click", ".btn_cancel_modal", function(event) {
+
+            //Obtenemos los campos obligatorios para aplicarles estilos css
+            let modal_fecha_css = document.getElementById("modal_fecha");
+            let modal_importe_css = document.getElementById("modal_importe");
+            let modal_observaciones_css = document.getElementById("modal_observaciones");
+
+            modal_fecha_css.style.border = '1px solid #DFDFDF';
+            modal_importe_css.style.border = '1px solid #DFDFDF';
+            modal_observaciones_css.style.border = '1px solid #DFDFDF';
+
+        });
+
     </script>
 @endpush
