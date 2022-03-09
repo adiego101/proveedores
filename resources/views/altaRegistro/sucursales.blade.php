@@ -318,12 +318,32 @@
             localidad_css.style.border = '1px solid #DFDFDF';
    
         } else {
+
+            if(nombre_sucursal.length == 0){
+
+                nombre_css.style.border = '2px dashed red';
+            }
             
-            nombre_css.style.border = '2px dashed red';
-            email_css.style.border = '2px dashed red';
-            telefono_css.style.border = '2px dashed red';
-            provincia_css.style.border = '2px dashed red';
-            localidad_css.style.border = '2px dashed red';
+            if(email.length == 0){
+
+                email_css.style.border = '2px dashed red';
+            }
+
+            if(telefono.length == 0){
+
+                telefono_css.style.border = '2px dashed red';
+            }
+
+            if(provincia == " "){
+
+                provincia_css.style.border = '2px dashed red';
+            }
+
+            if(localidad_sucursal == " "){
+                
+                localidad_css.style.border = '2px dashed red';
+            }
+            
             
             /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
             //Desplegamos el modal

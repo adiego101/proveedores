@@ -179,14 +179,18 @@
 
         var checkbox_vehiculo = document.getElementById('vehiculos_afectados');
         var button_vehiculo = document.getElementById('add_vehiculo');
+
         checkbox_vehiculo.addEventListener("change", validaCheckboxVehiculo, false);
-        function validaCheckboxVehiculo()
-        {
+
+        function validaCheckboxVehiculo() {
+
             var checked_vehiculo = checkbox_vehiculo.checked;
-            if(checked_vehiculo){
+
+            if(checked_vehiculo) {
          
                 button_vehiculo.disabled = false; 
-            }else{
+
+            } else {
           
                 button_vehiculo.disabled = true; 
             }
@@ -250,11 +254,27 @@
 
             } else {
 
-                marca_css.style.border = '2px dashed red';
-                modelo_css.style.border = '2px dashed red';
-                dominio_css.style.border = '2px dashed red';
-                inscripto_en_css.style.border = '2px dashed red';
+                if(marca.length == 0){
 
+                    marca_css.style.border = '2px dashed red';
+                }
+
+                if(modelo.length == 0){
+
+                    modelo_css.style.border = '2px dashed red';
+                }
+
+                if(dominio.length == 0){
+
+                    dominio_css.style.border = '2px dashed red';
+                }
+
+                if(inscripto_en.length == 0){
+
+                    inscripto_en_css.style.border = '2px dashed red';
+                }
+                
+                
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
                 $('#modal_validar_vehiculo').modal('show');
@@ -305,14 +325,18 @@
 
         var checkbox_seguro = document.getElementById('seguros_sta_cruz');
         var button_seguro = document.getElementById('add_seguro');
+
         checkbox_seguro.addEventListener("change", validaCheckboxSeguro, false);
-        function validaCheckboxSeguro()
-        {
+
+        function validaCheckboxSeguro() {
+
             var checked_seguro = checkbox_seguro.checked;
-            if(checked_seguro){
+
+            if(checked_seguro) {
          
                 button_seguro.disabled = false; 
-            }else{
+
+            } else {
           
                 button_seguro.disabled = true; 
             }
@@ -378,10 +402,26 @@
             
             } else {
 
-                poliza_css.style.border = '2px dashed red';
-                agencia_css.style.border = '2px dashed red';
-                asegurado_css.style.border = '2px dashed red';
-                vigencia_css.style.border = '2px dashed red';
+                if(poliza.length == 0){
+
+                    poliza_css.style.border = '2px dashed red';
+                }
+
+                if(agencia.length == 0){
+
+                    agencia_css.style.border = '2px dashed red';
+                }
+
+                if(asegurado.length == 0){
+
+                    asegurado_css.style.border = '2px dashed red';
+                }
+
+                if(vigencia.length == 0){
+
+                    vigencia_css.style.border = '2px dashed red';
+                }
+                
 
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
@@ -433,14 +473,18 @@
 
         var checkbox_sede = document.getElementById('servicio_personal_especializado');
         var button_sede = document.getElementById('add_sede');
+
         checkbox_sede.addEventListener("change", validaCheckboxSede, false);
-        function validaCheckboxSede()
-        {
+
+        function validaCheckboxSede() {
+
             var checked_sede = checkbox_sede.checked;
-            if(checked_sede){
+
+            if(checked_sede) {
          
                 button_sede.disabled = false; 
-            }else{
+
+            } else {
           
                 button_sede.disabled = true; 
             }
@@ -504,10 +548,22 @@
         provincia_sede_css.style.border = '1px solid #DFDFDF';
 
         } else {
+   
+            if(domicilio.length == 0){
 
-            domicilio_sede_css.style.border = '2px dashed red';
-            localidad_sede_css.style.border = '2px dashed red';
-            provincia_sede_css.style.border = '2px dashed red';
+                domicilio_sede_css.style.border = '2px dashed red';
+            }
+
+            if(id_localidad == " "){
+
+                localidad_sede_css.style.border = '2px dashed red';
+            }
+
+            if(provincia_sede == " "){
+
+                provincia_sede_css.style.border = '2px dashed red';
+            }
+
 
             /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
             //Desplegamos el modal

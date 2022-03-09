@@ -249,11 +249,27 @@ $("#add_producto").on("click", function(e) {
 
     } else {
 
-        producto_elaborado_css.style.border = '2px dashed red';
-        unidad_producida_css.style.border = '2px dashed red';
-        rnpa_css.style.border = '2px dashed red';
-        produccion_total_css.style.border = '2px dashed red';
+        if(producto_elaborado.length == 0){
 
+            producto_elaborado_css.style.border = '2px dashed red';
+        }
+
+        if(unidad_producida.length == 0){
+
+            unidad_producida_css.style.border = '2px dashed red';
+        }
+        
+        if(rnpa.length == 0){
+
+            rnpa_css.style.border = '2px dashed red';
+        }
+        
+        if(produccion_total.length == 0){
+
+            produccion_total_css.style.border = '2px dashed red';
+        }
+        
+    
         /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
         //Desplegamos el modal
         $('#modal_validar_producto').modal('show');

@@ -118,9 +118,21 @@
 
             } else {
 
-                fecha_css.style.border = '2px dashed red';
-                importe_css.style.border = '2px dashed red';
-                observaciones_pago_css.style.border = '2px dashed red';
+                if(fecha.length == 0){
+
+                    fecha_css.style.border = '2px dashed red';
+                }
+
+                if(importe.length == 0){
+
+                    importe_css.style.border = '2px dashed red';
+                }
+
+                if(observaciones_pago.length == 0){
+
+                    observaciones_pago_css.style.border = '2px dashed red';
+                }
+                
 
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                //Desplegamos el modal
