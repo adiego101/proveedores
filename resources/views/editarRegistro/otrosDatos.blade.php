@@ -193,7 +193,7 @@ value="5">Otros</option>
 
     <div class="row navbuttons ">
         <div class="col-6 col-sm-auto" id="btnPrevious">
-            <a class="btn btn-primary btnPrevious">Anterior</a>
+            <a class="btn btn-outline-secondary btnPrevious">Atrás</a>
         </div>
     </div>
 

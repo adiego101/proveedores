@@ -42,7 +42,7 @@ value="{{ isset($proveedor->cant_empleados_domicilio_sta_cruz) ? $proveedor->can
 
     <div class="row navbuttons ">
         <div class="col-6 col-sm-auto" id="btnPrevious">
-            <a class="btn btn-primary btnPrevious">Anterior</a>
+            <a class="btn btn-outline-secondary btnPrevious">Atrás</a>
         </div>
         <div class="col-6 col-sm-auto" id="btnNext">
             <a class="btn btn-primary btnNext">Siguiente</a>
