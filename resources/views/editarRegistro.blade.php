@@ -74,8 +74,7 @@
         </ul>
 
         <br>
-        <!-- -->
-
+      
     </nav>
 
     <form id="edit_form" action="{{url('editarProveedor/'.$proveedor->id_proveedor)}}"  method="POST">
@@ -149,7 +148,7 @@
         </div>
 
     </form>
-    <!--@include('modales.altaInscripcion')-->
+  
     @yield('datos')
 
 @endsection
