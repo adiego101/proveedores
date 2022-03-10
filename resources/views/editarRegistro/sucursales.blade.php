@@ -3,7 +3,7 @@
 <h2 class="mb-4">Sucursales</h2>
 @if ($mode == "edit")
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('sucursales.nuevo', ['id' => $id]) }}" title="Agregar sucursal">+</a>
+<a class="btn btn-success" style="float: left" href="{{ route('sucursales.nuevo', ['id' => $id]) }}" title="Agregar sucursal">+</a>
 <br>
 <hr>
 @endif

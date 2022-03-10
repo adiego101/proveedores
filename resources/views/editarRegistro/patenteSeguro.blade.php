@@ -16,7 +16,7 @@ value="0">
 
 @if ($mode == "edit")
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('patentes.nuevo', ['id' => $id]) }}" title="Agregar vehiculo">+</a>
+<a class="btn btn-success" style="float: left" href="{{ route('patentes.nuevo', ['id' => $id]) }}" title="Agregar vehiculo">+</a>
 <br>
 <hr>
     @endif
@@ -53,7 +53,7 @@ value="0">
 
 @if ($mode == "edit")
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('seguros.nuevo', ['id' => $id]) }}" title="Agregar seguro">+</a>
+<a class="btn btn-success" style="float: left" href="{{ route('seguros.nuevo', ['id' => $id]) }}" title="Agregar seguro">+</a>
 <br>
 <hr>
 @endif
@@ -90,7 +90,7 @@ value="0">
 
 @if ($mode == "edit")
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('sedes.nuevo', ['id' => $id]) }}" title="Agregar sede">+</a>
+<a class="btn btn-success" style="float: left" href="{{ route('sedes.nuevo', ['id' => $id]) }}" title="Agregar sede">+</a>
 <br>
 <hr>
 @endif

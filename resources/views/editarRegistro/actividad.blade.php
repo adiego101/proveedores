@@ -11,7 +11,7 @@
 value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
 @if ($mode == "edit")
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('actividades.nuevo', ['id' => $id]) }}" title="Agregar actividad">+</a>
+<a class="btn btn-success" style="float: left" href="{{ route('actividades.nuevo', ['id' => $id]) }}" title="Agregar actividad">+</a>
 <br>
 <hr>
 @endif
@@ -44,7 +44,7 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
 value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
 @if ($mode == "edit")
 
-<a class="btn btn-secondary" style="float: left" href="{{ route('productos.nuevo', ['id' => $id]) }}" title="Agregar producto">+</a>
+<a class="btn btn-success" style="float: left" href="{{ route('productos.nuevo', ['id' => $id]) }}" title="Agregar producto">+</a>
 <br>
 <hr>
 @endif

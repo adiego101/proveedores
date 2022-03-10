@@ -27,7 +27,7 @@ value="0" name="prov_provincial">
 
     @if ($mode == "edit")
 
-    <a class="btn btn-secondary" style="float: left" href="{{ route('pagos.nuevo', ['id' => $id]) }}" title="Agregar pago">+</a>
+    <a class="btn btn-success" style="float: left" href="{{ route('pagos.nuevo', ['id' => $id]) }}" title="Agregar pago">+</a>
     <br>
     <hr>
 
