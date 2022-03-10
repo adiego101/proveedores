@@ -127,6 +127,7 @@
                                             <input type="text" class="form-control" aria-describedby="basic-addon1" id="local_jerarquia" name="local_jerarquia" readonly value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                                             </td>
                                         </tr>
+                                        <input type="text" class="form-control" aria-describedby="basic-addon1" id="local_jerarquia_hasta" hidden value="{{$jerarquia->valor_hasta}}">
                                     @break
                                     @case ('Intermedio')
                                         <tr>
