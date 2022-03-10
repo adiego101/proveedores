@@ -549,7 +549,7 @@ class ProveedoresController extends Controller
                     $url2 = url('verSucursales/' . $row->id_sucursal);
 
                     if ($mode == "show") {
-                        $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                        $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
                         <i class="fas fa-eye"></i></a>';
                         return $actionBtn;
                     } else {
@@ -723,7 +723,7 @@ class ProveedoresController extends Controller
                 $url2 = url('verPagos/' . $row->id_pagos);
 
                 if ($mode == "show") {
-                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
@@ -812,7 +812,7 @@ class ProveedoresController extends Controller
                 $url = url('editarActividades/' . $row->id_actividad_proveedor);
                 $url2 = url('verActividades/' . $row->id_actividad_proveedor);
                 if ($mode == "show") {
-                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
                     <i class="fas fa-eye"></i></a> ';
                     return $actionBtn;                } else {
                     $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
@@ -957,7 +957,7 @@ class ProveedoresController extends Controller
                 $url2 = url('verProductos/' . $row->id_producto);
 
                 if ($mode == "show") {
-                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
@@ -1048,7 +1048,7 @@ class ProveedoresController extends Controller
                 $url2 = url('verPatentes/' . $row->id_proveedor_patente);
 
                 if ($mode == "show") {
-                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
@@ -1130,7 +1130,7 @@ class ProveedoresController extends Controller
                 $url2 = url('verSeguros/' . $row->id_proveedor_seguro);
 
                 if ($mode == "show") {
-                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
@@ -1219,7 +1219,7 @@ class ProveedoresController extends Controller
                 $url2 = url('verSedes/' . $row->id_proveedor_sede);
 
                 if ($mode=="show") {
-                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-success btn-sm" title="Ver">
+                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
                     <i class="fas fa-eye"></i></a> ';
                     return $actionBtn;
                 } else {
