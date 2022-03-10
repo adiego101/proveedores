@@ -78,7 +78,7 @@
 
     </nav>
 
-    <form id="regiration_form" action="{{url('editarProveedor/'.$proveedor->id_proveedor)}}"  method="POST">
+    <form id="edit_form" action="{{url('editarProveedor/'.$proveedor->id_proveedor)}}"  method="POST">
         @csrf
 
                     <div class="tab-content" id="nav-tabContent">
@@ -141,9 +141,15 @@
             <div class="btn-group">
                 <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
             </div>
+            <!--@if(isset($proveedor->nro_rupae_proveedor) && $proveedor->nro_rupae_proveedor!=null)
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAltaInscripcion">
+                    {{ 'Finalizar' }}
+                </button>
+            @endif-->
         </div>
 
     </form>
+    <!--@include('modales.altaInscripcion')-->
     @yield('datos')
 
 @endsection
