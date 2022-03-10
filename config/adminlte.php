@@ -248,7 +248,7 @@ return [
         [
             'text' => 'Gestionar Registros',
             'url' => '/gestionarRegistros',
-            'icon' => 'fas fa-fw fa-building',
+            'icon' => 'fas fa-fw fa-folder',
             'label_color' => 'success',
         ],
        //DESCOMENTAR DESPÚES DE LA EXPOSICIÓN
@@ -276,7 +276,7 @@ return [
         [
             'text' => 'Actualizar Formulas',
             'url' => '/actualizarFormulas',
-            'icon' => 'fas fa-fw fa-building',
+            'icon' => 'fas fa-fw fa-edit',
             'label_color' => 'success',
         ],
         [

@@ -26,37 +26,37 @@
         @switch($ponderacion->desc_ponderacion)
             @case ('Facturacion')
             <div class="col-sm">                  
-                <label for="actualizar_facturacion">Facturación:</label><br>
+                <label for="actualizar_facturacion">Facturación: <sup>*</sup></label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el porcentaje de facturación" aria-describedby="basic-addon1" id="actualizar_facturacion" name="actualizar_facturacion" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
 
             @break
             @case ('Gastos')
 
-                <label for="actualizar_gastos">Gastos:</label><br>
+                <label for="actualizar_gastos">Gastos: <sup>*</sup></label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el porcentaje de gastos" aria-describedby="basic-addon1" id="actualizar_gastos" name="actualizar_gastos" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
                                   
             @break
             @case ('Mano_Obra')
 
-                <label for="actualizar_obra">Mano de Obra:</label><br>
+                <label for="actualizar_obra">Mano de Obra: <sup>*</sup></label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el porcentaje de mano de obra" aria-describedby="basic-addon1" id="actualizar_obra" name="actualizar_obra" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
             </div>                 
             @break
             @case ('Antiguedad')
             <div class="col-sm">
-                <label for="actualizar_antiguedad">Antiguedad:</label><br>
+                <label for="actualizar_antiguedad">Antiguedad: <sup>*</sup></label><br>
                 <input type="text" class="form-control" placeholder="Ingrese la antiguedad en Santa Cruz" aria-describedby="basic-addon1" id="actualizar_antiguedad" name="actualizar_antiguedad" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
                                      
             @break
             @case ('Dom_fiscal')
 
-                <label for="actualizar_domicilio">Domicilio Fiscal:</label><br>
+                <label for="actualizar_domicilio">Domicilio Fiscal: <sup>*</sup></label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el domicilio fiscal" aria-describedby="basic-addon1" id="actualizar_domicilio" name="actualizar_domicilio" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
                                       
             @break
             @case ('Valor_Agregado')
 
-                <label for="actualizar_agregado">Valor Agregado:</label><br>
+                <label for="actualizar_agregado">Valor Agregado: <sup>*</sup></label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el valor agregado" aria-describedby="basic-addon1" id="actualizar_agregado" name="actualizar_agregado" maxlength="4" value="{{$ponderacion->valor_ponderacion}}" pattern="^[0-9]*(\.?)[0-9]+$" required><br>
             </div>                  
             @break
@@ -79,12 +79,12 @@
             <div class="row">
                 <div class="col-sm">
                   
-                    <label for="local_inicial">valor inicial:</label><br>
+                    <label for="local_inicial">valor inicial: <sup>*</sup></label><br>
                     <input type="number" class="form-control" placeholder="Ingrese el rango del índice local inicial" aria-describedby="basic-addon1" id="local_inicial" name="local_inicial" min="0" max="100" value="{{$jerarquia->valor_desde}}" required><br>
                 </div>
                 
                 <div class="col-sm">
-                    <label for="local_final">valor final:</label><br>
+                    <label for="local_final">valor final: <sup>*</sup></label><br>
                     <input type="number" class="form-control" placeholder="Ingrese el rango del índice local final" aria-describedby="basic-addon1" id="local_final" name="local_final" min="0" max="100" value="{{$jerarquia->valor_hasta}}" required><br>
                 </div>
             </div>
@@ -96,12 +96,12 @@
             <div class="row">
                 <div class="col-sm">
                   
-                    <label for="intermedio_inicial">valor inicial:</label><br>
+                    <label for="intermedio_inicial">valor inicial: <sup>*</sup></label><br>
                     <input type="number" class="form-control" placeholder="Ingrese el rango del índice intermedio inicial" aria-describedby="basic-addon1" id="intermedio_inicial" name="intermedio_inicial" min="0" max="100" value="{{$jerarquia->valor_desde}}" required> 
                 </div>
                 
                 <div class="col-sm">
-                    <label for="intermedio_final">valor final:</label><br>
+                    <label for="intermedio_final">valor final: <sup>*</sup></label><br>
                     <input type="number" class="form-control" placeholder="Ingrese el rango del índice intermedio final" aria-describedby="basic-addon1" id="intermedio_final" name="intermedio_final" min="0" max="100" value="{{$jerarquia->valor_hasta}}" required> 
                 </div>
             </div>
@@ -114,12 +114,12 @@
             <div class="row">
                 <div class="col-sm">
                   
-                    <label for="foraneo_inicial">valor inicial:</label><br>
+                    <label for="foraneo_inicial">valor inicial: <sup>*</sup></label><br>
                     <input type="number" class="form-control" placeholder="Ingrese el rango del índice foráneo inicial" aria-describedby="basic-addon1" id="foraneo_inicial" name="foraneo_inicial" min="0" max="100" value="{{$jerarquia->valor_desde}}" required><br>
                 </div>
                 
                 <div class="col-sm">
-                    <label for="foraneo_final">valor final:</label><br>
+                    <label for="foraneo_final">valor final: <sup>*</sup></label><br>
                     <input type="number" class="form-control" placeholder="Ingrese el rango del índice foráneo final" aria-describedby="basic-addon1" id="foraneo_final" name="foraneo_final" min="0" max="100" value="{{$jerarquia->valor_hasta}}" required><br> 
                 </div>
             </div>
@@ -235,7 +235,7 @@
 
         input:hover:invalid:required {
 
-            border: 2px dashed red;
+            background-color: rgb(255, 76, 76);
         }
     </style>
 @endpush
