@@ -58,10 +58,10 @@ value="OTROS">OTROS</option>
     <label>Corresponde retención:</label>
     <div class="form-check">
       <div class="col-sm">
-        <input  @if ( $mode == "show") disabled @endif type="radio" {{ ($proveedor->retencion=="1") ? "checked"  : "" }} id="retencion" name="retencion" value="1" >SI
+      <label><input  @if ( $mode == "show") disabled @endif type="radio" {{ ($proveedor->retencion=="1") ? "checked"  : "" }} id="retencion" name="retencion" value="1" >SI</label>
       </div>
       <div class="col-sm">
-        <input  @if ( $mode == "show") disabled @endif type="radio" {{ ($proveedor->retencion=="0") ? "checked"  : "" }}  id="retencion" name="retencion" value="0" >NO
+      <label><input  @if ( $mode == "show") disabled @endif type="radio" {{ ($proveedor->retencion=="0") ? "checked"  : "" }}  id="retencion" name="retencion" value="0" >NO</label>
       </div>
     </div>
   </div>

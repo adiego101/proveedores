@@ -42,10 +42,10 @@
     <label>Corresponde retención:</label>
     <div class="form-check">
       <div class="col-sm">
-        <input type="radio" id="retencion" name="retencion" value="1" checked>SI
+        <label><input type="radio" id="retencion" name="retencion" value="1" checked>SI</label>
       </div>
       <div class="col-sm">
-        <input type="radio" id="retencion" name="retencion" value="0">NO
+        <label><input type="radio" id="retencion" name="retencion" value="0">NO</label>
       </div>
     </div>
   </div>
