@@ -127,8 +127,6 @@
                                             <input type="text" class="form-control" aria-describedby="basic-addon1" id="local_jerarquia" name="local_jerarquia" readonly value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                                             </td>
                                         </tr>
-                                        <input type="text" class="form-control" aria-describedby="basic-addon1" id="local_jerarquia_desde" hidden value="{{$jerarquia->valor_desde}}">
-                                        <input type="text" class="form-control" aria-describedby="basic-addon1" id="local_jerarquia_hasta" hidden value="{{$jerarquia->valor_hasta}}">
                                     @break
                                     @case ('Intermedio')
                                         <tr>
@@ -137,7 +135,6 @@
                                             <input type="text" class="form-control" aria-describedby="basic-addon1" id="intermedio_jerarquia" name="intermedio_jerarquia" readonly value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                                             </td>
                                         </tr>
-                                        <input type="text" class="form-control" aria-describedby="basic-addon1" id="intermedio_jerarquia_desde" hidden value="{{$jerarquia->valor_desde}}">
                                         <input type="text" class="form-control" aria-describedby="basic-addon1" id="intermedio_jerarquia_hasta" hidden value="{{$jerarquia->valor_hasta}}">
                                     @break
                                     @case ('Foráneo')
@@ -319,13 +316,15 @@
         }
 
         function mostrarProveedor(valor_indice){
-            if(valor_indice>=$("#foraneo_jerarquia_desde").val())
-                if(valor_indice<=$("#foraneo_jerarquia_hasta").val())
+            if(valor_indice>=parseInt($("#foraneo_jerarquia_desde").val()))
+                if(valor_indice<=parseInt($("#foraneo_jerarquia_hasta").val()))
                     $("#proveedor").val('PROVEEDOR FORANEO');
-                else if(valor_indice<=$("#intermedio_jerarquia_hasta").val())
+                else if(valor_indice<=parseInt($("#intermedio_jerarquia_hasta").val()))
                         $("#proveedor").val('PROVEEDOR INTERMEDIO');
-                    else 
+                    else if(valor_indice<=parseInt($("#local_jerarquia_hasta").val()))
                         $("#proveedor").val('PROVEEDOR LOCAL');
+                        else    
+                            $("#proveedor").val('');
         }
     </script>
 
