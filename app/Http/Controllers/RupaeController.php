@@ -13,6 +13,9 @@ use App\Models\Proveedor_telefono;
 use App\Models\Actividad_economica;
 use App\Models\Proveedor_domicilio;
 use App\Models\Actividades_proveedores;
+use App\Models\Jerarquia_compre_local;
+use Carbon\Carbon;
+use App\Models\Certificado;
 use Illuminate\Support\Facades\Storage;
 
 class RupaeController extends Controller
@@ -230,12 +233,28 @@ public function descargarRegistroAlta($id)
 
     ];
 
+    
 /*
     return PDF::loadView('registroAlta', array('data'=> $data))
         ->stream('registro-alta.pdf');*/
         $dompdf = PDF::loadView('registroAlta', array('data'=> $data));
         // return storage_path('app/public/');
         $dompdf->save(storage_path('app/public/') . 'registro-alta_'.$idAlta.'.pdf');
+        $this->guardarHistorico($proveedor, 
+                                $proveedor_domicilio_real, 
+                                $proveedor_localidad_real,
+                                $provinciaReal,
+                                $proveedor_telefono_real,
+                                $proveedor_email_real,
+                                $proveedor_localidad_legal,
+                                $provinciaLegal,
+                                $proveedor_domicilio_legal,
+                                $proveedor_telefono_legal,
+                                $proveedor_email_legal,
+                                $persona,
+                                $Actividad_economica,
+                                $actividades_Secundarias
+                                );
         return $dompdf->stream('registro-alta_'.$idAlta.'.pdf');
 }
 
@@ -306,6 +325,7 @@ public function descargarCertificadoInscripcion($id)
         $dompdf = PDF::loadView('certificadoInscripcion', array('data'=> $data));
         // return storage_path('app/public/');
         $dompdf->save(storage_path('app/public/') . 'certificado-inscripcion_'.$idInscripcion.'.pdf');
+        
         return $dompdf->stream('certificado-inscripcion_'.$idInscripcion.'.pdf');
 
         //return PDF::loadFile(public_path().'/certificado-inscripcion.pdf')->save('/path-to/my_stored_file.pdf')->stream('download.pdf');
@@ -332,6 +352,76 @@ public function descargarCertificadoInscripcion($id)
             }
         }
         while($error_numero_registro);
+    }
+
+    public function guardarHistorico(   $proveedor, 
+                                        $proveedor_domicilio_real, 
+                                        $proveedor_localidad_real,
+                                        $provinciaReal,
+                                        $proveedor_telefono_real,
+                                        $proveedor_email_real,
+                                        $proveedor_localidad_legal,
+                                        $provinciaLegal,
+                                        $proveedor_domicilio_legal,
+                                        $proveedor_telefono_legal,
+                                        $proveedor_email_legal,
+                                        $persona,
+                                        $Actividad_economica,
+                                        $actividades_Secundarias){
+        $jerarquias = Jerarquia_compre_local::all();
+        $desc_jerarquia_compre_local='';
+        foreach($jerarquias as $jerarquia){
+            if($proveedor->valor_indice_rupae>=$jerarquia->valor_desde && $proveedor->valor_indice_rupae<=$jerarquia->valor_hasta)
+                $desc_jerarquia_compre_local=$jerarquia->desc_jerarquia_compre_local;
+        }
+
+        $certificado = Certificado::create([
+            'nro_rupae_proveedor'=>$proveedor->nro_rupae_proveedor,
+            'fecha_inscripcion'=>Carbon::now(),
+            'razon_social'=>$proveedor->razon_social,
+            'cuit'=>$proveedor->cuit,
+            'nombre_fantasia'=>$proveedor->nombre_fantasia,
+            'calle_real'=>$proveedor_domicilio_real->calle,
+            'numero_real'=>$proveedor_domicilio_real->numero,
+            'nombre_localidad_real'=>$proveedor_localidad_real->nombre_localidad,
+            'nombre_provincia_real'=>$provinciaReal->nombre_provincia,
+            'nro_tel_real'=>$proveedor_telefono_real->nro_tel,
+            'email_real'=>$proveedor_email_real->email,
+            'nombre_localidad_legal'=>$proveedor_localidad_legal->nombre_localidad,
+            'nombre_provincia_legal'=>$provinciaLegal->nombre_provincia,
+            'calle_legal'=>$proveedor_domicilio_legal->calle,
+            'numero_legal'=>$proveedor_domicilio_legal->numero,
+            'nro_tel_legal'=>$proveedor_telefono_legal->nro_tel,
+            'email_legal'=>$proveedor_email_legal->email,
+            'nombre_representante_legal'=>$persona->nombre_persona.' '.$persona->apellido_persona,
+            'dni_representante_legal'=>$persona->dni_persona,
+            'tipo_de_sociedad'=>$proveedor->tipo_de_sociedad,
+            'situacion_iva'=>$proveedor->situacion_iva,
+            'retencion'=>$proveedor->retencion,
+            'nro_ingresos_brutos'=>$proveedor->nro_ingresos_brutos,
+            'jurisdiccion'=>$proveedor->jurisdiccion,
+            'tipo_contribuyente'=>$proveedor->tipo_contribuyente,
+            'nro_habilitacion_municipal'=>$proveedor->nro_habilitacion_municipal,
+            'nombre_localidad_habilit_municip'=>$proveedor->localidad_habilitacion,
+            'nro_inscripcion_personas_juridicas'=>$proveedor->nro_inscripcion_personas_juridicas,
+            'provincia_inscrip_personas_jur'=>$proveedor->provincia_inscrip_personas_jur,
+            'registro_publico_de_comercio'=>$proveedor->registro_publico_de_comercio,
+            'provincia_registro_publico'=>$proveedor->provincia_registro_publico,
+            'inspeccion_gral_justicia'=>$proveedor->inspeccion_gral_justicia,
+            'provincia_inspeccion_justicia'=>$proveedor->provincia_inspeccion_justicia,
+            'desc_actividad_economica_princ'=>$Actividad_economica,
+            'desc_actividad_economica_sec'=>$actividades_Secundarias,
+            'porc_mo'=>$proveedor->porc_mo, //Porcentaje de Mano de Obra en Santa Cruz
+            'porc_facturacion'=>$proveedor->porc_facturacion,
+            'porc_gasto'=>$proveedor->porc_gasto,
+            'antiguedad'=>$proveedor->antiguedad,
+            'dom_fiscal'=>$proveedor->dom_fiscal,
+            'valor_agregado'=>$proveedor->valor_agregado,
+            'valor_indice_rupae'=>$proveedor->valor_indice_rupae,
+            'desc_jerarquia_compre_local'=>$desc_jerarquia_compre_local,
+            'fecha_emision_certificado'=>Carbon::now()
+        ]);
+        $proveedor->certificados()->save($certificado);
     }
 
 }

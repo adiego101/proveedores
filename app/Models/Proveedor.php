@@ -74,6 +74,7 @@ class Proveedor extends Model
                             'valor_agregado',
                             'id_tamanio_empresa',
                             'observaciones',
+                            'valor_indice_rupae'
                             ];
 
     protected $primaryKey = 'id_proveedor';
@@ -308,4 +309,9 @@ class Proveedor extends Model
     public function tamanio_empresa(){
         return $this->belongsTo(Tamanio_empresa::class, 'id_tamanio_empresa', 'id_tamanio_empresa');
     }
+
+    public function certificados(){
+        return $this->hasMany(Certificado::class,'id_proveedor');
+     }
+
 }

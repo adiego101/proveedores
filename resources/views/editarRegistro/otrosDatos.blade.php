@@ -211,10 +211,8 @@ value="5">Otros</option>
                 let valor_agregado = $("#valor_agregado").val();
                 let valor_indice;
                 console.log(valor_agregado);
-                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
+                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
-                }
                 else
                     $("#valor_indice").val('');
                 
@@ -226,10 +224,8 @@ value="5">Otros</option>
                 let dom_fiscal = $("#dom_fiscal").val();
                 let antiguedad = $("#antiguedad").val();
                 let valor_agregado = $("#valor_agregado").val();
-                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
+                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
-                }
                 else
                     $("#valor_indice").val('');
                 
@@ -241,10 +237,8 @@ value="5">Otros</option>
                 let dom_fiscal = $("#dom_fiscal").val();
                 let antiguedad = $("#antiguedad").val();
                 let valor_agregado = $("#valor_agregado").val();
-                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
+                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
-                }
                 else
                     $("#valor_indice").val('');
                 
@@ -256,10 +250,8 @@ value="5">Otros</option>
                 let dom_fiscal = $("#dom_fiscal").val();
                 let antiguedad = $("#antiguedad").val();
                 let valor_agregado = $("#valor_agregado").val();
-                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
+                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
-                }
                 else
                     $("#valor_indice").val('');
                 
@@ -271,10 +263,8 @@ value="5">Otros</option>
                 let dom_fiscal = $("#dom_fiscal").val();
                 let antiguedad = $("#antiguedad").val();
                 let valor_agregado = $("#valor_agregado").val();
-                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
+                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
-                }
                 else
                     $("#valor_indice").val('');
                 
@@ -286,10 +276,8 @@ value="5">Otros</option>
                 let dom_fiscal = $("#dom_fiscal").val();
                 let antiguedad = $("#antiguedad").val();
                 let valor_agregado = $("#valor_agregado").val();
-                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
+                if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
-                }
                 else
                     $("#valor_indice").val('');
             });
@@ -338,6 +326,7 @@ value="5">Otros</option>
                                                     100*antiguedad_ponderacion+
                                                     dom_fiscal*dom_fiscal_ponderacion+
                                                     valor_agregado*valor_agregado_ponderacion);
+            mostrarProveedor($("#valor_indice").val());
         }
 
         function mostrarProveedor(valor_indice){
