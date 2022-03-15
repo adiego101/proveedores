@@ -85,6 +85,10 @@ class ProveedoresController extends Controller
     public function crear_registro(Request $request)
     {
 
+        //var_dump($request->all());
+
+        //return $request->valor_indice_rupae;
+
         //try{
         $cuit = Proveedor::where('cuit', $request->cuit)->exists();
         $dado_de_baja = Proveedor::where('cuit', $request->cuit)->where('dado_de_baja', '0')->get();
@@ -534,7 +538,7 @@ class ProveedoresController extends Controller
     }
 
     public function getSucursales(Request $request, $id, $mode)
-    {   
+    {
         if ($request->ajax()) {
             $data = Sucursal::with(['telefonos','emails'])
                         ->where('id_proveedor', $id)
@@ -2458,7 +2462,7 @@ return $select;
 
             return redirect()->back()->withSuccess('Los valores de las fórmulas se han actualizado satisfactoriamente.');
 
-        } catch(\Illuminate\Database\QueryException $ex){ 
+        } catch(\Illuminate\Database\QueryException $ex){
             //dd($ex->getMessage());
             $message = "Los valores introducidos en los campos de Ponderación deben ser menores a 10.";
             return redirect()->back()->withErrors($message);

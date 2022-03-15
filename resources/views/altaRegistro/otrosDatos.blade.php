@@ -28,15 +28,15 @@
                     </div>
                 </div>
             </div>
-            
+
             <br>
 
-            <label for="valor_indice">Valor del índice:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="valor_indice" name="valor_indice" disabled>
+            <label for="valor_indice_rupae">Valor del índice:</label><br>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" readonly id="valor_indice_rupae" name="valor_indice_rupae" >
             <br>
 
             <label for="proveedor">Proveedor:</label><br>
-            <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" id="proveedor" name="proveedor" disabled>
+            <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" id="proveedor" name="proveedor" readonly>
             <br>
         </div>
 
@@ -167,7 +167,7 @@
         <option value="4">Grande</option>
         <option value="5">Otros</option>
     </select>
-    
+
     <br>
 
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
@@ -185,15 +185,14 @@
                 let dom_fiscal = $("#dom_fiscal").val();
                 let antiguedad = $("#antiguedad").val();
                 let valor_agregado = $("#valor_agregado").val();
-                let valor_indice;
                 console.log(valor_agregado);
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
+                    mostrarProveedor($("#valor_indice_rupae").val());
                 }
                 else
-                    $("#valor_indice").val('');
-                
+                    $("#valor_indice_rupae").val('');
+
             });
             $("#porc_gasto").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -204,11 +203,11 @@
                 let valor_agregado = $("#valor_agregado").val();
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
+                    mostrarProveedor($("#valor_indice_rupae").val());
                 }
                 else
-                    $("#valor_indice").val('');
-                
+                    $("#valor_indice_rupae").val('');
+
             });
             $("#porc_mo").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -219,11 +218,11 @@
                 let valor_agregado = $("#valor_agregado").val();
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
+                    mostrarProveedor($("#valor_indice_rupae").val());
                 }
                 else
-                    $("#valor_indice").val('');
-                
+                    $("#valor_indice_rupae").val('');
+
             });
             $("#dom_fiscal").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -234,11 +233,11 @@
                 let valor_agregado = $("#valor_agregado").val();
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
+                    mostrarProveedor($("#valor_indice_rupae").val());
                 }
                 else
-                    $("#valor_indice").val('');
-                
+                    $("#valor_indice_rupae").val('');
+
             });
             $("#antiguedad").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -249,11 +248,11 @@
                 let valor_agregado = $("#valor_agregado").val();
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
+                    mostrarProveedor($("#valor_indice_rupae").val());
                 }
                 else
-                    $("#valor_indice").val('');
-                
+                    $("#valor_indice_rupae").val('');
+
             });
             $("#valor_agregado").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -264,10 +263,10 @@
                 let valor_agregado = $("#valor_agregado").val();
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
-                    mostrarProveedor($("#valor_indice").val());
+                    mostrarProveedor($("#valor_indice_rupae").val());
                 }
                 else
-                    $("#valor_indice").val('');
+                    $("#valor_indice_rupae").val('');
             });
         });
         function calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado) {
@@ -285,7 +284,7 @@
             else
                 valor_agregado=0;
             if(antiguedad < 6)
-                $("#valor_indice").val( porc_facturacion*facturacion_ponderacion+
+                $("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
                                         porc_gasto*gastos_ponderacion+
                                         porc_mo*mano_obra_ponderacion+
                                         25*antiguedad_ponderacion+
@@ -293,7 +292,7 @@
                                         valor_agregado*valor_agregado_ponderacion);
             else
                 if(antiguedad < 11)
-                    $("#valor_indice").val( porc_facturacion*facturacion_ponderacion+
+                    $("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
                                             porc_gasto*gastos_ponderacion+
                                             porc_mo*mano_obra_ponderacion+
                                             50*antiguedad_ponderacion+
@@ -301,14 +300,14 @@
                                             valor_agregado*valor_agregado_ponderacion);
                 else
                     if(antiguedad<21)
-                        $("#valor_indice").val( porc_facturacion*facturacion_ponderacion+
+                        $("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
                                                 porc_gasto*gastos_ponderacion+
                                                 porc_mo*mano_obra_ponderacion+
                                                 75*antiguedad_ponderacion+
                                                 dom_fiscal*dom_fiscal_ponderacion+
                                                 valor_agregado*valor_agregado_ponderacion);
                     else
-                        $("#valor_indice").val( porc_facturacion*facturacion_ponderacion+
+                        $("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
                                                     porc_gasto*gastos_ponderacion+
                                                     porc_mo*mano_obra_ponderacion+
                                                     100*antiguedad_ponderacion+
@@ -316,15 +315,15 @@
                                                     valor_agregado*valor_agregado_ponderacion);
         }
 
-        function mostrarProveedor(valor_indice){
-            if(valor_indice>=parseInt($("#foraneo_jerarquia_desde").val()))
-                if(valor_indice<=parseInt($("#foraneo_jerarquia_hasta").val()))
+        function mostrarProveedor(valor_indice_rupae){
+            if(valor_indice_rupae>=parseInt($("#foraneo_jerarquia_desde").val()))
+                if(valor_indice_rupae<=parseInt($("#foraneo_jerarquia_hasta").val()))
                     $("#proveedor").val('PROVEEDOR FORANEO');
-                else if(valor_indice<=parseInt($("#intermedio_jerarquia_hasta").val()))
+                else if(valor_indice_rupae<=parseInt($("#intermedio_jerarquia_hasta").val()))
                         $("#proveedor").val('PROVEEDOR INTERMEDIO');
-                    else if(valor_indice<=parseInt($("#local_jerarquia_hasta").val()))
+                    else if(valor_indice_rupae<=parseInt($("#local_jerarquia_hasta").val()))
                         $("#proveedor").val('PROVEEDOR LOCAL');
-                        else    
+                        else
                             $("#proveedor").val('');
         }
     </script>

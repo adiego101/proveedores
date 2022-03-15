@@ -41,12 +41,12 @@ disabled>
                 </div>
             </div><br>
 
-            <label for="valor_indice">Valor del indice:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" id="valor_indice" name="valor_indice" disabled>
+            <label for="valor_indice_rupae">Valor del indice:</label><br>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->valor_indice_rupae) ? $proveedor->valor_indice_rupae : '' }}" id="valor_indice_rupae" name="valor_indice_rupae" readonly>
             <br>
 
             <label for="proveedor">Proveedor:</label><br>
-            <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" id="proveedor" name="proveedor" disabled>
+            <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" id="proveedor" name="proveedor" readonly>
             <br>
 
             <label for="id_tamanio_empresa">Tamaño de la Empresa:</label><br>
@@ -192,7 +192,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
         </div>
     </div>
 
-    
+
     <div class="row navbuttons ">
         <div class="col-6 col-sm-auto" id="btnPrevious">
             <a class="btn btn-outline-secondary btnPrevious">Atrás</a>
@@ -211,13 +211,13 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                 let dom_fiscal = $("#dom_fiscal").val();
                 let antiguedad = $("#antiguedad").val();
                 let valor_agregado = $("#valor_agregado").val();
-                let valor_indice;
+                let valor_indice_rupae;
                 console.log(valor_agregado);
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
                 else
-                    $("#valor_indice").val('');
-                
+                    $("#valor_indice_rupae").val('');
+
             });
             $("#porc_gasto").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -229,8 +229,8 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
                 else
-                    $("#valor_indice").val('');
-                
+                    $("#valor_indice_rupae").val('');
+
             });
             $("#porc_mo").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -242,8 +242,8 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
                 else
-                    $("#valor_indice").val('');
-                
+                    $("#valor_indice_rupae").val('');
+
             });
             $("#dom_fiscal").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -255,8 +255,8 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
                 else
-                    $("#valor_indice").val('');
-                
+                    $("#valor_indice_rupae").val('');
+
             });
             $("#antiguedad").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -268,8 +268,8 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
                 else
-                    $("#valor_indice").val('');
-                
+                    $("#valor_indice_rupae").val('');
+
             });
             $("#valor_agregado").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -281,7 +281,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
                 else
-                    $("#valor_indice").val('');
+                    $("#valor_indice_rupae").val('');
             });
         });
         function calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado) {
@@ -299,7 +299,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
             else
                 valor_agregado=0;
             if(antiguedad < 6)
-                $("#valor_indice").val( porc_facturacion*facturacion_ponderacion+
+                $("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
                                         porc_gasto*gastos_ponderacion+
                                         porc_mo*mano_obra_ponderacion+
                                         25*antiguedad_ponderacion+
@@ -307,7 +307,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                                         valor_agregado*valor_agregado_ponderacion);
             else
                 if(antiguedad < 11)
-                    $("#valor_indice").val( porc_facturacion*facturacion_ponderacion+
+                    $("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
                                             porc_gasto*gastos_ponderacion+
                                             porc_mo*mano_obra_ponderacion+
                                             50*antiguedad_ponderacion+
@@ -315,31 +315,31 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                                             valor_agregado*valor_agregado_ponderacion);
                 else
                     if(antiguedad<21)
-                        $("#valor_indice").val( porc_facturacion*facturacion_ponderacion+
+                        $("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
                                                 porc_gasto*gastos_ponderacion+
                                                 porc_mo*mano_obra_ponderacion+
                                                 75*antiguedad_ponderacion+
                                                 dom_fiscal*dom_fiscal_ponderacion+
                                                 valor_agregado*valor_agregado_ponderacion);
                     else
-                        $("#valor_indice").val( porc_facturacion*facturacion_ponderacion+
+                        $("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
                                                     porc_gasto*gastos_ponderacion+
                                                     porc_mo*mano_obra_ponderacion+
                                                     100*antiguedad_ponderacion+
                                                     dom_fiscal*dom_fiscal_ponderacion+
                                                     valor_agregado*valor_agregado_ponderacion);
-            mostrarProveedor($("#valor_indice").val());
+            mostrarProveedor($("#valor_indice_rupae").val());
         }
 
-        function mostrarProveedor(valor_indice){
-            if(valor_indice>=parseInt($("#foraneo_jerarquia_desde").val()))
-                if(valor_indice<=parseInt($("#foraneo_jerarquia_hasta").val()))
+        function mostrarProveedor(valor_indice_rupae){
+            if(valor_indice_rupae>=parseInt($("#foraneo_jerarquia_desde").val()))
+                if(valor_indice_rupae<=parseInt($("#foraneo_jerarquia_hasta").val()))
                     $("#proveedor").val('PROVEEDOR FORANEO');
-                else if(valor_indice<=parseInt($("#intermedio_jerarquia_hasta").val()))
+                else if(valor_indice_rupae<=parseInt($("#intermedio_jerarquia_hasta").val()))
                         $("#proveedor").val('PROVEEDOR INTERMEDIO');
-                    else if(valor_indice<=parseInt($("#local_jerarquia_hasta").val()))
+                    else if(valor_indice_rupae<=parseInt($("#local_jerarquia_hasta").val()))
                         $("#proveedor").val('PROVEEDOR LOCAL');
-                        else    
+                        else
                             $("#proveedor").val('');
         }
     </script>
@@ -372,7 +372,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
             boton_habilitar.innerText = "Deshabilitar campos";
 
         } else {
-          
+
             porc_facturacion.setAttribute('disabled', "true");
             porc_gastos.setAttribute('disabled', "true");
             porc_mano_obra.setAttribute('disabled', "true");
@@ -383,7 +383,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
             contador--;
             boton_habilitar.innerText = "Habilitar campos";
         }
-    
+
     }
 
 </script>

@@ -132,7 +132,7 @@ $('input[type="checkbox"]').on('change', function(){
 
         //Detenemos el envio del formulario
         event.preventDefault();
-        
+
         let comodin = true;
         let texto = "Faltan completar los siguientes campos: ";
 
@@ -141,19 +141,19 @@ $('input[type="checkbox"]').on('change', function(){
         let nombre = document.getElementById('nombre_fantasia').value;
         let cuit = document.getElementById('cuit').value;
 
-        if (razon.length == 0) 
+        if (razon.length == 0)
         {
             texto = texto + "\n*Razón social (Datos generales)";
             comodin = false;
         }
 
-        if (nombre.length == 0) 
+        if (nombre.length == 0)
         {
             texto = texto + "\n*Nombre de fantasía (Datos generales)";
             comodin = false;
         }
 
-        if (cuit.length == 0) 
+        if (cuit.length == 0)
         {
             texto = texto + "\n*Cuit (Datos generales)";
             comodin = false;
@@ -167,7 +167,7 @@ $('input[type="checkbox"]').on('change', function(){
             //Enviamos los valores recuperados anteriormente a los inputs del modal
             $('#modal_aviso').text(texto);
         }
-        
+
         if (comodin)
         {
             this.submit();
