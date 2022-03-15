@@ -1,10 +1,5 @@
 <?php
 
-use Carbon\Carbon;
-
-//Fecha actual, en la que se genera el documento
-$date = Carbon::now()->format("d/m/Y H:i:s");
-
 //Recuperamos la fecha de inscripcion desde la BD
 //La fecha original tiene el formato YYYY-mm-dd H:i:s
 $fechaOriginalInscripcion = htmlspecialchars($data['fecha_inscripcion']);
@@ -214,7 +209,7 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
             <br>
 
             <label for="">Rio Gallegos, </label>
-            {{$date}}
+            {{$data['fecha_emision_certificado']}}
 
         </main>
 

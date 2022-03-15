@@ -206,7 +206,7 @@ public function descargarRegistroAlta($id)
 
         $actividades_Secundarias = $Actividad_economica2->cod_actividad.",".$actividades_Secundarias;
     }
-
+    $fecha_emision_certificado=Carbon::now();
     $data = [
         'proveedor' => $proveedor,
         'titulo' => 'Certificado inscripción',
@@ -230,9 +230,9 @@ public function descargarRegistroAlta($id)
 
         'localidad_legal' => isset($proveedor_localidad_legal->nombre_localidad) ? $proveedor_localidad_legal->nombre_localidad : '',
         'fecha_inscripcion' => $proveedor->created_at,
-
+        'fecha_emision_certificado'=>$fecha_emision_certificado->format("d/m/Y H:i:s")
     ];
-
+        
     
 /*
     return PDF::loadView('registroAlta', array('data'=> $data))
@@ -253,7 +253,8 @@ public function descargarRegistroAlta($id)
                                 $proveedor_email_legal,
                                 $persona,
                                 $Actividad_economica,
-                                $actividades_Secundarias
+                                $actividades_Secundarias,
+                                $fecha_emision_certificado
                                 );
         return $dompdf->stream('registro-alta_'.$idAlta.'.pdf');
 }
@@ -367,7 +368,8 @@ public function descargarCertificadoInscripcion($id)
                                         $proveedor_email_legal,
                                         $persona,
                                         $Actividad_economica,
-                                        $actividades_Secundarias){
+                                        $actividades_Secundarias,
+                                        $fecha_emision_certificado){
         $jerarquias = Jerarquia_compre_local::all();
         $desc_jerarquia_compre_local='';
         foreach($jerarquias as $jerarquia){
@@ -377,7 +379,7 @@ public function descargarCertificadoInscripcion($id)
 
         $certificado = Certificado::create([
             'nro_rupae_proveedor'=>$proveedor->nro_rupae_proveedor,
-            'fecha_inscripcion'=>Carbon::now(),
+            'fecha_inscripcion'=>$proveedor->created_at,
             'razon_social'=>$proveedor->razon_social,
             'cuit'=>$proveedor->cuit,
             'nombre_fantasia'=>$proveedor->nombre_fantasia,
@@ -419,7 +421,7 @@ public function descargarCertificadoInscripcion($id)
             'valor_agregado'=>$proveedor->valor_agregado,
             'valor_indice_rupae'=>$proveedor->valor_indice_rupae,
             'desc_jerarquia_compre_local'=>$desc_jerarquia_compre_local,
-            'fecha_emision_certificado'=>Carbon::now()
+            'fecha_emision_certificado'=>$fecha_emision_certificado
         ]);
         $proveedor->certificados()->save($certificado);
     }
