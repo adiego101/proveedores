@@ -7,23 +7,23 @@
 
             <label for="porc_facturacion">Porcentaje de facturación en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_facturacion) ? $proveedor->porc_facturacion : '' }}" id="porc_facturacion" name="porc_facturacion" placeholder="Ingrese el porcentaje de facturación" maxlength="9"><br>
+value="{{ isset($proveedor->porc_facturacion) ? $proveedor->porc_facturacion : '' }}" id="porc_facturacion" name="porc_facturacion" placeholder="Ingrese el porcentaje de facturación" maxlength="9" disabled><br>
 
             <label for="porc_gasto">Porcentaje de Gastos en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_gasto) ? $proveedor->porc_gasto : '' }}" id="porc_gasto" name="porc_gasto" placeholder="Ingrese el porcentaje de gastos" maxlength="9"><br>
+value="{{ isset($proveedor->porc_gasto) ? $proveedor->porc_gasto : '' }}" id="porc_gasto" name="porc_gasto" placeholder="Ingrese el porcentaje de gastos" maxlength="9" disabled><br>
 
             <label for="porc_mo">Porcentaje de Mano de Obra en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_mo) ? $proveedor->porc_mo : '' }}" id="porc_mo" name="porc_mo" placeholder="Ingrese el porcentaje de mano de obra" maxlength="9"><br>
+value="{{ isset($proveedor->porc_mo) ? $proveedor->porc_mo : '' }}" id="porc_mo" name="porc_mo" placeholder="Ingrese el porcentaje de mano de obra" maxlength="9" disabled><br>
 
             <label for="antiguedad">Antiguedad en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->antiguedad) ? $proveedor->antiguedad : '' }}" id="antiguedad" name="antiguedad" placeholder="Ingrese la antiguedad en Santa Cruz" maxlength="3"><br>
+value="{{ isset($proveedor->antiguedad) ? $proveedor->antiguedad : '' }}" id="antiguedad" name="antiguedad" placeholder="Ingrese la antiguedad en Santa Cruz" maxlength="3" disabled><br>
 
             <label for="dom_fiscal">Domicilio Fiscal:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}" id="dom_fiscal" name="dom_fiscal" placeholder="Ingrese el domicilio fiscal" maxlength="9"><br>
+value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}" id="dom_fiscal" name="dom_fiscal" placeholder="Ingrese el domicilio fiscal" maxlength="9" disabled><br>
 
                 <div class="container">
                 <div class="row">
@@ -33,7 +33,7 @@ value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}" id="do
 value="1"
                     @else
 value="0" @endif
->
+disabled>
                         <label for="valor_agregado">Valor Agregado</label><br>
 
 
@@ -41,13 +41,28 @@ value="0" @endif
                 </div>
             </div><br>
 
-            <label for="valor-indice">Valor del indice:</label><br>
+            <label for="valor_indice">Valor del indice:</label><br>
             <input type="text" class="form-control" aria-describedby="basic-addon1" id="valor_indice" name="valor_indice" disabled>
             <br>
 
             <label for="proveedor">Proveedor:</label><br>
             <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" id="proveedor" name="proveedor" disabled>
             <br>
+
+            <label for="id_tamanio_empresa">Tamaño de la Empresa:</label><br>
+    <select @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="id_tamanio_empresa" name="id_tamanio_empresa" disabled>
+        <option {{ ($proveedor->id_tamanio_empresa=="1") ? "selected"  : "" }}
+value="1">Micro</option>
+        <option {{ ($proveedor->id_tamanio_empresa=="2") ? "selected"  : "" }}
+value="2">Pequeña</option>
+        <option {{ ($proveedor->id_tamanio_empresa=="3") ? "selected"  : "" }}
+value="3">Mediana</option>
+        <option {{ ($proveedor->id_tamanio_empresa=="4") ? "selected"  : "" }}
+value="4">Grande</option>
+        <option {{ ($proveedor->id_tamanio_empresa=="5") ? "selected"  : "" }}
+value="5">Otros</option>
+    </select><br>
+
         </div>
         <div class="col col-sm-2"></div>
         <div class="col col-sm-4">
@@ -171,26 +186,13 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                     </table>
                 </div>
             @endif
+            <br>
+            <br>
+            <a id="button_habilitar" class="btn btn-outline-primary"  onclick="habilitarCampos()">Habilitar campos</a>
         </div>
     </div>
 
-    <label for="tamaño">Tamaño de la Empresa:</label><br>
-
-
-    <select @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="id_tamanio_empresa" name="id_tamanio_empresa">
-        <option {{ ($proveedor->id_tamanio_empresa=="1") ? "selected"  : "" }}
-value="1">Micro</option>
-        <option {{ ($proveedor->id_tamanio_empresa=="2") ? "selected"  : "" }}
-value="2">Pequeña</option>
-        <option {{ ($proveedor->id_tamanio_empresa=="3") ? "selected"  : "" }}
-value="3">Mediana</option>
-        <option {{ ($proveedor->id_tamanio_empresa=="4") ? "selected"  : "" }}
-value="4">Grande</option>
-        <option {{ ($proveedor->id_tamanio_empresa=="5") ? "selected"  : "" }}
-value="5">Otros</option>
-    </select><br>
-
-
+    
     <div class="row navbuttons ">
         <div class="col-6 col-sm-auto" id="btnPrevious">
             <a class="btn btn-outline-secondary btnPrevious">Atrás</a>
@@ -341,5 +343,49 @@ value="5">Otros</option>
                             $("#proveedor").val('');
         }
     </script>
+
+
+<script type="text/javascript">
+
+    let porc_facturacion = document.getElementById("porc_facturacion");
+    let porc_gastos = document.getElementById("porc_gasto");
+    let porc_mano_obra = document.getElementById("porc_mo");
+    let antiguedad = document.getElementById("antiguedad");
+    let dom_fiscal = document.getElementById("dom_fiscal");
+    let valor_agregado = document.getElementById("valor_agregado");
+    let tamanio_empresa = document.getElementById("id_tamanio_empresa");
+    let boton_habilitar = document.getElementById("button_habilitar");
+    let contador = 0;
+
+    function habilitarCampos() {
+
+        if (contador == 0) {
+
+            porc_facturacion.removeAttribute('disabled');
+            porc_gastos.removeAttribute('disabled');
+            porc_mano_obra.removeAttribute('disabled');
+            antiguedad.removeAttribute('disabled');
+            dom_fiscal.removeAttribute('disabled');
+            valor_agregado.removeAttribute('disabled');
+            tamanio_empresa.removeAttribute('disabled');
+            contador++;
+            boton_habilitar.innerText = "Deshabilitar campos";
+
+        } else {
+          
+            porc_facturacion.setAttribute('disabled', "true");
+            porc_gastos.setAttribute('disabled', "true");
+            porc_mano_obra.setAttribute('disabled', "true");
+            antiguedad.setAttribute('disabled', "true");
+            dom_fiscal.setAttribute('disabled', "true");
+            valor_agregado.setAttribute('disabled', "true");
+            tamanio_empresa.setAttribute('disabled', "true");
+            contador--;
+            boton_habilitar.innerText = "Habilitar campos";
+        }
+    
+    }
+
+</script>
 
 @endpush
