@@ -74,7 +74,7 @@
         </ul>
 
         <br>
-      
+
     </nav>
 
     <form id="edit_form" action="{{url('editarProveedor/'.$proveedor->id_proveedor)}}"  method="POST">
@@ -146,9 +146,9 @@
                 </button>
             @endif-->
         </div>
-
+        
     </form>
-  
+
     @yield('datos')
 
 @endsection
@@ -193,8 +193,6 @@ $('input[type="checkbox"]').on('change', function(){
  }).change();
 
  window.onload = function(){
-    calcular();
-
 
         recargarListaRealEdit2();
         recargarListaFiscal2();

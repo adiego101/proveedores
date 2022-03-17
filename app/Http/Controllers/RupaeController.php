@@ -115,8 +115,7 @@ class RupaeController extends Controller
 
 
 //Prueba generacion PDF
-
-public function descargarRegistroAlta($id)
+public function generarRegistroAlta($id, $idCertificado)
 {
     $proveedor = Proveedor::find($id);
     if($proveedor->nro_rupae_proveedor==null){
@@ -232,45 +231,113 @@ public function descargarRegistroAlta($id)
         'fecha_inscripcion' => $proveedor->created_at,
         'fecha_emision_certificado'=>$fecha_emision_certificado->format("d/m/Y H:i:s")
     ];
-        
-    
+
+
 /*
     return PDF::loadView('registroAlta', array('data'=> $data))
         ->stream('registro-alta.pdf');*/
         $dompdf = PDF::loadView('registroAlta', array('data'=> $data));
         // return storage_path('app/public/');
-        $dompdf->save(storage_path('app/public/') . 'registro-alta_'.$idAlta.'.pdf');
-        $this->guardarHistorico($proveedor, 
-                                $proveedor_domicilio_real, 
-                                $proveedor_localidad_real,
-                                $provinciaReal,
-                                $proveedor_telefono_real,
-                                $proveedor_email_real,
-                                $proveedor_localidad_legal,
-                                $provinciaLegal,
-                                $proveedor_domicilio_legal,
-                                $proveedor_telefono_legal,
-                                $proveedor_email_legal,
-                                $persona,
-                                $Actividad_economica,
-                                $actividades_Secundarias,
-                                $fecha_emision_certificado
-                                );
-        return $dompdf->stream('registro-alta_'.$idAlta.'.pdf');
+        $dompdf->save(storage_path('app/public/') . 'registro-alta_'.$idCertificado.'.pdf');
+        //return $dompdf->stream('registro-alta_'.$idAlta.'.pdf');
 }
 
 
-public function descargarCertificadoInscripcion($id)
+public function descargarRegistroAlta($id)
+{
+
+    $certificado = Certificado::where('id_proveedor', $id)->exists();
+
+    if(!$certificado){
+        $this->guardarHistorico($id);
+
+        $certificado = Certificado::where('id_proveedor', $id)->get()->last();
+
+        $this->generarCertificadoInscripcion($id,$certificado->id_certificado);
+        $this->generarRegistroAlta($id,$certificado->id_certificado);
+
+        $file_name = "registro-alta_$certificado->id_certificado.pdf";
+
+        $file = Storage::disk('public')->get($file_name);
+
+            return response($file, 200)
+                  ->header('Content-type', 'application/pdf');
+}
+else
+{
+
+    $certificado = Certificado::where('id_proveedor', $id)->get()->last();
+    $file_name = "registro-alta_$certificado->id_certificado.pdf";
+
+    $file = Storage::disk('public')->get($file_name);
+
+        return response($file, 200)
+              ->header('Content-type', 'application/pdf');
+
+    return $certificado->id_certificado;
+}
+}
+
+public function generarHistoricoCertificado($id)
 {
     $proveedor = Proveedor::find($id);
 
     // crea una ID única con un número aleatorio como prefijo, más seguro que un prefijo estático uniqid (rand (), true)
-    $idInscripcion = uniqid (rand ());
+    //$idInscripcion = uniqid (rand ());
 
-    return $idInscripcion;
+    //return $idInscripcion;
 
-    if($proveedor->nro_rupae_proveedor==null)
+    if($proveedor->nro_rupae_proveedor==null){
         $this->asignarNroRupaeProveedor($proveedor);
+
+    }
+    $idAlta = $proveedor->nro_rupae_proveedor;
+
+    $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')->first();
+
+    $proveedor_telefono_real = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'real')->first();
+
+    $proveedor_localidad_real = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->first();
+
+    $proveedor_actividad_id = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 1)->first();
+    if (empty($proveedor_actividad_id)) {
+        $proveedor_tipo_actividad = "";
+        $Actividad_economica = "";
+
+    } else {
+        $proveedor_tipo_actividad = Tipo_actividad::where('id_tipo_actividad', $proveedor_actividad_id->id_tipo_actividad)->first();
+        $Actividad_economica = Actividad_economica::where('id_actividad_economica', $proveedor_actividad_id->id_tipo_actividad)->first();
+
+    }
+
+
+    $proveedor_actividad_secundaria = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 2)->get();
+
+    $actividades_Secundarias = "";
+
+    foreach( $proveedor_actividad_secundaria as $actividad_secundaria){
+
+        $Actividad_economica2 = Actividad_economica::where('id_actividad_economica', $actividad_secundaria->id_tipo_actividad)->first();
+
+        $actividades_Secundarias = $Actividad_economica2->cod_actividad.",".$actividades_Secundarias;
+    }
+
+}
+
+public function generarCertificadoInscripcion($id,$idCertificado)
+{
+    $proveedor = Proveedor::find($id);
+
+    // crea una ID única con un número aleatorio como prefijo, más seguro que un prefijo estático uniqid (rand (), true)
+    //$idInscripcion = uniqid (rand ());
+
+    //return $idInscripcion;
+
+    if($proveedor->nro_rupae_proveedor==null){
+        $this->asignarNroRupaeProveedor($proveedor);
+
+    }
+    $idAlta = $proveedor->nro_rupae_proveedor;
 
     $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')->first();
 
@@ -325,13 +392,46 @@ public function descargarCertificadoInscripcion($id)
         //$dompdf = App::make("dompdf.wrapper");
         $dompdf = PDF::loadView('certificadoInscripcion', array('data'=> $data));
         // return storage_path('app/public/');
-        $dompdf->save(storage_path('app/public/') . 'certificado-inscripcion_'.$idInscripcion.'.pdf');
-        
-        return $dompdf->stream('certificado-inscripcion_'.$idInscripcion.'.pdf');
+        $dompdf->save(storage_path('app/public/') . 'certificado-inscripcion_'.$idCertificado.'.pdf');
+
+        //return $dompdf->stream('certificado-inscripcion_'.$idAlta.'.pdf');
 
         //return PDF::loadFile(public_path().'/certificado-inscripcion.pdf')->save('/path-to/my_stored_file.pdf')->stream('download.pdf');
 
         //return $content;
+}
+
+public function descargarCertificadoInscripcion($id)
+{
+
+    $certificado = Certificado::where('id_proveedor', $id)->exists();
+
+    if(!$certificado){
+        $this->guardarHistorico($id);
+
+        $certificado = Certificado::where('id_proveedor', $id)->get()->last();
+
+        $this->generarCertificadoInscripcion($id,$certificado->id_certificado);
+        $this->generarRegistroAlta($id,$certificado->id_certificado);
+        $file_name = "certificado-inscripcion_$certificado->id_certificado.pdf";
+
+        $file = Storage::disk('public')->get($file_name);
+
+            return response($file, 200)
+                ->header('Content-type', 'application/pdf');
+    }
+    else{
+
+        $certificado = Certificado::where('id_proveedor', $id)->get()->last();
+        $file_name = "certificado-inscripcion_$certificado->id_certificado.pdf";
+
+        $file = Storage::disk('public')->get($file_name);
+
+            return response($file, 200)
+                ->header('Content-type', 'application/pdf');
+
+        return $certificado->id_certificado;
+    }
 
 }
 
@@ -355,21 +455,96 @@ public function descargarCertificadoInscripcion($id)
         while($error_numero_registro);
     }
 
-    public function guardarHistorico(   $proveedor, 
-                                        $proveedor_domicilio_real, 
-                                        $proveedor_localidad_real,
-                                        $provinciaReal,
-                                        $proveedor_telefono_real,
-                                        $proveedor_email_real,
-                                        $proveedor_localidad_legal,
-                                        $provinciaLegal,
-                                        $proveedor_domicilio_legal,
-                                        $proveedor_telefono_legal,
-                                        $proveedor_email_legal,
-                                        $persona,
-                                        $Actividad_economica,
-                                        $actividades_Secundarias,
-                                        $fecha_emision_certificado){
+    public function guardarHistorico($id){
+                                            $proveedor = Proveedor::find($id);
+    if($proveedor->nro_rupae_proveedor==null){
+        $this->asignarNroRupaeProveedor($proveedor);
+
+    }
+    $idAlta = $proveedor->nro_rupae_proveedor;
+    $persona = $proveedor->personas()->get();
+
+    if ($persona->isEmpty()) {
+        $persona =  "";
+
+    }
+    else{
+        $persona = $persona[0];
+    }
+
+    $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')->first();
+
+    $proveedor_telefono_real = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'real')->first();
+
+    $proveedor_localidad_real = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->first();
+
+    $proveedor_actividad_id = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 1)->first();
+
+    if (empty($proveedor_actividad_id)) {
+        $proveedor_tipo_actividad = "";
+    } else {
+        $proveedor_tipo_actividad = Tipo_actividad::where('id_tipo_actividad', $proveedor_actividad_id->id_tipo_actividad)->first();
+    }
+
+
+    $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
+    ->first();
+
+    $provinciaLegal = Localidad::where('id_localidad', $proveedor_domicilio_legal->id_localidad)->get();
+
+
+
+    if ($provinciaLegal->isEmpty()) {
+        $provinciaLegal =  "";
+    } else {
+        $provinciaLegal =  $provinciaLegal[0]->id_provincia;
+
+        $provinciaLegal = Provincia::where('id_provincia', $provinciaLegal)->first();
+    }
+
+    $proveedor_localidad_legal = Localidad::where('id_localidad', $proveedor_domicilio_legal->id_localidad)->first();
+
+
+    $proveedor_email_legal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'legal')
+        ->first();
+
+    $proveedor_telefono_legal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'legal')
+        ->first();
+
+
+    $provinciaReal = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->get();
+
+    if ($provinciaReal->isEmpty()) {
+        $provinciaReal =  "";
+    } else {
+        $provinciaReal =  $provinciaReal[0]->id_provincia;
+
+        $provinciaReal = Provincia::where('id_provincia', $provinciaReal)->first();
+    }
+
+
+
+    $proveedor_email_real = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'real')
+        ->first();
+
+
+        if (empty($proveedor_actividad_id)) {
+            $Actividad_economica = "";
+        } else {
+            $Actividad_economica = Actividad_economica::where('id_actividad_economica', $proveedor_actividad_id->id_tipo_actividad)->first();
+            $Actividad_economica =$Actividad_economica->desc_actividad;
+        }
+
+    $proveedor_actividad_secundaria = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 2)->get();
+    $actividades_Secundarias = "";
+
+    foreach( $proveedor_actividad_secundaria as $actividad_secundaria){
+
+        $Actividad_economica2 = Actividad_economica::where('id_actividad_economica', $actividad_secundaria->id_tipo_actividad)->first();
+
+        $actividades_Secundarias = $Actividad_economica2->cod_actividad.",".$actividades_Secundarias;
+    }
+    $fecha_emision_certificado=Carbon::now();
         $jerarquias = Jerarquia_compre_local::all();
         $desc_jerarquia_compre_local='';
         foreach($jerarquias as $jerarquia){
@@ -379,48 +554,48 @@ public function descargarCertificadoInscripcion($id)
 
         $certificado = Certificado::create([
             'nro_rupae_proveedor'=>$proveedor->nro_rupae_proveedor,
-            'fecha_inscripcion'=>$proveedor->created_at,
+            'fecha_inscripcion'=>isset($proveedor->created_at) ? $proveedor->created_at : NULL,
             'razon_social'=>$proveedor->razon_social,
             'cuit'=>$proveedor->cuit,
             'nombre_fantasia'=>$proveedor->nombre_fantasia,
-            'calle_real'=>$proveedor_domicilio_real->calle,
-            'numero_real'=>$proveedor_domicilio_real->numero,
-            'nombre_localidad_real'=>$proveedor_localidad_real->nombre_localidad,
-            'nombre_provincia_real'=>$provinciaReal->nombre_provincia,
-            'nro_tel_real'=>$proveedor_telefono_real->nro_tel,
-            'email_real'=>$proveedor_email_real->email,
-            'nombre_localidad_legal'=>$proveedor_localidad_legal->nombre_localidad,
-            'nombre_provincia_legal'=>$provinciaLegal->nombre_provincia,
-            'calle_legal'=>$proveedor_domicilio_legal->calle,
-            'numero_legal'=>$proveedor_domicilio_legal->numero,
-            'nro_tel_legal'=>$proveedor_telefono_legal->nro_tel,
-            'email_legal'=>$proveedor_email_legal->email,
-            'nombre_representante_legal'=>$persona->nombre_persona.' '.$persona->apellido_persona,
-            'dni_representante_legal'=>$persona->dni_persona,
-            'tipo_de_sociedad'=>$proveedor->tipo_de_sociedad,
-            'situacion_iva'=>$proveedor->situacion_iva,
-            'retencion'=>$proveedor->retencion,
-            'nro_ingresos_brutos'=>$proveedor->nro_ingresos_brutos,
-            'jurisdiccion'=>$proveedor->jurisdiccion,
-            'tipo_contribuyente'=>$proveedor->tipo_contribuyente,
-            'nro_habilitacion_municipal'=>$proveedor->nro_habilitacion_municipal,
-            'nombre_localidad_habilit_municip'=>$proveedor->localidad_habilitacion,
-            'nro_inscripcion_personas_juridicas'=>$proveedor->nro_inscripcion_personas_juridicas,
-            'provincia_inscrip_personas_jur'=>$proveedor->provincia_inscrip_personas_jur,
-            'registro_publico_de_comercio'=>$proveedor->registro_publico_de_comercio,
-            'provincia_registro_publico'=>$proveedor->provincia_registro_publico,
-            'inspeccion_gral_justicia'=>$proveedor->inspeccion_gral_justicia,
-            'provincia_inspeccion_justicia'=>$proveedor->provincia_inspeccion_justicia,
-            'desc_actividad_economica_princ'=>$Actividad_economica,
-            'desc_actividad_economica_sec'=>$actividades_Secundarias,
-            'porc_mo'=>$proveedor->porc_mo, //Porcentaje de Mano de Obra en Santa Cruz
+            'calle_real'=>isset($proveedor_domicilio_real->calle) ? $proveedor_domicilio_real->calle: NULL,
+            'numero_real'=>isset($proveedor_domicilio_real->numero) ? $proveedor_domicilio_real->numero : null,
+            'nombre_localidad_real'=>isset($proveedor_localidad_real->id_localidad) ? $proveedor_localidad_real->id_localidad : NULL,
+            'nombre_provincia_real'=>isset($provinciaReal->nombre_provincia) ? $provinciaReal->nombre_provincia : NULL,
+            'nro_tel_real'=>isset($proveedor_telefono_real->nro_tel) ? $proveedor_telefono_real->nro_tel : NULL,
+            'email_real'=>isset($proveedor_email_real->email) ? $proveedor_email_real->email : NULL,
+            'nombre_localidad_legal'=>isset($proveedor_localidad_legal->nombre_localidad) ? $proveedor_localidad_legal->nombre_localidad : NULL,
+            'nombre_provincia_legal'=>isset($provinciaLegal->nombre_provincia) ? $provinciaLegal->nombre_provincia : NULL,
+            'calle_legal'=>isset($proveedor_domicilio_legal->calle) ? $proveedor_domicilio_legal->calle : NULL,
+            'numero_legal'=>isset($proveedor_domicilio_legal->numero) ? $proveedor_domicilio_legal->numero : NULL,
+            'nro_tel_legal'=>isset($proveedor_telefono_legal->nro_tel) ? $proveedor_telefono_legal->nro_tel : NULL,
+            'email_legal'=>isset($proveedor_email_legal->email) ? $proveedor_email_legal->email : NULL,
+            'nombre_representante_legal'=>(isset($persona->nombre_persona) ? $persona->nombre_persona : NULL).' '.(isset($persona->apellido_persona) ? $persona->apellido_persona : NULL),
+            'dni_representante_legal'=>isset($persona->dni_persona) ? $persona->dni_persona : NULL,
+            'tipo_de_sociedad'=>isset($proveedor->tipo_de_sociedad) ? $proveedor->tipo_de_sociedad : NULL,
+            'situacion_iva'=>isset($proveedor->situacion_iva) ? $proveedor->situacion_iva: NULL,
+            'retencion'=>isset($proveedor->retencion) ? $proveedor->retencion : NULL,
+            'nro_ingresos_brutos'=>isset($proveedor->nro_ingresos_brutos) ? $proveedor->nro_ingresos_brutos : NULL,
+            'jurisdiccion'=>isset($proveedor->jurisdiccion) ? $proveedor->jurisdiccion : NULL,
+            'tipo_contribuyente'=>isset($proveedor->tipo_contribuyente) ? $proveedor->tipo_contribuyente : NULL,
+            'nro_habilitacion_municipal'=>isset($proveedor->nro_habilitacion_municipal) ? $proveedor->nro_habilitacion_municipal : NULL,
+            'nombre_localidad_habilit_municip'=>isset($proveedor->localidad_habilitacion) ? $proveedor->localidad_habilitacion : NULL,
+            'nro_inscripcion_personas_juridicas'=>isset($proveedor->nro_inscripcion_personas_juridicas) ? $proveedor->nro_inscripcion_personas_juridicas : NULL,
+            'provincia_inscrip_personas_jur'=>isset($proveedor->provincia_inscrip_personas_jur) ? $proveedor->provincia_inscrip_personas_jur: NULL,
+            'registro_publico_de_comercio'=>isset($proveedor->registro_publico_de_comercio) ? $proveedor->registro_publico_de_comercio : NULL,
+            'provincia_registro_publico'=>isset($proveedor->provincia_registro_publico) ? $proveedor->provincia_registro_publico : NULL,
+            'inspeccion_gral_justicia'=>isset($proveedor->inspeccion_gral_justicia) ? $proveedor->inspeccion_gral_justicia : NULL,
+            'provincia_inspeccion_justicia'=>isset($proveedor->provincia_inspeccion_justicia) ? $proveedor->provincia_inspeccion_justicia : NULL,
+            'desc_actividad_economica_princ'=>isset($Actividad_economica) ? $Actividad_economica : NULL,
+            'desc_actividad_economica_sec'=>isset($actividades_Secundarias) ? $actividades_Secundarias : NULL,
+            'porc_mo'=>isset($proveedor->porc_mo) ? $proveedor->porc_mo : NULL, //Porcentaje de Mano de Obra en Santa Cruz
             'porc_facturacion'=>$proveedor->porc_facturacion,
-            'porc_gasto'=>$proveedor->porc_gasto,
-            'antiguedad'=>$proveedor->antiguedad,
-            'dom_fiscal'=>$proveedor->dom_fiscal,
-            'valor_agregado'=>$proveedor->valor_agregado,
-            'valor_indice_rupae'=>$proveedor->valor_indice_rupae,
-            'desc_jerarquia_compre_local'=>$desc_jerarquia_compre_local,
+            'porc_gasto'=>isset($proveedor->porc_gasto) ? $proveedor->porc_gasto : NULL,
+            'antiguedad'=>isset($proveedor->antiguedad) ? $proveedor->antiguedad : NULL,
+            'dom_fiscal'=>isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : NULL,
+            'valor_agregado'=>isset($proveedor->valor_agregado) ? $proveedor->valor_agregado : NULL,
+            'valor_indice_rupae'=>isset($proveedor->valor_indice_rupae) ? $proveedor->valor_indice_rupae : NULL,
+            'desc_jerarquia_compre_local'=>isset($desc_jerarquia_compre_local) ? $desc_jerarquia_compre_local : NULL,
             'fecha_emision_certificado'=>$fecha_emision_certificado
         ]);
         $proveedor->certificados()->save($certificado);

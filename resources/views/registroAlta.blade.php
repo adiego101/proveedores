@@ -5,7 +5,7 @@
 $fechaOriginalInscripcion = htmlspecialchars($data['fecha_inscripcion']);
 
 //Cambiamos el formato por dd/mm/YYYY H:i:s
-$timestamp = strtotime($fechaOriginalInscripcion); 
+$timestamp = strtotime($fechaOriginalInscripcion);
 $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
 ?>
 
@@ -110,7 +110,7 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
             <table>
                 <tr>
                     <td colspan="2">
-                        <h1><u>Inscripción Rupae Nº 
+                        <h1><u>Inscripción Rupae Nº
                                 {{isset($data['proveedor']['nro_rupae_proveedor']) && strlen($data['proveedor']['nro_rupae_proveedor'])<5 ? substr(str_repeat(0, 5).$data['proveedor']['nro_rupae_proveedor'], - 5) : ''}}
                                 {{isset($data['proveedor']['nro_rupae_proveedor']) && strlen($data['proveedor']['nro_rupae_proveedor'])>=5 ? $data['proveedor']['nro_rupae_proveedor']: ''}}
                             </u>
@@ -140,7 +140,7 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
                         <label for="">Provincia: {{isset($data['provincia_real']) ? $data['provincia_real'] : ''}}</label><br>
                         <label for="">Teléfono:  {{isset($data['telefono_real']) ? $data['telefono_real'] : ''}}</label><br>
                         <label for="">Correo electrónico: {{isset($data['email_real']) ? $data['email_real'] : ''}}</label><br>
-                
+
                     </td>
                     <td>
                         <br>
@@ -193,17 +193,17 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
                         <label for="">Porcentaje facturación: {{isset($data['proveedor']['porc_facturacion']) ? $data['proveedor']['porc_facturacion'] : ''}}</label><br>
                         <label for="">Porcentaje gasto: {{isset($data['proveedor']['porc_gasto']) ? $data['proveedor']['porc_gasto'] : ''}}</label><br>
                         <label for="">Porcentaje mano de obra: {{isset($data['proveedor']['porc_mo']) ? $data['proveedor']['porc_mo'] : ''}}</label><br>
-                        <label for="">Indice: {{"FALTA DEFINIR CAMPO"}}</label><br>
+                        <label for="">Indice: {{isset($data['proveedor']['valor_indice_rupae']) ? $data['proveedor']['valor_indice_rupae'] : ''}}</label><br>
                     </td>
                     <td>
                         <label for="">Antiguedad en provincia: {{isset($data['proveedor']['antiguedad']) ? $data['proveedor']['antiguedad'] : ''}}</label><br>
                         <label for="">Domicilio fiscal en la provincia: {{isset($data['proveedor']['dom_fiscal']) ? $data['proveedor']['dom_fiscal'] : ''}}</label><br>
                         <label for="">Valor agregado:  {{$data['proveedor']['valor_agregado'] ? "Si" : "No" }} </label><br>
-                        <label for="">Proveedor: {{"FALTA DEFINIR CAMPO"}} </label><br>
+                        <label for="">Proveedor: {{isset($data['proveedor']['proveedor']) ? $data['proveedor']['proveedor'] : ''}} </label><br>
                     </td>
                 </tr>
             </table>
-            
+
             <br>
             <br>
             <br>

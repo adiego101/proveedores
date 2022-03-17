@@ -178,9 +178,6 @@ $('input[type="checkbox"]').on('change', function(){
  }).change();
 
  window.onload = function(){
-    calcular();
-
-
 recargarListaRealEdit2();
 recargarListaFiscal2();
 recargarListaLegal2();

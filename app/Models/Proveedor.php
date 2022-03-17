@@ -74,7 +74,8 @@ class Proveedor extends Model
                             'valor_agregado',
                             'id_tamanio_empresa',
                             'observaciones',
-                            'valor_indice_rupae'
+                            'valor_indice_rupae',
+                            'proveedor'
                             ];
 
     protected $primaryKey = 'id_proveedor';

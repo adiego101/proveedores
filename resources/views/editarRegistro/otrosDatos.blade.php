@@ -46,7 +46,7 @@ disabled>
             <br>
 
             <label for="proveedor">Proveedor:</label><br>
-            <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" id="proveedor" name="proveedor" readonly>
+            <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" id="proveedor" value="{{ isset($proveedor->proveedor) ? $proveedor->proveedor : '' }}" name="proveedor" readonly>
             <br>
 
             <label for="id_tamanio_empresa">Tamaño de la Empresa:</label><br>
