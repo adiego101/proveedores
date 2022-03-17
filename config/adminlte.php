@@ -232,19 +232,20 @@ return [
         ['header' => 'Funciones Principales'],
 
         [
-            'text' => 'Nuevo Registro Cuit',
+            'text' => 'Nuevo Registro',
             'url' => '/nuevoRegistroCuit',
             'icon' => 'fas fa-fw fa-plus-circle',
             'label_color' => 'success',
         ],
 
-
+        /*
         [
             'text' => 'Nuevo Registro',
             'url' => '/nuevoRegistro',
             'icon' => 'fas fa-fw fa-plus-circle',
             'label_color' => 'success',
         ],
+        */
         [
             'text' => 'Gestionar Registros',
             'url' => '/gestionarRegistros',
