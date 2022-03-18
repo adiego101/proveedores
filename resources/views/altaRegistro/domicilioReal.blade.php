@@ -127,7 +127,7 @@
                                 '</div>';
 
             if(x == 1){
-                
+
                 //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
                 let tel_real = document.getElementById('telefono_real').value;
 
@@ -135,7 +135,7 @@
                 if (tel_real.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
 
@@ -144,20 +144,20 @@
                 }
 
             } else {
-                
+
                 var y = x - 1;
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
                 var tel_real_dinamico = document.getElementById('telefono_real' + y).value;
-              
+
                 //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
                 if (tel_real_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_telefono_real).append(fieldHTML_telefono_real); // Agrega un nuevo campo html (telefono)
                     }
                 }
@@ -176,7 +176,7 @@
         var addEmail_real = $('.add_email_real');
         var wrapper_email_real = $('.field_email_real');
         var i = 1; //Contador inicial, comienza en 1
-        
+
         $(addEmail_real).click(function() {
 
             //Nuevo campo html (agregar un nuevo correo)
@@ -197,7 +197,7 @@
                 if (email_real.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
 
@@ -206,20 +206,20 @@
                 }
 
             } else {
-                
+
                 var y = i - 1;
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Correo
                 var email_real_dinamico = document.getElementById('email_real' + y).value;
-              
+
                 //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
                 if (email_real_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_email_real).append(fieldHTML_email_real); // Agrega un nuevo campo html (correo)
                     }
                 }
@@ -250,7 +250,7 @@
 	function recargarListaReal(){
 		$.ajax({
 			type:"GET",
-			url:"localidades/"+$('#provincia_real').val(),
+			url:"{{url('localidades/')}}/"+$('#provincia_real').val(),
 			success:function(r){
 				$('#localidad_real').html(r);
 			}

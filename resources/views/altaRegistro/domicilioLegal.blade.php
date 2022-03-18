@@ -108,7 +108,7 @@
         var addTelefono_legal = $('.add_telefono_legal');
         var wrapper_telefono_legal = $('.field_telefono_legal');
         var x = 1; //Contador inicial, comienza en 1
-        
+
         $(addTelefono_legal).click(function() {
 
             //Nuevo campo html (agregar un nuevo teléfono)
@@ -122,7 +122,7 @@
 
 
             if(x == 1){
-                
+
                 //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
                 let tel_legal = document.getElementById('telefono_legal').value;
 
@@ -130,7 +130,7 @@
                 if (tel_legal.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
 
@@ -139,20 +139,20 @@
                 }
 
             } else {
-                
+
                 var y = x - 1;
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
                 var tel_legal_dinamico = document.getElementById('telefono_legal' + y).value;
-              
+
                 //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
                 if (tel_legal_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_telefono_legal).append(fieldHTML_telefono_legal); // Agrega un nuevo campo html (telefono)
                     }
                 }
@@ -195,7 +195,7 @@
                 if (email_legal.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
 
@@ -214,10 +214,10 @@
                 if (email_legal_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_email_legal).append(fieldHTML_email_legal); // Agrega un nuevo campo html (correo)
                     }
                 }
@@ -249,7 +249,7 @@
 	function recargarListaLegal(){
 		$.ajax({
 			type:"GET",
-			url:"localidades/"+$('#provincia_legal').val(),
+			url:"{{url('localidades/')}}/"+$('#provincia_legal').val(),
 			success:function(r){
 				$('#localidad_legal').html(r);
 			}

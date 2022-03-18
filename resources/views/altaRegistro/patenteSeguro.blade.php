@@ -243,8 +243,8 @@
 
                     inscripto_en_css.style.border = '2px dashed red';
                 }
-                
-                
+
+
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
                 $('#modal_validar_vehiculo').modal('show');
@@ -346,7 +346,7 @@
                 agencia_css.style.border = '1px solid #DFDFDF';
                 asegurado_css.style.border = '1px solid #DFDFDF';
                 vigencia_css.style.border = '1px solid #DFDFDF';
-            
+
             } else {
 
                 if(poliza.length == 0){
@@ -368,7 +368,7 @@
 
                     vigencia_css.style.border = '2px dashed red';
                 }
-                
+
 
                 /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
@@ -429,7 +429,7 @@
         id_localidad = $("#localidad_sede").val(); // Capturamos el valor del select (el id)
         valor_localidad = $("#localidad_sede").find('option:selected').text(); // Capturamos el texto del option seleccionado
         provincia_sede = $("#provincia_sede").val();
-        
+
         /*console.log("Provincia: "+provincia_sede);
         console.log("localidad: "+localidad);
         if(localidad != " "){
@@ -471,7 +471,7 @@
         provincia_sede_css.style.border = '1px solid #DFDFDF';
 
         } else {
-   
+
             if(domicilio.length == 0){
 
                 domicilio_sede_css.style.border = '2px dashed red';
@@ -545,7 +545,7 @@
         function recargarListaSeguro(){
             $.ajax({
                 type:"GET",
-                url:"localidades/"+$('#provincia_sede').val(),
+                url:"{{url('localidades/')}}/"+$('#provincia_sede').val(),
                 success:function(r){
                     $('#localidad_sede').html(r);
                 }

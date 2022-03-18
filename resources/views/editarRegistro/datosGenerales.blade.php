@@ -20,13 +20,17 @@ value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="11"><br
     <hr>
     <!--FALTA VALIDAR -->
     <br>
-    <label for="representante_legal">Representante Legal:
-    </label><br>
-    <input type="text" class="form-control" placeholder="Ingrese el nombre completo del representante legal" aria-describedby="basic-addon1" id="representante_legal" @if ( $mode == "show") readonly @endif
-value="{{ isset($persona->nombre_persona) ? $persona->nombre_persona : '' }}" maxlength="50" name="representante_legal"><br>
+    <h1>Representante Legal</h1><br>
+
+
+    <label for="apellido_persona">Apellido:</label><br>
+    <input type="text" @if ( $mode == "show") readonly @endif value="{{ isset($persona->apellido_persona) ? $persona->apellido_persona : '' }}" class="form-control" placeholder="Ingrese el apellido del representante legal" aria-describedby="basic-addon1" id="apellido_persona" name="apellido_persona" maxlength="50"><br>
+
+    <label for="nombre_persona">Nombre:</label><br>
+    <input type="text" @if ( $mode == "show") readonly @endif class="form-control" value="{{ isset($persona->nombre_persona) ? $persona->nombre_persona : '' }}" placeholder="Ingrese el nombre completo del representante legal" aria-describedby="basic-addon1" id="nombre_persona" name="nombre_persona" maxlength="50"><br>
 
     <!--FALTA VALIDAR -->
-    <label for="dni_legal">Dni:</label><br>
+    <label for="dni_legal">DNI:</label><br>
     <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el dni del representante legal" @if ( $mode == "show") readonly @endif
 value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="8">
     <br>

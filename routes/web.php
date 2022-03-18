@@ -40,7 +40,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => ['auth']], function () {
 
 
-    Route::get('/nuevoRegistro', function () {
+    Route::get('/nuevoRegistro/{cuit?}', function ($cuit = null) {
         $paises = Pais::all();
         $provincias = Provincia::all();
         $localidades = Localidad::all();
@@ -49,7 +49,8 @@ Route::group(['middleware' => ['auth']], function () {
         $productos = Producto::All();
         $ponderaciones = Ponderacion_compre_local::All();
         $jerarquias = Jerarquia_compre_local::All();
-        return view('nuevoRegistro', compact('paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones', 'jerarquias'));
+
+        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones', 'jerarquias'));
     })->name('nuevoRegistro');
 
 

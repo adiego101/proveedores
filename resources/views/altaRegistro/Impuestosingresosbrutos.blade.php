@@ -128,7 +128,7 @@
 	function recargarListaHabilitacion(){
 		$.ajax({
 			type:"GET",
-			url:"localidades/"+$('#provincia_habilitacion').val(),
+			url:"{{url('localidades/')}}/"+$('#provincia_habilitacion').val(),
 			success:function(r){
 				$('#localidad_habilitacion').html(r);
 			}
