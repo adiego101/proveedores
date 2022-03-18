@@ -84,10 +84,9 @@
             //Obtenemos los campos obligatorios para aplicarles estilos css
             let fecha_css = document.getElementById("fecha_pago");
             let importe_css = document.getElementById("importe_pago");
-            let observaciones_pago_css = document.getElementById("observaciones_pago");
 
 
-            if(fecha.length != 0 && importe.length != 0 && observaciones_pago.length != 0){
+            if(fecha.length != 0 && importe.length != 0){
 
                 $("#body_table_pago").append(
                     '<tr id="row_pago' + indice + '">' +
@@ -114,7 +113,6 @@
 
                 fecha_css.style.border = '1px solid #DFDFDF';
                 importe_css.style.border = '1px solid #DFDFDF';
-                observaciones_pago_css.style.border = '1px solid #DFDFDF';
 
             } else {
 
@@ -126,11 +124,6 @@
                 if(importe.length == 0){
 
                     importe_css.style.border = '2px dashed red';
-                }
-
-                if(observaciones_pago.length == 0){
-
-                    observaciones_pago_css.style.border = '2px dashed red';
                 }
                 
 

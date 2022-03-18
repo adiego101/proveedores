@@ -49,10 +49,9 @@
             //Obtenemos los campos obligatorios para aplicarles estilos css
             let modal_fecha_css = document.getElementById("modal_fecha");
             let modal_importe_css = document.getElementById("modal_importe");
-            let modal_observaciones_css = document.getElementById("modal_observaciones");
 
             //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
-            if(modal_fecha.length != 0 && modal_importe.length != 0 && modal_observaciones.length != 0){
+            if(modal_fecha.length != 0 && modal_importe.length != 0){
 
                 //Ocultamos el modal
                 $('#modal_pago').modal('hide');
@@ -70,7 +69,6 @@
 
                 modal_fecha_css.style.border = '1px solid #DFDFDF';
                 modal_importe_css.style.border = '1px solid #DFDFDF';
-                modal_observaciones_css.style.border = '1px solid #DFDFDF';
 
             }else{
 
@@ -87,10 +85,6 @@
                     modal_importe_css.style.border = '2px dashed red';
                 }
 
-                if(modal_observaciones.length == 0){
-
-                    modal_observaciones_css.style.border = '2px dashed red';
-                }
             }
 
         });
@@ -102,12 +96,10 @@
             //Obtenemos los campos obligatorios para aplicarles estilos css
             let modal_fecha_css = document.getElementById("modal_fecha");
             let modal_importe_css = document.getElementById("modal_importe");
-            let modal_observaciones_css = document.getElementById("modal_observaciones");
-
+      
             modal_fecha_css.style.border = '1px solid #DFDFDF';
             modal_importe_css.style.border = '1px solid #DFDFDF';
-            modal_observaciones_css.style.border = '1px solid #DFDFDF';
-
+            
         });
 
     </script>
