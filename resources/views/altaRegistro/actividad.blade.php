@@ -209,11 +209,9 @@ $("#add_producto").on("click", function(e) {
     //Obtenemos los campos obligatorios para aplicarles estilos css
     let producto_elaborado_css = document.getElementById("producto_elaborado");
     let unidad_producida_css = document.getElementById("unidad_producida");
-    let rnpa_css = document.getElementById("rnpa");
-    let produccion_total_css = document.getElementById("produccion_total");
 
 
-    if(producto_elaborado.length != 0 && unidad_producida.length != 0 && rnpa.length != 0 && produccion_total.length != 0){
+    if(producto_elaborado.length != 0 && unidad_producida.length != 0){
 
         $("#body_table_producto").append(
             '<tr id="row_producto' + n +'">'+
@@ -243,8 +241,6 @@ $("#add_producto").on("click", function(e) {
 
         producto_elaborado_css.style.border = '1px solid #DFDFDF';
         unidad_producida_css.style.border = '1px solid #DFDFDF';
-        rnpa_css.style.border = '1px solid #DFDFDF';
-        produccion_total_css.style.border = '1px solid #DFDFDF';
         
 
     } else {
@@ -259,17 +255,7 @@ $("#add_producto").on("click", function(e) {
             unidad_producida_css.style.border = '2px dashed red';
         }
         
-        if(rnpa.length == 0){
-
-            rnpa_css.style.border = '2px dashed red';
-        }
         
-        if(produccion_total.length == 0){
-
-            produccion_total_css.style.border = '2px dashed red';
-        }
-        
-    
         /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
         //Desplegamos el modal
         $('#modal_validar_producto').modal('show');

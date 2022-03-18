@@ -32,13 +32,13 @@
             <br>
 
             <label for="rnpa">RNPA:</label><br>
-            <input @if ( $mode == "show") readonly @endif type="text" class="form-control" value="{{ isset($producto->rnpa) ? $producto->rnpa : '' }}" aria-describedby="basic-addon1" id="rnpa" name="rnpa" placeholder="Ingrese el RNPA" maxlength="8" required><br>
+            <input @if ( $mode == "show") readonly @endif type="text" class="form-control" value="{{ isset($producto->rnpa) ? $producto->rnpa : '' }}" aria-describedby="basic-addon1" id="rnpa" name="rnpa" placeholder="Ingrese el RNPA" maxlength="8"><br>
         </div>
 
         <div class="col-sm">
             <label for="Producida_unidad">Unidad producida:</label><br>
             <input @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" value="{{ isset($producto->Producida_unidad) ? $producto->Producida_unidad : '' }}" class="form-control" aria-describedby="basic-addon1" id="Producida_unidad"
-            name="Producida_unidad" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9"><br>
+            name="Producida_unidad" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9" required><br>
 
             <label for="capacidad_produccion_total">Capacidad de producción total:</label><br>
             <input @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" value="{{ isset($producto->capacidad_produccion_total) ? $producto->capacidad_produccion_total : '' }}" class="form-control" aria-describedby="basic-addon1" id="capacidad_produccion_total" name="capacidad_produccion_total" placeholder="Ingrese la producción total" maxlength="9"><br>
