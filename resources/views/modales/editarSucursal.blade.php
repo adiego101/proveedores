@@ -130,15 +130,13 @@ $(document).on("click", ".btn_edit_modal_sucursal", function(event) {
 
     //Obtenemos los campos obligatorios para aplicarles estilos css
     let modal_nombre_css = document.getElementById("modal_nombre_sucursal");
-    let modal_email_css = document.getElementById("modal_email_sucursal");
-    let modal_telefono_css = document.getElementById("modal_telefono_sucursal");
     //let modal_pais_css = document.getElementById("modal_nombre_sucursal");
     let modal_provincia_css = document.getElementById("modal_provincia_sucursal");
     let modal_localidad_css = document.getElementById("modal_localidad_sucursal");
 
     //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
-    if(modal_nombre_sucursal.length != 0 && modal_email.length != 0 && modal_telefono.length != 0 && modal_pais != " " && modal_provincia != " " && modal_localidad_sucursal != " "){
-                
+    if(modal_nombre_sucursal.length != 0 && modal_pais != " " && modal_provincia != " " && modal_localidad_sucursal != " "){
+
         //Ocultamos el modal
         $('#modal_sucursal').modal('hide');
 
@@ -167,38 +165,26 @@ $(document).on("click", ".btn_edit_modal_sucursal", function(event) {
         $('#telefono_sucursal_text'+id_fila_sucursal).text(modal_telefono);
 
         modal_nombre_css.style.border = '1px solid #DFDFDF';
-        modal_email_css.style.border = '1px solid #DFDFDF';
-        modal_telefono_css.style.border = '1px solid #DFDFDF';
         modal_provincia_css.style.border = '1px solid #DFDFDF';
         modal_localidad_css.style.border = '1px solid #DFDFDF';
-            
+
     } else {
 
         //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
         event.preventDefault();
 
         if(modal_nombre_sucursal.length == 0){
-      
+
             modal_nombre_css.style.border = '2px dashed red';
         }
 
-        if(modal_email.length == 0){
-         
-            modal_email_css.style.border = '2px dashed red';
-        }
-
-        if(modal_telefono.length == 0){
-        
-            modal_telefono_css.style.border = '2px dashed red';
-        }
-
         if(modal_provincia == " "){
-            
+
             modal_provincia_css.style.border = '2px dashed red';
         }
-        
+
         if(modal_localidad_sucursal == " "){
-          
+
             modal_localidad_css.style.border = '2px dashed red';
         }
     }
@@ -210,15 +196,11 @@ $(document).on("click", ".btn_cancel_modal", function(event) {
 
     //Obtenemos los campos obligatorios para aplicarles estilos css
     let modal_nombre_css = document.getElementById("modal_nombre_sucursal");
-    let modal_email_css = document.getElementById("modal_email_sucursal");
-    let modal_telefono_css = document.getElementById("modal_telefono_sucursal");
     //let modal_pais_css = document.getElementById("modal_nombre_sucursal");
     let modal_provincia_css = document.getElementById("modal_provincia_sucursal");
     let modal_localidad_css = document.getElementById("modal_localidad_sucursal");
 
     modal_nombre_css.style.border = '1px solid #DFDFDF';
-    modal_email_css.style.border = '1px solid #DFDFDF';
-    modal_telefono_css.style.border = '1px solid #DFDFDF';
     modal_provincia_css.style.border = '1px solid #DFDFDF';
     modal_localidad_css.style.border = '1px solid #DFDFDF';
 
@@ -240,7 +222,7 @@ $(document).on("click", ".btn_cancel_modal", function(event) {
 	function recargarListaSucursalModal(){
 		$.ajax({
 			type:"GET",
-			url:"localidades/"+$('#modal_provincia_sucursal').val(),
+			url:"{{url('localidades/')}}/"+$('#modal_provincia_sucursal').val(),
 			success:function(r){
 				$('#modal_localidad_sucursal').html(r);
 			}

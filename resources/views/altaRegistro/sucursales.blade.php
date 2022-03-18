@@ -80,7 +80,7 @@
 
             <label for="telefono_sucursal">Teléfono:</label><br>
             <input type="text" onkeypress="return valideKey(event);" id="telefono_sucursal" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" maxlength="14">
-         
+
             <br>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -166,7 +166,7 @@
         pais = $("#pais_sucursal").val();
         provincia = $("#provincia_sucursal").val();
         localidad_sucursal = $("#localidad_sucursal").val();
-        
+
 
         /*
         console.log(pais);
@@ -254,13 +254,11 @@
 
         //Obtenemos los campos obligatorios para aplicarles estilos css
         let nombre_css = document.getElementById("nombre_sucursal");
-        let email_css = document.getElementById("email_sucursal");
-        let telefono_css = document.getElementById("telefono_sucursal");
         //let pais_css = document.getElementById("nombre_sucursal");
         let provincia_css = document.getElementById("provincia_sucursal");
         let localidad_css = document.getElementById("localidad_sucursal");
-        
-        if(nombre_sucursal.length != 0 && email.length != 0 && telefono.length != 0 && pais != " " && provincia != " " && localidad_sucursal != " "){
+
+        if(nombre_sucursal.length != 0 && pais != " " && provincia != " " && localidad_sucursal != " "){
 
             $("#body_table_sucursal").append(
                 '<tr id="row_sucursal' + i_sucursal +'">'+
@@ -312,26 +310,14 @@
             document.getElementById("telefono_sucursal").value = "";
 
             nombre_css.style.border = '1px solid #DFDFDF';
-            email_css.style.border = '1px solid #DFDFDF';
-            telefono_css.style.border = '1px solid #DFDFDF';
             provincia_css.style.border = '1px solid #DFDFDF';
             localidad_css.style.border = '1px solid #DFDFDF';
-   
+
         } else {
 
             if(nombre_sucursal.length == 0){
 
                 nombre_css.style.border = '2px dashed red';
-            }
-            
-            if(email.length == 0){
-
-                email_css.style.border = '2px dashed red';
-            }
-
-            if(telefono.length == 0){
-
-                telefono_css.style.border = '2px dashed red';
             }
 
             if(provincia == " "){
@@ -340,15 +326,15 @@
             }
 
             if(localidad_sucursal == " "){
-                
+
                 localidad_css.style.border = '2px dashed red';
             }
-            
-            
+
+
             /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
             //Desplegamos el modal
             $('#modal_validar_sucursal').modal('show');
-            
+
         }
             /*if(error_encontrado){
             $('#errors').focus();
@@ -499,7 +485,7 @@ $(document).ready(function() {
 	function recargarListaSucursal(){
 		$.ajax({
 			type:"GET",
-			url:"localidades/"+$('#provincia_sucursal').val(),
+			url:"{{url('localidades/')}}/"+$('#provincia_sucursal').val(),
 			success:function(r){
 				$('#localidad_sucursal').html(r);
 			}
