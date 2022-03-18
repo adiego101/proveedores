@@ -14,10 +14,10 @@
             <label for="porc_mo">Porcentaje de Mano de Obra en Santa Cruz:</label><br>
             <input type="number" class="form-control" aria-describedby="basic-addon1" id="porc_mo" name="porc_mo" placeholder="Ingrese el porcentaje de mano de obra" min="0" max="100"><br>
 
-            <label for="antiguedad">Antiguedad en Santa Cruz:</label><br>
+            <label for="antiguedad">Porcentaje de Antiguedad en Santa Cruz:</label><br>
             <input type="number" class="form-control" aria-describedby="basic-addon1" id="antiguedad" name="antiguedad" placeholder="Ingrese la antiguedad en Santa Cruz" min="0" max="100"><br>
 
-            <label for="dom_fiscal">Domicilio Fiscal:</label><br>
+            <label for="dom_fiscal">Porcentaje de Domicilio Fiscal:</label><br>
             <input type="number" class="form-control" aria-describedby="basic-addon1" id="dom_fiscal" name="dom_fiscal" placeholder="Ingrese el domicilio fiscal" min="0" max="100"><br>
 
             <div class="container">

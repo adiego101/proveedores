@@ -121,7 +121,7 @@
 
 
             if(x == 1){
-                
+
                 //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
                 let tel_fiscal = document.getElementById('telefono_fiscal').value;
 
@@ -129,7 +129,7 @@
                 if (tel_fiscal.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
 
@@ -138,20 +138,20 @@
                 }
 
             } else {
-                
+
                 var y = x - 1;
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
                 var tel_fiscal_dinamico = document.getElementById('telefono_fiscal' + y).value;
-              
+
                 //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
                 if (tel_fiscal_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_telefono_fiscal).append(fieldHTML_telefono_fiscal); // Agrega un nuevo campo html (telefono)
                     }
                 }
@@ -172,7 +172,7 @@
         var addEmail_fiscal = $('.add_email_fiscal');
         var wrapper_email_fiscal = $('.field_email_fiscal');
         var i = 1; //Contador inicial, comienza en 1
-        
+
         $(addEmail_fiscal).click(function() {
 
             //Nuevo campo html (agregar un nuevo correo)
@@ -184,7 +184,7 @@
                                     '<br>'+
                                 '</div>';
 
-            
+
             if(i == 1){
 
                 //Obtenemos el valor del campo, al clickear el botón Agregar Correo
@@ -194,7 +194,7 @@
                 if (email_fiscal.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
 
@@ -213,10 +213,10 @@
                 if (email_fiscal_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_email_fiscal).append(fieldHTML_email_fiscal); // Agrega un nuevo campo html (correo)
                     }
                 }
@@ -247,7 +247,7 @@
 	function recargarListaFiscal(){
 		$.ajax({
 			type:"GET",
-			url:"localidades/"+$('#provincia_fiscal').val(),
+			url:"{{url('localidades/')}}/"+$('#provincia_fiscal').val(),
 			success:function(r){
 				$('#localidad_fiscal').html(r);
 			}

@@ -22,7 +22,7 @@
                         @endforelse
                     </select>
                     <br>
-                            
+
                     <label for="modal_localidad_sede">Localidad:</label><br>
                     <select class="form-control" aria-describedby="basic-addon1" id="modal_localidad_sede" name="modal_localidad_sede">
                         <option value=" ">Seleccione una localidad</option>
@@ -33,7 +33,7 @@
                         @endforelse
                     </select>
                     <br>
-                 
+
                     <div class="modal-footer">
                         <input id="numero_fila_sede" name="numero_fila_sede" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
@@ -141,7 +141,7 @@ $(document).on("click", ".btn_cancel_modal", function(event) {
 	function recargarListaSedeModal(){
 		$.ajax({
 			type:"GET",
-			url:"localidades/"+$('#modal_provincia_sede').val(),
+			url:"{{url('localidades/')}}/"+$('#modal_provincia_sede').val(),
 			success:function(r){
 				$('#modal_localidad_sede').html(r);
 			}

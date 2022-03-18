@@ -68,8 +68,9 @@ class ProveedoresController extends Controller
         //return $dado_de_baja->isEmpty();
         //return empty($dado_de_baja);
         //return $cuit;
+
         if (!$cuit /*|| $dado_de_baja->isEmpty()*/) {
-            return redirect()->route('nuevoRegistro');
+            return redirect()->route('nuevoRegistro',['cuit' => $request->cuit ]);
 
         }
         else{
@@ -249,16 +250,21 @@ class ProveedoresController extends Controller
                 $email_legal->save();
             }
 
+
             $Representante_legal = Persona::create([
                 'dni_persona' => htmlspecialchars($request->dni_legal),
-                //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                'nombre_persona' => htmlspecialchars($request->representante_legal),
+                    //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                'nombre_persona' => htmlspecialchars($request->nombre_persona),
+                'apellido_persona'=>htmlspecialchars($request->apellido_persona),
                 //'apellido_persona'=>$proveedores_rupae->apellido_persona,
                 //'genero_persona'=>$proveedores_rupae->genero_persona,
             ]);
+
+
+
             $Representante_legal->save();
 
-            $proveedores_rupae->personas()->attach($Representante_legal);
+            $proveedores_rupae->personas()->attach($Representante_legal,['rol_persona_proveedor' => 'Representante']);
 
             //----------------------------------Carga Domicilio Fiscal---------------------------------------------
 
@@ -483,7 +489,10 @@ class ProveedoresController extends Controller
                 }
             }
 
-            return redirect()->back()->with('message', 'Registro creado correctamente');
+            return redirect()->route('verRegistro',['id' =>$proveedores_rupae->id_proveedor ])->with('message', 'Registro creado correctamente');
+
+
+            //return redirect()->back()->with('message', 'Registro creado correctamente');
         } else {
 
             $proveedor = Proveedor::where('cuit', $request->cuit)->first();
@@ -1671,13 +1680,14 @@ class ProveedoresController extends Controller
         $persona = $proveedor->personas()->get();
 
         if ($persona->isEmpty()) {
+            return htmlspecialchars($request->nombre_persona);
 
-            if($request->dni_legal || $request->representante_legal){
+            if($request->dni_legal || $request->nombre_persona || $request->apellido_persona){
             $persona = Persona::create([
                 'dni_persona' => htmlspecialchars($request->dni_legal),
                 //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                'nombre_persona' => htmlspecialchars($request->representante_legal),
-                //'apellido_persona'=>$proveedores_rupae->apellido_persona,
+                'nombre_persona' => htmlspecialchars($request->nombre_persona),
+                'apellido_persona'=>htmlspecialchars($request->apellido_persona),
                 //'genero_persona'=>$proveedores_rupae->genero_persona,
             ]);
             $persona->save();
@@ -1694,8 +1704,8 @@ class ProveedoresController extends Controller
             $persona->update([
                 'dni_persona' => htmlspecialchars($request->dni_legal),
                 //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                'nombre_persona' => htmlspecialchars($request->representante_legal),
-                //'apellido_persona'=>$proveedores_rupae->apellido_persona,
+                'nombre_persona' => htmlspecialchars($request->nombre_persona),
+                'apellido_persona'=>htmlspecialchars($request->apellido_persona),
                 //'genero_persona'=>$proveedores_rupae->genero_persona,
             ]);
             $persona->save();
