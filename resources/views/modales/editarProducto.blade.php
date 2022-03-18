@@ -58,13 +58,11 @@ $(document).on("click", ".btn_edit_modal", function(event) {
 
     //Obtenemos los campos obligatorios para aplicarles estilos css
     let modal_producto_elaborado_css = document.getElementById("modal_producto_elaborado");
-    let modal_rnpa_css = document.getElementById("modal_rnpa");
     let modal_unidad_producida_css = document.getElementById("modal_unidad_producida");
-    let modal_produccion_total_css = document.getElementById("modal_produccion_total");
-    
+
 
     //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
-    if(modal_producto_elaborado.length != 0 && modal_rnpa.length != 0 && modal_unidad_producida.length != 0 && modal_produccion_total.length != 0){
+    if(modal_producto_elaborado.length != 0 && modal_unidad_producida.length != 0){
 
         //Ocultamos el modal
         $('#modal_producto').modal('hide');
@@ -82,9 +80,7 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         $('#produccion_total_text'+id_fila).text(modal_produccion_total);
 
         modal_producto_elaborado_css.style.border = '1px solid #DFDFDF';
-        modal_rnpa_css.style.border = '1px solid #DFDFDF';
         modal_unidad_producida_css.style.border = '1px solid #DFDFDF';
-        modal_produccion_total_css.style.border = '1px solid #DFDFDF';
 
     }else{
         //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
@@ -95,19 +91,10 @@ $(document).on("click", ".btn_edit_modal", function(event) {
             modal_producto_elaborado_css.style.border = '2px dashed red';
         }
 
-        if(modal_rnpa.length == 0){
-
-            modal_rnpa_css.style.border = '2px dashed red';
-        }
 
         if(modal_unidad_producida.length == 0){
 
             modal_unidad_producida_css.style.border = '2px dashed red';
-        }
-
-        if(modal_produccion_total.length == 0){
-
-            modal_produccion_total_css.style.border = '2px dashed red';
         }
 
     }
@@ -120,14 +107,10 @@ $(document).on("click", ".btn_cancel_modal", function(event) {
 
     //Obtenemos los campos obligatorios para aplicarles estilos css
     let modal_producto_elaborado_css = document.getElementById("modal_producto_elaborado");
-    let modal_rnpa_css = document.getElementById("modal_rnpa");
     let modal_unidad_producida_css = document.getElementById("modal_unidad_producida");
-    let modal_produccion_total_css = document.getElementById("modal_produccion_total");
 
     modal_producto_elaborado_css.style.border = '1px solid #DFDFDF';
-    modal_rnpa_css.style.border = '1px solid #DFDFDF';
     modal_unidad_producida_css.style.border = '1px solid #DFDFDF';
-    modal_produccion_total_css.style.border = '1px solid #DFDFDF';
 
 });
 
