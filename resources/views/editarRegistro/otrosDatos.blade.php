@@ -6,24 +6,24 @@
             <h5>Cálculo del índice de compra local</h5>
 
             <label for="porc_facturacion">Porcentaje de facturación en Santa Cruz:</label><br>
-            <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_facturacion) ? $proveedor->porc_facturacion : '' }}" id="porc_facturacion" name="porc_facturacion" placeholder="Ingrese el porcentaje de facturación" maxlength="9" disabled><br>
+            <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
+value="{{ isset($proveedor->porc_facturacion) ? $proveedor->porc_facturacion : '' }}" id="porc_facturacion" name="porc_facturacion" placeholder="Ingrese el porcentaje de facturación" min="0" max="100" disabled><br>
 
             <label for="porc_gasto">Porcentaje de Gastos en Santa Cruz:</label><br>
-            <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_gasto) ? $proveedor->porc_gasto : '' }}" id="porc_gasto" name="porc_gasto" placeholder="Ingrese el porcentaje de gastos" maxlength="9" disabled><br>
+            <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
+value="{{ isset($proveedor->porc_gasto) ? $proveedor->porc_gasto : '' }}" id="porc_gasto" name="porc_gasto" placeholder="Ingrese el porcentaje de gastos" min="0" max="100" disabled><br>
 
             <label for="porc_mo">Porcentaje de Mano de Obra en Santa Cruz:</label><br>
-            <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_mo) ? $proveedor->porc_mo : '' }}" id="porc_mo" name="porc_mo" placeholder="Ingrese el porcentaje de mano de obra" maxlength="9" disabled><br>
+            <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
+value="{{ isset($proveedor->porc_mo) ? $proveedor->porc_mo : '' }}" id="porc_mo" name="porc_mo" placeholder="Ingrese el porcentaje de mano de obra" min="0" max="100" disabled><br>
 
             <label for="antiguedad">Antiguedad en Santa Cruz:</label><br>
-            <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->antiguedad) ? $proveedor->antiguedad : '' }}" id="antiguedad" name="antiguedad" placeholder="Ingrese la antiguedad en Santa Cruz" maxlength="3" disabled><br>
+            <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
+value="{{ isset($proveedor->antiguedad) ? $proveedor->antiguedad : '' }}" id="antiguedad" name="antiguedad" placeholder="Ingrese la antiguedad en Santa Cruz" min="0" max="100" disabled><br>
 
             <label for="dom_fiscal">Domicilio Fiscal:</label><br>
-            <input  @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}" id="dom_fiscal" name="dom_fiscal" placeholder="Ingrese el domicilio fiscal" maxlength="9" disabled><br>
+            <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
+value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}" id="dom_fiscal" name="dom_fiscal" placeholder="Ingrese el domicilio fiscal" min="0" max="100" disabled><br>
 
                 <div class="container">
                 <div class="row">
