@@ -6,9 +6,7 @@
 
 <br/>
 
-<input type="checkbox" id="vehiculos_afectados" name="vehiculos_afectados" value="0">
-<label for="vehiculos_afectados">Posee vehículos afectados a la actividad económica que desarrolla</label><br>
-<br>
+<h4>Vehículos:</h4><br>
 
     <div class="row">
         <div class="col-sm">
@@ -27,7 +25,7 @@
             <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en_vehiculo" maxlength="20"/><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <input type="button" id="add_vehiculo" class="btn btn-success" value="Agregar Vehículo" disabled></input>
+                <input type="button" id="add_vehiculo" class="btn btn-success" value="Agregar Vehículo"></input>
             </div>
         </div>
     </div>
@@ -51,9 +49,7 @@
 
     <hr>
 
-<input type="checkbox" id="seguros_sta_cruz"  name="seguros_sta_cruz" value="0">
-<label for="seguros_sta_cruz">Posee seguros contratados con promotores residentes en nuestra provincia</label><br>
-<br>
+<h4>Seguros:</h4><br>
 
     <div class="row">
         <div class="col-sm">
@@ -72,7 +68,7 @@
             <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia" /><br />
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <input type="button" id="add_seguro" class="btn btn-success" value="Agregar Seguro" disabled></input>
+                <input type="button" id="add_seguro" class="btn btn-success" value="Agregar Seguro"></input>
             </div>
         </div>
     </div>
@@ -98,9 +94,7 @@
 
     <hr>
 
-<input type="checkbox" id="servicio_personal_especializado" name="servicio_personal_especializado"  value="0">
-<label for="servicio_personal_especializado">Utiliza como sede de la actividad económica que desarrolla algún inmueble que tribute impuesto inmobiliario en localidades de la Provincia de Santa Cruz</label><br>
-<br>
+<h4>Sedes:</h4><br>
 
 <label for="domicilio_sede">Domicilio:</label><br />
 <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio_sede" maxlength="50"/><br />
@@ -127,7 +121,7 @@
             <br>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <input type="button" id="add_sede" class="btn btn-success" value="Agregar Sede" disabled></input>
+                <input type="button" id="add_sede" class="btn btn-success" value="Agregar Sede"></input>
             </div>
         </div>
     </div>
@@ -174,30 +168,6 @@
     @include('modales.validarSede')
 
     @push('js')
-
-    <script type="text/javascript">
-
-        var checkbox_vehiculo = document.getElementById('vehiculos_afectados');
-        var button_vehiculo = document.getElementById('add_vehiculo');
-
-        checkbox_vehiculo.addEventListener("change", validaCheckboxVehiculo, false);
-
-        function validaCheckboxVehiculo() {
-
-            var checked_vehiculo = checkbox_vehiculo.checked;
-
-            if(checked_vehiculo) {
-         
-                button_vehiculo.disabled = false; 
-
-            } else {
-          
-                button_vehiculo.disabled = true; 
-            }
-        }
-        
-    </script>
-
 
     <script type="text/javascript">
 
@@ -323,29 +293,6 @@
 
     <script type="text/javascript">
 
-        var checkbox_seguro = document.getElementById('seguros_sta_cruz');
-        var button_seguro = document.getElementById('add_seguro');
-
-        checkbox_seguro.addEventListener("change", validaCheckboxSeguro, false);
-
-        function validaCheckboxSeguro() {
-
-            var checked_seguro = checkbox_seguro.checked;
-
-            if(checked_seguro) {
-         
-                button_seguro.disabled = false; 
-
-            } else {
-          
-                button_seguro.disabled = true; 
-            }
-        }
-        
-    </script>
-
-    <script type="text/javascript">
-
         let poliza;
         let agencia;
         let asegurado;
@@ -466,30 +413,6 @@
 
         });
 
-    </script>
-
-
-    <script type="text/javascript">
-
-        var checkbox_sede = document.getElementById('servicio_personal_especializado');
-        var button_sede = document.getElementById('add_sede');
-
-        checkbox_sede.addEventListener("change", validaCheckboxSede, false);
-
-        function validaCheckboxSede() {
-
-            var checked_sede = checkbox_sede.checked;
-
-            if(checked_sede) {
-         
-                button_sede.disabled = false; 
-
-            } else {
-          
-                button_sede.disabled = true; 
-            }
-        }
-        
     </script>
 
 
