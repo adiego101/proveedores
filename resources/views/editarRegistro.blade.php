@@ -139,6 +139,7 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <div class="btn-group">
                 <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
+                <!-- <a id="reset" class="btn btn-success">Reset</a> -->
             </div>
             <!--@if(isset($proveedor->nro_rupae_proveedor) && $proveedor->nro_rupae_proveedor!=null)
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAltaInscripcion">
@@ -202,6 +203,63 @@ $('input[type="checkbox"]').on('change', function(){
         };
 
 </script>
+
+<!-- Script para resetear los campos del formulario. Todavia no funciona bien.
+Sugerencia: agregar una nueva clase a cada campo a borrar. -->
+
+<!-- <script type="text/javascript">
+
+    $("#reset").on("click", function(e) {
+
+        //const inputs = document.getElementsByTagName('input');
+        const inputs_text = document.querySelectorAll('[type="text"]');
+        //const inputs_select = document.getElementsByTagName('select');
+        const inputs_text_area = document.getElementsByTagName('textarea');
+        const inputs_number = document.querySelectorAll('[type="number"]');
+        const inputs_check = document.querySelectorAll('[type="checkbox"]');
+        const inputs_email = document.querySelectorAll('[type="email"]');
+
+        for(var i = 0; i < inputs_text.length; i++) {
+           
+            inputs_text[i].value = "";
+            
+        }
+
+        /*for(var i = 0; i < inputs_select.length; i++) {
+           
+           inputs_select[i].value = "";
+           
+       }*/
+
+       for(var i = 0; i < inputs_text_area.length; i++) {
+           
+        inputs_text_area[i].value = "";
+           
+       }
+
+       for(var i = 0; i < inputs_number.length; i++) {
+           
+           inputs_number[i].value = "";
+           
+       }
+
+
+       for(var i = 0; i < inputs_check.length; i++) {
+           
+           inputs_check[i].checked = 0;
+           
+       }
+
+
+       for(var i = 0; i < inputs_email.length; i++) {
+           
+           inputs_email[i].value = "";
+           
+       }
+
+    });
+
+</script> -->
 
 @endpush
 
