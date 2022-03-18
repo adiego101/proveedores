@@ -34,7 +34,7 @@ class ProveedoresExport implements FromCollection, WithHeadings
             'Correo Electrónico',
             'Representante Legal',
             'Telefono Legal',
-            'Situaciòn IVA',
+            'Situación IVA',
             'Agrupamiento',
             'Sector',
             'Actividad Principal',
@@ -231,8 +231,8 @@ class ProveedoresExport implements FromCollection, WithHeadings
                 'Tipo Proveedor'=>$proveedor->tipo_proveedor,
                 'Facturación Anual Alcanzada'=>$proveedor->facturacion_anual_alcanzada,
                 'Último Pago'=>$ultimoPago,
-                'índice',//=>$proveedor->ultimo_indice->Valor_Indice,
-                'Proveedor',
+                'índice'=>$proveedor->valor_indice_rupae,
+                'Proveedor'=>$proveedor->desc_jerarquia_compre_local,
                 'Tamaño'=>$tamanioEmpresa
             ];
             $collection->add($proveedor);

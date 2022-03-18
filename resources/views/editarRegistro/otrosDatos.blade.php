@@ -45,8 +45,8 @@ disabled>
             <input type="text" class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->valor_indice_rupae) ? $proveedor->valor_indice_rupae : '' }}" id="valor_indice_rupae" name="valor_indice_rupae" readonly>
             <br>
 
-            <label for="proveedor">Proveedor:</label><br>
-            <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" id="proveedor" value="{{ isset($proveedor->proveedor) ? $proveedor->proveedor : '' }}" name="proveedor" readonly>
+            <label for="desc_jerarquia_compre_local">Proveedor:</label><br>
+            <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" id="desc_jerarquia_compre_local" value="{{ isset($proveedor->desc_jerarquia_compre_local) ? $proveedor->desc_jerarquia_compre_local : '' }}" name="desc_jerarquia_compre_local" readonly>
             <br>
 
             <label for="id_tamanio_empresa">Tamaño de la Empresa:</label><br>
@@ -334,13 +334,13 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
         function mostrarProveedor(valor_indice_rupae){
             if(valor_indice_rupae>=parseInt($("#foraneo_jerarquia_desde").val()))
                 if(valor_indice_rupae<=parseInt($("#foraneo_jerarquia_hasta").val()))
-                    $("#proveedor").val('PROVEEDOR FORANEO');
+                    $("#desc_jerarquia_compre_local").val('PROVEEDOR FORANEO');
                 else if(valor_indice_rupae<=parseInt($("#intermedio_jerarquia_hasta").val()))
-                        $("#proveedor").val('PROVEEDOR INTERMEDIO');
+                        $("#desc_jerarquia_compre_local").val('PROVEEDOR INTERMEDIO');
                     else if(valor_indice_rupae<=parseInt($("#local_jerarquia_hasta").val()))
-                        $("#proveedor").val('PROVEEDOR LOCAL');
+                        $("#desc_jerarquia_compre_local").val('PROVEEDOR LOCAL');
                         else
-                            $("#proveedor").val('');
+                            $("#desc_jerarquia_compre_local").val('');
         }
     </script>
 

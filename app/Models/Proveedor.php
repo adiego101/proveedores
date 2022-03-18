@@ -75,7 +75,7 @@ class Proveedor extends Model
                             'id_tamanio_empresa',
                             'observaciones',
                             'valor_indice_rupae',
-                            'proveedor'
+                            'desc_jerarquia_compre_local'
                             ];
 
     protected $primaryKey = 'id_proveedor';
