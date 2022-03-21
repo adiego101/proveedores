@@ -24,7 +24,6 @@ class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize
     public function headings(): array
     {
         return [
-            'Idproveedor',
             'Cuit',
             'Razon Social',
             'Nombre de Fantasía',
@@ -212,7 +211,6 @@ class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize
             //Log::info('Tamanio empresa => '.$tamanioEmpresa);
 
             $proveedor = [
-                'Idproveedor'=>$proveedor->nro_rupae_proveedor,
                 'Cuit'=>$proveedor->cuit,
                 'Razon Social'=>$proveedor->razon_social,
                 'Nombre de Fantasía'=>$proveedor->nombre_fantasia,
