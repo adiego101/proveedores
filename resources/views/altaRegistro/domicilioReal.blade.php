@@ -47,8 +47,19 @@
 
                 </div>
 
-                <label for="telefono_real">Teléfono:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14">
+               <!-- <label for="telefono_real">Teléfono:</label><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14"> -->
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="telefono_real_cod">Código de área:</label><br>
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="14">
+                    </div>
+                    <div class="col-sm">
+                        <label for="telefono_real">Número de Teléfono:</label><br>
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14">
+                    </div>
+                </div>
+                <br>
                 <div class="field_telefono_real">
 
                 </div>
@@ -118,11 +129,19 @@
         $(addTelefono_real).click(function() {
 
             //Nuevo campo html (agregar un nuevo teléfono)
-            var fieldHTML_telefono_real = '<div>'+
+            var fieldHTML_telefono_real = '<div class="row">'+
                                  '<br>'+
-                                    '<label for="telefono_real' + x +'">Teléfono:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real' + x +'" name="telefono_real[]" maxlength="14">'+
-                                    '<a href="javascript:void(0);" class="remove_telefono_real" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+                                 '<br>'+
+                                 '<div class="col-sm">'+
+                                 '<label for="telefono_real_cod' + x +'">Código de área:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod' + x +'" name="telefono_real_cod[]" maxlength="14">'+
+                                    '</div>'+
+                                    '<div class="col-sm">'+
+                                    '<label for="telefono_real' + x +'">Número de Teléfono:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real' + x +'" name="telefono_real[]" maxlength="14">'+
+                                    '</div>'+
+                                    '<a href="javascript:void(0);" class="remove_telefono_real" title="Elimine el teléfono"><input type="button" value="X" class="btn btn-danger btn-xs"></a>'+
+                                 '<br>'+
                                  '<br>'+
                                 '</div>';
 
