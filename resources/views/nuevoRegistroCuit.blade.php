@@ -29,7 +29,7 @@
             <div class="col-sm">
 
                 <label for="cuit">CUIT: <sup>*</sup></label><br>
-                <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el número de cuit de la empresa (sin guiones medios)" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="11" required><br>
+                <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el número de cuit de la empresa (sin guiones medios)" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="11" pattern="^([0-9]{2})([0-9]{9}|-[0-9]{8}-[0-9]{1})$" required><br>
 
             </div>
 
