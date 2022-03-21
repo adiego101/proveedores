@@ -188,7 +188,9 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
             @endif
             <br>
             <br>
+            @if ( $mode != "show")
             <a id="button_habilitar" class="btn btn-outline-primary"  onclick="habilitarCampos()">Habilitar campos</a>
+            @endif
         </div>
     </div>
 
