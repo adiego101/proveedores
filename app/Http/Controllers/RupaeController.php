@@ -114,10 +114,7 @@ class RupaeController extends Controller
     public function generarRegistroAlta($id, $idCertificado)
     {
         $proveedor = Proveedor::find($id);
-        if ($proveedor->nro_rupae_proveedor == null) {
-            $this->asignarNroRupaeProveedor($proveedor);
 
-        }
         $idAlta = $proveedor->nro_rupae_proveedor;
         $persona = $proveedor->personas()->get();
 
@@ -296,10 +293,9 @@ class RupaeController extends Controller
 
         //return $idInscripcion;
 
-        if ($proveedor->nro_rupae_proveedor == null) {
             $this->asignarNroRupaeProveedor($proveedor);
 
-        }
+
         $idAlta = $proveedor->nro_rupae_proveedor;
 
         $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')->first();
@@ -330,10 +326,8 @@ class RupaeController extends Controller
 
         //return $idInscripcion;
 
-        if ($proveedor->nro_rupae_proveedor == null) {
-            $this->asignarNroRupaeProveedor($proveedor);
 
-        }
+
         $idAlta = $proveedor->nro_rupae_proveedor;
 
         $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')->first();
@@ -476,10 +470,9 @@ class RupaeController extends Controller
     public function guardarHistorico($id)
     {
         $proveedor = Proveedor::find($id);
-        if ($proveedor->nro_rupae_proveedor == null) {
             $this->asignarNroRupaeProveedor($proveedor);
 
-        }
+
         $idAlta = $proveedor->nro_rupae_proveedor;
         $persona = $proveedor->personas()->get();
 

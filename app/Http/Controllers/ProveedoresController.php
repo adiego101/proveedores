@@ -2478,7 +2478,7 @@ return $select;
 
     }
 
-    /*  Funcion para limpiar registros de la base de datos, 
+    /*  Funcion para limpiar registros de la base de datos,
         cuando se selecciona limpiar los datos de formulario*/
     public function limpiar(Request $request)
      {
