@@ -275,7 +275,7 @@ return [
         */
 
         [
-            'text' => 'Actualizar Formulas',
+            'text' => 'Actualizar Fórmulas',
             'url' => '/actualizarFormulas',
             'icon' => 'fas fa-fw fa-edit',
             'label_color' => 'success',

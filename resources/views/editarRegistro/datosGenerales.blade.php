@@ -17,6 +17,10 @@ value="{{ isset($proveedor->nombre_fantasia) ? $proveedor->nombre_fantasia : '' 
         placeholder="Ingrese el número de cuit de la empresa (sin guiones medios)" aria-describedby="basic-addon1" id="cuit" name="cuit"
         @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="11"><br>
+
+    <label for="observaciones">Observaciones:</label><br>
+    <textarea id="observaciones"   @if ( $mode == "show") readonly @endif name="observaciones" class="form-control" placeholder="Ingrese las observaciones que considere necesarias" maxlength="200">{{ isset($proveedor->observaciones) ? $proveedor->observaciones : '' }}</textarea>
+    <br>
     <hr>
     <!--FALTA VALIDAR -->
     <br>
@@ -29,14 +33,9 @@ value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="11"><br
     <label for="nombre_persona">Nombre:</label><br>
     <input type="text" @if ( $mode == "show") readonly @endif class="form-control limpiar" value="{{ isset($persona->nombre_persona) ? $persona->nombre_persona : '' }}" placeholder="Ingrese el nombre completo del representante legal" aria-describedby="basic-addon1" id="nombre_persona" name="nombre_persona" maxlength="50"><br>
 
-    <!--FALTA VALIDAR -->
     <label for="dni_legal">DNI:</label><br>
     <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el dni del representante legal" @if ( $mode == "show") readonly @endif
 value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="8">
-    <br>
-
-    <label for="observaciones">Observaciones:</label><br>
-    <textarea id="observaciones"   @if ( $mode == "show") readonly @endif name="observaciones" class="form-control limpiar" placeholder="Ingrese las observaciones que considere necesarias" maxlength="200">{{ isset($proveedor->observaciones) ? $proveedor->observaciones : '' }}</textarea>
     <br>
     <br>
 

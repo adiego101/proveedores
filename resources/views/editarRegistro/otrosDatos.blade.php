@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col col-sm-6">
             <h5>Cálculo del índice de compra local</h5>
+            <br>
 
             <label for="porc_facturacion">Porcentaje de facturación en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
@@ -21,7 +22,7 @@ value="{{ isset($proveedor->porc_mo) ? $proveedor->porc_mo : '' }}" id="porc_mo"
             <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
 value="{{ isset($proveedor->antiguedad) ? $proveedor->antiguedad : '' }}" id="antiguedad" name="antiguedad" placeholder="Ingrese la antiguedad en Santa Cruz" min="0" max="100" disabled><br>
 
-            <label for="dom_fiscal">Porcentaje de Domicilio Fiscal:</label><br>
+            <label for="dom_fiscal">Porcentaje de Domicilio Fiscal en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
 value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}" id="dom_fiscal" name="dom_fiscal" placeholder="Ingrese el domicilio fiscal" min="0" max="100" disabled><br>
 
@@ -188,7 +189,9 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
             @endif
             <br>
             <br>
+            @if ( $mode != "show")
             <a id="button_habilitar" class="btn btn-outline-primary"  onclick="habilitarCampos()">Habilitar campos</a>
+            @endif
         </div>
     </div>
 
