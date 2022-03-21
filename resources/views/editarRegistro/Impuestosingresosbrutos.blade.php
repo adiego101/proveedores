@@ -5,10 +5,10 @@
   <h4>Ingresos brutos:</h4><br>
 
   <label for="nro_ingresos_brutos">Número de ingresos brutos:</label><br>
-  <input @if ( $mode == "show") readonly @endif  type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de ingresos brutos" aria-describedby="basic-addon1" value="{{ isset($proveedor->nro_ingresos_brutos) ? $proveedor->nro_ingresos_brutos : '' }}" id="nro_ingresos_brutos" name="nro_ingresos_brutos" maxlength="9"><br>
+  <input @if ( $mode == "show") readonly @endif  type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de ingresos brutos" aria-describedby="basic-addon1" value="{{ isset($proveedor->nro_ingresos_brutos) ? $proveedor->nro_ingresos_brutos : '' }}" id="nro_ingresos_brutos" name="nro_ingresos_brutos" maxlength="9"><br>
 
   <label for="jurisdiccion">Jurisdicción:</label><br>
-  <input @if ( $mode == "show") readonly @endif  type="text" class="form-control" placeholder="Ingrese su jurisdicción" aria-describedby="basic-addon1"
+  <input @if ( $mode == "show") readonly @endif  type="text" class="form-control limpiar" placeholder="Ingrese su jurisdicción" aria-describedby="basic-addon1"
 value="{{ isset($proveedor->jurisdiccion) ? $proveedor->jurisdiccion : '' }}" id="jurisdiccion" name="jurisdiccion" maxlength="40"><br>
 
   <label for="tipo_contribuyente">Tipo de contribuyente:</label><br>
@@ -26,7 +26,7 @@ value="Contribuyente Convenio Multilateral">Contribuyente Convenio Multilateral<
   <h4>Habilitaciones:</h4><br>
 
   <label for="nro_habilitacion_municipal">Número de habilitación municipal:</label><br>
-  <input @if ( $mode == "show") readonly @endif  type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de habilitación municipal" aria-describedby="basic-addon1" value="{{ isset($proveedor->nro_habilitacion_municipal) ? $proveedor->nro_habilitacion_municipal : '' }}" id="nro_habilitacion_municipal" name="nro_habilitacion_municipal" maxlength="20"><br>
+  <input @if ( $mode == "show") readonly @endif  type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de habilitación municipal" aria-describedby="basic-addon1" value="{{ isset($proveedor->nro_habilitacion_municipal) ? $proveedor->nro_habilitacion_municipal : '' }}" id="nro_habilitacion_municipal" name="nro_habilitacion_municipal" maxlength="20"><br>
 
   <div class="container">
     <div class="row">
@@ -67,7 +67,7 @@ value="Contribuyente Convenio Multilateral">Contribuyente Convenio Multilateral<
 
       <div class="col-sm">
         <label for="nro_inscripcion_personas_juridicas">Número de inscripción personas jurídicas:</label><br>
-        <input @if ( $mode == "show") readonly @endif  type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de inscripción de personas jurídicas" aria-describedby="basic-addon1" value="{{ isset($proveedor->nro_inscripcion_personas_juridicas) ? $proveedor->nro_inscripcion_personas_juridicas : '' }}" id="nro_inscripcion_personas_juridicas" name="nro_inscripcion_personas_juridicas" maxlength="4"><br>
+        <input @if ( $mode == "show") readonly @endif  type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de inscripción de personas jurídicas" aria-describedby="basic-addon1" value="{{ isset($proveedor->nro_inscripcion_personas_juridicas) ? $proveedor->nro_inscripcion_personas_juridicas : '' }}" id="nro_inscripcion_personas_juridicas" name="nro_inscripcion_personas_juridicas" maxlength="4"><br>
       </div>
 
       <div class="col-sm">
@@ -91,7 +91,7 @@ value="Contribuyente Convenio Multilateral">Contribuyente Convenio Multilateral<
 
       <div class="col-sm">
         <label for="registro_publico_de_comercio">Registro público de comercio:</label><br>
-        <input @if ( $mode == "show") readonly @endif  type="text" class="form-control" placeholder="Ingrese el registro público de comercio" aria-describedby="basic-addon1"
+        <input @if ( $mode == "show") readonly @endif  type="text" class="form-control limpiar" placeholder="Ingrese el registro público de comercio" aria-describedby="basic-addon1"
 value="{{ isset($proveedor->registro_publico_de_comercio) ? $proveedor->registro_publico_de_comercio : '' }}" id="registro_publico_de_comercio"  name="registro_publico_de_comercio" maxlength="20"><br>
       </div>
 
@@ -116,7 +116,7 @@ value="{{ isset($proveedor->registro_publico_de_comercio) ? $proveedor->registro
 
       <div class="col-sm">
         <label for="inspeccion_gral_justicia">Inspección general de justicia:</label><br>
-        <input @if ( $mode == "show") readonly @endif  type="text" class="form-control" placeholder="Ingrese la inspección general de justicia" aria-describedby="basic-addon1"
+        <input @if ( $mode == "show") readonly @endif  type="text" class="form-control limpiar" placeholder="Ingrese la inspección general de justicia" aria-describedby="basic-addon1"
 value="{{ isset($proveedor->inspeccion_gral_justicia) ? $proveedor->inspeccion_gral_justicia : '' }}" name="inspeccion_gral_justicia" maxlength="20"><br>
       </div>
 

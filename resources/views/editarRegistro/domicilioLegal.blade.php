@@ -6,23 +6,23 @@
         <div class="row">
             <div class="col-sm">
                 <label for="calle_legal">Calle:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_legal" name="calle_legal" @if ( $mode == "show") readonly @endif maxlength="50"
+                <input type="text" class="form-control limpiar" placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_legal" name="calle_legal" @if ( $mode == "show") readonly @endif maxlength="50"
 value="{{ isset($proveedor_domicilio_legal->calle) ? $proveedor_domicilio_legal->calle : '' }}"><br>
 
                 <label for="dpto_legal">Departamento:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_legal" name="dpto_legal" @if ( $mode == "show") readonly @endif maxlength="10"
+                <input type="text" class="form-control limpiar" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_legal" name="dpto_legal" @if ( $mode == "show") readonly @endif maxlength="10"
 value="{{ isset($proveedor_domicilio_legal->dpto) ? $proveedor_domicilio_legal->dpto : '' }}"><br>
 
                 <label for="lote_legal">Lote:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_legal" name="lote_legal" @if ( $mode == "show") readonly @endif
+                <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_legal" name="lote_legal" @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor_domicilio_legal->lote) ? $proveedor_domicilio_legal->lote : '' }}" maxlength="4"><br>
 
                 <label for="entreCalles_legal">Entre Calles:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_legal" name="entreCalles_legal" @if ( $mode == "show") readonly @endif maxlength="70"
+                <input type="text" class="form-control limpiar" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_legal" name="entreCalles_legal" @if ( $mode == "show") readonly @endif maxlength="70"
 value="{{ isset($proveedor_domicilio_legal->entre_calles) ? $proveedor_domicilio_legal->entre_calles : '' }}"><br>
 
                 <label for="monoblock_legal">Monoblock:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_legal" name="monoblock_legal" @if ( $mode == "show") readonly @endif maxlength="10"
+                <input type="text" class="form-control limpiar" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_legal" name="monoblock_legal" @if ( $mode == "show") readonly @endif maxlength="10"
 value="{{ isset($proveedor_domicilio_legal->monoblock) ? $proveedor_domicilio_legal->monoblock : '' }}"><br>
 
                 <label for="pais_legal">Pais:</label><br>
@@ -70,23 +70,23 @@ value="{{ isset($proveedor_domicilio_legal->monoblock) ? $proveedor_domicilio_le
             <div class="col-sm">
 
                 <label for="numero_legal">Número:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_legal" name="numero_legal"  @if ( $mode == "show") readonly @endif
+                <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_legal" name="numero_legal"  @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor_domicilio_legal->numero) ? $proveedor_domicilio_legal->numero : '' }}" maxlength="5"><br>
 
                 <label for="puerta_legal">Puerta:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_legal" name="puerta_legal" @if ( $mode == "show") readonly @endif maxlength="4"
+                <input type="text" class="form-control limpiar" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_legal" name="puerta_legal" @if ( $mode == "show") readonly @endif maxlength="4"
 value="{{ isset($proveedor_domicilio_legal->puerta) ? $proveedor_domicilio_legal->puerta : '' }}"><br>
 
                 <label for="manzana_legal">Manzana:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_legal" name="manzana_legal" @if ( $mode == "show") readonly @endif
+                <input type="text" class="form-control limpiar" placeholder="Ingrese el número de manzana" aria-describedby="basic-addon1" id="manzana_legal" name="manzana_legal" @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor_domicilio_legal->manzana) ? $proveedor_domicilio_legal->manzana : '' }}" maxlength="5"><br>
 
                 <label for="oficina_legal">Oficina:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_legal" name="oficina_legal" @if ( $mode == "show") readonly @endif maxlength="4"
+                <input type="text" class="form-control limpiar" placeholder="Ingrese la oficina" aria-describedby="basic-addon1" id="oficina_legal" name="oficina_legal" @if ( $mode == "show") readonly @endif maxlength="4"
 value="{{ isset($proveedor_domicilio_legal->oficina) ? $proveedor_domicilio_legal->oficina : '' }}"><br>
 
                 <label for="barrio_legal">Barrio:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_legal" name="barrio_legal" @if ( $mode == "show") readonly @endif maxlength="50"
+                <input type="text" class="form-control limpiar" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio_legal" name="barrio_legal" @if ( $mode == "show") readonly @endif maxlength="50"
 value="{{ isset($proveedor_domicilio_legal->barrio) ? $proveedor_domicilio_legal->barrio : '' }}"><br>
 
                 <label for="provincia_legal">Provincia:</label><br>
@@ -105,7 +105,7 @@ value="{{ isset($proveedor_domicilio_legal->barrio) ? $proveedor_domicilio_legal
                 <br>
 
                 <label for="cp_legal">Código Postal:</label><br>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_legal" name="cp_legal" placeholder="Ingrese el código postal" @if ( $mode == "show") readonly @endif
+                <input type="text" class="form-control limpiar" aria-describedby="basic-addon1" id="cp_legal" name="cp_legal" placeholder="Ingrese el código postal" @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicilio_legal->codigo_postal : '' }}" maxlength="8"><br>
 
 @if ( $mode != "show")

@@ -2478,4 +2478,14 @@ return $select;
 
     }
 
+    /*  Funcion para limpiar registros de la base de datos, 
+        cuando se selecciona limpiar los datos de formulario*/
+    public function limpiar(Request $request)
+     {
+        echo "im in AjaxController index".$request->input('id_proveedor');
+        /*$id_proveedor=$request->input('id_proveedor');
+        $proveedor=Proveedor::findOrFail($id_proveedor);
+        $proveedor->domicilios()->delete();*/
+     }
+
 }

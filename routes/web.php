@@ -190,4 +190,5 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::get('/exportar', 'App\Http\Controllers\ExportController@exportar')->name('exportar');
+    Route::post('limpiar', 'App\Http\Controllers\ProveedoresController@limpiar')->name('limpiar');
 });

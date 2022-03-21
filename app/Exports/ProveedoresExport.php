@@ -5,13 +5,14 @@ use App\Models\Proveedor;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\Exportable;
 
 //librerias para seguir el comportamiento de la aplicacion mediante log
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class ProveedoresExport implements FromCollection, WithHeadings
+class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     use Exportable;
     protected $proveedores;

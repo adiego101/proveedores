@@ -139,7 +139,7 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <div class="btn-group">
                 <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
-                <!-- <a id="reset" class="btn btn-success">Reset</a> -->
+                <!--<a id="reset" class="btn btn-success">Reset</a>-->
             </div>
             <!--@if(isset($proveedor->nro_rupae_proveedor) && $proveedor->nro_rupae_proveedor!=null)
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAltaInscripcion">
@@ -259,7 +259,19 @@ Sugerencia: agregar una nueva clase a cada campo a borrar. -->
 
     });
 
-</script> -->
+</script> 
+
+<script>
+    $("#reset").on("click", function(e) {
+        $(".limpiar").val('');
+        $('#edit_form :select').selectedIndex = 1;
+        $.ajax({
+          url:"{{route('limpiar')}}",
+          data:{'id_proveedor':"{{$id}}"},
+          type:'post'
+       });
+    });
+</script>-->
 
 @endpush
 
