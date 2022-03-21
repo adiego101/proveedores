@@ -59,3 +59,21 @@
 @endif
 
 @endsection
+@push('js')
+    <script type="text/javascript">
+    function valideKey(evt){
+
+        // El código es la representación decimal ASCII de la clave presionada.
+        var code = (evt.which) ? evt.which : evt.keyCode;
+
+        if(code==8) { // espacio.
+          return true;
+        } else if(code>=48 && code<=57) { // es un numero.
+          return true;
+        } else{ // otras teclas
+        console.log("no es un numero");
+          return false;
+        }
+    }
+    </script>
+@endpush

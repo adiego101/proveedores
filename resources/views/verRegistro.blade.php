@@ -133,6 +133,8 @@
      @if ( $mode == "show")
      <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-success">Descargar Registro alta</a>
         <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-warning">Descargar Certificado inscripción</a>
+        <a href="{{ url('nuevo-registro/' . $id) }}" class="btn btn-warning">Generar Nuevo Certificado inscripción</a>
+
         @endif
     </div>
 

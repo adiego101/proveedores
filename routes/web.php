@@ -179,6 +179,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/registro-alta/{id}', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');
     Route::get('/certificado-inscripcion/{id}', 'App\Http\Controllers\RupaeController@descargarCertificadoInscripcion');
 
+    Route::get('/nuevo-registro/{id}', 'App\Http\Controllers\RupaeController@nuevoRegistroAlta');
+    Route::get('/nuevo-certificado/{id}', 'App\Http\Controllers\RupaeController@nuevoCertificadoInscripcion');
+
     Route::get('/excel', function () {
         /*ini_set('memory_limit','1024M');
         set_time_limit(0);*/
