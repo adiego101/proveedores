@@ -16,7 +16,7 @@
 
             <div class="card">
             
-                <div class="card-header">{{ __('¡Bienvenido!') }}</div>
+                <div class="card-header"> {{ __('Registro Único de Proveedores de Actividades Económicas de la provincia de Santa Cruz.') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -25,7 +25,10 @@
                         </div>
                     @endif
 
-                    {{ __('Registro Único de Proveedores de Actividades Económicas de la provincia de Santa Cruz.') }}
+                    <div align="center">
+                        <img src="logo_minpro.png" alt="Logo del Ministerio de la Producción, Comercio e Industria" title="Ministerio de la Producción, Comercio e Industria">
+                    </div>
+                    
                 </div>
             </div>
         </div>
