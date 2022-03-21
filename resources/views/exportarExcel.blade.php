@@ -11,7 +11,7 @@
             <option>PROVEEDORES POR LOCALIDAD</option>
             <option>PROVEEDORES POR ACTIVIDAD</option>
             <option>PROVEEDORES POR SECTOR</option>
-            <option>PROVEEDORES POR PALABRA CLAVE</option>
+            <!-- <option>PROVEEDORES POR PALABRA CLAVE</option> -->
     </select>
     <br>
     <div class="row" id="proveedores_por_localidad" style="display:none;">
