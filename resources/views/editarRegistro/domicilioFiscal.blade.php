@@ -54,42 +54,31 @@ value="{{ isset($proveedor_domicilio_fiscal->monoblock) ? $proveedor_domicilio_f
 
                     </div>
 
-            <!--    <div class="field_telefono_fiscal">
-
-                    @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
-
-                        <label for="telefono_fiscal">Teléfono:</label><br>
-                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->nro_tel}}" maxlength="14"> <br>
-                    @empty
-                        <label for="telefono_fiscal">Teléfono:</label><br>
-                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14"> <br>
-                    @endforelse
-
-                </div> -->
-
-
+         
                 <div class="field_telefono_fiscal">
 
                     <div class="row">
-                        @forelse($proveedor_telefono_fiscal_cod as $telefono_fiscal_cod)
+                        
                         <div class="col-sm">
+                        @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
                             <label for="telefono_fiscal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal_cod->cod_area_tel}}" maxlength="14">
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->cod_area_tel}}" maxlength="14">
                         @empty
                             <label for="telefono_fiscal_cod">Código de área:</label><br>
                             <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="14">
+                            @endforelse
                         </div>
-                        @endforelse
-
-                        @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
+                        
                         <div class="col-sm">
+                        @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
                             <label for="telefono_fiscal">Número de Teléfono:</label><br>
                             <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->nro_tel}}" maxlength="14">
                         @empty
                             <label for="telefono_fiscal">Número de Teléfono:</label><br>
                             <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14"><br>
+                            @endforelse
                         </div>
-                        @endforelse
+                       
                     </div>
 
                 </div>
@@ -177,16 +166,6 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
         $(addTelefono_fiscal).click(function() {
 
             //Nuevo campo html (agregar un nuevo teléfono)
-            /*var fieldHTML_telefono_fiscal = '<div>'+
-                                 '<br>'+
-                                    '<label for="telefono_fiscal' + x +'">Teléfono:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal' + x +'" name="telefono_fiscal[]" maxlength="14">'+
-                                    '<a href="javascript:void(0);" class="remove_telefono_fiscal" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
-                                 '<br>'+
-                                '</div>';*/
-
-
-            //Nuevo campo html (agregar un nuevo teléfono)
             var fieldHTML_telefono_fiscal = '<div class="row">'+
                                  '<div class="col-sm">'+
                                  '<br>'+
@@ -206,7 +185,7 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
 
 
             if(x == 1){
-                
+
                 //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
                 let tel_fiscal = document.getElementById('telefono_fiscal').value;
                 var cod_tel_fiscal = document.getElementById('telefono_fiscal_cod').value;
@@ -215,7 +194,7 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                 if (tel_fiscal.length != 0 && cod_tel_fiscal.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
 
@@ -224,7 +203,7 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                 }
 
             } else {
-                
+
                 var y = x - 1;
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
@@ -235,10 +214,10 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                 if (tel_fiscal_dinamico.length != 0 && cod_tel_fiscal_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_telefono_fiscal).append(fieldHTML_telefono_fiscal); // Agrega un nuevo campo html (telefono)
                     }
                 }
@@ -281,7 +260,7 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                 if (email_fiscal.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
 
@@ -300,10 +279,10 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                 if (email_fiscal_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_email_fiscal).append(fieldHTML_email_fiscal); // Agrega un nuevo campo html (correo)
                     }
                 }
@@ -319,7 +298,7 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
         });
 
     });
-    
+
 </script>
 
 <script type="text/javascript">

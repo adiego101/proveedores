@@ -54,41 +54,31 @@ value="{{ isset($proveedor_domicilio_legal->monoblock) ? $proveedor_domicilio_le
 
                     </div>
 
-               <!--     <div class="field_telefono_legal">
-
-                        @forelse($proveedor_telefono_legal as $telefono_legal)
-
-                            <label for="telefono_legal">Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->nro_tel}}" maxlength="14"> <br>
-                        @empty
-                            <label for="telefono_legal">Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14"> <br>
-                        @endforelse
-
-                    </div> -->
-
                     <div class="field_telefono_legal">
 
                         <div class="row">
-                            @forelse($proveedor_telefono_legal_cod as $telefono_legal_cod)
+                            
                             <div class="col-sm">
+                            @forelse($proveedor_telefono_legal as $telefono_legal)
                                 <label for="telefono_legal_cod">Código de área:</label><br>
-                                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal_cod->cod_area_tel}}" maxlength="14">
+                                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->cod_area_tel}}" maxlength="14">
                             @empty
                                 <label for="telefono_legal_cod">Código de área:</label><br>
                                 <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="14">
+                                @endforelse
                             </div>
-                            @endforelse
 
-                            @forelse($proveedor_telefono_legal as $telefono_legal)
+                            
                             <div class="col-sm">
+                            @forelse($proveedor_telefono_legal as $telefono_legal)
                                 <label for="telefono_legal">Número de Teléfono:</label><br>
                                 <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->nro_tel}}" maxlength="14">
                             @empty
                                 <label for="telefono_legal">Número de Teléfono:</label><br>
                                 <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14"><br>
+                                @endforelse
                             </div>
-                            @endforelse
+                            
                         </div>
 
                     </div>
@@ -176,17 +166,6 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
         $(addTelefono_legal).click(function() {
 
             //Nuevo campo html (agregar un nuevo teléfono)
-            /*var fieldHTML_telefono_legal = '<div>'+
-                                 '<br>'+
-                                    '<label for="telefono_legal' + x +'">Teléfono:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal' + x +'" name="telefono_legal[]" maxlength="14">'+
-                                    '<a href="javascript:void(0);" class="remove_telefono_legal" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
-                                 '<br>'+
-                                '</div>';*/
-
-
-
-            //Nuevo campo html (agregar un nuevo teléfono)
             var fieldHTML_telefono_legal = '<div class="row">'+
                                  '<div class="col-sm">'+
                                  '<br>'+
@@ -206,7 +185,7 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
 
 
             if(x == 1){
-                
+
                 //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
                 let tel_legal = document.getElementById('telefono_legal').value;
                 var cod_tel_legal = document.getElementById('telefono_legal_cod').value;
@@ -215,7 +194,7 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                 if (tel_legal.length != 0 && cod_tel_legal.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
 
@@ -224,7 +203,7 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                 }
 
             } else {
-                
+
                 var y = x - 1;
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
@@ -235,15 +214,15 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                 if (tel_legal_dinamico.length != 0 && cod_tel_legal_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_telefono_legal).append(fieldHTML_telefono_legal); // Agrega un nuevo campo html (telefono)
                     }
                 }
             }
-           
+
         });
 
 
@@ -280,7 +259,7 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                 if (email_legal.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
 
@@ -299,10 +278,10 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                 if (email_legal_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_email_legal).append(fieldHTML_email_legal); // Agrega un nuevo campo html (correo)
                     }
                 }
