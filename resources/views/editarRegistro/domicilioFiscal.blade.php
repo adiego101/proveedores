@@ -62,20 +62,20 @@ value="{{ isset($proveedor_domicilio_fiscal->monoblock) ? $proveedor_domicilio_f
                         <div class="col-sm">
                         @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
                             <label for="telefono_fiscal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->cod_area_tel}}" maxlength="14">
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->cod_area_tel}}" maxlength="14"> <br>
                         @empty
                             <label for="telefono_fiscal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="14">
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="14"> <br>
                             @endforelse
                         </div>
                         
                         <div class="col-sm">
                         @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
                             <label for="telefono_fiscal">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->nro_tel}}" maxlength="14">
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->nro_tel}}" maxlength="14"> <br>
                         @empty
                             <label for="telefono_fiscal">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14"><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14"> <br>
                             @endforelse
                         </div>
                        

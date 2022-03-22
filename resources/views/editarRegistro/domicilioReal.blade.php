@@ -67,20 +67,20 @@ value="{{ isset($proveedor->pagina_web) ? $proveedor->pagina_web : '' }}"><br>
                         <div class="col-sm">
                         @forelse($proveedor_telefono_real as $telefono_real)
                             <label for="telefono_real_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->cod_area_tel}}" maxlength="14">
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->cod_area_tel}}" maxlength="14"> <br>
                         @empty
                             <label for="telefono_real_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="14">
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="14"> <br>
                             @endforelse
                         </div>
                         
                         <div class="col-sm">
                         @forelse($proveedor_telefono_real as $telefono_real)
                             <label for="telefono_real">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->nro_tel}}" maxlength="14">
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->nro_tel}}" maxlength="14"> <br>
                         @empty
                             <label for="telefono_real">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14"><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14"> <br>
                             @endforelse
                         </div>
                         
