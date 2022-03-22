@@ -84,8 +84,17 @@
                         <label for="modal_codigo_postal_sucursal">Código Postal:</label><br>
                         <input type="text" class="form-control" aria-describedby="basic-addon1" id="modal_codigo_postal_sucursal" name="modal_codigo_postal_sucursal" placeholder="Ingrese el código postal" maxlength="8"><br>
 
-                        <label for="modal_telefono_sucursal">Teléfono:</label><br>
-                        <input type="text" onkeypress="return valideKey(event);" id="modal_telefono_sucursal" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" maxlength="14">
+                        <div class="row">
+                            <div class="col-sm">
+                                <label for="modal_telefono_sucursal_cod">Código de área:</label><br>
+                                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="modal_telefono_sucursal_cod" maxlength="14">
+                            </div>
+                            <div class="col-sm">
+                                <label for="modal_telefono_sucursal">Número de Teléfono:</label><br>
+                                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="modal_telefono_sucursal" maxlength="14">
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -127,6 +136,7 @@ $(document).on("click", ".btn_edit_modal_sucursal", function(event) {
     var modal_provincia = $('#modal_provincia_sucursal').val();
     var modal_codigo_postal = $('#modal_codigo_postal_sucursal').val();
     var modal_telefono = $('#modal_telefono_sucursal').val();
+    var modal_telefono_cod = $('#modal_telefono_sucursal_cod').val();
 
     //Obtenemos los campos obligatorios para aplicarles estilos css
     let modal_nombre_css = document.getElementById("modal_nombre_sucursal");
@@ -158,11 +168,12 @@ $(document).on("click", ".btn_edit_modal_sucursal", function(event) {
         $('#provincia_sucursal'+id_fila_sucursal).val(modal_provincia);
         $('#codigo_postal_sucursal'+id_fila_sucursal).val(modal_codigo_postal);
         $('#telefono_sucursal'+id_fila_sucursal).val(modal_telefono);
+        $('#telefono_sucursal_cod'+id_fila_sucursal).val(modal_telefono_cod);
 
         //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
         $('#nombre_sucursal_text'+id_fila_sucursal).text(modal_nombre_sucursal);
         $('#email_sucursal_text'+id_fila_sucursal).text(modal_email);
-        $('#telefono_sucursal_text'+id_fila_sucursal).text(modal_telefono);
+        $('#telefono_sucursal_text'+id_fila_sucursal).text(modal_telefono_cod + ' ' + modal_telefono);
 
         modal_nombre_css.style.border = '1px solid #DFDFDF';
         modal_provincia_css.style.border = '1px solid #DFDFDF';

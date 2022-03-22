@@ -78,8 +78,16 @@
             <label for="codigo_postal_sucursal">Código Postal:</label><br>
             <input type="text" class="form-control" aria-describedby="basic-addon1" id="codigo_postal_sucursal" name="codigo_postal" placeholder="Ingrese el código postal" maxlength="8"><br>
 
-            <label for="telefono_sucursal">Teléfono:</label><br>
-            <input type="text" onkeypress="return valideKey(event);" id="telefono_sucursal" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" maxlength="14">
+            <div class="row">
+                <div class="col-sm">
+                    <label for="telefono_sucursal_cod">Código de área:</label><br>
+                    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_sucursal_cod" maxlength="14">
+                </div>
+                <div class="col-sm">
+                    <label for="telefono_sucursal">Número de Teléfono:</label><br>
+                    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_sucursal" maxlength="14">
+                </div>
+            </div>
 
             <br>
 
@@ -128,6 +136,7 @@
     let nombre_sucursal;
     let email;
     let telefono;
+    let telefono_cod;
     let calle;
     let numero;
     let departamento;
@@ -150,6 +159,7 @@
         nombre_sucursal = $("#nombre_sucursal").val();
         email = $("#email_sucursal").val();
         telefono = $("#telefono_sucursal").val();
+        telefono_cod = $("#telefono_sucursal_cod").val();
 
         //Campos ocultos (hidden)
         calle = $("#calle_sucursal").val();
@@ -264,11 +274,12 @@
                 '<tr id="row_sucursal' + i_sucursal +'">'+
                     '<td> <div id="nombre_sucursal_text' + i_sucursal +'">' + nombre_sucursal +'</div></td>'+
                     '<td> <div id="email_sucursal_text' + i_sucursal +'">' + email +'</div></td>'+
-                    '<td> <div id="telefono_sucursal_text' + i_sucursal +'">' + telefono +'</div></td>'+
+                    '<td> <div id="telefono_sucursal_text' + i_sucursal +'">' + telefono_cod + ' ' + telefono +'</div></td>'+
                     '<td>'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="nombre_sucursal' + i_sucursal +'" name="nombres_sucursales[]"  readonly value="' + nombre_sucursal +'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="email_sucursal' + i_sucursal +'" name="correos_electronicos[]" readonly value="'+ email +'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="telefono_sucursal' + i_sucursal +'" name="Telefonos_sucursales[]" readonly value="' + telefono +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="telefono_sucursal_cod' + i_sucursal +'" name="telefonos_cod_sucursales[]" readonly value="' + telefono_cod +'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="calle_sucursal' + i_sucursal +'" name="calles[]" readonly value="' + calle +'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="numero_sucursal' + i_sucursal +'" name="numeros[]" readonly value="'+numero+'">'+
                     '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="dpto_sucursal' + i_sucursal +'" name="dptos[]" readonly value="'+ departamento +'">'+
@@ -308,6 +319,7 @@
             document.getElementById("codigo_postal_sucursal").value = "";
             document.getElementById("email_sucursal").value = "";
             document.getElementById("telefono_sucursal").value = "";
+            document.getElementById("telefono_sucursal_cod").value = "";
 
             nombre_css.style.border = '1px solid #DFDFDF';
             provincia_css.style.border = '1px solid #DFDFDF';
@@ -366,6 +378,7 @@
         let modal_nombre_sucursal = $("#nombre_sucursal"+ button_id).val();
         let modal_email = $("#email_sucursal"+ button_id).val();
         let modal_telefono = $("#telefono_sucursal"+ button_id).val();
+        let modal_telefono_cod = $("#telefono_sucursal_cod"+ button_id).val();
         let modal_calle = $("#calle_sucursal"+ button_id).val();
         let modal_numero = $("#numero_sucursal"+ button_id).val();
         let modal_departamento = $("#dpto_sucursal"+ button_id).val();
@@ -402,6 +415,7 @@
         $('#modal_provincia_sucursal').val(modal_provincia);
         $('#modal_codigo_postal_sucursal').val(modal_codigo_postal);
         $('#modal_telefono_sucursal').val(modal_telefono);
+        $('#modal_telefono_sucursal_cod').val(modal_telefono_cod);
         $('#numero_fila_sucursal').val(button_id);
 
     });
