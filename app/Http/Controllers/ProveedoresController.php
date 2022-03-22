@@ -170,7 +170,7 @@ class ProveedoresController extends Controller
                 $telefono_real = Proveedor_telefono::create([
                     'nro_tel' => $request->telefono_real[$i],
                     'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                    //'cod_area_tel' =>,
+                    'cod_area_tel' =>$request->telefono_real_cod[$i],
                     //'tipo_medio'=>,
                     //'desc_telefono'=>,
                     'tipo_telefono' => 'real',
@@ -227,7 +227,7 @@ class ProveedoresController extends Controller
                 $telefono_legal = Proveedor_telefono::create([
                     'nro_tel' => $request->telefono_legal[$i],
                     'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                    //'cod_area_tel' =>,
+                    'cod_area_tel' =>$request->telefono_legal_cod[$i],
                     //'tipo_medio'=>,
                     //'desc_telefono'=>,
                     'tipo_telefono' => 'legal',
@@ -296,7 +296,7 @@ class ProveedoresController extends Controller
                 $telefono_fiscal = Proveedor_telefono::create([
                     'nro_tel' => $request->telefono_fiscal[$i],
                     'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                    //'cod_area_tel' =>,
+                    'cod_area_tel' =>$request->telefono_fiscal_cod[$i],
                     //'tipo_medio'=>,
                     //'desc_telefono'=>,
                     'tipo_telefono' => 'fiscal',
@@ -358,11 +358,12 @@ class ProveedoresController extends Controller
                         $sucursal_email->save();
                     }
                     //----------------Carga de telefono Sucursal---------------
-                    if (isset($request->Telefonos_sucursales)) {
+                    if (isset($request->Telefonos_sucursales) && isset($request->telefonos_cod_sucursales)) {
 
                         $sucursal_telefono = new Sucursal_telefono();
                         $sucursal_telefono->id_sucursal = $sucursal->id_sucursal;
                         $sucursal_telefono->nro_tel = $request->Telefonos_sucursales[$i];
+                        $sucursal_telefono->cod_area_tel = $request->telefonos_cod_sucursales[$i];
                         $sucursal_telefono->save();
                     }
                     echo ($sucursal->toJson());
@@ -739,6 +740,7 @@ class ProveedoresController extends Controller
                     return $actionBtn;
                 } else {
                     $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    <a onclick="verPago(' . $row->id_pagos . ');" class="view btn btn-primary btn-sm" title="ver pago">
                     <i class="fas fa-edit"></i></a> <a onclick="bajaPago(' . $row->id_pagos . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
                     <i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
@@ -766,8 +768,8 @@ class ProveedoresController extends Controller
         $pago = Pago::where('id_pagos', $id)->get();
         $mode = "show";
 
-
-        return view('ediciones.pagos',compact('mode'), (['pago' => $pago[0]]));
+        return response()->json($pago);
+        //return view('ediciones.pagos',compact('mode'), (['pago' => $pago[0]]));
 
     }
 
@@ -1746,7 +1748,7 @@ class ProveedoresController extends Controller
                 $telefono_real = Proveedor_telefono::create([
                     'nro_tel' => $request->telefono_real[$i],
                     'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                    //'cod_area_tel' =>,
+                    'cod_area_tel' =>$request->telefono_real_cod[$i],
                     //'tipo_medio'=>,
                     //'desc_telefono'=>,
                     'tipo_telefono' => 'real',
@@ -1825,7 +1827,7 @@ class ProveedoresController extends Controller
                     $telefono_real = Proveedor_telefono::create([
                         'nro_tel' => $request->telefono_real[$i],
                         'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                        //'cod_area_tel' =>,
+                        'cod_area_tel' =>$request->telefono_real_cod[$i],
                         //'tipo_medio'=>,
                         //'desc_telefono'=>,
                         'tipo_telefono' => 'real',
@@ -1907,7 +1909,7 @@ class ProveedoresController extends Controller
                 $telefono_legal = Proveedor_telefono::create([
                     'nro_tel' => $request->telefono_legal[$i],
                     'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                    //'cod_area_tel' =>,
+                    'cod_area_tel' =>$request->telefono_legal_cod[$i],
                     //'tipo_medio'=>,
                     //'desc_telefono'=>,
                     'tipo_telefono' => 'legal',
