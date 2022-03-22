@@ -43,8 +43,18 @@
 
                 </div>
 
-                <label for="telefono_fiscal">Teléfono:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14">
+                <!-- <label for="telefono_fiscal">Teléfono:</label><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14"> -->
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="telefono_fiscal_cod">Código de área:</label><br>
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="14">
+                    </div>
+                    <div class="col-sm">
+                        <label for="telefono_fiscal">Número de Teléfono:</label><br>
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14">
+                    </div>
+                </div>
                 <div class="field_telefono_fiscal">
 
                 </div>
@@ -111,11 +121,19 @@
         $(addTelefono_fiscal).click(function() {
 
             //Nuevo campo html (agregar un nuevo teléfono)
-            var fieldHTML_telefono_fiscal = '<div>'+
+            var fieldHTML_telefono_fiscal = '<div class="row">'+
+                                 '<div class="col-sm">'+
                                  '<br>'+
-                                    '<label for="telefono_fiscal' + x +'">Teléfono:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_fiscal' + x +'" name="telefono_fiscal[]" maxlength="14">'+
-                                    '<a href="javascript:void(0);" class="remove_telefono_fiscal" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+                                 '<label for="telefono_fiscal_cod' + x +'">Código de área:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod' + x +'" name="telefono_fiscal_cod[]" maxlength="14">'+
+                                    '</div>'+
+                                    '<div class="col-sm">'+
+                                    '<br>'+
+                                    '<label for="telefono_fiscal' + x +'">Número de Teléfono:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal' + x +'" name="telefono_fiscal[]" maxlength="14">'+
+                                    '</div>'+
+                                    '<a href="javascript:void(0);" class="remove_telefono_fiscal" title="Elimine el teléfono"><input type="button" value="X" class="btn btn-danger btn-xs"></a>'+
+                                 '<br>'+
                                  '<br>'+
                                 '</div>';
 
@@ -124,9 +142,10 @@
 
                 //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
                 let tel_fiscal = document.getElementById('telefono_fiscal').value;
+                var cod_tel_fiscal = document.getElementById('telefono_fiscal_cod').value;
 
                 //Si el campo teléfono no se encuentra vacío, permite agregar un segundo campo.
-                if (tel_fiscal.length != 0){
+                if (tel_fiscal.length != 0 && cod_tel_fiscal.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
                     if (x < maxField) {
@@ -143,9 +162,10 @@
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
                 var tel_fiscal_dinamico = document.getElementById('telefono_fiscal' + y).value;
+                var cod_tel_fiscal_dinamico = document.getElementById('telefono_fiscal_cod' + y).value;
 
                 //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
-                if (tel_fiscal_dinamico.length != 0){
+                if (tel_fiscal_dinamico.length != 0 && cod_tel_fiscal_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
                     if (x < maxField) {

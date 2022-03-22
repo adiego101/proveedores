@@ -59,7 +59,6 @@
                         <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14">
                     </div>
                 </div>
-                <br>
                 <div class="field_telefono_real">
 
                 </div>
@@ -130,13 +129,13 @@
 
             //Nuevo campo html (agregar un nuevo teléfono)
             var fieldHTML_telefono_real = '<div class="row">'+
-                                 '<br>'+
-                                 '<br>'+
                                  '<div class="col-sm">'+
+                                 '<br>'+
                                  '<label for="telefono_real_cod' + x +'">Código de área:</label><br>'+
                                     '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod' + x +'" name="telefono_real_cod[]" maxlength="14">'+
                                     '</div>'+
                                     '<div class="col-sm">'+
+                                    '<br>'+
                                     '<label for="telefono_real' + x +'">Número de Teléfono:</label><br>'+
                                     '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real' + x +'" name="telefono_real[]" maxlength="14">'+
                                     '</div>'+
@@ -149,9 +148,10 @@
 
                 //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
                 let tel_real = document.getElementById('telefono_real').value;
-
+                var cod_tel_real = document.getElementById('telefono_real_cod').value;
+                
                 //Si el campo teléfono no se encuentra vacío, permite agregar un segundo campo.
-                if (tel_real.length != 0){
+                if (tel_real.length != 0 && cod_tel_real.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
                     if (x < maxField) {
@@ -168,9 +168,10 @@
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
                 var tel_real_dinamico = document.getElementById('telefono_real' + y).value;
+                var cod_tel_real_dinamico = document.getElementById('telefono_real_cod' + y).value;
 
                 //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
-                if (tel_real_dinamico.length != 0){
+                if (tel_real_dinamico.length != 0 && cod_tel_real_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
                     if (x < maxField) {

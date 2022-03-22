@@ -43,8 +43,18 @@
 
                 </div>
 
-                <label for="telefono_legal">Teléfono:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14">
+                <!-- <label for="telefono_legal">Teléfono:</label><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14"> -->
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="telefono_legal_cod">Código de área:</label><br>
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="14">
+                    </div>
+                    <div class="col-sm">
+                        <label for="telefono_legal">Número de Teléfono:</label><br>
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14">
+                    </div>
+                </div>
                 <div class="field_telefono_legal">
 
                 </div>
@@ -112,11 +122,19 @@
         $(addTelefono_legal).click(function() {
 
             //Nuevo campo html (agregar un nuevo teléfono)
-            var fieldHTML_telefono_legal = '<div>'+
+            var fieldHTML_telefono_legal = '<div class="row">'+
+                                 '<div class="col-sm">'+
                                  '<br>'+
-                                    '<label for="telefono_legal' + x +'">Teléfono:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal' + x +'" name="telefono_legal[]" maxlength="14">'+
-                                    '<a href="javascript:void(0);" class="remove_telefono_legal" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+                                 '<label for="telefono_legal_cod' + x +'">Código de área:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod' + x +'" name="telefono_legal_cod[]" maxlength="14">'+
+                                    '</div>'+
+                                    '<div class="col-sm">'+
+                                    '<br>'+
+                                    '<label for="telefono_legal' + x +'">Número de Teléfono:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal' + x +'" name="telefono_legal[]" maxlength="14">'+
+                                    '</div>'+
+                                    '<a href="javascript:void(0);" class="remove_telefono_legal" title="Elimine el teléfono"><input type="button" value="X" class="btn btn-danger btn-xs"></a>'+
+                                 '<br>'+
                                  '<br>'+
                                 '</div>';
 
@@ -125,9 +143,10 @@
 
                 //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
                 let tel_legal = document.getElementById('telefono_legal').value;
+                var cod_tel_legal = document.getElementById('telefono_legal_cod').value;
 
                 //Si el campo teléfono no se encuentra vacío, permite agregar un segundo campo.
-                if (tel_legal.length != 0){
+                if (tel_legal.length != 0 && cod_tel_legal.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
                     if (x < maxField) {
@@ -144,9 +163,10 @@
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
                 var tel_legal_dinamico = document.getElementById('telefono_legal' + y).value;
+                var cod_tel_legal_dinamico = document.getElementById('telefono_legal_cod' + y).value;
 
                 //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
-                if (tel_legal_dinamico.length != 0){
+                if (tel_legal_dinamico.length != 0 && cod_tel_legal_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
                     if (x < maxField) {
