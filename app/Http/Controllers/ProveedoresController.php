@@ -787,7 +787,6 @@ class ProveedoresController extends Controller
         $pago = new Pago($request->all());
         $pago->id_proveedor = $id;
         $pago->save();
-        return redirect()->back()->with('message', 'Pago Creado Correctamente');
 
     }
 

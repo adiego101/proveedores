@@ -2,6 +2,7 @@
 <div class="row">
         <h1>Actividad</h1>
 </div>
+<h1>actividades</h1>
 
 <br/>
     <label for="facturacion_anual_alcanzada">Facturación anual alcanzada:</label><br>
@@ -11,8 +12,10 @@
 value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
 @if ($mode == "edit")
 
-<a class="btn btn-success" style="float: left" href="{{ route('actividades.nuevo', ['id' => $id]) }}" title="Agregar actividad">+</a>
-<br>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaActividad">
+    Agregar Nueva Actividad
+  </button><br>
 <hr>
 @endif
         <div>
@@ -44,8 +47,12 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
 value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
 @if ($mode == "edit")
 
-<a class="btn btn-success" style="float: left" href="{{ route('productos.nuevo', ['id' => $id]) }}" title="Agregar producto">+</a>
-<br>
+<h1>Productos</h1>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoProducto">
+    Agregar Nuevo Producto
+  </button><br>
 <hr>
 @endif
         <div>
@@ -85,10 +92,9 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
     @include('modales.editarProducto')
 
 @push('js')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">

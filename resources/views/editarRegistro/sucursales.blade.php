@@ -3,8 +3,10 @@
 <h2 class="mb-4">Sucursales</h2>
 @if ($mode == "edit")
 
-<a class="btn btn-success" style="float: left" href="{{ route('sucursales.nuevo', ['id' => $id]) }}" title="Agregar sucursal">+</a>
-<br>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaSucursal">
+    Agregar Nueva Sucursal
+  </button><br>
 <hr>
 @endif
 
@@ -50,10 +52,9 @@
 
 @push('js')
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
@@ -86,18 +87,18 @@
         serverSide: true,
         ajax: "{{ url('sucursales/'.$id.'/'.$mode) }}",
         columns: [
-            {   data: 'nombre_sucursal', 
+            {   data: 'nombre_sucursal',
                 name: 'nombre_sucursal'
             },
-            {   data: 'emails', 
+            {   data: 'emails',
                 name: 'emails',
                 render: {
                     _: '[/ ].email'
-                }, 
+                },
                 defaultContent: "",
                 searchable: false
             },
-            {   data: null, 
+            {   data: null,
                 name: 'telefonos',
                 render: function (data, type, row) {
                     let cellData = '';
@@ -113,7 +114,7 @@
                                 cellData += row.telefonos[index].nro_tel+'/';
                     }
                     return cellData;
-                }, 
+                },
                 defaultContent: "",
                 searchable: false
             },

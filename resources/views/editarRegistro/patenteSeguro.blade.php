@@ -12,12 +12,13 @@ value="0">
 <label for="vehiculos_afectados">Posee vehículos afectados a la actividad económica que desarrolla</label><br>
 <br> -->
 
-<h4>Vehículos:</h4><br>
+<h1>Vehículos:</h1><br>
 
 @if ($mode == "edit")
 
-<a class="btn btn-success" style="float: left" href="{{ route('patentes.nuevo', ['id' => $id]) }}" title="Agregar vehiculo">+</a>
-<br>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaPatente">
+    Agregar Nueva Patente
+  </button><br>
 <hr>
     @endif
 
@@ -49,12 +50,14 @@ value="0">
 <label for="seguros_sta_cruz">Posee seguros contratados con promotores residentes en nuestra provincia</label><br>
 <br> -->
 
-<h4>Seguros:</h4><br>
+<h1>Seguros:</h1><br>
 
 @if ($mode == "edit")
 
-<a class="btn btn-success" style="float: left" href="{{ route('seguros.nuevo', ['id' => $id]) }}" title="Agregar seguro">+</a>
-<br>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoSeguro">
+    Agregar Nuevo Seguro
+  </button><br>
 <hr>
 @endif
 <div>
@@ -86,12 +89,15 @@ value="0">
 <label for="servicio_personal_especializado">Utiliza como sede de la actividad económica que desarrolla algún inmueble que tribute impuesto inmobiliario en localidades de la Provincia de Santa Cruz</label><br>
 <br> -->
 
-<h4>Sedes:</h4><br>
+<h1>Sedes:</h1><br>
 
 @if ($mode == "edit")
 
-<a class="btn btn-success" style="float: left" href="{{ route('sedes.nuevo', ['id' => $id]) }}" title="Agregar sede">+</a>
-<br>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaSede">
+    Agregar Nueva Sede
+  </button><br>
 <hr>
 @endif
 
@@ -126,10 +132,9 @@ value="0">
 </fieldset>
 
 @push('js')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
@@ -221,18 +226,18 @@ $('#baja_patente').val(id_registro);
               {data: 'poliza', name: 'poliza'},
               {data: 'agencia', name: 'agencia'},
               {data: 'asegurado', name: 'asegurado'},
-              {data: 'vigencia_hasta', 
-    
+              {data: 'vigencia_hasta',
+
                 render: function(data){
-                    
+
                     let fecha_sin_hora_seguros = data.split(' ')[0];
                     let fecha_local_seguros = fecha_sin_hora_seguros.split('-').reverse().join('/');
-                  
+
                     return fecha_local_seguros;
                 }
-              
+
               },
-            
+
               {
                   data: 'action',
                   name: 'action',
@@ -298,7 +303,7 @@ $('#baja_patente').val(id_registro);
 
     });
 
-   
+
 
     function bajaSede(id_registro) {
 

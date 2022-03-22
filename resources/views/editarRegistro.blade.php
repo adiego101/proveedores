@@ -2,9 +2,7 @@
 
 @section('content2')
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -147,8 +145,18 @@
                 </button>
             @endif-->
         </div>
-        
+
     </form>
+    @include('edicionesModales.pagos')
+    @include('edicionesModales.actividades')
+    @include('edicionesModales.patentes')
+    @include('edicionesModales.producto')
+    @include('edicionesModales.sedes')
+    @include('edicionesModales.seguros')
+
+
+
+
 
     @yield('datos')
 
@@ -220,46 +228,46 @@ Sugerencia: agregar una nueva clase a cada campo a borrar. -->
         const inputs_email = document.querySelectorAll('[type="email"]');
 
         for(var i = 0; i < inputs_text.length; i++) {
-           
+
             inputs_text[i].value = "";
-            
+
         }
 
         /*for(var i = 0; i < inputs_select.length; i++) {
-           
+
            inputs_select[i].value = "";
-           
+
        }*/
 
        for(var i = 0; i < inputs_text_area.length; i++) {
-           
+
         inputs_text_area[i].value = "";
-           
+
        }
 
        for(var i = 0; i < inputs_number.length; i++) {
-           
+
            inputs_number[i].value = "";
-           
+
        }
 
 
        for(var i = 0; i < inputs_check.length; i++) {
-           
+
            inputs_check[i].checked = 0;
-           
+
        }
 
 
        for(var i = 0; i < inputs_email.length; i++) {
-           
+
            inputs_email[i].value = "";
-           
+
        }
 
     });
 
-</script> 
+</script>
 
 <script>
     $("#reset").on("click", function(e) {
