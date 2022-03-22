@@ -311,6 +311,36 @@ $('#baja_patente').val(id_registro);
         $('#modal_baja_sede').modal('show');
         $('#baja_sede').val(id_registro);
     }
+
+
+    function editarSede(id_registro) {
+
+        $ .ajax ({
+              url: "{{ url('sedesBD/'.$id) }}",
+              success: function (response) {
+
+                let domicilio = response;
+               console.log(domicilio);
+               abrirModalEditar(response);
+              }
+           });
+
+        function abrirModalEditar(response){
+            //var domicilio = response [0].Domicilio;
+            var longitud = response.length;
+            //for (var i = 0; i <longitud; i ++) {
+            
+            //$('#Domicilio').val(response [i].Domicilio);
+            //}
+
+            $('#nuevaSede').modal('show');
+            $('#Domicilio').val(response [0].Domicilio);
+        }
+           
+        //Desplegamos el modal
+        //$('#nuevaSede').modal('show');
+        //$('#baja_sede').val(id_registro);
+    }
   </script>
 
 @endpush

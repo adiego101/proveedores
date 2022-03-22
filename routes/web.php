@@ -124,6 +124,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('patentes/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPatentes')->name('patentes.list');
     Route::get('seguros/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getSeguros')->name('seguros.list');
     Route::get('sedes/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getSedes')->name('sedes.list');
+    //Obtenemos las sedes de la BD para cargar en el modal, para modificar
+    Route::get('sedesBD/{id}/', 'App\Http\Controllers\ProveedoresController@getSedesBD');
 
     Route::post('bajaSucursales/{id}', 'App\Http\Controllers\ProveedoresController@bajaSucursales')->name('sucursales.baja');
     Route::post('bajaPagos/{id}', 'App\Http\Controllers\ProveedoresController@bajaPagos')->name('pagos.baja');

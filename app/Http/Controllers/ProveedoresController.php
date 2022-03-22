@@ -1235,7 +1235,7 @@ class ProveedoresController extends Controller
                     <i class="fas fa-eye"></i></a> ';
                     return $actionBtn;
                 } else {
-                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    $actionBtn = '<a onclick="editarSede(' . $row->id_proveedor_sede . ');" class="edit btn btn-warning btn-sm" title="Editar">
                     <i class="fas fa-edit"></i></a>
                     <a onclick="bajaSede(' . $row->id_proveedor_sede . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;                }
@@ -1245,6 +1245,40 @@ class ProveedoresController extends Controller
             })
             ->rawColumns(['action'])
             ->make(true);
+        //}
+    }
+
+
+
+    public function getSedesBD($id)
+    {
+        //if ($request->ajax()) {
+        //$data = Proveedor_sede::where('id_proveedor', $id)->get();
+
+        $data = Proveedor_sede::join("localidades","localidades.id_localidad", "=", "proveedores_sede.Localidad")->where("proveedores_sede.id_proveedor", "=", $id)->select("proveedores_sede.id_proveedor_sede","proveedores_sede.Domicilio","localidades.nombre_localidad")->get();
+
+        return $data;
+        /*return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) use ($mode) {
+                $url = url('editarSedes/' . $row->id_proveedor_sede);
+                $url2 = url('verSedes/' . $row->id_proveedor_sede);
+
+                if ($mode=="show") {
+                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
+                    <i class="fas fa-eye"></i></a> ';
+                    return $actionBtn;
+                } else {
+                    $actionBtn = '<a onclick="editarSede(' . $row->id_proveedor_sede . ');" class="edit btn btn-warning btn-sm" title="Editar">
+                    <i class="fas fa-edit"></i></a>
+                    <a onclick="bajaSede(' . $row->id_proveedor_sede . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;                }
+
+
+
+            })
+            ->rawColumns(['action'])
+            ->make(true);*/
         //}
     }
 
@@ -1294,7 +1328,7 @@ class ProveedoresController extends Controller
 
             // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
 
-            return redirect()->back()->with('message', 'Sede creada correctamente');
+            //return redirect()->back()->with('message', 'Sede creada correctamente');
     }
 
     public function nuevoSedes($id)

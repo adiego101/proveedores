@@ -1,7 +1,6 @@
-
-
-
-  <!-- Modal -->
+<!-- Modal -->
+  <form id="addformSede">
+    @csrf
   <div class="modal fade" id="nuevaSede" tabindex="-1" role="dialog" aria-labelledby="modalNuevaSede" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -20,7 +19,7 @@
                 <br/>
 
                 <label for="Domicilio">Domicilio:</label><br />
-                <input @if ( $mode == "show") readonly @endif type="text" value="{{ isset($sede->Domicilio) ? $sede->Domicilio : '' }}" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="50" required/><br />
+                <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="50" required/><br />
 
                 <div class="row">
                         <div class="col-sm">
@@ -57,11 +56,12 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
   </div>
+</form>
 
 
 @push('js')
@@ -119,5 +119,40 @@ window.onload = function(){
         }
     }
     </script>
-@endpush
 
+<script>
+
+$(function () {console.log("{{url('crearSedes/'.$id)}}")});
+
+//Damos de alta una nueva sede en la BD.
+
+        $(document).ready(  function()
+            {
+                $('#addformSede').on('submit', function(e)
+                {
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: "post",
+                        url: "{{url('crearSedes/'.$id)}}",
+                        data: $('#addformSede').serialize(),
+                        success: function (response) {
+                            console.log(response)
+                            $('#nuevaSede').modal('hide')
+                            alert("Sede Guardada");
+                            $('.yajra-sedes').DataTable().ajax.reload();
+
+                        },
+                        error: function(error){
+                            console.log(error)
+                            alert("ERROR!! Sede no guardada")
+                        }
+                    });
+                }
+                );
+            }
+        );
+
+
+    </script>
+@endpush
