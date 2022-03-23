@@ -14,7 +14,7 @@
 
             <fieldset>
 
-                <h1>Sede</h1>
+                <h1>Alta Sede</h1>
 
                 <br/>
 
@@ -46,7 +46,12 @@
                         <div class="col-sm">
                             <label for="Localidad">Localidad:</label><br>
                             <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad" required>
-                                <option value="">Seleccione una localidad</option>
+                            <option value=" ">Seleccione una localidad</option>
+                            @forelse($localidades as $localidad)
+                                <option value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
+                            @empty
+                                <option value=" "></option>
+                            @endforelse
                             </select>
                             <br>
 
@@ -131,7 +136,7 @@ $(function () {console.log("{{url('crearSedes/'.$id)}}")});
                 $('#addformSede').on('submit', function(e)
                 {
                     e.preventDefault();
-
+                    
                     $.ajax({
                         type: "post",
                         url: "{{url('crearSedes/'.$id)}}",
