@@ -3,6 +3,8 @@
 
 
   <!-- Modal -->
+  <form id="addform">
+    @csrf
   <div class="modal fade" id="nuevoSeguro" tabindex="-1" role="dialog" aria-labelledby="modalNuevoSeguro" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -52,4 +54,41 @@
     </div>
   </div>
 
+</form>
 
+@push('js')
+<script>
+
+$(function () {console.log("{{url('crearPagos/'.$id)}}")});
+
+
+        $(document).ready(  function()
+            {
+                $('#addform').on('submit', function(e)
+                {
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: "post",
+                        url: "{{url('crearPagos/'.$id)}}",
+                        data: $('#addform').serialize(),
+                        success: function (response) {
+                            console.log(response)
+                            $('#nuevoPago').modal('hide')
+                            alert("Pago Guardado");
+                            $('.yajra-pagos').DataTable().ajax.reload();
+
+                        },
+                        error: function(error){
+                            console.log(error)
+                            alert("ERROR!! Pago no guardado")
+                        }
+                    });
+                }
+                );
+            }
+        );
+
+
+    </script>
+@endpush

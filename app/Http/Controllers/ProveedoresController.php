@@ -735,12 +735,13 @@ class ProveedoresController extends Controller
                 $url2 = url('verPagos/' . $row->id_pagos);
 
                 if ($mode == "show") {
-                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
-                    <i class="fas fa-eye"></i></a>';
+                    $actionBtn = '
+                    <a onclick="verPago(' . $row->id_pagos . ');" class="view btn btn-primary btn-sm" title="ver pago">
+                    <i class="fas fa-edit"></i></a>';
                     return $actionBtn;
                 } else {
-                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
-                    <a onclick="verPago(' . $row->id_pagos . ');" class="view btn btn-primary btn-sm" title="ver pago">
+                    $actionBtn = '
+                    <a onclick="verPago(' . $row->id_pagos . ');" class="view btn btn-primary btn-sm" title="editar pago">
                     <i class="fas fa-edit"></i></a> <a onclick="bajaPago(' . $row->id_pagos . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
                     <i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
@@ -768,7 +769,7 @@ class ProveedoresController extends Controller
         $pago = Pago::where('id_pagos', $id)->get();
         $mode = "show";
 
-        return response()->json($pago);
+        return $pago;
         //return view('ediciones.pagos',compact('mode'), (['pago' => $pago[0]]));
 
     }
@@ -776,10 +777,13 @@ class ProveedoresController extends Controller
     public function guardarPagos($id, Request $request)
     {
         $pago = Pago::find($id);
+        $pago->importe = $request->importeeditar;
+        $pago->fecha = $request->fechaeditar;
+        $pago->observaciones = $request->observacionespagoeditar;
 
         $pago = $pago->fill($request->all());
         $pago->save();
-        return redirect()->back()->with('message', 'Los datos del Pago fueron modificados correctamente');
+        //return redirect()->back()->with('message', 'Los datos del Pago fueron modificados correctamente');
 
     }
 
@@ -787,7 +791,9 @@ class ProveedoresController extends Controller
     {
 
         $pago = new Pago($request->all());
+
         $pago->id_proveedor = $id;
+        $pago->observaciones = $request->observacionespago;
         $pago->save();
 
     }
@@ -1235,7 +1241,7 @@ class ProveedoresController extends Controller
                     <i class="fas fa-eye"></i></a> ';
                     return $actionBtn;
                 } else {
-                    $actionBtn = '<a onclick="editarSede(' . $row->id_proveedor_sede . ');" class="edit btn btn-warning btn-sm" title="Editar">
+                    $actionBtn = '<a onclick="editarSede(' . $row->id_proveedor_sede . ');" value="'.$row->id_proveedor_sede.'" class="edit btn btn-warning btn-sm" title="Editar">
                     <i class="fas fa-edit"></i></a>
                     <a onclick="bajaSede(' . $row->id_proveedor_sede . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;                }
@@ -1255,7 +1261,7 @@ class ProveedoresController extends Controller
         //if ($request->ajax()) {
         //$data = Proveedor_sede::where('id_proveedor', $id)->get();
 
-        $data = Proveedor_sede::join("localidades","localidades.id_localidad", "=", "proveedores_sede.Localidad")->where("proveedores_sede.id_proveedor", "=", $id)->select("proveedores_sede.id_proveedor_sede","proveedores_sede.Domicilio","localidades.nombre_localidad")->get();
+        $data = Proveedor_sede::join("localidades","localidades.id_localidad", "=", "proveedores_sede.Localidad")->join("provincias","provincias.id_provincia", "=", "localidades.id_provincia")->where("proveedores_sede.id_proveedor_sede", "=", $id)->select("proveedores_sede.id_proveedor_sede","proveedores_sede.Domicilio","localidades.id_localidad", "provincias.nombre_provincia")->get();
 
         return $data;
         /*return Datatables::of($data)
@@ -1348,8 +1354,14 @@ class ProveedoresController extends Controller
         $sede = Proveedor_sede::find($id);
 
         $sede = $sede->fill($request->all());
+
+       $sede->Localidad = $request->Localidades;
+        $sede->Domicilio = $request->Domicilios;
+
+
+
         $sede->save();
-        return redirect()->back()->with('message', 'Los datos de la Sede fueron modificados correctamente');
+        //return redirect()->back()->with('message', 'Los datos de la Sede fueron modificados correctamente');
 
     }
 

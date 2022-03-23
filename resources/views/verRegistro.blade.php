@@ -125,6 +125,8 @@
                 aria-labelledby="nav-otrosDatos-tab">
                 @include('editarRegistro.otrosDatos') </div>
         </div>
+        @include('edicionesModales.editarpagos')
+
     @yield('datos')
     <br>
 
