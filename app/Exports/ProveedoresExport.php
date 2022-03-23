@@ -6,13 +6,15 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\Exportable;
 
 //librerias para seguir el comportamiento de la aplicacion mediante log
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize
+class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles
 {
     use Exportable;
     protected $proveedores;
@@ -240,5 +242,12 @@ class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize
         $queries = DB::getQueryLog();
         Log::info($queries);
         return $collection;
+    }
+
+    public function styles(Worksheet $sheet){
+        return [
+            // Style the first row as bold text.
+            1    => [   'font' => ['bold' => true]]
+        ];
     }
 }

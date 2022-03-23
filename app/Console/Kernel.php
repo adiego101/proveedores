@@ -25,6 +25,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            DB::table('proveedores')
+                            ->where('fecha_inscripcion','<=',Carbon::now()->subYear())
+                            ->update('dado_de_baja',1);
+        })->everyMinute();
     }
 
     /**
