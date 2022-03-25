@@ -1,11 +1,11 @@
 <!-- Modal -->
-  <form id="addformSede">
+<form id="editformSede">
     @csrf
-  <div class="modal fade" id="nuevaSede" tabindex="-1" role="dialog" aria-labelledby="modalNuevaSede" aria-hidden="true">
+  <div class="modal fade" id="editarSede" tabindex="-1" role="dialog" aria-labelledby="modalEditarSede" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalNuevaSede">Modal title</h5>
+          <h1 class="modal-title" id="modalEditarSede">Editar Sede</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -14,17 +14,13 @@
 
             <fieldset>
 
-                <h1>Sede</h1>
-
-                <br/>
-
-                <label for="Domicilio">Domicilio:</label><br />
-                <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="50" required/><br />
+                <label for="Domicilios">Domicilio:</label><br />
+                <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilios" name="Domicilios" maxlength="50" required/><br />
 
                 <div class="row">
                         <div class="col-sm">
-                            <label for="provincia_sede">Provincia:</label><br>
-                            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="provincia_sede" name="provincia_sede" required>
+                            <label for="provincia_sedes">Provincia:</label><br>
+                            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="provincia_sedes" name="provincia_sedes" required>
                             <option value="">Seleccione una provincia</option>
                             @forelse($provincias as $provincia)
                                 @if (isset($provinciaid))
@@ -44,19 +40,25 @@
                         </div>
 
                         <div class="col-sm">
-                            <label for="Localidad">Localidad:</label><br>
-                            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad" required>
-                                <option value="">Seleccione una localidad</option>
+                            <label for="Localidades">Localidad:</label><br>
+                            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidades" name="Localidades" required>
+                            <option value="">Seleccione una localidad</option>
+                            @forelse($localidades as $localidad)
+                                <option value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
+                            @empty
+                                <option value=" "></option>
+                            @endforelse
                             </select>
                             <br>
 
                         </div>
+                        <input type="hidden" id="id_proveedor_sede" name="id_proveedor_sede">
                     </div>
                 </fieldset>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
@@ -74,7 +76,7 @@ window.onload = function(){
 
     $(document).ready(function(){
 
-        $('#provincia_sede').change(function(){
+        $('#provincia_sedes').change(function(){
             recargarListaSeguro();
         });
     })
@@ -87,7 +89,7 @@ window.onload = function(){
             type:"GET",
             url:"{{url('localidadSelect/')}}/{{isset($sede->Localidad) ? $sede->Localidad : ''}}",
             success:function(r){
-                $('#Localidad').html(r);
+                $('#Localidades').html(r);
             }
         });
     }
@@ -95,9 +97,9 @@ window.onload = function(){
     function recargarListaSeguro(){
             $.ajax({
                 type:"GET",
-                url:"{{url('localidades/')}}/"+$('#provincia_sede').val(),
+                url:"{{url('localidades/')}}/"+$('#provincia_sedes').val(),
                 success:function(r){
-                    $('#Localidad').html(r);
+                    $('#Localidades').html(r);
                 }
             });
         }
@@ -122,30 +124,31 @@ window.onload = function(){
 
 <script>
 
-$(function () {console.log("{{url('crearSedes/'.$id)}}")});
 
-//Damos de alta una nueva sede en la BD.
-
+//Modificamos los datos de una sede en la BD.
         $(document).ready(  function()
             {
-                $('#addformSede').on('submit', function(e)
+                $('#editformSede').on('submit', function(e)
                 {
                     e.preventDefault();
-
+                    console.log($('#id_proveedor_sede').val());
+                    
+                    var id_proveedor = $('#id_proveedor_sede').val();
+                    console.log("{{url('guardarSedes/')}}/"+id_proveedor);
                     $.ajax({
                         type: "post",
-                        url: "{{url('crearSedes/'.$id)}}",
-                        data: $('#addformSede').serialize(),
+                        url: "{{url('guardarSedes/')}}/"+id_proveedor,
+                        data: $('#editformSede').serialize(),
                         success: function (response) {
                             console.log(response)
-                            $('#nuevaSede').modal('hide')
-                            alert("Sede Guardada");
+                            $('#editarSede').modal('hide')
+                            alert("Sede Modificada");
                             $('.yajra-sedes').DataTable().ajax.reload();
 
                         },
                         error: function(error){
                             console.log(error)
-                            alert("ERROR!! Sede no guardada")
+                            alert("ERROR!! Sede no modificada")
                         }
                     });
                 }

@@ -4,6 +4,8 @@
 
 
   <!-- Modal -->
+  <form id="addformpatente">
+    @csrf
   <div class="modal fade" id="nuevaPatente" tabindex="-1" role="dialog" aria-labelledby="modalNuevaPatente" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -49,3 +51,40 @@
       </div>
     </div>
   </div>
+</form>
+@push('js')
+<script>
+
+$(function () {console.log("{{url('crearPatentes/'.$id)}}")});
+
+
+        $(document).ready(  function()
+            {
+                $('#addformpatente').on('submit', function(e)
+                {
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: "post",
+                        url: "{{url('crearPatentes/'.$id)}}",
+                        data: $('#addformpatente').serialize(),
+                        success: function (response) {
+                            console.log(response)
+                            $('#nuevaPatente').modal('hide')
+                            alert("Patente Guardado");
+                            $('.yajra-patentes').DataTable().ajax.reload();
+
+                        },
+                        error: function(error){
+                            console.log(error)
+                            alert("ERROR!! Patente no guardada")
+                        }
+                    });
+                }
+                );
+            }
+        );
+
+
+    </script>
+@endpush

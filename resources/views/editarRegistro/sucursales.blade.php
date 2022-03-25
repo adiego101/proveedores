@@ -106,7 +106,7 @@
                         if(row.telefonos[index].tipo_medio!=null)
                             cellData += row.telefonos[index].tipo_medio+':';
                         if(row.telefonos[index].cod_area_tel!=null)
-                            cellData += row.telefonos[index].cod_area_tel+'-';
+                            cellData += row.telefonos[index].cod_area_tel+' ';
                         if(row.telefonos[index].nro_tel!=null)
                             if(index==row.telefonos.length-1)
                                 cellData += row.telefonos[index].nro_tel;

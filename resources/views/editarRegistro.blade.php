@@ -2,7 +2,7 @@
 
 @section('content2')
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -147,14 +147,23 @@
         </div>
 
     </form>
+    @include('edicionesModales.editarpagos')
     @include('edicionesModales.pagos')
     @include('edicionesModales.actividades')
-    @include('edicionesModales.patentes')
     @include('edicionesModales.producto')
-    @include('edicionesModales.sedes')
-    @include('edicionesModales.seguros')
     @include('edicionesModales.sucursales')
+    @include('edicionesModales.editarProducto')
 
+
+    {{--
+        {{--
+    @include('edicionesModales.editarProducto.blade')
+    @include('edicionesModales.patentes')
+    --}}
+    @include('edicionesModales.altaSedes')
+    @include('edicionesModales.editarSedes')
+    @include('edicionesModales.altaSeguros')
+    @include('edicionesModales.editarSeguros')
 
 
 

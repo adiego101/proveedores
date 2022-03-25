@@ -55,7 +55,7 @@ value="0">
 @if ($mode == "edit")
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoSeguro">
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevoSeguro">
     Agregar Nuevo Seguro
   </button><br>
 <hr>
@@ -95,7 +95,7 @@ value="0">
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaSede">
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaSede">
     Agregar Nueva Sede
   </button><br>
 <hr>
@@ -103,7 +103,7 @@ value="0">
 
     <div>
 
-        <table style="width:100%" class="yajra-sedes table table-hover  table-striped table-condensed">
+        <table style="width:100%" id="table" class="yajra-sedes table table-hover  table-striped table-condensed">
             <thead>
                 <tr>
                     <th>Domicilio</th>
@@ -257,8 +257,42 @@ $('#baja_patente').val(id_registro);
   $('#modal_baja_seguro').modal('show');
   $('#baja_seguro').val(id_registro);
   }
+
+
+  //Enviamos el id del registro que queremos modificar (id de la tabla)
+  function editarSeguro(id_registro) {
+
+        $.ajax ({
+        url: "{{ url('segurosBD/') }}/"+id_registro,
+        success: function (response) {
+
+            abrirModalEditarSeguro(response);
+        }
+        });
+
+    
+        function abrirModalEditarSeguro(response){
+    
+            //Desplegamos el modal
+            $('#editarSeguro').modal('show');
+            //Enviamos los valores a cada campo
+            $('#polizas').val(response [0].poliza);
+            $('#asegurados').val(response [0].asegurado);
+            $('#agencias').val(response [0].agencia);
+            let vigencia_hasta = response [0].vigencia_hasta;
+            vigencia_hasta = vigencia_hasta.split(" ");
+            vigencia = vigencia_hasta[0];
+            $('#vigencias_hasta').val(vigencia);
+            $('#id_proveedor_seguro').val(response [0].id_proveedor_seguro);
+            
+        }
+   
+    }
+
   </script>
 
+
+<!-- Scripts SEDES -->
 
 <script type="text/javascript">
     $(function () {
@@ -312,34 +346,31 @@ $('#baja_patente').val(id_registro);
         $('#baja_sede').val(id_registro);
     }
 
-
+    //Enviamos el id del registro que queremos modificar (id de la tabla)
     function editarSede(id_registro) {
 
         $ .ajax ({
-              url: "{{ url('sedesBD/'.$id) }}",
+              url: "{{ url('sedesBD/') }}/"+id_registro,
               success: function (response) {
 
-                let domicilio = response;
-               console.log(domicilio);
-               abrirModalEditar(response);
+                    abrirModalEditarSede(response);
               }
            });
 
-        function abrirModalEditar(response){
-            //var domicilio = response [0].Domicilio;
-            var longitud = response.length;
-            //for (var i = 0; i <longitud; i ++) {
-            
-            //$('#Domicilio').val(response [i].Domicilio);
-            //}
 
-            $('#nuevaSede').modal('show');
-            $('#Domicilio').val(response [0].Domicilio);
+        function abrirModalEditarSede(response){
+         
+            //Desplegamos el modal
+            $('#editarSede').modal('show');
+            //Enviamos los valores a cada campo
+            $('#Domicilios').val(response [0].Domicilio);
+            $('#provincia_sedes').val(response [0].nombre_provincia);
+            $('#Localidades').val(response [0].id_localidad);
+            $('#id_proveedor_sede').val(response [0].id_proveedor_sede);
+            console.log(response);
+ 
         }
            
-        //Desplegamos el modal
-        //$('#nuevaSede').modal('show');
-        //$('#baja_sede').val(id_registro);
     }
   </script>
 

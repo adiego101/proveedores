@@ -12,13 +12,6 @@
             </div>
             <div class="modal-body">
 
-                <fieldset>
-                    <div class="row">
-                        <h1>Sucursales</h1>
-                    </div>
-
-                    <br />
-
                     <label for="nombre_sucursal">Nombre Sucursal:</label><br />
                     <input @if ( $mode == "show") readonly @endif  type="text" class="form-control" value="{{ isset($sucursal->nombre_sucursal) ? $sucursal->nombre_sucursal : '' }}" placeholder="Ingrese el nombre de la sucursal" aria-describedby="basic-addon1" id="nombre_sucursal" name="nombre_sucursal" maxlength="50" required/><br />
 
@@ -119,15 +112,44 @@
     </div>
 </form>
 
-
-
-
-
-
-
+</form>
 
 
 @push('js')
+<script>
+
+$(function () {console.log("{{url('crearPagos/'.$id)}}")});
+
+
+        $(document).ready(  function()
+            {
+                $('#addform').on('submit', function(e)
+                {
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: "post",
+                        url: "{{url('crearPagos/'.$id)}}",
+                        data: $('#addform').serialize(),
+                        success: function (response) {
+                            console.log(response)
+                            $('#nuevoPago').modal('hide')
+                            alert("Pago Guardado");
+                            $('.yajra-pagos').DataTable().ajax.reload();
+
+                        },
+                        error: function(error){
+                            console.log(error)
+                            alert("ERROR!! Pago no guardado")
+                        }
+                    });
+                }
+                );
+            }
+        );
+
+
+    </script>
 <script type="text/javascript">
 	$(document).ready(function(){
 
