@@ -42,7 +42,7 @@
                         <div class="col-sm">
                             <label for="Localidad">Localidad:</label><br>
                             <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad" required>
-                            <option value=" ">Seleccione una localidad</option>
+                            <option value="">Seleccione una localidad</option>
                             @forelse($localidades as $localidad)
                                 <option value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
                             @empty
@@ -143,9 +143,10 @@ $(function () {console.log("{{url('crearSedes/'.$id)}}")});
                         success: function (response) {
                             console.log(response)
                             $('#nuevaSede').modal('hide')
-                            alert("Sede Guardada");
                             $('.yajra-sedes').DataTable().ajax.reload();
-
+                            $('#Domicilio').val('');	
+                            $('#provincia_sede').val('');	
+                            $('#Localidad').val('');
                         },
                         error: function(error){
                             console.log(error)

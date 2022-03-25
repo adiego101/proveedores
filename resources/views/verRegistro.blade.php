@@ -126,6 +126,12 @@
                 @include('editarRegistro.otrosDatos') </div>
         </div>
         @include('edicionesModales.editarpagos')
+    @include('edicionesModales.editarActividades')
+    @include('edicionesModales.editarProducto')
+    {{-- @include('edicionesModales.sucursales') --}}
+    @include('edicionesModales.editarSedes')
+    @include('edicionesModales.editarSeguros')
+    @include('edicionesModales.editarVehiculos')
 
     @yield('datos')
     <br>

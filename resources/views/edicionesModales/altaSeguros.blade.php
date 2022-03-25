@@ -85,9 +85,11 @@ $(function () {console.log("{{url('crearSeguros/'.$id)}}")});
                         success: function (response) {
                             console.log(response)
                             $('#nuevoSeguro').modal('hide')
-                            alert("Seguro Guardado");
                             $('.yajra-seguros').DataTable().ajax.reload();
-
+                            $('#poliza').val('');	
+                            $('#asegurado').val('');	
+                            $('#agencia').val('');
+                            $('#vigencia_hasta').val('');
                         },
                         error: function(error){
                             console.log(error)

@@ -1,4 +1,6 @@
+@if ($mode != 'show')
 <form id="editara">
+    @endif
     @csrf
   <!-- Modal -->
   <div class="modal fade" id="editarActividad" tabindex="-1" role="dialog" aria-labelledby="modalNuevaActividad" aria-hidden="true">
@@ -49,13 +51,14 @@
             <input type="hidden" id="editar_actividad1">
             <input type="hidden" id="ver_actividad1">
             @if ($mode != 'show') <button type="submit" class="btn btn_editar_actividad btn-success">Guardar</button> @endif
-            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
 </form>
-
+@endif
 @push('js')
     <script>
         $(document).on("click", ".btn_editar_actividad", function() {

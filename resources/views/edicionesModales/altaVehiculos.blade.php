@@ -36,7 +36,7 @@
 
         </div>
         <div class="modal-footer">
-        <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="submit" class="btn btn-success">Guardar</button>
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
@@ -62,9 +62,11 @@ $(function () {console.log("{{url('crearPatentes/'.$id)}}")});
                         success: function (response) {
                             console.log(response)
                             $('#nuevoVehiculo').modal('hide')
-                            alert("Vehiculo Guardado");
                             $('.yajra-vehiculos').DataTable().ajax.reload();
-
+                            $('#marca').val('');	
+                            $('#dominio').val('');	
+                            $('#modelo').val('');
+                            $('#inscripto_en').val('');
                         },
                         error: function(error){
                             console.log(error)

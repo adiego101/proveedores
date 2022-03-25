@@ -1,15 +1,13 @@
-
-
-
-
-  <!-- Modal -->
+<!-- Modal -->
+  @if ($mode != 'show')
   <form id="editarprod">
+@endif
     @csrf
   <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog" aria-labelledby="modalEditarProducto" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalEditarProducto">Modal title</h5>
+          <h1 class="modal-title" id="modalEditarProducto">Editar Producto</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -50,14 +48,16 @@
         </div>
         <div class="modal-footer">
             <input type="hidden" id="editar_producto">
-                    <input type="hidden" id="ver_producto">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+            <input type="hidden" id="ver_producto">
+          @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
 </form>
+@endif
 @push('js')
     <script>
         $(document).on("click", ".btn_editar_producto", function() {

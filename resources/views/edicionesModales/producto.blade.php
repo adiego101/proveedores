@@ -1,15 +1,11 @@
-
-
-
-
-  <!-- Modal -->
+<!-- Modal -->
   <form id="addformproducto">
     @csrf
   <div class="modal fade" id="nuevoProducto" tabindex="-1" role="dialog" aria-labelledby="modalNuevoProducto" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalNuevoProducto">Agregar Nuevo Producto</h5>
+          <h1 class="modal-title" id="modalNuevoProducto">Nuevo Producto</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -49,8 +45,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-success">Guardar</button>
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
@@ -75,9 +71,11 @@ $(function () {console.log("{{url('crearProductos/'.$id)}}")});
                         success: function (response) {
                             console.log(response)
                             $('#nuevoProducto').modal('hide')
-                            alert("Producto Guardado");
                             $('.yajra-productos').DataTable().ajax.reload();
-
+                            $('#producto_elaborado').val('');	
+                            $('#rnpa').val('');	
+                            $('#Producida_unidad').val('');	
+                            $('#capacidad_produccion_total').val('');	
                         },
                         error: function(error){
                             console.log(error)
@@ -89,6 +87,6 @@ $(function () {console.log("{{url('crearProductos/'.$id)}}")});
             }
         );
 
-
     </script>
+
 @endpush

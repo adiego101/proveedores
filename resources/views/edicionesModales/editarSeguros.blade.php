@@ -1,5 +1,7 @@
 <!-- Modal -->
+@if ($mode != 'show')
 <form id="editformSeguro">
+@endif
     @csrf
   <div class="modal fade" id="editarSeguro" tabindex="-1" role="dialog" aria-labelledby="modalEditarSeguro" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -39,7 +41,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Guardar</button>
+            @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
@@ -66,7 +68,7 @@
           return false;
         }
     }
-    
+
 </script>
 
 <script>
@@ -78,7 +80,7 @@ $(document).ready(  function()
                 {
                     e.preventDefault();
                     console.log($('#id_proveedor_seguro').val());
-                    
+
                     var id_proveedor = $('#id_proveedor_seguro').val();
                     console.log("{{url('guardarSeguros/')}}/"+id_proveedor);
                     $.ajax({

@@ -1,15 +1,11 @@
-
-
-
-
-  <form id="addformActividad">
+<form id="addformActividad">
     @csrf
   <!-- Modal -->
   <div class="modal fade" id="nuevaActividad" tabindex="-1" role="dialog" aria-labelledby="modalNuevaActividad" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalNuevaActividad">Nueva Actividad</h5>
+          <h1 class="modal-title" id="modalNuevaActividad">Nueva Actividad</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -18,8 +14,6 @@
 
 <fieldset>
 
-
-    <br/>
         <div class="row">
             <div class="col-sm">
                 <label for="tipo_actividad">Tipo de Actividad:</label><br>
@@ -50,8 +44,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
@@ -74,7 +68,6 @@
                     success: function(response) {
                         console.log(response)
                         $('#nuevaActividad').modal('hide')
-                        alert("Actividad Guardada");
                         $('.yajra-actividades').DataTable().ajax.reload();
 
                     },

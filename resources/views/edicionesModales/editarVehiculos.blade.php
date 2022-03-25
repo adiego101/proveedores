@@ -1,5 +1,7 @@
 <!-- Modal -->
+@if ($mode != 'show')
 <form id="editformVehiculo">
+@endif
     @csrf
   <div class="modal fade" id="editarVehiculo" tabindex="-1" role="dialog" aria-labelledby="modalEditarVehiculo" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -39,14 +41,15 @@
 
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Guardar</button>
+            @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
 </form>
-
+@endif
 @push('js')
 
 <script>
@@ -57,7 +60,7 @@
                 {
                     e.preventDefault();
                     console.log($('#id_proveedor_patente').val());
-                    
+
                     var id_proveedor = $('#id_proveedor_patente').val();
                     console.log("{{url('guardarPatentes/')}}/"+id_proveedor);
 
