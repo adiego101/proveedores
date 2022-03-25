@@ -118,6 +118,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('idLocalidad/{nombre_localidad}', 'App\Http\Controllers\ProveedoresController@idLocalidad');
 
     Route::get('sucursales/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getSucursales')->name('sucursales.list');
+    //Obtenemos las sucursales de la BD para cargar en el modal, para modificar
+    Route::get('sucursalesBD/{id}/', 'App\Http\Controllers\ProveedoresController@getSucursalesBD');
     Route::get('pagos/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPagos')->name('pagos.list');
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
     Route::get('productos/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getProductos')->name('productos.list');

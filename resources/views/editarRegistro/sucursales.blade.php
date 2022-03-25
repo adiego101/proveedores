@@ -12,7 +12,7 @@
 
 <div>
 
-    <table style="width:100%" class="yajra-datatable table table-hover  table-striped table-condensed">
+    <table style="width:100%" class="yajra-sucursal yajra-datatable table table-hover  table-striped table-condensed">
         <thead>
             <tr>
                 <th>Nombre sucursal</th>
@@ -144,6 +144,32 @@
          //Desplegamos el modal
          $('#modalBajaSucursal').modal('show');
          $('#baja').val(id_sucursal);
+    }
+
+    function editarSucursal(id_sucursal) {
+
+        $ .ajax ({
+            url: "{{ url('sucursalesBD/'.$id) }}",
+            success: function (response) {
+                abrirModalEditar(response);
+            }
+        });
+
+    function abrirModalEditar(response){
+        //var domicilio = response [0].Domicilio;
+        var longitud = response.length;
+        //for (var i = 0; i <longitud; i ++) {
+        
+        //$('#Domicilio').val(response [i].Domicilio);
+        //}
+
+        $('#nuevaSucursal').modal('show');
+        $('#nombre_sucursal').val(response [0].nombre_sucursal);
+    }
+    
+    //Desplegamos el modal
+    //$('#nuevaSede').modal('show');
+    //$('#baja_sede').val(id_registro);
     }
 </script>
 

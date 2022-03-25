@@ -151,6 +151,7 @@
     @include('edicionesModales.pagos')
     @include('edicionesModales.actividades')
     @include('edicionesModales.producto')
+    @include('edicionesModales.sucursales')
     @include('edicionesModales.editarProducto')
     @include('edicionesModales.editarActividades')
 

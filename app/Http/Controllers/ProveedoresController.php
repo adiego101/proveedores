@@ -565,10 +565,10 @@ class ProveedoresController extends Controller
                         <i class="fas fa-eye"></i></a>';
                         return $actionBtn;
                     } else {
-                        $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
-                        <i class="fas fa-edit"></i></a> <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
-                        <i class="fas fa-exclamation-circle"></i></a>';
-                        return $actionBtn;
+                        $actionBtn = '<a onclick="editarSucursal(' . $row->id_sucursal . ');" class="edit btn btn-warning btn-sm" title="Editar">
+                        <i class="fas fa-edit"></i></a>
+                        <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                        return $actionBtn;                
                     }
 
 
@@ -579,6 +579,12 @@ class ProveedoresController extends Controller
         }
     }
 }
+
+    public function getSucursalesBD($id){
+        $proveedor = Proveedor::findOrFail($id);
+        return $proveedor->sucursales;
+    }
+
     public function editarSucursales($id)
     {
         $sucursal = Sucursal::where('id_sucursal', $id)->get();
