@@ -1,8 +1,9 @@
 <fieldset>
 <div class="row">
-        <h1>Actividad</h1>
+        <h2>Actividad</h2>
 </div>
-<h1>actividades</h1>
+<br>
+<h3>Actividades</h3>
 
 <br/>
     <label for="facturacion_anual_alcanzada">Facturación anual alcanzada:</label><br>
@@ -11,9 +12,9 @@
      @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
 @if ($mode == "edit")
-
+<br>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaActividad">
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaActividad">
     Agregar Nueva Actividad
   </button><br>
 <hr>
@@ -41,16 +42,18 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
 
     <hr>
 
+    <h3>Productos</h3>
+    <br>
+
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
     <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"
         @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
 @if ($mode == "edit")
 
-<h1>Productos</h1>
-
+<br>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoProducto">
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevoProducto">
     Agregar Nuevo Producto
   </button><br>
 <hr>

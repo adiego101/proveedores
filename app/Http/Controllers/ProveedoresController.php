@@ -747,7 +747,7 @@ class ProveedoresController extends Controller
                     return $actionBtn;
                 } else {
                     $actionBtn = '
-                    <a onclick="verPago(' . $row->id_pagos . ');" class="view btn btn-primary btn-sm" title="editar pago">
+                    <a onclick="verPago(' . $row->id_pagos . ');" class="view btn btn-warning btn-sm" title="editar pago">
                     <i class="fas fa-edit"></i></a> <a onclick="bajaPago(' . $row->id_pagos . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
                     <i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
@@ -839,7 +839,7 @@ class ProveedoresController extends Controller
                     $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
                     <i class="fas fa-eye"></i></a> ';
                     return $actionBtn;                } else {
-                    $actionBtn = '<a onclick="verActividad(' . $row->id_actividad_proveedor . ');" class="view btn btn-primary btn-sm" title="editar producto">
+                    $actionBtn = '<a onclick="verActividad(' . $row->id_actividad_proveedor . ');" class="view btn btn-warning btn-sm" title="editar producto">
                     <i class="fas fa-edit"></i></a> <a onclick="bajaActividad(' . $row->id_actividad_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
                     <i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
@@ -988,7 +988,7 @@ class ProveedoresController extends Controller
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
-                    $actionBtn = '<a onclick="verProducto(' . $row->id_producto . ');" class="view btn btn-primary btn-sm" title="editar producto">
+                    $actionBtn = '<a onclick="verProducto(' . $row->id_producto . ');" class="view btn btn-warning btn-sm" title="editar producto">
                     <i class="fas fa-edit"></i></a> <a onclick="bajaProducto(' . $row->id_producto . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
                     <i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;

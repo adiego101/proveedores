@@ -149,27 +149,19 @@
     </form>
     @include('edicionesModales.editarpagos')
     @include('edicionesModales.pagos')
-    @include('edicionesModales.actividades')
-    @include('edicionesModales.producto')
-    @include('edicionesModales.sucursales')
-    @include('edicionesModales.editarProducto')
     @include('edicionesModales.editarActividades')
-
-
-
-    {{--
-        {{--
-    @include('edicionesModales.editarProducto.blade')
-    @include('edicionesModales.patentes')
-    --}}
+    @include('edicionesModales.actividades')
+    @include('edicionesModales.editarProducto')
+    @include('edicionesModales.producto')
+    {{-- @include('edicionesModales.sucursales') --}}
     @include('edicionesModales.altaSedes')
     @include('edicionesModales.editarSedes')
     @include('edicionesModales.altaSeguros')
     @include('edicionesModales.editarSeguros')
     @include('edicionesModales.altaVehiculos')
     @include('edicionesModales.editarVehiculos')
-
-
+    {{-- @include('edicionesModales.editarProducto.blade') --}}
+    
     @yield('datos')
 
 @endsection
