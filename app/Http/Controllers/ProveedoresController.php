@@ -979,7 +979,7 @@ class ProveedoresController extends Controller
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
-                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    $actionBtn = '<a onclick="verProducto(' . $row->id_producto . ');" class="view btn btn-primary btn-sm" title="editar producto">
                     <i class="fas fa-edit"></i></a> <a onclick="bajaProducto(' . $row->id_producto . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
                     <i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
@@ -1008,10 +1008,10 @@ class ProveedoresController extends Controller
         $producto = Producto::where('id_producto', $id)->get();
         $producto = $producto[0];
         $productos = Producto::All();
-        $mode = "show";
+       // $mode = "show";
 
-
-        return view('ediciones.producto', compact('mode','producto','productos'));
+return $producto;
+       // return view('ediciones.producto', compact('mode','producto','productos'));
 
     }
 
@@ -1046,11 +1046,13 @@ class ProveedoresController extends Controller
     {
         $producto = Producto::find($id);
 
-        $producto = $producto->fill($request->all());
-        $productos = Producto::All();
+        $producto->producto_elaborado = $request->producto_elaborado1;
+        $producto->rnpa = $request->rnpa1;
+        $producto->Producida_unidad = $request->Producida_unidad1;
+        $producto->capacidad_produccion_total = $request->capacidad_produccion_total1;
 
         $producto->save();
-        return redirect()->back()->with('message', 'Los datos del Producto fueron modificados correctamente');
+        //return redirect()->back()->with('message', 'Los datos del Producto fueron modificados correctamente');
 
     }
 
@@ -1152,21 +1154,53 @@ class ProveedoresController extends Controller
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
-                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    $actionBtn = '<a onclick="editarSeguro(' . $row->id_proveedor_seguro . ');" value="'.$row->id_proveedor_seguro.'" class="edit btn btn-warning btn-sm" title="Editar">
                     <i class="fas fa-edit"></i></a>
-
                     <a onclick="bajaSeguro(' . $row->id_proveedor_seguro . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
                     <i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
+
                 }
-
-
 
             })
             ->rawColumns(['action'])
             ->make(true);
         //}
     }
+
+
+
+    public function getSegurosBD($id)
+    {
+        //if ($request->ajax()) {
+        $data = Proveedor_seguro::where('id_proveedor_seguro', $id)->get();
+        return $data;
+        /*return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) use ($mode) {
+                $url = url('editarSeguros/' . $row->id_proveedor_seguro);
+                $url2 = url('verSeguros/' . $row->id_proveedor_seguro);
+
+                if ($mode == "show") {
+                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
+                    <i class="fas fa-eye"></i></a>';
+                    return $actionBtn;
+                } else {
+                    $actionBtn = '<a onclick="editarSeguro(' . $row->id_proveedor_seguro . ');" value="'.$row->id_proveedor_seguro.'" class="edit btn btn-warning btn-sm" title="Editar">
+                    <i class="fas fa-edit"></i></a>
+                    <a onclick="bajaSeguro(' . $row->id_proveedor_seguro . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
+                    <i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+
+                }
+
+            })
+            ->rawColumns(['action'])
+            ->make(true);*/
+        //}
+    }
+
+
 
     public function editarSeguros($id)
     {
@@ -1202,7 +1236,7 @@ class ProveedoresController extends Controller
 
             // return view('ediciones.actividades',  compact('actividad','tipos_actividades','actividades'));
 
-            return redirect()->back()->with('message', 'Seguro Creado Correctamente');
+            //return redirect()->back()->with('message', 'Seguro Creado Correctamente');
     }
 
     public function nuevoSeguros($id)
@@ -1218,9 +1252,15 @@ class ProveedoresController extends Controller
         $seguro = Proveedor_seguro::find($id);
 
         $seguro = $seguro->fill($request->all());
-        $seguro->save();
-        return redirect()->back()->with('message', 'Los datos del Seguro fueron modificados correctamente');
 
+        $seguro->poliza = $request->polizas;
+        $seguro->agencia = $request->agencias;
+        $seguro->asegurado = $request->asegurados;
+        $seguro->vigencia_hasta = $request->vigencias_hasta;
+
+        $seguro->save();
+
+        //return redirect()->back()->with('message', 'Los datos del Seguro fueron modificados correctamente');
     }
 
     public function getSedes(Request $request, $id, $mode = null)
@@ -1355,10 +1395,8 @@ class ProveedoresController extends Controller
 
         $sede = $sede->fill($request->all());
 
-       $sede->Localidad = $request->Localidades;
+        $sede->Localidad = $request->Localidades;
         $sede->Domicilio = $request->Domicilios;
-
-
 
         $sede->save();
         //return redirect()->back()->with('message', 'Los datos de la Sede fueron modificados correctamente');

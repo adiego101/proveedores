@@ -104,7 +104,9 @@ window.onload = function(){
         }
 
 </script>
-    <script type="text/javascript">
+
+<script type="text/javascript">
+
     function valideKey(evt){
 
         // El código es la representación decimal ASCII de la clave presionada.
@@ -119,7 +121,8 @@ window.onload = function(){
           return false;
         }
     }
-    </script>
+    
+</script>
 
 <script>
 

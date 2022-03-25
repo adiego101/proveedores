@@ -55,7 +55,7 @@ value="0">
 @if ($mode == "edit")
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoSeguro">
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevoSeguro">
     Agregar Nuevo Seguro
   </button><br>
 <hr>
@@ -257,8 +257,42 @@ $('#baja_patente').val(id_registro);
   $('#modal_baja_seguro').modal('show');
   $('#baja_seguro').val(id_registro);
   }
+
+
+  //Enviamos el id del registro que queremos modificar (id de la tabla)
+  function editarSeguro(id_registro) {
+
+        $.ajax ({
+        url: "{{ url('segurosBD/') }}/"+id_registro,
+        success: function (response) {
+
+            abrirModalEditarSeguro(response);
+        }
+        });
+
+    
+        function abrirModalEditarSeguro(response){
+    
+            //Desplegamos el modal
+            $('#editarSeguro').modal('show');
+            //Enviamos los valores a cada campo
+            $('#polizas').val(response [0].poliza);
+            $('#asegurados').val(response [0].asegurado);
+            $('#agencias').val(response [0].agencia);
+            let vigencia_hasta = response [0].vigencia_hasta;
+            vigencia_hasta = vigencia_hasta.split(" ");
+            vigencia = vigencia_hasta[0];
+            $('#vigencias_hasta').val(vigencia);
+            $('#id_proveedor_seguro').val(response [0].id_proveedor_seguro);
+            
+        }
+   
+    }
+
   </script>
 
+
+<!-- Scripts SEDES -->
 
 <script type="text/javascript">
     $(function () {
@@ -319,12 +353,12 @@ $('#baja_patente').val(id_registro);
               url: "{{ url('sedesBD/') }}/"+id_registro,
               success: function (response) {
 
-                    abrirModalEditar(response);
+                    abrirModalEditarSede(response);
               }
            });
 
-           //Falta hacer un nuevo modal, para editar. NO usar el del alta.
-        function abrirModalEditar(response){
+
+        function abrirModalEditarSede(response){
          
             //Desplegamos el modal
             $('#editarSede').modal('show');

@@ -149,15 +149,20 @@
     </form>
     @include('edicionesModales.editarpagos')
     @include('edicionesModales.pagos')
+    @include('edicionesModales.actividades')
+    @include('edicionesModales.producto')
+    @include('edicionesModales.editarProducto')
+
+
     {{--
         {{--
-    @include('edicionesModales.actividades')
+    @include('edicionesModales.editarProducto.blade')
     @include('edicionesModales.patentes')
-    @include('edicionesModales.producto')--}}
+    --}}
     @include('edicionesModales.altaSedes')
     @include('edicionesModales.editarSedes')
-    {{--@include('edicionesModales.seguros')--}}
-
+    @include('edicionesModales.altaSeguros')
+    @include('edicionesModales.editarSeguros')
 
 
 
