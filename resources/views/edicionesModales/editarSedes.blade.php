@@ -5,7 +5,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalEditarSede">Modal title</h5>
+          <h1 class="modal-title" id="modalEditarSede">Editar Sede</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -13,10 +13,6 @@
         <div class="modal-body">
 
             <fieldset>
-
-                <h1>Editar Sede</h1>
-
-                <br/>
 
                 <label for="Domicilios">Domicilio:</label><br />
                 <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilios" name="Domicilios" maxlength="50" required/><br />
@@ -61,8 +57,8 @@
                 </fieldset>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>

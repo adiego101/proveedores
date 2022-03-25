@@ -95,7 +95,7 @@ value="0">
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaSede">
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaSede">
     Agregar Nueva Sede
   </button><br>
 <hr>
