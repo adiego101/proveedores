@@ -153,6 +153,7 @@
     @include('edicionesModales.producto')
     @include('edicionesModales.sedes')
     @include('edicionesModales.seguros')
+    @include('edicionesModales.sucursales')
 
 
 
