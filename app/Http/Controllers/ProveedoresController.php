@@ -833,7 +833,7 @@ class ProveedoresController extends Controller
                     $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
                     <i class="fas fa-eye"></i></a> ';
                     return $actionBtn;                } else {
-                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    $actionBtn = '<a onclick="verActividad(' . $row->id_actividad_proveedor . ');" class="view btn btn-primary btn-sm" title="editar producto">
                     <i class="fas fa-edit"></i></a> <a onclick="bajaActividad(' . $row->id_actividad_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
                     <i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
@@ -860,13 +860,16 @@ class ProveedoresController extends Controller
 
     public function verActividades($id)
     {
-        $tipos_actividades = Tipo_actividad::All();
-        $actividades = Actividad_economica::All();
-        $actividad = Actividades_proveedores::where('id_actividad_proveedor', $id)->get();
+        $actividad = Actividades_proveedores::where('id_actividad_proveedor', $id)
+        ->join('actividades_economicas', 'actividades_proveedores.id_actividad_economica', '=', 'actividades_economicas.id_actividad_economica')
+        ->join('tipos_actividades', 'actividades_proveedores.id_tipo_actividad', '=', 'tipos_actividades.id_tipo_actividad')
+        ->select('actividades_proveedores.id_actividad_economica','actividades_proveedores.id_actividad_proveedor','actividades_proveedores.id_tipo_actividad','actividades_economicas.desc_actividad','actividades_economicas.cod_actividad','tipos_actividades.desc_tipo_actividad')
+        ->get();
         $actividad = $actividad[0];
         $mode = "show";
 
-        return view('ediciones.actividades', compact('mode','actividad', 'tipos_actividades', 'actividades'));
+            return $actividad;
+        //return view('ediciones.actividades', compact('mode','actividad', 'tipos_actividades', 'actividades'));
 
     }
 
@@ -935,7 +938,7 @@ class ProveedoresController extends Controller
             $actividades = Actividad_economica::All();
 
             $actividad->update([
-                'id_actividad_economica' => $this->idActividad_economica($request->actividad_1),
+                'id_actividad_economica' => $this->idActividad_economica($request->actividad_11),
             ]);
 
             $actividad->save();
@@ -950,7 +953,7 @@ class ProveedoresController extends Controller
             $actividades = Actividad_economica::All();
 
             $actividad->update([
-                'id_actividad_economica' => $this->idActividad_economica($request->actividad_1),
+                'id_actividad_economica' => $this->idActividad_economica($request->actividad_11),
             ]);
 
             $actividad->save();
@@ -1072,10 +1075,11 @@ return $producto;
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
-                    $actionBtn = '<a href="' . "$url" . '" class="edit btn btn-warning btn-sm" title="Editar">
+                    $actionBtn = '<a onclick="editarPatente(' . $row->id_proveedor_patente . ');" value="'.$row->id_proveedor_patente.'" class="edit btn btn-warning btn-sm" title="Editar">
                     <i class="fas fa-edit"></i></a>
                     <a onclick="bajaPatente(' . $row->id_proveedor_patente . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                     return $actionBtn;
+
                  }
 
 
@@ -1083,6 +1087,40 @@ return $producto;
             })
             ->rawColumns(['action'])
             ->make(true);
+        //}
+    }
+
+
+    public function getPatentesBD($id)
+    {
+        //if ($request->ajax()) {
+        $data = Proveedor_patente::where('id_proveedor_patente', $id)->get();
+
+        return $data;
+
+        /*return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) use ($mode) {
+                $url = url('editarPatentes/' . $row->id_proveedor_patente);
+                $url2 = url('verPatentes/' . $row->id_proveedor_patente);
+
+                if ($mode == "show") {
+                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
+                    <i class="fas fa-eye"></i></a>';
+                    return $actionBtn;
+                } else {
+                    $actionBtn = '<a onclick="editarPatente(' . $row->id_proveedor_patente . ');" value="'.$row->id_proveedor_patente.'" class="edit btn btn-warning btn-sm" title="Editar">
+                    <i class="fas fa-edit"></i></a>
+                    <a onclick="bajaPatente(' . $row->id_proveedor_patente . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                    return $actionBtn;
+
+                 }
+
+
+
+            })
+            ->rawColumns(['action'])
+            ->make(true);*/
         //}
     }
 
@@ -1134,8 +1172,14 @@ return $producto;
         $patente = Proveedor_patente::find($id);
 
         $patente = $patente->fill($request->all());
+
+        $patente->dominio = $request->dominios;
+        $patente->marca = $request->marcas;
+        $patente->modelo = $request->modelos;
+        $patente->inscripto_en = $request->inscriptos_en;
+
         $patente->save();
-        return redirect()->back()->with('message', 'Los datos del Vehículo fueron modificados correctamente');
+        //return redirect()->back()->with('message', 'Los datos del Vehículo fueron modificados correctamente');
 
     }
 

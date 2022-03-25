@@ -152,6 +152,8 @@
     @include('edicionesModales.actividades')
     @include('edicionesModales.producto')
     @include('edicionesModales.editarProducto')
+    @include('edicionesModales.editarActividades')
+
 
 
     {{--
@@ -163,8 +165,8 @@
     @include('edicionesModales.editarSedes')
     @include('edicionesModales.altaSeguros')
     @include('edicionesModales.editarSeguros')
-
-
+    @include('edicionesModales.altaVehiculos')
+    @include('edicionesModales.editarVehiculos')
 
 
     @yield('datos')

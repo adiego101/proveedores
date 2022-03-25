@@ -16,8 +16,8 @@ value="0">
 
 @if ($mode == "edit")
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaPatente">
-    Agregar Nueva Patente
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevoVehiculo">
+    Agregar Nuevo Vehículo
   </button><br>
 <hr>
     @endif
@@ -137,6 +137,9 @@ value="0">
 
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
+
+<!-- Scripts VEHICULOS -->
+
 <script type="text/javascript">
   $(function () {
 
@@ -183,15 +186,46 @@ value="0">
 
   });
 
-    //Funciones a implementar
+
 
     function bajaPatente(id_registro) {
 
-//Desplegamos el modal
-$('#modal_baja_patente').modal('show');
-$('#baja_patente').val(id_registro);
-}
+        //Desplegamos el modal
+        $('#modal_baja_patente').modal('show');
+        $('#baja_patente').val(id_registro);
+    }
+
+
+    //Enviamos el id del registro que queremos modificar (id de la tabla)
+    function editarPatente(id_registro) {
+
+        $.ajax ({
+        url: "{{ url('patentesBD/') }}/"+id_registro,
+        success: function (response) {
+
+            abrirModalEditarPatente(response);
+        }
+        });
+
+
+        function abrirModalEditarPatente(response){
+
+            //Desplegamos el modal
+            $('#editarVehiculo').modal('show');
+            //Enviamos los valores a cada campo
+            $('#marcas').val(response [0].marca);
+            $('#dominios').val(response [0].dominio);
+            $('#modelos').val(response [0].modelo);
+            $('#inscriptos_en').val(response [0].inscripto_en);
+            $('#id_proveedor_patente').val(response [0].id_proveedor_patente);
+            
+        }
+
+    }
+
 </script>
+
+<!-- Scripts SEGUROS -->
 
 <script type="text/javascript">
     $(function () {
@@ -249,18 +283,18 @@ $('#baja_patente').val(id_registro);
 
     });
 
-      //Funciones a implementar
+ 
 
-      function bajaSeguro(id_registro) {
+    function bajaSeguro(id_registro) {
 
-  //Desplegamos el modal
-  $('#modal_baja_seguro').modal('show');
-  $('#baja_seguro').val(id_registro);
-  }
+        //Desplegamos el modal
+        $('#modal_baja_seguro').modal('show');
+        $('#baja_seguro').val(id_registro);
+    }
 
 
-  //Enviamos el id del registro que queremos modificar (id de la tabla)
-  function editarSeguro(id_registro) {
+    //Enviamos el id del registro que queremos modificar (id de la tabla)
+    function editarSeguro(id_registro) {
 
         $.ajax ({
         url: "{{ url('segurosBD/') }}/"+id_registro,

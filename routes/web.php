@@ -122,6 +122,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
     Route::get('productos/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getProductos')->name('productos.list');
     Route::get('patentes/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPatentes')->name('patentes.list');
+    //Obtenemos los vehiculos de la BD para cargar en el modal, para modificar
+    Route::get('patentesBD/{id}', 'App\Http\Controllers\ProveedoresController@getPatentesBD');
     Route::get('seguros/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getSeguros')->name('seguros.list');
     //Obtenemos los seguros de la BD para cargar en el modal, para modificar
     Route::get('segurosBD/{id}', 'App\Http\Controllers\ProveedoresController@getSegurosBD');
