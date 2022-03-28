@@ -280,7 +280,7 @@
             $('#modal_validar_sucursal').modal('show');
 
         }
-           
+
     });
 
 

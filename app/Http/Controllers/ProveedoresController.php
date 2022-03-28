@@ -699,7 +699,7 @@ class ProveedoresController extends Controller
 
         $sucursal = $sucursal->fill($request->all());
         $sucursal->save();
-        return redirect()->back()->with('message', 'Los datos de la Sucursal fueron modificados correctamente');
+        //return redirect()->back()->with('message', 'Los datos de la Sucursal fueron modificados correctamente');
     }
 
     public function crearSucursales($id, Request $request)

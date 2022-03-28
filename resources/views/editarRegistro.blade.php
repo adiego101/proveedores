@@ -159,8 +159,16 @@
     @include('edicionesModales.editarSeguros')
     @include('edicionesModales.altaVehiculos')
     @include('edicionesModales.editarVehiculos')
-    {{-- @include('edicionesModales.editarProducto.blade') --}}
-    
+    @include('sucursales.create')
+
+    <!--Incluimos el modal para editar los campos de las sucursales -->
+
+    @include('sucursales.edit')
+
+    <!--Incluimos el modal para dar de baja un registro -->
+    <!-- Falta incluir el modal -->
+    @include('modales.modalBajaSucursal')
+
     @yield('datos')
 
 @endsection

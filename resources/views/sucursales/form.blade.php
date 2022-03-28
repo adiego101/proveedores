@@ -37,9 +37,9 @@
                 <option value="">Seleccione una localidad</option>
                 @forelse($localidades as $localidad)
                     @if (isset($sucursal->localidad) && $sucursal->localidad->nombre_localidad==$localidad->nombre_localidad)
-                        <option selected="selected" value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
+                        <option selected="selected" value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
                     @else
-                        <option value="{{$localidad->nombre_localidad}}">{{$localidad->nombre_localidad}}</option>
+                        <option value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
                     @endif
                 @empty
                     <option value=" "></option>
@@ -96,8 +96,8 @@
                 <a href="javascript:void(0);" class="add_telefono" title="Agregue un nuevo teléfono"> <input @if ( $mode == "show") readonly @endif  type="button" value="Agregar Teléfono" class="btn btn-success"></a>
             </div> -->
         <br>
+        <input type="hidden" id="editar_sucursal">
 
-        <input type="hidden" id="id_sucursal" name="id_sucursal" value={{isset($sucursal) ? $sucursal->id_sucursal : '' }}>
+        <input type="hidden" id="id_sucursal" value={{isset($sucursal) ? $sucursal->id_sucursal : '' }}>
     </div>
 </div>
-            

@@ -81,16 +81,25 @@
 
 <script>
     //Damos de alta una nueva sede en la BD.
+    $(function () {
+        console.log($('#id_sucursal').val());
+        console.log("{{url('guardarSucursales/')}}"+$('#id_sucursal').val())
+    });
 
     $(document).ready(  function()
         {
-            let id_sucursal = $('#id_sucursal').val();
+
             $('#editformSucursal').on('submit', function(e)
             {
+                let id_sucursal = $("#editar_sucursal").val();
+
+                console.log($("#editar_sucursal").val());
+
+
                 e.preventDefault();
 
                 $.ajax({
-                    type: "post",
+                    type: "POST",
                     url: "{{url('guardarSucursales/')}}/"+id_sucursal,
                     data: $('#editformSucursal').serialize(),
                     success: function (response) {

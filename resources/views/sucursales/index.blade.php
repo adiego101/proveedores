@@ -29,15 +29,7 @@
 
 <!--Incluimos el modal para crear sucursal -->
 
-@include('sucursales.create')
 
-<!--Incluimos el modal para editar los campos de las sucursales -->
-
-@include('sucursales.edit')
-
-<!--Incluimos el modal para dar de baja un registro -->
-<!-- Falta incluir el modal -->
-@include('modales.modalBajaSucursal')
 <br>
 
 
@@ -120,25 +112,27 @@
             },
         ]
     });
-    $(document).on('click', '.edit_sucursal', function() { 
+    $(document).on('click', '.edit_sucursal', function() {
         var id_proveedor = $(this).data('id_proveedor');
         var id_sucursal = $(this).data('id_sucursal');
-        console.log('id_proveedor='+id_proveedor+' id_sucursal='+id_sucursal); 
+        console.log('id_proveedor='+id_proveedor+' id_sucursal='+id_sucursal);
         $.ajax({
             url:"{{ url('editarSucursales/') }}/" + id_sucursal,
             success:function(view) {
-                
-                    /*console.log('valor del input 1-->'+$('#modal_calle_sucursal').val()); 
+
+                    /*console.log('valor del input 1-->'+$('#modal_calle_sucursal').val());
                     console.log('valor con get element id = '+document.getElementById('modal_calle_sucursal').value);
                     $('#modal_calle_sucursal').val(sucursal.calle);
-                    $("#modal_calle_sucursal").trigger("change"); 
-                    console.log('valor del input 2-->'+$('#modal_calle_sucursal').val()); 
+                    $("#modal_calle_sucursal").trigger("change");
+                    console.log('valor del input 2-->'+$('#modal_calle_sucursal').val());
                     console.log('valor con get element id = '+document.getElementById('modal_calle_sucursal').value);
                     $('#modal_numero_sucursal').val(sucursal.numero);
                     $('#modal_editarSucursal').modal('toggle'); */
 
-                      $("#respuesta").html(view);       
-                      $('#editarSucursal').modal('show');       
+                      $("#respuesta").html(view);
+                      $("#editar_sucursal").val(id_sucursal) ;
+
+                      $('#editarSucursal').modal('show');
                 }
         });
     });
@@ -172,14 +166,14 @@
         //var domicilio = response [0].Domicilio;
         var longitud = response.length;
         //for (var i = 0; i <longitud; i ++) {
-        
+
         //$('#Domicilio').val(response [i].Domicilio);
         //}
 
         $('#nuevaSucursal').modal('show');
         //$('#nombre_sucursal').val(response [0].nombre_sucursal);
     }
-    
+
     //Desplegamos el modal
     //$('#nuevaSede').modal('show');
     //$('#baja_sede').val(id_registro);
