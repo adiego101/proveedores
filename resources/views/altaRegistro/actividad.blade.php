@@ -123,6 +123,9 @@
 
 @push('js')
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
     <script type="text/javascript">
 
         let tipo_actividad;
@@ -160,6 +163,16 @@
 
                 m++;
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Actividad Guardada',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
             }else{
           
                 //Desplegamos el modal
@@ -184,6 +197,16 @@
         
             //borra la fila
             $("#row_actividad" + button_id + "").remove();
+
+            Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Actividad dada de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
            
         });
 
@@ -241,6 +264,16 @@ $("#add_producto").on("click", function(e) {
 
         producto_elaborado_css.style.border = '1px solid #DFDFDF';
         unidad_producida_css.style.border = '1px solid #DFDFDF';
+
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Producto Guardado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+        })
         
 
     } else {
@@ -272,6 +305,16 @@ $(document).on("click", ".btn_remove_producto", function() {
 
     //borra la fila
     $("#row_producto" + button_id + "").remove();
+
+    Swal.fire({
+                position: 'top-end',
+                icon: 'info',
+                title: 'Producto dado de baja',
+                showConfirmButton: false,
+                timer: 1500,
+                toast: true
+
+    })
    
 });
 

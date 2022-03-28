@@ -40,6 +40,10 @@
         </div>
     </div>
 
+@push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script type="text/javascript">
 
@@ -82,6 +86,16 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         modal_producto_elaborado_css.style.border = '1px solid #DFDFDF';
         modal_unidad_producida_css.style.border = '1px solid #DFDFDF';
 
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Producto Modificado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+        })
+
     }else{
         //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
         event.preventDefault();
@@ -115,3 +129,5 @@ $(document).on("click", ".btn_cancel_modal", function(event) {
 });
 
 </script>
+
+@endpush

@@ -169,6 +169,9 @@
 
     @push('js')
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
     <script type="text/javascript">
 
         let marca;
@@ -222,6 +225,16 @@
                 dominio_css.style.border = '1px solid #DFDFDF';
                 inscripto_en_css.style.border = '1px solid #DFDFDF';
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Vehículo Guardado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
             } else {
 
                 if(marca.length == 0){
@@ -260,6 +273,17 @@
 
             //borra la fila
             $("#row_vehiculo" + button_id + "").remove();
+
+            Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Vehículo dado de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
+
         });
 
 
@@ -347,6 +371,16 @@
                 asegurado_css.style.border = '1px solid #DFDFDF';
                 vigencia_css.style.border = '1px solid #DFDFDF';
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Seguro Guardado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
             } else {
 
                 if(poliza.length == 0){
@@ -385,6 +419,16 @@
 
             //borra la fila
             $("#row_seguro" + button_id + "").remove();
+
+            Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Seguro dado de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
         });
 
 
@@ -470,6 +514,16 @@
         localidad_sede_css.style.border = '1px solid #DFDFDF';
         provincia_sede_css.style.border = '1px solid #DFDFDF';
 
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Sede Guardada',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
+
         } else {
 
             if(domicilio.length == 0){
@@ -503,6 +557,16 @@
 
         //borra la fila
         $("#row_sede" + button_id + "").remove();
+
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Sede dada de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
     });
 
 
