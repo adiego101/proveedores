@@ -134,6 +134,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
+
 <script type="text/javascript">
 
     let nombre_sucursal;
@@ -188,6 +189,9 @@
         let localidad_css = document.getElementById("localidad_sucursal");
 
         if(nombre_sucursal.length != 0 && pais != " " && provincia != " " && localidad_sucursal != " "){
+
+            //borra la fila con el mensaje vacio
+            $("#row_sucursal").remove();
 
             $("#body_table_sucursal").append(
                 '<tr id="row_sucursal' + i_sucursal +'">'+
@@ -297,6 +301,20 @@
                     toast: true
 
         })
+
+        var cant_filas_sucursal = document.getElementById("body_table_sucursal").rows.length;
+
+            if(cant_filas_sucursal == 0){
+
+                $("#body_table_sucursal").append(
+                        '<tr id="row_sucursal" class="alert alert-light" role="alert">'+
+                            '<td></td>'+
+                            '<td>No hay registros</td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                        '</tr>'
+                );
+            }
     });
 
 

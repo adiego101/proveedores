@@ -194,6 +194,9 @@
 
             if(marca.length != 0 && modelo.length != 0 && dominio.length != 0 && inscripto_en.length != 0){
 
+                //borra la fila con el mensaje vacio
+                $("#row_vehiculo").remove();
+
                 $("#body_table_vehiculo").append(
                     '<tr id="row_vehiculo' + j +'">'+
                         '<td> <div id="marca_vehiculo_text' + j +'">' + marca +'</div></td>'+
@@ -283,6 +286,21 @@
 
             })
 
+            var cant_filas_vehiculo = document.getElementById("body_table_vehiculo").rows.length;
+
+            if(cant_filas_vehiculo == 0){
+
+                $("#body_table_vehiculo").append(
+                '<tr id="row_vehiculo" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
+
         });
 
 
@@ -338,6 +356,9 @@
             let vigencia_css = document.getElementById("vigencia");
 
             if(poliza.length != 0 && agencia.length != 0 && asegurado.length != 0 && vigencia.length != 0){
+
+                //borra la fila con el mensaje vacio
+                $("#row_seguro").remove();
 
                 $("#body_table_seguro").append(
                     '<tr id="row_seguro' + k +'">'+
@@ -427,6 +448,22 @@
                     toast: true
 
             })
+
+
+            var cant_filas_seguro = document.getElementById("body_table_seguro").rows.length;
+
+            if(cant_filas_seguro == 0){
+
+                $("#body_table_seguro").append(
+                '<tr id="row_seguro" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
         });
 
 
@@ -479,19 +516,22 @@
 
         if(domicilio.length != 0 && id_localidad != " " && provincia_sede != " "){
 
-        $("#body_table_sede").append(
-            '<tr id="row_sede' + l +'">'+
-                '<td> <div id="domicilio_sede_text' + l +'">' + domicilio +'</div></td>'+
-                '<td> <div id="provincia_sede_text' + l +'">' + provincia_sede +'</div></td>'+
-                '<td> <div id="localidad_sede_text' + l +'">' + valor_localidad +'</div></td>'+
-                '<td>'+
-                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'">'+
-                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + id_localidad +'">'+
-                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sede' + l +'" name="provincias_sedes[]" readonly value="' + provincia_sede +'">'+
-                '<button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button>'+
-                '</td>'+
-            '</tr>'
-        );
+            //borra la fila con el mensaje vacio
+            $("#row_sede").remove();
+
+            $("#body_table_sede").append(
+                '<tr id="row_sede' + l +'">'+
+                    '<td> <div id="domicilio_sede_text' + l +'">' + domicilio +'</div></td>'+
+                    '<td> <div id="provincia_sede_text' + l +'">' + provincia_sede +'</div></td>'+
+                    '<td> <div id="localidad_sede_text' + l +'">' + valor_localidad +'</div></td>'+
+                    '<td>'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + id_localidad +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sede' + l +'" name="provincias_sedes[]" readonly value="' + provincia_sede +'">'+
+                    '<button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button>'+
+                    '</td>'+
+                '</tr>'
+            );
 
 
         l++;
@@ -556,6 +596,21 @@
                     toast: true
 
             })
+
+
+            var cant_filas_sede = document.getElementById("body_table_sede").rows.length;
+
+            if(cant_filas_sede == 0){
+
+                $("#body_table_sede").append(
+                '<tr id="row_sede" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
     });
 
 

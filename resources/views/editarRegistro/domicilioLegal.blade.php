@@ -53,35 +53,11 @@ value="{{ isset($proveedor_domicilio_legal->monoblock) ? $proveedor_domicilio_le
                         @endforelse
 
                     </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="javascript:void(0);" class="add_email_legal" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
+                </div>
 
-                    <div class="field_telefono_legal">
 
-                        <div class="row">
-                            
-                            <div class="col-sm">
-                            @forelse($proveedor_telefono_legal as $telefono_legal)
-                                <label for="telefono_legal_cod">Código de área:</label><br>
-                                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->cod_area_tel}}" maxlength="14"> <br>
-                            @empty
-                                <label for="telefono_legal_cod">Código de área:</label><br>
-                                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="14"> <br>
-                                @endforelse
-                            </div>
-
-                            
-                            <div class="col-sm">
-                            @forelse($proveedor_telefono_legal as $telefono_legal)
-                                <label for="telefono_legal">Número de Teléfono:</label><br>
-                                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->nro_tel}}" maxlength="14"> <br>
-                            @empty
-                                <label for="telefono_legal">Número de Teléfono:</label><br>
-                                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14"> <br>
-                                @endforelse
-                            </div>
-                            
-                        </div>
-
-                    </div>
 
             </div>
             <div class="col-sm">
@@ -127,13 +103,36 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
 
 @if ( $mode != "show")
 
-                <br>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <a href="javascript:void(0);" class="add_email_legal" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
+
+
+                <div class="field_telefono_legal">
+
+                    <div class="row">
+
+                        <div class="col-sm">
+                        @forelse($proveedor_telefono_legal as $telefono_legal)
+                            <label for="telefono_legal_cod">Código de área:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->cod_area_tel}}" maxlength="14"> <br>
+                        @empty
+                            <label for="telefono_legal_cod">Código de área:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="14"> <br>
+                            @endforelse
+                        </div>
+
+
+                        <div class="col-sm">
+                        @forelse($proveedor_telefono_legal as $telefono_legal)
+                            <label for="telefono_legal">Número de Teléfono:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->nro_tel}}" maxlength="14"> <br>
+                        @empty
+                            <label for="telefono_legal">Número de Teléfono:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14"> <br>
+                            @endforelse
+                        </div>
+
+                    </div>
+
                 </div>
-                <br>
-                <br>
-                <br>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_telefono_legal" title="Agregue un nuevo teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>
                 </div>
@@ -166,7 +165,7 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
         $(addTelefono_legal).click(function() {
 
             //Nuevo campo html (agregar un nuevo teléfono)
-            var fieldHTML_telefono_legal = '<div class="row">'+
+            var fieldHTML_telefono_legal = '<div>'+'<div class="row">'+
                                  '<div class="col-sm">'+
                                  '<br>'+
                                  '<label for="telefono_legal_cod' + x +'">Código de área:</label><br>'+
@@ -177,9 +176,9 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                                     '<label for="telefono_legal' + x +'">Número de Teléfono:</label><br>'+
                                     '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal' + x +'" name="telefono_legal[]" maxlength="14">'+
                                     '</div>'+
-                                    '<a href="javascript:void(0);" class="remove_telefono_legal" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="X" class="btn btn-danger btn-xs"></a>'+
-                                 '<br>'+
-                                 '<br>'+
+                                '</div>'+
+                                '<a href="javascript:void(0);" class="remove_telefono_legal" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+
                                 '</div>';
 
 

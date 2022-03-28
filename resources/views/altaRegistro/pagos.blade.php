@@ -91,6 +91,9 @@
 
             if(fecha.length != 0 && importe.length != 0){
 
+                //borra la fila con el mensaje vacio
+                $("#row_pago").remove();
+
                 $("#body_table_pago").append(
                     '<tr id="row_pago' + indice + '">' +
                         '<td> <div id="fecha_pago_text' + indice + '">' + fecha_clasica_pago +'</div></td>'+
@@ -164,6 +167,20 @@
                     toast: true
 
             })
+
+            var cant_filas_pago = document.getElementById("body_table_pago").rows.length;
+
+            if(cant_filas_pago == 0){
+
+                $("#body_table_pago").append(
+                '<tr id="row_pago" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
         });
 
 

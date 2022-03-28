@@ -126,6 +126,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
+
     <script type="text/javascript">
 
         let tipo_actividad;
@@ -133,7 +134,7 @@
         let codigo_actividad;
         let m = 1; //contador para asignar id al boton que borrara la fila
         let contador = 0; //Contador para llevar el registro de la cantidad de actividades principales agregadas.
-
+    
         $("#add_actividad").on("click", function(e) {
 
             tipo_actividad = $("#tipo_actividad").val();
@@ -148,6 +149,9 @@
             }
 
             if(tipo_actividad != 'Primaria' || contador <= 1){
+
+                //borra la fila con el mensaje vacio
+                $("#row_actividad").remove();
 
                 $("#body_table_actividad").append(
                     '<tr id="row_actividad' + m +'">'+
@@ -207,6 +211,20 @@
                     toast: true
 
                 })
+
+                var cant_filas_actividad = document.getElementById("body_table_actividad").rows.length;
+
+                /*Si al eliminar una fila, la tabla esta vacia, volvemos a mostrar el mensaje de aviso*/
+                if(cant_filas_actividad == 0){
+
+                    $("#body_table_actividad").append(
+                        '<tr id="row_actividad" class="alert alert-light" role="alert">'+
+                            '<td></td>'+
+                            '<td>No hay registros</td>'+
+                            '<td></td>'+
+                        '</tr>'
+                    );
+                }
            
         });
 
@@ -235,6 +253,9 @@ $("#add_producto").on("click", function(e) {
 
 
     if(producto_elaborado.length != 0 && unidad_producida.length != 0){
+
+        //borra la fila con el mensaje vacio
+        $("#row_producto").remove();
 
         $("#body_table_producto").append(
             '<tr id="row_producto' + n +'">'+
@@ -315,6 +336,22 @@ $(document).on("click", ".btn_remove_producto", function() {
                 toast: true
 
     })
+
+    var cant_filas_producto = document.getElementById("body_table_producto").rows.length;
+
+    /*Si al eliminar una fila, la tabla esta vacia, volvemos a mostrar el mensaje de aviso*/
+    if(cant_filas_producto == 0){
+
+        $("#body_table_producto").append(
+                '<tr id="row_producto" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+        );
+    }
    
 });
 

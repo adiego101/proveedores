@@ -59,34 +59,11 @@ value="{{ isset($proveedor->pagina_web) ? $proveedor->pagina_web : '' }}"><br>
                     @endforelse
 
                 </div>
-
-                <div class="field_telefono_real">
-
-                    <div class="row">
-                        
-                        <div class="col-sm">
-                        @forelse($proveedor_telefono_real as $telefono_real)
-                            <label for="telefono_real_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->cod_area_tel}}" maxlength="14"> <br>
-                        @empty
-                            <label for="telefono_real_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="14"> <br>
-                            @endforelse
-                        </div>
-                        
-                        <div class="col-sm">
-                        @forelse($proveedor_telefono_real as $telefono_real)
-                            <label for="telefono_real">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->nro_tel}}" maxlength="14"> <br>
-                        @empty
-                            <label for="telefono_real">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14"> <br>
-                            @endforelse
-                        </div>
-                        
-                    </div>
-
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="javascript:void(0);" class="add_email_real" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
                 </div>
+
+
 
             </div>
             <div class="col-sm">
@@ -136,13 +113,34 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
                 <br>
                 <br>
                 <br>
-                <br>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <a href="javascript:void(0);" class="add_email_real" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
+                <div class="field_telefono_real">
+
+                    <div class="row">
+
+                        <div class="col-sm">
+                        @forelse($proveedor_telefono_real as $telefono_real)
+                            <label for="telefono_real_cod">Código de área:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->cod_area_tel}}" maxlength="14"> <br>
+                        @empty
+                            <label for="telefono_real_cod">Código de área:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="14"> <br>
+                            @endforelse
+                        </div>
+
+                        <div class="col-sm">
+                        @forelse($proveedor_telefono_real as $telefono_real)
+                            <label for="telefono_real">Número de Teléfono:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->nro_tel}}" maxlength="14"> <br>
+                        @empty
+                            <label for="telefono_real">Número de Teléfono:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14"> <br>
+                            @endforelse
+                        </div>
+
+                    </div>
+
                 </div>
-                <br>
-                <br>
-                <br>
+
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_telefono_real" title="Agregue un nuevo teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>
                 </div>
@@ -175,7 +173,7 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
         $(addTelefono_real).click(function() {
 
             //Nuevo campo html (agregar un nuevo teléfono)
-            var fieldHTML_telefono_real = '<div class="row">'+
+            var fieldHTML_telefono_real = '<div>'+'<div class="row">'+
                                  '<div class="col-sm">'+
                                  '<br>'+
                                  '<label for="telefono_real_cod' + x +'">Código de área:</label><br>'+
@@ -186,9 +184,8 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
                                     '<label for="telefono_real' + x +'">Número de Teléfono:</label><br>'+
                                     '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real' + x +'" name="telefono_real[]" maxlength="14">'+
                                     '</div>'+
-                                    '<a href="javascript:void(0);" class="remove_telefono_real" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="X" class="btn btn-danger btn-xs"></a>'+
-                                 '<br>'+
-                                 '<br>'+
+                                '</div>'+
+                                    '<a href="javascript:void(0);" class="remove_telefono_real" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                 '</div>';
 
 
