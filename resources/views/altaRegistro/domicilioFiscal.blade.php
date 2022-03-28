@@ -35,7 +35,7 @@
                     <option value=" ">Seleccione una localidad</option>
                 </select>
                 <br>
-                <br>
+                
 
 
                 <label for="email_fiscal">Correo electrónico:</label><br>
@@ -85,7 +85,7 @@
                 <label for="cp_fiscal">Código Postal:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_fiscal" name="cp_fiscal" placeholder="Ingrese el código postal" maxlength="8"><br>
 
-                <br>
+                
                 <div class="row">
                     <div class="col-sm">
                         <label for="telefono_fiscal_cod">Código de área:</label><br>
