@@ -48,11 +48,18 @@
             <br>
 
             <label for="email">Correo electrónico:</label><br>
-            <input @if ( $mode == "show") readonly @endif  id="email" value="{{ isset($sucursal_email->email) ? $sucursal_email->email : '' }}" type="email" class="form-control email" placeholder="ejemplo@dominio.com"
-            name="email" aria-describedby="basic-addon1" maxlength="50"><br>
-            <div class="field_email">
+            @if(isset($sucursal->emails))
+                @foreach($sucursal->emails as $email)
+                    <input @if ( $mode == "show") readonly @endif  id="email" value="{{ isset($email->email) ? $email->email : '' }}" type="email" class="form-control email" placeholder="ejemplo@dominio.com"
+                    name="email" aria-describedby="basic-addon1" maxlength="50"><br>
+                @endforeach
+            @else
+                <input @if ( $mode == "show") readonly @endif  id="email" value="{{ isset($email->email) ? $email->email : '' }}" type="email" class="form-control email" placeholder="ejemplo@dominio.com"
+                    name="email" aria-describedby="basic-addon1" maxlength="50"><br>
+                <div class="field_email">
 
-            </div>
+                </div>
+            @endif
 
     </div>
 
@@ -91,11 +98,17 @@
         <input @if ( $mode == "show") readonly @endif  type="text" class="form-control" value="{{ isset($sucursal->codigo_postal) ? $sucursal->codigo_postal : '' }}" aria-describedby="basic-addon1" id="codigo_postal" name="codigo_postal" placeholder="Ingrese el código postal" maxlength="8"><br>
 
         <label for="nro_tel">Teléfono:</label><br>
+        @if(isset($sucursal->telefonos))
+            @foreach($sucursal->telefonos as $telefono)
+                <input @if ( $mode == "show") readonly @endif  type="text" onkeypress="return valideKey(event);" name="nro_tel" value="{{ isset($telefono->nro_tel) ? $telefono->nro_tel : '' }}" id="nro_tel" class="form-control telefono" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" maxlength="14">
+            @endforeach
+        @else
         <input @if ( $mode == "show") readonly @endif  type="text" onkeypress="return valideKey(event);" name="nro_tel" value="{{ isset($sucursal_telefono->nro_tel) ? $sucursal_telefono->nro_tel : '' }}" id="nro_tel" class="form-control telefono" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" maxlength="14">
         <!--    <div class="field_telefono d-grid gap-2 d-md-flex justify-content-md-center">
                 <a href="javascript:void(0);" class="add_telefono" title="Agregue un nuevo teléfono"> <input @if ( $mode == "show") readonly @endif  type="button" value="Agregar Teléfono" class="btn btn-success"></a>
             </div> -->
         <br>
+        @endif
         <input type="hidden" id="editar_sucursal">
 
         <input type="hidden" id="id_sucursal" value={{isset($sucursal) ? $sucursal->id_sucursal : '' }}>
