@@ -48,6 +48,9 @@
 
 @push('js')
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
 <script type="text/javascript">
 
     function valideKey(evt){
@@ -90,6 +93,16 @@ $(function () {console.log("{{url('crearSeguros/'.$id)}}")});
                             $('#asegurado').val('');	
                             $('#agencia').val('');
                             $('#vigencia_hasta').val('');
+
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Seguro Guardado',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
                         },
                         error: function(error){
                             console.log(error)

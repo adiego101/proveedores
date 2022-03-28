@@ -53,6 +53,10 @@
 </form>
 
 @push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
     <script>
         $(function() {
             console.log("{{ url('crearActividades/' . $id) }}")
@@ -68,6 +72,17 @@
                     success: function(response) {
                         console.log(response)
                         $('#nuevaActividad').modal('hide')
+
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Actividad Guardada',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+
                         $('.yajra-actividades').DataTable().ajax.reload();
 
                     },

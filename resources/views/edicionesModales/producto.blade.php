@@ -52,7 +52,12 @@
     </div>
   </div>
 </form>
+
 @push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
 <script>
 
 $(function () {console.log("{{url('crearProductos/'.$id)}}")});
@@ -76,6 +81,16 @@ $(function () {console.log("{{url('crearProductos/'.$id)}}")});
                             $('#rnpa').val('');	
                             $('#Producida_unidad').val('');	
                             $('#capacidad_produccion_total').val('');	
+
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Producto Guardado',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
                         },
                         error: function(error){
                             console.log(error)

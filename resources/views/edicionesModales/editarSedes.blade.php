@@ -71,6 +71,9 @@
 
 @push('js')
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
 <script type="text/javascript">
 
 window.onload = function(){
@@ -133,7 +136,18 @@ window.onload = function(){
                         success: function (response) {
                             console.log(response)
                             $('#editarSede').modal('hide')
-                            alert("Sede Modificada");
+                        
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Sede Modificada',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+
+
                             $('.yajra-sedes').DataTable().ajax.reload();
 
                         },
