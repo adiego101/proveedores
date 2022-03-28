@@ -565,8 +565,9 @@ class ProveedoresController extends Controller
                         <i class="fas fa-eye"></i></a>';
                         return $actionBtn;
                     } else {
-                        $actionBtn = '<a onclick="editarSucursal(' . $row->id_sucursal . ');" class="edit btn btn-warning btn-sm" title="Editar">
-                        <i class="fas fa-edit"></i></a>
+                        $actionBtn ='<a class="edit_sucursal btn btn-warning btn-sm" title="Editar" data-toggle="modal" data-id_proveedor="'.$row->id_proveedor.'" data-id_sucursal="'.$row->id_sucursal.'">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
                         <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                         return $actionBtn;                
                     }
@@ -585,9 +586,9 @@ class ProveedoresController extends Controller
         return $proveedor->sucursales;
     }
 
-    public function editarSucursales($id)
+    public function editarSucursales($id_sucursal)
     {
-        $sucursal = Sucursal::where('id_sucursal', $id)->get();
+        /*$sucursal = Sucursal::where('id_sucursal', $id)->get();
         $sucursal_email = Sucursal_email::where('id_sucursal', $id)->get();
         $sucursal_telefono = Sucursal_telefono::where('id_sucursal', $id)->get();
         if(empty($sucursal_email[0])){
@@ -615,7 +616,16 @@ class ProveedoresController extends Controller
         $localidades = Localidad::all();
         $mode = "edit";
 
-        return view('ediciones.sucursales', compact( 'provinciaid','mode','sucursal', 'sucursal_email', 'sucursal_telefono','paises','provincias','localidades'));
+        return view('ediciones.sucursales', compact( 'provinciaid',,'sucursal', 'sucursal_email', 'sucursal_telefono','paises','provincias','localidades'));
+        */
+        $sucursal = Sucursal::where('id_sucursal', '=', $id_sucursal)
+                            ->with(['localidad','telefonos','emails'])
+                            ->first();
+        $mode = "edit";
+        $paises = Pais::all();
+        $provincias = Provincia::all();
+        $localidades = Localidad::all();
+        return (String)view('sucursales.form', compact('mode','paises','provincias', 'localidades', 'sucursal'));
 
     }
 
@@ -666,6 +676,7 @@ class ProveedoresController extends Controller
                 $sucursal_email->id_sucursal = $sucursal->id_sucursal;
                 $sucursal_email->email = $request->email;
                 $sucursal_email->save();
+                //$sucursal->save($sucursal_email);
             }
         }
         $sucursal_telefono = Sucursal_telefono::where('id_sucursal', $id)->first();

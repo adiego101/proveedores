@@ -153,7 +153,6 @@
     @include('edicionesModales.actividades')
     @include('edicionesModales.editarProducto')
     @include('edicionesModales.producto')
-    {{-- @include('edicionesModales.sucursales') --}}
     @include('edicionesModales.altaSedes')
     @include('edicionesModales.editarSedes')
     @include('edicionesModales.altaSeguros')
