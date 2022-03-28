@@ -82,16 +82,15 @@ $(document).ready(  function()
                 $('#editformSeguro').on('submit', function(e)
                 {
                     e.preventDefault();
-                    console.log($('#id_proveedor_seguro').val());
 
                     var id_proveedor = $('#id_proveedor_seguro').val();
-                    console.log("{{url('guardarSeguros/')}}/"+id_proveedor);
+           
                     $.ajax({
                         type: "post",
                         url: "{{url('guardarSeguros/')}}/"+id_proveedor,
                         data: $('#editformSeguro').serialize(),
                         success: function (response) {
-                            console.log(response)
+                           
                             $('#editarSeguro').modal('hide')
                         
                             Swal.fire({
@@ -103,7 +102,6 @@ $(document).ready(  function()
                             toast: true
 
                             })
-
 
                             $('.yajra-seguros').DataTable().ajax.reload();
 

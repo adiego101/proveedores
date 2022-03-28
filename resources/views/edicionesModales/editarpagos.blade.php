@@ -79,14 +79,13 @@
             $('#editarp').on('submit', function(e) {
                 e.preventDefault();
                 let id_registro = $("#editar_pago").val();
-                console.log("{{ url('guardarPagos/') }}/" + id_registro);
 
                 $.ajax({
                     type: "post",
                     url: "{{ url('guardarPagos/') }}/" + id_registro,
                     data: $('#editarp').serialize(),
                     success: function(response) {
-                        console.log(response)
+             
                         $('#editarPago').modal('hide')
 
                         Swal.fire({
@@ -110,12 +109,12 @@
             });
         });
         @endif
+
         function verPago(id_registro) {
 
             $.ajax({
                 url: "{{ url('verPagos/') }}/" + id_registro,
                 success: function(response) {
-
 
                     abrirModalverPago(response);
                 }
@@ -126,18 +125,14 @@
                 ms = Date.parse(response[0].fecha);
                 fecha = new Date(ms);
 
-
                 document.getElementById("fechaeditar").valueAsDate = fecha;
                 $('#importeeditar').val(response[0].importe);
 
-                console.log(response[0].observaciones);
                 $('#observacionespagoeditar').val(response[0].observaciones);
                 $('#editar_pago').val(response[0].id_pagos);
                 $('#ver_pago').val(response[0].id_pagos);
 
                 $('.yajra-pagos').DataTable().ajax.reload();
-
-                console.log(response);
 
             }
         }

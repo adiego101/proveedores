@@ -258,7 +258,6 @@
                 }
 
 
-                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
                 $('#modal_validar_vehiculo').modal('show');
             }
@@ -404,7 +403,6 @@
                 }
 
 
-                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
                 $('#modal_validar_seguro').modal('show');
             }
@@ -474,14 +472,6 @@
         valor_localidad = $("#localidad_sede").find('option:selected').text(); // Capturamos el texto del option seleccionado
         provincia_sede = $("#provincia_sede").val();
 
-        /*console.log("Provincia: "+provincia_sede);
-        console.log("localidad: "+localidad);
-        if(localidad != " "){
-            console.log("No es vacio");
-        }else{
-            console.log("Es vacio");
-        }*/
-
         //Obtenemos los campos obligatorios para aplicarles estilos css
         let domicilio_sede_css = document.getElementById("domicilio_sede");
         let localidad_sede_css = document.getElementById("localidad_sede");
@@ -542,7 +532,6 @@
             }
 
 
-            /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
             //Desplegamos el modal
             $('#modal_validar_sede').modal('show');
         }

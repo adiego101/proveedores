@@ -83,16 +83,16 @@
 
         $(document).ready(function() {
             $('#editara').on('submit', function(e) {
+                
                 e.preventDefault();
                 let id_registro = $("#editar_actividad1").val();
-                console.log("{{ url('guardarActividades/') }}/" + id_registro);
 
                 $.ajax({
                     type: "post",
                     url: "{{ url('guardarActividades/') }}/" + id_registro,
                     data: $('#editara').serialize(),
                     success: function(response) {
-                        console.log(response)
+                      
                         $('#editarActividad').modal('hide')
                   
                         Swal.fire({
@@ -121,19 +121,14 @@
                 url: "{{ url('verActividades/') }}/" + id_registro,
                 success: function(response) {
 
-
                     abrirModalverActividad(response);
                 }
             });
 
             function abrirModalverActividad(response) {
+
                 $('#editarActividad').modal('show');
-                console.log(response);
-                console.log(response['id_actividad_economica']);
-
-                console.log(response['id_tipo_actividad']);
-
-
+              
                 $('#tipo_actividad1').val(response['desc_tipo_actividad']);
                 $('#actividad_11').val(response['desc_actividad']);
 
@@ -141,8 +136,6 @@
                 $('#ver_actividad1').val(response['id_actividad_proveedor']);
 
                 $('.yajra-actividades').DataTable().ajax.reload();
-
-                console.log(response);
 
             }
         }

@@ -140,7 +140,6 @@
                 }
                 
 
-                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                //Desplegamos el modal
                $('#modal_validar_pago').modal('show');
             }

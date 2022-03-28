@@ -60,9 +60,6 @@
 
 <script>
 
-$(function () {console.log("{{url('crearProductos/'.$id)}}")});
-
-
         $(document).ready(  function()
             {
                 $('#addformproducto').on('submit', function(e)
@@ -74,7 +71,7 @@ $(function () {console.log("{{url('crearProductos/'.$id)}}")});
                         url: "{{url('crearProductos/'.$id)}}",
                         data: $('#addformproducto').serialize(),
                         success: function (response) {
-                            console.log(response)
+                           
                             $('#nuevoProducto').modal('hide')
                             $('.yajra-productos').DataTable().ajax.reload();
                             $('#producto_elaborado').val('');	

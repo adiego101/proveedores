@@ -70,7 +70,6 @@
             //Obtenemos el numero de la fila que queremos modificar
             let id = $("#editar_producto").val();
 
-
         });
 
         $(document).on("click", ".btn_ver_producto", function() {
@@ -82,16 +81,16 @@
 
         $(document).ready(function() {
             $('#editarprod').on('submit', function(e) {
+
                 e.preventDefault();
                 let id_registro = $("#editar_producto").val();
-                console.log("{{ url('guardarProductos/') }}/" + id_registro);
 
                 $.ajax({
                     type: "post",
                     url: "{{ url('guardarProductos/') }}/" + id_registro,
                     data: $('#editarprod').serialize(),
                     success: function(response) {
-                        console.log(response)
+                     
                         $('#editarproducto').modal('hide')
                       
                         Swal.fire({
@@ -120,18 +119,13 @@
                 url: "{{ url('verProductos/') }}/" + id_registro,
                 success: function(response) {
 
-
                     abrirModalverProducto(response);
                 }
             });
 
             function abrirModalverProducto(response) {
+
                 $('#editarproducto').modal('show');
-                console.log(response);
-
-                console.log(response['rnpa']);
-
-
 
                 $('#producto_elaborado1').val(Number(response['producto_elaborado']));
                 $('#rnpa1').val(response['rnpa']);
@@ -144,8 +138,9 @@
 
                 $('.yajra-productos').DataTable().ajax.reload();
 
-
             }
         }
+
     </script>
+    
 @endpush

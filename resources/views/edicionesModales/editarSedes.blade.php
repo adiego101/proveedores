@@ -125,16 +125,15 @@ window.onload = function(){
                 $('#editformSede').on('submit', function(e)
                 {
                     e.preventDefault();
-                    console.log($('#id_proveedor_sede').val());
 
                     var id_proveedor = $('#id_proveedor_sede').val();
-                    console.log("{{url('guardarSedes/')}}/"+id_proveedor);
+                 
                     $.ajax({
                         type: "post",
                         url: "{{url('guardarSedes/')}}/"+id_proveedor,
                         data: $('#editformSede').serialize(),
                         success: function (response) {
-                            console.log(response)
+                         
                             $('#editarSede').modal('hide')
                         
                             Swal.fire({
@@ -161,6 +160,6 @@ window.onload = function(){
             }
         );
 
-
     </script>
+    
 @endpush

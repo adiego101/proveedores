@@ -50,11 +50,10 @@
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
     <script>
-        $(function() {
-            console.log("{{ url('crearPagos/' . $id) }}")
-        });
+       
         $(document).ready(function() {
             $('#addform').on('submit', function(e) {
+
                 e.preventDefault();
 
                 $.ajax({
@@ -62,7 +61,7 @@
                     url: "{{ url('crearPagos/' . $id) }}",
                     data: $('#addform').serialize(),
                     success: function(response) {
-                        console.log(response)
+                    
                         $('#nuevoPago').modal('hide')
                         $('.yajra-pagos').DataTable().ajax.reload();
                         $('#fecha').val('');	
@@ -87,7 +86,6 @@
             });
         });
 
-
-
     </script>
+
 @endpush

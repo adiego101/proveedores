@@ -62,17 +62,15 @@
                 $('#editformVehiculo').on('submit', function(e)
                 {
                     e.preventDefault();
-                    console.log($('#id_proveedor_patente').val());
 
                     var id_proveedor = $('#id_proveedor_patente').val();
-                    console.log("{{url('guardarPatentes/')}}/"+id_proveedor);
 
                     $.ajax({
                         type: "post",
                         url: "{{url('guardarPatentes/')}}/"+id_proveedor,
                         data: $('#editformVehiculo').serialize(),
                         success: function (response) {
-                            console.log(response)
+                        
                             $('#editarVehiculo').modal('hide')
 
                             Swal.fire({

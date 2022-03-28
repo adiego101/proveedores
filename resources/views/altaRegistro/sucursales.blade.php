@@ -181,90 +181,6 @@
         localidad_sucursal = $("#localidad_sucursal").val();
 
 
-        /*
-        console.log(pais);
-        console.log(provincia);
-        console.log(localidad_sucursal);
-        console.log($('#localidad_sucursal option:selected').html());
-        */
-
-      /*  let error_encontrado=false;
-
-        nombre_sucursal=$('#nombre_sucursal').val();
-        console.log("Nombre sucursal a agregar**"+nombre_sucursal);
-        if(nombre_sucursal=''){
-            error_encontrado=true;
-            console.log("Nombre sucursal"+nombre_sucursal);
-            $('#errors').show();
-            $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar su NOMBRE.</li>");
-            return false;
-        }
-        calle = $("#calle").val();
-
-        barrio = $("#barrio").val();
-
-        //telefono = $("#nro_tel").val();
-        entre_calle = $("#entre_calles").val();
-
-        numero = $("#numero").val();
-
-        departamento = $("#dpto").val();
-
-
-        let valoresTelefonos = [];
-        let telefono = "";
-        $('.telefono_sucursal').each(function(){
-            telefono = $(this).val();
-            if(telefono != '')
-                valoresTelefonos.push(telefono);
-            else{
-                error_encontrado=true;
-                $('#errors').show();
-                $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar al menos 1 (UN) TELEFONO.</li>");
-                return false;
-            }
-        });
-
-        let telefono_aux = '';
-
-        for(i_sucursal in valoresTelefonos){
-            telefono_aux = telefono_aux + valoresTelefonos[i_sucursal] + '/';
-        }
-
-        let valoresEmails = [];
-        let email = "";
-        $('.email_sucursal').each(function(){
-            email = $(this).val();
-            if(email != '')
-                valoresEmails.push(telefono);
-            else{
-                error_encontrado=true;
-                $('#errors').show();
-                $('#vinetas_error').append("<li>Para agregar una SUCURSAL debe especificar al menos 1 (UN) EMAIL.</li>");
-                return false;
-            }
-        });
-
-        let email_aux = '';
-        for(i_sucursal in valoresEmails){
-            email_aux = email_aux + valoresEmails[i_sucursal] + '/';
-        }
-*/
-
-        //if(!error_encontrado){
-            /*$("#body_table_sucursal").append(
-                '<tr id="row' + i_sucursal +'">'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="calle' + i_sucursal +'" name="calles[]" readonly value="' + calle +'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="barrio' + i_sucursal +'" name="barrios[]" readonly value="' + barrio +'"></td>'+
-                    '<td><input type="number"  onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="nro_tel' + i_sucursal +'" name="Telefonos_sucursales[]" value="'+telefono_aux+'" readonly></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="entre_calles' + i_sucursal +'" name="entreCalles[]" readonly value="'+ entre_calle +'"></td>'+
-                    '<td><input type="number"  onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="numero' + i_sucursal +'" name="numeros[]" readonly value="'+numero+'"></td>'+
-                    '<td><input type="text" class="form-control" aria-describedby="basic-addon1" id="dpto' + i_sucursal +'" name="dptos[]" readonly value="'+ departamento +'"></td>'+
-                    '<td><input type="email" class="form-control" aria-describedby="basic-addon1" id="email' + i_sucursal +'" name="correos_electronicos[]" readonly value="'+ email +'"></td>'+
-                    '<td><button type="button" name="edit" id="'+ i_sucursal +'" class="btn btn-warning btn-sm btn_edit_sucursal" title="editar sucursal"><i_sucursal class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + i_sucursal +'" class="btn btn-danger btn-sm btn_remove_sucursal" title="quitar sucursal"><i_sucursal class="fas fa-trash"></i></button></td>'+
-                '</tr>'
-            );*/
-
         //Obtenemos los campos obligatorios para aplicarles estilos css
         let nombre_css = document.getElementById("nombre_sucursal");
         //let pais_css = document.getElementById("nombre_sucursal");
@@ -356,19 +272,14 @@
             }
 
 
-            /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
             //Desplegamos el modal
             $('#modal_validar_sucursal').modal('show');
 
         }
-            /*if(error_encontrado){
-            $('#errors').focus();
-            return false;
-        }*/
-
-    //}
-
+           
     });
+
+
     $(document).on("click", ".btn_remove_sucursal", function() {
 
         //cuando da click al boton quitar, obtenemos el id del boton
@@ -445,69 +356,6 @@
 
 </script>
 
-<!--
-<script type="text/javascript">
-$(document).ready(function() {
-
-    let maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
-    let addTelefono_sucursal = $('.add_telefono_sucursal');
-    let wrapper_telefono_sucursal = $('.field_telefono_sucursal');
-
-
-    //Nuevo campo html (agregar un nuevo teléfono)
-    let fieldHTML_telefono_sucursal = '<div>'+
-                             '<br>'+
-                                '<label for="telefono_sucursal">Teléfono:</label><br>'+
-                                '<input type="number"  onkeypress="return valideKey(event);" class="form-control telefono_sucursal" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" >'+
-                                '<a href="javascript:void(0);" class="remove_telefono_sucursal" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
-                             '<br>'+
-                            '</div>';
-
-
-    let x = 1; //Contador inicial, comienza en 1
-    $(addTelefono_sucursal).click(function() {
-        if (x < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
-            x++; //Incrementa el contador en 1
-            $(wrapper_telefono_sucursal).append(fieldHTML_telefono_sucursal); // Agrega un nuevo campo html (telefono)
-        }
-    });
-    $(wrapper_telefono_sucursal).on('click', '.remove_telefono_sucursal', function(e) {
-        e.preventDefault();
-        $(this).parent('div').remove(); //Remueve un campo html (telefono)
-        x--; //Decrementa el contador en 1
-    });
-
-
-
-    let addEmail_sucursal = $('.add_email_sucursal');
-    let wrapper_email_sucursal = $('.field_email_sucursal');
-
-    //Nuevo campo html (agregar un nuevo correo)
-    let fieldHTML_email_sucursal = '<div>'+
-                                '<label for="email_sucursal">Correo electrónico:</label><br>'+
-                                '<input type="email" class="form-control email_sucursal" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" >'+
-                                '<a href="javascript:void(0);" class="remove_email_sucursal" title="Elimine el correo"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
-                                '<br>'+
-                                '<br>'+
-                            '</div>';
-
-
-
-    let i_sucursal = 1; //Contador inicial, comienza en 1
-    $(addEmail_sucursal).click(function() {
-        if (i_sucursal < maxField) { //Verifica el numero maximo de campos a agregar, con el limite establecido
-            i_sucursal; //Incrementa el contador en 1
-            $(wrapper_email_sucursal).append(fieldHTML_email_sucursal); // Agrega un nuevo campo html (correo)
-        }
-    });
-    $(wrapper_email_sucursal).on('click', '.remove_email_sucursal', function(e) {
-        e.preventDefault();
-        $(this).parent('div').remove(); //Remueve un campo html (correo)
-       i_sucursal--; //Decrementa el contador en 1
-    });
-});
-</script>
--->
 
 <script type="text/javascript">
 	$(document).ready(function(){
