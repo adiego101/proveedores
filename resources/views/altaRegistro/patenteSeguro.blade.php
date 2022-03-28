@@ -169,6 +169,9 @@
 
     @push('js')
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
     <script type="text/javascript">
 
         let marca;
@@ -222,6 +225,16 @@
                 dominio_css.style.border = '1px solid #DFDFDF';
                 inscripto_en_css.style.border = '1px solid #DFDFDF';
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Vehículo Guardado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
             } else {
 
                 if(marca.length == 0){
@@ -245,7 +258,6 @@
                 }
 
 
-                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
                 $('#modal_validar_vehiculo').modal('show');
             }
@@ -260,6 +272,17 @@
 
             //borra la fila
             $("#row_vehiculo" + button_id + "").remove();
+
+            Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Vehículo dado de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
+
         });
 
 
@@ -347,6 +370,16 @@
                 asegurado_css.style.border = '1px solid #DFDFDF';
                 vigencia_css.style.border = '1px solid #DFDFDF';
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Seguro Guardado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
             } else {
 
                 if(poliza.length == 0){
@@ -370,7 +403,6 @@
                 }
 
 
-                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
                 $('#modal_validar_seguro').modal('show');
             }
@@ -385,6 +417,16 @@
 
             //borra la fila
             $("#row_seguro" + button_id + "").remove();
+
+            Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Seguro dado de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
         });
 
 
@@ -430,14 +472,6 @@
         valor_localidad = $("#localidad_sede").find('option:selected').text(); // Capturamos el texto del option seleccionado
         provincia_sede = $("#provincia_sede").val();
 
-        /*console.log("Provincia: "+provincia_sede);
-        console.log("localidad: "+localidad);
-        if(localidad != " "){
-            console.log("No es vacio");
-        }else{
-            console.log("Es vacio");
-        }*/
-
         //Obtenemos los campos obligatorios para aplicarles estilos css
         let domicilio_sede_css = document.getElementById("domicilio_sede");
         let localidad_sede_css = document.getElementById("localidad_sede");
@@ -470,6 +504,16 @@
         localidad_sede_css.style.border = '1px solid #DFDFDF';
         provincia_sede_css.style.border = '1px solid #DFDFDF';
 
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Sede Guardada',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
+
         } else {
 
             if(domicilio.length == 0){
@@ -488,7 +532,6 @@
             }
 
 
-            /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
             //Desplegamos el modal
             $('#modal_validar_sede').modal('show');
         }
@@ -503,6 +546,16 @@
 
         //borra la fila
         $("#row_sede" + button_id + "").remove();
+
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Sede dada de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
     });
 
 

@@ -7,15 +7,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditarPago">Modal title</h5>
+                    <h1 class="modal-title" id="modalEditarPago">Editar Pago</h1>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <fieldset>
-
-                        <h1>Pagos</h1>
 
                         <label for="fechaeditar">Fecha:</label><br>
                         <input @if ($mode == 'show') readonly @endif type="date" class="form-control"
@@ -44,9 +42,8 @@
                     <input type="hidden" id="editar_pago">
                     <input type="hidden" id="ver_pago">
 
-
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    @if ($mode != 'show') <button type="submit" class="btn btn_editar_pago btn-primary">Save changes</button> @endif
+                    @if ($mode != 'show') <button type="submit" class="btn btn_editar_pago btn-success">Guardar</button> @endif
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -55,7 +52,12 @@
 
 </form>
 @endif
+
 @push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
     <script>
         $(document).on("click", ".btn_editar_pago", function() {
 
@@ -77,16 +79,25 @@
             $('#editarp').on('submit', function(e) {
                 e.preventDefault();
                 let id_registro = $("#editar_pago").val();
-                console.log("{{ url('guardarPagos/') }}/" + id_registro);
 
                 $.ajax({
                     type: "post",
                     url: "{{ url('guardarPagos/') }}/" + id_registro,
                     data: $('#editarp').serialize(),
                     success: function(response) {
-                        console.log(response)
+             
                         $('#editarPago').modal('hide')
-                        alert("Pago Guardado");
+
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Pago Modificado',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+
                         $('.yajra-pagos').DataTable().ajax.reload();
 
                     },
@@ -98,12 +109,12 @@
             });
         });
         @endif
+
         function verPago(id_registro) {
 
             $.ajax({
                 url: "{{ url('verPagos/') }}/" + id_registro,
                 success: function(response) {
-
 
                     abrirModalverPago(response);
                 }
@@ -114,20 +125,17 @@
                 ms = Date.parse(response[0].fecha);
                 fecha = new Date(ms);
 
-
                 document.getElementById("fechaeditar").valueAsDate = fecha;
                 $('#importeeditar').val(response[0].importe);
 
-                console.log(response[0].observaciones);
                 $('#observacionespagoeditar').val(response[0].observaciones);
                 $('#editar_pago').val(response[0].id_pagos);
                 $('#ver_pago').val(response[0].id_pagos);
 
                 $('.yajra-pagos').DataTable().ajax.reload();
 
-                console.log(response);
-
             }
         }
     </script>
+
 @endpush

@@ -42,7 +42,7 @@
                         <div class="col-sm">
                             <label for="Localidad">Localidad:</label><br>
                             <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad" required>
-                            <option value=" ">Seleccione una localidad</option>
+                            <option value="">Seleccione una localidad</option>
                             @forelse($localidades as $localidad)
                                 <option value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
                             @empty
@@ -66,6 +66,9 @@
 
 
 @push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script type="text/javascript">
 
@@ -143,9 +146,20 @@ $(function () {console.log("{{url('crearSedes/'.$id)}}")});
                         success: function (response) {
                             console.log(response)
                             $('#nuevaSede').modal('hide')
-                            alert("Sede Guardada");
                             $('.yajra-sedes').DataTable().ajax.reload();
+                            $('#Domicilio').val('');	
+                            $('#provincia_sede').val('');	
+                            $('#Localidad').val('');
 
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Sede Guardada',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
                         },
                         error: function(error){
                             console.log(error)

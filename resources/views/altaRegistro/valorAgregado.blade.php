@@ -45,4 +45,3 @@
   <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
 </fieldset>
-

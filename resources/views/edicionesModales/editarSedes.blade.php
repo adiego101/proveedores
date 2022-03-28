@@ -1,5 +1,7 @@
 <!-- Modal -->
+@if ($mode != 'show')
 <form id="editformSede">
+    @endif
     @csrf
   <div class="modal fade" id="editarSede" tabindex="-1" role="dialog" aria-labelledby="modalEditarSede" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -15,7 +17,7 @@
             <fieldset>
 
                 <label for="Domicilios">Domicilio:</label><br />
-                <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilios" name="Domicilios" maxlength="50" required/><br />
+                <input type="text" class="form-control" @if ( $mode == "show") disabled @endif placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilios" name="Domicilios" maxlength="50" required/><br />
 
                 <div class="row">
                         <div class="col-sm">
@@ -57,16 +59,20 @@
                 </fieldset>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Guardar</button>
+            @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
 </form>
-
+@endif
 
 @push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script type="text/javascript">
 
@@ -77,24 +83,11 @@ window.onload = function(){
     $(document).ready(function(){
 
         $('#provincia_sedes').change(function(){
-            recargarListaSeguro();
+            recargarListaSeguro2();
         });
     })
-</script>
 
-<script type="text/javascript">
-
-    function recargarLista(){
-        $.ajax({
-            type:"GET",
-            url:"{{url('localidadSelect/')}}/{{isset($sede->Localidad) ? $sede->Localidad : ''}}",
-            success:function(r){
-                $('#Localidades').html(r);
-            }
-        });
-    }
-
-    function recargarListaSeguro(){
+    function recargarListaSeguro2(){
             $.ajax({
                 type:"GET",
                 url:"{{url('localidades/')}}/"+$('#provincia_sedes').val(),
@@ -103,8 +96,9 @@ window.onload = function(){
                 }
             });
         }
-
 </script>
+
+
     <script type="text/javascript">
     function valideKey(evt){
 
@@ -131,18 +125,28 @@ window.onload = function(){
                 $('#editformSede').on('submit', function(e)
                 {
                     e.preventDefault();
-                    console.log($('#id_proveedor_sede').val());
-                    
+
                     var id_proveedor = $('#id_proveedor_sede').val();
-                    console.log("{{url('guardarSedes/')}}/"+id_proveedor);
+                 
                     $.ajax({
                         type: "post",
                         url: "{{url('guardarSedes/')}}/"+id_proveedor,
                         data: $('#editformSede').serialize(),
                         success: function (response) {
-                            console.log(response)
+                         
                             $('#editarSede').modal('hide')
-                            alert("Sede Modificada");
+                        
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Sede Modificada',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+
+
                             $('.yajra-sedes').DataTable().ajax.reload();
 
                         },
@@ -156,6 +160,6 @@ window.onload = function(){
             }
         );
 
-
     </script>
+    
 @endpush

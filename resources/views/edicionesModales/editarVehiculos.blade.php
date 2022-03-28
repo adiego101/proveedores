@@ -1,5 +1,7 @@
 <!-- Modal -->
+@if ($mode != 'show')
 <form id="editformVehiculo">
+@endif
     @csrf
   <div class="modal fade" id="editarVehiculo" tabindex="-1" role="dialog" aria-labelledby="modalEditarVehiculo" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -39,15 +41,19 @@
 
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Guardar</button>
+            @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
 </form>
-
+@endif
 @push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script>
 
@@ -56,25 +62,33 @@
                 $('#editformVehiculo').on('submit', function(e)
                 {
                     e.preventDefault();
-                    console.log($('#id_proveedor_patente').val());
-                    
+
                     var id_proveedor = $('#id_proveedor_patente').val();
-                    console.log("{{url('guardarPatentes/')}}/"+id_proveedor);
 
                     $.ajax({
                         type: "post",
                         url: "{{url('guardarPatentes/')}}/"+id_proveedor,
                         data: $('#editformVehiculo').serialize(),
                         success: function (response) {
-                            console.log(response)
+                        
                             $('#editarVehiculo').modal('hide')
-                            alert("Vehiculo Guardado");
+
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Vehículo Modificado',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+
                             $('.yajra-vehiculos').DataTable().ajax.reload();
 
                         },
                         error: function(error){
                             console.log(error)
-                            alert("ERROR!! Vehiculo no guardado")
+                            alert("ERROR!! Vehiculo no modificado")
                         }
                     });
                 }

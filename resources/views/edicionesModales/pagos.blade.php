@@ -5,15 +5,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalNuevoPago">Modal title</h5>
+                    <h1 class="modal-title" id="modalNuevoPago">Nuevo Pago</h1>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <fieldset>
-
-                        <h1>Pagos</h1>
 
                         <label for="fecha">Fecha:</label><br>
                         <input @if ($mode == 'show') readonly @endif type="date" class="form-control"
@@ -38,20 +36,24 @@
                 <div class="modal-footer">
                     <input type="hidden" id="ver_pago">
 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    @if ($mode != 'show') <button type="submit" class="btn btn-primary">Save changes</button> @endif
+                    @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
 @push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
     <script>
-        $(function() {
-            console.log("{{ url('crearPagos/' . $id) }}")
-        });
+       
         $(document).ready(function() {
             $('#addform').on('submit', function(e) {
+
                 e.preventDefault();
 
                 $.ajax({
@@ -59,11 +61,22 @@
                     url: "{{ url('crearPagos/' . $id) }}",
                     data: $('#addform').serialize(),
                     success: function(response) {
-                        console.log(response)
+                    
                         $('#nuevoPago').modal('hide')
-                        alert("Pago Guardado");
                         $('.yajra-pagos').DataTable().ajax.reload();
+                        $('#fecha').val('');	
+                        $('#importe').val('');	
+                        $('#observacionespago').val('');
 
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Pago Guardado',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
                     },
                     error: function(error) {
                         console.log(error)
@@ -73,7 +86,6 @@
             });
         });
 
-
-
     </script>
+
 @endpush

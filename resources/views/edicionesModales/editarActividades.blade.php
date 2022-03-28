@@ -1,4 +1,6 @@
+@if ($mode != 'show')
 <form id="editara">
+    @endif
     @csrf
   <!-- Modal -->
   <div class="modal fade" id="editarActividad" tabindex="-1" role="dialog" aria-labelledby="modalNuevaActividad" aria-hidden="true">
@@ -49,14 +51,20 @@
             <input type="hidden" id="editar_actividad1">
             <input type="hidden" id="ver_actividad1">
             @if ($mode != 'show') <button type="submit" class="btn btn_editar_actividad btn-success">Guardar</button> @endif
-            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
 </form>
+@endif
 
 @push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
     <script>
         $(document).on("click", ".btn_editar_actividad", function() {
 
@@ -75,18 +83,28 @@
 
         $(document).ready(function() {
             $('#editara').on('submit', function(e) {
+                
                 e.preventDefault();
                 let id_registro = $("#editar_actividad1").val();
-                console.log("{{ url('guardarActividades/') }}/" + id_registro);
 
                 $.ajax({
                     type: "post",
                     url: "{{ url('guardarActividades/') }}/" + id_registro,
                     data: $('#editara').serialize(),
                     success: function(response) {
-                        console.log(response)
+                      
                         $('#editarActividad').modal('hide')
-                        alert("Actividad Guardado");
+                  
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Actividad Modificada',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+
                         $('.yajra-actividades').DataTable().ajax.reload();
 
                     },
@@ -103,19 +121,14 @@
                 url: "{{ url('verActividades/') }}/" + id_registro,
                 success: function(response) {
 
-
                     abrirModalverActividad(response);
                 }
             });
 
             function abrirModalverActividad(response) {
+
                 $('#editarActividad').modal('show');
-                console.log(response);
-                console.log(response['id_actividad_economica']);
-
-                console.log(response['id_tipo_actividad']);
-
-
+              
                 $('#tipo_actividad1').val(response['desc_tipo_actividad']);
                 $('#actividad_11').val(response['desc_actividad']);
 
@@ -123,8 +136,6 @@
                 $('#ver_actividad1').val(response['id_actividad_proveedor']);
 
                 $('.yajra-actividades').DataTable().ajax.reload();
-
-                console.log(response);
 
             }
         }

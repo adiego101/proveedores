@@ -1,15 +1,11 @@
-
-
-
-
-  <!-- Modal -->
+<!-- Modal -->
   <form id="addformproducto">
     @csrf
   <div class="modal fade" id="nuevoProducto" tabindex="-1" role="dialog" aria-labelledby="modalNuevoProducto" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalNuevoProducto">Agregar Nuevo Producto</h5>
+          <h1 class="modal-title" id="modalNuevoProducto">Nuevo Producto</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -49,18 +45,20 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-success">Guardar</button>
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
   </div>
 </form>
+
 @push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
 <script>
-
-$(function () {console.log("{{url('crearProductos/'.$id)}}")});
-
 
         $(document).ready(  function()
             {
@@ -73,11 +71,23 @@ $(function () {console.log("{{url('crearProductos/'.$id)}}")});
                         url: "{{url('crearProductos/'.$id)}}",
                         data: $('#addformproducto').serialize(),
                         success: function (response) {
-                            console.log(response)
+                           
                             $('#nuevoProducto').modal('hide')
-                            alert("Producto Guardado");
                             $('.yajra-productos').DataTable().ajax.reload();
+                            $('#producto_elaborado').val('');	
+                            $('#rnpa').val('');	
+                            $('#Producida_unidad').val('');	
+                            $('#capacidad_produccion_total').val('');	
 
+                            Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Producto Guardado',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
                         },
                         error: function(error){
                             console.log(error)
@@ -89,6 +99,6 @@ $(function () {console.log("{{url('crearProductos/'.$id)}}")});
             }
         );
 
-
     </script>
+
 @endpush

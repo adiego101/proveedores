@@ -561,7 +561,7 @@ class ProveedoresController extends Controller
                     $url2 = url('verSucursales/' . $row->id_sucursal);
 
                     if ($mode == "show") {
-                        $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
+                        $actionBtn = ' <a onclick="editarSucursal(' . $row->id_sucursal . ');" class="view btn btn-primary btn-sm" title="ver">
                         <i class="fas fa-eye"></i></a>';
                         return $actionBtn;
                     } else {
@@ -569,7 +569,7 @@ class ProveedoresController extends Controller
                                         <i class="fas fa-edit"></i>
                                     </a>
                         <a onclick="bajaSucursal(' . $row->id_sucursal . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
-                        return $actionBtn;                
+                        return $actionBtn;
                     }
 
 
@@ -754,7 +754,7 @@ class ProveedoresController extends Controller
                 if ($mode == "show") {
                     $actionBtn = '
                     <a onclick="verPago(' . $row->id_pagos . ');" class="view btn btn-primary btn-sm" title="ver pago">
-                    <i class="fas fa-edit"></i></a>';
+                    <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
                     $actionBtn = '
@@ -847,8 +847,8 @@ class ProveedoresController extends Controller
                 $url = url('editarActividades/' . $row->id_actividad_proveedor);
                 $url2 = url('verActividades/' . $row->id_actividad_proveedor);
                 if ($mode == "show") {
-                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
-                    <i class="fas fa-eye"></i></a> ';
+                    $actionBtn = ' <a onclick="verActividad(' . $row->id_actividad_proveedor . ');" class="view btn btn-primary btn-sm" title="ver producto">
+                    <i class="fas fa-eye"></i></a>  ';
                     return $actionBtn;                } else {
                     $actionBtn = '<a onclick="verActividad(' . $row->id_actividad_proveedor . ');" class="view btn btn-warning btn-sm" title="editar producto">
                     <i class="fas fa-edit"></i></a> <a onclick="bajaActividad(' . $row->id_actividad_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
@@ -995,7 +995,7 @@ class ProveedoresController extends Controller
                 $url2 = url('verProductos/' . $row->id_producto);
 
                 if ($mode == "show") {
-                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
+                    $actionBtn = '<a onclick="verProducto(' . $row->id_producto . ');" class="view btn btn-primary btn-sm" title="ver producto">
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
@@ -1088,7 +1088,7 @@ return $producto;
                 $url2 = url('verPatentes/' . $row->id_proveedor_patente);
 
                 if ($mode == "show") {
-                    $actionBtn = ' <a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
+                    $actionBtn = ' <a onclick="editarPatente(' . $row->id_proveedor_patente . ');" value="'.$row->id_proveedor_patente.'" class="view btn btn-primary btn-sm" title="ver">
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
@@ -1211,7 +1211,7 @@ return $producto;
                 $url2 = url('verSeguros/' . $row->id_proveedor_seguro);
 
                 if ($mode == "show") {
-                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
+                    $actionBtn = '<a onclick="editarSeguro(' . $row->id_proveedor_seguro . ');" value="'.$row->id_proveedor_seguro.'" class="view btn btn-primary btn-sm title="ver">
                     <i class="fas fa-eye"></i></a>';
                     return $actionBtn;
                 } else {
@@ -1338,7 +1338,7 @@ return $producto;
                 $url2 = url('verSedes/' . $row->id_proveedor_sede);
 
                 if ($mode=="show") {
-                    $actionBtn = '<a href="' . "$url2" . '" class="view btn btn-primary btn-sm" title="Ver">
+                    $actionBtn = '<a onclick="editarSede(' . $row->id_proveedor_sede . ');" value="'.$row->id_proveedor_sede.'" class="view btn btn-primary btn-sm" title="ver">
                     <i class="fas fa-eye"></i></a> ';
                     return $actionBtn;
                 } else {

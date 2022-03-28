@@ -1,15 +1,13 @@
-
-
-
-
-  <!-- Modal -->
+<!-- Modal -->
+  @if ($mode != 'show')
   <form id="editarprod">
+@endif
     @csrf
   <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog" aria-labelledby="modalEditarProducto" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalEditarProducto">Modal title</h5>
+          <h1 class="modal-title" id="modalEditarProducto">Editar Producto</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -50,21 +48,27 @@
         </div>
         <div class="modal-footer">
             <input type="hidden" id="editar_producto">
-                    <input type="hidden" id="ver_producto">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+            <input type="hidden" id="ver_producto">
+          @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
 </form>
+@endif
+
 @push('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
     <script>
         $(document).on("click", ".btn_editar_producto", function() {
 
             //Obtenemos el numero de la fila que queremos modificar
             let id = $("#editar_producto").val();
-
 
         });
 
@@ -77,18 +81,28 @@
 
         $(document).ready(function() {
             $('#editarprod').on('submit', function(e) {
+
                 e.preventDefault();
                 let id_registro = $("#editar_producto").val();
-                console.log("{{ url('guardarProductos/') }}/" + id_registro);
 
                 $.ajax({
                     type: "post",
                     url: "{{ url('guardarProductos/') }}/" + id_registro,
                     data: $('#editarprod').serialize(),
                     success: function(response) {
-                        console.log(response)
+                     
                         $('#editarproducto').modal('hide')
-                        alert("Producto Guardado");
+                      
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Producto Modificado',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+
                         $('.yajra-productos').DataTable().ajax.reload();
 
                     },
@@ -105,18 +119,13 @@
                 url: "{{ url('verProductos/') }}/" + id_registro,
                 success: function(response) {
 
-
                     abrirModalverProducto(response);
                 }
             });
 
             function abrirModalverProducto(response) {
+
                 $('#editarproducto').modal('show');
-                console.log(response);
-
-                console.log(response['rnpa']);
-
-
 
                 $('#producto_elaborado1').val(Number(response['producto_elaborado']));
                 $('#rnpa1').val(response['rnpa']);
@@ -129,8 +138,9 @@
 
                 $('.yajra-productos').DataTable().ajax.reload();
 
-
             }
         }
+
     </script>
+    
 @endpush

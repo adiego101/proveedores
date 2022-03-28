@@ -43,21 +43,14 @@
 
                 </div>
 
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="javascript:void(0);" class="add_email_legal" title="Agregue un nuevo correo"><input type="button" value="Agregar nuevo correo" class="btn btn-outline-success"></a>
+                </div>
+                <br>
+
                 <!-- <label for="telefono_legal">Teléfono:</label><br>
                 <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14"> -->
-                <div class="row">
-                    <div class="col-sm">
-                        <label for="telefono_legal_cod">Código de área:</label><br>
-                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="14">
-                    </div>
-                    <div class="col-sm">
-                        <label for="telefono_legal">Número de Teléfono:</label><br>
-                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14">
-                    </div>
-                </div>
-                <div class="field_telefono_legal">
 
-                </div>
             </div>
             <div class="col-sm">
 
@@ -89,13 +82,20 @@
 
                 <label for="cp_legal">Código Postal:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_legal" name="cp_legal" placeholder="Ingrese el código postal" maxlength="8"><br>
-                <br>
 
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <a href="javascript:void(0);" class="add_email_legal" title="Agregue un nuevo correo"><input type="button" value="Agregar nuevo correo" class="btn btn-outline-success"></a>
+                <div class="row">
+                    <div class="col-sm">
+                        <label for="telefono_legal_cod">Código de área:</label><br>
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="14">
+                    </div>
+                    <div class="col-sm">
+                        <label for="telefono_legal">Número de Teléfono:</label><br>
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14">
+                    </div>
                 </div>
-                <br>
-                <br>
+                <div class="field_telefono_legal">
+
+                </div>
                 <br>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_telefono_legal" title="Agregue un nuevo teléfono"><input type="button" value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>
@@ -122,7 +122,7 @@
         $(addTelefono_legal).click(function() {
 
             //Nuevo campo html (agregar un nuevo teléfono)
-            var fieldHTML_telefono_legal = '<div class="row">'+
+            var fieldHTML_telefono_legal = '<div>'+'<div class="row">'+
                                  '<div class="col-sm">'+
                                  '<br>'+
                                  '<label for="telefono_legal_cod' + x +'">Código de área:</label><br>'+
@@ -133,9 +133,11 @@
                                     '<label for="telefono_legal' + x +'">Número de Teléfono:</label><br>'+
                                     '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal' + x +'" name="telefono_legal[]" maxlength="14">'+
                                     '</div>'+
-                                    '<a href="javascript:void(0);" class="remove_telefono_legal" title="Elimine el teléfono"><input type="button" value="X" class="btn btn-danger btn-xs"></a>'+
                                  '<br>'+
                                  '<br>'+
+                                '</div>'+
+                                '<a href="javascript:void(0);" class="remove_telefono_legal" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>'+
+
                                 '</div>';
 
 
