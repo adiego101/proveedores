@@ -62,7 +62,15 @@
         @endif
 
     </div>
+    <footer class=" font-small bg-transparent">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2022 - Desarrollado por
+          <a href="#">Dir. de Proyectos de Innovación - Secretaría de Estado de Modernización e Innovación Tecnológica </a>.
+        </div>
+    </footer>
+
 @stop
+
 
 @section('adminlte_js')
     @stack('js')

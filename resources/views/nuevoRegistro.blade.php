@@ -2,7 +2,7 @@
 
 @section('content2')
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -94,6 +94,13 @@
 
 
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
     function valideKey(evt){
@@ -106,7 +113,7 @@
         } else if(code>=48 && code<=57) { // es un numero.
           return true;
         } else{ // otras teclas
-        console.log("no es un numero");
+        //console.log("no es un numero");
           return false;
         }
     }
@@ -116,7 +123,7 @@
 
 $('input[type="checkbox"]').on('change', function(){
     this.value = this.checked ? 1 : 0;
-     console.log(this.value);
+     //console.log(this.value);
  }).change();
 </script>
 

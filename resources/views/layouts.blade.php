@@ -1,8 +1,10 @@
 @extends('adminlte::page')
 @section('css')
 
+
 @endsection
 @section('js')
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {
@@ -32,6 +34,8 @@
                         </div>
                     @endif
 
+
+
                     @yield('content2')
 
                 </div>
@@ -39,3 +43,4 @@
     </div>
 </div>
 @endsection
+

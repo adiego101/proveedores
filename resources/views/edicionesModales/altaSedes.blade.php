@@ -1,5 +1,7 @@
 <!-- Modal -->
+@if ($mode != 'show')
   <form id="addformSede">
+      @endif
     @csrf
   <div class="modal fade" id="nuevaSede" tabindex="-1" role="dialog" aria-labelledby="modalNuevaSede" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -56,19 +58,24 @@
                 </fieldset>
         </div>
         <div class="modal-footer">
+            @if ($mode != 'show')
             <button type="submit" class="btn btn-success">Guardar</button>
+
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-        </div>
+            @else
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+            @endif   </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
+
 </form>
+@endif
 
 
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script type="text/javascript">
 
@@ -120,16 +127,14 @@ window.onload = function(){
         } else if(code>=48 && code<=57) { // es un numero.
           return true;
         } else{ // otras teclas
-        console.log("no es un numero");
+        //console.log("no es un numero");
           return false;
         }
     }
-    
+
 </script>
 
 <script>
-
-$(function () {console.log("{{url('crearSedes/'.$id)}}")});
 
 //Damos de alta una nueva sede en la BD.
 
@@ -137,18 +142,19 @@ $(function () {console.log("{{url('crearSedes/'.$id)}}")});
             {
                 $('#addformSede').on('submit', function(e)
                 {
-                    e.preventDefault();
-                    
+                   e.preventDefault();
+                $("button").prop("disabled", true);
+
                     $.ajax({
                         type: "post",
                         url: "{{url('crearSedes/'.$id)}}",
                         data: $('#addformSede').serialize(),
                         success: function (response) {
-                            console.log(response)
+
                             $('#nuevaSede').modal('hide')
                             $('.yajra-sedes').DataTable().ajax.reload();
-                            $('#Domicilio').val('');	
-                            $('#provincia_sede').val('');	
+                            $('#Domicilio').val('');
+                            $('#provincia_sede').val('');
                             $('#Localidad').val('');
 
                             Swal.fire({
@@ -160,9 +166,11 @@ $(function () {console.log("{{url('crearSedes/'.$id)}}")});
                             toast: true
 
                             })
+                            $("button").prop("disabled", false);
                         },
                         error: function(error){
-                            console.log(error)
+                            //console.log(error)
+                        $("button").prop("disabled", false);
                             alert("ERROR!! Sede no guardada")
                         }
                     });
@@ -171,6 +179,6 @@ $(function () {console.log("{{url('crearSedes/'.$id)}}")});
             }
         );
 
-
     </script>
+
 @endpush

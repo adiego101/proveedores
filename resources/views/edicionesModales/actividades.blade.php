@@ -1,4 +1,6 @@
+@if ($mode != 'show')
 <form id="addformActividad">
+@endif
     @csrf
   <!-- Modal -->
   <div class="modal fade" id="nuevaActividad" tabindex="-1" role="dialog" aria-labelledby="modalNuevaActividad" aria-hidden="true">
@@ -44,33 +46,37 @@
 
         </div>
         <div class="modal-footer">
+            @if ($mode != 'show')
             <button type="submit" class="btn btn-success">Guardar</button>
+
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+            @else
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+            @endif
         </div>
       </div>
     </div>
   </div>
-</form>
+  @if ($mode != 'show')
 
+</form>
+@endif
 @push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-
     <script>
-        $(function() {
-            console.log("{{ url('crearActividades/' . $id) }}")
-        });
+
         $(document).ready(function() {
             $('#addformActividad').on('submit', function(e) {
-                e.preventDefault();
+               e.preventDefault();
+                $("button").prop("disabled", true);
 
                 $.ajax({
                     type: "post",
                     url: "{{ url('crearActividades/' . $id) }}",
                     data: $('#addformActividad').serialize(),
                     success: function(response) {
-                        console.log(response)
+
                         $('#nuevaActividad').modal('hide')
 
                         Swal.fire({
@@ -82,12 +88,14 @@
                             toast: true
 
                             })
+                            $("button").prop("disabled", false);
 
                         $('.yajra-actividades').DataTable().ajax.reload();
 
                     },
                     error: function(error) {
-                        console.log(error)
+                        //console.log(error)
+                        $("button").prop("disabled", false);
                         alert("ERROR!! Actividad no guardada")
                     }
                 });
@@ -95,5 +103,5 @@
         });
 
     </script>
-    
+
 @endpush

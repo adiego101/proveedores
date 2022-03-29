@@ -7,7 +7,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title" id="modalEditarSeguro">Editar Seguro</h1>
+          <h1 class="modal-title" id="modalEditarSeguro">Seguro</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -41,19 +41,22 @@
         </div>
 
         <div class="modal-footer">
-            @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
+            @if ($mode != 'show')
+            <button type="submit" class="btn btn-success">Guardar</button>
+
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-        </div>
+            @else
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+            @endif     </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
 
 </form>
-
+@endif
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script type="text/javascript">
 
@@ -67,7 +70,7 @@
         } else if(code>=48 && code<=57) { // es un numero.
           return true;
         } else{ // otras teclas
-        console.log("no es un numero");
+        //console.log("no es un numero");
           return false;
         }
     }
@@ -81,18 +84,19 @@ $(document).ready(  function()
             {
                 $('#editformSeguro').on('submit', function(e)
                 {
-                    e.preventDefault();
+                   e.preventDefault();
+                $("button").prop("disabled", true);
 
                     var id_proveedor = $('#id_proveedor_seguro').val();
-           
+
                     $.ajax({
                         type: "post",
                         url: "{{url('guardarSeguros/')}}/"+id_proveedor,
                         data: $('#editformSeguro').serialize(),
                         success: function (response) {
-                           
+
                             $('#editarSeguro').modal('hide')
-                        
+
                             Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -102,12 +106,14 @@ $(document).ready(  function()
                             toast: true
 
                             })
+                            $("button").prop("disabled", false);
 
                             $('.yajra-seguros').DataTable().ajax.reload();
 
                         },
                         error: function(error){
-                            console.log(error)
+                            //console.log(error)
+                        $("button").prop("disabled", false);
                             alert("ERROR!! Seguro no modificado")
                         }
                     });

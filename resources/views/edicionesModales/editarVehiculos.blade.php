@@ -7,7 +7,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title" id="modalEditarVehiculo">Editar Vehículo</h1>
+          <h1 class="modal-title" id="modalEditarVehiculo">Vehículo</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -41,19 +41,23 @@
 
         </div>
         <div class="modal-footer">
-            @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
+            @if ($mode != 'show')
+            <button type="submit" class="btn btn-success">Guardar</button>
+
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-        </div>
+            @else
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+            @endif
+              </div>
       </div>
     </div>
   </div>
   @if ($mode != 'show')
 </form>
 @endif
-@push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+@push('js')
 
 <script>
 
@@ -61,7 +65,8 @@
             {
                 $('#editformVehiculo').on('submit', function(e)
                 {
-                    e.preventDefault();
+                   e.preventDefault();
+                $("button").prop("disabled", true);
 
                     var id_proveedor = $('#id_proveedor_patente').val();
 
@@ -70,7 +75,7 @@
                         url: "{{url('guardarPatentes/')}}/"+id_proveedor,
                         data: $('#editformVehiculo').serialize(),
                         success: function (response) {
-                        
+
                             $('#editarVehiculo').modal('hide')
 
                             Swal.fire({
@@ -82,12 +87,14 @@
                             toast: true
 
                             })
+                            $("button").prop("disabled", false);
 
                             $('.yajra-vehiculos').DataTable().ajax.reload();
 
                         },
                         error: function(error){
-                            console.log(error)
+                            //console.log(error)
+                        $("button").prop("disabled", false);
                             alert("ERROR!! Vehiculo no modificado")
                         }
                     });

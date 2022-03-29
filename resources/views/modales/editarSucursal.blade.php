@@ -87,7 +87,7 @@
                         <div class="row">
                             <div class="col-sm">
                                 <label for="modal_telefono_sucursal_cod">Código de área:</label><br>
-                                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="modal_telefono_sucursal_cod" maxlength="14">
+                                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="modal_telefono_sucursal_cod" maxlength="10">
                             </div>
                             <div class="col-sm">
                                 <label for="modal_telefono_sucursal">Número de Teléfono:</label><br>
@@ -107,10 +107,8 @@
         </div>
     </div>
 </div>
-@push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+@push('js')
 
 <script type="text/javascript">
 

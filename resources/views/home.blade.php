@@ -1,21 +1,15 @@
-@extends('adminlte::page')
+@extends('layouts')
 
-@section('content')
+@section('content2')
 
 
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-        
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <p>{{ $message }}</p>
                 </div>
             @endif
 
-            <div class="card">
-            
+
                 <div class="card-header"> {{ __('Registro Único de Proveedores de Actividades Económicas de la provincia de Santa Cruz.') }}</div>
 
                 <div class="card-body">
@@ -28,10 +22,6 @@
                     <div align="center">
                         <img src="logo_minpro.png" alt="Logo del Ministerio de la Producción, Comercio e Industria" title="Ministerio de la Producción, Comercio e Industria">
                     </div>
-                    
+
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

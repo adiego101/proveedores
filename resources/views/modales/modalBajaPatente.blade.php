@@ -8,7 +8,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p>¿Está seguro que desea dar de baja la Patente?</p>
+                <p>¿Está seguro que desea dar de baja el Vehículo?</p>
                 <p>Esta operación <b>NO</b> podrá deshacerse.</p>
             </div>
             <div class="modal-footer">
@@ -21,14 +21,9 @@
     </div>
 </div>
 
-
 @push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-
 <script type="text/javascript">
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
     $(document).on("click", ".btn_baja_patente", function() {
 
@@ -38,10 +33,8 @@
 
         $.ajax({
             type: "POST",
-            //Si colocamos un numero (id) funciona sin problemas... VER
             url: "{{url('bajaPatentes/')}}/"+id,
             success: function() {
-                 // En caso de que se ejecute
                  $('.yajra-vehiculos').DataTable().ajax.reload();
 
                  Swal.fire({
@@ -56,12 +49,11 @@
         }
         });
 
-
-        //se recarga la tabla para que desaparesca la fila dada de baja
         //Ocultamos el modal
         $('#modal_baja_patente').modal('hide');
 
     });
 
 </script>
+
 @endpush

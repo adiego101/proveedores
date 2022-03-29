@@ -186,7 +186,7 @@
                 let dom_fiscal = $("#dom_fiscal").val();
                 let antiguedad = $("#antiguedad").val();
                 let valor_agregado = $("#valor_agregado").val();
-                console.log(valor_agregado);
+                //console.log(valor_agregado);
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!=''){
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
                     mostrarProveedor($("#valor_indice_rupae").val());

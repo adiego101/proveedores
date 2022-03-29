@@ -7,7 +7,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title" id="modalNuevaActividad">Editar Actividad</h1>
+          <h1 class="modal-title" id="modalNuevaActividad">Actividad</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -50,9 +50,15 @@
         <div class="modal-footer">
             <input type="hidden" id="editar_actividad1">
             <input type="hidden" id="ver_actividad1">
-            @if ($mode != 'show') <button type="submit" class="btn btn_editar_actividad btn-success">Guardar</button> @endif
+            @if ($mode != 'show')
+            <button type="submit" class="btn btn-success">Guardar</button>
+
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-        </div>
+            @else
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+            @endif
+              </div>
       </div>
     </div>
   </div>
@@ -61,9 +67,6 @@
 @endif
 
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
     <script>
         $(document).on("click", ".btn_editar_actividad", function() {
@@ -83,8 +86,9 @@
 
         $(document).ready(function() {
             $('#editara').on('submit', function(e) {
-                
-                e.preventDefault();
+
+               e.preventDefault();
+                $("button").prop("disabled", true);
                 let id_registro = $("#editar_actividad1").val();
 
                 $.ajax({
@@ -92,9 +96,9 @@
                     url: "{{ url('guardarActividades/') }}/" + id_registro,
                     data: $('#editara').serialize(),
                     success: function(response) {
-                      
+
                         $('#editarActividad').modal('hide')
-                  
+
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -104,12 +108,14 @@
                             toast: true
 
                             })
+                            $("button").prop("disabled", false);
 
                         $('.yajra-actividades').DataTable().ajax.reload();
 
                     },
                     error: function(error) {
-                        console.log(error)
+                        //console.log(error)
+                        $("button").prop("disabled", false);
                         alert("ERROR!! Actividad no guardado")
                     }
                 });
@@ -128,7 +134,7 @@
             function abrirModalverActividad(response) {
 
                 $('#editarActividad').modal('show');
-              
+
                 $('#tipo_actividad1').val(response['desc_tipo_actividad']);
                 $('#actividad_11').val(response['desc_actividad']);
 
@@ -139,5 +145,7 @@
 
             }
         }
+
     </script>
+
 @endpush

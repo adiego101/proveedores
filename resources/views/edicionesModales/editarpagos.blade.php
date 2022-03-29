@@ -7,7 +7,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title" id="modalEditarPago">Editar Pago</h1>
+                    <h1 class="modal-title" id="modalEditarPago">Pago</h1>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -42,9 +42,15 @@
                     <input type="hidden" id="editar_pago">
                     <input type="hidden" id="ver_pago">
 
-                    @if ($mode != 'show') <button type="submit" class="btn btn_editar_pago btn-success">Guardar</button> @endif
+                    @if ($mode != 'show')
+                    <button type="submit" class="btn btn-success">Guardar</button>
+
                     <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-                </div>
+                    @else
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+                    @endif
+                        </div>
             </div>
         </div>
     </div>
@@ -54,9 +60,6 @@
 @endif
 
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
     <script>
         $(document).on("click", ".btn_editar_pago", function() {
@@ -77,7 +80,8 @@
         @if ($mode != 'show')
         $(document).ready(function() {
             $('#editarp').on('submit', function(e) {
-                e.preventDefault();
+               e.preventDefault();
+                $("button").prop("disabled", true);
                 let id_registro = $("#editar_pago").val();
 
                 $.ajax({
@@ -85,7 +89,7 @@
                     url: "{{ url('guardarPagos/') }}/" + id_registro,
                     data: $('#editarp').serialize(),
                     success: function(response) {
-             
+
                         $('#editarPago').modal('hide')
 
                         Swal.fire({
@@ -97,12 +101,14 @@
                             toast: true
 
                             })
+                            $("button").prop("disabled", false);
 
                         $('.yajra-pagos').DataTable().ajax.reload();
 
                     },
                     error: function(error) {
-                        console.log(error)
+                        //console.log(error)
+                        $("button").prop("disabled", false);
                         alert("ERROR!! Pago no guardado")
                     }
                 });

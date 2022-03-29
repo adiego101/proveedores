@@ -22,14 +22,14 @@
 
                     <label for="modal_rnpa">RNPA:</label><br>
                     <input type="text" class="form-control" aria-describedby="basic-addon1" id="modal_rnpa" name="modal_rnpa" placeholder="Ingrese el RNPA" maxlength="8"><br>
-                 
+
                     <label for="modal_unidad_producida">Unidad producida:</label><br>
                     <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="modal_unidad_producida"
                     name="modal_unidad_producida" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9"><br>
 
                     <label for="modal_produccion_total">Capacidad de producción total:</label><br>
                     <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="modal_produccion_total" name="modal_produccion_total" placeholder="Ingrese la producción total" maxlength="9"><br>
-                       
+
                     <div class="modal-footer">
                         <input id="numero_fila_producto" name="numero_fila_producto" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
@@ -41,9 +41,6 @@
     </div>
 
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script type="text/javascript">
 

@@ -1,4 +1,3 @@
-
 <fieldset>
 
 <div class="row">
@@ -6,11 +5,6 @@
 </div>
 
 <br/>
-
-<!-- <input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="vehiculos_afectados" name="vehiculos_afectados"
-value="0">
-<label for="vehiculos_afectados">Posee vehículos afectados a la actividad económica que desarrolla</label><br>
-<br> -->
 
 <h1>Vehículos:</h1><br>
 
@@ -45,11 +39,6 @@ value="0">
 
     <hr>
 
-<!-- <input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="seguros_sta_cruz"  name="seguros_sta_cruz"
-value="0">
-<label for="seguros_sta_cruz">Posee seguros contratados con promotores residentes en nuestra provincia</label><br>
-<br> -->
-
 <h1>Seguros:</h1><br>
 
 @if ($mode == "edit")
@@ -61,8 +50,6 @@ value="0">
 <hr>
 @endif
 <div>
-
-
 
     <table style="width:100%" class="yajra-seguros table table-hover  table-striped table-condensed">
         <thead>
@@ -84,11 +71,6 @@ value="0">
 
     <hr>
 
-<!-- <input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="servicio_personal_especializado" name="servicio_personal_especializado"
-value="0">
-<label for="servicio_personal_especializado">Utiliza como sede de la actividad económica que desarrolla algún inmueble que tribute impuesto inmobiliario en localidades de la Provincia de Santa Cruz</label><br>
-<br> -->
-
 <h1>Sedes:</h1><br>
 
 @if ($mode == "edit")
@@ -102,7 +84,6 @@ value="0">
 @endif
 
     <div>
-
         <table style="width:100%" id="table" class="yajra-sedes table table-hover  table-striped table-condensed">
             <thead>
                 <tr>
@@ -115,10 +96,10 @@ value="0">
             </tbody>
         </table>
     </div>
+
     @include('modales.modalBajaSede')
 
     <br />
-
 
     <div class="row navbuttons ">
     <div class="col-6 col-sm-auto" id="btnPrevious">
@@ -132,18 +113,11 @@ value="0">
 </fieldset>
 
 @push('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-
 
 <!-- Scripts VEHICULOS -->
 
 <script type="text/javascript">
   $(function () {
-
-    console.log({{$id}});
 
     var table = $('.yajra-vehiculos').DataTable({
     language: {
@@ -187,7 +161,6 @@ value="0">
   });
 
 
-
     function bajaPatente(id_registro) {
 
         //Desplegamos el modal
@@ -218,19 +191,20 @@ value="0">
             $('#modelos').val(response [0].modelo);
             $('#inscriptos_en').val(response [0].inscripto_en);
             $('#id_proveedor_patente').val(response [0].id_proveedor_patente);
-            
+
         }
 
     }
 
 </script>
 
+
+
 <!-- Scripts SEGUROS -->
 
 <script type="text/javascript">
-    $(function () {
 
-      console.log({{$id}});
+    $(function () {
 
       var table = $('.yajra-seguros').DataTable({
       language: {
@@ -283,7 +257,7 @@ value="0">
 
     });
 
- 
+
 
     function bajaSeguro(id_registro) {
 
@@ -304,9 +278,9 @@ value="0">
         }
         });
 
-    
+
         function abrirModalEditarSeguro(response){
-    
+
             //Desplegamos el modal
             $('#editarSeguro').modal('show');
             //Enviamos los valores a cada campo
@@ -318,20 +292,20 @@ value="0">
             vigencia = vigencia_hasta[0];
             $('#vigencias_hasta').val(vigencia);
             $('#id_proveedor_seguro').val(response [0].id_proveedor_seguro);
-            
+
         }
-   
+
     }
 
   </script>
 
 
+
 <!-- Scripts SEDES -->
 
 <script type="text/javascript">
-    $(function () {
 
-      console.log({{$id}});
+    $(function () {
 
       var table = $('.yajra-sedes').DataTable({
       language: {
@@ -380,6 +354,7 @@ value="0">
         $('#baja_sede').val(id_registro);
     }
 
+
     //Enviamos el id del registro que queremos modificar (id de la tabla)
     function editarSede(id_registro) {
 
@@ -393,7 +368,7 @@ value="0">
 
 
         function abrirModalEditarSede(response){
-         
+
             //Desplegamos el modal
             $('#editarSede').modal('show');
             //Enviamos los valores a cada campo
@@ -401,11 +376,12 @@ value="0">
             $('#provincia_sedes').val(response [0].nombre_provincia);
             $('#Localidades').val(response [0].id_localidad);
             $('#id_proveedor_sede').val(response [0].id_proveedor_sede);
-            console.log(response);
- 
+            //console.log(response);
+
         }
-           
+
     }
+
   </script>
 
 @endpush

@@ -123,8 +123,7 @@
 
 @push('js')
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
 
 
     <script type="text/javascript">
@@ -134,7 +133,7 @@
         let codigo_actividad;
         let m = 1; //contador para asignar id al boton que borrara la fila
         let contador = 0; //Contador para llevar el registro de la cantidad de actividades principales agregadas.
-    
+
         $("#add_actividad").on("click", function(e) {
 
             tipo_actividad = $("#tipo_actividad").val();
@@ -178,7 +177,7 @@
                 })
 
             }else{
-          
+
                 //Desplegamos el modal
                 $('#modal_validar_actividad').modal('show');
 
@@ -198,7 +197,7 @@
             if(valor_tipo == 'Primaria'){
                 contador = 0;
             }
-        
+
             //borra la fila
             $("#row_actividad" + button_id + "").remove();
 
@@ -225,7 +224,7 @@
                         '</tr>'
                     );
                 }
-           
+
         });
 
     </script>
@@ -295,7 +294,7 @@ $("#add_producto").on("click", function(e) {
                     toast: true
 
         })
-        
+
 
     } else {
 
@@ -308,14 +307,14 @@ $("#add_producto").on("click", function(e) {
 
             unidad_producida_css.style.border = '2px dashed red';
         }
-        
-        
+
+
         /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
         //Desplegamos el modal
         $('#modal_validar_producto').modal('show');
 
     }
-  
+
 });
 
 
@@ -352,7 +351,7 @@ $(document).on("click", ".btn_remove_producto", function() {
                 '</tr>'
         );
     }
-   
+
 });
 
 

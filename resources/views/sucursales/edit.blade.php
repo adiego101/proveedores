@@ -1,11 +1,18 @@
 <!-- Modal -->
+@if ($mode != 'show')
+
 <form id="editformSucursal">
+    @endif
     @csrf
     <div class="modal fade" id="editarSucursal" tabindex="-1" role="dialog" aria-labelledby="modalEditarSucursal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalEditarSucursal">Modal title</h5>
+                    @if ($mode != 'show')
+                    <h1 class="modal-title" id="modalEditarSucursal">Editar Sucursal</h1>
+                    @else
+                    <h1 class="modal-title" id="modalEditarSucursal">Sucursal</h1>
+                    @endif
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -16,17 +23,29 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    @if ($mode != 'show')
+                        <button type="submit" class="btn btn-success">Guardar</button>
+
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+                        @else
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+                        @endif
                 </div>
             </div>
         </div>
     </div>
+    @if ($mode != 'show')
+
 </form>
+
+@endif
+
 
 @push('js')
 
 <script type="text/javascript">
+
 	$(document).ready(function(){
 
 		$('#provincia').change(function(){
@@ -38,10 +57,12 @@
         {{isset($sucursal->id_localidad) ? 'recargarListaSucursal2();' : ''}}
 
         };
+
 </script>
 
 
 <script type="text/javascript">
+
 	function recargarListaSucursal(){
 		$.ajax({
 			type:"GET",
@@ -51,6 +72,8 @@
 			}
 		});
 	}
+
+
     function recargarListaSucursal2(){
         $.ajax({
             type:"GET",
@@ -60,9 +83,11 @@
             }
         });
     }
+
 </script>
 
 <script type="text/javascript">
+
     function valideKey(evt){
 
         // El código es la representación decimal ASCII de la clave presionada.
@@ -73,18 +98,14 @@
         } else if(code>=48 && code<=57) { // es un numero.
           return true;
         } else{ // otras teclas
-        console.log("no es un numero");
+        //console.log("no es un numero");
           return false;
         }
     }
-    </script>
+
+</script>
 
 <script>
-    //Damos de alta una nueva sede en la BD.
-    $(function () {
-        console.log($('#id_sucursal').val());
-        console.log("{{url('guardarSucursales/')}}"+$('#id_sucursal').val())
-    });
 
     $(document).ready(  function()
         {
@@ -93,8 +114,7 @@
             {
                 let id_sucursal = $("#editar_sucursal").val();
 
-                console.log($("#editar_sucursal").val());
-
+                $("button").prop("disabled", true);
 
                 e.preventDefault();
 
@@ -103,14 +123,25 @@
                     url: "{{url('guardarSucursales/')}}/"+id_sucursal,
                     data: $('#editformSucursal').serialize(),
                     success: function (response) {
-                        console.log(response);
+
                         $('#editarSucursal').modal('hide');
-                        alert("Sucursal Guardada");
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Sucursal Guardada',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+                            $("button").prop("disabled", false);
+
                         $('.yajra-sucursal').DataTable().ajax.reload();
 
                     },
                     error: function(error){
-                        console.log(error)
+                        //console.log(error)
+                        $("button").prop("disabled", false);
                         alert("ERROR!! Sucursal no guardada")
                     }
                 });
@@ -118,7 +149,7 @@
             );
         }
     );
+
 </script>
+
 @endpush
-
-

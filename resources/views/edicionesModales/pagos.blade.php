@@ -1,4 +1,7 @@
+@if ($mode != 'show')
+
 <form id="addform">
+    @endif
     @csrf
     <!-- Modal -->
     <div id="nuevoPago" class="modal fade" tabindex="-1" aria-labelledby="modalNuevoPago" role="dialog">
@@ -36,36 +39,43 @@
                 <div class="modal-footer">
                     <input type="hidden" id="ver_pago">
 
-                    @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
+                    @if ($mode != 'show')
+                    <button type="submit" class="btn btn-success">Guardar</button>
+
                     <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-                </div>
+                    @else
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+                    @endif
+                         </div>
             </div>
         </div>
     </div>
+    @if ($mode != 'show')
+
 </form>
+@endif
 
 @push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-
     <script>
-       
+
         $(document).ready(function() {
             $('#addform').on('submit', function(e) {
 
-                e.preventDefault();
+               e.preventDefault();
+                $("button").prop("disabled", true);
 
                 $.ajax({
                     type: "post",
                     url: "{{ url('crearPagos/' . $id) }}",
                     data: $('#addform').serialize(),
                     success: function(response) {
-                    
+
                         $('#nuevoPago').modal('hide')
                         $('.yajra-pagos').DataTable().ajax.reload();
-                        $('#fecha').val('');	
-                        $('#importe').val('');	
+                        $('#fecha').val('');
+                        $('#importe').val('');
                         $('#observacionespago').val('');
 
                         Swal.fire({
@@ -77,9 +87,12 @@
                             toast: true
 
                             })
+                            $("button").prop("disabled", false);
                     },
                     error: function(error) {
-                        console.log(error)
+                        //console.log(error)
+                        $("button").prop("disabled", false);
+
                         alert("ERROR!! Pago no guardado")
                     }
                 });

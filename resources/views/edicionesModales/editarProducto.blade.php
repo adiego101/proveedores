@@ -7,7 +7,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title" id="modalEditarProducto">Editar Producto</h1>
+          <h1 class="modal-title" id="modalEditarProducto">Producto</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -49,9 +49,14 @@
         <div class="modal-footer">
             <input type="hidden" id="editar_producto">
             <input type="hidden" id="ver_producto">
-          @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
-          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-        </div>
+            @if ($mode != 'show')
+            <button type="submit" class="btn btn-success">Guardar</button>
+
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+            @else
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+            @endif   </div>
       </div>
     </div>
   </div>
@@ -60,9 +65,6 @@
 @endif
 
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
     <script>
         $(document).on("click", ".btn_editar_producto", function() {
@@ -82,7 +84,8 @@
         $(document).ready(function() {
             $('#editarprod').on('submit', function(e) {
 
-                e.preventDefault();
+               e.preventDefault();
+                $("button").prop("disabled", true);
                 let id_registro = $("#editar_producto").val();
 
                 $.ajax({
@@ -90,9 +93,9 @@
                     url: "{{ url('guardarProductos/') }}/" + id_registro,
                     data: $('#editarprod').serialize(),
                     success: function(response) {
-                     
+
                         $('#editarproducto').modal('hide')
-                      
+
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -103,11 +106,14 @@
 
                             })
 
+                        $("button").prop("disabled", false);
+
                         $('.yajra-productos').DataTable().ajax.reload();
 
                     },
                     error: function(error) {
-                        console.log(error)
+                        //console.log(error)
+                        $("button").prop("disabled", false);
                         alert("ERROR!! Producto no guardado")
                     }
                 });
@@ -127,7 +133,7 @@
 
                 $('#editarproducto').modal('show');
 
-                $('#producto_elaborado1').val(Number(response['producto_elaborado']));
+                $('#producto_elaborado1').val(response['producto_elaborado']);
                 $('#rnpa1').val(response['rnpa']);
                 $('#Producida_unidad1').val(response['Producida_unidad']);
                 $('#capacidad_produccion_total1').val(response['capacidad_produccion_total']);
@@ -142,5 +148,5 @@
         }
 
     </script>
-    
+
 @endpush

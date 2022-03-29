@@ -7,7 +7,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title" id="modalEditarSede">Editar Sede</h1>
+          <h1 class="modal-title" id="modalEditarSede">Sede</h1>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -59,9 +59,15 @@
                 </fieldset>
         </div>
         <div class="modal-footer">
-            @if ($mode != 'show') <button type="submit" class="btn btn-success">Guardar</button> @endif
+            @if ($mode != 'show')
+            <button type="submit" class="btn btn-success">Guardar</button>
+
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-        </div>
+            @else
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+            @endif
+         </div>
       </div>
     </div>
   </div>
@@ -70,9 +76,6 @@
 @endif
 
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script type="text/javascript">
 
@@ -110,7 +113,7 @@ window.onload = function(){
         } else if(code>=48 && code<=57) { // es un numero.
           return true;
         } else{ // otras teclas
-        console.log("no es un numero");
+        //console.log("no es un numero");
           return false;
         }
     }
@@ -118,24 +121,24 @@ window.onload = function(){
 
 <script>
 
-
 //Modificamos los datos de una sede en la BD.
         $(document).ready(  function()
             {
                 $('#editformSede').on('submit', function(e)
                 {
-                    e.preventDefault();
+                   e.preventDefault();
+                $("button").prop("disabled", true);
 
                     var id_proveedor = $('#id_proveedor_sede').val();
-                 
+
                     $.ajax({
                         type: "post",
                         url: "{{url('guardarSedes/')}}/"+id_proveedor,
                         data: $('#editformSede').serialize(),
                         success: function (response) {
-                         
+
                             $('#editarSede').modal('hide')
-                        
+
                             Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -145,13 +148,14 @@ window.onload = function(){
                             toast: true
 
                             })
-
+                            $("button").prop("disabled", false);
 
                             $('.yajra-sedes').DataTable().ajax.reload();
 
                         },
                         error: function(error){
-                            console.log(error)
+                            //console.log(error)
+                        $("button").prop("disabled", false);
                             alert("ERROR!! Sede no modificada")
                         }
                     });
@@ -161,5 +165,5 @@ window.onload = function(){
         );
 
     </script>
-    
+
 @endpush

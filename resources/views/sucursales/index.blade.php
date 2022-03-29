@@ -2,7 +2,7 @@
 @if ($mode == "edit")
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevaSucursal">
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaSucursal">
     Agregar Nueva Sucursal
   </button><br>
 <hr>
@@ -36,15 +36,11 @@
 
 @push('js')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
   $("#document").ready(function () {
 
-    console.log({{$id}});
 
     var table = $('.yajra-datatable').DataTable({
     language: {
@@ -115,9 +111,32 @@
     $(document).on('click', '.edit_sucursal', function() {
         var id_proveedor = $(this).data('id_proveedor');
         var id_sucursal = $(this).data('id_sucursal');
-        console.log('id_proveedor='+id_proveedor+' id_sucursal='+id_sucursal);
         $.ajax({
             url:"{{ url('editarSucursales/') }}/" + id_sucursal,
+            success:function(view) {
+
+                    /*console.log('valor del input 1-->'+$('#modal_calle_sucursal').val());
+                    console.log('valor con get element id = '+document.getElementById('modal_calle_sucursal').value);
+                    $('#modal_calle_sucursal').val(sucursal.calle);
+                    $("#modal_calle_sucursal").trigger("change");
+                    console.log('valor del input 2-->'+$('#modal_calle_sucursal').val());
+                    console.log('valor con get element id = '+document.getElementById('modal_calle_sucursal').value);
+                    $('#modal_numero_sucursal').val(sucursal.numero);
+                    $('#modal_editarSucursal').modal('toggle'); */
+
+                      $("#respuesta").html(view);
+                      $("#editar_sucursal").val(id_sucursal) ;
+
+                      $('#editarSucursal').modal('show');
+                }
+        });
+    });
+    $(document).on('click', '.view_sucursal', function() {
+        var id_proveedor = $(this).data('id_proveedor');
+        var id_sucursal = $(this).data('id_sucursal');
+        console.log('id_proveedor='+id_proveedor+' id_sucursal='+id_sucursal);
+        $.ajax({
+            url:"{{ url('verSucursales/') }}/" + id_sucursal,
             success:function(view) {
 
                     /*console.log('valor del input 1-->'+$('#modal_calle_sucursal').val());

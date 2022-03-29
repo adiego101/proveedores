@@ -1,5 +1,8 @@
 <!-- Modal -->
+@if ($mode != 'show')
+
   <form id="addformproducto">
+      @endif
     @csrf
   <div class="modal fade" id="nuevoProducto" tabindex="-1" role="dialog" aria-labelledby="modalNuevoProducto" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -45,18 +48,23 @@
 
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success">Guardar</button>
-          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
-        </div>
+            @if ($mode != 'show')
+            <button type="submit" class="btn btn-success">Guardar</button>
+
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+            @else
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+            @endif
+             </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
+
 </form>
-
+@endif
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script>
 
@@ -64,20 +72,21 @@
             {
                 $('#addformproducto').on('submit', function(e)
                 {
-                    e.preventDefault();
+                   e.preventDefault();
+                $("button").prop("disabled", true);
 
                     $.ajax({
                         type: "post",
                         url: "{{url('crearProductos/'.$id)}}",
                         data: $('#addformproducto').serialize(),
                         success: function (response) {
-                           
+
                             $('#nuevoProducto').modal('hide')
                             $('.yajra-productos').DataTable().ajax.reload();
-                            $('#producto_elaborado').val('');	
-                            $('#rnpa').val('');	
-                            $('#Producida_unidad').val('');	
-                            $('#capacidad_produccion_total').val('');	
+                            $('#producto_elaborado').val('');
+                            $('#rnpa').val('');
+                            $('#Producida_unidad').val('');
+                            $('#capacidad_produccion_total').val('');
 
                             Swal.fire({
                             position: 'top-end',
@@ -88,9 +97,11 @@
                             toast: true
 
                             })
+                            $("button").prop("disabled", false);
                         },
                         error: function(error){
-                            console.log(error)
+                            //console.log(error)
+                        $("button").prop("disabled", false);
                             alert("ERROR!! Producto no guardado")
                         }
                     });

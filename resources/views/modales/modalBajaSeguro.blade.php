@@ -21,14 +21,9 @@
     </div>
 </div>
 
-
 @push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-
 <script type="text/javascript">
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
     $(document).on("click", ".btn_baja_seguro", function() {
 
@@ -37,10 +32,8 @@
 
         $.ajax({
             type: "POST",
-            //Si colocamos un numero (id) funciona sin problemas... VER
             url: "{{url('bajaSeguros/')}}/"+id,
             success: function() {
-                 // En caso de que se ejecute
                  $('.yajra-seguros').DataTable().ajax.reload();
 
                  Swal.fire({
@@ -55,8 +48,6 @@
         }
         });
 
-        //se recarga la tabla para que desaparesca la fila dada de baja
-        $('.yajra-seguros').DataTable().ajax.reload();
         //Ocultamos el modal
         $('#modal_baja_seguro').modal('hide');
 

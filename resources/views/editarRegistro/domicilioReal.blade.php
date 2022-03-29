@@ -59,11 +59,12 @@ value="{{ isset($proveedor->pagina_web) ? $proveedor->pagina_web : '' }}"><br>
                     @endforelse
 
                 </div>
+                @if ( $mode != "show")
+
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_email_real" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
                 </div>
-
-
+                @endif
 
             </div>
             <div class="col-sm">
@@ -107,7 +108,6 @@ value="{{ isset($proveedor_domicilio_real->barrio) ? $proveedor_domicilio_real->
                 <input type="text" class="form-control limpiar" aria-describedby="basic-addon1" id="cp_real" name="cp_real" placeholder="Ingrese el código postal" @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio_real->codigo_postal : '' }}" maxlength="8"><br>
 
-@if ( $mode != "show")
 
                 <br>
                 <br>
@@ -120,10 +120,10 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
                         <div class="col-sm">
                         @forelse($proveedor_telefono_real as $telefono_real)
                             <label for="telefono_real_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->cod_area_tel}}" maxlength="14"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->cod_area_tel}}" maxlength="10"> <br>
                         @empty
                             <label for="telefono_real_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="14"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="10"> <br>
                             @endforelse
                         </div>
 
@@ -140,6 +140,7 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
                     </div>
 
                 </div>
+                @if ( $mode != "show")
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_telefono_real" title="Agregue un nuevo teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>
@@ -159,10 +160,11 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
         <a class="btn btn-primary btnNext">Siguiente</a>
     </div>
 </div>
+
 @push('js')
 
-
 <script type="text/javascript">
+
     $(document).ready(function() {
 
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
@@ -177,7 +179,7 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
                                  '<div class="col-sm">'+
                                  '<br>'+
                                  '<label for="telefono_real_cod' + x +'">Código de área:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod' + x +'" name="telefono_real_cod[]" maxlength="14">'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_real_cod' + x +'" name="telefono_real_cod[]" maxlength="10">'+
                                     '</div>'+
                                     '<div class="col-sm">'+
                                     '<br>'+
@@ -307,7 +309,7 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
 
 <script type="text/javascript">
   window.onload = function(){
-        console.log("localidad real");
+        //console.log("localidad real");
         };
     function recargarListaRealEdit2(){
         $.ajax({
@@ -341,4 +343,5 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
 </script>
 
 @endpush
+
 </fieldset>

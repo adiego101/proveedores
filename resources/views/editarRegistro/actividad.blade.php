@@ -39,7 +39,6 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
 
     @include('modales.modalBajaActividad')
 
-
     <hr>
 
     <h3>Productos</h3>
@@ -95,16 +94,10 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
     @include('modales.editarProducto')
 
 @push('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
 
   $(function () {
-
-    console.log({{$id}});
 
     var table = $('.yajra-productos').DataTable({
     language: {
@@ -135,8 +128,6 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
             {data: 'rnpa', name: 'rnpa'},
             {data: 'Producida_unidad', name: 'Producida_unidad'},
             {data: 'capacidad_produccion_total', name: 'capacidad_produccion_total'},
-            //{data: 'cuit', name: 'cuit'},
-            //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
             {
                 data: 'action',
                 name: 'action',
@@ -149,8 +140,6 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
   });
 
   $(function () {
-
-    console.log({{$id}});
 
     var table = $('.yajra-actividades').DataTable({
     language: {
@@ -180,8 +169,6 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
             {data: 'cod_actividad', name: 'cod_actividad'},
             {data: 'desc_actividad', name: 'desc_actividad'},
             {data: 'desc_tipo_actividad', name: 'desc_tipo_actividad'},
-
-            //{data: 'en_la_provincia_de', name: 'en_la_provincia_de'},
             {
                 data: 'action',
                 name: 'action',
@@ -193,7 +180,7 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
 
   });
 
-    //Funciones a implementar
+ 
 
     function verRegistro() {
 

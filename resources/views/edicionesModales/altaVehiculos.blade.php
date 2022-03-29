@@ -1,5 +1,8 @@
 <!-- Modal -->
+@if ($mode != 'show')
+
   <form id="addformVehiculo">
+      @endif
     @csrf
   <div class="modal fade" id="nuevoVehiculo" tabindex="-1" role="dialog" aria-labelledby="modalNuevoVehiculo" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -12,7 +15,6 @@
         </div>
         <div class="modal-body">
             <fieldset>
-
                     <div class="row">
                         <div class="col-sm">
                             <label for="marca">Marca:</label><br />
@@ -31,44 +33,46 @@
 
                         </div>
                     </div>
-
                 </fieldset>
-
         </div>
         <div class="modal-footer">
+            @if ($mode != 'show')
             <button type="submit" class="btn btn-success">Guardar</button>
+
             <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+            @else
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cerrar</button>
+
+            @endif
         </div>
       </div>
     </div>
   </div>
+  @if ($mode != 'show')
+
 </form>
+@endif
 @push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-
 <script>
-
-$(function () {console.log("{{url('crearPatentes/'.$id)}}")});
-
 
         $(document).ready(  function()
             {
                 $('#addformVehiculo').on('submit', function(e)
                 {
-                    e.preventDefault();
+                   e.preventDefault();
+                $("button").prop("disabled", true);
 
                     $.ajax({
                         type: "post",
                         url: "{{url('crearPatentes/'.$id)}}",
                         data: $('#addformVehiculo').serialize(),
                         success: function (response) {
-                            console.log(response)
+
                             $('#nuevoVehiculo').modal('hide')
                             $('.yajra-vehiculos').DataTable().ajax.reload();
-                            $('#marca').val('');	
-                            $('#dominio').val('');	
+                            $('#marca').val('');
+                            $('#dominio').val('');
                             $('#modelo').val('');
                             $('#inscripto_en').val('');
 
@@ -81,10 +85,12 @@ $(function () {console.log("{{url('crearPatentes/'.$id)}}")});
                             toast: true
 
                             })
+                            $("button").prop("disabled", false);
 
                         },
                         error: function(error){
-                            console.log(error)
+                            //console.log(error)
+                        $("button").prop("disabled", false);
                             alert("ERROR!! Vehiculo no guardado")
                         }
                     });

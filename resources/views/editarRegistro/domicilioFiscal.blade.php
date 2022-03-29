@@ -53,13 +53,12 @@ value="{{ isset($proveedor_domicilio_fiscal->monoblock) ? $proveedor_domicilio_f
                         @endforelse
 
                     </div>
+                    @if ( $mode != "show")
+
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                         <a href="javascript:void(0);" class="add_email_fiscal" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
                     </div>
-
-
-
-
+@endif
             </div>
             <div class="col-sm">
 
@@ -102,7 +101,6 @@ value="{{ isset($proveedor_domicilio_fiscal->barrio) ? $proveedor_domicilio_fisc
                 <input type="text" class="form-control limpiar" aria-describedby="basic-addon1" id="cp_fiscal" name="cp_fiscal" placeholder="Ingrese el código postal" @if ( $mode == "show") readonly @endif maxlength="8"
 value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicilio_fiscal->codigo_postal : '' }}"><br>
 
-@if ( $mode != "show")
                 <div class="field_telefono_fiscal">
 
                     <div class="row">
@@ -110,10 +108,10 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                         <div class="col-sm">
                         @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
                             <label for="telefono_fiscal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->cod_area_tel}}" maxlength="14"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->cod_area_tel}}" maxlength="10"> <br>
                         @empty
                             <label for="telefono_fiscal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="14"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="10"> <br>
                             @endforelse
                         </div>
 
@@ -130,6 +128,8 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                     </div>
 
                 </div>
+                @if ( $mode != "show")
+
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_telefono_fiscal" title="Agregue un nuevo teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>
                 </div>
@@ -149,9 +149,10 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
 </div>
 
 
-
 @push('js')
+
 <script type="text/javascript">
+
     $(document).ready(function() {
 
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
@@ -166,7 +167,7 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                                  '<div class="col-sm">'+
                                  '<br>'+
                                  '<label for="telefono_fiscal_cod' + x +'">Código de área:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod' + x +'" name="telefono_fiscal_cod[]" maxlength="14">'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod' + x +'" name="telefono_fiscal_cod[]" maxlength="10">'+
                                     '</div>'+
                                     '<div class="col-sm">'+
                                     '<br>'+
@@ -176,7 +177,6 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                                 '</div>'+
                                 '<a href="javascript:void(0);" class="remove_telefono_fiscal" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                 '</div>';
-
 
 
             if(x == 1){

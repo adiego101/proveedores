@@ -20,11 +20,11 @@
                     <label for="modal_asegurado">Asegurado:</label><br />
                     <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="modal_asegurado" name="modal_asegurado" maxlength="40"/>
                     <br />
-                     
+
                     <label for="modal_vigencia">Vigencia hasta:</label><br />
                     <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="modal_vigencia" name="modal_vigencia" />
                     <br />
-                    
+
                     <div class="modal-footer">
                         <input id="numero_fila_seguro" name="numero_fila_seguro" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
@@ -36,9 +36,6 @@
     </div>
 
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script type="text/javascript">
 
@@ -138,7 +135,7 @@ $(document).on("click", ".btn_cancel_modal", function(event) {
     modal_asegurado_css.style.border = '1px solid #DFDFDF';
     modal_agencia_css.style.border = '1px solid #DFDFDF';
     modal_vigencia_css.style.border = '1px solid #DFDFDF';
-    
+
 });
 
 </script>

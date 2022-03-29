@@ -37,7 +37,6 @@ value="0" @endif
 disabled>
                         <label for="valor_agregado">Valor Agregado</label><br>
 
-
                     </div>
                 </div>
             </div><br>
@@ -205,7 +204,9 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
 </fieldset>
 
 @push('js')
+
     <script type="text/javascript">
+
         $("#document").ready(function(){
             $("#porc_facturacion").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
@@ -215,7 +216,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                 let antiguedad = $("#antiguedad").val();
                 let valor_agregado = $("#valor_agregado").val();
                 let valor_indice_rupae;
-                console.log(valor_agregado);
+                //console.log(valor_agregado);
                 if(porc_facturacion!='' && porc_gasto!=''&& porc_mo!='' && dom_fiscal!='' && antiguedad!='')
                     calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado);
                 else

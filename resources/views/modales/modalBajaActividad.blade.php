@@ -4,7 +4,7 @@
         <!-- Contenido del Modal-->
         <div class="modal-content">
             <div class="modal-header">
-                <h1>Dar de baja Actividad</h1>
+                <h1>Dar de baja</h1>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -24,11 +24,7 @@
 
 @push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-
 <script type="text/javascript">
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
     $(document).on("click", ".btn_bajaActividad", function() {
 
@@ -38,10 +34,8 @@
 
         $.ajax({
             type: "POST",
-            //Si colocamos un numero (id) funciona sin problemas... VER
             url: "{{url('bajaActividades/')}}/"+id,
             success: function() {
-                 // En caso de que se ejecute
                  $('.yajra-actividades').DataTable().ajax.reload();
 
                  Swal.fire({
@@ -56,11 +50,11 @@
         }
         });
 
-
-        //se recarga la tabla para que desaparesca la fila dada de baja
         //Ocultamos el modal
         $('#modalBajaActividad').modal('hide');
 
     });
+
 </script>
+
 @endpush

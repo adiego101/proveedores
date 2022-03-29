@@ -53,11 +53,12 @@ value="{{ isset($proveedor_domicilio_legal->monoblock) ? $proveedor_domicilio_le
                         @endforelse
 
                     </div>
+                    @if ( $mode != "show")
+
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_email_legal" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
                 </div>
-
-
+                @endif
 
             </div>
             <div class="col-sm">
@@ -101,9 +102,6 @@ value="{{ isset($proveedor_domicilio_legal->barrio) ? $proveedor_domicilio_legal
                 <input type="text" class="form-control limpiar" aria-describedby="basic-addon1" id="cp_legal" name="cp_legal" placeholder="Ingrese el código postal" @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicilio_legal->codigo_postal : '' }}" maxlength="8"><br>
 
-@if ( $mode != "show")
-
-
 
                 <div class="field_telefono_legal">
 
@@ -112,10 +110,10 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                         <div class="col-sm">
                         @forelse($proveedor_telefono_legal as $telefono_legal)
                             <label for="telefono_legal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->cod_area_tel}}" maxlength="14"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->cod_area_tel}}" maxlength="10"> <br>
                         @empty
                             <label for="telefono_legal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="14"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="10"> <br>
                             @endforelse
                         </div>
 
@@ -133,6 +131,8 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                     </div>
 
                 </div>
+                @if ( $mode != "show")
+
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_telefono_legal" title="Agregue un nuevo teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>
                 </div>
@@ -151,9 +151,8 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
     </div>
 </div>
 
-
-
 @push('js')
+
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -169,7 +168,7 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                                  '<div class="col-sm">'+
                                  '<br>'+
                                  '<label for="telefono_legal_cod' + x +'">Código de área:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod' + x +'" name="telefono_legal_cod[]" maxlength="14">'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod' + x +'" name="telefono_legal_cod[]" maxlength="10">'+
                                     '</div>'+
                                     '<div class="col-sm">'+
                                     '<br>'+

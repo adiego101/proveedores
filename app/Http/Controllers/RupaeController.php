@@ -201,7 +201,7 @@ class RupaeController extends Controller
             'cuit' => $proveedor->cuit,
             'nombre_fantasia' => $proveedor->nombre_fantasia,
             'razon_social' => $proveedor->razon_social,
-            'actividad_principal' => $Actividad_economica, //FALTA RECUPERAR
+            'actividad_principal' => $Actividad_economica,
             'actividad_secundaria' => $actividades_Secundarias,
             'calle_ruta_real' => $proveedor_domicilio_real->calle . ' ' . $proveedor_domicilio_real->numero,
 
@@ -209,12 +209,14 @@ class RupaeController extends Controller
             'localidad_real' => isset($proveedor_localidad_real->nombre_localidad) ? $proveedor_localidad_real->nombre_localidad : '',
             'provincia_real' => isset($provinciaReal->nombre_provincia) ? $provinciaReal->nombre_provincia : '',
             'email_real' => isset($proveedor_email_real->email) ? $proveedor_email_real->email : '',
+            'cod_tel_real' => isset($proveedor_telefono_real->cod_area_tel) ? $proveedor_telefono_real->cod_area_tel : null,
 
             'calle_ruta_legal' => $proveedor_domicilio_legal->calle . ' ' . $proveedor_domicilio_legal->numero,
             'telefono_legal' => isset($proveedor_telefono_legal->nro_tel) ? $proveedor_telefono_legal->nro_tel : '',
             'provincia_legal' => isset($provinciaLegal->nombre_provincia) ? $provinciaLegal->nombre_provincia : '',
             'email_legal' => isset($proveedor_email_legal->email) ? $proveedor_email_legal->email : '',
             'representante_legal' => $persona,
+            'cod_tel_legal' => isset($proveedor_telefono_legal->cod_area_tel) ? $proveedor_telefono_legal->cod_area_tel : null,
 
             'localidad_legal' => isset($proveedor_localidad_legal->nombre_localidad) ? $proveedor_localidad_legal->nombre_localidad : '',
             'fecha_inscripcion' => $proveedor->created_at,
@@ -326,8 +328,6 @@ class RupaeController extends Controller
 
         //return $idInscripcion;
 
-
-
         $idAlta = $proveedor->nro_rupae_proveedor;
 
         $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')->first();
@@ -375,6 +375,7 @@ class RupaeController extends Controller
             'actividad_secundaria' => isset($actividades_Secundarias) ? $actividades_Secundarias : '',
             'calle_ruta' => $proveedor_domicilio_real->calle . ' ' . $proveedor_domicilio_real->numero,
             'telefono' => isset($proveedor_telefono_real->nro_tel) ? $proveedor_telefono_real->nro_tel : '',
+            'cod_tel_real' => isset($proveedor_telefono_real->cod_area_tel) ? $proveedor_telefono_real->cod_area_tel : null,
             'fecha_inscripcion' => $proveedor->created_at,
             'localidad' => isset($proveedor_localidad_real->nombre_localidad) ? $proveedor_localidad_real->nombre_localidad : '',
 
@@ -556,6 +557,7 @@ class RupaeController extends Controller
             }
 
         }
+
 
         $certificado = Certificado::create([
             'nro_rupae_proveedor' => $proveedor->nro_rupae_proveedor,

@@ -35,35 +35,26 @@
             Agregar Nuevo Pago
         </button>
 
-
         <br>
         <hr>
+
     @endif
-
-
 
     <div>
 
         <table style="width:100%" class="yajra-pagos table table-hover  table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>fecha</th>
-                    <th>importe</th>
-                    <th>observaciones</th>
-                    {{-- <th>Correo electrónico</th>
-                        <th>Teléfono</th> --}}
+                    <th>Fecha</th>
+                    <th>Importe</th>
+                    <th>Observaciones</th>
                     <th>Acciones</th>
-                    <!--  <th>Username</th>
-                    <th>Phone</th>
-                    <th>DOB</th> -->
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
     </div>
-
-
 
     <div class="row navbuttons ">
         <div class="col-6 col-sm-auto" id="btnPrevious">
@@ -80,14 +71,10 @@
 </fieldset>
 
 @push('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
     <script type="text/javascript">
-        $(function() {
 
-            console.log({{ $id }});
+        $(function() {
 
             var table = $('.yajra-pagos').DataTable({
                 language: {
@@ -126,7 +113,6 @@
                         }
                     },
 
-
                     {
                         data: 'importe',
                         name: 'importe'
@@ -156,4 +142,5 @@
 
 
     </script>
+    
 @endpush

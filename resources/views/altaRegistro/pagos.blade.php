@@ -22,8 +22,7 @@
     <h4>Registro de Pagos de inscripción y renovación:</h4><br>
 
     <label for="fecha_pago">Fecha:</label><br>
-    <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago"
-        aria-describedby="basic-addon1" id="fecha_pago"><br>
+    <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago" aria-describedby="basic-addon1" id="fecha_pago"><br>
 
     <label for="importe_pago">Importe:</label><br>
     <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="importe_pago" maxlength="9"><br>
@@ -66,8 +65,7 @@
 
 @push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
 
     <script type="text/javascript">
 
@@ -141,7 +139,7 @@
 
                     importe_css.style.border = '2px dashed red';
                 }
-                
+
 
                //Desplegamos el modal
                $('#modal_validar_pago').modal('show');

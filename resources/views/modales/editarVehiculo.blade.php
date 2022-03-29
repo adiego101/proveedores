@@ -17,10 +17,10 @@
 
                     <label for="modal_dominio_vehiculo">Dominio:</label><br />
                     <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="modal_dominio_vehiculo" name="modal_dominio_vehiculo" maxlength="7"/><br />
-                           
+
                     <label for="modal_inscripto_en_vehiculo">Inscripto en:</label><br />
                     <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="modal_inscripto_en_vehiculo" name="modal_inscripto_en_vehiculo" maxlength="20"/><br />
-                         
+
                     <div class="modal-footer">
                         <input id="numero_fila_vehiculo" name="numero_fila_vehiculo" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
@@ -31,11 +31,7 @@
         </div>
     </div>
 
-
 @push('js')
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
 <script type="text/javascript">
 

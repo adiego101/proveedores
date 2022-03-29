@@ -21,28 +21,19 @@
     </div>
 </div>
 
-
 @push('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-
 <script type="text/javascript">
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
     $(document).on("click", ".btn_baja_producto", function() {
 
         //Obtenemos el numero de la fila que queremos modificar
         let id = $("#baja_producto").val();
 
-
-
         $.ajax({
             type: "POST",
-            //Si colocamos un numero (id) funciona sin problemas... VER
             url: "{{url('bajaProductos/')}}/"+id,
             success: function() {
-                 // En caso de que se ejecute
                  $('.yajra-productos').DataTable().ajax.reload();
 
                  Swal.fire({
@@ -56,10 +47,12 @@
                             })
         }
         });
-        //se recarga la tabla para que desaparesca la fila dada de baja
+
         //Ocultamos el modal
         $('#modal_baja_producto').modal('hide');
 
     });
+
 </script>
+
 @endpush

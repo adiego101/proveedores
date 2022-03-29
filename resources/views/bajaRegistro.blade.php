@@ -19,7 +19,7 @@
     <script>
         $('input[type="checkbox"]').on('change', function() {
             this.value = this.checked ? 1 : 0;
-            console.log(this.value);
+            //console.log(this.value);
         }).change();
 
         $('.btnNext').click(function() {

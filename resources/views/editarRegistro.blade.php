@@ -166,7 +166,7 @@
     @include('sucursales.edit')
 
     <!--Incluimos el modal para dar de baja un registro -->
-    <!-- Falta incluir el modal -->
+
     @include('modales.modalBajaSucursal')
 
     @yield('datos')
@@ -174,10 +174,16 @@
 @endsection
 
 @push('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $('input[type="checkbox"]').on('change', function() {
             this.value = this.checked ? 1 : 0;
-            console.log(this.value);
+            //console.log(this.value);
         }).change();
 
         $('.btnNext').click(function() {
@@ -199,7 +205,7 @@ $('.btnPrevious').click(function() {
         } else if(code>=48 && code<=57) { // es un numero.
           return true;
         } else{ // otras teclas
-        console.log("no es un numero");
+        //console.log("no es un numero");
           return false;
         }
     }
@@ -209,7 +215,7 @@ $('.btnPrevious').click(function() {
 
 $('input[type="checkbox"]').on('change', function(){
     this.value = this.checked ? 1 : 0;
-     console.log(this.value);
+     //console.log(this.value);
  }).change();
 
  window.onload = function(){
@@ -303,4 +309,3 @@ Sugerencia: agregar una nueva clase a cada campo a borrar. -->
 
     </style>
 @endpush
-
