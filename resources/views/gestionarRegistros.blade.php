@@ -17,7 +17,6 @@
                     <th align="center">Nombre de fantasía</th>
                     <th align="center">Razón Social</th>
                     <th align="center">CUIT</th>
-                    <!--<th align="center">Dada de baja</th>-->
                     <th align="center">Acciones</th>
                 </tr>
             </thead>
@@ -29,7 +28,6 @@
 
 <!--Incluimos el modal para dar de alta un registro -->
 @include('modalAltaRegistro')
-
 
 @endsection
 
@@ -93,14 +91,6 @@
                         return '<div style="color:red;">'+data+'</div>';
             }
             },
-            /*{data: 'dado_de_baja',
-            render: function(data){
-                    if (data === 0)
-                        return 'No';
-                    else
-                        return '<div style="background-color:yellow;">Si</div>';
-                }
-            },*/
             {
                 data: 'action',
                 name: 'action',

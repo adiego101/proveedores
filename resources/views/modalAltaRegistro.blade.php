@@ -13,7 +13,7 @@
             <div class="modal-footer">
 
                 <input type="hidden" id="id_alta">
-                <button type="button" class="btn btn-primary btn_alta_modal">Alta</button>
+                <button type="button" class="btn btn-success btn_alta_modal">Alta</button>
                 <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
@@ -25,7 +25,6 @@
 
 
 <script type="text/javascript">
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
     $(document).on("click", ".btn_alta_modal", function() {
 
@@ -44,5 +43,7 @@
         $('#modal_alta').modal('hide');
 
     });
+
 </script>
+
 @endpush

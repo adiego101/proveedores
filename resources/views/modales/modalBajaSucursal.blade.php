@@ -21,33 +21,39 @@
     </div>
 </div>
 
-
 @push('js')
 
-
 <script type="text/javascript">
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
     $(document).on("click", ".btn_bajaSucursal", function() {
 
         //Obtenemos el numero de la fila que queremos modificar
         let id = $("#baja").val();
 
-
         $.ajax({
             type: "POST",
-            //Si colocamos un numero (id) funciona sin problemas... VER
             url: "{{url('bajaSucursales/')}}/"+id,
             success: function() {
-                 // En caso de que se ejecute
+
+                Swal.fire({
+                            position: 'top-end',
+                            icon: 'info',
+                            title: 'Sucursal dada de baja',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+          
                  $('.yajra-datatable').DataTable().ajax.reload();
         }
         });
 
-        //se recarga la tabla para que desaparesca la fila dada de baja
         //Ocultamos el modal
         $('#modalBajaSucursal').modal('hide');
 
     });
+
 </script>
+
 @endpush

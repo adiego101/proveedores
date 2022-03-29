@@ -114,7 +114,9 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
         }
 
 
-       /* .page_break { page-break-before: always; } {{$data['titulo']}} */
+        /*.page_break { 
+            page-break-before: always; 
+        }*/
 
     </style>
 </head>
@@ -133,8 +135,9 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
                  Registro Único Provincial  <br> de Actividades Económicas
             </div>
 
-    <br>
-    <br>
+            <br>
+            <br>
+
             <span><u>Certificado de Inscripción</u></span>
             <label for="" class="txt-right">Cuit Nº: {{isset($data['cuit']) ? $data['cuit'] : ''}}</label><br><br>
             <label for="">Nombre del establecimiento: {{isset($data['nombre_fantasia']) ? $data['nombre_fantasia'] : ''}}</label><br><br>
@@ -162,7 +165,7 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
         </section>
         <br>
         <p>-------------------------------------------------------------------------------------------------------------------------</p>
-
+        <!-- <div class="page_break"> -->
         <section>
 
             <img src="../public/Santa_Cruz.png" class="img-left">
@@ -195,8 +198,8 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
             </div>
 
         </section>
-
+        <!-- </div> -->
     </main>
-    <!--<div class="page_break"></div>-->
+    <!-- <div class="page_break"></div> -->
 </body>
 </html>
