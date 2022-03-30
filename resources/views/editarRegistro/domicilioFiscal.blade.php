@@ -108,10 +108,10 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                         <div class="col-sm">
                         @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
                             <label for="telefono_fiscal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->cod_area_tel}}" maxlength="10"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->cod_area_tel}}" maxlength="4"> <br>
                         @empty
                             <label for="telefono_fiscal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="10"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="4"> <br>
                             @endforelse
                         </div>
 
@@ -167,7 +167,7 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                                  '<div class="col-sm">'+
                                  '<br>'+
                                  '<label for="telefono_fiscal_cod' + x +'">Código de área:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod' + x +'" name="telefono_fiscal_cod[]" maxlength="10">'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_fiscal_cod' + x +'" name="telefono_fiscal_cod[]" maxlength="4">'+
                                     '</div>'+
                                     '<div class="col-sm">'+
                                     '<br>'+
