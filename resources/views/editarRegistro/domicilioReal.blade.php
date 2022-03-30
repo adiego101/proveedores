@@ -49,7 +49,6 @@ value="{{ isset($proveedor->pagina_web) ? $proveedor->pagina_web : '' }}"><br>
                 <div class="field_email_real">
 
                     @forelse($proveedor_email_real as $email_real)
-
                         <label for="email_real">Correo electrónico:</label><br>
                         <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_real" name="email_real[]" @if ( $mode == "show") readonly @endif value="{{$email_real->email}}" maxlength="50"> <br>
                     @empty
@@ -59,7 +58,7 @@ value="{{ isset($proveedor->pagina_web) ? $proveedor->pagina_web : '' }}"><br>
                     @endforelse
 
                 </div>
-                @if ( $mode != "show")
+                @if ( $mode != "show" && count($proveedor_email_real) < 3)
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_email_real" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
@@ -140,7 +139,7 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
                     </div>
 
                 </div>
-                @if ( $mode != "show")
+                @if ( $mode != "show" && count($proveedor_telefono_real) < 3)
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_telefono_real" title="Agregue un nuevo teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>

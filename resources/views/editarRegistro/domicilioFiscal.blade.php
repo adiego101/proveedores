@@ -53,7 +53,7 @@ value="{{ isset($proveedor_domicilio_fiscal->monoblock) ? $proveedor_domicilio_f
                         @endforelse
 
                     </div>
-                    @if ( $mode != "show")
+                    @if ( $mode != "show" && count($proveedor_email_fiscal) < 3)
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                         <a href="javascript:void(0);" class="add_email_fiscal" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
@@ -128,7 +128,7 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                     </div>
 
                 </div>
-                @if ( $mode != "show")
+                @if ( $mode != "show" && count($proveedor_telefono_fiscal) < 3)
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_telefono_fiscal" title="Agregue un nuevo teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>
