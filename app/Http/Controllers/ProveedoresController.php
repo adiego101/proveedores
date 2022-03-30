@@ -63,20 +63,36 @@ class ProveedoresController extends Controller
     {
 
         $cuit = Proveedor::where('cuit', $request->cuit)->exists();
-        $dado_de_baja = Proveedor::where('cuit', $request->cuit)->where('dado_de_baja', '0')->get();
+     
+        $dado_de_baja = Proveedor::where('cuit', $request->cuit)->get();
+        //dd($dado_de_baja[0]['dado_de_baja']);
 
-        if (!$cuit /*|| $dado_de_baja->isEmpty()*/) {
+        /*Primero verificamos si el cuit NO existe en la BD. En este caso, lo redirijimos al usuario al formulario de alta.*/
+        if (!$cuit) {
+
             return redirect()->route('nuevoRegistro',['cuit' => $request->cuit ]);
 
         }
         else{
 
-            $proveedor = Proveedor::where('cuit', $request->cuit)->first();
+            /*Sino, si el cuit existe en la BD, verificamos si no esta dado de baja.
+            Si no esta dado de baja, recuperamos los datos y redirijimos al usuario al formulario de editar.
+            En el caso de que se encuentre dado de baja, mostramos un mensaje de aviso.*/
 
-            return redirect()->route('modificarRegistro',['id' =>$proveedor->id_proveedor ]);
+            if($dado_de_baja[0]['dado_de_baja'] == 0) {
+
+                $proveedor = Proveedor::where('cuit', $request->cuit)->first();
+
+                return redirect()->route('modificarRegistro',['id' =>$proveedor->id_proveedor ]);
+
+            } else {
+
+                return redirect()->back()->withErrors("El registro con el número de CUIT: ". $request->cuit ." se encuentra dado de baja. Si desea modificar sus datos, vaya a la pestaña 'Gestionar Registros' para darlo de alta nuevamente.");
+            }
 
         }
     }
+
 
     //Carga Completa de Proveedor
     public function crear_registro(Request $request)

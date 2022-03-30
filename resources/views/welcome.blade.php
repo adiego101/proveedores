@@ -155,11 +155,11 @@
             <div class="header-content-container center">
                 <div class="header-content">
                     <img  loading="lazy"
-                        src="gobierno-logo-blanco-transparente.png"
+                        src="jefatrura-banner3.png"
                         title="" alt=""
-                        srcset="gobierno-logo-blanco-transparente.png 282w, gobierno-logo-blanco-transparente.png 188w"
+                        srcset="jefatrura-banner3.png 282w, jefatrura-banner3.png 188w"
                         sizes="(max-width: 282px) 100vw, 282px" class="header-logo wp-image-322"
-                        height="449">
+                        height="423">
 
 
 

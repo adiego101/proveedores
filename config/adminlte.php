@@ -229,7 +229,7 @@ return [
 
         // Sidebar items:
 
-        ['header' => 'Funciones Principales'],
+        /*['header' => 'Funciones Principales'],*/
 
         [
             'text' => 'Nuevo Registro',
