@@ -1,12 +1,12 @@
 <fieldset>
-    
+
     <h1>Personal Ocupado</h1>
     <br>
     <label for="empleados_nomina">Empleados en Nómina (F-931):</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="empleados_nomina" name="empleados_nomina" placeholder="Ingrese la cantidad de empleados en nómina" @if ( $mode == "show") readonly @endif value="{{ isset($proveedor->empleados_nomina) ? $proveedor->empleados_nomina : '' }}" maxlength="9"><br>
+    <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="empleados_nomina" name="empleados_nomina" placeholder="Ingrese la cantidad de empleados en nómina" @if ( $mode == "show") readonly @endif value="{{ isset($proveedor->empleados_nomina) ? $proveedor->empleados_nomina : '' }}" maxlength="6"><br>
 
     <label for="puestos_trabajo_Sta_Cruz">Puestos de trabajo en la Provincia de Santa Cruz:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="puestos_trabajo_Sta_Cruz" name="puestos_trabajo_Sta_Cruz" placeholder="Ingrese la cantidad de puestos de trabajo en la Provincia de Santa Cruz" @if ( $mode == "show") readonly @endif value="{{ isset($proveedor->puestos_trabajo_Sta_Cruz) ? $proveedor->puestos_trabajo_Sta_Cruz : '' }}" maxlength="9"><br>
+    <input type="text" value="{{ isset($proveedor->puestos_trabajo_sta_cruz) ? $proveedor->puestos_trabajo_sta_cruz : '' }}" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="puestos_trabajo_sta_cruz" name="puestos_trabajo_sta_cruz" placeholder="Ingrese la cantidad de puestos de trabajo en la Provincia de Santa Cruz" @if ( $mode == "show") readonly @endif  maxlength="6"><br>
 
     <div class="container">
         <div class="row">

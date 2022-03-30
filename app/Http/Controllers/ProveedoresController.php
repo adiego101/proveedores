@@ -63,7 +63,7 @@ class ProveedoresController extends Controller
     {
 
         $cuit = Proveedor::where('cuit', $request->cuit)->exists();
-     
+
         $dado_de_baja = Proveedor::where('cuit', $request->cuit)->get();
         //dd($dado_de_baja[0]['dado_de_baja']);
 
@@ -1565,6 +1565,8 @@ class ProveedoresController extends Controller
     public function verProveedorRupaeId($id,$tab = null)
     {
         $proveedor = Proveedor::findOrFail($id);
+
+        //return $proveedor;
         $persona = $proveedor->personas()->get();
 
         if ($persona->isEmpty()) {
@@ -1817,7 +1819,7 @@ class ProveedoresController extends Controller
             }
 
             $arraySize = count($request->telefono_real);
-            if($i<2){
+            if($i<3){
                 for ($i; $i < $arraySize; $i++) {
                     //---------Carga de Telefonos_Real----------
 
@@ -1853,7 +1855,7 @@ class ProveedoresController extends Controller
 
 
             $arraySize = count($request->email_real);
-            if($i<2){
+            if($i<3){
 
 
             for ($i; $i < $arraySize ; $i++) {
@@ -1979,13 +1981,15 @@ class ProveedoresController extends Controller
             }
 
             $arraySize = count($request->telefono_legal);
-            if($i<2){
+            if($i<3){
                 for ($i; $i < $arraySize; $i++) {
                     //---------Carga de Telefonos_Legal----------
 
                     $telefono_legal = Proveedor_telefono::create([
                         'nro_tel' => $request->telefono_legal[$i],
                         'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
+                        'cod_area_tel' =>$request->telefono_legal_cod[$i],
+
                         //'cod_area_tel' =>,
                         //'tipo_medio'=>,
                         //'desc_telefono'=>,
@@ -2015,7 +2019,7 @@ class ProveedoresController extends Controller
 
 
             $arraySize = count($request->email_legal);
-            if($i<2){
+            if($i<3){
 
 
             for ($i; $i < $arraySize ; $i++) {
@@ -2144,14 +2148,14 @@ class ProveedoresController extends Controller
             }
 
             $arraySize = count($request->telefono_fiscal);
-            if($i<2){
+            if($i<3){
                 for ($i; $i < $arraySize; $i++) {
                     //---------Carga de Telefonos_Fiscal----------
 
                     $telefono_fiscal = Proveedor_telefono::create([
                         'nro_tel' => $request->telefono_fiscal[$i],
                         'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                        //'cod_area_tel' =>,
+                        'cod_area_tel' =>$request->telefono_fiscal_cod[$i],
                         //'tipo_medio'=>,
                         //'desc_telefono'=>,
                         'tipo_telefono' => 'fiscal',
@@ -2180,7 +2184,7 @@ class ProveedoresController extends Controller
 
 
             $arraySize = count($request->email_fiscal);
-            if($i<2){
+            if($i<3){
 
 
             for ($i; $i < $arraySize ; $i++) {
