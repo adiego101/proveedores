@@ -20,7 +20,7 @@
 @endpush
 
 @section('content_header')
-<div class="container ">
+<div class="container " oncopy="return false" onpaste="return false">
     <div class="row justify-content-center">
         <div class="col-md-9 ">
             <div class="card">
