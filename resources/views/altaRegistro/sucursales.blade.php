@@ -81,7 +81,7 @@
             <div class="row">
                 <div class="col-sm">
                     <label for="telefono_sucursal_cod">Código de área:</label><br>
-                    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_sucursal_cod" maxlength="10">
+                    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_sucursal_cod" maxlength="4">
                 </div>
                 <div class="col-sm">
                     <label for="telefono_sucursal">Número de Teléfono:</label><br>

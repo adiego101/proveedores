@@ -86,7 +86,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <label for="telefono_legal_cod">Código de área:</label><br>
-                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="10">
+                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="4">
                     </div>
                     <div class="col-sm">
                         <label for="telefono_legal">Número de Teléfono:</label><br>
@@ -126,7 +126,7 @@
                                  '<div class="col-sm">'+
                                  '<br>'+
                                  '<label for="telefono_legal_cod' + x +'">Código de área:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod' + x +'" name="telefono_legal_cod[]" maxlength="10">'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 02966" aria-describedby="basic-addon1" id="telefono_legal_cod' + x +'" name="telefono_legal_cod[]" maxlength="4">'+
                                     '</div>'+
                                     '<div class="col-sm">'+
                                     '<br>'+
