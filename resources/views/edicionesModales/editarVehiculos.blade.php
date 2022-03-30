@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-sm">
                             <label for="marcas">Marca:</label><br />
-                            <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marcas" name="marcas" maxlength="40" required/><br />
+                            <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marcas" name="marcas" maxlength="20" required/><br />
 
                             <label for="dominios">Dominio:</label><br />
                             <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominios" name="dominios" maxlength="7" required/><br />
@@ -26,7 +26,7 @@
 
                         <div class="col-sm">
                             <label for="modelos">Modelo:</label><br />
-                            <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelos" name="modelos" maxlength="40" required/><br />
+                            <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelos" name="modelos" maxlength="20" required/><br />
 
                             <label for="inscriptos_en">Inscripto en:</label><br />
                             <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscriptos_en" name="inscriptos_en" maxlength="20" required/><br />

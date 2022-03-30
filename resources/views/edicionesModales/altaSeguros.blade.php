@@ -23,12 +23,12 @@
                     <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese la póliza" aria-describedby="basic-addon1" id="poliza" name="poliza" maxlength="20" required/><br />
 
                     <label for="asegurado">Asegurado:</label><br />
-                    <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" name="asegurado" maxlength="40" required/><br />
+                    <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" name="asegurado" maxlength="20" required/><br />
                 </div>
 
                 <div class="col-sm">
                     <label for="agencia">Agencia:</label><br />
-                    <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" name="agencia" maxlength="40" required/><br />
+                    <input @if ( $mode == "show") readonly @endif type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" name="agencia" maxlength="20" required/><br />
 
                     <label for="vigencia_hasta">Vigencia hasta:</label><br />
                     <input @if ( $mode == "show") readonly @endif type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia_hasta" name="vigencia_hasta" required/><br />
