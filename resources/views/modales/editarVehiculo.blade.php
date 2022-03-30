@@ -10,10 +10,10 @@
                 <div class="modal-body">
 
                     <label for="modal_marca_vehiculo">Marca:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="modal_marca_vehiculo" name="modal_marca_vehiculo" maxlength="40"/><br />
+                    <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="modal_marca_vehiculo" name="modal_marca_vehiculo" maxlength="20"/><br />
 
                     <label for="modal_modelo_vehiculo">Modelo:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modal_modelo_vehiculo" name="modal_modelo_vehiculo" maxlength="40"/><br />
+                    <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modal_modelo_vehiculo" name="modal_modelo_vehiculo" maxlength="20"/><br />
 
                     <label for="modal_dominio_vehiculo">Dominio:</label><br />
                     <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="modal_dominio_vehiculo" name="modal_dominio_vehiculo" maxlength="7"/><br />

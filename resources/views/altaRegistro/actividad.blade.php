@@ -61,7 +61,7 @@
     <div class="row">
         <div class="col-sm">
             <label for="producto_elaborado">Producto elaborado:</label><br>
-            <input list="productos" name="producto_elaborado" id="producto_elaborado"  class="form-control" placeholder="Ingrese o seleccione el producto que produce">
+            <input list="productos" name="producto_elaborado" id="producto_elaborado"  class="form-control" placeholder="Ingrese o seleccione el producto que produce" maxlength="30">
             <datalist id="productos">
                 @forelse($productos as $producto)
                     <option value="{{$producto->producto_elaborado}}">

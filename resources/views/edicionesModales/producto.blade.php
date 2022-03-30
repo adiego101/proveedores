@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <label for="producto_elaborado">Producto elaborado:</label><br>
-                        <input @if ( $mode == "show") readonly @endif list="productos" name="producto_elaborado" id="producto_elaborado" value="{{ isset($producto->producto_elaborado) ? $producto->producto_elaborado : '' }}"  class="form-control" placeholder="Ingrese o seleccione el producto que produce" required>
+                        <input @if ( $mode == "show") readonly @endif list="productos" name="producto_elaborado" id="producto_elaborado" value="{{ isset($producto->producto_elaborado) ? $producto->producto_elaborado : '' }}"  class="form-control" placeholder="Ingrese o seleccione el producto que produce" maxlength="30" required>
                         <datalist id="productos">
                             @forelse($productos as $producto2)
 
