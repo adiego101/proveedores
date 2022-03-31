@@ -2,7 +2,7 @@
 @if ($mode == "edit")
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaSucursal">
+<button type="button" id="btnNuevaSucursal" class="btn btn-success" data-toggle="modal" data-target="#nuevaSucursal">
     Agregar Nueva Sucursal
   </button><br>
 <hr>
@@ -39,6 +39,7 @@
 
 
 <script type="text/javascript">
+
   $("#document").ready(function () {
 
 
@@ -181,6 +182,8 @@
             }
         });
 
+    
+
     function abrirModalEditar(response){
         //var domicilio = response [0].Domicilio;
         var longitud = response.length;
@@ -197,6 +200,118 @@
     //$('#nuevaSede').modal('show');
     //$('#baja_sede').val(id_registro);
     }
+</script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+        $(document).on('change', '#provincia.edit', function() {
+			$.ajax({
+                type:"GET",
+                url:"{{url('localidades/')}}/"+$(this).children("option:selected").val(),
+                success:function(r){
+                    $('#id_localidad.edit').html(r);
+                }
+		    });
+		});
+
+        $(document).on('change', '#provincia.create', function() {
+			$.ajax({
+                type:"GET",
+                url:"{{url('localidades/')}}/"+$(this).children("option:selected").val(),
+                success:function(r){
+                    $('#id_localidad.create').html(r);
+                }
+		    });
+		});
+	})
+    window.onload = function(){
+
+        {{isset($sucursal->id_localidad) ? 'recargarListaSucursal2();' : ''}}
+
+        };
+
+</script>
+
+
+<script type="text/javascript">
+
+    function recargarListaSucursal2(){
+        $.ajax({
+            type:"GET",
+            url:"{{url('localidadSelect/')}}/{{isset($sucursal->id_localidad) ? $sucursal->id_localidad : ''}}",
+            success:function(r){
+                $('#id_localidad').html(r);
+            }
+        });
+    }
+
+</script>
+
+<script type="text/javascript">
+
+    function valideKey(evt){
+
+        // El código es la representación decimal ASCII de la clave presionada.
+        var code = (evt.which) ? evt.which : evt.keyCode;
+
+        if(code==8) { // espacio.
+          return true;
+        } else if(code>=48 && code<=57) { // es un numero.
+          return true;
+        } else{ // otras teclas
+        //console.log("no es un numero");
+          return false;
+        }
+    }
+
+</script>
+
+<script>
+
+
+    //Damos de alta una nueva sede en la BD.
+
+    $(document).ready(  function()
+        {
+            $('#addformSucursal').on('submit', function(e)
+            {
+                e.preventDefault();
+                $("button").prop("disabled", true);
+
+
+                $.ajax({
+                    type: "post",
+                    url: "{{url('crearSucursales/'.$id)}}",
+                    data: $('#addformSucursal').serialize(),
+                    success: function (response) {
+                        //console.log(response)
+                        $('#nuevaSucursal').modal('hide')
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Sucursal Guardada',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+                            $("button").prop("disabled", false);
+
+                        $('.yajra-sucursal').DataTable().ajax.reload();
+
+                    },
+                    error: function(error){
+                        //console.log(error)
+                        $("button").prop("disabled", false);
+                        alert("ERROR!! Sucursal no guardada")
+                    }
+                });
+            }
+            );
+        }
+    );
 </script>
 
 @endpush

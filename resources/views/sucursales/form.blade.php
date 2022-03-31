@@ -33,7 +33,7 @@
             <br>
 
             <label for="id_localidad">Localidad:</label><br>
-            <select  @if ( $mode == "show") disabled @endif  class="form-control"  aria-describedby="basic-addon1" id="id_localidad" name="id_localidad" required>
+            <select  @if ( $mode == "show") disabled @endif  class="form-control {{$mode}}"  aria-describedby="basic-addon1" id="id_localidad" name="id_localidad" required>
                 <option value="">Seleccione una localidad</option>
                 @forelse($localidades as $localidad)
                     @if (isset($sucursal->localidad) && $sucursal->localidad->nombre_localidad==$localidad->nombre_localidad)
@@ -80,8 +80,8 @@
         <input @if ( $mode == "show") readonly @endif  type="text" class="form-control" value="{{ isset($sucursal->barrio) ? $sucursal->barrio : '' }}" placeholder="Ingrese el barrio" aria-describedby="basic-addon1" id="barrio" name="barrio" maxlength="50"/><br />
 
         <label for="provincia">Provincia:</label><br>
-        <select  @if ( $mode == "show") disabled @endif  class="form-control" value="{{ isset($sucursal->poliza) ? $sucursal->poliza : '' }}" aria-describedby="basic-addon1" id="provincia" name="provincia" required>
-            <option value="">Seleccione una provincia</option>
+        <select  @if ( $mode == "show") disabled @endif  class="form-control {{$mode}}" value="{{ isset($sucursal->poliza) ? $sucursal->poliza : '' }}" aria-describedby="basic-addon1" id="provincia" name="provincia" required>
+            <option selected value="">Seleccione una provincia</option>
                 @forelse($provincias as $provincia)
                     @if (isset($sucursal->localidad->provincia) && $sucursal->localidad->provincia->nombre_provincia==$provincia->nombre_provincia)
                         <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
