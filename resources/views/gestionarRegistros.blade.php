@@ -66,20 +66,20 @@
         columns: [
             {data: 'nombre_fantasia',
             render: function (data, type, row){
-
+                let nombre_fantasia_sub = data.substring(0, 20);
                 if (row['dado_de_baja'] === 0)
-                        return data;
+                        return nombre_fantasia_sub;
                     else
-                        return '<div style="color:red;">'+data+'</div>';
+                        return '<div style="color:red;">'+nombre_fantasia_sub+'</div>';
             }
             },
             {data: 'razon_social',
             render: function (data, type, row){
-
+                let razon_social_sub = data.substring(0, 20);
                 if (row['dado_de_baja'] === 0)
-                        return data;
+                        return razon_social_sub;
                     else
-                        return '<div style="color:red;">'+data+'</div>';
+                        return '<div style="color:red;">'+razon_social_sub+'</div>';
             }
             },
            {data: 'cuit',
