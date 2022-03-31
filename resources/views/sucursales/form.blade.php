@@ -97,7 +97,6 @@
         <label for="codigo_postal">Código Postal:</label><br>
         <input @if ( $mode == "show") readonly @endif  type="text" class="form-control" value="{{ isset($sucursal->codigo_postal) ? $sucursal->codigo_postal : '' }}" aria-describedby="basic-addon1" id="codigo_postal" name="codigo_postal" placeholder="Ingrese el código postal" maxlength="8"><br>
 
-        <label for="nro_tel">Teléfono:</label><br>
         @if(isset($sucursal->telefonos->isNotEmpty))
             @foreach($sucursal->telefonos as $telefono)
                 <div class="row">
@@ -122,9 +121,6 @@
                     <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" maxlength="14">
                 </div>
             </div>
-        <!--    <div class="field_telefono d-grid gap-2 d-md-flex justify-content-md-center">
-                <a href="javascript:void(0);" class="add_telefono" title="Agregue un nuevo teléfono"> <input @if ( $mode == "show") readonly @endif  type="button" value="Agregar Teléfono" class="btn btn-success"></a>
-            </div> -->
         
         @endif
         <br>
