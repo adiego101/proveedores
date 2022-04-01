@@ -37,7 +37,7 @@
                 <option value="">Seleccione una localidad</option>
                 @forelse($localidades as $localidad)
                     @if (isset($sucursal->localidad) && $sucursal->localidad->nombre_localidad==$localidad->nombre_localidad)
-                        <option selected="selected" value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
+                        <option selected value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
                     @else
                         <option value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
                     @endif
@@ -84,10 +84,10 @@
 
         <label for="provincia">Provincia:</label><br>
         <select  @if ( $mode == "show") disabled @endif  class="form-control {{$mode}}" value="{{ isset($sucursal->poliza) ? $sucursal->poliza : '' }}" aria-describedby="basic-addon1" id="provincia" name="provincia" required>
-            <option selected value="">Seleccione una provincia</option>
+            <option value="">Seleccione una provincia</option>
                 @forelse($provincias as $provincia)
                     @if (isset($sucursal->localidad->provincia) && $sucursal->localidad->provincia->nombre_provincia==$provincia->nombre_provincia)
-                        <option selected="selected" value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
+                        <option selected value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
                     @else
                         <option value="{{$provincia->nombre_provincia}}">{{$provincia->nombre_provincia}}</option>
                     @endif

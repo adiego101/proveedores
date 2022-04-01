@@ -287,7 +287,10 @@
                     data: $('#addformSucursal').serialize(),
                     success: function (response) {
                         //console.log(response)
-                        $('#nuevaSucursal').modal('hide')
+                        $('#nuevaSucursal').modal('hide');
+                        $('#addformSucursal :input').val('');
+                        $('#pais option:first').attr('selected', 'selected');
+                        $('#id_localidad option:first').attr('selected', 'selected');
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
