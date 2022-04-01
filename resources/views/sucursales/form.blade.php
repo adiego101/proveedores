@@ -27,7 +27,7 @@
                         <option value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
                     @endif
                 @empty
-                    <option value=" "></option>
+                    <option value=" ">Seleccione un país</option>
                 @endforelse
             </select>
             <br>
