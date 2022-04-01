@@ -790,18 +790,19 @@ try{
         $sucursal->save();
 
         //----------------Carga de email Sucursal---------------
-        if (isset($request->email)) {
+        if (isset($request->email_sucursales)) {
             $sucursal_email = new Sucursal_email();
             $sucursal_email->id_sucursal = $sucursal->id_sucursal;
-            $sucursal_email->email = $request->email;
+            $sucursal_email->email = $request->email_sucursales;
             $sucursal_email->save();
         }
         //----------------Carga de telefono Sucursal---------------
-        if (isset($request->nro_tel)) {
+        if (isset($request->telefono_sucursal)) {
 
             $sucursal_telefono = new Sucursal_telefono();
             $sucursal_telefono->id_sucursal = $sucursal->id_sucursal;
-            $sucursal_telefono->nro_tel = $request->nro_tel;
+            $sucursal_telefono->nro_tel = $request->telefono_sucursal;
+            $sucursal_telefono->cod_area_tel = $request->telefono_sucursal_cod;
             $sucursal_telefono->save();
         }
         $sucursal->save();
