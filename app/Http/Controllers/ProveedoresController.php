@@ -642,9 +642,15 @@ try{
             ->with(['localidad', 'telefonos', 'emails'])
             ->first();
         $mode = "edit";
-        $paises = Pais::all();
-        $provincias = Provincia::all();
-        $localidades = Localidad::all();
+        $paises = Pais::orderBy('nombre_pais','ASC')
+                        ->get();
+        $provincias = Provincia::orderBy('nombre_provincia','ASC')
+                                ->get();
+        $localidades = Localidad::orderBy('nombre_localidad','ASC')
+                                ->whereHas('provincia', function ($query) use($sucursal){
+                                    $query->where('nombre_provincia', '=', $sucursal->localidad->provincia->nombre_provincia);
+                                })
+                                ->get();
         return (String) view('sucursales.form', compact('mode', 'paises', 'provincias', 'localidades', 'sucursal'));
     }
     catch (\Exception $e)
@@ -658,22 +664,29 @@ try{
     public function verSucursales($id_sucursal)
     {
         try{
-        $sucursal = Sucursal::where('id_sucursal', '=', $id_sucursal)
-            ->with(['localidad', 'telefonos', 'emails'])
-            ->first();
-        $mode = "show";
-        $paises = Pais::all();
-        $provincias = Provincia::all();
-        $localidades = Localidad::all();
-        return (String) view('sucursales.form', compact('mode', 'paises', 'provincias', 'localidades', 'sucursal'));
-    }
-    catch (\Exception $e)
-    {
-    Log::error('Error inesperado.' . $e->getMessage());
 
-    return Redirect::back()
-    ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
-    }
+            $sucursal = Sucursal::where('id_sucursal', '=', $id_sucursal)
+                ->with(['localidad', 'telefonos', 'emails'])
+                ->first();
+            $mode = "show";
+            $paises = Pais::orderBy('nombre_pais','ASC')
+                            ->get();
+            $provincias = Provincia::orderBy('nombre_provincia','ASC')
+                                    ->get();
+            $localidades = Localidad::orderBy('nombre_localidad','ASC')
+                                    ->whereHas('provincia', function ($query) use($sucursal){
+                                        $query->where('nombre_provincia', '=', $sucursal->localidad->provincia->nombre_provincia);
+                                    })
+                                    ->get();
+            return (String) view('sucursales.form', compact('mode', 'paises', 'provincias', 'localidades', 'sucursal'));
+        }
+        catch (\Exception $e)
+        {
+        Log::error('Error inesperado.' . $e->getMessage());
+    
+        return Redirect::back()
+        ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+        }
     }
 
 
@@ -2876,8 +2889,7 @@ try{
 
         //var_dump(json_decode(json_encode($localidades[0]["nombre_localidad"])));
 
-        $select = '';
-
+        $select = "<option value=''>Seleccione una localidad</option>";
         for ($i = 0; $i < $max; $i++) {
             $select = $select . '<option value=' . $localidades[$i]["id_localidad"] . '>' . $localidades[$i]["nombre_localidad"] . '</option>';
         }

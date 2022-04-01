@@ -289,8 +289,7 @@
                         //console.log(response)
                         $('#nuevaSucursal').modal('hide');
                         $('#addformSucursal :input').val('');
-                        $('#pais option:first').attr('selected', 'selected');
-                        $('#id_localidad option:first').attr('selected', 'selected');
+                        $("#pais option:first").attr('selected','selected');
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',

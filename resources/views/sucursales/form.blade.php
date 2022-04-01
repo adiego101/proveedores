@@ -20,6 +20,7 @@
 
         <label for="pais">Pais:</label><br>
             <select  @if ( $mode == "show") disabled @endif   class="form-control" aria-describedby="basic-addon1" id="pais" name="pais" required>
+                <!--<option value="">Seleccione un país</option>-->
                 @forelse($paises as $pais)
                     @if(isset($sucursal->localidad->provincia->pais->nombre_pais) && $sucursal->localidad->provincia->pais->nombre_pais==$pais->nombre_pais)
                         <option selected value="{{$pais->nombre_pais}}">{{$pais->nombre_pais}}</option>
