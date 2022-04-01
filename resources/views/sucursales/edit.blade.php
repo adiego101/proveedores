@@ -40,3 +40,53 @@
 </form>
 
 @endif
+@push("js")
+<script>
+
+    $(document).ready(  function()
+        {
+
+            $('#editformSucursal').on('submit', function(e)
+            {
+                let id_sucursal = $("#editar_sucursal").val();
+
+                $("button").prop("disabled", true);
+
+                e.preventDefault();
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{url('guardarSucursales/')}}/"+id_sucursal,
+                    data: $('#editformSucursal').serialize(),
+                    success: function (response) {
+
+                        $('#editarSucursal').modal('hide');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Sucursal Guardada',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+                            $("button").prop("disabled", false);
+
+                        $('.yajra-sucursal').DataTable().ajax.reload();
+
+                    },
+                    error: function(error){
+                        //console.log(error)
+                        $("button").prop("disabled", false);
+                        alert("ERROR!! Sucursal no guardada")
+                    }
+                });
+            }
+            );
+        }
+    );
+
+</script>
+
+
+@endpush
