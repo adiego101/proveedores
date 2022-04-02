@@ -18,7 +18,8 @@ class PermissionsSeeder extends Seeder
                         'admin_crear_roles',
                         'admin_editar_roles',
                         'admin_eliminar_roles',
-                        'admin_users'];
+                        'admin_users',
+                        'admin_formulas'];
         foreach($permisos as $permiso)
             Permission::create(['name'=>$permiso]);
     }

@@ -278,6 +278,8 @@ return [
             'text' => 'Actualizar Fórmulas',
             'url' => '/actualizarFormulas',
             'icon' => 'fas fa-fw fa-edit',
+            'can'    => 'admin_lista_roles',
+
             'label_color' => 'success',
         ],
         [

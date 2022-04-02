@@ -75,11 +75,11 @@ Route::group(['middleware' => ['auth']], function () {
         $ponderaciones = Ponderacion_compre_local::All();
         $jerarquias = Jerarquia_compre_local::All();
         return view('actualizarFormulas', compact('ponderaciones', 'jerarquias'));
-    });
+    })->middleware(['can:admin_users']);;
 
     Route::post('/crear_registro_cuit', [ProveedoresController::class, 'crear_registro_cuit'])->name('crear_registro_cuit');
 
-    Route::post('/actualizar_formulas', [ProveedoresController::class, 'actualizar_formulas'])->name('actualizar_formulas');
+    Route::post('/actualizar_formulas', [ProveedoresController::class, 'actualizar_formulas'])->name('actualizar_formulas')->middleware(['can:admin_users']);;
 
     Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
 
