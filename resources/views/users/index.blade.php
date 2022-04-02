@@ -27,6 +27,7 @@
    <th>Roles</th>
    <th width="280px">&nbsp</th>
  </tr>
+ {{$i=0}}
  @foreach ($data as $key => $user)
   <tr>
     <td>{{ ++$i }}</td>
@@ -45,7 +46,7 @@
 
         <!-- Botón que abre el Modal -->
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal{{ $user->id }}">Eliminar</button>
-     
+
         @include('users.modalUsers')
     </td>
   </tr>
@@ -53,7 +54,6 @@
 </table>
 </div>
 
-{!! $data->render() !!}
 
 
 @endsection

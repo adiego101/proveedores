@@ -20,6 +20,7 @@ class RolesSeeder extends Seeder
                                 'admin_crear_roles',
                                 'admin_editar_roles',
                                 'admin_eliminar_roles',
+                                'admin_formulas',
                                 'admin_users']);
 
     }
