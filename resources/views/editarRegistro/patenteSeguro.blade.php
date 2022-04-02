@@ -1,4 +1,3 @@
-
 <fieldset>
 
 <div class="row">
@@ -7,17 +6,13 @@
 
 <br/>
 
-<!-- <input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="vehiculos_afectados" name="vehiculos_afectados"
-value="0">
-<label for="vehiculos_afectados">Posee vehículos afectados a la actividad económica que desarrolla</label><br>
-<br> -->
-
-<h4>Vehículos:</h4><br>
+<h1>Vehículos:</h1><br>
 
 @if ($mode == "edit")
 
-<a class="btn btn-success" style="float: left" href="{{ route('patentes.nuevo', ['id' => $id]) }}" title="Agregar vehiculo">+</a>
-<br>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevoVehiculo">
+    Agregar Nuevo Vehículo
+  </button><br>
 <hr>
     @endif
 
@@ -44,22 +39,17 @@ value="0">
 
     <hr>
 
-<!-- <input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="seguros_sta_cruz"  name="seguros_sta_cruz"
-value="0">
-<label for="seguros_sta_cruz">Posee seguros contratados con promotores residentes en nuestra provincia</label><br>
-<br> -->
-
-<h4>Seguros:</h4><br>
+<h1>Seguros:</h1><br>
 
 @if ($mode == "edit")
 
-<a class="btn btn-success" style="float: left" href="{{ route('seguros.nuevo', ['id' => $id]) }}" title="Agregar seguro">+</a>
-<br>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevoSeguro">
+    Agregar Nuevo Seguro
+  </button><br>
 <hr>
 @endif
 <div>
-
-
 
     <table style="width:100%" class="yajra-seguros table table-hover  table-striped table-condensed">
         <thead>
@@ -81,23 +71,20 @@ value="0">
 
     <hr>
 
-<!-- <input @if ( $mode == "show") onclick="return false" @endif    type="checkbox" id="servicio_personal_especializado" name="servicio_personal_especializado"
-value="0">
-<label for="servicio_personal_especializado">Utiliza como sede de la actividad económica que desarrolla algún inmueble que tribute impuesto inmobiliario en localidades de la Provincia de Santa Cruz</label><br>
-<br> -->
-
-<h4>Sedes:</h4><br>
+<h1>Sedes:</h1><br>
 
 @if ($mode == "edit")
 
-<a class="btn btn-success" style="float: left" href="{{ route('sedes.nuevo', ['id' => $id]) }}" title="Agregar sede">+</a>
-<br>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaSede">
+    Agregar Nueva Sede
+  </button><br>
 <hr>
 @endif
 
     <div>
-
-        <table style="width:100%" class="yajra-sedes table table-hover  table-striped table-condensed">
+        <table style="width:100%" id="table" class="yajra-sedes table table-hover  table-striped table-condensed">
             <thead>
                 <tr>
                     <th>Domicilio</th>
@@ -109,10 +96,10 @@ value="0">
             </tbody>
         </table>
     </div>
+
     @include('modales.modalBajaSede')
 
     <br />
-
 
     <div class="row navbuttons ">
     <div class="col-6 col-sm-auto" id="btnPrevious">
@@ -126,16 +113,11 @@ value="0">
 </fieldset>
 
 @push('js')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+<!-- Scripts VEHICULOS -->
 
 <script type="text/javascript">
   $(function () {
-
-    console.log({{$id}});
 
     var table = $('.yajra-vehiculos').DataTable({
     language: {
@@ -178,20 +160,51 @@ value="0">
 
   });
 
-    //Funciones a implementar
 
     function bajaPatente(id_registro) {
 
-//Desplegamos el modal
-$('#modal_baja_patente').modal('show');
-$('#baja_patente').val(id_registro);
-}
+        //Desplegamos el modal
+        $('#modal_baja_patente').modal('show');
+        $('#baja_patente').val(id_registro);
+    }
+
+
+    //Enviamos el id del registro que queremos modificar (id de la tabla)
+    function editarPatente(id_registro) {
+
+        $.ajax ({
+        url: "{{ url('patentesBD/') }}/"+id_registro,
+        success: function (response) {
+
+            abrirModalEditarPatente(response);
+        }
+        });
+
+
+        function abrirModalEditarPatente(response){
+
+            //Desplegamos el modal
+            $('#editarVehiculo').modal('show');
+            //Enviamos los valores a cada campo
+            $('#marcas').val(response [0].marca);
+            $('#dominios').val(response [0].dominio);
+            $('#modelos').val(response [0].modelo);
+            $('#inscriptos_en').val(response [0].inscripto_en);
+            $('#id_proveedor_patente').val(response [0].id_proveedor_patente);
+
+        }
+
+    }
+
 </script>
 
-<script type="text/javascript">
-    $(function () {
 
-      console.log({{$id}});
+
+<!-- Scripts SEGUROS -->
+
+<script type="text/javascript">
+
+    $(function () {
 
       var table = $('.yajra-seguros').DataTable({
       language: {
@@ -221,18 +234,18 @@ $('#baja_patente').val(id_registro);
               {data: 'poliza', name: 'poliza'},
               {data: 'agencia', name: 'agencia'},
               {data: 'asegurado', name: 'asegurado'},
-              {data: 'vigencia_hasta', 
-    
+              {data: 'vigencia_hasta',
+
                 render: function(data){
-                    
+
                     let fecha_sin_hora_seguros = data.split(' ')[0];
                     let fecha_local_seguros = fecha_sin_hora_seguros.split('-').reverse().join('/');
-                  
+
                     return fecha_local_seguros;
                 }
-              
+
               },
-            
+
               {
                   data: 'action',
                   name: 'action',
@@ -244,21 +257,55 @@ $('#baja_patente').val(id_registro);
 
     });
 
-      //Funciones a implementar
 
-      function bajaSeguro(id_registro) {
 
-  //Desplegamos el modal
-  $('#modal_baja_seguro').modal('show');
-  $('#baja_seguro').val(id_registro);
-  }
+    function bajaSeguro(id_registro) {
+
+        //Desplegamos el modal
+        $('#modal_baja_seguro').modal('show');
+        $('#baja_seguro').val(id_registro);
+    }
+
+
+    //Enviamos el id del registro que queremos modificar (id de la tabla)
+    function editarSeguro(id_registro) {
+
+        $.ajax ({
+        url: "{{ url('segurosBD/') }}/"+id_registro,
+        success: function (response) {
+
+            abrirModalEditarSeguro(response);
+        }
+        });
+
+
+        function abrirModalEditarSeguro(response){
+
+            //Desplegamos el modal
+            $('#editarSeguro').modal('show');
+            //Enviamos los valores a cada campo
+            $('#polizas').val(response [0].poliza);
+            $('#asegurados').val(response [0].asegurado);
+            $('#agencias').val(response [0].agencia);
+            let vigencia_hasta = response [0].vigencia_hasta;
+            vigencia_hasta = vigencia_hasta.split(" ");
+            vigencia = vigencia_hasta[0];
+            $('#vigencias_hasta').val(vigencia);
+            $('#id_proveedor_seguro').val(response [0].id_proveedor_seguro);
+
+        }
+
+    }
+
   </script>
 
 
-<script type="text/javascript">
-    $(function () {
 
-      console.log({{$id}});
+<!-- Scripts SEDES -->
+
+<script type="text/javascript">
+
+    $(function () {
 
       var table = $('.yajra-sedes').DataTable({
       language: {
@@ -298,7 +345,7 @@ $('#baja_patente').val(id_registro);
 
     });
 
-   
+
 
     function bajaSede(id_registro) {
 
@@ -306,6 +353,35 @@ $('#baja_patente').val(id_registro);
         $('#modal_baja_sede').modal('show');
         $('#baja_sede').val(id_registro);
     }
+
+
+    //Enviamos el id del registro que queremos modificar (id de la tabla)
+    function editarSede(id_registro) {
+
+        $ .ajax ({
+              url: "{{ url('sedesBD/') }}/"+id_registro,
+              success: function (response) {
+
+                    abrirModalEditarSede(response);
+              }
+           });
+
+
+        function abrirModalEditarSede(response){
+
+            //Desplegamos el modal
+            $('#editarSede').modal('show');
+            //Enviamos los valores a cada campo
+            $('#Domicilios').val(response [0].Domicilio);
+            $('#provincia_sedes').val(response [0].nombre_provincia);
+            $('#Localidades').val(response [0].id_localidad);
+            $('#id_proveedor_sede').val(response [0].id_proveedor_sede);
+            //console.log(response);
+
+        }
+
+    }
+
   </script>
 
 @endpush

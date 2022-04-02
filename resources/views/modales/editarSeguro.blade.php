@@ -14,17 +14,17 @@
                     <br />
 
                     <label for="modal_agencia">Agencia:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="modal_agencia" name="modal_agencia" maxlength="40"/>
+                    <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="modal_agencia" name="modal_agencia" maxlength="20"/>
                     <br />
 
                     <label for="modal_asegurado">Asegurado:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="modal_asegurado" name="modal_asegurado" maxlength="40"/>
+                    <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="modal_asegurado" name="modal_asegurado" maxlength="20"/>
                     <br />
-                     
+
                     <label for="modal_vigencia">Vigencia hasta:</label><br />
                     <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="modal_vigencia" name="modal_vigencia" />
                     <br />
-                    
+
                     <div class="modal-footer">
                         <input id="numero_fila_seguro" name="numero_fila_seguro" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
@@ -35,6 +35,7 @@
         </div>
     </div>
 
+@push('js')
 
 <script type="text/javascript">
 
@@ -81,6 +82,16 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         modal_agencia_css.style.border = '1px solid #DFDFDF';
         modal_vigencia_css.style.border = '1px solid #DFDFDF';
 
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Seguro Modificado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+        })
+
     } else {
 
         //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
@@ -124,7 +135,9 @@ $(document).on("click", ".btn_cancel_modal", function(event) {
     modal_asegurado_css.style.border = '1px solid #DFDFDF';
     modal_agencia_css.style.border = '1px solid #DFDFDF';
     modal_vigencia_css.style.border = '1px solid #DFDFDF';
-    
+
 });
 
 </script>
+
+@endpush

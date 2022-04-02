@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-sm">
             <label for="marca_vehiculo">Marca:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca_vehiculo" maxlength="40"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="marca_vehiculo" maxlength="20"/><br />
 
             <label for="dominio_vehiculo">Dominio:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="dominio_vehiculo" maxlength="7"/><br />
@@ -19,7 +19,7 @@
 
         <div class="col-sm">
             <label for="modelo_vehiculo">Modelo:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo_vehiculo" maxlength="40"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modelo_vehiculo" maxlength="20"/><br />
 
             <label for="inscripto_en_vehiculo">Inscripto en:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="inscripto_en_vehiculo" maxlength="20"/><br />
@@ -57,12 +57,12 @@
             <input type="text" class="form-control" placeholder="Ingrese la póliza" aria-describedby="basic-addon1" id="poliza" maxlength="20"/><br />
 
             <label for="asegurado">Asegurado:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" maxlength="40"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese el asegurado" aria-describedby="basic-addon1" id="asegurado" maxlength="20"/><br />
         </div>
 
         <div class="col-sm">
             <label for="agencia">Agencia:</label><br />
-            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" maxlength="40"/><br />
+            <input type="text" class="form-control" placeholder="Ingrese la agencia" aria-describedby="basic-addon1" id="agencia" maxlength="20"/><br />
 
             <label for="vigencia">Vigencia hasta:</label><br />
             <input type="date" class="form-control" placeholder="Ingrese la fecha de vigencia" aria-describedby="basic-addon1" id="vigencia" /><br />
@@ -169,6 +169,8 @@
 
     @push('js')
 
+
+
     <script type="text/javascript">
 
         let marca;
@@ -190,6 +192,9 @@
             let inscripto_en_css = document.getElementById("inscripto_en_vehiculo");
 
             if(marca.length != 0 && modelo.length != 0 && dominio.length != 0 && inscripto_en.length != 0){
+
+                //borra la fila con el mensaje vacio
+                $("#row_vehiculo").remove();
 
                 $("#body_table_vehiculo").append(
                     '<tr id="row_vehiculo' + j +'">'+
@@ -222,6 +227,16 @@
                 dominio_css.style.border = '1px solid #DFDFDF';
                 inscripto_en_css.style.border = '1px solid #DFDFDF';
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Vehículo Guardado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
             } else {
 
                 if(marca.length == 0){
@@ -245,7 +260,6 @@
                 }
 
 
-                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
                 $('#modal_validar_vehiculo').modal('show');
             }
@@ -260,6 +274,32 @@
 
             //borra la fila
             $("#row_vehiculo" + button_id + "").remove();
+
+            Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Vehículo dado de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
+
+            var cant_filas_vehiculo = document.getElementById("body_table_vehiculo").rows.length;
+
+            if(cant_filas_vehiculo == 0){
+
+                $("#body_table_vehiculo").append(
+                '<tr id="row_vehiculo" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
+
         });
 
 
@@ -316,6 +356,9 @@
 
             if(poliza.length != 0 && agencia.length != 0 && asegurado.length != 0 && vigencia.length != 0){
 
+                //borra la fila con el mensaje vacio
+                $("#row_seguro").remove();
+
                 $("#body_table_seguro").append(
                     '<tr id="row_seguro' + k +'">'+
                         '<td> <div id="poliza_text' + k +'">' + poliza +'</div></td>'+
@@ -347,6 +390,16 @@
                 asegurado_css.style.border = '1px solid #DFDFDF';
                 vigencia_css.style.border = '1px solid #DFDFDF';
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Seguro Guardado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
             } else {
 
                 if(poliza.length == 0){
@@ -370,7 +423,6 @@
                 }
 
 
-                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
                 //Desplegamos el modal
                 $('#modal_validar_seguro').modal('show');
             }
@@ -385,6 +437,32 @@
 
             //borra la fila
             $("#row_seguro" + button_id + "").remove();
+
+            Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Seguro dado de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
+
+
+            var cant_filas_seguro = document.getElementById("body_table_seguro").rows.length;
+
+            if(cant_filas_seguro == 0){
+
+                $("#body_table_seguro").append(
+                '<tr id="row_seguro" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
         });
 
 
@@ -430,14 +508,6 @@
         valor_localidad = $("#localidad_sede").find('option:selected').text(); // Capturamos el texto del option seleccionado
         provincia_sede = $("#provincia_sede").val();
 
-        /*console.log("Provincia: "+provincia_sede);
-        console.log("localidad: "+localidad);
-        if(localidad != " "){
-            console.log("No es vacio");
-        }else{
-            console.log("Es vacio");
-        }*/
-
         //Obtenemos los campos obligatorios para aplicarles estilos css
         let domicilio_sede_css = document.getElementById("domicilio_sede");
         let localidad_sede_css = document.getElementById("localidad_sede");
@@ -445,19 +515,22 @@
 
         if(domicilio.length != 0 && id_localidad != " " && provincia_sede != " "){
 
-        $("#body_table_sede").append(
-            '<tr id="row_sede' + l +'">'+
-                '<td> <div id="domicilio_sede_text' + l +'">' + domicilio +'</div></td>'+
-                '<td> <div id="provincia_sede_text' + l +'">' + provincia_sede +'</div></td>'+
-                '<td> <div id="localidad_sede_text' + l +'">' + valor_localidad +'</div></td>'+
-                '<td>'+
-                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'">'+
-                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + id_localidad +'">'+
-                '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sede' + l +'" name="provincias_sedes[]" readonly value="' + provincia_sede +'">'+
-                '<button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button>'+
-                '</td>'+
-            '</tr>'
-        );
+            //borra la fila con el mensaje vacio
+            $("#row_sede").remove();
+
+            $("#body_table_sede").append(
+                '<tr id="row_sede' + l +'">'+
+                    '<td> <div id="domicilio_sede_text' + l +'">' + domicilio +'</div></td>'+
+                    '<td> <div id="provincia_sede_text' + l +'">' + provincia_sede +'</div></td>'+
+                    '<td> <div id="localidad_sede_text' + l +'">' + valor_localidad +'</div></td>'+
+                    '<td>'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="domicilio_sede' + l +'" name="domicilios_sedes[]" readonly value="' + domicilio +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sede' + l +'" name="localidades_sedes[]" readonly value="' + id_localidad +'">'+
+                    '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sede' + l +'" name="provincias_sedes[]" readonly value="' + provincia_sede +'">'+
+                    '<button type="button" name="edit" id="'+ l +'" class="btn btn-warning btn-sm btn_edit_sede" title="editar sede"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="' + l +'" class="btn btn-danger btn-sm btn_remove_sede" title="quitar sede"><i class="fas fa-trash"></i></button>'+
+                    '</td>'+
+                '</tr>'
+            );
 
 
         l++;
@@ -469,6 +542,16 @@
         domicilio_sede_css.style.border = '1px solid #DFDFDF';
         localidad_sede_css.style.border = '1px solid #DFDFDF';
         provincia_sede_css.style.border = '1px solid #DFDFDF';
+
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Sede Guardada',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
 
         } else {
 
@@ -488,7 +571,6 @@
             }
 
 
-            /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
             //Desplegamos el modal
             $('#modal_validar_sede').modal('show');
         }
@@ -503,6 +585,31 @@
 
         //borra la fila
         $("#row_sede" + button_id + "").remove();
+
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Sede dada de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
+
+
+            var cant_filas_sede = document.getElementById("body_table_sede").rows.length;
+
+            if(cant_filas_sede == 0){
+
+                $("#body_table_sede").append(
+                '<tr id="row_sede" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
     });
 
 

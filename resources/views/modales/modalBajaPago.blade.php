@@ -21,12 +21,9 @@
     </div>
 </div>
 
-
 @push('js')
 
-
 <script type="text/javascript">
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
     $(document).on("click", ".btn_baja_pago", function() {
 
@@ -35,21 +32,27 @@
 
         $.ajax({
             type: "POST",
-            //Si colocamos un numero (id) funciona sin problemas... VER
             url: "{{url('bajaPagos/')}}/"+id,
             success: function() {
-                 // En caso de que se ejecute
                  $('.yajra-pagos').DataTable().ajax.reload();
+
+                 Swal.fire({
+                            position: 'top-end',
+                            icon: 'info',
+                            title: 'Pago dado de baja',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
         }
         });
 
-        //se recarga la tabla para que desaparesca la fila dada de baja
-        //$('.yajra-pagos').DataTable().ajax.reload();
-        //location.reload();
         //Ocultamos el modal
         $('#modal_baja_pago').modal('hide');
 
     });
 
 </script>
+
 @endpush

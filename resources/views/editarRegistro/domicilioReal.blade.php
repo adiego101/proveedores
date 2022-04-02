@@ -49,7 +49,6 @@ value="{{ isset($proveedor->pagina_web) ? $proveedor->pagina_web : '' }}"><br>
                 <div class="field_email_real">
 
                     @forelse($proveedor_email_real as $email_real)
-
                         <label for="email_real">Correo electrónico:</label><br>
                         <input type="email" class="form-control" placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" id="email_real" name="email_real[]" @if ( $mode == "show") readonly @endif value="{{$email_real->email}}" maxlength="50"> <br>
                     @empty
@@ -59,20 +58,13 @@ value="{{ isset($proveedor->pagina_web) ? $proveedor->pagina_web : '' }}"><br>
                     @endforelse
 
                 </div>
+                @if ( $mode != "show" && count($proveedor_email_real) < 3)
 
-                <div class="field_telefono_real">
-
-                    @forelse($proveedor_telefono_real as $telefono_real)
-
-                        <label for="telefono_real">Teléfono:</label><br>
-                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" @if ( $mode == "show") readonly @endif
-value="{{$telefono_real->nro_tel}}" maxlength="14"> <br>
-                    @empty
-                        <label for="telefono_real">Teléfono:</label><br>
-                        <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14"><br>
-                    @endforelse
-
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="javascript:void(0);" class="add_email_real" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
                 </div>
+                @endif
+
             </div>
             <div class="col-sm">
 
@@ -115,19 +107,40 @@ value="{{ isset($proveedor_domicilio_real->barrio) ? $proveedor_domicilio_real->
                 <input type="text" class="form-control limpiar" aria-describedby="basic-addon1" id="cp_real" name="cp_real" placeholder="Ingrese el código postal" @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio_real->codigo_postal : '' }}" maxlength="8"><br>
 
-@if ( $mode != "show")
 
                 <br>
                 <br>
                 <br>
                 <br>
-                <br>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <a href="javascript:void(0);" class="add_email_real" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
+                <div class="field_telefono_real">
+
+                    <div class="row">
+
+                        <div class="col-sm">
+                        @forelse($proveedor_telefono_real as $telefono_real)
+                            <label for="telefono_real_cod">Código de área:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->cod_area_tel}}" maxlength="4"> <br>
+                        @empty
+                            <label for="telefono_real_cod">Código de área:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="4"> <br>
+                            @endforelse
+                        </div>
+
+                        <div class="col-sm">
+                        @forelse($proveedor_telefono_real as $telefono_real)
+                            <label for="telefono_real">Número de Teléfono:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->nro_tel}}" maxlength="14"> <br>
+                        @empty
+                            <label for="telefono_real">Número de Teléfono:</label><br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14"> <br>
+                            @endforelse
+                        </div>
+
+                    </div>
+
                 </div>
-                <br>
-                <br>
-                <br>
+                @if ( $mode != "show" && count($proveedor_telefono_real) < 3)
+
                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                     <a href="javascript:void(0);" class="add_telefono_real" title="Agregue un nuevo teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>
                 </div>
@@ -146,10 +159,11 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
         <a class="btn btn-primary btnNext">Siguiente</a>
     </div>
 </div>
+
 @push('js')
 
-
 <script type="text/javascript">
+
     $(document).ready(function() {
 
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
@@ -160,26 +174,33 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
         $(addTelefono_real).click(function() {
 
             //Nuevo campo html (agregar un nuevo teléfono)
-            var fieldHTML_telefono_real = '<div>'+
+            var fieldHTML_telefono_real = '<div>'+'<div class="row">'+
+                                 '<div class="col-sm">'+
                                  '<br>'+
-                                    '<label for="telefono_real' + x +'">Teléfono:</label><br>'+
-                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de teléfono" aria-describedby="basic-addon1" id="telefono_real' + x +'" name="telefono_real[]" maxlength="14">'+
+                                 '<label for="telefono_real_cod' + x +'">Código de área:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_real_cod' + x +'" name="telefono_real_cod[]" maxlength="4">'+
+                                    '</div>'+
+                                    '<div class="col-sm">'+
+                                    '<br>'+
+                                    '<label for="telefono_real' + x +'">Número de Teléfono:</label><br>'+
+                                    '<input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real' + x +'" name="telefono_real[]" maxlength="14">'+
+                                    '</div>'+
+                                '</div>'+
                                     '<a href="javascript:void(0);" class="remove_telefono_real" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
-                                 '<br>'+
                                 '</div>';
 
 
-
             if(x == 1){
-                
+
                 //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
                 let tel_real = document.getElementById('telefono_real').value;
+                var cod_tel_real = document.getElementById('telefono_real_cod').value;
 
                 //Si el campo teléfono no se encuentra vacío, permite agregar un segundo campo.
-                if (tel_real.length != 0){
+                if (tel_real.length != 0 && cod_tel_real.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
 
@@ -188,20 +209,21 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
                 }
 
             } else {
-                
+
                 var y = x - 1;
 
                 //Obtenemos el valor del campo dinamico x, al clickear el botón Agregar Teléfono
                 var tel_real_dinamico = document.getElementById('telefono_real' + y).value;
-              
+                var cod_tel_real_dinamico = document.getElementById('telefono_real_cod' + y).value;
+
                 //Si el campo dinamico x no se encuentra vacío, permite agregar un siguiente campo x+1.
-                if (tel_real_dinamico.length != 0){
+                if (tel_real_dinamico.length != 0 && cod_tel_real_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (x < maxField) { 
+                    if (x < maxField) {
 
                         x++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_telefono_real).append(fieldHTML_telefono_real); // Agrega un nuevo campo html (telefono)
                     }
                 }
@@ -243,7 +265,7 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
                 if (email_real.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
 
@@ -262,10 +284,10 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
                 if (email_real_dinamico.length != 0){
 
                     //Verifica el numero maximo de campos a agregar, con el limite establecido
-                    if (i < maxField) { 
+                    if (i < maxField) {
 
                         i++; //Incrementa el contador en 1
-                        
+
                         $(wrapper_email_real).append(fieldHTML_email_real); // Agrega un nuevo campo html (correo)
                     }
                 }
@@ -273,7 +295,7 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
 
         });
 
-        
+
         $(wrapper_email_real).on('click', '.remove_email_real', function(e) {
             e.preventDefault();
             $(this).parent('div').remove(); //Remueve un campo html (correo)
@@ -286,7 +308,7 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
 
 <script type="text/javascript">
   window.onload = function(){
-        console.log("localidad real");
+        //console.log("localidad real");
         };
     function recargarListaRealEdit2(){
         $.ajax({
@@ -317,8 +339,8 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
 		});
 	}
 
-
 </script>
 
 @endpush
+
 </fieldset>

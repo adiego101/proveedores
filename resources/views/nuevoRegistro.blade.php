@@ -2,8 +2,7 @@
 
 @section('content2')
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -95,6 +94,13 @@
 
 
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
     function valideKey(evt){
@@ -107,7 +113,7 @@
         } else if(code>=48 && code<=57) { // es un numero.
           return true;
         } else{ // otras teclas
-        console.log("no es un numero");
+        //console.log("no es un numero");
           return false;
         }
     }
@@ -117,7 +123,7 @@
 
 $('input[type="checkbox"]').on('change', function(){
     this.value = this.checked ? 1 : 0;
-     console.log(this.value);
+     //console.log(this.value);
  }).change();
 </script>
 
@@ -176,6 +182,120 @@ $('input[type="checkbox"]').on('change', function(){
     }, false);
 
 </script>
+
+
+<script type="text/javascript">
+
+        /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
+        window.onload = function() {
+
+            var cant_filas_sucursal = document.getElementById("body_table_sucursal").rows.length;
+
+            if(cant_filas_sucursal == 0){
+
+                $("#body_table_sucursal").append(
+                        '<tr id="row_sucursal" class="alert alert-light" role="alert">'+
+                            '<td></td>'+
+                            '<td>No hay registros</td>'+
+                            '<td></td>'+
+                            '<td></td>'+
+                        '</tr>'
+                );
+            }
+
+
+            var cant_filas_actividad = document.getElementById("body_table_actividad").rows.length;
+
+            if(cant_filas_actividad == 0){
+
+                $("#body_table_actividad").append(
+                        '<tr id="row_actividad" class="alert alert-light" role="alert">'+
+                            '<td></td>'+
+                            '<td>No hay registros</td>'+
+                            '<td></td>'+
+                        '</tr>'
+                );
+            }
+
+            var cant_filas_producto = document.getElementById("body_table_producto").rows.length;
+
+            if(cant_filas_producto == 0){
+
+                $("#body_table_producto").append(
+                '<tr id="row_producto" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
+
+
+            var cant_filas_pago = document.getElementById("body_table_pago").rows.length;
+
+            if(cant_filas_pago == 0){
+
+                $("#body_table_pago").append(
+                '<tr id="row_pago" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
+
+
+            var cant_filas_vehiculo = document.getElementById("body_table_vehiculo").rows.length;
+
+            if(cant_filas_vehiculo == 0){
+
+                $("#body_table_vehiculo").append(
+                '<tr id="row_vehiculo" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
+
+
+            var cant_filas_seguro = document.getElementById("body_table_seguro").rows.length;
+
+            if(cant_filas_seguro == 0){
+
+                $("#body_table_seguro").append(
+                '<tr id="row_seguro" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
+
+
+            var cant_filas_sede = document.getElementById("body_table_sede").rows.length;
+
+            if(cant_filas_sede == 0){
+
+                $("#body_table_sede").append(
+                '<tr id="row_sede" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
+        };
+
+    </script>
 
 @endpush
 

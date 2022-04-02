@@ -118,12 +118,12 @@
         });
         $('#exportar').click(function(){
             if($('#tipo_descarga').val()=='TODOS LOS PROVEEDORES'){
-                console.log('Llama a metodo exportarProveedores');
+                //console.log('Llama a metodo exportarProveedores');
                 exportarProveedores();
             }
             if($('#tipo_descarga').val()=='PROVEEDORES POR LOCALIDAD')
                 exportarProveedoresLocalidad($('#localidad_descarga').val());
-                
+
         });*/
 	})
 
@@ -138,7 +138,7 @@
 	}
 
     function exportarProveedores(){
-        console.log('Entro a metodo exportarProveedores');
+        //console.log('Entro a metodo exportarProveedores');
         $.ajax({
                 type:"GET",
                 url:"/Laravel-Apps/rupae-interfaces/public/exportar",
@@ -158,6 +158,6 @@
                 }
             });
     }
-    
+
 </script>
 @endsection

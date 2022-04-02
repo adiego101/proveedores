@@ -61,7 +61,7 @@
     <div class="row">
         <div class="col-sm">
             <label for="producto_elaborado">Producto elaborado:</label><br>
-            <input list="productos" name="producto_elaborado" id="producto_elaborado"  class="form-control" placeholder="Ingrese o seleccione el producto que produce">
+            <input list="productos" name="producto_elaborado" id="producto_elaborado"  class="form-control" placeholder="Ingrese o seleccione el producto que produce" maxlength="30">
             <datalist id="productos">
                 @forelse($productos as $producto)
                     <option value="{{$producto->producto_elaborado}}">
@@ -123,6 +123,9 @@
 
 @push('js')
 
+
+
+
     <script type="text/javascript">
 
         let tipo_actividad;
@@ -146,6 +149,9 @@
 
             if(tipo_actividad != 'Primaria' || contador <= 1){
 
+                //borra la fila con el mensaje vacio
+                $("#row_actividad").remove();
+
                 $("#body_table_actividad").append(
                     '<tr id="row_actividad' + m +'">'+
                         '<td>' + tipo_actividad +'</td>'+
@@ -160,8 +166,18 @@
 
                 m++;
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Actividad Guardada',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
             }else{
-          
+
                 //Desplegamos el modal
                 $('#modal_validar_actividad').modal('show');
 
@@ -181,10 +197,34 @@
             if(valor_tipo == 'Primaria'){
                 contador = 0;
             }
-        
+
             //borra la fila
             $("#row_actividad" + button_id + "").remove();
-           
+
+            Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Actividad dada de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
+                var cant_filas_actividad = document.getElementById("body_table_actividad").rows.length;
+
+                /*Si al eliminar una fila, la tabla esta vacia, volvemos a mostrar el mensaje de aviso*/
+                if(cant_filas_actividad == 0){
+
+                    $("#body_table_actividad").append(
+                        '<tr id="row_actividad" class="alert alert-light" role="alert">'+
+                            '<td></td>'+
+                            '<td>No hay registros</td>'+
+                            '<td></td>'+
+                        '</tr>'
+                    );
+                }
+
         });
 
     </script>
@@ -212,6 +252,9 @@ $("#add_producto").on("click", function(e) {
 
 
     if(producto_elaborado.length != 0 && unidad_producida.length != 0){
+
+        //borra la fila con el mensaje vacio
+        $("#row_producto").remove();
 
         $("#body_table_producto").append(
             '<tr id="row_producto' + n +'">'+
@@ -241,7 +284,17 @@ $("#add_producto").on("click", function(e) {
 
         producto_elaborado_css.style.border = '1px solid #DFDFDF';
         unidad_producida_css.style.border = '1px solid #DFDFDF';
-        
+
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Producto Guardado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+        })
+
 
     } else {
 
@@ -254,14 +307,14 @@ $("#add_producto").on("click", function(e) {
 
             unidad_producida_css.style.border = '2px dashed red';
         }
-        
-        
+
+
         /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
         //Desplegamos el modal
         $('#modal_validar_producto').modal('show');
 
     }
-  
+
 });
 
 
@@ -272,7 +325,33 @@ $(document).on("click", ".btn_remove_producto", function() {
 
     //borra la fila
     $("#row_producto" + button_id + "").remove();
-   
+
+    Swal.fire({
+                position: 'top-end',
+                icon: 'info',
+                title: 'Producto dado de baja',
+                showConfirmButton: false,
+                timer: 1500,
+                toast: true
+
+    })
+
+    var cant_filas_producto = document.getElementById("body_table_producto").rows.length;
+
+    /*Si al eliminar una fila, la tabla esta vacia, volvemos a mostrar el mensaje de aviso*/
+    if(cant_filas_producto == 0){
+
+        $("#body_table_producto").append(
+                '<tr id="row_producto" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+        );
+    }
+
 });
 
 

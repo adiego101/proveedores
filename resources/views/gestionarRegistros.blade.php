@@ -17,7 +17,6 @@
                     <th align="center">Nombre de fantasía</th>
                     <th align="center">Razón Social</th>
                     <th align="center">CUIT</th>
-                    <!--<th align="center">Dada de baja</th>-->
                     <th align="center">Acciones</th>
                 </tr>
             </thead>
@@ -30,14 +29,11 @@
 <!--Incluimos el modal para dar de alta un registro -->
 @include('modalAltaRegistro')
 
-
 @endsection
 
 @push('js')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
 <script type="text/javascript">
@@ -68,41 +64,33 @@
         serverSide: true,
         ajax: "{{ route('registros.list') }}",
         columns: [
-            {data: 'nombre_fantasia', 
+            {data: 'nombre_fantasia',
             render: function (data, type, row){
-                
+                let nombre_fantasia_sub = data.substring(0, 20);
+                if (row['dado_de_baja'] === 0)
+                        return nombre_fantasia_sub;
+                    else
+                        return '<div style="color:red;">'+nombre_fantasia_sub+'</div>';
+            }
+            },
+            {data: 'razon_social',
+            render: function (data, type, row){
+                let razon_social_sub = data.substring(0, 20);
+                if (row['dado_de_baja'] === 0)
+                        return razon_social_sub;
+                    else
+                        return '<div style="color:red;">'+razon_social_sub+'</div>';
+            }
+            },
+           {data: 'cuit',
+            render: function (data, type, row){
+
                 if (row['dado_de_baja'] === 0)
                         return data;
                     else
                         return '<div style="color:red;">'+data+'</div>';
             }
             },
-            {data: 'razon_social', 
-            render: function (data, type, row){
-                
-                if (row['dado_de_baja'] === 0)
-                        return data;
-                    else
-                        return '<div style="color:red;">'+data+'</div>';
-            }
-            },
-           {data: 'cuit', 
-            render: function (data, type, row){
-                
-                if (row['dado_de_baja'] === 0)
-                        return data;
-                    else
-                        return '<div style="color:red;">'+data+'</div>';
-            }
-            },
-            /*{data: 'dado_de_baja',
-            render: function(data){
-                    if (data === 0)
-                        return 'No';
-                    else
-                        return '<div style="background-color:yellow;">Si</div>';
-                }
-            },*/
             {
                 data: 'action',
                 name: 'action',

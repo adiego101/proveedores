@@ -86,6 +86,16 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         modal_localidad_css.style.border = '1px solid #DFDFDF';
         modal_provincia_css.style.border = '1px solid #DFDFDF';
 
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Sede Modificada',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+        })
+
     } else {
 
         //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.

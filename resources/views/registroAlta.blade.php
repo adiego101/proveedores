@@ -138,7 +138,7 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
                         <label for="">Domicilio Real: {{isset($data['calle_ruta_real']) ? $data['calle_ruta_real'] : ''}}</label><br>
                         <label for="">Localidad: {{isset($data['localidad_real']) ? $data['localidad_real'] : ''}}</label><br>
                         <label for="">Provincia: {{isset($data['provincia_real']) ? $data['provincia_real'] : ''}}</label><br>
-                        <label for="">Teléfono:  {{isset($data['telefono_real']) ? $data['telefono_real'] : ''}}</label><br>
+                        <label for="">Teléfono:  {{isset($data['cod_tel_real']) ? $data['cod_tel_real'] : ''}}-{{isset($data['telefono_real']) ? $data['telefono_real'] : ''}}</label><br>
                         <label for="">Correo electrónico: {{isset($data['email_real']) ? $data['email_real'] : ''}}</label><br>
 
                     </td>
@@ -147,7 +147,7 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
                         <label for="">Domicilio Legal: {{isset($data['calle_ruta_legal']) ? $data['calle_ruta_legal'] : ''}}</label><br>
                         <label for="">Localidad: {{isset($data['localidad_legal']) ? $data['localidad_legal'] : ''}}</label><br>
                         <label for="">Provincia: {{isset($data['provincia_legal']) ? $data['provincia_legal'] : ''}}</label><br>
-                        <label for="">Teléfono: {{isset($data['telefono_legal']) ? $data['telefono_legal'] : ''}}</label><br>
+                        <label for="">Teléfono: {{isset($data['cod_tel_legal']) ? $data['cod_tel_legal'] : ''}}-{{isset($data['telefono_legal']) ? $data['telefono_legal'] : ''}}</label><br>
                         <label for="">Correo electrónico: {{isset($data['email_legal']) ? $data['email_legal'] : ''}}</label><br>
                         <label for="">Representante legal: {{isset($data['representante_legal']['apellido_persona']) ? $data['representante_legal']['apellido_persona'] : '' }} {{ isset($data['representante_legal']['nombre_persona']) ? $data['representante_legal']['nombre_persona'] : '' }} </label><br>
                         <label for="">DNI: {{ isset($data['representante_legal']['dni_persona']) ? $data['representante_legal']['dni_persona'] : '' }} </label><br>

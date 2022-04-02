@@ -7,11 +7,11 @@
 $fechaOriginalInscripcion = htmlspecialchars($data['fecha_inscripcion']);
 
 //Cambiamos el formato por dd/mm/YYYY H:i:s
-$timestamp = strtotime($fechaOriginalInscripcion); 
+$timestamp = strtotime($fechaOriginalInscripcion);
 $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
 
 //Tomamos la fecha de inscripcion y le aumentamos un año (para el campo valido hasta)
-$anioSiguiente = strtotime($fechaOriginalInscripcion.'+1 year'); 
+$anioSiguiente = strtotime($fechaOriginalInscripcion.'+1 year');
 $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
 ?>
 
@@ -114,7 +114,9 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
         }
 
 
-       /* .page_break { page-break-before: always; } {{$data['titulo']}} */
+        /*.page_break {
+            page-break-before: always;
+        }*/
 
     </style>
 </head>
@@ -133,8 +135,9 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
                  Registro Único Provincial  <br> de Actividades Económicas
             </div>
 
-    <br>
-    <br>
+            <br>
+            <br>
+
             <span><u>Certificado de Inscripción</u></span>
             <label for="" class="txt-right">Cuit Nº: {{isset($data['cuit']) ? $data['cuit'] : ''}}</label><br><br>
             <label for="">Nombre del establecimiento: {{isset($data['nombre_fantasia']) ? $data['nombre_fantasia'] : ''}}</label><br><br>
@@ -142,7 +145,7 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
             <label for="">Actividad principal: {{isset($data['cod_actividad_principal']) ? $data['cod_actividad_principal'] : ''}} - {{isset($data['actividad_principal']) ? $data['actividad_principal'] : ''}}</label><br><br>
             <label for="">Actividad secundaria: {{isset($data['actividad_secundaria']) ? $data['actividad_secundaria'] : ''}}</label><br><br>
             <label for="">Calle o ruta: {{isset($data['calle_ruta']) ? $data['calle_ruta'] : ''}}</label><br><br>
-            <label for="">Teléfono: {{isset($data['telefono']) ? $data['telefono'] : ''}}</label>
+            <label for="">Teléfono:{{isset($data['cod_tel_real']) ? $data['cod_tel_real'] : ''}} - {{isset($data['telefono']) ? $data['telefono'] : ''}}</label>
             <label for="" class="txt-right">Localidad / Paraje: {{isset($data['localidad']) ? $data['localidad'] : ''}}</label><br><br>
             <label for="">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label>
             <label for="" class="txt-right"><b>Válido hasta:</b> {{$fechaValidoHasta}}</label>
@@ -162,7 +165,7 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
         </section>
         <br>
         <p>-------------------------------------------------------------------------------------------------------------------------</p>
-
+        <!-- <div class="page_break"> -->
         <section>
 
             <img src="../public/Santa_Cruz.png" class="img-left">
@@ -177,7 +180,7 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
             <label for="">Actividad principal: {{isset($data['cod_actividad_principal']) ? $data['cod_actividad_principal'] : ''}} - {{isset($data['actividad_principal']) ? $data['actividad_principal'] : ''}}</label><br><br>
             <label for="">Actividad secundaria: {{isset($data['actividad_secundaria']) ? $data['actividad_secundaria'] : ''}}</label><br><br>
             <label for="">Calle o ruta: {{isset($data['calle_ruta']) ? $data['calle_ruta'] : ''}}</label><br><br>
-            <label for="">Teléfono: {{isset($data['telefono']) ? $data['telefono'] : ''}}</label>
+            <label for="">Teléfono:{{isset($data['cod_tel_real']) ? $data['cod_tel_real'] : ''}} - {{isset($data['telefono']) ? $data['telefono'] : ''}}</label>
             <label for="" class="txt-right">Localidad / Paraje: {{isset($data['localidad']) ? $data['localidad'] : ''}}</label><br><br>
             <label for="">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label>
             <label for="" class="txt-right"><b>Válido hasta:</b> {{$fechaValidoHasta}}</label>
@@ -195,8 +198,8 @@ $fechaValidoHasta = date("d/m/Y H:i:s", $anioSiguiente);
             </div>
 
         </section>
-
+        <!-- </div> -->
     </main>
-    <!--<div class="page_break"></div>-->
+    <!-- <div class="page_break"></div> -->
 </body>
 </html>

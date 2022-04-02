@@ -22,10 +22,8 @@ value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="11"><br
     <textarea id="observaciones"   @if ( $mode == "show") readonly @endif name="observaciones" class="form-control" placeholder="Ingrese las observaciones que considere necesarias" maxlength="200">{{ isset($proveedor->observaciones) ? $proveedor->observaciones : '' }}</textarea>
     <br>
     <hr>
-    <!--FALTA VALIDAR -->
     <br>
     <h1>Representante Legal</h1><br>
-
 
     <label for="apellido_persona">Apellido:</label><br>
     <input type="text" @if ( $mode == "show") readonly @endif value="{{ isset($persona->apellido_persona) ? $persona->apellido_persona : '' }}" class="form-control limpiar" placeholder="Ingrese el apellido del representante legal" aria-describedby="basic-addon1" id="apellido_persona" name="apellido_persona" maxlength="50"><br>

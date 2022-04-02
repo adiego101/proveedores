@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <p>¿Está seguro que desea dar de baja la empresa?</p>
-                <p>Esta operación <b>NO</b> podrá deshacerse.</p>
+                <p>Si desea, puede volver a darla de alta nuevamente.</p>
             </div>
             <div class="modal-footer">
 
@@ -24,9 +24,7 @@
 
 @push('js')
 
-
 <script type="text/javascript">
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
     $(document).on("click", ".btn_baja_modal", function() {
 
@@ -45,5 +43,7 @@
         $('#modal_baja').modal('hide');
 
     });
+
 </script>
+
 @endpush

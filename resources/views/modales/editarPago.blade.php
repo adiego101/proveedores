@@ -33,7 +33,7 @@
 @push('js')
 
     <script type="text/javascript">
-        
+
         //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
         $(document).on("click", ".btn_edit_modal", function(event) {
@@ -70,6 +70,16 @@
                 modal_fecha_css.style.border = '1px solid #DFDFDF';
                 modal_importe_css.style.border = '1px solid #DFDFDF';
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Pago Modificado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
             }else{
 
                 //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
@@ -96,11 +106,12 @@
             //Obtenemos los campos obligatorios para aplicarles estilos css
             let modal_fecha_css = document.getElementById("modal_fecha");
             let modal_importe_css = document.getElementById("modal_importe");
-      
+
             modal_fecha_css.style.border = '1px solid #DFDFDF';
             modal_importe_css.style.border = '1px solid #DFDFDF';
-            
+
         });
 
     </script>
+    
 @endpush

@@ -10,17 +10,17 @@
                 <div class="modal-body">
 
                     <label for="modal_marca_vehiculo">Marca:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="modal_marca_vehiculo" name="modal_marca_vehiculo" maxlength="40"/><br />
+                    <input type="text" class="form-control" placeholder="Ingrese la marca del vehículo" aria-describedby="basic-addon1" id="modal_marca_vehiculo" name="modal_marca_vehiculo" maxlength="20"/><br />
 
                     <label for="modal_modelo_vehiculo">Modelo:</label><br />
-                    <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modal_modelo_vehiculo" name="modal_modelo_vehiculo" maxlength="40"/><br />
+                    <input type="text" class="form-control" placeholder="Ingrese el modelo del vehículo" aria-describedby="basic-addon1" id="modal_modelo_vehiculo" name="modal_modelo_vehiculo" maxlength="20"/><br />
 
                     <label for="modal_dominio_vehiculo">Dominio:</label><br />
                     <input type="text" class="form-control" placeholder="Ingrese el dominio del vehículo" aria-describedby="basic-addon1" id="modal_dominio_vehiculo" name="modal_dominio_vehiculo" maxlength="7"/><br />
-                           
+
                     <label for="modal_inscripto_en_vehiculo">Inscripto en:</label><br />
                     <input type="text" class="form-control" placeholder="Ingrese donde se encuentra inscripto el vehículo" aria-describedby="basic-addon1" id="modal_inscripto_en_vehiculo" name="modal_inscripto_en_vehiculo" maxlength="20"/><br />
-                         
+
                     <div class="modal-footer">
                         <input id="numero_fila_vehiculo" name="numero_fila_vehiculo" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
@@ -31,6 +31,7 @@
         </div>
     </div>
 
+@push('js')
 
 <script type="text/javascript">
 
@@ -75,6 +76,16 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         modal_dominio_css.style.border = '1px solid #DFDFDF';
         modal_modelo_css.style.border = '1px solid #DFDFDF';
         modal_inscripto_css.style.border = '1px solid #DFDFDF';
+
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Vehículo Modificado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+        })
 
     }else{
 
@@ -122,3 +133,5 @@ $(document).on("click", ".btn_cancel_modal", function(event) {
 });
 
 </script>
+
+@endpush

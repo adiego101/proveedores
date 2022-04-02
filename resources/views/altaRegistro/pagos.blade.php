@@ -22,8 +22,7 @@
     <h4>Registro de Pagos de inscripción y renovación:</h4><br>
 
     <label for="fecha_pago">Fecha:</label><br>
-    <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago"
-        aria-describedby="basic-addon1" id="fecha_pago"><br>
+    <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago" aria-describedby="basic-addon1" id="fecha_pago"><br>
 
     <label for="importe_pago">Importe:</label><br>
     <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="importe_pago" maxlength="9"><br>
@@ -66,6 +65,8 @@
 
 @push('js')
 
+
+
     <script type="text/javascript">
 
         let fecha;
@@ -87,6 +88,9 @@
 
 
             if(fecha.length != 0 && importe.length != 0){
+
+                //borra la fila con el mensaje vacio
+                $("#row_pago").remove();
 
                 $("#body_table_pago").append(
                     '<tr id="row_pago' + indice + '">' +
@@ -114,6 +118,16 @@
                 fecha_css.style.border = '1px solid #DFDFDF';
                 importe_css.style.border = '1px solid #DFDFDF';
 
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Pago Guardado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+                })
+
             } else {
 
                 if(fecha.length == 0){
@@ -125,9 +139,8 @@
 
                     importe_css.style.border = '2px dashed red';
                 }
-                
 
-                /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
+
                //Desplegamos el modal
                $('#modal_validar_pago').modal('show');
             }
@@ -142,6 +155,30 @@
 
             //borra la fila
             $("#row_pago" + button_id + "").remove();
+
+            Swal.fire({
+                    position: 'top-end',
+                    icon: 'info',
+                    title: 'Pago dado de baja',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+            })
+
+            var cant_filas_pago = document.getElementById("body_table_pago").rows.length;
+
+            if(cant_filas_pago == 0){
+
+                $("#body_table_pago").append(
+                '<tr id="row_pago" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
         });
 
 

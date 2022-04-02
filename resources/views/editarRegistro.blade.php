@@ -2,9 +2,7 @@
 
 @section('content2')
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -147,18 +145,45 @@
                 </button>
             @endif-->
         </div>
-        
+
     </form>
+    @include('edicionesModales.editarpagos')
+    @include('edicionesModales.pagos')
+    @include('edicionesModales.editarActividades')
+    @include('edicionesModales.actividades')
+    @include('edicionesModales.editarProducto')
+    @include('edicionesModales.producto')
+    @include('edicionesModales.altaSedes')
+    @include('edicionesModales.editarSedes')
+    @include('edicionesModales.altaSeguros')
+    @include('edicionesModales.editarSeguros')
+    @include('edicionesModales.altaVehiculos')
+    @include('edicionesModales.editarVehiculos')
+    @include('sucursales.create')
+
+    <!--Incluimos el modal para editar los campos de las sucursales -->
+
+    @include('sucursales.edit')
+
+    <!--Incluimos el modal para dar de baja un registro -->
+
+    @include('modales.modalBajaSucursal')
 
     @yield('datos')
 
 @endsection
 
 @push('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $('input[type="checkbox"]').on('change', function() {
             this.value = this.checked ? 1 : 0;
-            console.log(this.value);
+            //console.log(this.value);
         }).change();
 
         $('.btnNext').click(function() {
@@ -180,7 +205,7 @@ $('.btnPrevious').click(function() {
         } else if(code>=48 && code<=57) { // es un numero.
           return true;
         } else{ // otras teclas
-        console.log("no es un numero");
+        //console.log("no es un numero");
           return false;
         }
     }
@@ -190,7 +215,7 @@ $('.btnPrevious').click(function() {
 
 $('input[type="checkbox"]').on('change', function(){
     this.value = this.checked ? 1 : 0;
-     console.log(this.value);
+     //console.log(this.value);
  }).change();
 
  window.onload = function(){
@@ -220,46 +245,46 @@ Sugerencia: agregar una nueva clase a cada campo a borrar. -->
         const inputs_email = document.querySelectorAll('[type="email"]');
 
         for(var i = 0; i < inputs_text.length; i++) {
-           
+
             inputs_text[i].value = "";
-            
+
         }
 
         /*for(var i = 0; i < inputs_select.length; i++) {
-           
+
            inputs_select[i].value = "";
-           
+
        }*/
 
        for(var i = 0; i < inputs_text_area.length; i++) {
-           
+
         inputs_text_area[i].value = "";
-           
+
        }
 
        for(var i = 0; i < inputs_number.length; i++) {
-           
+
            inputs_number[i].value = "";
-           
+
        }
 
 
        for(var i = 0; i < inputs_check.length; i++) {
-           
+
            inputs_check[i].checked = 0;
-           
+
        }
 
 
        for(var i = 0; i < inputs_email.length; i++) {
-           
+
            inputs_email[i].value = "";
-           
+
        }
 
     });
 
-</script> 
+</script>
 
 <script>
     $("#reset").on("click", function(e) {
@@ -284,4 +309,3 @@ Sugerencia: agregar una nueva clase a cada campo a borrar. -->
 
     </style>
 @endpush
-

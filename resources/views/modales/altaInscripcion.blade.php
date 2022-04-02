@@ -28,7 +28,6 @@
 
 @push('js')
 
-
 <script type="text/javascript">
 
     $(document).on("click", "#alta_registro_nro_rupae", function() {
@@ -38,5 +37,7 @@
             url: "{{url('/crear_registro')}}"
         });
     });
+
 </script>
+
 @endpush

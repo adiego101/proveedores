@@ -11,8 +11,7 @@ class Sucursal extends Model
 
     protected $table = "sucursales";
 
-    protected $fillable = [
-                            'nombre_sucursal',
+    protected $fillable = [ 'nombre_sucursal',
                             'calle',
                             'numero',
                             'lote',

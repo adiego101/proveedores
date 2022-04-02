@@ -22,14 +22,14 @@
 
                     <label for="modal_rnpa">RNPA:</label><br>
                     <input type="text" class="form-control" aria-describedby="basic-addon1" id="modal_rnpa" name="modal_rnpa" placeholder="Ingrese el RNPA" maxlength="8"><br>
-                 
+
                     <label for="modal_unidad_producida">Unidad producida:</label><br>
                     <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="modal_unidad_producida"
                     name="modal_unidad_producida" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9"><br>
 
                     <label for="modal_produccion_total">Capacidad de producción total:</label><br>
                     <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="modal_produccion_total" name="modal_produccion_total" placeholder="Ingrese la producción total" maxlength="9"><br>
-                       
+
                     <div class="modal-footer">
                         <input id="numero_fila_producto" name="numero_fila_producto" type="hidden">
                         <button type="button" name="edit" class="btn btn-success btn_edit_modal">Editar</button>
@@ -40,6 +40,7 @@
         </div>
     </div>
 
+@push('js')
 
 <script type="text/javascript">
 
@@ -82,6 +83,16 @@ $(document).on("click", ".btn_edit_modal", function(event) {
         modal_producto_elaborado_css.style.border = '1px solid #DFDFDF';
         modal_unidad_producida_css.style.border = '1px solid #DFDFDF';
 
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Producto Modificado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+        })
+
     }else{
         //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
         event.preventDefault();
@@ -115,3 +126,5 @@ $(document).on("click", ".btn_cancel_modal", function(event) {
 });
 
 </script>
+
+@endpush

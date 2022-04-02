@@ -154,22 +154,28 @@
         <div class="et_pb_fullwidth_header_container center">
             <div class="header-content-container center">
                 <div class="header-content">
-                    <img loading="lazy"
-                        src="https://jefatura.santacruz.gob.ar/wp-content/uploads/2020/07/jefatrura-banner3.png"
+                    <img  loading="lazy"
+                        src="jefatrura-banner3.png"
                         title="" alt=""
-                        srcset="https://jefatura.santacruz.gob.ar/wp-content/uploads/2020/07/jefatrura-banner3.png 282w, https://jefatura.santacruz.gob.ar/wp-content/uploads/2020/07/jefatrura-banner3-188x300.png 188w"
-                        sizes="(max-width: 282px) 100vw, 282px" class="header-logo wp-image-322" width="282"
-                        height="449">
+                        srcset="jefatrura-banner3.png 282w, jefatrura-banner3.png 188w"
+                        sizes="(max-width: 282px) 100vw, 282px" class="header-logo wp-image-322"
+                        height="423">
 
-                    <div class="et_pb_header_content_wrapper">Secretaría de Estado de Modernización <br> e Innovación
-                        Tecnológica</div>
+
 
                 </div>
 
             </div>
             <div class="et_pb_fullwidth_header_overlay"></div>
             <div class="et_pb_fullwidth_header_scroll"></div>
+            <footer class=" font-small bg-transparent">
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2022 - Desarrollado por
+                  <a href="#">Dir. de Proyectos de Innovación - Secretaría de Estado de Modernización e Innovación Tecnológica </a>.
+                </div>
+            </footer>
     </section>
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

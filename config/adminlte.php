@@ -46,11 +46,11 @@ return [
      */
 
     'logo' => '<b>RUPAE</b>',
-    'logo_img' => '/logo_santacruz.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img' => '/logo_color_minpro.png',
+    'logo_img_class' => 'brand-image   ',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Logo Santa Cruz',
+    'logo_img_alt' => 'Logo MinPro',
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ return [
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
-    'layout_dark_mode' => null,
+    'layout_dark_mode' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -229,7 +229,7 @@ return [
 
         // Sidebar items:
 
-        ['header' => 'Funciones Principales'],
+        /*['header' => 'Funciones Principales'],*/
 
         [
             'text' => 'Nuevo Registro',

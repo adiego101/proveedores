@@ -21,33 +21,38 @@
     </div>
 </div>
 
-
 @push('js')
 
-
 <script type="text/javascript">
-    //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
     $(document).on("click", ".btn_baja_producto", function() {
 
         //Obtenemos el numero de la fila que queremos modificar
         let id = $("#baja_producto").val();
 
-
-
         $.ajax({
             type: "POST",
-            //Si colocamos un numero (id) funciona sin problemas... VER
             url: "{{url('bajaProductos/')}}/"+id,
             success: function() {
-                 // En caso de que se ejecute
                  $('.yajra-productos').DataTable().ajax.reload();
+
+                 Swal.fire({
+                            position: 'top-end',
+                            icon: 'info',
+                            title: 'Producto dado de baja',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
         }
         });
-        //se recarga la tabla para que desaparesca la fila dada de baja
+
         //Ocultamos el modal
         $('#modal_baja_producto').modal('hide');
 
     });
+
 </script>
+
 @endpush

@@ -2,14 +2,7 @@
 
 @section('content2')
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-    {{--
-    <div class="alert alert-info" role="alert">
-        Modifique los campos que se presentan continuación
-        y presione el botón <b>Siguiente</b>, para continuar la modificación de los datos.
-    </div>--}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <nav>
         <ul class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -70,7 +63,6 @@
         </ul>
 
         <br>
-        <!-- -->
 
     </nav>
     <div class="tab-content" id="nav-tabContent">
@@ -126,6 +118,18 @@
                 aria-labelledby="nav-otrosDatos-tab">
                 @include('editarRegistro.otrosDatos') </div>
         </div>
+        @include('edicionesModales.editarpagos')
+    @include('edicionesModales.editarActividades')
+    @include('edicionesModales.editarProducto')
+    {{-- @include('edicionesModales.sucursales') --}}
+    @include('edicionesModales.editarSedes')
+    @include('edicionesModales.editarSeguros')
+    @include('edicionesModales.editarVehiculos')
+
+    <!--Incluimos el modal para editar los campos de las sucursales -->
+
+    @include('sucursales.edit')
+
     @yield('datos')
     <br>
 
@@ -141,10 +145,19 @@
 @endsection
 
 @push('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
     <script>
         $('input[type="checkbox"]').on('change', function() {
             this.value = this.checked ? 1 : 0;
-            console.log(this.value);
+            //console.log(this.value);
         }).change();
 
         $('.btnNext').click(function() {
@@ -166,7 +179,7 @@ $('.btnPrevious').click(function() {
         } else if(code>=48 && code<=57) { // es un numero.
           return true;
         } else{ // otras teclas
-        console.log("no es un numero");
+        //console.log("no es un numero");
           return false;
         }
     }
@@ -176,7 +189,7 @@ $('.btnPrevious').click(function() {
 
 $('input[type="checkbox"]').on('change', function(){
     this.value = this.checked ? 1 : 0;
-     console.log(this.value);
+     //console.log(this.value);
  }).change();
 
  window.onload = function(){
@@ -200,4 +213,3 @@ recargarListaHabilitacion2();
 
     </style>
 @endpush
-
