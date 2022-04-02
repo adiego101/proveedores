@@ -22,6 +22,8 @@ class RolesSeeder extends Seeder
                                 'admin_eliminar_roles',
                                 'admin_formulas',
                                 'admin_users']);
+        $rol2 = Role::create(['name'=>'Usuario']);
+        $rol2->givePermissionTo(['user_basic']);
 
     }
 }
