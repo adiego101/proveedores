@@ -182,7 +182,7 @@
             }
         });
 
-    
+
 
     function abrirModalEditar(response){
         //var domicilio = response [0].Domicilio;
@@ -289,8 +289,8 @@
                         //console.log(response)
                         $('#nuevaSucursal').modal('hide');
                         $('#addformSucursal :input').val('');
-                        $("#pais option:first").attr('selected','selected');
-                        Swal.fire({
+                        $("#pais").prop("selectedIndex", 0).val();
+                                                Swal.fire({
                             position: 'top-end',
                             icon: 'success',
                             title: 'Sucursal Guardada',
