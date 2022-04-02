@@ -106,22 +106,22 @@
                 <div class="row">
                     <div class="col-sm">
                         <label for="telefono_sucursal_cod">Código de área:</label><br>
-                        <input id="telefono_sucursal_cod" name="telefono_sucursal_cod" type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" maxlength="4" value="{{ isset($telefono->cod_area_tel) ? $telefono->cod_area_tel : '' }}">
+                        <input  @if ( $mode == "show") readonly @endif  id="telefono_sucursal_cod" name="telefono_sucursal_cod" type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" maxlength="4" value="{{ isset($telefono->cod_area_tel) ? $telefono->cod_area_tel : '' }}">
                     </div>
                     <div class="col-sm">
                         <label for="telefono_sucursal">Número de Teléfono:</label><br>
-                        <input id="telefono_sucursal" name="telefono_sucursal" type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" maxlength="14" value="{{ isset($telefono->nro_tel) ? $telefono->nro_tel : '' }}">
+                        <input @if ( $mode == "show") readonly @endif id="telefono_sucursal" name="telefono_sucursal" type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" maxlength="14" value="{{ isset($telefono->nro_tel) ? $telefono->nro_tel : '' }}">
                     </div>
                 </div>
             @empty
                 <div class="row">
                     <div class="col-sm">
                         <label for="telefono_sucursal_cod">Código de área:</label><br>
-                        <input id="telefono_sucursal_cod" name="telefono_sucursal_cod" type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" maxlength="4" value="{{ isset($telefono->cod_area_tel) ? $telefono->cod_area_tel : '' }}">
+                        <input @if ( $mode == "show") readonly @endif id="telefono_sucursal_cod" name="telefono_sucursal_cod" type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" maxlength="4" value="{{ isset($telefono->cod_area_tel) ? $telefono->cod_area_tel : '' }}">
                     </div>
                     <div class="col-sm">
                         <label for="telefono_sucursal">Número de Teléfono:</label><br>
-                        <input id="telefono_sucursal" name="telefono_sucursal" type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" maxlength="14" value="{{ isset($telefono->nro_tel) ? $telefono->nro_tel : '' }}">
+                        <input  @if ( $mode == "show") readonly @endif  id="telefono_sucursal" name="telefono_sucursal" type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" maxlength="14" value="{{ isset($telefono->nro_tel) ? $telefono->nro_tel : '' }}">
                     </div>
                 </div>
             @endforelse
@@ -129,11 +129,11 @@
             <div class="row">
                 <div class="col-sm">
                     <label for="telefono_sucursal_cod">Código de área:</label><br>
-                    <input type="text" id="telefono_sucursal_cod" name="telefono_sucursal_cod" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" maxlength="4" value="{{ isset($telefono->cod_area_tel) ? $telefono->cod_area_tel : '' }}">
+                    <input  @if ( $mode == "show") readonly @endif type="text" id="telefono_sucursal_cod" name="telefono_sucursal_cod" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" maxlength="4" value="{{ isset($telefono->cod_area_tel) ? $telefono->cod_area_tel : '' }}">
                 </div>
                 <div class="col-sm">
                     <label for="telefono_sucursal">Número de Teléfono:</label><br>
-                    <input type="text"  id="telefono_sucursal" name="telefono_sucursal"  onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" maxlength="14" value="{{ isset($telefono->nro_tel) ? $telefono->nro_tel : '' }}">
+                    <input  @if ( $mode == "show") readonly @endif type="text"  id="telefono_sucursal" name="telefono_sucursal"  onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" maxlength="14" value="{{ isset($telefono->nro_tel) ? $telefono->nro_tel : '' }}">
                 </div>
             </div>
 
