@@ -29,9 +29,14 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
+            $fecha_actual=Carbon::now();
+            
             $result = DB::table('proveedores')
-                            ->where('fecha_inscripcion','<=',Carbon::now()->subYear())
-                            ->update(['dado_de_baja'=>1]);
+                            ->where('fecha_inscripcion','<=',$fecha_actual->subYear())
+                            ->update([  'dado_de_baja'=>1,
+                                        'fecha_baja'=>$fecha_actual->format("Y/m/d"),
+                                        'motivo_baja'=>'Se venció el período de vigencia (un año desde la fecha de inscripción)',
+                                        'updated_at'=>$fecha_actual]);
         })->everyMinute();
     }
 
