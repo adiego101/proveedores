@@ -2080,6 +2080,8 @@ class ProveedoresController extends Controller
     public function editarProveedor($id, Request $request)
     {
         try {
+            $cuit = Proveedor::where('cuit', $request->cuit)->where('id_proveedor','<>',$id)->exists();
+            if(!$cuit){
             $proveedor = Proveedor::find($id);
 
             $persona = $proveedor->personas()->get();
@@ -2674,6 +2676,11 @@ class ProveedoresController extends Controller
 
             $proveedores_rupae->save();
             return redirect()->back()->withSuccess('Los datos del registro se han modificado satisfactoriamente !');
+            }
+            else{
+                return Redirect::back()
+                ->withErrors(['El CUIT ya se encuentra registrado']);
+            }
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 

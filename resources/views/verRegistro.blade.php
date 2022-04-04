@@ -144,7 +144,6 @@
     @endif
 
 
-    </div>
 @endsection
 
 @push('js')
@@ -160,10 +159,28 @@
     <script>
         $("#document").ready(function(){
             $("#nuevos_certificados").click(function(){
+                let timerInterval
+Swal.fire({
+  title: 'Generando Nuevos Certificados!',
+  timer: 9999,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
                 $.ajax({
                     url: "{{url('/nuevo-registro/'.$id)}}"
                     }).done( function() {
-                        
+
                         Swal.fire({
                             position: 'top-end',
                             icon: 'info',

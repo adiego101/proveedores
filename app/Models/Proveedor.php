@@ -76,7 +76,8 @@ class Proveedor extends Model
                             'observaciones',
                             'dado_de_baja',
                             'valor_indice_rupae',
-                            'desc_jerarquia_compre_local'
+                            'desc_jerarquia_compre_local',
+                            'id_proveedor'
                             ];
 
     protected $primaryKey = 'id_proveedor';
