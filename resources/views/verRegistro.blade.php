@@ -163,7 +163,16 @@
                 $.ajax({
                     url: "{{url('/nuevo-registro/'.$id)}}"
                     }).done( function() {
-                    alert( 'Success!!' );
+                        
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'info',
+                            title: 'Nuevos certificados generados',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
                 });
             });
         });
