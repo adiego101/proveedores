@@ -332,7 +332,7 @@
           serverSide: true,
           ajax: "{{ url('sedes/'.$id.'/'.$mode) }}",
           columns: [
-              {data: 'Domicilio', name: 'Domicilio'},
+              {data: 'domicilio', name: 'domicilio'},
               {data: 'nombre_localidad', name: 'nombre_localidad'},
               {
                   data: 'action',
@@ -372,7 +372,7 @@
             //Desplegamos el modal
             $('#editarSede').modal('show');
             //Enviamos los valores a cada campo
-            $('#Domicilios').val(response [0].Domicilio);
+            $('#Domicilios').val(response [0].domicilio);
             $('#provincia_sedes').val(response [0].nombre_provincia);
             $('#Localidades').val(response [0].id_localidad);
             $('#id_proveedor_sede').val(response [0].id_proveedor_sede);
