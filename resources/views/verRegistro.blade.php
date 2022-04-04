@@ -2,6 +2,11 @@
 
 @section('content2')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    @if($proveedor->dado_de_baja == 1)
+    <div class="alert alert-danger" role="alert">
+        El Registro con el Cuit: {{$proveedor->cuit}} esta dado de Baja
+      </div>
+    @endif
 
     <nav>
         <ul class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -128,14 +133,19 @@
     @yield('datos')
     <br>
 
-    <!--DEJAR COMENTADO HASTA LA EXPOSICION -->
     @if ($mode == 'show')
+    @if($proveedor->dado_de_baja != 1)
+
         <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-success">Descargar Registro alta</a>
         <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-warning">Descargar Certificado
             inscripción</a>
         <a href="{{ url('nuevo-registro/' . $id) }}" class="btn btn-outline-info">Generar Nuevo Certificado
             inscripción</a>
     @endif
+
+    @endif
+
+
     </div>
 @endsection
 

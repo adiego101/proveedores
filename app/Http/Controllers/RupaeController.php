@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Actividades_proveedores;
-use App\Models\Actividad_economica;
-use App\Models\Certificado;
-use App\Models\Jerarquia_compre_local;
+use PDF;
+use Carbon\Carbon;
 use App\Models\Localidad;
 use App\Models\Proveedor;
-use App\Models\Proveedor_domicilio;
+use App\Models\Provincia;
+use App\Models\Certificado;
+use Illuminate\Http\Request;
+use App\Models\Tipo_actividad;
 use App\Models\Proveedor_email;
 use App\Models\Proveedor_telefono;
-use App\Models\Provincia;
-use App\Models\Tipo_actividad;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Models\Actividad_economica;
+use App\Models\Proveedor_domicilio;
+use App\Models\Jerarquia_compre_local;
+use App\Models\Actividades_proveedores;
 use Illuminate\Support\Facades\Storage;
-use PDF;
+use Illuminate\Support\Facades\Redirect;
 
 class RupaeController extends Controller
 {
@@ -114,6 +115,8 @@ class RupaeController extends Controller
     public function generarRegistroAlta($id, $idCertificado)
     {
         $proveedor = Proveedor::find($id);
+
+    if($proveedor->dado_de_baja != 1){
 
         $idAlta = $proveedor->nro_rupae_proveedor;
         $persona = $proveedor->personas()->get();
@@ -231,9 +234,18 @@ class RupaeController extends Controller
         $dompdf->save(storage_path('app/public/') . 'registro-alta_' . $idCertificado . '.pdf');
         //return $dompdf->stream('registro-alta_'.$idAlta.'.pdf');
     }
+    else{
+        return Redirect::back()
+        ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
+
+    }
+    }
 
     public function descargarRegistroAlta($id)
     {
+        $proveedor = Proveedor::find($id);
+        if($proveedor->dado_de_baja != 1){
+
 
         $certificado = Certificado::where('id_proveedor', $id)->exists();
 
@@ -264,9 +276,18 @@ class RupaeController extends Controller
             return $certificado->id_certificado;
         }
     }
+    else{
+        return Redirect::back()
+        ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
+
+    }
+    }
 
     public function nuevoRegistroAlta($id)
     {
+        $proveedor = Proveedor::find($id);
+        if($proveedor->dado_de_baja != 1){
+
 
             $certificado = Certificado::where('id_proveedor', $id)->exists();
 
@@ -283,12 +304,19 @@ class RupaeController extends Controller
 
             return response($file, 200)
                 ->header('Content-type', 'application/pdf');
+        }
+        else{
+            return Redirect::back()
+            ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
+
+        }
 
     }
 
     public function generarHistoricoCertificado($id)
     {
         $proveedor = Proveedor::find($id);
+        if($proveedor->dado_de_baja != 1){
 
         // crea una ID única con un número aleatorio como prefijo, más seguro que un prefijo estático uniqid (rand (), true)
         //$idInscripcion = uniqid (rand ());
@@ -315,13 +343,22 @@ class RupaeController extends Controller
             $proveedor_tipo_actividad = Tipo_actividad::where('id_tipo_actividad', $proveedor_actividad_id->id_tipo_actividad)->first();
             $Actividad_economica = Actividad_economica::where('id_actividad_economica', $proveedor_actividad_id->id_tipo_actividad)->first();
 
+
         }
+    }
+    else{
+        return Redirect::back()
+        ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
+
+    }
 
     }
 
     public function generarCertificadoInscripcion($id, $idCertificado)
     {
+
         $proveedor = Proveedor::find($id);
+        if($proveedor->dado_de_baja != 1){
 
         // crea una ID única con un número aleatorio como prefijo, más seguro que un prefijo estático uniqid (rand (), true)
         //$idInscripcion = uniqid (rand ());
@@ -398,9 +435,19 @@ class RupaeController extends Controller
 
         //return $content;
     }
+    else{
+        return Redirect::back()
+        ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
+
+    }
+    }
 
     public function descargarCertificadoInscripcion($id)
     {
+        $proveedor = Proveedor::find($id);
+
+        if($proveedor->dado_de_baja != 1){
+
 
         $certificado = Certificado::where('id_proveedor', $id)->exists();
 
@@ -429,11 +476,20 @@ class RupaeController extends Controller
 
             return $certificado->id_certificado;
         }
+    }
+    else{
+        return Redirect::back()
+        ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
+
+    }
 
     }
 
     public function nuevoCertificadoInscripcion($id)
     {
+        $proveedor = Proveedor::find($id);
+
+        if($proveedor->dado_de_baja != 1){
             $certificado = Certificado::where('id_proveedor', $id)->exists();
             $this->guardarHistorico($id);
             $certificado = Certificado::where('id_proveedor', $id)->get()->last();
@@ -445,10 +501,18 @@ class RupaeController extends Controller
 
             return response($file, 200)
                 ->header('Content-type', 'application/pdf');
+            }
+            else{
+                return Redirect::back()
+                ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
+
+            }
     }
 
     public function asignarNroRupaeProveedor($proveedor)
     {
+        if($proveedor->dado_de_baja != 1){
+
         //asigna numero de registro
         $max_numero_registro = Proveedor::max('nro_rupae_proveedor');
         if ($max_numero_registro == null) {
@@ -467,10 +531,18 @@ class RupaeController extends Controller
             }
         } while ($error_numero_registro);
     }
+    else{
+        return Redirect::back()
+        ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
+
+    }
+    }
 
     public function guardarHistorico($id)
     {
         $proveedor = Proveedor::find($id);
+        if($proveedor->dado_de_baja != 1){
+
             $this->asignarNroRupaeProveedor($proveedor);
 
 
@@ -606,5 +678,12 @@ class RupaeController extends Controller
         ]);
         $proveedor->certificados()->save($certificado);
     }
+    else{
+        return Redirect::back()
+        ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
+
+    }
+    }
+
 
 }
