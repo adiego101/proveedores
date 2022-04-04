@@ -136,11 +136,9 @@
     @if ($mode == 'show')
     @if($proveedor->dado_de_baja != 1)
 
-        <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-success">Descargar Registro alta</a>
-        <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-warning">Descargar Certificado
-            inscripción</a>
-        <a href="{{ url('nuevo-registro/' . $id) }}" class="btn btn-outline-info">Generar Nuevo Certificado
-            inscripción</a>
+        <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-outline-dark" target="_blank">Descargar Registro alta</a>
+        <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-outline-dark" target="_blank">Descargar Certificado inscripción</a>
+        <a href="{{ url('nuevo-registro/' . $id) }}" class="btn btn-outline-info">Generar Nuevos Certificados</a>
     @endif
 
     @endif
