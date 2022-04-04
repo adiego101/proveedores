@@ -222,7 +222,7 @@ class RupaeController extends Controller
             'cod_tel_legal' => isset($proveedor_telefono_legal->cod_area_tel) ? $proveedor_telefono_legal->cod_area_tel : null,
 
             'localidad_legal' => isset($proveedor_localidad_legal->nombre_localidad) ? $proveedor_localidad_legal->nombre_localidad : '',
-            'fecha_inscripcion' => isset($proveedor->fecha_inscripcion) ? $proveedor->fecha_inscripcion->format("d/m/Y H:i:s") : '',
+            'fecha_inscripcion' => isset($proveedor->fecha_inscripcion) ? $proveedor->fecha_inscripcion : '',
             'fecha_emision_certificado' => $fecha_emision_certificado->format("d/m/Y H:i:s"),
         ];
 
@@ -413,7 +413,7 @@ class RupaeController extends Controller
             'calle_ruta' => $proveedor_domicilio_real->calle . ' ' . $proveedor_domicilio_real->numero,
             'telefono' => isset($proveedor_telefono_real->nro_tel) ? $proveedor_telefono_real->nro_tel : '',
             'cod_tel_real' => isset($proveedor_telefono_real->cod_area_tel) ? $proveedor_telefono_real->cod_area_tel : null,
-            'fecha_inscripcion' => isset($proveedor->fecha_inscripcion) ? $proveedor->fecha_inscripcion->format("d/m/Y H:i:s") : '',
+            'fecha_inscripcion' => isset($proveedor->fecha_inscripcion) ? $proveedor->fecha_inscripcion : '',
             'localidad' => isset($proveedor_localidad_real->nombre_localidad) ? $proveedor_localidad_real->nombre_localidad : '',
 
         ];
@@ -630,6 +630,7 @@ class RupaeController extends Controller
 
         }
         $proveedor->fecha_inscripcion = $fecha_emision_certificado;
+        $proveedor->save();
         $certificado = Certificado::create([
             'nro_rupae_proveedor' => $proveedor->nro_rupae_proveedor,
             'fecha_inscripcion' => $proveedor->fecha_inscripcion,
