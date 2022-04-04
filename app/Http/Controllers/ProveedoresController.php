@@ -493,8 +493,8 @@ class ProveedoresController extends Controller
                     for ($i = 0; $i < $arraySize; $i++) {
                         $Proveedor_sede = Proveedor_sede::create([
                             'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'Domicilio' => $request->domicilios_sedes[$i],
-                            'Localidad' => $request->localidades_sedes[$i],
+                            'domicilio' => $request->domicilios_sedes[$i],
+                            'id_localidad' => $request->localidades_sedes[$i],
                         ]);
                         $Proveedor_sede->save();
                     }
@@ -1556,7 +1556,7 @@ class ProveedoresController extends Controller
     public function getSedes(Request $request, $id, $mode = null)
     {
         try {
-            $data = Proveedor_sede::join("localidades", "localidades.id_localidad", "=", "proveedores_sede.Localidad")->where("proveedores_sede.id_proveedor", "=", $id)->select("proveedores_sede.id_proveedor_sede", "proveedores_sede.Domicilio", "localidades.nombre_localidad")->get();
+            $data = Proveedor_sede::join("localidades", "localidades.id_localidad", "=", "proveedores_sedes.id_localidad")->where("proveedores_sedes.id_proveedor", "=", $id)->select("proveedores_sedes.id_proveedor_sede", "proveedores_sedes.domicilio", "localidades.nombre_localidad")->get();
 
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -1589,7 +1589,7 @@ class ProveedoresController extends Controller
     public function getSedesBD($id)
     {
         try {
-            $data = Proveedor_sede::join("localidades", "localidades.id_localidad", "=", "proveedores_sede.Localidad")->join("provincias", "provincias.id_provincia", "=", "localidades.id_provincia")->where("proveedores_sede.id_proveedor_sede", "=", $id)->select("proveedores_sede.id_proveedor_sede", "proveedores_sede.Domicilio", "localidades.id_localidad", "provincias.nombre_provincia")->get();
+            $data = Proveedor_sede::join("localidades", "localidades.id_localidad", "=", "proveedores_sedes.id_localidad")->join("provincias", "provincias.id_provincia", "=", "localidades.id_provincia")->where("proveedores_sedes.id_proveedor_sede", "=", $id)->select("proveedores_sedes.id_proveedor_sede", "proveedores_sedes.domicilio", "localidades.id_localidad", "provincias.nombre_provincia")->get();
 
             return $data;
         } catch (\Exception$e) {
@@ -1695,8 +1695,8 @@ class ProveedoresController extends Controller
 
             $sede = $sede->fill($request->all());
 
-            $sede->Localidad = $request->Localidades;
-            $sede->Domicilio = $request->Domicilios;
+            $sede->id_localidad = $request->Localidades;
+            $sede->domicilio = $request->Domicilios;
 
             $sede->save();
             //return redirect()->back()->with('message', 'Los datos de la Sede fueron modificados correctamente');

@@ -9,14 +9,13 @@ class Proveedor_sede extends Model
 {
     use HasFactory;
 
-    protected $table = "proveedores_sede";
+    protected $table = "proveedores_sedes";
     protected $primaryKey = 'id_proveedor_sede';
 
     protected $fillable = [
-                            'Localidad',
-                            'Domicilio',
+                            'id_localidad',
+                            'domicilio',
                             'id_proveedor',
                             ];
-
 
 }
