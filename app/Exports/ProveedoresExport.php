@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Carbon\Carbon;
 
 //librerias para seguir el comportamiento de la aplicacion mediante log
 use Illuminate\Support\Facades\DB;
@@ -119,7 +120,10 @@ class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize,
                 if($telefono_real->cod_area_tel != null)
                     $tel.= $telefono_real->cod_area_tel.'-';
                 if($telefono_real->nro_tel != null)
-                    $tel.= $telefono_real->nro_tel.'/';
+                    if($proveedor->telefonos_real->last() == $telefono_real)
+                        $tel.= $telefono_real->nro_tel;
+                    else
+                        $tel.= $telefono_real->nro_tel.'/';
             }
                 
             foreach($proveedor->telefonos_legal as $telefono_legal){
@@ -128,11 +132,17 @@ class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize,
                 if($telefono_legal->cod_area_tel != null)
                     $telLegal.= $telefono_legal->cod_area_tel.'-';
                 if($telefono_legal->nro_tel != null)
+                    if($proveedor->telefonos_legal->last() == $telefono_legal)
+                        $tel.= $telefono_legal->nro_tel;
+                    else
                     $telLegal.= $telefono_legal->nro_tel.'/';
             }
             foreach($proveedor->emails_real as $email)
                 if($email->email != null)
-                    $correoElectronico.= $email->email.'/';
+                    if($proveedor->emails_real->last() == $email)
+                        $correoElectronico.= $email->email;
+                    else
+                        $correoElectronico.= $email->email.'/';
             /*Log::info('Domicilio => '.$domicilioReal);
             Log::info('Localidad => '.$localidad);
             Log::info('Provincia => '.$provincia);
@@ -146,7 +156,10 @@ class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize,
                 if($representante->apellido_persona != null)
                     $representanteLegal.= $representante->apellido_persona.' ';
                 if($representante->dni_persona != null)
-                    $representanteLegal.= ' DNI: '.$representante->dni_persona.'/';
+                    if($proveedor->representantes->last() == $representante)
+                        $representanteLegal.= ' DNI: '.$representante->dni_persona;
+                    else
+                        $representanteLegal.= ' DNI: '.$representante->dni_persona.'/';
             }
             //Log::info('Representante => '.$representanteLegal);
 
@@ -206,7 +219,7 @@ class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize,
             Log::info('Sector => '.$strSector);*/
             
             if($proveedor->ultimo_pago!=null)
-                $ultimoPago=$proveedor->ultimo_pago->fecha;
+                $ultimoPago=(new Carbon($proveedor->ultimo_pago->fecha))->format('d/m/y');
             //Log::info('Utlimo pago => '.$ultimoPago);
             if($proveedor->tamanio_empresa!=null)
                 $tamanioEmpresa=$proveedor->tamanio_empresa->desc_tamanio_empresa;

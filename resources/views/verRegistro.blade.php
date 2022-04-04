@@ -139,7 +139,9 @@
         <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-success">Descargar Registro alta</a>
         <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-warning">Descargar Certificado
             inscripción</a>
-        <a href="{{ url('nuevo-registro/' . $id) }}" class="btn btn-outline-info">Generar Nuevo Certificado
+        <!--<a href="{{ url('nuevo-registro/' . $id) }}" class="btn btn-outline-info">Generar Nuevo Certificado
+            inscripción</a>-->
+            <a href="#" class="btn btn-outline-info" id="nuevos_certificados">Generar Nuevo Certificado
             inscripción</a>
     @endif
 
@@ -160,6 +162,16 @@
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
     <script>
+        $("#document").ready(function(){
+            $("#nuevos_certificados").click(function(){
+                $.ajax({
+                    url: "{{url('/nuevo-registro/.$id')}}"
+                    }).done( function() {
+                    alert( 'Success!!' );
+                });
+            });
+        });
+
         $('input[type="checkbox"]').on('change', function() {
             this.value = this.checked ? 1 : 0;
             //console.log(this.value);
