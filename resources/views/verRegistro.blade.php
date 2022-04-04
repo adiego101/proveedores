@@ -136,7 +136,6 @@
     @if ($mode == 'show')
     @if($proveedor->dado_de_baja != 1)
 
-<<<<<<< HEAD
         <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-success">Descargar Registro alta</a>
         <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-warning">Descargar Certificado
             inscripción</a>
@@ -144,11 +143,6 @@
             inscripción</a>-->
             <a href="#" class="btn btn-outline-info" id="nuevos_certificados">Generar Nuevo Certificado
             inscripción</a>
-=======
-        <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-outline-dark" target="_blank">Descargar Registro alta</a>
-        <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-outline-dark" target="_blank">Descargar Certificado inscripción</a>
-        <a href="{{ url('nuevo-registro/' . $id) }}" class="btn btn-outline-info">Generar Nuevos Certificados</a>
->>>>>>> 49cdb579b9d9bed2c7660eb896ca771f058ee650
     @endif
 
     @endif
@@ -171,7 +165,7 @@
         $("#document").ready(function(){
             $("#nuevos_certificados").click(function(){
                 $.ajax({
-                    url: "{{url('/nuevo-registro/.$id')}}"
+                    url: "{{url('/nuevo-registro/'.$id)}}"
                     }).done( function() {
                     alert( 'Success!!' );
                 });
