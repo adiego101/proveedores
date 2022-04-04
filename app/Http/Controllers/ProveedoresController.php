@@ -44,7 +44,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -59,7 +59,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -74,7 +74,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -114,7 +114,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -532,7 +532,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -565,7 +565,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -607,7 +607,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -620,7 +620,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -646,7 +646,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
     public function verSucursales($id_sucursal)
@@ -671,7 +671,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -696,7 +696,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -712,7 +712,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -767,7 +767,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -803,7 +803,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -820,7 +820,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -856,7 +856,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
     public function editarPagos($id)
@@ -870,7 +870,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -885,7 +885,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -904,7 +904,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -922,7 +922,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -937,7 +937,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -952,7 +952,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -987,7 +987,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1005,7 +1005,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1025,7 +1025,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -1064,7 +1064,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1080,7 +1080,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1097,7 +1097,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1135,7 +1135,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -1169,7 +1169,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1186,7 +1186,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1202,7 +1202,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1215,7 +1215,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1231,7 +1231,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1247,7 +1247,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -1267,7 +1267,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1301,7 +1301,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1315,7 +1315,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1330,7 +1330,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1345,7 +1345,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1358,7 +1358,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1374,7 +1374,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1388,7 +1388,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -1410,7 +1410,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1442,7 +1442,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1455,7 +1455,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1471,7 +1471,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1487,7 +1487,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1500,7 +1500,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1514,7 +1514,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1528,7 +1528,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1549,7 +1549,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1582,7 +1582,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1596,7 +1596,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1620,7 +1620,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1640,7 +1640,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1653,7 +1653,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1667,7 +1667,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1684,7 +1684,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1704,7 +1704,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1857,7 +1857,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -1964,7 +1964,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -2073,7 +2073,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -2685,7 +2685,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -2702,7 +2702,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -2731,7 +2731,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
     }
@@ -2749,7 +2749,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -2777,7 +2777,7 @@ class ProveedoresController extends Controller
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
@@ -2915,7 +2915,7 @@ return $select;
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
-                ->withErrors(['Ocurrió un error al realizar la carga, la operación no pudo completarse']);
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
 
