@@ -6,7 +6,7 @@ $fechaOriginalInscripcion = htmlspecialchars($data['fecha_inscripcion']);
 
 //Cambiamos el formato por dd/mm/YYYY H:i:s
 $timestamp = strtotime($fechaOriginalInscripcion);
-$fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
+$fechaInscripcionFormat = date("d/m/Y", $timestamp);
 ?>
 
 <html>
@@ -35,16 +35,16 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
             }
 
             footer {
-                position: fixed;
-                bottom: 0cm;
-                left: 0cm;
-                right: 0cm;
-                height: 2cm;
-                color: black;
-                text-align: center;
-                line-height: 35px;
-                font-size: small;
-            }
+            position: fixed;
+            bottom: 0cm;
+            left: 3cm;
+            right: 2.5cm;
+            height: 2cm;
+            color: black;
+            text-align: center;
+            line-height: 18px;
+            font-size: small;
+        }
 
             .img-left{
                 float: left;
@@ -93,8 +93,6 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
                 word-wrap: break-word;
             }
 
-            /* .page_break { page-break-before: always; } */
-
         </style>
     </head>
 
@@ -102,7 +100,7 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
         <header>
             <img src="../public/Santa_Cruz.png" class="img-left">
             <img src="../public/logo_minpro.png" class="img-right">
-            <div class="center"> Registro Único Provincial   de Actividades Económicas</div>
+            <div class="center"> Registro Único Provincial de Actividades Económicas</div>
         </header>
 
         <main>
@@ -208,18 +206,15 @@ $fechaInscripcionFormat = date("d/m/Y H:i:s", $timestamp);
             <br>
             <br>
 
-            <label for="">Rio Gallegos, </label>
+            <label for="">Río Gallegos, </label>
             {{$data['fecha_emision_certificado']}}
 
         </main>
 
-        <!--<div class="page_break"></div>-->
-
         <footer>
-            <div>
-                Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br>
-                Río Gallegos - PROVINCIA DE SANTA CRUZ
-            </div>
+            <hr>
+            Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br>
+            Río Gallegos - PROVINCIA DE SANTA CRUZ
         </footer>
 
     </body>
