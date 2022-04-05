@@ -14,6 +14,7 @@ use App\Models\Proveedor_email;
 use App\Models\Proveedor_telefono;
 use App\Models\Actividad_economica;
 use App\Models\Proveedor_domicilio;
+use Illuminate\Support\Facades\Log;
 use App\Models\Jerarquia_compre_local;
 use App\Models\Actividades_proveedores;
 use Illuminate\Support\Facades\Storage;
@@ -36,8 +37,15 @@ class RupaeController extends Controller
      */
     public function index()
     {
+        try{
         $proveedores_rupae = $this->proveedores_rupae->obtenerProveedoresRupae();
         return view('proveedores.listado', ['proveedores_rupae' => $proveedores_rupae]);
+    } catch (\Exception$e) {
+        Log::error('Error inesperado.' . $e->getMessage());
+
+        return Redirect::back()
+            ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+    }
     }
 
     /**
@@ -47,7 +55,14 @@ class RupaeController extends Controller
      */
     public function create()
     {
+        try{
         return view('proveedores.crear');
+    } catch (\Exception$e) {
+        Log::error('Error inesperado.' . $e->getMessage());
+
+        return Redirect::back()
+            ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+    }
     }
 
     /**
@@ -58,9 +73,16 @@ class RupaeController extends Controller
      */
     public function store(Request $request)
     {
+        try{
         $proveedores_rupae = new Proveedor($request->all());
         $proveedores_rupae->save();
         return redirect()->action([RupaeController::class, 'index']);
+    } catch (\Exception$e) {
+        Log::error('Error inesperado.' . $e->getMessage());
+
+        return Redirect::back()
+            ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+    }
     }
 
     /**
@@ -70,8 +92,15 @@ class RupaeController extends Controller
      */
     public function show($id)
     {
+        try{
         $proveedores_rupae = $this->proveedores_rupae->obtenerProveedorRupaeId($id);
         return view('proveedores.ver', ['proveedores_rupae' => $proveedores_rupae]);
+    } catch (\Exception$e) {
+        Log::error('Error inesperado.' . $e->getMessage());
+
+        return Redirect::back()
+            ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+    }
     }
 
     /**
@@ -81,8 +110,15 @@ class RupaeController extends Controller
      */
     public function edit($id)
     {
+        try{
         $proveedores_rupae = $this->proveedores_rupae->obtenerProveedorRupaeId($id);
         return view('proveedores_rupae.editar', ['proveedores_rupae' => $proveedores_rupae]);
+    } catch (\Exception$e) {
+        Log::error('Error inesperado.' . $e->getMessage());
+
+        return Redirect::back()
+            ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+    }
     }
 
     /**
@@ -93,10 +129,17 @@ class RupaeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try{
         $proveedores_rupae = Proveedor::find($id);
         $proveedores_rupae->fill($request->all());
         $proveedores_rupae->save();
         return redirect()->action([RupaeController::class, 'index']);
+    } catch (\Exception$e) {
+        Log::error('Error inesperado.' . $e->getMessage());
+
+        return Redirect::back()
+            ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+    }
     }
 
     /**
@@ -106,14 +149,22 @@ class RupaeController extends Controller
      */
     public function destroy($id)
     {
+        try{
         $proveedores_rupae = Proveedor::find($id);
         $proveedores_rupae->delete();
         return redirect()->action([RupaeController::class, 'index']);
+    } catch (\Exception$e) {
+        Log::error('Error inesperado.' . $e->getMessage());
+
+        return Redirect::back()
+            ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+    }
     }
 
 //Prueba generacion PDF
     public function generarRegistroAlta($id, $idCertificado)
     {
+        try{
         $proveedor = Proveedor::find($id);
 
     if($proveedor->dado_de_baja != 1){
@@ -222,14 +273,14 @@ class RupaeController extends Controller
             'cod_tel_legal' => isset($proveedor_telefono_legal->cod_area_tel) ? $proveedor_telefono_legal->cod_area_tel : null,
 
             'localidad_legal' => isset($proveedor_localidad_legal->nombre_localidad) ? $proveedor_localidad_legal->nombre_localidad : '',
-            'fecha_inscripcion' => $proveedor->created_at,
+            'fecha_inscripcion' => isset($proveedor->fecha_inscripcion) ? $proveedor->fecha_inscripcion : '',
             'fecha_emision_certificado' => $fecha_emision_certificado->format("d/m/Y H:i:s"),
         ];
 
         /*
         return PDF::loadView('registroAlta', array('data'=> $data))
         ->stream('registro-alta.pdf');*/
-        $dompdf = PDF::loadView('registroAlta', array('data' => $data));
+                $dompdf = PDF::loadView('registroAlta', array('data' => $data));
         // return storage_path('app/public/');
         $dompdf->save(storage_path('app/public/') . 'registro-alta_' . $idCertificado . '.pdf');
         //return $dompdf->stream('registro-alta_'.$idAlta.'.pdf');
@@ -239,10 +290,17 @@ class RupaeController extends Controller
         ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
 
     }
+} catch (\Exception$e) {
+    Log::error('Error inesperado.' . $e->getMessage());
+
+    return Redirect::back()
+        ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+}
     }
 
     public function descargarRegistroAlta($id)
     {
+        try{
         $proveedor = Proveedor::find($id);
         if($proveedor->dado_de_baja != 1){
 
@@ -281,10 +339,17 @@ class RupaeController extends Controller
         ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
 
     }
+} catch (\Exception$e) {
+    Log::error('Error inesperado.' . $e->getMessage());
+
+    return Redirect::back()
+        ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+}
     }
 
     public function nuevoRegistroAlta($id)
     {
+        try{
         $proveedor = Proveedor::find($id);
         if($proveedor->dado_de_baja != 1){
 
@@ -310,11 +375,18 @@ class RupaeController extends Controller
             ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
 
         }
+    } catch (\Exception$e) {
+        Log::error('Error inesperado.' . $e->getMessage());
+
+        return Redirect::back()
+            ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+    }
 
     }
 
     public function generarHistoricoCertificado($id)
     {
+        try{
         $proveedor = Proveedor::find($id);
         if($proveedor->dado_de_baja != 1){
 
@@ -351,11 +423,17 @@ class RupaeController extends Controller
         ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
 
     }
+} catch (\Exception$e) {
+    Log::error('Error inesperado.' . $e->getMessage());
 
+    return Redirect::back()
+        ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+}
     }
 
     public function generarCertificadoInscripcion($id, $idCertificado)
     {
+        try{
 
         $proveedor = Proveedor::find($id);
         if($proveedor->dado_de_baja != 1){
@@ -413,7 +491,7 @@ class RupaeController extends Controller
             'calle_ruta' => $proveedor_domicilio_real->calle . ' ' . $proveedor_domicilio_real->numero,
             'telefono' => isset($proveedor_telefono_real->nro_tel) ? $proveedor_telefono_real->nro_tel : '',
             'cod_tel_real' => isset($proveedor_telefono_real->cod_area_tel) ? $proveedor_telefono_real->cod_area_tel : null,
-            'fecha_inscripcion' => $proveedor->created_at,
+            'fecha_inscripcion' => isset($proveedor->fecha_inscripcion) ? $proveedor->fecha_inscripcion : '',
             'localidad' => isset($proveedor_localidad_real->nombre_localidad) ? $proveedor_localidad_real->nombre_localidad : '',
 
         ];
@@ -440,10 +518,17 @@ class RupaeController extends Controller
         ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
 
     }
+} catch (\Exception$e) {
+    Log::error('Error inesperado.' . $e->getMessage());
+
+    return Redirect::back()
+        ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+}
     }
 
     public function descargarCertificadoInscripcion($id)
     {
+        try{
         $proveedor = Proveedor::find($id);
 
         if($proveedor->dado_de_baja != 1){
@@ -482,11 +567,17 @@ class RupaeController extends Controller
         ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
 
     }
+} catch (\Exception$e) {
+    Log::error('Error inesperado.' . $e->getMessage());
 
+    return Redirect::back()
+        ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+}
     }
 
     public function nuevoCertificadoInscripcion($id)
     {
+        try{
         $proveedor = Proveedor::find($id);
 
         if($proveedor->dado_de_baja != 1){
@@ -507,10 +598,17 @@ class RupaeController extends Controller
                 ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
 
             }
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
     }
 
     public function asignarNroRupaeProveedor($proveedor)
     {
+        try{
         if($proveedor->dado_de_baja != 1){
 
         //asigna numero de registro
@@ -536,10 +634,17 @@ class RupaeController extends Controller
         ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
 
     }
+} catch (\Exception$e) {
+    Log::error('Error inesperado.' . $e->getMessage());
+
+    return Redirect::back()
+        ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+}
     }
 
     public function guardarHistorico($id)
     {
+        try{
         $proveedor = Proveedor::find($id);
         if($proveedor->dado_de_baja != 1){
 
@@ -629,11 +734,11 @@ class RupaeController extends Controller
             }
 
         }
-
-
+        $proveedor->fecha_inscripcion = $fecha_emision_certificado;
+        $proveedor->save();
         $certificado = Certificado::create([
             'nro_rupae_proveedor' => $proveedor->nro_rupae_proveedor,
-            'fecha_inscripcion' => isset($proveedor->created_at) ? $proveedor->created_at : null,
+            'fecha_inscripcion' => $proveedor->fecha_inscripcion,
             'razon_social' => $proveedor->razon_social,
             'cuit' => $proveedor->cuit,
             'nombre_fantasia' => $proveedor->nombre_fantasia,
@@ -684,6 +789,12 @@ class RupaeController extends Controller
         ->withErrors(['El registro se encuentra dado de baja, no se puede descargar certificado']);
 
     }
+} catch (\Exception$e) {
+    Log::error('Error inesperado.' . $e->getMessage());
+
+    return Redirect::back()
+        ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+}
     }
 
 

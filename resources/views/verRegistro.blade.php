@@ -135,18 +135,15 @@
 
     @if ($mode == 'show')
     @if($proveedor->dado_de_baja != 1)
-
-        <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-success">Descargar Registro alta</a>
-        <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-warning">Descargar Certificado
-            inscripción</a>
-        <a href="{{ url('nuevo-registro/' . $id) }}" class="btn btn-outline-info">Generar Nuevo Certificado
-            inscripción</a>
-    @endif
+        <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-outline-dark" target="_blank">Descargar Registro alta</a>
+        <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-outline-dark" target="_blank">Descargar Certificado inscripción</a>
+        <a href="#" class="btn btn-outline-info" id="nuevos_certificados">Generar Nuevos Certificados</a>
 
     @endif
 
+    @endif
 
-    </div>
+
 @endsection
 
 @push('js')
@@ -160,6 +157,43 @@
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
     <script>
+        $("#document").ready(function(){
+            $("#nuevos_certificados").click(function(){
+                let timerInterval
+Swal.fire({
+  title: 'Generando Nuevos Certificados!',
+  timer: 9999,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
+                $.ajax({
+                    url: "{{url('/nuevo-registro/'.$id)}}"
+                    }).done( function() {
+
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'info',
+                            title: 'Nuevos certificados generados',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+
+                            })
+                });
+            });
+        });
+
         $('input[type="checkbox"]').on('change', function() {
             this.value = this.checked ? 1 : 0;
             //console.log(this.value);

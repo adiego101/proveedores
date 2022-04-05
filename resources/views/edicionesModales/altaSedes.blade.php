@@ -16,8 +16,8 @@
 
             <fieldset>
 
-                <label for="Domicilio">Domicilio:</label><br />
-                <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="Domicilio" name="Domicilio" maxlength="50" required/><br />
+                <label for="domicilio">Domicilio:</label><br />
+                <input type="text" class="form-control" placeholder="Ingrese el domicilio" aria-describedby="basic-addon1" id="domicilio" name="domicilio" maxlength="50" required/><br />
 
                 <div class="row">
                         <div class="col-sm">
@@ -42,8 +42,8 @@
                         </div>
 
                         <div class="col-sm">
-                            <label for="Localidad">Localidad:</label><br>
-                            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="Localidad" name="Localidad" required>
+                            <label for="id_localidad">Localidad:</label><br>
+                            <select  @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="id_localidad" name="id_localidad" required>
                             <option value="">Seleccione una localidad</option>
                             @forelse($localidades as $localidad)
                                 <option value="{{$localidad->id_localidad}}">{{$localidad->nombre_localidad}}</option>
@@ -98,7 +98,7 @@ window.onload = function(){
             type:"GET",
             url:"{{url('localidadSelect/')}}/{{isset($sede->Localidad) ? $sede->Localidad : ''}}",
             success:function(r){
-                $('#Localidad').html(r);
+                $('#id_localidad').html(r);
             }
         });
     }
@@ -108,7 +108,7 @@ window.onload = function(){
                 type:"GET",
                 url:"{{url('localidades/')}}/"+$('#provincia_sede').val(),
                 success:function(r){
-                    $('#Localidad').html(r);
+                    $('#id_localidad').html(r);
                 }
             });
         }
@@ -153,9 +153,9 @@ window.onload = function(){
 
                             $('#nuevaSede').modal('hide')
                             $('.yajra-sedes').DataTable().ajax.reload();
-                            $('#Domicilio').val('');
+                            $('#domicilio').val('');
                             $('#provincia_sede').val('');
-                            $('#Localidad').val('');
+                            $('#id_localidad').val('');
 
                             Swal.fire({
                             position: 'top-end',
