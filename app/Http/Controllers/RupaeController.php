@@ -14,6 +14,7 @@ use App\Models\Proveedor_email;
 use App\Models\Proveedor_telefono;
 use App\Models\Actividad_economica;
 use App\Models\Proveedor_domicilio;
+use Illuminate\Support\Facades\Log;
 use App\Models\Jerarquia_compre_local;
 use App\Models\Actividades_proveedores;
 use Illuminate\Support\Facades\Storage;
@@ -279,7 +280,7 @@ class RupaeController extends Controller
         /*
         return PDF::loadView('registroAlta', array('data'=> $data))
         ->stream('registro-alta.pdf');*/
-        $dompdf = PDF::loadView('registroAlta', array('data' => $data));
+                $dompdf = PDF::loadView('registroAlta', array('data' => $data));
         // return storage_path('app/public/');
         $dompdf->save(storage_path('app/public/') . 'registro-alta_' . $idCertificado . '.pdf');
         //return $dompdf->stream('registro-alta_'.$idAlta.'.pdf');

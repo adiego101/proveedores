@@ -35,16 +35,16 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
             }
 
             footer {
-            position: fixed;
-            bottom: 0cm;
-            left: 3cm;
-            right: 2.5cm;
-            height: 2cm;
-            color: black;
-            text-align: center;
-            line-height: 18px;
-            font-size: small;
-        }
+                position: fixed;
+                bottom: 0cm;
+                left: 3cm;
+                right: 2.5cm;
+                height: 2cm;
+                color: black;
+                text-align: center;
+                line-height: 18px;
+                font-size: small;
+            }
 
             .img-left{
                 float: left;
@@ -102,11 +102,13 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
             <img src="../public/logo_minpro.png" class="img-right">
             <div class="center"> Registro Único Provincial de Actividades Económicas</div>
         </header>
+
         <footer>
             <hr>
             Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br>
             Río Gallegos - PROVINCIA DE SANTA CRUZ
         </footer>
+
         <main>
 
             <table>
@@ -215,6 +217,14 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
 
         </main>
 
+        <script type="text/php">
+
+             if (isset($pdf)) {
+                $font = $fontMetrics->getFont("Arial", "bold");
+                $pdf->page_text(550, 800, "{PAGE_NUM}/{PAGE_COUNT}", $font, 12, array(0, 0, 0));
+             }
+        </script>
+        
     </body>
 
 </html>

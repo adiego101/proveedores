@@ -102,14 +102,12 @@ $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
         }
 
         article{
-
             margin: 30px;
         }
 
         span{
             font-size: 20px;
             font-weight: bold;
-
         }
 
         .page_break {
@@ -153,8 +151,8 @@ $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
             <br>
             <br>
 
-            <label for="" class="txt-right">__________________ <br>Firma</label>
-          
+            <label for="" class="txt-right">_________________________ <br>Firma</label>
+
             <footer>
                 <hr>
                 Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br>
@@ -191,8 +189,8 @@ $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
                 <br>
                 <br>
 
-                <label for="" class="txt-right">__________________ <br>Firma</label>
-            
+                <label for="" class="txt-right">_________________________ <br>Firma</label>
+
                 <footer>
                     <hr>
                     Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br>
@@ -201,5 +199,14 @@ $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
             </section>
         </div>
     </main>
+
+    <script type="text/php">
+
+        if (isset($pdf)) {
+           $font = $fontMetrics->getFont("Arial", "bold");
+           $pdf->page_text(550, 800, "{PAGE_NUM}/{PAGE_COUNT}", $font, 12, array(0, 0, 0));
+        }
+   </script>
+   
 </body>
 </html>
