@@ -12,7 +12,9 @@
                 <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_legal" name="dpto_legal" maxlength="10"><br>
 
                 <label for="lote_legal">Lote:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_legal" name="lote_legal" maxlength="4"><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_legal" name="lote_legal" maxlength="4">
+                <small class="small" id="small-lote-legal"></small>
+                <br>
 
                 <label for="entreCalles_legal">Entre Calles:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_legal" name="entreCalles_legal" maxlength="70"><br>
@@ -55,7 +57,9 @@
             <div class="col-sm">
 
                 <label for="numero_legal">Número:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_legal" name="numero_legal" maxlength="5"><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_legal" name="numero_legal" maxlength="5">
+                <small class="small" id="small-numero-legal"></small>
+                <br>
 
                 <label for="puerta_legal">Puerta:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_legal" name="puerta_legal" maxlength="4"><br>
@@ -87,10 +91,12 @@
                     <div class="col-sm">
                         <label for="telefono_legal_cod">Código de área:</label><br>
                         <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="4">
+                        <small class="small" id="small-telefono-legal-cod"></small>
                     </div>
                     <div class="col-sm">
                         <label for="telefono_legal">Número de Teléfono:</label><br>
                         <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14">
+                        <small class="small" id="small-telefono-legal"></small>
                     </div>
                 </div>
                 <div class="field_telefono_legal">
@@ -112,6 +118,66 @@
 
 
 <script type="text/javascript">
+
+
+    $('#lote_legal').keyup(validarLoteLegal);
+
+    function validarLoteLegal() {
+   
+        if (!(/^[0-9]/.test($('#lote_legal').val()))) {
+
+            mostrarError('#lote_legal', '#small-lote-legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#lote_legal', '#small-lote-legal');
+        return true;
+    }
+
+
+    $('#numero_legal').keyup(validarNumeroLegal);
+
+    function validarNumeroLegal() {
+   
+        if (!(/^[0-9]/.test($('#numero_legal').val()))) {
+
+            mostrarError('#numero_legal', '#small-numero-legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de la calle</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#numero_legal', '#small-numero-legal');
+        return true;
+    }
+
+
+    $('#telefono_legal_cod').keyup(validarTelefonoLegalCod);
+
+    function validarTelefonoLegalCod() {
+   
+        if (!(/^[0-9]/.test($('#telefono_legal_cod').val()))) {
+
+            mostrarError('#telefono_legal_cod', '#small-telefono-legal-cod', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#telefono_legal_cod', '#small-telefono-legal-cod');
+        return true;
+    }
+
+
+
+    $('#telefono_legal').keyup(validarTelefonoLegal);
+
+    function validarTelefonoLegal() {
+   
+        if (!(/^[0-9]/.test($('#telefono_legal').val()))) {
+
+            mostrarError('#telefono_legal', '#small-telefono-legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#telefono_legal', '#small-telefono-legal');
+        return true;
+    }
+
+
+
     $(document).ready(function() {
 
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
