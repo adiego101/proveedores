@@ -25,10 +25,14 @@
 
                     <label for="modal_unidad_producida">Unidad producida:</label><br>
                     <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="modal_unidad_producida"
-                    name="modal_unidad_producida" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9"><br>
+                    name="modal_unidad_producida" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9">
+                    <small class="small" id="small-unidad-producida-modal"></small>
+                    <br>
 
                     <label for="modal_produccion_total">Capacidad de producción total:</label><br>
-                    <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="modal_produccion_total" name="modal_produccion_total" placeholder="Ingrese la producción total" maxlength="9"><br>
+                    <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="modal_produccion_total" name="modal_produccion_total" placeholder="Ingrese la producción total" maxlength="9">
+                    <small class="small" id="small-produccion-total-modal"></small>
+                    <br>
 
                     <div class="modal-footer">
                         <input id="numero_fila_producto" name="numero_fila_producto" type="hidden">
@@ -43,6 +47,36 @@
 @push('js')
 
 <script type="text/javascript">
+
+
+        $('#modal_unidad_producida').keyup(validarUnidadProducidaModal);
+
+        function validarUnidadProducidaModal() {
+   
+            if (!(/^[0-9]/.test($('#modal_unidad_producida').val()))) {
+
+                mostrarError('#modal_unidad_producida', '#small-unidad-producida-modal', '<div class="alert alert-danger mt-3 pt-1">La <strong>unidad producida</strong> debe contener solamente dígitos numéricos.</div>');
+                return false;
+            }
+            ocultarError('#modal_unidad_producida', '#small-unidad-producida-modal');
+            return true;
+        }
+
+
+        $('#modal_produccion_total').keyup(validarProduccionTotalModal);
+
+        function validarProduccionTotalModal() {
+   
+            if (!(/^[0-9]/.test($('#modal_produccion_total').val()))) {
+
+                mostrarError('#modal_produccion_total', '#small-produccion-total-modal', '<div class="alert alert-danger mt-3 pt-1">La <strong>producción total</strong> debe contener solamente dígitos numéricos.</div>');
+                return false;
+            }
+            ocultarError('#modal_produccion_total', '#small-produccion-total-modal');
+            return true;
+        }
+
+
 
 //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
