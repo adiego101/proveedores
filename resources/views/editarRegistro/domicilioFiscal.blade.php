@@ -15,7 +15,9 @@ value="{{ isset($proveedor_domicilio_fiscal->dpto) ? $proveedor_domicilio_fiscal
 
                 <label for="lote_fiscal">Lote:</label><br>
                 <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_fiscal" name="lote_fiscal" @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor_domicilio_fiscal->lote) ? $proveedor_domicilio_fiscal->lote : '' }}" maxlength="4"><br>
+value="{{ isset($proveedor_domicilio_fiscal->lote) ? $proveedor_domicilio_fiscal->lote : '' }}" maxlength="4">
+                <small class="small" id="small-lote-fiscal"></small>
+                <br>
 
                 <label for="entreCalles_fiscal">Entre Calles:</label><br>
                 <input type="text" class="form-control limpiar" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_fiscal" name="entreCalles_fiscal" @if ( $mode == "show") readonly @endif maxlength="70"
@@ -64,7 +66,9 @@ value="{{ isset($proveedor_domicilio_fiscal->monoblock) ? $proveedor_domicilio_f
 
                 <label for="numero_fiscal">Número:</label><br>
                 <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_fiscal" name="numero_fiscal" @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor_domicilio_fiscal->numero) ? $proveedor_domicilio_fiscal->numero : '' }}" maxlength="5"><br>
+value="{{ isset($proveedor_domicilio_fiscal->numero) ? $proveedor_domicilio_fiscal->numero : '' }}" maxlength="5">
+                <small class="small" id="small-numero-fiscal"></small>
+                <br>
 
                 <label for="puerta_fiscal">Puerta:</label><br>
                 <input type="text" class="form-control limpiar" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_fiscal" name="puerta_fiscal" @if ( $mode == "show") readonly @endif
@@ -108,20 +112,28 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
                         <div class="col-sm">
                         @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
                             <label for="telefono_fiscal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->cod_area_tel}}" maxlength="4"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->cod_area_tel}}" maxlength="4"> 
+                            <small class="small" id="small-telefono-fiscal-cod"></small>
+                            <br>
                         @empty
                             <label for="telefono_fiscal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="4"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="4"> 
+                            <small class="small" id="small-telefono-fiscal-cod"></small>
+                            <br>
                             @endforelse
                         </div>
 
                         <div class="col-sm">
                         @forelse($proveedor_telefono_fiscal as $telefono_fiscal)
                             <label for="telefono_fiscal">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->nro_tel}}" maxlength="14"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_fiscal->nro_tel}}" maxlength="14"> 
+                            <small class="small" id="small-telefono-fiscal"></small>
+                            <br>
                         @empty
                             <label for="telefono_fiscal">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14"> 
+                            <small class="small" id="small-telefono-fiscal"></small>
+                            <br>
                             @endforelse
                         </div>
 
@@ -152,6 +164,66 @@ value="{{ isset($proveedor_domicilio_fiscal->codigo_postal) ? $proveedor_domicil
 @push('js')
 
 <script type="text/javascript">
+
+    $('#lote_fiscal').keyup(validarLoteFiscal);
+
+    function validarLoteFiscal() {
+   
+        if (!(/^[0-9]/.test($('#lote_fiscal').val()))) {
+
+            mostrarError('#lote_fiscal', '#small-lote-fiscal', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#lote_fiscal', '#small-lote-fiscal');
+        return true;
+    }
+
+
+    $('#numero_fiscal').keyup(validarNumeroFiscal);
+
+    function validarNumeroFiscal() {
+   
+        if (!(/^[0-9]/.test($('#numero_fiscal').val()))) {
+
+            mostrarError('#numero_fiscal', '#small-numero-fiscal', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de la calle</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#numero_fiscal', '#small-numero-fiscal');
+        return true;
+    }
+
+
+    $('#telefono_fiscal_cod').keyup(validarTelefonoFiscalCod);
+
+    function validarTelefonoFiscalCod() {
+   
+        if (!(/^[0-9]/.test($('#telefono_fiscal_cod').val()))) {
+
+            mostrarError('#telefono_fiscal_cod', '#small-telefono-fiscal-cod', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#telefono_fiscal_cod', '#small-telefono-fiscal-cod');
+        return true;
+    }
+
+
+
+    $('#telefono_fiscal').keyup(validarTelefonoFiscal);
+
+    function validarTelefonoFiscal() {
+   
+        if (!(/^[0-9]/.test($('#telefono_fiscal').val()))) {
+
+            mostrarError('#telefono_fiscal', '#small-telefono-fiscal', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#telefono_fiscal', '#small-telefono-fiscal');
+        return true;
+    }
+
+
+
+
 
     $(document).ready(function() {
 

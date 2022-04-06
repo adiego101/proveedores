@@ -15,7 +15,9 @@ value="{{ isset($proveedor_domicilio_real->dpto) ? $proveedor_domicilio_real->dp
 
                 <label for="lote_real">Lote:</label><br>
                 <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_real" name="lote_real" @if ( $mode == "show") readonly @endif maxlength="4"
-value="{{ isset($proveedor_domicilio_real->lote) ? $proveedor_domicilio_real->lote : '' }}"><br>
+value="{{ isset($proveedor_domicilio_real->lote) ? $proveedor_domicilio_real->lote : '' }}">
+                <small class="small" id="small-lote-real"></small>
+                <br>
 
                 <label for="entreCalles_real">Entre Calles:</label><br>
                 <input type="text" class="form-control limpiar" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_real" name="entreCalles_real" @if ( $mode == "show") readonly @endif maxlength="70"
@@ -70,7 +72,9 @@ value="{{ isset($proveedor->pagina_web) ? $proveedor->pagina_web : '' }}"><br>
 
                 <label for="numero_real">Número:</label><br>
                 <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_real" name="numero_real" @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor_domicilio_real->numero) ? $proveedor_domicilio_real->numero : '' }}" maxlength="5"><br>
+value="{{ isset($proveedor_domicilio_real->numero) ? $proveedor_domicilio_real->numero : '' }}" maxlength="5">
+                <small class="small" id="small-numero-real"></small>
+                <br>
 
                 <label for="puerta_real">Puerta:</label><br>
                 <input type="text" class="form-control limpiar" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_real" name="puerta_real" @if ( $mode == "show") readonly @endif maxlength="4"
@@ -119,20 +123,28 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
                         <div class="col-sm">
                         @forelse($proveedor_telefono_real as $telefono_real)
                             <label for="telefono_real_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->cod_area_tel}}" maxlength="4"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->cod_area_tel}}" maxlength="4">
+                            <small class="small" id="small-telefono-real-cod"></small>
+                            <br>
                         @empty
                             <label for="telefono_real_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="4"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="4"> 
+                            <small class="small" id="small-telefono-real-cod"></small>
+                            <br>
                             @endforelse
                         </div>
 
                         <div class="col-sm">
                         @forelse($proveedor_telefono_real as $telefono_real)
                             <label for="telefono_real">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->nro_tel}}" maxlength="14"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" @if ( $mode == "show") readonly @endif value="{{$telefono_real->nro_tel}}" maxlength="14"> 
+                            <small class="small" id="small-telefono-real"></small>
+                            <br>
                         @empty
                             <label for="telefono_real">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14"> <br>
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14"> 
+                            <small class="small" id="small-telefono-real"></small>
+                            <br>
                             @endforelse
                         </div>
 
@@ -163,6 +175,65 @@ value="{{ isset($proveedor_domicilio_real->codigo_postal) ? $proveedor_domicilio
 @push('js')
 
 <script type="text/javascript">
+
+
+    $('#lote_real').keyup(validarLoteReal);
+
+    function validarLoteReal() {
+   
+        if (!(/^[0-9]/.test($('#lote_real').val()))) {
+
+            mostrarError('#lote_real', '#small-lote-real', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#lote_real', '#small-lote-real');
+        return true;
+    }
+
+
+    $('#numero_real').keyup(validarNumeroReal);
+
+    function validarNumeroReal() {
+   
+        if (!(/^[0-9]/.test($('#numero_real').val()))) {
+
+            mostrarError('#numero_real', '#small-numero-real', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de la calle</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#numero_real', '#small-numero-real');
+        return true;
+    }
+
+
+    $('#telefono_real_cod').keyup(validarTelefonoRealCod);
+
+    function validarTelefonoRealCod() {
+   
+        if (!(/^[0-9]/.test($('#telefono_real_cod').val()))) {
+
+            mostrarError('#telefono_real_cod', '#small-telefono-real-cod', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#telefono_real_cod', '#small-telefono-real-cod');
+        return true;
+    }
+
+
+
+    $('#telefono_real').keyup(validarTelefonoReal);
+
+    function validarTelefonoReal() {
+   
+        if (!(/^[0-9]/.test($('#telefono_real').val()))) {
+
+            mostrarError('#telefono_real', '#small-telefono-real', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#telefono_real', '#small-telefono-real');
+        return true;
+    }
+
+
 
     $(document).ready(function() {
 
