@@ -10,7 +10,9 @@
     <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada"
     name="facturacion_anual_alcanzada" maxlength="9"
      @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}"><br>
+value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}">
+<small class="small" id="small-facturacion-anual"></small>
+<br>
 @if ($mode == "edit")
 <br>
 <!-- Button trigger modal -->
@@ -47,7 +49,9 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
     <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne"
         @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
+value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8">
+    <small class="small" id="small-rne"></small>
+    <br>
 @if ($mode == "edit")
 
 <br>
@@ -96,6 +100,34 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8"><br>
 @push('js')
 
 <script type="text/javascript">
+
+    $('#facturacion_anual_alcanzada').keyup(validarFacturacionAnual);
+
+    function validarFacturacionAnual() {
+   
+        if (!(/^[0-9]/.test($('#facturacion_anual_alcanzada').val()))) {
+
+            mostrarError('#facturacion_anual_alcanzada', '#small-facturacion-anual', '<div class="alert alert-danger mt-3 pt-1">La <strong>facturación anual</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#facturacion_anual_alcanzada', '#small-facturacion-anual');
+        return true;
+    }
+
+
+    $('#rne').keyup(validarRne);
+
+    function validarRne() {
+   
+        if (!(/^[0-9]/.test($('#rne').val()))) {
+
+            mostrarError('#rne', '#small-rne', '<div class="alert alert-danger mt-3 pt-1">El <strong>Registro Nacional de Establecimientos</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#rne', '#small-rne');
+        return true;
+    }
+
 
   $(function () {
 
