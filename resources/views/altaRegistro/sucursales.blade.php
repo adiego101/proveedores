@@ -17,7 +17,9 @@
             <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_sucursal" maxlength="10"/><br />
 
             <label for="lote_sucursal">Lote:</label><br />
-            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_sucursal" name="lote_sucursal" maxlength="4"/><br />
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_sucursal" name="lote_sucursal" maxlength="4"/>
+            <small class="small" id="small-lote-sucursal"></small>
+            <br />
 
             <label for="entre_calles_sucursal">Entre Calles:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entre_calles_sucursal" maxlength="70"/><br />
@@ -50,7 +52,9 @@
 
         <div class="col-sm">
             <label for="numero_sucursal">Número:</label><br />
-            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_sucursal" maxlength="5"/><br />
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_sucursal" maxlength="5"/>
+            <small class="small" id="small-numero-sucursal"></small>
+            <br />
 
             <label for="puerta_sucursal">Puerta:</label><br />
             <input type="text" class="form-control" placeholder="Ingrese la puerta" aria-describedby="basic-addon1" id="puerta_sucursal" name="puerta_sucursal" maxlength="4"/><br />
@@ -82,10 +86,12 @@
                 <div class="col-sm">
                     <label for="telefono_sucursal_cod">Código de área:</label><br>
                     <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_sucursal_cod" maxlength="4">
+                    <small class="small" id="small-telefono-sucursal-cod"></small>
                 </div>
                 <div class="col-sm">
                     <label for="telefono_sucursal">Número de Teléfono:</label><br>
                     <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_sucursal" maxlength="14">
+                    <small class="small" id="small-telefono-sucursal"></small>
                 </div>
             </div>
 
@@ -131,10 +137,68 @@
 
 @push('js')
 
-
-
-
 <script type="text/javascript">
+
+
+    $('#numero_sucursal').keyup(validarNumeroSucursal);
+
+    function validarNumeroSucursal() {
+   
+        if (!(/^[0-9]/.test($('#numero_sucursal').val()))) {
+
+            mostrarError('#numero_sucursal', '#small-numero-sucursal', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de calle</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#numero_sucursal', '#small-numero-sucursal');
+        return true;
+    }
+
+
+
+    $('#lote_sucursal').keyup(validarLoteSucursal);
+
+    function validarLoteSucursal() {
+
+        if (!(/^[0-9]/.test($('#lote_sucursal').val()))) {
+
+            mostrarError('#lote_sucursal', '#small-lote-sucursal', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#lote_sucursal', '#small-lote-sucursal');
+        return true;
+    }
+
+
+
+    $('#telefono_sucursal_cod').keyup(validarTelefonoSucursalCod);
+
+    function validarTelefonoSucursalCod() {
+
+        if (!(/^[0-9]/.test($('#telefono_sucursal_cod').val()))) {
+
+            mostrarError('#telefono_sucursal_cod', '#small-telefono-sucursal-cod', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#telefono_sucursal_cod', '#small-telefono-sucursal-cod');
+        return true;
+    }
+
+
+
+    $('#telefono_sucursal').keyup(validarTelefonoSucursal);
+
+    function validarTelefonoSucursal() {
+
+        if (!(/^[0-9]/.test($('#telefono_sucursal').val()))) {
+
+            mostrarError('#telefono_sucursal', '#small-telefono-sucursal', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+        }
+        ocultarError('#telefono_sucursal', '#small-telefono-sucursal');
+        return true;
+    }
+
+
 
     let nombre_sucursal;
     let email;
