@@ -12,10 +12,13 @@
                 <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_fiscal" name="dpto_fiscal" maxlength="10"><br>
 
                 <label for="lote_fiscal">Lote:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_fiscal" name="lote_fiscal" maxlength="4"><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_fiscal" name="lote_fiscal" maxlength="4">
+                <small class="small" id="small-lote_fiscal"></small>
+                <br>
 
                 <label for="entreCalles_fiscal">Entre Calles:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_fiscal" name="entreCalles_fiscal" maxlength="70"><br>
+                <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_fiscal" name="entreCalles_fiscal" maxlength="70">
+                <br>
 
                 <label for="monoblock_fiscal">Monoblock:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el monoblock" aria-describedby="basic-addon1" id="monoblock_fiscal" name="monoblock_fiscal" maxlength="10"><br>
@@ -35,7 +38,7 @@
                     <option value=" ">Seleccione una localidad</option>
                 </select>
                 <br>
-                
+
 
 
                 <label for="email_fiscal">Correo electrónico:</label><br>
@@ -57,7 +60,10 @@
             <div class="col-sm">
 
                 <label for="numero_fiscal">Número:</label><br>
-                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_fiscal" name="numero_fiscal" maxlength="5"><br>
+                <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_fiscal" name="numero_fiscal" maxlength="5">
+                <small class="small" id="small-numero_fiscal"></small>
+
+                <br>
 
                 <label for="puerta_fiscal">Puerta:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese el número de puerta" aria-describedby="basic-addon1" id="puerta_fiscal" name="puerta_fiscal" maxlength="4"><br>
@@ -85,17 +91,23 @@
                 <label for="cp_fiscal">Código Postal:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_fiscal" name="cp_fiscal" placeholder="Ingrese el código postal" maxlength="8"><br>
 
-                
+
                 <div class="row">
                     <div class="col-sm">
                         <label for="telefono_fiscal_cod">Código de área:</label><br>
                         <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_fiscal_cod" name="telefono_fiscal_cod[]" maxlength="4">
+                        <small class="small" id="small-telefono_fiscal_cod"></small>
+
                     </div>
                     <div class="col-sm">
                         <label for="telefono_fiscal">Número de Teléfono:</label><br>
                         <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_fiscal" name="telefono_fiscal[]" maxlength="14">
+                        <small class="small" id="small-telefono_fiscal"></small>
+
                     </div>
                 </div>
+
+
                 <div class="field_telefono_fiscal">
 
                 </div>
@@ -114,6 +126,77 @@
 
 
 <script type="text/javascript">
+
+
+$('#lote_fiscal').keyup(validarLotefiscal);
+
+function validarLotefiscal() {
+
+    if (!(/^[0-9]+$/.test($('#lote_fiscal').val()))) {
+
+        if($('#lote_fiscal').val() != ""){
+
+
+        mostrarError('#lote_fiscal', '#small-lote_fiscal', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
+        return false;
+        }
+    }
+    ocultarError('#lote_fiscal', '#small-lote_fiscal');
+    return true;
+}
+
+
+$('#numero_fiscal').keyup(validarNumerofiscal);
+
+function validarNumerofiscal() {
+
+    if (!(/^[0-9]+$/.test($('#numero_fiscal').val()))) {
+        if($('#numero_fiscal').val() != ""){
+
+        mostrarError('#numero_fiscal', '#small-numero_fiscal', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de la calle</strong> debe contener solamente dígitos numéricos.</div>');
+        return false;
+        }
+    }
+    ocultarError('#numero_fiscal', '#small-numero_fiscal');
+    return true;
+}
+
+
+$('#telefono_fiscal_cod').keyup(validarTelefonofiscalCod);
+
+function validarTelefonofiscalCod() {
+
+    if (!(/^[0-9]+$/.test($('#telefono_fiscal_cod').val()))) {
+        if($('#telefono_fiscal_cod').val() != ""){
+
+        mostrarError('#telefono_fiscal_cod', '#small-telefono_fiscal_cod', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
+        return false;
+        }
+    }
+    ocultarError('#telefono_fiscal_cod', '#small-telefono_fiscal_cod');
+    return true;
+}
+
+
+
+$('#telefono_fiscal').keyup(validarTelefonofiscal);
+
+function validarTelefonofiscal() {
+
+    if (!(/^[0-9]+$/.test($('#telefono_fiscal').val()))) {
+        if($('#telefono_fiscal').val() != ""){
+
+        mostrarError('#telefono_fiscal', '#small-telefono_fiscal', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
+        return false;
+        }
+    }
+    ocultarError('#telefono_fiscal', '#small-telefono_fiscal');
+    return true;
+}
+
+
+
+
     $(document).ready(function() {
 
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar

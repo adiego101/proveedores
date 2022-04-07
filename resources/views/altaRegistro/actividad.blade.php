@@ -5,7 +5,9 @@
 
 <br/>
     <label for="facturacion_anual_alcanzada">Facturación anual alcanzada:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada" name="facturacion_anual_alcanzada" maxlength="9"><br>
+    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada" name="facturacion_anual_alcanzada" maxlength="9">
+    <small class="small" id="small-facturacion-anual"></small>
+    <br>
 
     <div class="row">
         <div class="col-sm">
@@ -56,7 +58,9 @@
     <hr>
 
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="8"><br>
+    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="8">
+    <small class="small" id="small-rne"></small>
+    <br>
 
     <div class="row">
         <div class="col-sm">
@@ -78,10 +82,14 @@
 
         <div class="col-sm">
             <label for="unidad_producida">Unidad producida:</label><br>
-            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="unidad_producida" name="unidad_producida" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9"><br>
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="unidad_producida" name="unidad_producida" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9">
+            <small class="small" id="small-unidad-producida"></small>
+            <br>
 
             <label for="produccion_total">Capacidad de producción total:</label><br>
-            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="produccion_total" name="produccion_total" placeholder="Ingrese la producción total" maxlength="9"><br>
+            <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="produccion_total" name="produccion_total" placeholder="Ingrese la producción total" maxlength="9">
+            <small class="small" id="small-produccion-total"></small>
+            <br>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                 <a id="add_producto" class="btn btn-success">Agregar Producto</a>
@@ -123,10 +131,72 @@
 
 @push('js')
 
-
-
-
     <script type="text/javascript">
+
+        $('#facturacion_anual_alcanzada').keyup(validarFacturacionAnual);
+
+        function validarFacturacionAnual() {
+
+            if (!(/^[0-9]+$/.test($('#facturacion_anual_alcanzada').val()))) {
+                if($('#facturacion_anual_alcanzada').val() != ""){
+                mostrarError('#facturacion_anual_alcanzada', '#small-facturacion-anual', '<div class="alert alert-danger mt-3 pt-1">La <strong>facturación anual</strong> debe contener solamente dígitos numéricos.</div>');
+                return false;
+                }
+            }
+            ocultarError('#facturacion_anual_alcanzada', '#small-facturacion-anual');
+            return true;
+        }
+
+
+        $('#rne').keyup(validarRne);
+
+        function validarRne() {
+
+            if (!(/^[0-9]+$/.test($('#rne').val()))) {
+
+                if($('#rne').val() != ""){
+
+
+                mostrarError('#rne', '#small-rne', '<div class="alert alert-danger mt-3 pt-1">El <strong>Registro Nacional de Establecimientos</strong> debe contener solamente dígitos numéricos.</div>');
+                return false;
+                }
+            }
+            ocultarError('#rne', '#small-rne');
+            return true;
+        }
+
+
+        $('#unidad_producida').keyup(validarUnidadProducida);
+
+        function validarUnidadProducida() {
+
+            if (!(/^[0-9]+$/.test($('#unidad_producida').val()))) {
+                if($('#unidad_producida').val() != ""){
+                mostrarError('#unidad_producida', '#small-unidad-producida', '<div class="alert alert-danger mt-3 pt-1">La <strong>unidad producida</strong> debe contener solamente dígitos numéricos.</div>');
+                return false;
+                }
+            }
+            ocultarError('#unidad_producida', '#small-unidad-producida');
+            return true;
+        }
+
+
+        $('#produccion_total').keyup(validarProduccionTotal);
+
+        function validarProduccionTotal() {
+
+            if (!(/^[0-9]+$/.test($('#produccion_total').val()))) {
+                if($('#produccion_total').val() != ""){
+
+                mostrarError('#produccion_total', '#small-produccion-total', '<div class="alert alert-danger mt-3 pt-1">La <strong>producción total</strong> debe contener solamente dígitos numéricos.</div>');
+                return false;
+                }
+            }
+            ocultarError('#produccion_total', '#small-produccion-total');
+            return true;
+        }
+
+
 
         let tipo_actividad;
         let actividad;

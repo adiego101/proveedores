@@ -26,7 +26,10 @@
                         <input @if ($mode == 'show') readonly @endif type="text" class="form-control"
                             onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado"
                             aria-describedby="basic-addon1" value="{{ isset($pago->importe) ? $pago->importe : '' }}"
-                            id="importe" name="importe" maxlength="9" required><br>
+                            id="importe" name="importe" maxlength="9" required>
+                            <small class="small" id="small-importe"></small>
+
+                            <br>
 
                         <label for="observacionespago">Observaciones:</label><br>
                         <input @if ($mode == 'show') readonly @endif type="text" class="form-control"
@@ -59,6 +62,23 @@
 @push('js')
 
     <script>
+
+$('#importe').keyup(validarimporte);
+
+function validarimporte() {
+
+    if (!(/^[0-9]+$/.test($('#importe').val()))) {
+        if($('#importe').val() != ""){
+        mostrarError('#importe', '#small-importe', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de importe</strong> debe contener solamente dígitos numéricos.</div>');
+        return false;
+        }
+    }
+    ocultarError('#importe', '#small-importe');
+    return true;
+}
+
+
+
 
         $(document).ready(function() {
             $('#addform').on('submit', function(e) {
