@@ -14,7 +14,9 @@
                         <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago" aria-describedby="basic-addon1" id="modal_fecha"/><br />
 
                         <label for="modal_importe">Importe:</label><br />
-                        <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="modal_importe" maxlength="9"/><br />
+                        <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="modal_importe" maxlength="9"/>
+                        <small class="small" id="small-importe-pago-modal"></small>
+                        <br />
 
                         <label for="modal_observaciones">Observaciones:</label><br />
                         <input type="text" class="form-control" placeholder="Ingrese las observaciones del pago" aria-describedby="basic-addon1" id="modal_observaciones" maxlength="50"/><br />
@@ -33,6 +35,24 @@
 @push('js')
 
     <script type="text/javascript">
+
+
+        $('#modal_importe').keyup(validarImportePagoModal);
+
+        function validarImportePagoModal() {
+
+            if (!(/^[0-9]+$/.test($('#modal_importe').val()))) {
+                if($('#modal_importe').val() != ""){
+
+                mostrarError('#modal_importe', '#small-importe-pago-modal', '<div class="alert alert-danger mt-3 pt-1">El <strong>importe del pago</strong> debe contener solamente dígitos numéricos.</div>');
+                return false;
+                }
+            }
+            ocultarError('#modal_importe', '#small-importe-pago-modal');
+            return true;
+        }
+
+
 
         //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
@@ -113,5 +133,5 @@
         });
 
     </script>
-    
+
 @endpush
