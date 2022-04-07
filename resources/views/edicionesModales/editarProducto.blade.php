@@ -36,10 +36,14 @@
                     <div class="col-sm">
                         <label for="Producida_unidad1">Unidad producida:</label><br>
                         <input @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" value="{{ isset($producto->Producida_unidad) ? $producto->Producida_unidad : '' }}" class="form-control" aria-describedby="basic-addon1" id="Producida_unidad1"
-                        name="Producida_unidad1" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9" required><br>
+                        name="Producida_unidad1" placeholder="Ingrese la cantidad de unidades producidas" maxlength="9" required>
+                        <small class="small" id="small-Producida_unidad1"></small>
+                        <br>
 
                         <label for="capacidad_produccion_total1">Capacidad de producción total:</label><br>
-                        <input @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" value="{{ isset($producto->capacidad_produccion_total) ? $producto->capacidad_produccion_total : '' }}" class="form-control" aria-describedby="basic-addon1" id="capacidad_produccion_total1" name="capacidad_produccion_total1" placeholder="Ingrese la producción total" maxlength="9"><br>
+                        <input @if ( $mode == "show") readonly @endif type="text" onkeypress="return valideKey(event);" value="{{ isset($producto->capacidad_produccion_total) ? $producto->capacidad_produccion_total : '' }}" class="form-control" aria-describedby="basic-addon1" id="capacidad_produccion_total1" name="capacidad_produccion_total1" placeholder="Ingrese la producción total" maxlength="9">
+                        <small class="small" id="small-capacidad_produccion_total1"></small>
+                        <br>
                     </div>
                 </div>
                 <br>
@@ -67,6 +71,38 @@
 @push('js')
 
     <script>
+
+
+        $('#Producida_unidad1').keyup(validarUnidadProducida);
+
+        function validarUnidadProducida() {
+   
+            if (!(/^[0-9]/.test($('#Producida_unidad1').val()))) {
+
+                mostrarError('#Producida_unidad1', '#small-Producida_unidad1', '<div class="alert alert-danger mt-3 pt-1">La <strong>unidad producida</strong> debe contener solamente dígitos numéricos.</div>');
+                return false;
+            }
+            ocultarError('#Producida_unidad1', '#small-Producida_unidad1');
+            return true;
+        }
+
+
+        $('#capacidad_produccion_total1').keyup(validarProduccionTotal);
+
+        function validarProduccionTotal() {
+   
+            if (!(/^[0-9]/.test($('#capacidad_produccion_total1').val()))) {
+
+                mostrarError('#capacidad_produccion_total1', '#small-capacidad_produccion_total1', '<div class="alert alert-danger mt-3 pt-1">La <strong>producción total</strong> debe contener solamente dígitos numéricos.</div>');
+                return false;
+            }
+            ocultarError('#capacidad_produccion_total1', '#small-capacidad_produccion_total1');
+            return true;
+        }
+
+
+
+
         $(document).on("click", ".btn_editar_producto", function() {
 
             //Obtenemos el numero de la fila que queremos modificar
