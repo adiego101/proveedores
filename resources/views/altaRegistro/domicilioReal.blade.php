@@ -12,7 +12,9 @@
                 <input type="text" class="form-control" placeholder="Ingrese el departamento" aria-describedby="basic-addon1" id="dpto_real" name="dpto_real" maxlength="10"><br>
 
                 <label for="lote_real">Lote:</label><br>
-                <input type="text"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_real" name="lote_real" maxlength="4"><br>
+                <input type="text"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de lote" aria-describedby="basic-addon1" id="lote_real" name="lote_real" maxlength="4">
+                <small class="small" id="small-lote-real"></small>
+                <br>
 
                 <label for="entreCalles_real">Entre Calles:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese las calles correspondientes" aria-describedby="basic-addon1" id="entreCalles_real" name="entreCalles_real" maxlength="70"><br>
@@ -59,7 +61,9 @@
             <div class="col-sm">
 
                 <label for="numero_real">Número:</label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_real" name="numero_real" maxlength="5"><br>
+                <input type="text"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_real" name="numero_real" maxlength="5">
+                <small class="small" id="small-numero-real"></small>
+                <br>
 
                 <label for="puerta_real">Puerta:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese la puerta" aria-describedby="basic-addon1" id="puerta_real" name="puerta_real" maxlength="4"><br>
@@ -97,10 +101,12 @@
                     <div class="col-sm">
                         <label for="telefono_real_cod">Código de área:</label><br>
                         <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_real_cod" name="telefono_real_cod[]" maxlength="4">
+                        <small class="small" id="small-telefono-real-cod"></small>
                     </div>
                     <div class="col-sm">
                         <label for="telefono_real">Número de Teléfono:</label><br>
                         <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_real" name="telefono_real[]" maxlength="14">
+                        <small class="small" id="small-telefono-real"></small>
                     </div>
                 </div>
                 <div class="field_telefono_real">
@@ -122,12 +128,80 @@
 
 
 <script type="text/javascript">
+
+
+    $('#lote_real').keyup(validarLoteReal);
+
+    function validarLoteReal() {
+
+        if (!(/^[0-9]+$/.test($('#lote_real').val()))) {
+            if($('#lote_real').val() != ""){
+            mostrarError('#lote_real', '#small-lote-real', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+            }
+        }
+        ocultarError('#lote_real', '#small-lote-real');
+        return true;
+    }
+
+
+    $('#numero_real').keyup(validarNumeroReal);
+
+    function validarNumeroReal() {
+
+        if (!(/^[0-9]+$/.test($('#numero_real').val()))) {
+            if($('#numero_real').val() != ""){
+
+            mostrarError('#numero_real', '#small-numero-real', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de la calle</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+            }
+        }
+        ocultarError('#numero_real', '#small-numero-real');
+        return true;
+    }
+
+
+    $('#telefono_real_cod').keyup(validarTelefonoRealCod);
+
+    function validarTelefonoRealCod() {
+
+        if (!(/^[0-9]+$/.test($('#telefono_real_cod').val()))) {
+            if($('#telefono_real_cod').val() != ""){
+
+            mostrarError('#telefono_real_cod', '#small-telefono-real-cod', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+            }
+        }
+        ocultarError('#telefono_real_cod', '#small-telefono-real-cod');
+        return true;
+    }
+
+
+
+    $('#telefono_real').keyup(validarTelefonoReal);
+
+    function validarTelefonoReal() {
+
+        if (!(/^[0-9]+$/.test($('#telefono_real').val()))) {
+            if($('#telefono_real').val() != ""){
+
+            mostrarError('#telefono_real', '#small-telefono-real', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
+            return false;
+            }
+        }
+        ocultarError('#telefono_real', '#small-telefono-real');
+        return true;
+    }
+
+
+
     $(document).ready(function() {
 
         var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
         var addTelefono_real = $('.add_telefono_real');
         var wrapper_telefono_real = $('.field_telefono_real');
         var x = 1; //Contador inicial, comienza en 1
+
 
         $(addTelefono_real).click(function() {
 
@@ -258,6 +332,7 @@
             $(this).parent('div').remove(); //Remueve un campo html (correo)
             i--; //Decrementa el contador en 1
         });
+
     });
 
 </script>

@@ -313,3 +313,19 @@
 
     </style>
 @endpush
+
+@push('css')
+
+    <style>
+        input:invalid:required {
+
+            border: 1px dashed red;
+        }
+
+        input:hover:invalid:required {
+
+            background-color: rgb(255, 76, 76);
+        }
+    </style>
+
+@endpush

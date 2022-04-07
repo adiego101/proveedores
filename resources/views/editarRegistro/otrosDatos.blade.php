@@ -8,23 +8,33 @@
 
             <label for="porc_facturacion">Porcentaje de facturación en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_facturacion) ? $proveedor->porc_facturacion : '' }}" id="porc_facturacion" name="porc_facturacion" placeholder="Ingrese el porcentaje de facturación" min="0" max="100" disabled><br>
+value="{{ isset($proveedor->porc_facturacion) ? $proveedor->porc_facturacion : '' }}" id="porc_facturacion" name="porc_facturacion" placeholder="Ingrese el porcentaje de facturación" min="0" max="100" disabled>
+            <small class="small" id="small-porc_facturacion"></small>
+            <br>
 
             <label for="porc_gasto">Porcentaje de Gastos en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_gasto) ? $proveedor->porc_gasto : '' }}" id="porc_gasto" name="porc_gasto" placeholder="Ingrese el porcentaje de gastos" min="0" max="100" disabled><br>
+value="{{ isset($proveedor->porc_gasto) ? $proveedor->porc_gasto : '' }}" id="porc_gasto" name="porc_gasto" placeholder="Ingrese el porcentaje de gastos" min="0" max="100" disabled>
+            <small class="small" id="small-porc_gasto"></small>
+            <br>
 
             <label for="porc_mo">Porcentaje de Mano de Obra en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->porc_mo) ? $proveedor->porc_mo : '' }}" id="porc_mo" name="porc_mo" placeholder="Ingrese el porcentaje de mano de obra" min="0" max="100" disabled><br>
+value="{{ isset($proveedor->porc_mo) ? $proveedor->porc_mo : '' }}" id="porc_mo" name="porc_mo" placeholder="Ingrese el porcentaje de mano de obra" min="0" max="100" disabled>
+            <small class="small" id="small-porc_mo"></small>
+            <br>
 
-            <label for="antiguedad">Porcentaje de Antiguedad en Santa Cruz:</label><br>
+            <label for="antiguedad">Antiguedad en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->antiguedad) ? $proveedor->antiguedad : '' }}" id="antiguedad" name="antiguedad" placeholder="Ingrese la antiguedad en Santa Cruz" min="0" max="100" disabled><br>
+value="{{ isset($proveedor->antiguedad) ? $proveedor->antiguedad : '' }}" id="antiguedad" name="antiguedad" placeholder="Ingrese la antiguedad en Santa Cruz" min="0" max="1000" disabled>
+            <small class="small" id="small-antiguedad"></small>
+            <br>
 
             <label for="dom_fiscal">Porcentaje de Domicilio Fiscal en Santa Cruz:</label><br>
             <input  @if ( $mode == "show") readonly @endif type="number" class="form-control" aria-describedby="basic-addon1"
-value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}" id="dom_fiscal" name="dom_fiscal" placeholder="Ingrese el domicilio fiscal" min="0" max="100" disabled><br>
+value="{{ isset($proveedor->dom_fiscal) ? $proveedor->dom_fiscal : '' }}" id="dom_fiscal" name="dom_fiscal" placeholder="Ingrese el domicilio fiscal" min="0" max="100" disabled>
+            <small class="small" id="small-dom_fiscal"></small>
+            <br>
 
                 <div class="container">
                 <div class="row">
@@ -42,7 +52,7 @@ disabled>
             </div><br>
 
             <label for="valor_indice_rupae">Valor del indice:</label><br>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" value="{{ isset($proveedor->valor_indice_rupae) ? $proveedor->valor_indice_rupae : '' }}" id="valor_indice_rupae" name="valor_indice_rupae" readonly>
+            <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" value="{{ isset($proveedor->valor_indice_rupae) ? $proveedor->valor_indice_rupae : '' }}" id="valor_indice_rupae" name="valor_indice_rupae" readonly>
             <br>
 
             <label for="desc_jerarquia_compre_local">Proveedor:</label><br>
@@ -207,7 +217,83 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
 
     <script type="text/javascript">
 
+        $('#porc_facturacion').keyup(validarPorcFacturacion);
+
+        function validarPorcFacturacion() {
+   
+            if (parseInt($('#porc_facturacion').val()) < 0 || parseInt($('#porc_facturacion').val()) > 100) {
+
+                mostrarError('#porc_facturacion', '#small-porc_facturacion', '<div class="alert alert-danger mt-3 pt-1">El <strong>porcentaje de facturación</strong> debe ser mayor o igual que 0 y menor o igual que 100.</div>');
+                return false;
+            }
+            ocultarError('#porc_facturacion', '#small-porc_facturacion');
+            return true;
+        }
+
+
+
+        $('#porc_gasto').keyup(validarPorcGasto);
+
+        function validarPorcGasto() {
+
+            if (parseInt($('#porc_gasto').val()) < 0 || parseInt($('#porc_gasto').val()) > 100) {
+
+                mostrarError('#porc_gasto', '#small-porc_gasto', '<div class="alert alert-danger mt-3 pt-1">El <strong>porcentaje de gastos</strong> debe ser mayor o igual que 0 y menor o igual que 100.</div>');
+                return false;
+            }
+            ocultarError('#porc_gasto', '#small-porc_gasto');
+            return true;
+        }
+
+
+        $('#porc_mo').keyup(validarPorcMo);
+
+        function validarPorcMo() {
+
+            if (parseInt($('#porc_mo').val()) < 0 || parseInt($('#porc_mo').val()) > 100) {
+
+                mostrarError('#porc_mo', '#small-porc_mo', '<div class="alert alert-danger mt-3 pt-1">El <strong>porcentaje de mano de obra</strong> debe ser mayor o igual que 0 y menor o igual que 100.</div>');
+                return false;
+            }
+            ocultarError('#porc_mo', '#small-porc_mo');
+            return true;
+        }
+
+
+
+        $('#dom_fiscal').keyup(validarPorcDomFiscal);
+
+        function validarPorcDomFiscal() {
+
+            if (parseInt($('#dom_fiscal').val()) < 0 || parseInt($('#dom_fiscal').val()) > 100) {
+
+                mostrarError('#dom_fiscal', '#small-dom_fiscal', '<div class="alert alert-danger mt-3 pt-1">El <strong>porcentaje de domicilio fiscal</strong> debe ser mayor o igual que 0 y menor o igual que 100.</div>');
+                return false;
+            }
+            ocultarError('#dom_fiscal', '#small-dom_fiscal');
+            return true;
+        }
+
+
+
+        $('#antiguedad').keyup(validarAntiguedad);
+
+        function validarAntiguedad() {
+
+            if (parseInt($('#antiguedad').val()) < 0 || parseInt($('#antiguedad').val()) > 1000) {
+
+                mostrarError('#antiguedad', '#small-antiguedad', '<div class="alert alert-danger mt-3 pt-1">La <strong>antiguedad</strong> ingresada no está permitida.</div>');
+                return false;
+            }
+            ocultarError('#antiguedad', '#small-antiguedad');
+            return true;
+        }
+
+
+
+
         $("#document").ready(function(){
+
             $("#porc_facturacion").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
                 let porc_gasto = $("#porc_gasto").val();
@@ -223,6 +309,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                     $("#valor_indice_rupae").val('');
 
             });
+
             $("#porc_gasto").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
                 let porc_gasto = $("#porc_gasto").val();
@@ -236,6 +323,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                     $("#valor_indice_rupae").val('');
 
             });
+
             $("#porc_mo").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
                 let porc_gasto = $("#porc_gasto").val();
@@ -249,6 +337,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                     $("#valor_indice_rupae").val('');
 
             });
+
             $("#dom_fiscal").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
                 let porc_gasto = $("#porc_gasto").val();
@@ -262,6 +351,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                     $("#valor_indice_rupae").val('');
 
             });
+
             $("#antiguedad").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
                 let porc_gasto = $("#porc_gasto").val();
@@ -275,6 +365,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                     $("#valor_indice_rupae").val('');
 
             });
+
             $("#valor_agregado").change(function() {
                 let porc_facturacion = $("#porc_facturacion").val();
                 let porc_gasto = $("#porc_gasto").val();
@@ -288,6 +379,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                     $("#valor_indice_rupae").val('');
             });
         });
+
         function calcular_indice(porc_facturacion, porc_gasto, porc_mo, dom_fiscal, antiguedad, valor_agregado) {
             let facturacion_ponderacion = $("#facturacion_ponderacion").val();
             let gastos_ponderacion = $("#gastos_ponderacion").val();
@@ -326,25 +418,34 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                                                 dom_fiscal*dom_fiscal_ponderacion+
                                                 valor_agregado*valor_agregado_ponderacion);
                     else
-                        $("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
+                        /*$("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
                                                     porc_gasto*gastos_ponderacion+
                                                     porc_mo*mano_obra_ponderacion+
                                                     100*antiguedad_ponderacion+
                                                     dom_fiscal*dom_fiscal_ponderacion+
-                                                    valor_agregado*valor_agregado_ponderacion);
+                                                    valor_agregado*valor_agregado_ponderacion);*/
+                        $("#valor_indice_rupae").val('Sin resultados'); 
             mostrarProveedor($("#valor_indice_rupae").val());
         }
 
         function mostrarProveedor(valor_indice_rupae){
-            if(valor_indice_rupae>=parseInt($("#foraneo_jerarquia_desde").val()))
-                if(valor_indice_rupae<=parseInt($("#foraneo_jerarquia_hasta").val()))
-                    $("#desc_jerarquia_compre_local").val('PROVEEDOR FORANEO');
-                else if(valor_indice_rupae<=parseInt($("#intermedio_jerarquia_hasta").val()))
-                        $("#desc_jerarquia_compre_local").val('PROVEEDOR INTERMEDIO');
-                    else if(valor_indice_rupae<=parseInt($("#local_jerarquia_hasta").val()))
-                        $("#desc_jerarquia_compre_local").val('PROVEEDOR LOCAL');
-                        else
-                            $("#desc_jerarquia_compre_local").val('');
+
+            if(valor_indice_rupae != 'Sin resultados') {
+
+                if(valor_indice_rupae>=parseInt($("#foraneo_jerarquia_desde").val()))
+                    if(valor_indice_rupae<=parseInt($("#foraneo_jerarquia_hasta").val()))
+                        $("#desc_jerarquia_compre_local").val('PROVEEDOR FORANEO');
+                    else if(valor_indice_rupae<=parseInt($("#intermedio_jerarquia_hasta").val()))
+                            $("#desc_jerarquia_compre_local").val('PROVEEDOR INTERMEDIO');
+                        else if(valor_indice_rupae<=parseInt($("#local_jerarquia_hasta").val()))
+                            $("#desc_jerarquia_compre_local").val('PROVEEDOR LOCAL');
+                            else
+                                $("#desc_jerarquia_compre_local").val('Sin resultados');
+
+            } else {
+                  
+                    $("#desc_jerarquia_compre_local").val('Sin resultados');
+            }
         }
     </script>
 

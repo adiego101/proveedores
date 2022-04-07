@@ -175,11 +175,12 @@
         $('#facturacion_anual_alcanzada').keyup(validarFacturacionAnual);
 
         function validarFacturacionAnual() {
-   
-            if (!(/^[0-9]/.test($('#facturacion_anual_alcanzada').val()))) {
 
+            if (!(/^[0-9]+$/.test($('#facturacion_anual_alcanzada').val()))) {
+                if($('#facturacion_anual_alcanzada').val() != ""){
                 mostrarError('#facturacion_anual_alcanzada', '#small-facturacion-anual', '<div class="alert alert-danger mt-3 pt-1">La <strong>facturación anual</strong> debe contener solamente dígitos numéricos.</div>');
                 return false;
+                }
             }
             ocultarError('#facturacion_anual_alcanzada', '#small-facturacion-anual');
             return true;
@@ -189,11 +190,15 @@
         $('#rne').keyup(validarRne);
 
         function validarRne() {
-   
-            if (!(/^[0-9]/.test($('#rne').val()))) {
+
+            if (!(/^[0-9]+$/.test($('#rne').val()))) {
+
+                if($('#rne').val() != ""){
+
 
                 mostrarError('#rne', '#small-rne', '<div class="alert alert-danger mt-3 pt-1">El <strong>Registro Nacional de Establecimientos</strong> debe contener solamente dígitos numéricos.</div>');
                 return false;
+                }
             }
             ocultarError('#rne', '#small-rne');
             return true;
@@ -203,11 +208,12 @@
         $('#unidad_producida').keyup(validarUnidadProducida);
 
         function validarUnidadProducida() {
-   
-            if (!(/^[0-9]/.test($('#unidad_producida').val()))) {
 
+            if (!(/^[0-9]+$/.test($('#unidad_producida').val()))) {
+                if($('#unidad_producida').val() != ""){
                 mostrarError('#unidad_producida', '#small-unidad-producida', '<div class="alert alert-danger mt-3 pt-1">La <strong>unidad producida</strong> debe contener solamente dígitos numéricos.</div>');
                 return false;
+                }
             }
             ocultarError('#unidad_producida', '#small-unidad-producida');
             return true;
@@ -217,16 +223,18 @@
         $('#produccion_total').keyup(validarProduccionTotal);
 
         function validarProduccionTotal() {
-   
-            if (!(/^[0-9]/.test($('#produccion_total').val()))) {
+
+            if (!(/^[0-9]+$/.test($('#produccion_total').val()))) {
+                if($('#produccion_total').val() != ""){
 
                 mostrarError('#produccion_total', '#small-produccion-total', '<div class="alert alert-danger mt-3 pt-1">La <strong>producción total</strong> debe contener solamente dígitos numéricos.</div>');
                 return false;
+                }
             }
             ocultarError('#produccion_total', '#small-produccion-total');
             return true;
         }
-          
+
 
 
         let tipo_actividad;
