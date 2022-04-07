@@ -121,421 +121,427 @@ class ProveedoresController extends Controller
     //Carga Completa de Proveedor
     public function crear_registro(Request $request)
     {
-
         try {
-            $cuit = Proveedor::where('cuit', $request->cuit)->exists();
-            $dado_de_baja = Proveedor::where('cuit', $request->cuit)->where('dado_de_baja', '0')->get();
-            //return $dado_de_baja->isEmpty();
-            //return empty($dado_de_baja);
-            //return $cuit;
-            if (!$cuit/*|| $dado_de_baja->isEmpty()*/) {
+            DB::transaction(function() use ($request) {
+                $cuit = Proveedor::where('cuit', $request->cuit)->exists();
+                $dado_de_baja = Proveedor::where('cuit', $request->cuit)->where('dado_de_baja', '0')->get();
+                //return $dado_de_baja->isEmpty();
+                //return empty($dado_de_baja);
+                //return $cuit;
+                if (!$cuit/*|| $dado_de_baja->isEmpty()*/) {
 
-                //$id_tamanio_empresa = $request->id_tamanio_empresa;
+                    //$id_tamanio_empresa = $request->id_tamanio_empresa;
 
-                //-------------------Carga Proveedor-------------------
-                //return $request->input('retencion');
-                $proveedores_rupae = new Proveedor($request->all());
-                //$proveedores_rupae->id_tamanio_empresa = $id_tamanio_empresa;
+                    //-------------------Carga Proveedor-------------------
+                    //return $request->input('retencion');
+                    $proveedores_rupae = new Proveedor($request->all());
+                    //$proveedores_rupae->id_tamanio_empresa = $id_tamanio_empresa;
 
-                $proveedores_rupae->save();
+                    $proveedores_rupae->save();
 
-                //return "Fin";
+                    //return "Fin";
 
-                //---------Tipo de Proveedor----------
-                if (isset($request->prov_provincial)) {
-                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => $proveedores_rupae->id_proveedor,
-                        'id_tipo_proveedor' => '4',
-                    ]);
-                    $Proveedores_tipos_proveedores->save();
-                }
+                    //---------Tipo de Proveedor----------
+                    if (isset($request->prov_provincial)) {
+                        $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                            'id_proveedor' => $proveedores_rupae->id_proveedor,
+                            'id_tipo_proveedor' => '4',
+                        ]);
+                        $Proveedores_tipos_proveedores->save();
+                    }
 
-                if (isset($request->prov_estado)) {
-                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => $proveedores_rupae->id_proveedor,
-                        'id_tipo_proveedor' => '1',
-                    ]);
+                    if (isset($request->prov_estado)) {
+                        $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                            'id_proveedor' => $proveedores_rupae->id_proveedor,
+                            'id_tipo_proveedor' => '1',
+                        ]);
 
-                    $Proveedores_tipos_proveedores->save();}
-                if (isset($request->prov_minero)) {
-                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => $proveedores_rupae->id_proveedor,
-                        'id_tipo_proveedor' => '2',
-                    ]);
-                    $Proveedores_tipos_proveedores->save();}
+                        $Proveedores_tipos_proveedores->save();}
+                    if (isset($request->prov_minero)) {
+                        $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                            'id_proveedor' => $proveedores_rupae->id_proveedor,
+                            'id_tipo_proveedor' => '2',
+                        ]);
+                        $Proveedores_tipos_proveedores->save();}
 
-                if (isset($request->prov_petrolero)) {
-                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => $proveedores_rupae->id_proveedor,
-                        'id_tipo_proveedor' => '3',
-                    ]);
-                    $Proveedores_tipos_proveedores->save();}
+                    if (isset($request->prov_petrolero)) {
+                        $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                            'id_proveedor' => $proveedores_rupae->id_proveedor,
+                            'id_tipo_proveedor' => '3',
+                        ]);
+                        $Proveedores_tipos_proveedores->save();}
 
-                //----------------------------------Carga Domicilio Real---------------------------------------------
+                    //----------------------------------Carga Domicilio Real---------------------------------------------
 
-                $domicilio_real = Proveedor_domicilio::create([
-                    'tipo_domicilio' => 'real',
-                    //'nro_orden_domicilio',
-                    'calle' => htmlspecialchars($request->input('calle_real')),
-                    'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                    'numero' => $request->input('numero_real'),
-                    'dpto' => htmlspecialchars($request->input('dpto_real')),
-                    'puerta' => htmlspecialchars($request->input('puerta_real')),
-                    'lote' => htmlspecialchars($request->input('lote_real')),
-                    'manzana' => htmlspecialchars($request->input('manzana_real')),
-                    'entre_calles' => htmlspecialchars($request->input('entreCalles_real')),
-                    'oficina' => htmlspecialchars($request->input('oficina_real')),
-                    'monoblock' => htmlspecialchars($request->input('monoblock_real')),
-                    'barrio' => htmlspecialchars($request->input('barrio_real')),
-                    'id_localidad' => $request->input('localidad_real'),
-                    'codigo_postal' => htmlspecialchars($request->input('cp_real')),
-                ]);
-                $domicilio_real->save();
-
-                //---------Contador de Telefono_Real----------
-
-                $arraySize = count($request->telefono_real);
-
-                for ($i = 0; $i < $arraySize; $i++) {
-                    //---------Carga de Telefonos_Real----------
-
-                    $telefono_real = Proveedor_telefono::create([
-                        'nro_tel' => $request->telefono_real[$i],
+                    $domicilio_real = Proveedor_domicilio::create([
+                        'tipo_domicilio' => 'real',
+                        //'nro_orden_domicilio',
+                        'calle' => htmlspecialchars($request->input('calle_real')),
                         'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                        'cod_area_tel' => $request->telefono_real_cod[$i],
-                        //'tipo_medio'=>,
-                        //'desc_telefono'=>,
-                        'tipo_telefono' => 'real',
-                        //'nro_orden_telefono'=>,
+                        'numero' => $request->input('numero_real'),
+                        'dpto' => htmlspecialchars($request->input('dpto_real')),
+                        'puerta' => htmlspecialchars($request->input('puerta_real')),
+                        'lote' => htmlspecialchars($request->input('lote_real')),
+                        'manzana' => htmlspecialchars($request->input('manzana_real')),
+                        'entre_calles' => htmlspecialchars($request->input('entreCalles_real')),
+                        'oficina' => htmlspecialchars($request->input('oficina_real')),
+                        'monoblock' => htmlspecialchars($request->input('monoblock_real')),
+                        'barrio' => htmlspecialchars($request->input('barrio_real')),
+                        'id_localidad' => $request->input('localidad_real'),
+                        'codigo_postal' => htmlspecialchars($request->input('cp_real')),
                     ]);
-                    $telefono_real->save();
-                }
+                    $domicilio_real->save();
 
-                //---------Contador de Email_Real----------
+                    //---------Contador de Telefono_Real----------
 
-                $arraySize = count($request->email_real);
+                    $arraySize = count($request->telefono_real);
 
-                for ($i = 0; $i < $arraySize; $i++) {
-                    //---------Carga de Email_Real----------
+                    for ($i = 0; $i < $arraySize; $i++) {
+                        //---------Carga de Telefonos_Real----------
 
-                    $email_real = Proveedor_email::create([
-                        'email' => $request->email_real[$i],
+                        $telefono_real = Proveedor_telefono::create([
+                            'nro_tel' => $request->telefono_real[$i],
+                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                            'cod_area_tel' => $request->telefono_real_cod[$i],
+                            //'tipo_medio'=>,
+                            //'desc_telefono'=>,
+                            'tipo_telefono' => 'real',
+                            //'nro_orden_telefono'=>,
+                        ]);
+                        $telefono_real->save();
+                    }
+
+                    //---------Contador de Email_Real----------
+
+                    $arraySize = count($request->email_real);
+
+                    for ($i = 0; $i < $arraySize; $i++) {
+                        //---------Carga de Email_Real----------
+
+                        $email_real = Proveedor_email::create([
+                            'email' => $request->email_real[$i],
+                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                            'tipo_email' => 'real',
+                        ]);
+                        $email_real->save();
+                    }
+
+                    //----------------------------------Carga Domicilio Legal---------------------------------------------
+
+                    $domicilio_legal = Proveedor_domicilio::create([
+                        'tipo_domicilio' => 'legal',
                         'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                        'tipo_email' => 'real',
+
+                        //'nro_orden_domicilio',
+                        'calle' => htmlspecialchars($request->input('calle_legal')),
+                        'numero' => $request->input('numero_legal'),
+                        'lote' => htmlspecialchars($request->input('lote_legal')),
+                        'entre_calles' => htmlspecialchars($request->input('entreCalles_legal')),
+                        'monoblock' => htmlspecialchars($request->input('monoblock_legal')),
+                        'dpto' => htmlspecialchars($request->input('dpto_legal')),
+                        'puerta' => htmlspecialchars($request->input('puerta_legal')),
+                        'oficina' => htmlspecialchars($request->input('oficina_legal')),
+                        'manzana' => htmlspecialchars($request->input('manzana_legal')),
+                        'barrio' => htmlspecialchars($request->input('barrio_legal')),
+                        'codigo_postal' => htmlspecialchars($request->input('cp_legal')),
+                        'id_localidad' => $request->input('localidad_legal'),
+
                     ]);
-                    $email_real->save();
-                }
+                    $domicilio_legal->save();
+                    //---------Contador de Telefono_Legal----------
 
-                //----------------------------------Carga Domicilio Legal---------------------------------------------
+                    $arraySize = count($request->telefono_legal);
 
-                $domicilio_legal = Proveedor_domicilio::create([
-                    'tipo_domicilio' => 'legal',
-                    'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-
-                    //'nro_orden_domicilio',
-                    'calle' => htmlspecialchars($request->input('calle_legal')),
-                    'numero' => $request->input('numero_legal'),
-                    'lote' => htmlspecialchars($request->input('lote_legal')),
-                    'entre_calles' => htmlspecialchars($request->input('entreCalles_legal')),
-                    'monoblock' => htmlspecialchars($request->input('monoblock_legal')),
-                    'dpto' => htmlspecialchars($request->input('dpto_legal')),
-                    'puerta' => htmlspecialchars($request->input('puerta_legal')),
-                    'oficina' => htmlspecialchars($request->input('oficina_legal')),
-                    'manzana' => htmlspecialchars($request->input('manzana_legal')),
-                    'barrio' => htmlspecialchars($request->input('barrio_legal')),
-                    'codigo_postal' => htmlspecialchars($request->input('cp_legal')),
-                    'id_localidad' => $request->input('localidad_legal'),
-
-                ]);
-                $domicilio_legal->save();
-                //---------Contador de Telefono_Legal----------
-
-                $arraySize = count($request->telefono_legal);
-
-                //---------Carga de Telefonos_Legal----------
-
-                for ($i = 0; $i < $arraySize; $i++) {
-
-                    $telefono_legal = Proveedor_telefono::create([
-                        'nro_tel' => $request->telefono_legal[$i],
-                        'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                        'cod_area_tel' => $request->telefono_legal_cod[$i],
-                        //'tipo_medio'=>,
-                        //'desc_telefono'=>,
-                        'tipo_telefono' => 'legal',
-                        //'nro_orden_telefono'=>,
-                    ]);
-                    $telefono_legal->save();
-                }
-                //---------Contador de Email_Legal----------
-
-                $arraySize = count($request->email_legal);
-
-                for ($i = 0; $i < $arraySize; $i++) {
-                    //---------Carga de Email_legal----------
-
-                    $email_legal = Proveedor_email::create([
-                        'email' => $request->email_legal[$i],
-                        'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                        'tipo_email' => 'legal',
-                    ]);
-                    $email_legal->save();
-                }
-
-                $Representante_legal = Persona::create([
-                    'dni_persona' => htmlspecialchars($request->dni_legal),
-                    //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                    'nombre_persona' => htmlspecialchars($request->nombre_persona),
-                    'apellido_persona' => htmlspecialchars($request->apellido_persona),
-                    //'apellido_persona'=>$proveedores_rupae->apellido_persona,
-                    //'genero_persona'=>$proveedores_rupae->genero_persona,
-                ]);
-
-                $Representante_legal->save();
-
-                $proveedores_rupae->personas()->attach($Representante_legal, ['rol_persona_proveedor' => 'Representante']);
-
-                //----------------------------------Carga Domicilio Fiscal---------------------------------------------
-
-                $domicilio_fiscal = Proveedor_domicilio::create([
-                    'tipo_domicilio' => 'fiscal',
-                    'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                    //'nro_orden_domicilio',
-                    'calle' => htmlspecialchars($request->input('calle_fiscal')),
-                    'numero' => $request->input('numero_fiscal'),
-                    'lote' => htmlspecialchars($request->input('lote_fiscal')),
-                    'entre_calles' => htmlspecialchars($request->input('entreCalles_fiscal')),
-                    'monoblock' => htmlspecialchars($request->input('monoblock_fiscal')),
-                    'dpto' => htmlspecialchars($request->input('dpto_fiscal')),
-                    'puerta' => htmlspecialchars($request->input('puerta_fiscal')),
-                    'oficina' => htmlspecialchars($request->input('oficina_fiscal')),
-                    'manzana' => htmlspecialchars($request->input('manzana_fiscal')),
-                    'barrio' => htmlspecialchars($request->input('barrio_fiscal')),
-                    'id_localidad' => $request->input('localidad_fiscal'),
-                    'codigo_postal' => htmlspecialchars($request->input('cp_fiscal')),
-                ]);
-                $domicilio_fiscal->save();
-                //---------Contador de Telefono_Fiscal----------
-
-                $arraySize = count($request->telefono_fiscal);
-
-                //---------Carga de Telefonos_Fiscal----------
-
-                for ($i = 0; $i < $arraySize; $i++) {
-                    $telefono_fiscal = Proveedor_telefono::create([
-                        'nro_tel' => $request->telefono_fiscal[$i],
-                        'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                        'cod_area_tel' => $request->telefono_fiscal_cod[$i],
-                        //'tipo_medio'=>,
-                        //'desc_telefono'=>,
-                        'tipo_telefono' => 'fiscal',
-                        //'nro_orden_telefono'=>,
-                    ]);
-                    $telefono_fiscal->save();
-
-                }
-
-                //---------Contador de Email_fiscal----------
-
-                $arraySize = count($request->email_fiscal);
-
-                for ($i = 0; $i < $arraySize; $i++) {
-                    //---------Carga de Email_fiscal----------
-
-                    $email_fiscal = Proveedor_email::create([
-                        'email' => $request->email_fiscal[$i],
-                        'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                        'tipo_email' => 'fiscal',
-                    ]);
-                    $email_fiscal->save();
-                }
-
-                //------------------------------------------SUCURSALES--------------------------------------------------------
-
-                //---------Contador de sucursales----------
-                if (isset($request->calles)) {
-
-                    $arraySize = count($request->calles);
+                    //---------Carga de Telefonos_Legal----------
 
                     for ($i = 0; $i < $arraySize; $i++) {
 
-                        //----------------Carga de Sucursal---------------
+                        $telefono_legal = Proveedor_telefono::create([
+                            'nro_tel' => $request->telefono_legal[$i],
+                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                            'cod_area_tel' => $request->telefono_legal_cod[$i],
+                            //'tipo_medio'=>,
+                            //'desc_telefono'=>,
+                            'tipo_telefono' => 'legal',
+                            //'nro_orden_telefono'=>,
+                        ]);
+                        $telefono_legal->save();
+                    }
+                    //---------Contador de Email_Legal----------
 
-                        $sucursal = new Sucursal();
-                        $sucursal->nombre_sucursal = $request->nombres_sucursales[$i];
-                        $sucursal->id_proveedor = $proveedores_rupae->id_proveedor;
-                        $sucursal->calle = $request->calles[$i];
-                        $sucursal->numero = $request->numeros[$i];
-                        $sucursal->dpto = $request->dptos[$i];
-                        $sucursal->lote = $request->lotes[$i];
-                        $sucursal->entre_calles = $request->entreCalles[$i];
-                        $sucursal->monoblock = $request->monoblocks[$i];
-                        $sucursal->id_localidad = $request->localidades[$i];
-                        $sucursal->puerta = $request->puertas[$i];
-                        $sucursal->oficina = $request->oficinas[$i];
-                        $sucursal->manzana = $request->manzanas[$i];
-                        $sucursal->codigo_postal = $request->codigos_postales[$i];
-                        $sucursal->barrio = $request->barrios[$i];
+                    $arraySize = count($request->email_legal);
 
-                        $sucursal->save();
+                    for ($i = 0; $i < $arraySize; $i++) {
+                        //---------Carga de Email_legal----------
 
-                        //----------------Carga de email Sucursal---------------
-                        if (isset($request->correos_electronicos)) {
-                            $sucursal_email = new Sucursal_email();
-                            $sucursal_email->id_sucursal = $sucursal->id_sucursal;
-                            $sucursal_email->email = $request->correos_electronicos[$i];
-                            $sucursal_email->save();
+                        $email_legal = Proveedor_email::create([
+                            'email' => $request->email_legal[$i],
+                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                            'tipo_email' => 'legal',
+                        ]);
+                        $email_legal->save();
+                    }
+
+                    $Representante_legal = Persona::create([
+                        'dni_persona' => htmlspecialchars($request->dni_legal),
+                        //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                        'nombre_persona' => htmlspecialchars($request->nombre_persona),
+                        'apellido_persona' => htmlspecialchars($request->apellido_persona),
+                        //'apellido_persona'=>$proveedores_rupae->apellido_persona,
+                        //'genero_persona'=>$proveedores_rupae->genero_persona,
+                    ]);
+
+                    $Representante_legal->save();
+
+                    $proveedores_rupae->personas()->attach($Representante_legal, ['rol_persona_proveedor' => 'Representante']);
+
+                    //----------------------------------Carga Domicilio Fiscal---------------------------------------------
+
+                    $domicilio_fiscal = Proveedor_domicilio::create([
+                        'tipo_domicilio' => 'fiscal',
+                        'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                        //'nro_orden_domicilio',
+                        'calle' => htmlspecialchars($request->input('calle_fiscal')),
+                        'numero' => $request->input('numero_fiscal'),
+                        'lote' => htmlspecialchars($request->input('lote_fiscal')),
+                        'entre_calles' => htmlspecialchars($request->input('entreCalles_fiscal')),
+                        'monoblock' => htmlspecialchars($request->input('monoblock_fiscal')),
+                        'dpto' => htmlspecialchars($request->input('dpto_fiscal')),
+                        'puerta' => htmlspecialchars($request->input('puerta_fiscal')),
+                        'oficina' => htmlspecialchars($request->input('oficina_fiscal')),
+                        'manzana' => htmlspecialchars($request->input('manzana_fiscal')),
+                        'barrio' => htmlspecialchars($request->input('barrio_fiscal')),
+                        'id_localidad' => $request->input('localidad_fiscal'),
+                        'codigo_postal' => htmlspecialchars($request->input('cp_fiscal')),
+                    ]);
+                    $domicilio_fiscal->save();
+                    //---------Contador de Telefono_Fiscal----------
+
+                    $arraySize = count($request->telefono_fiscal);
+
+                    //---------Carga de Telefonos_Fiscal----------
+
+                    for ($i = 0; $i < $arraySize; $i++) {
+                        $telefono_fiscal = Proveedor_telefono::create([
+                            'nro_tel' => $request->telefono_fiscal[$i],
+                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                            'cod_area_tel' => $request->telefono_fiscal_cod[$i],
+                            //'tipo_medio'=>,
+                            //'desc_telefono'=>,
+                            'tipo_telefono' => 'fiscal',
+                            //'nro_orden_telefono'=>,
+                        ]);
+                        $telefono_fiscal->save();
+
+                    }
+
+                    //---------Contador de Email_fiscal----------
+
+                    $arraySize = count($request->email_fiscal);
+
+                    for ($i = 0; $i < $arraySize; $i++) {
+                        //---------Carga de Email_fiscal----------
+
+                        $email_fiscal = Proveedor_email::create([
+                            'email' => $request->email_fiscal[$i],
+                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                            'tipo_email' => 'fiscal',
+                        ]);
+                        $email_fiscal->save();
+                    }
+
+                    //------------------------------------------SUCURSALES--------------------------------------------------------
+
+                    //---------Contador de sucursales----------
+                    if (isset($request->calles)) {
+
+                        $arraySize = count($request->calles);
+
+                        for ($i = 0; $i < $arraySize; $i++) {
+
+                            //----------------Carga de Sucursal---------------
+
+                            $sucursal = new Sucursal();
+                            $sucursal->nombre_sucursal = $request->nombres_sucursales[$i];
+                            $sucursal->id_proveedor = $proveedores_rupae->id_proveedor;
+                            $sucursal->calle = $request->calles[$i];
+                            $sucursal->numero = $request->numeros[$i];
+                            $sucursal->dpto = $request->dptos[$i];
+                            $sucursal->lote = $request->lotes[$i];
+                            $sucursal->entre_calles = $request->entreCalles[$i];
+                            $sucursal->monoblock = $request->monoblocks[$i];
+                            $sucursal->id_localidad = $request->localidades[$i];
+                            $sucursal->puerta = $request->puertas[$i];
+                            $sucursal->oficina = $request->oficinas[$i];
+                            $sucursal->manzana = $request->manzanas[$i];
+                            $sucursal->codigo_postal = $request->codigos_postales[$i];
+                            $sucursal->barrio = $request->barrios[$i];
+
+                            $sucursal->save();
+
+                            //----------------Carga de email Sucursal---------------
+                            if (isset($request->correos_electronicos)) {
+                                $sucursal_email = new Sucursal_email();
+                                $sucursal_email->id_sucursal = $sucursal->id_sucursal;
+                                $sucursal_email->email = $request->correos_electronicos[$i];
+                                $sucursal_email->save();
+                            }
+                            //----------------Carga de telefono Sucursal---------------
+                            if (isset($request->Telefonos_sucursales) && isset($request->telefonos_cod_sucursales)) {
+
+                                $sucursal_telefono = new Sucursal_telefono();
+                                $sucursal_telefono->id_sucursal = $sucursal->id_sucursal;
+                                $sucursal_telefono->nro_tel = $request->Telefonos_sucursales[$i];
+                                $sucursal_telefono->cod_area_tel = $request->telefonos_cod_sucursales[$i];
+                                $sucursal_telefono->save();
+                            }
+                            echo ($sucursal->toJson());
                         }
-                        //----------------Carga de telefono Sucursal---------------
-                        if (isset($request->Telefonos_sucursales) && isset($request->telefonos_cod_sucursales)) {
+                    }
 
-                            $sucursal_telefono = new Sucursal_telefono();
-                            $sucursal_telefono->id_sucursal = $sucursal->id_sucursal;
-                            $sucursal_telefono->nro_tel = $request->Telefonos_sucursales[$i];
-                            $sucursal_telefono->cod_area_tel = $request->telefonos_cod_sucursales[$i];
-                            $sucursal_telefono->save();
+                    //---------Contador de Actividades----------
+                    if (isset($request->tipos_actividades)) {
+
+                        $arraySize = count($request->tipos_actividades);
+                        var_dump($arraySize);
+
+                        //---------Carga de Actividades----------
+
+                        for ($i = 0; $i < $arraySize; $i++) {
+                            $actividades_proveedores = Actividades_proveedores::create([
+                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'id_tipo_actividad' => $this->idtipos_actividades($request->tipos_actividades[$i]),
+                                'id_actividad_economica' => $this->idActividad_economica($request->actividades[$i]),
+                            ]);
+
+                            $actividades_proveedores->save();
                         }
-                        echo ($sucursal->toJson());
                     }
-                }
 
-                //---------Contador de Actividades----------
-                if (isset($request->tipos_actividades)) {
+                    //---------Contador de Productos----------
+                    if (isset($request->productos)) {
 
-                    $arraySize = count($request->tipos_actividades);
-                    var_dump($arraySize);
+                        $arraySize = count($request->productos);
+                        var_dump($arraySize);
 
-                    //---------Carga de Actividades----------
+                        //---------Carga de Productos----------
 
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        $actividades_proveedores = Actividades_proveedores::create([
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'id_tipo_actividad' => $this->idtipos_actividades($request->tipos_actividades[$i]),
-                            'id_actividad_economica' => $this->idActividad_economica($request->actividades[$i]),
-                        ]);
+                        for ($i = 0; $i < $arraySize; $i++) {
+                            $producto = Producto::create([
+                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'producto_elaborado' => $request->productos[$i],
+                                'Producida_unidad' => $request->unidades[$i],
+                                'rnpa' => $request->rnpas[$i],
+                                'capacidad_produccion_total' => $request->producciones[$i],
 
-                        $actividades_proveedores->save();
+                            ]);
+
+                            $producto->save();
+                        }
                     }
-                }
 
-                //---------Contador de Productos----------
-                if (isset($request->productos)) {
+                    //---------Contador de Patentes----------
+                    if (isset($request->dominios)) {
 
-                    $arraySize = count($request->productos);
-                    var_dump($arraySize);
+                        $arraySize = count($request->dominios);
+                        var_dump($arraySize);
 
-                    //---------Carga de Productos----------
+                        //---------Carga de Patentes----------
 
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        $producto = Producto::create([
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'producto_elaborado' => $request->productos[$i],
-                            'Producida_unidad' => $request->unidades[$i],
-                            'rnpa' => $request->rnpas[$i],
-                            'capacidad_produccion_total' => $request->producciones[$i],
+                        for ($i = 0; $i < $arraySize; $i++) {
+                            $Proveedor_patente = Proveedor_patente::create([
+                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'dominio' => $request->dominios[$i],
+                                'marca' => $request->marcas[$i],
+                                'modelo' => $request->modelos[$i],
+                                'inscripto_en' => $request->inscriptos[$i],
 
-                        ]);
+                            ]);
 
-                        $producto->save();
+                            $Proveedor_patente->save();
+                        }
                     }
-                }
+                    //---------Contador de Polizas----------
+                    if (isset($request->vigencias)) {
 
-                //---------Contador de Patentes----------
-                if (isset($request->dominios)) {
+                        $arraySize = count($request->vigencias);
+                        var_dump($arraySize);
 
-                    $arraySize = count($request->dominios);
-                    var_dump($arraySize);
+                        //---------Carga de Polizas----------
 
-                    //---------Carga de Patentes----------
+                        for ($i = 0; $i < $arraySize; $i++) {
+                            $Proveedor_seguro = Proveedor_seguro::create([
+                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'poliza' => $request->polizas[$i],
+                                'agencia' => $request->agencias[$i],
+                                'asegurado' => $request->asegurados[$i],
+                                'vigencia_hasta' => $request->vigencias[$i],
 
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        $Proveedor_patente = Proveedor_patente::create([
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'dominio' => $request->dominios[$i],
-                            'marca' => $request->marcas[$i],
-                            'modelo' => $request->modelos[$i],
-                            'inscripto_en' => $request->inscriptos[$i],
-
-                        ]);
-
-                        $Proveedor_patente->save();
+                            ]);
+                            $Proveedor_seguro->save();
+                        }
                     }
-                }
-                //---------Contador de Polizas----------
-                if (isset($request->vigencias)) {
 
-                    $arraySize = count($request->vigencias);
-                    var_dump($arraySize);
+                    //---------Contador de Sede----------
+                    if (isset($request->domicilios_sedes)) {
 
-                    //---------Carga de Polizas----------
+                        $arraySize = count($request->domicilios_sedes);
+                        var_dump($arraySize);
 
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        $Proveedor_seguro = Proveedor_seguro::create([
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'poliza' => $request->polizas[$i],
-                            'agencia' => $request->agencias[$i],
-                            'asegurado' => $request->asegurados[$i],
-                            'vigencia_hasta' => $request->vigencias[$i],
+                        //---------Carga de Sede----------
 
-                        ]);
-                        $Proveedor_seguro->save();
+                        for ($i = 0; $i < $arraySize; $i++) {
+                            $Proveedor_sede = Proveedor_sede::create([
+                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'domicilio' => $request->domicilios_sedes[$i],
+                                'id_localidad' => $request->localidades_sedes[$i],
+                            ]);
+                            $Proveedor_sede->save();
+                        }
                     }
-                }
 
-                //---------Contador de Sede----------
-                if (isset($request->domicilios_sedes)) {
+                    //---------Contador de Pagos----------
+                    if (isset($request->importes_pagos)) {
 
-                    $arraySize = count($request->domicilios_sedes);
-                    var_dump($arraySize);
+                        $arraySize = count($request->importes_pagos);
+                        var_dump($arraySize);
 
-                    //---------Carga de Sede----------
+                        //---------Carga de Pagos----------
+                        for ($i = 0; $i < $arraySize; $i++) {
+                            $Pago = Pago::create([
+                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'fecha' => $request->fechas_pagos[$i],
+                                'importe' => $request->importes_pagos[$i],
+                                'observaciones' => $request->observaciones_pagos[$i],
 
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        $Proveedor_sede = Proveedor_sede::create([
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'domicilio' => $request->domicilios_sedes[$i],
-                            'id_localidad' => $request->localidades_sedes[$i],
-                        ]);
-                        $Proveedor_sede->save();
+                            ]);
+                            $Pago->save();
+                        }
                     }
+
+                    return redirect()->route('verRegistro', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Registro creado correctamente');
+
+                } else {
+
+                    $proveedor = Proveedor::where('cuit', $request->cuit)->first();
+
+                    return redirect()->route('modificarRegistro', ['id' => $proveedor->id_proveedor]);
+
                 }
-
-                //---------Contador de Pagos----------
-                if (isset($request->importes_pagos)) {
-
-                    $arraySize = count($request->importes_pagos);
-                    var_dump($arraySize);
-
-                    //---------Carga de Pagos----------
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        $Pago = Pago::create([
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'fecha' => $request->fechas_pagos[$i],
-                            'importe' => $request->importes_pagos[$i],
-                            'observaciones' => $request->observaciones_pagos[$i],
-
-                        ]);
-                        $Pago->save();
-                    }
-                }
-
-                return redirect()->route('verRegistro', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Registro creado correctamente');
-
-            } else {
-
-                $proveedor = Proveedor::where('cuit', $request->cuit)->first();
-
-                return redirect()->route('modificarRegistro', ['id' => $proveedor->id_proveedor]);
-
-            }
+            });
         } catch (\Exception$e) {
+            Log::error('**Capturo excepción de función crear_registro.');
             Log::error('Error inesperado.' . $e->getMessage());
-
-            return Redirect::back()
-                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+            $request->flash();
+            $data = $request->session()->all();
+            Log::info('Datos de la sesion: '. print_r($data, true));
+            return redirect()->back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse'])
+                ->withInput();
         }
 
     }
+    
 
     /*
     Funcion que devuelve un listado de proveedores almacenados en la BD (Datatable)

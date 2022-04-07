@@ -5,7 +5,7 @@
 
 <br/>
     <label for="facturacion_anual_alcanzada">Facturación anual alcanzada:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada" name="facturacion_anual_alcanzada" maxlength="9">
+    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada" name="facturacion_anual_alcanzada" maxlength="9" value="{{old('facturacion_anual_alcanzada')}}">
     <small class="small" id="small-facturacion-anual"></small>
     <br>
 
@@ -49,7 +49,28 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="body_table_actividad"></tbody>
+            <tbody id="body_table_actividad">
+                @if(old('tipos_actividades') && old('actividades'))
+                    @foreach(old('tipos_actividades') as $actividad)
+                        <tr id="row_actividad{{$loop->iteration}}">
+                            <td>{{$actividad}}</td>
+                            @php
+                                $old_actividad=old('actividades')[$loop->index]
+                            @endphp
+                            @foreach($actividades as $actividad)
+                                @if($actividad->desc_actividad == $old_actividad)
+                                    <td>{{$actividad->cod_actividad}} - {{$actividad->desc_actividad}}</td>
+                                @endif
+                            @endforeach
+                            <td>
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="tipo_actividad{{$loop->iteration}}" name="tipos_actividades[]" readonly value="{{$actividad}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="actividad{{$loop->iteration}}" name="actividades[]" readonly value="{{old('actividades')[$loop->index]}}">
+                                <button type="button" name="remove" id="{{$loop->iteration}}" class="btn btn-danger btn-sm btn_remove_actividad" title="quitar actividad"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
         </table>
     </div>
 
@@ -108,7 +129,25 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="body_table_producto"></tbody>
+            <tbody id="body_table_producto">
+                @if(old('productos'))
+                    @foreach(old('productos') as $producto)
+                        <tr id="row_producto{{$loop->iteration}}">
+                            <td> <div id="producto_elaborado_text{{$loop->iteration}}">{{$producto}}</div></td>
+                            <td> <div id="unidad_producida_text{{$loop->iteration}}">{{old('unidades')[$loop->index]}}</div></td>
+                            <td> <div id="rnpa_text{{$loop->iteration}}">{{old('rnpas')[$loop->index]}}</div></td>
+                            <td> <div id="produccion_total_text{{$loop->iteration}}">{{old('producciones')[$loop->index]}}</div></td>
+                            <td>
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="producto_elaborado{{$loop->iteration}}" name="productos[]" readonly value="{{$producto}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="unidad_producida{{$loop->iteration}}" name="unidades[]" readonly value="{{old('unidades')[$loop->index]}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="rnpa{{$loop->iteration}}" name="rnpas[]" readonly value="{{old('rnpas')[$loop->index]}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="produccion_total{{$loop->iteration}}" name="producciones[]" readonly value="{{old('producciones')[$loop->index]}}">
+                                <button type="button" name="edit" id="{{$loop->iteration}}" class="btn btn-warning btn-sm btn_edit_producto" title="editar producto"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="{{$loop->iteration}}" class="btn btn-danger btn-sm btn_remove_producto" title="quitar producto"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
         </table>
     </div>
 

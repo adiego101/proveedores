@@ -59,7 +59,7 @@
             <div class="col-sm">
 
                 <label for="numero_real">Número:</label><br>
-                <input type="text"  onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_real" name="numero_real" maxlength="5"><br>
+                <input type="text" class="form-control" placeholder="Ingrese el número de la calle" aria-describedby="basic-addon1" id="numero_real" name="numero_real" maxlength="5"><br>
 
                 <label for="puerta_real">Puerta:</label><br>
                 <input type="text" class="form-control" placeholder="Ingrese la puerta" aria-describedby="basic-addon1" id="puerta_real" name="puerta_real" maxlength="4"><br>
