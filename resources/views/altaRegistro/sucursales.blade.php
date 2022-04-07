@@ -143,11 +143,13 @@
     $('#numero_sucursal').keyup(validarNumeroSucursal);
 
     function validarNumeroSucursal() {
-   
-        if (!(/^[0-9]/.test($('#numero_sucursal').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#numero_sucursal').val()))) {
+            if($('#numero_sucursal').val() != ""){
 
             mostrarError('#numero_sucursal', '#small-numero-sucursal', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de calle</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#numero_sucursal', '#small-numero-sucursal');
         return true;
@@ -159,10 +161,12 @@
 
     function validarLoteSucursal() {
 
-        if (!(/^[0-9]/.test($('#lote_sucursal').val()))) {
+        if (!(/^[0-9]+$/.test($('#lote_sucursal').val()))) {
+            if($('#lote_sucursal').val() != ""){
 
             mostrarError('#lote_sucursal', '#small-lote-sucursal', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#lote_sucursal', '#small-lote-sucursal');
         return true;
@@ -174,10 +178,12 @@
 
     function validarTelefonoSucursalCod() {
 
-        if (!(/^[0-9]/.test($('#telefono_sucursal_cod').val()))) {
+        if (!(/^[0-9]+$/.test($('#telefono_sucursal_cod').val()))) {
+            if($('#telefono_sucursal_cod').val() != ""){
 
             mostrarError('#telefono_sucursal_cod', '#small-telefono-sucursal-cod', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#telefono_sucursal_cod', '#small-telefono-sucursal-cod');
         return true;
@@ -189,10 +195,12 @@
 
     function validarTelefonoSucursal() {
 
-        if (!(/^[0-9]/.test($('#telefono_sucursal').val()))) {
+        if (!(/^[0-9]+$/.test($('#telefono_sucursal').val()))) {
+            if($('#telefono_sucursal').val() != ""){
 
             mostrarError('#telefono_sucursal', '#small-telefono-sucursal', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#telefono_sucursal', '#small-telefono-sucursal');
         return true;

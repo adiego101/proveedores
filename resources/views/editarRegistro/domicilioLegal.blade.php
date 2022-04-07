@@ -114,12 +114,12 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                         <div class="col-sm">
                         @forelse($proveedor_telefono_legal as $telefono_legal)
                             <label for="telefono_legal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->cod_area_tel}}" maxlength="4"> 
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->cod_area_tel}}" maxlength="4">
                             <small class="small" id="small-telefono-legal-cod"></small>
                             <br>
                         @empty
                             <label for="telefono_legal_cod">Código de área:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="4"> 
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ej: 2966" aria-describedby="basic-addon1" id="telefono_legal_cod" name="telefono_legal_cod[]" maxlength="4">
                             <small class="small" id="small-telefono-legal-cod"></small>
                             <br>
                             @endforelse
@@ -129,12 +129,12 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
                         <div class="col-sm">
                         @forelse($proveedor_telefono_legal as $telefono_legal)
                             <label for="telefono_legal">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->nro_tel}}" maxlength="14"> 
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" @if ( $mode == "show") readonly @endif value="{{$telefono_legal->nro_tel}}" maxlength="14">
                             <small class="small" id="small-telefono-legal"></small>
                             <br>
                         @empty
                             <label for="telefono_legal">Número de Teléfono:</label><br>
-                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14"> 
+                            <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Teléfono" aria-describedby="basic-addon1" id="telefono_legal" name="telefono_legal[]" maxlength="14">
                             <small class="small" id="small-telefono-legal"></small>
                             <br>
                             @endforelse
@@ -170,11 +170,13 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
     $('#lote_legal').keyup(validarLoteLegal);
 
     function validarLoteLegal() {
-   
-        if (!(/^[0-9]/.test($('#lote_legal').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#lote_legal').val()))) {
+            if($('#lote_legal').val() != ""){
 
             mostrarError('#lote_legal', '#small-lote-legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#lote_legal', '#small-lote-legal');
         return true;
@@ -184,11 +186,13 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
     $('#numero_legal').keyup(validarNumeroLegal);
 
     function validarNumeroLegal() {
-   
-        if (!(/^[0-9]/.test($('#numero_legal').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#numero_legal').val()))) {
+            if($('#numero_legal').val() != ""){
 
             mostrarError('#numero_legal', '#small-numero-legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de la calle</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#numero_legal', '#small-numero-legal');
         return true;
@@ -198,11 +202,13 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
     $('#telefono_legal_cod').keyup(validarTelefonoLegalCod);
 
     function validarTelefonoLegalCod() {
-   
-        if (!(/^[0-9]/.test($('#telefono_legal_cod').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#telefono_legal_cod').val()))) {
+            if($('#telefono_legal_cod').val() != ""){
 
             mostrarError('#telefono_legal_cod', '#small-telefono-legal-cod', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#telefono_legal_cod', '#small-telefono-legal-cod');
         return true;
@@ -213,11 +219,13 @@ value="{{ isset($proveedor_domicilio_legal->codigo_postal) ? $proveedor_domicili
     $('#telefono_legal').keyup(validarTelefonoLegal);
 
     function validarTelefonoLegal() {
-   
-        if (!(/^[0-9]/.test($('#telefono_legal').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#telefono_legal').val()))) {
+            if($('#telefono_legal').val() != ""){
 
             mostrarError('#telefono_legal', '#small-telefono-legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#telefono_legal', '#small-telefono-legal');
         return true;

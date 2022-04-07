@@ -75,10 +75,12 @@ $('#importe_pago').keyup(validarimporte_pago);
 
 function validarimporte_pago() {
 
-    if (!(/^[0-9]/.test($('#importe_pago').val()))) {
+    if (!(/^[0-9]+$/.test($('#importe_pago').val()))) {
+        if($('#importe_pago').val() != ""){
 
         mostrarError('#importe_pago', '#small-importe_pago', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de Importe</strong> debe contener solamente dígitos numéricos.</div>');
         return false;
+        }
     }
     ocultarError('#importe_pago', '#small-importe_pago');
     return true;

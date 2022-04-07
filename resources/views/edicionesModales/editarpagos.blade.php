@@ -27,7 +27,10 @@
                             onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado"
                             aria-describedby="basic-addon1"
                             value="{{ isset($pago->importeeditar) ? $pago->importeeditar : '' }}" id="importeeditar"
-                            name="importeeditar" maxlength="9" required><br>
+                            name="importeeditar" maxlength="9" required>
+                            <small class="small" id="small-importe2"></small>
+
+                            <br>
 
                         <label for="observacionespagoeditar">Observaciones:</label><br>
                         <input @if ($mode == 'show') readonly @endif type="text" class="form-control"
@@ -62,6 +65,23 @@
 @push('js')
 
     <script>
+
+        $('#importe2').keyup(validarImporte2);
+
+        function validarImporte2() {
+
+            if (!(/^[0-9]+$/.test($('#importe2').val()))) {
+                if($('#importe2').val() != ""){
+                mostrarError('#importe2', '#small-importe2', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de IMPORTE2</strong> debe contener solamente dígitos numéricos.</div>');
+                return false;
+                }
+            }
+            ocultarError('#importe2', '#small-importe2');
+            return true;
+        }
+
+
+
         $(document).on("click", ".btn_editar_pago", function() {
 
             //Obtenemos el numero de la fila que queremos modificar

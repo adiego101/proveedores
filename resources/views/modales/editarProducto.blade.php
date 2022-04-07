@@ -52,11 +52,13 @@
         $('#modal_unidad_producida').keyup(validarUnidadProducidaModal);
 
         function validarUnidadProducidaModal() {
-   
-            if (!(/^[0-9]/.test($('#modal_unidad_producida').val()))) {
+
+            if (!(/^[0-9]+$/.test($('#modal_unidad_producida').val()))) {
+                if($('#modal_unidad_producida').val() != ""){
 
                 mostrarError('#modal_unidad_producida', '#small-unidad-producida-modal', '<div class="alert alert-danger mt-3 pt-1">La <strong>unidad producida</strong> debe contener solamente dígitos numéricos.</div>');
                 return false;
+                }
             }
             ocultarError('#modal_unidad_producida', '#small-unidad-producida-modal');
             return true;
@@ -66,11 +68,13 @@
         $('#modal_produccion_total').keyup(validarProduccionTotalModal);
 
         function validarProduccionTotalModal() {
-   
-            if (!(/^[0-9]/.test($('#modal_produccion_total').val()))) {
+
+            if (!(/^[0-9]+$/.test($('#modal_produccion_total').val()))) {
+                if($('#modal_produccion_total').val() != ""){
 
                 mostrarError('#modal_produccion_total', '#small-produccion-total-modal', '<div class="alert alert-danger mt-3 pt-1">La <strong>producción total</strong> debe contener solamente dígitos numéricos.</div>');
                 return false;
+                }
             }
             ocultarError('#modal_produccion_total', '#small-produccion-total-modal');
             return true;

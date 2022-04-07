@@ -75,10 +75,12 @@ value="{{ isset($proveedor->cant_empleados_domicilio_sta_cruz) ? $proveedor->can
 
     function validarempleados_nomina() {
 
-        if (!(/^[0-9]/.test($('#empleados_nomina').val()))) {
+        if (!(/^[0-9]+$/.test($('#empleados_nomina').val()))) {
+            if($('#empleados_nomina').val() != ""){
 
             mostrarError('#empleados_nomina', '#small-empleados_nomina', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de Empleados en Nómina</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#empleados_nomina', '#small-empleados_nomina');
         return true;
@@ -89,10 +91,12 @@ value="{{ isset($proveedor->cant_empleados_domicilio_sta_cruz) ? $proveedor->can
 
     function validarpuestos_trabajo_Sta_Cruz() {
 
-        if (!(/^[0-9]/.test($('#puestos_trabajo_sta_cruz').val()))) {
+        if (!(/^[0-9]+$/.test($('#puestos_trabajo_sta_cruz').val()))) {
+            if($('#puestos_trabajo_sta_cruz').val() != ""){
 
             mostrarError('#puestos_trabajo_sta_cruz', '#small-puestos_trabajo_sta_cruz', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de Puestos de trabajo</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#puestos_trabajo_sta_cruz', '#small-puestos_trabajo_sta_cruz');
         return true;
@@ -103,10 +107,12 @@ value="{{ isset($proveedor->cant_empleados_domicilio_sta_cruz) ? $proveedor->can
 
     function validarmasa_salarial_bruta() {
 
-        if (!(/^[0-9]/.test($('#masa_salarial_bruta').val()))) {
+        if (!(/^[0-9]+$/.test($('#masa_salarial_bruta').val()))) {
+            if($('#masa_salarial_bruta').val() != ""){
 
             mostrarError('#masa_salarial_bruta', '#small-masa_salarial_bruta', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de masa salarial</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#masa_salarial_bruta', '#small-masa_salarial_bruta');
         return true;
@@ -117,10 +123,12 @@ value="{{ isset($proveedor->cant_empleados_domicilio_sta_cruz) ? $proveedor->can
 
     function validarcant_empleados_domicilio_sta_cruz() {
 
-        if (!(/^[0-9]/.test($('#cant_empleados_domicilio_sta_cruz').val()))) {
+        if (!(/^[0-9]+$/.test($('#cant_empleados_domicilio_sta_cruz').val()))) {
+            if($('#cant_empleados_domicilio_sta_cruz').val() != ""){
 
             mostrarError('#cant_empleados_domicilio_sta_cruz', '#small-cant_empleados_domicilio_sta_cruz', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de Cantidad de empleados</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#cant_empleados_domicilio_sta_cruz', '#small-cant_empleados_domicilio_sta_cruz');
         return true;
@@ -131,10 +139,12 @@ value="{{ isset($proveedor->cant_empleados_domicilio_sta_cruz) ? $proveedor->can
 
     function validarcant_administrativos() {
 
-        if (!(/^[0-9]/.test($('#cant_administrativos').val()))) {
+        if (!(/^[0-9]+$/.test($('#cant_administrativos').val()))) {
+            if($('#cant_administrativos').val() != ""){
 
             mostrarError('#cant_administrativos', '#small-cant_administrativos', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de Cantidad de administrativos</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#cant_administrativos', '#small-cant_administrativos');
         return true;
@@ -145,10 +155,12 @@ value="{{ isset($proveedor->cant_empleados_domicilio_sta_cruz) ? $proveedor->can
 
     function validarcant_operarios() {
 
-        if (!(/^[0-9]/.test($('#cant_operarios').val()))) {
+        if (!(/^[0-9]+$/.test($('#cant_operarios').val()))) {
+            if($('#cant_operarios').val() != ""){
 
             mostrarError('#cant_operarios', '#small-cant_operarios', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de Cantidad de Operarios</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#cant_operarios', '#small-cant_operarios');
         return true;
@@ -159,10 +171,12 @@ value="{{ isset($proveedor->cant_empleados_domicilio_sta_cruz) ? $proveedor->can
 
     function validarcant_personal_vta() {
 
-        if (!(/^[0-9]/.test($('#cant_personal_vta').val()))) {
+        if (!(/^[0-9]+$/.test($('#cant_personal_vta').val()))) {
+            if($('#cant_personal_vta').val() != ""){
 
             mostrarError('#cant_personal_vta', '#small-cant_personal_vta', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de Cantidad de Personal de ventas</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#cant_personal_vta', '#small-cant_personal_vta');
         return true;

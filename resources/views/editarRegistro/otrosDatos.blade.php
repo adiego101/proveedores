@@ -56,7 +56,7 @@ disabled>
             <br>
 
             <label for="desc_jerarquia_compre_local">Proveedor:</label><br>
-            <input type="text" class="form-control" style="font-weight: bold;" aria-describedby="basic-addon1" id="desc_jerarquia_compre_local" value="{{ isset($proveedor->desc_jerarquia_compre_local) ? $proveedor->desc_jerarquia_compre_local : '' }}" name="desc_jerarquia_compre_local" readonly>
+            <input type="text" class="form-control" style="font-weight: bold; border-top-style: none; border-right-style: none; border-bottom-style: solid; border-left-style: none;" aria-describedby="basic-addon1" id="desc_jerarquia_compre_local" value="{{ isset($proveedor->desc_jerarquia_compre_local) ? $proveedor->desc_jerarquia_compre_local : '' }}" name="desc_jerarquia_compre_local" readonly>
             <br>
 
             <label for="id_tamanio_empresa">Tamaño de la Empresa:</label><br>

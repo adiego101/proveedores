@@ -43,27 +43,30 @@
 <script type="text/javascript">
 
     $('#cuit').keyup(validarNumerocuit);
-    
+
     function validarNumerocuit() {
 
-        if (!(/^[0-9]/.test($('#cuit').val()))) {
-
+        if (!(/^[0-9]+$/.test($('#cuit').val()))) {
+            if($('#cuit').val() != ""){
             mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de CUIT</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#cuit', '#small-cuit');
         return true;
     }
 
-    
+
     $('#dni_legal').keyup(validardni_legal);
 
     function validardni_legal() {
 
-        if (!(/^[0-9]/.test($('#dni_legal').val()))) {
+        if (!(/^[0-9]+$/.test($('#dni_legal').val()))) {
+            if($('#dni_legal').val() != ""){
 
             mostrarError('#dni_legal', '#small-dni_legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#dni_legal', '#small-dni_legal');
         return true;

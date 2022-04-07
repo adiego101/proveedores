@@ -163,10 +163,12 @@ value="{{ isset($proveedor->inspeccion_gral_justicia) ? $proveedor->inspeccion_g
 
     function validarnro_inscripcion_personas_juridicas() {
 
-        if (!(/^[0-9]/.test($('#nro_inscripcion_personas_juridicas').val()))) {
+        if (!(/^[0-9]+$/.test($('#nro_inscripcion_personas_juridicas').val()))) {
+            if($('#nro_inscripcion_personas_juridicas').val() != ""){
 
             mostrarError('#nro_inscripcion_personas_juridicas', '#small-nro_inscripcion_personas_juridicas', '<div class="alert alert-danger mt-3 pt-1">El <strong>Número de inscripción personas jurídicas</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#nro_inscripcion_personas_juridicas', '#small-nro_inscripcion_personas_juridicas');
         return true;
@@ -176,10 +178,12 @@ value="{{ isset($proveedor->inspeccion_gral_justicia) ? $proveedor->inspeccion_g
 
     function validarnro_ingresos_brutos() {
 
-        if (!(/^[0-9]/.test($('#nro_ingresos_brutos').val()))) {
+        if (!(/^[0-9]+$/.test($('#nro_ingresos_brutos').val()))) {
+            if($('#nro_ingresos_brutos').val() != ""){
 
             mostrarError('#nro_ingresos_brutos', '#small-nro_ingresos_brutos', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de ingresos brutos</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#nro_ingresos_brutos', '#small-nro_ingresos_brutos');
         return true;
@@ -189,10 +193,12 @@ value="{{ isset($proveedor->inspeccion_gral_justicia) ? $proveedor->inspeccion_g
 
     function validarnro_habilitacion_municipal() {
 
-        if (!(/^[0-9]/.test($('#nro_habilitacion_municipal').val()))) {
+        if (!(/^[0-9]+$/.test($('#nro_habilitacion_municipal').val()))) {
+            if($('#nro_habilitacion_municipal').val() != ""){
 
             mostrarError('#nro_habilitacion_municipal', '#small-nro_habilitacion_municipal', '<div class="alert alert-danger mt-3 pt-1">El <strong>Número de habilitación municipal</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#nro_habilitacion_municipal', '#small-nro_habilitacion_municipal');
         return true;

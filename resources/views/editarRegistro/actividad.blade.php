@@ -104,11 +104,13 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8">
     $('#facturacion_anual_alcanzada').keyup(validarFacturacionAnual);
 
     function validarFacturacionAnual() {
-   
-        if (!(/^[0-9]/.test($('#facturacion_anual_alcanzada').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#facturacion_anual_alcanzada').val()))) {
+            if($('#facturacion_anual_alcanzada').val() != ""){
 
             mostrarError('#facturacion_anual_alcanzada', '#small-facturacion-anual', '<div class="alert alert-danger mt-3 pt-1">La <strong>facturación anual</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#facturacion_anual_alcanzada', '#small-facturacion-anual');
         return true;
@@ -118,11 +120,13 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8">
     $('#rne').keyup(validarRne);
 
     function validarRne() {
-   
-        if (!(/^[0-9]/.test($('#rne').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#rne').val()))) {
+            if($('#rne').val() != ""){
 
             mostrarError('#rne', '#small-rne', '<div class="alert alert-danger mt-3 pt-1">El <strong>Registro Nacional de Establecimientos</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#rne', '#small-rne');
         return true;
@@ -212,7 +216,7 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8">
 
   });
 
- 
+
 
     function verRegistro() {
 

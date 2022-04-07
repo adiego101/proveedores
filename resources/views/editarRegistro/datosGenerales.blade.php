@@ -57,26 +57,29 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
         $('#cuit').keyup(validarCuit);
 
         function validarCuit() {
-   
-            if (!(/^[0-9]/.test($('#cuit').val()))) {
 
+            if (!(/^[0-9]+$/.test($('#cuit').val()))) {
+                if($('#cuit').val() != ""){
                 mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de CUIT</strong> debe contener solamente dígitos numéricos.</div>');
                 return false;
+                }
             }
             ocultarError('#cuit', '#small-cuit');
             return true;
         }
 
 
-        
+
         $('#dni_legal').keyup(validarDni);
 
         function validarDni() {
-   
-            if (!(/^[0-9]/.test($('#dni_legal').val()))) {
+
+            if (!(/^[0-9]+$/.test($('#dni_legal').val()))) {
+                if($('#dni_legal').val() != ""){
 
                 mostrarError('#dni_legal', '#small-dni', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> debe contener solamente dígitos numéricos.</div>');
                 return false;
+                }
             }
             ocultarError('#dni_legal', '#small-dni');
             return true;

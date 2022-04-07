@@ -123,11 +123,14 @@
     $('#lote_legal').keyup(validarLoteLegal);
 
     function validarLoteLegal() {
-   
-        if (!(/^[0-9]/.test($('#lote_legal').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#lote_legal').val()))) {
+            if($('#lote_legal').val() != ""){
+
 
             mostrarError('#lote_legal', '#small-lote-legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#lote_legal', '#small-lote-legal');
         return true;
@@ -137,11 +140,13 @@
     $('#numero_legal').keyup(validarNumeroLegal);
 
     function validarNumeroLegal() {
-   
-        if (!(/^[0-9]/.test($('#numero_legal').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#numero_legal').val()))) {
+            if($('#numero_legal').val() != ""){
 
             mostrarError('#numero_legal', '#small-numero-legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de la calle</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#numero_legal', '#small-numero-legal');
         return true;
@@ -151,11 +156,13 @@
     $('#telefono_legal_cod').keyup(validarTelefonoLegalCod);
 
     function validarTelefonoLegalCod() {
-   
-        if (!(/^[0-9]/.test($('#telefono_legal_cod').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#telefono_legal_cod').val()))) {
+            if($('#telefono_legal_cod').val() != ""){
 
             mostrarError('#telefono_legal_cod', '#small-telefono-legal-cod', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#telefono_legal_cod', '#small-telefono-legal-cod');
         return true;
@@ -166,11 +173,13 @@
     $('#telefono_legal').keyup(validarTelefonoLegal);
 
     function validarTelefonoLegal() {
-   
-        if (!(/^[0-9]/.test($('#telefono_legal').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#telefono_legal').val()))) {
+            if($('#telefono_legal').val() != ""){
 
             mostrarError('#telefono_legal', '#small-telefono-legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#telefono_legal', '#small-telefono-legal');
         return true;

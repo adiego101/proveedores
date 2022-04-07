@@ -40,11 +40,13 @@
         $('#modal_importe').keyup(validarImportePagoModal);
 
         function validarImportePagoModal() {
-   
-            if (!(/^[0-9]/.test($('#modal_importe').val()))) {
+
+            if (!(/^[0-9]+$/.test($('#modal_importe').val()))) {
+                if($('#modal_importe').val() != ""){
 
                 mostrarError('#modal_importe', '#small-importe-pago-modal', '<div class="alert alert-danger mt-3 pt-1">El <strong>importe del pago</strong> debe contener solamente dígitos numéricos.</div>');
                 return false;
+                }
             }
             ocultarError('#modal_importe', '#small-importe-pago-modal');
             return true;
@@ -131,5 +133,5 @@
         });
 
     </script>
-    
+
 @endpush

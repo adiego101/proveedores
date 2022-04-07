@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <div class="field_telefono_real">
-              
+
                 </div>
                 <br>
 
@@ -133,11 +133,12 @@
     $('#lote_real').keyup(validarLoteReal);
 
     function validarLoteReal() {
-   
-        if (!(/^[0-9]/.test($('#lote_real').val()))) {
 
+        if (!(/^[0-9]+$/.test($('#lote_real').val()))) {
+            if($('#lote_real').val() != ""){
             mostrarError('#lote_real', '#small-lote-real', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#lote_real', '#small-lote-real');
         return true;
@@ -147,11 +148,13 @@
     $('#numero_real').keyup(validarNumeroReal);
 
     function validarNumeroReal() {
-   
-        if (!(/^[0-9]/.test($('#numero_real').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#numero_real').val()))) {
+            if($('#numero_real').val() != ""){
 
             mostrarError('#numero_real', '#small-numero-real', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de la calle</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#numero_real', '#small-numero-real');
         return true;
@@ -161,11 +164,13 @@
     $('#telefono_real_cod').keyup(validarTelefonoRealCod);
 
     function validarTelefonoRealCod() {
-   
-        if (!(/^[0-9]/.test($('#telefono_real_cod').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#telefono_real_cod').val()))) {
+            if($('#telefono_real_cod').val() != ""){
 
             mostrarError('#telefono_real_cod', '#small-telefono-real-cod', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#telefono_real_cod', '#small-telefono-real-cod');
         return true;
@@ -176,17 +181,19 @@
     $('#telefono_real').keyup(validarTelefonoReal);
 
     function validarTelefonoReal() {
-   
-        if (!(/^[0-9]/.test($('#telefono_real').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#telefono_real').val()))) {
+            if($('#telefono_real').val() != ""){
 
             mostrarError('#telefono_real', '#small-telefono-real', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#telefono_real', '#small-telefono-real');
         return true;
     }
 
-  
+
 
     $(document).ready(function() {
 

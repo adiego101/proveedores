@@ -122,11 +122,13 @@
 $('#modal_numero_sucursal').keyup(validarNumeroSucursalModal);
 
     function validarNumeroSucursalModal() {
-   
-        if (!(/^[0-9]/.test($('#modal_numero_sucursal').val()))) {
+
+        if (!(/^[0-9]+$/.test($('#modal_numero_sucursal').val()))) {
+            if($('#modal_numero_sucursal').val() != ""){
 
             mostrarError('#modal_numero_sucursal', '#small-numero-sucursal-modal', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de calle</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#modal_numero_sucursal', '#small-numero-sucursal-modal');
         return true;
@@ -138,10 +140,12 @@ $('#modal_numero_sucursal').keyup(validarNumeroSucursalModal);
 
     function validarLoteSucursalModal() {
 
-        if (!(/^[0-9]/.test($('#modal_lote_sucursal').val()))) {
+        if (!(/^[0-9]+$/.test($('#modal_lote_sucursal').val()))) {
+            if($('#modal_lote_sucursal').val() != ""){
 
             mostrarError('#modal_lote_sucursal', '#small-lote-sucursal-modal', '<div class="alert alert-danger mt-3 pt-1">El <strong>lote</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#modal_lote_sucursal', '#small-lote-sucursal-modal');
         return true;
@@ -153,10 +157,12 @@ $('#modal_numero_sucursal').keyup(validarNumeroSucursalModal);
 
     function validarTelefonoSucursalCodModal() {
 
-        if (!(/^[0-9]/.test($('#modal_telefono_sucursal_cod').val()))) {
+        if (!(/^[0-9]+$/.test($('#modal_telefono_sucursal_cod').val()))) {
+            if($('#modal_telefono_sucursal_cod').val() != ""){
 
             mostrarError('#modal_telefono_sucursal_cod', '#small-telefono-sucursal-cod-modal', '<div class="alert alert-danger mt-3 pt-1">El <strong>código de área</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#modal_telefono_sucursal_cod', '#small-telefono-sucursal-cod-modal');
         return true;
@@ -168,10 +174,12 @@ $('#modal_numero_sucursal').keyup(validarNumeroSucursalModal);
 
     function validarTelefonoSucursalModal() {
 
-        if (!(/^[0-9]/.test($('#modal_telefono_sucursal').val()))) {
+        if (!(/^[0-9]+$/.test($('#modal_telefono_sucursal').val()))) {
+            if($('#modal_telefono_sucursal').val() != ""){
 
             mostrarError('#modal_telefono_sucursal', '#small-telefono-sucursal-modal', '<div class="alert alert-danger mt-3 pt-1">El <strong>teléfono</strong> debe contener solamente dígitos numéricos.</div>');
             return false;
+            }
         }
         ocultarError('#modal_telefono_sucursal', '#small-telefono-sucursal-modal');
         return true;
