@@ -155,11 +155,11 @@
             <div class="header-content-container center">
                 <div class="header-content">
                     <img  loading="lazy"
-                        src="jefatrura-banner3.png"
+                        src="hero.png"
                         title="" alt=""
-                        srcset="jefatrura-banner3.png 282w, jefatrura-banner3.png 188w"
-                        sizes="(max-width: 282px) 100vw, 282px" class="header-logo wp-image-322"
-                        height="423">
+                        srcset="hero.png 622w, hero.png 188w"
+                        sizes="(max-width: 622px) 100vw, 622px" class="header-logo wp-image-322"
+                        height="380">
 
 
 
@@ -168,6 +168,10 @@
             </div>
             <div class="et_pb_fullwidth_header_overlay"></div>
             <div class="et_pb_fullwidth_header_scroll"></div>
+            <br>
+            <br>
+            <br>
+
             <footer class=" font-small bg-transparent">
                 <!-- Copyright -->
                 <div class="footer-copyright text-center py-3">© 2022 - Desarrollado por
