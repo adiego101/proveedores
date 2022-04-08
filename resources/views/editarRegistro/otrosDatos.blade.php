@@ -220,7 +220,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
         $('#porc_facturacion').keyup(validarPorcFacturacion);
 
         function validarPorcFacturacion() {
-   
+
             if (parseInt($('#porc_facturacion').val()) < 0 || parseInt($('#porc_facturacion').val()) > 100) {
 
                 mostrarError('#porc_facturacion', '#small-porc_facturacion', '<div class="alert alert-danger mt-3 pt-1">El <strong>porcentaje de facturación</strong> debe ser mayor o igual que 0 y menor o igual que 100.</div>');
@@ -280,9 +280,9 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
 
         function validarAntiguedad() {
 
-            if (parseInt($('#antiguedad').val()) < 0 || parseInt($('#antiguedad').val()) > 1000) {
+            if (parseInt($('#antiguedad').val()) < 0 || parseInt($('#antiguedad').val()) > 100) {
 
-                mostrarError('#antiguedad', '#small-antiguedad', '<div class="alert alert-danger mt-3 pt-1">La <strong>antiguedad</strong> ingresada no está permitida.</div>');
+                mostrarError('#antiguedad', '#small-antiguedad', '<div class="alert alert-danger mt-3 pt-1">La <strong>antiguedad</strong> ingresada no está permitida debe ser mayor o igual que 0 y menor o igual que 100.</div>');
                 return false;
             }
             ocultarError('#antiguedad', '#small-antiguedad');
@@ -418,13 +418,18 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                                                 dom_fiscal*dom_fiscal_ponderacion+
                                                 valor_agregado*valor_agregado_ponderacion);
                     else
-                        /*$("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
-                                                    porc_gasto*gastos_ponderacion+
-                                                    porc_mo*mano_obra_ponderacion+
-                                                    100*antiguedad_ponderacion+
-                                                    dom_fiscal*dom_fiscal_ponderacion+
-                                                    valor_agregado*valor_agregado_ponderacion);*/
-                        $("#valor_indice_rupae").val('Sin resultados'); 
+                        if(antiguedad<=100)
+
+                            $("#valor_indice_rupae").val( porc_facturacion*facturacion_ponderacion+
+                                                        porc_gasto*gastos_ponderacion+
+                                                        porc_mo*mano_obra_ponderacion+
+                                                        100*antiguedad_ponderacion+
+                                                        dom_fiscal*dom_fiscal_ponderacion+
+                                                        valor_agregado*valor_agregado_ponderacion);
+                        else
+                            $("#valor_indice_rupae").val('Sin resultados');
+
+
             mostrarProveedor($("#valor_indice_rupae").val());
         }
 
@@ -443,7 +448,7 @@ value="{{$jerarquia->valor_desde}}-{{$jerarquia->valor_hasta}}">
                                 $("#desc_jerarquia_compre_local").val('Sin resultados');
 
             } else {
-                  
+
                     $("#desc_jerarquia_compre_local").val('Sin resultados');
             }
         }
