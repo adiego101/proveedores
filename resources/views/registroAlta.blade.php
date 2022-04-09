@@ -203,7 +203,7 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
                         <label for="">Antiguedad en provincia: {{isset($data['proveedor']['antiguedad']) ? $data['proveedor']['antiguedad'] : ''}}</label><br>
                         <label for="">Domicilio fiscal en la provincia: {{isset($data['proveedor']['dom_fiscal']) ? $data['proveedor']['dom_fiscal'] : ''}}</label><br>
                         <label for="">Valor agregado:  {{$data['proveedor']['valor_agregado'] ? "Si" : "No" }} </label><br>
-                        <label for="">Proveedor: {{isset($data['proveedor']['proveedor']) ? $data['proveedor']['proveedor'] : ''}} </label><br>
+                        <label for="">Proveedor: {{isset($data['proveedor']['desc_jerarquia_compre_local']) ? $data['proveedor']['desc_jerarquia_compre_local'] : ''}} </label><br>
                     </td>
                 </tr>
             </table>
@@ -224,7 +224,7 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
                 $pdf->page_text(550, 800, "{PAGE_NUM}/{PAGE_COUNT}", $font, 12, array(0, 0, 0));
              }
         </script>
-        
+
     </body>
 
 </html>
