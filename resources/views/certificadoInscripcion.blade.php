@@ -156,5 +156,14 @@ $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
             </footer>
         </section>
     </main>
+
+    <script type="text/php">
+
+        if (isset($pdf)) {
+           $font = $fontMetrics->getFont("Arial", "bold");
+           $pdf->page_text(550, 800, "{PAGE_NUM}/{PAGE_COUNT}", $font, 12, array(0, 0, 0));
+        }
+   </script>
+
 </body>
 </html>
