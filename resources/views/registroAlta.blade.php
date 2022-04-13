@@ -179,14 +179,22 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
                         <label for="">Nro de Inscripción personas jurídicas: {{isset($data['proveedor']['nro_inscripcion_personas_juridicas']) ? $data['proveedor']['nro_inscripcion_personas_juridicas'] : ''}}</label><br>
                         <label for="">Registro público de comercio: {{isset($data['proveedor']['registro_publico_de_comercio']) ? $data['proveedor']['registro_publico_de_comercio'] : ''}}</label><br>
                         <label for="">Inspección general de justicia: {{isset($data['proveedor']['inspeccion_gral_justicia']) ? $data['proveedor']['inspeccion_gral_justicia'] : ''}}</label><br>
-                        <label for="">Act principal: {{isset($data['actividad_principal']) ? $data['actividad_principal'] : ''}}</label><br>
-                        <label for="">Act secundaria: {{isset($data['actividad_secundaria']) ? $data['actividad_secundaria'] : ''}}</label><br>
                     </td>
                     <td>
                         <label for="">Localidad habilitación {{isset($data['proveedor']['localidad_habilitacion']) ? $data['proveedor']['localidad_habilitacion'] : ''}}</label><br>
                         <label for="">Provincia inscrip personas jurídicas: {{isset($data['proveedor']['provincia_inscrip_personas_jur']) ? $data['proveedor']['provincia_inscrip_personas_jur'] : ''}}</label><br>
                         <label for="">Provincia registro público: {{isset($data['proveedor']['provincia_registro_publico']) ? $data['proveedor']['provincia_registro_publico'] : ''}}</label><br>
                         <label for="">Provincia inspección justicia: {{isset($data['proveedor']['provincia_inspeccion_justicia']) ? $data['proveedor']['provincia_inspeccion_justicia'] : ''}}</label><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label for="">Act principal: {{isset($data['actividad_principal']) ? $data['actividad_principal'] : ''}}</label><br><br>
+                        <label for="">Act secundaria: {{isset($data['actividad_secundaria']) ? $data['actividad_secundaria'] : ''}}</label><br>
+
                     </td>
                 </tr>
                 <tr>

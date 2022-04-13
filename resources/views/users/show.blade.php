@@ -23,8 +23,20 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
+            <strong>CUIL:</strong>
+            {{ $user->cuil }}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
             <strong>Email:</strong>
             {{ $user->email }}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Cargo:</strong>
+            {{ $user->cargo }}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">

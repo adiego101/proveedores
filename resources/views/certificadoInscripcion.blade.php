@@ -110,10 +110,6 @@ $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
             font-weight: bold;
         }
 
-        .page_break {
-            page-break-before: always;
-        }
-
     </style>
 </head>
 
@@ -159,45 +155,6 @@ $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
                 Río Gallegos - PROVINCIA DE SANTA CRUZ
             </footer>
         </section>
-
-        <div class="page_break">
-            <section>
-                <header>
-                    <img src="../public/Santa_Cruz.png" class="img-left">
-                    <img src="../public/logo_minpro.png" class="img-right">
-                    <div class="center">Registro Único Provincial  <br> de Actividades Económicas</div>
-                </header>
-
-                <br>
-                <br>
-                <br>
-                <br>
-
-                <span><u>Certificado de Inscripción</u></span>
-                <label for="" class="txt-right">Cuit Nº: {{isset($data['cuit']) ? $data['cuit'] : ''}}</label><br><br>
-                <label for="">Nombre del establecimiento: {{isset($data['nombre_fantasia']) ? $data['nombre_fantasia'] : ''}}</label><br><br>
-                <label for="">Nombre del propietario o razón social: {{isset($data['razon_social']) ? $data['razon_social'] : ''}}</label><br><br>
-                <label for="">Actividad principal: {{isset($data['cod_actividad_principal']) ? $data['cod_actividad_principal'] : ''}} - {{isset($data['actividad_principal']) ? $data['actividad_principal'] : ''}}</label><br><br>
-                <label for="">Actividad secundaria: {{isset($data['actividad_secundaria']) ? $data['actividad_secundaria'] : ''}}</label><br><br>
-                <label for="">Calle o ruta: {{isset($data['calle_ruta']) ? $data['calle_ruta'] : ''}}</label><br><br>
-                <label for="">Teléfono:{{isset($data['cod_tel_real']) ? $data['cod_tel_real'] : ''}} - {{isset($data['telefono']) ? $data['telefono'] : ''}}</label>
-                <label for="" class="txt-right">Localidad / Paraje: {{isset($data['localidad']) ? $data['localidad'] : ''}}</label><br><br>
-                <label for="">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label>
-                <label for="" class="txt-right"><b>Válido hasta:</b> {{$fechaValidoHasta}}</label>
-
-                <br>
-                <br>
-                <br>
-
-                <label for="" class="txt-right">_________________________ <br>Firma</label>
-
-                <footer>
-                    <hr>
-                    Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br>
-                    Río Gallegos - PROVINCIA DE SANTA CRUZ
-                </footer>
-            </section>
-        </div>
     </main>
 
     <script type="text/php">
@@ -207,6 +164,6 @@ $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
            $pdf->page_text(550, 800, "{PAGE_NUM}/{PAGE_COUNT}", $font, 12, array(0, 0, 0));
         }
    </script>
-   
+
 </body>
 </html>
