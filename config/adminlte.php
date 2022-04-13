@@ -252,6 +252,22 @@ return [
             'icon' => 'fas fa-fw fa-folder',
             'label_color' => 'success',
         ],
+        [
+            'text' => 'Gestionar Certificados',
+            'url' => '/gestionarCertificados',
+            'icon' => 'fas fa-fw fa-folder',
+            'label_color' => 'success',
+            'can'    => 'admin_users'
+
+        ],
+        [
+            'text' => 'Solicitudes de Firma',
+            'url' => '/gestionarSolicitudes',
+            'icon' => 'fas fa-fw fa-folder',
+            'label_color' => 'success',
+            'can'    => 'admin_users'
+
+        ],
        //DESCOMENTAR DESPÚES DE LA EXPOSICIÓN
        /*
         [

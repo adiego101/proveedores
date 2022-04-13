@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\ProveedoresController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
-use App\Models\Actividad_economica;
-use App\Models\Jerarquia_compre_local;
-use App\Models\Localidad;
 use App\Models\Pais;
-use App\Models\Ponderacion_compre_local;
+use App\Models\Sector;
 use App\Models\Producto;
+use App\Models\Localidad;
 use App\Models\Provincia;
 use App\Models\Tipo_actividad;
-use App\Models\Sector;
+use App\Models\Actividad_economica;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Models\Jerarquia_compre_local;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Models\Ponderacion_compre_local;
+use App\Http\Controllers\FirmarController;
+use App\Http\Controllers\ProveedoresController;
 
 
 
@@ -203,4 +204,31 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/exportar', 'App\Http\Controllers\ExportController@exportar')->name('exportar');
     Route::post('limpiar', 'App\Http\Controllers\ProveedoresController@limpiar')->name('limpiar');
+
+
+    Route::get('/token', 'App\Http\Controllers\FirmarController@token')->name('token');
+    Route::get('/pdf/{id}', 'App\Http\Controllers\FirmarController@pdfBase64')->name('pdfBase64');
+    Route::get('/firmar/{id}', 'App\Http\Controllers\FirmarController@Firmar')->name('Firmar');
+
+    Route::get('/verificarFirma/{id}', 'App\Http\Controllers\FirmarController@verificarFirma')->name('verificarFirma');
+    
+    Route::get('/certificados/list', 'App\Http\Controllers\FirmarController@getCertificados')->name('certificados.list');
+
+    
+
+    Route::get('/solicitudes/list', 'App\Http\Controllers\FirmarController@getSolicitud_firmas')->name('solicitudes.list');
+
+
+    Route::get('/gestionarCertificados', function () {
+        return view('gestionarCertificados');
+    });
+
+    Route::get('/gestionarSolicitudes', function () {
+        return view('gestionarSolicitudes');
+    });
+    
+
+
+    Route::post('/SolicitudFirmar/{id}', 'App\Http\Controllers\FirmarController@SolicitudFirmar')->name('SolicitudFirmar');
+
 });

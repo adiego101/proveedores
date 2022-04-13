@@ -137,7 +137,7 @@
     @if($proveedor->dado_de_baja != 1)
         <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-outline-dark" target="_blank">Descargar Registro alta</a>
         <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-outline-dark" target="_blank">Descargar Certificado inscripción</a>
-        <a href="#" class="btn btn-outline-info" id="nuevos_certificados">Generar Nuevos Certificados</a>
+        <a href="#" class="btn btn-outline-info" id="SolicitudFirmar">Solicitar Firma de Certificado</a>
 
     @endif
 
@@ -158,10 +158,12 @@
 
     <script>
         $("#document").ready(function(){
-            $("#nuevos_certificados").click(function(){
+            $("#SolicitudFirmar").click(function(){
+
+                console.log("{{url('/SolicitudFirmar/'.$id)}}");
                 let timerInterval
 Swal.fire({
-  title: 'Generando Nuevos Certificados!',
+  title: 'Enviando solicitud de Firma!',
   timer: 9999,
   timerProgressBar: true,
   didOpen: () => {
@@ -178,13 +180,15 @@ Swal.fire({
   }
 })
                 $.ajax({
-                    url: "{{url('/nuevo-registro/'.$id)}}"
+                    type:"POST",
+
+                    url: "{{url('/SolicitudFirmar/'.$id)}}"
                     }).done( function() {
 
                         Swal.fire({
                             position: 'top-end',
                             icon: 'info',
-                            title: 'Nuevos certificados generados',
+                            title: 'Solicitud enviada correctamente',
                             showConfirmButton: false,
                             timer: 1500,
                             toast: true
