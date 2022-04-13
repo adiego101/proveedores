@@ -23,8 +23,20 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
+            <strong>CUIL:</strong>
+            {!! Form::number('cuil', $user->cuil, array('placeholder' => 'CUIL del usuario','class' => 'form-control')) !!}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
             <strong>Email:</strong>
             {!! Form::text('email', $user->email, array('placeholder' => 'Email del usuario','class' => 'form-control')) !!}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Cargo:</strong>
+            {!! Form::text('cargo', $user->cargo, array('placeholder' => 'Cargo del usuario','class' => 'form-control')) !!}
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">

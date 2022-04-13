@@ -44,12 +44,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+        $messages = [
+            'password.regex' => 'Formato incorrecto. La contraseña debe contener como mínimo 8 caracteres: al menos una letra mayúscula, una letra minúscula y un número.',
+        ];
+
         $this->validate($request, [
             'name' => 'required',
+            'cuil' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
+            'cargo' => 'required',
+            'password' => 'required|same:confirm-password|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/',
             'roles' => 'required',
-        ]);
+        ], $messages);
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
@@ -58,7 +65,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
-            ->with('success', 'User created successfully');
+            ->with('success', 'Usuario creado exitosamente !');
     }
 
     /**
@@ -97,12 +104,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $messages = [
+            'password.regex' => 'Formato incorrecto. La contraseña debe contener como mínimo 8 caracteres: al menos una letra mayúscula, una letra minúscula y un número.',
+        ];
+
+
         $this->validate($request, [
             'name' => 'required',
+            'cuil' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'same:confirm-password',
+            'cargo' => 'required',
+            'password' => 'required|same:confirm-password|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/',
             'roles' => 'required',
-        ]);
+        ], $messages);
 
         $input = $request->all();
         if (!empty($input['password'])) {
@@ -118,7 +133,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+            ->with('success', 'Usuario actualizado exitosamente !');
     }
 
     /**
@@ -131,6 +146,10 @@ class UserController extends Controller
 
     public function changePassword(Request $request, $id)
     {
+        //Expresion regular que valida al menos un simbolo (mas completa).
+        //$regex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+
+        $regex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
 
         $input = $request->all();
 
@@ -140,7 +159,13 @@ class UserController extends Controller
 
                 if ($input['new-password'] == $input['confirm-password']) {
 
-                    $password= Hash::make($input['new-password']);
+                    if (preg_match($regex, $input['new-password'])) {
+
+                        $password= Hash::make($input['new-password']);
+                    } else {
+                        return redirect()->back()->
+                        withErrors(['msg' => 'Formato incorrecto. La contraseña debe contener como mínimo 8 caracteres: al menos una letra mayúscula, una letra minúscula y un número.']);
+                    }
 
                 } else {
                     $input = Arr::except($input, array('new-password'));
@@ -178,6 +203,6 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+            ->with('success', 'Usuario eliminado exitosamente !');
     }
 }
