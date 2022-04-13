@@ -32,10 +32,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Auth::routes(["register" => false]);
+
+Route::get('login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
+
+Route::post('login', 'App\Http\Controllers\Auth\LoginController@login');
+
+Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
 
