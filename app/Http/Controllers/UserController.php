@@ -115,7 +115,7 @@ class UserController extends Controller
             'cuil' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'cargo' => 'required',
-            'password' => 'required|same:confirm-password|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/',
+            'password' => 'nullable|same:confirm-password|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/',
             'roles' => 'required',
         ], $messages);
 
