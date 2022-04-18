@@ -123,6 +123,7 @@ class ProveedoresController extends Controller
     {
 
         try {
+            
             $cuit = Proveedor::where('cuit', $request->cuit)->exists();
             $dado_de_baja = Proveedor::where('cuit', $request->cuit)->where('dado_de_baja', '0')->get();
             //return $dado_de_baja->isEmpty();
@@ -134,6 +135,10 @@ class ProveedoresController extends Controller
 
                 //-------------------Carga Proveedor-------------------
                 //return $request->input('retencion');
+
+                //Inicio de la transaccion
+                DB::beginTransaction();
+
                 $proveedores_rupae = new Proveedor($request->all());
                 //$proveedores_rupae->id_tamanio_empresa = $id_tamanio_empresa;
 
@@ -519,7 +524,12 @@ class ProveedoresController extends Controller
                     }
                 }
 
+                //Fin de la transaccion
+                DB::commit();
+
                 return redirect()->route('verRegistro', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Registro creado correctamente');
+
+               
 
             } else {
 
@@ -529,6 +539,10 @@ class ProveedoresController extends Controller
 
             }
         } catch (\Exception$e) {
+
+            //Si algo fallo, volvemos atras la transaccion
+            DB::rollBack();
+
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
@@ -553,7 +567,7 @@ class ProveedoresController extends Controller
                         if ($row->dado_de_baja == 0) {
                             $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaRegistro(' . $row->id_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                         } else {
-                            $actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a>';
+                            $actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a> <a onclick="eliminarRegistro(' . $row->id_proveedor . ');" class="eliminar btn btn-outline-danger btn-sm" title="Eliminar">X</a>';
                         }
 
                         return $actionBtn;
@@ -2082,6 +2096,10 @@ class ProveedoresController extends Controller
         try {
             $cuit = Proveedor::where('cuit', $request->cuit)->where('id_proveedor','<>',$id)->exists();
             if(!$cuit){
+
+                //Inicio de la transaccion
+                DB::beginTransaction();
+
             $proveedor = Proveedor::find($id);
 
             $persona = $proveedor->personas()->get();
@@ -2675,6 +2693,10 @@ class ProveedoresController extends Controller
             $proveedores_rupae->producto_garantia = $request->producto_garantia;
 
             $proveedores_rupae->save();
+
+            //Fin de la transaccion
+            DB::commit();
+
             return redirect()->back()->withSuccess('Los datos del registro se han modificado satisfactoriamente !');
             }
             else{
@@ -2682,6 +2704,10 @@ class ProveedoresController extends Controller
                 ->withErrors(['El CUIT ya se encuentra registrado']);
             }
         } catch (\Exception$e) {
+
+            //Si algo fallo, volvemos la transaccion atras
+            DB::rollBack();
+
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
@@ -2752,6 +2778,33 @@ class ProveedoresController extends Controller
                 ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
+
+//ESTA FUNCION SE VA A UTILIZAR PARA ELIMINAR UN REGISTRO DE LA BD (FALTA TERMINAR DE IMPLEMENTAR)
+
+/*
+    public function eliminar_id(Request $request)
+    {
+        try {
+            $id_proveedor = htmlspecialchars($request->id);
+            Proveedor::findOrFail($id_proveedor)->representantes()->delete();
+            Proveedor::findOrFail($id_proveedor)->personas()->delete();
+            Proveedor::findOrFail($id_proveedor)->delete();
+            //return "success";
+
+            //$proveedores_rupae = Proveedor::find($id_proveedor);
+            //return response()->json($proveedores_rupae);
+            //$proveedores_rupae->dado_de_baja = 1;
+            //$proveedores_rupae->save();
+            return redirect()->back();
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+
+    }
+*/
 
     public function getLocalidades($provincia, Request $request)
     {
