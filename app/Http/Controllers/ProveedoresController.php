@@ -281,17 +281,20 @@ class ProveedoresController extends Controller
                         ]);
                         $email_legal->save();
                     }
+                    $Representante_legal = Persona::where('dni_persona',htmlspecialchars($request->dni_legal))
+                                                ->first();
+                    if(!$Representante_legal){
+                        $Representante_legal = Persona::create([
+                            'dni_persona' => htmlspecialchars($request->dni_legal),
+                            //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                            'nombre_persona' => htmlspecialchars($request->nombre_persona),
+                            'apellido_persona' => htmlspecialchars($request->apellido_persona),
+                            //'apellido_persona'=>$proveedores_rupae->apellido_persona,
+                            //'genero_persona'=>$proveedores_rupae->genero_persona,
+                        ]);
 
-                    $Representante_legal = Persona::create([
-                        'dni_persona' => htmlspecialchars($request->dni_legal),
-                        //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                        'nombre_persona' => htmlspecialchars($request->nombre_persona),
-                        'apellido_persona' => htmlspecialchars($request->apellido_persona),
-                        //'apellido_persona'=>$proveedores_rupae->apellido_persona,
-                        //'genero_persona'=>$proveedores_rupae->genero_persona,
-                    ]);
-
-                    $Representante_legal->save();
+                        $Representante_legal->save();
+                    }
 
                     $proveedores_rupae->personas()->attach($Representante_legal, ['rol_persona_proveedor' => 'Representante']);
 
@@ -1872,6 +1875,7 @@ class ProveedoresController extends Controller
         try {
             $proveedor = Proveedor::findOrFail($id);
 
+            /*Cambio para utilizar relacion representante
             $persona = $proveedor->personas()->get();
 
             if ($persona->isEmpty()) {
@@ -1881,7 +1885,10 @@ class ProveedoresController extends Controller
                 $persona = $persona[0];
             }
 
-            //return $persona;
+            //return $persona;*/
+
+            $persona=$proveedor->representante->first();
+
             $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
                 ->first();
 
@@ -1980,6 +1987,7 @@ class ProveedoresController extends Controller
             $proveedor = Proveedor::findOrFail($id);
 
             //return $proveedor;
+            /*Cambio para utilizar relacion representante
             $persona = $proveedor->personas()->get();
 
             if ($persona->isEmpty()) {
@@ -1988,6 +1996,10 @@ class ProveedoresController extends Controller
             } else {
                 $persona = $persona[0];
             }
+
+            //return $persona;*/
+
+            $persona=$proveedor->representante->first();
             $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
                 ->first();
             if (empty($proveedor_domicilio_fiscal)) {
@@ -2090,6 +2102,7 @@ class ProveedoresController extends Controller
             if(!$cuit){
             $proveedor = Proveedor::find($id);
 
+            /*Cambio para utilizar relacion representante
             $persona = $proveedor->personas()->get();
 
             if ($persona->isEmpty()) {
@@ -2120,6 +2133,36 @@ class ProveedoresController extends Controller
                 ]);
                 $persona->save();
 
+            }*/
+
+            $persona = $proveedor->representante->first();
+
+            if (!$persona) {
+
+                if ($request->dni_legal || $request->nombre_persona || $request->apellido_persona) {
+                    $persona = Persona::create([
+                        'dni_persona' => htmlspecialchars($request->dni_legal),
+                        //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                        'nombre_persona' => htmlspecialchars($request->nombre_persona),
+                        'apellido_persona' => htmlspecialchars($request->apellido_persona),
+                        //'genero_persona'=>$proveedores_rupae->genero_persona,
+                    ]);
+                    $persona->save();
+                    $proveedor->personas()->attach($persona);
+
+                    //$persona =  "";
+                } else {
+                    $persona = "";
+                }
+            } else {
+                $persona->update([
+                    'dni_persona' => htmlspecialchars($request->dni_legal),
+                    //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                    'nombre_persona' => htmlspecialchars($request->nombre_persona),
+                    'apellido_persona' => htmlspecialchars($request->apellido_persona),
+                    //'genero_persona'=>$proveedores_rupae->genero_persona,
+                ]);
+                $persona->save();
             }
             //----------------------------------Editar Domicilio Real---------------------------------------------
 
