@@ -61,9 +61,9 @@
         @csrf
         @include('altaRegistro.datosGenerales')
 
-        @include('altaRegistro.domicilioReal')
-        @include('altaRegistro.domicilioLegal')
-        @include('altaRegistro.domicilioFiscal')
+        @include('altaRegistro.domicilio',['tipo_domicilio'=>'real'])
+        @include('altaRegistro.domicilio',['tipo_domicilio'=>'legal'])
+        @include('altaRegistro.domicilio',['tipo_domicilio'=>'fiscal'])
         @include('altaRegistro.sucursales')
         @include('altaRegistro.infoImpositiva')
         @include('altaRegistro.Impuestosingresosbrutos')
