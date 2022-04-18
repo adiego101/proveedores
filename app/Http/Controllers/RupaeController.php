@@ -231,7 +231,7 @@ class RupaeController extends Controller
             $Actividad_economica = "";
         } else {
             $Actividad_economica = Actividad_economica::where('id_actividad_economica', $proveedor_actividad_id->id_actividad_economica)->first();
-            $Actividad_economica = $Actividad_economica->desc_actividad;
+            $Actividad_economica = $Actividad_economica;
         }
 
         $proveedor_actividad_secundaria = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 2)->get();
@@ -242,9 +242,9 @@ class RupaeController extends Controller
             $Actividad_economica2 = Actividad_economica::where('id_actividad_economica', $actividad_secundaria->id_actividad_economica)->first();
 
             if ($proveedor_actividad_secundaria->last() == $actividad_secundaria) {
-                $actividades_Secundarias = $actividades_Secundarias . $Actividad_economica2->desc_actividad . ".";
+                $actividades_Secundarias = $actividades_Secundarias . $Actividad_economica2->cod_actividad . " - " . $Actividad_economica2->desc_actividad . ".";
             } else {
-                $actividades_Secundarias = $Actividad_economica2->desc_actividad . ";  " . $actividades_Secundarias;
+                $actividades_Secundarias = $Actividad_economica2->cod_actividad . " - " .$Actividad_economica2->desc_actividad . ";  " . $actividades_Secundarias;
             }
         }
 
@@ -255,7 +255,8 @@ class RupaeController extends Controller
             'cuit' => $proveedor->cuit,
             'nombre_fantasia' => $proveedor->nombre_fantasia,
             'razon_social' => $proveedor->razon_social,
-            'actividad_principal' => $Actividad_economica,
+            'cod_actividad_principal' => $Actividad_economica->cod_actividad,
+            'actividad_principal' => $Actividad_economica->desc_actividad,
             'actividad_secundaria' => $actividades_Secundarias,
             'calle_ruta_real' => $proveedor_domicilio_real->calle . ' ' . $proveedor_domicilio_real->numero,
 
@@ -469,14 +470,15 @@ class RupaeController extends Controller
         $proveedor_actividad_secundaria = Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 2)->get();
         $actividades_Secundarias = "";
 
+
         foreach ($proveedor_actividad_secundaria as $actividad_secundaria) {
 
             $Actividad_economica2 = Actividad_economica::where('id_actividad_economica', $actividad_secundaria->id_actividad_economica)->first();
 
             if ($proveedor_actividad_secundaria->last() == $actividad_secundaria) {
-                $actividades_Secundarias = $actividades_Secundarias . $Actividad_economica2->desc_actividad . ".";
+                $actividades_Secundarias = $actividades_Secundarias . $Actividad_economica2->cod_actividad . " - " . $Actividad_economica2->desc_actividad . ".";
             } else {
-                $actividades_Secundarias = $Actividad_economica2->desc_actividad . ";  " . $actividades_Secundarias;
+                $actividades_Secundarias = $Actividad_economica2->cod_actividad . " - " .$Actividad_economica2->desc_actividad . ";  " . $actividades_Secundarias;
             }
         }
 
