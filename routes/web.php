@@ -106,7 +106,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('altaRegistro/{id}', 'App\Http\Controllers\ProveedoresController@dar_alta_id');
 
-    Route::get('eliminarRegistro/{id}', 'App\Http\Controllers\ProveedoresController@eliminar_id');
+    //RUTA PARA ELIMINAR UN REGISTRO DE LA BD
+
+    //Route::get('eliminarRegistro/{id}', 'App\Http\Controllers\ProveedoresController@eliminar_id');
 
     Route::post('/dar_baja', 'App\Http\Controllers\ProveedoresController@dar_baja');
 
