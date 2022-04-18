@@ -29,6 +29,10 @@
 <!--Incluimos el modal para dar de alta un registro -->
 @include('modalAltaRegistro')
 
+<!--Incluimos el modal para eliminar de la BD un registro -->
+@include('modalEliminarRegistro')
+
+
 @endsection
 
 @push('js')
@@ -116,6 +120,16 @@
         $('#modal_alta').modal('show');
         $('#id_alta').val(id_registro);
     }
+
+    //FUNCION PARA ELIMINAR UN REGISTRO DE LA BD
+    
+    /*
+    function eliminarRegistro(id_registro) {
+
+        //Desplegamos el modal
+        $('#modal_eliminar').modal('show');
+        $('#id_eliminar').val(id_registro);
+    }*/
 
 </script>
 

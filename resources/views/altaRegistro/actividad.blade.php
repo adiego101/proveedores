@@ -5,8 +5,7 @@
 
 <br/>
     <label for="facturacion_anual_alcanzada">Facturación anual alcanzada:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada" name="facturacion_anual_alcanzada" maxlength="9" value="{{old('facturacion_anual_alcanzada')}}">
-    <small class="small" id="small-facturacion-anual"></small>
+    <input type="text" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada" name="facturacion_anual_alcanzada" maxlength="40">
     <br>
 
     <div class="row">
@@ -171,21 +170,6 @@
 @push('js')
 
     <script type="text/javascript">
-
-        $('#facturacion_anual_alcanzada').keyup(validarFacturacionAnual);
-
-        function validarFacturacionAnual() {
-
-            if (!(/^[0-9]+$/.test($('#facturacion_anual_alcanzada').val()))) {
-                if($('#facturacion_anual_alcanzada').val() != ""){
-                mostrarError('#facturacion_anual_alcanzada', '#small-facturacion-anual', '<div class="alert alert-danger mt-3 pt-1">La <strong>facturación anual</strong> debe contener solamente dígitos numéricos.</div>');
-                return false;
-                }
-            }
-            ocultarError('#facturacion_anual_alcanzada', '#small-facturacion-anual');
-            return true;
-        }
-
 
         $('#rne').keyup(validarRne);
 
