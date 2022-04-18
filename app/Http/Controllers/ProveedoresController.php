@@ -2148,7 +2148,7 @@ class ProveedoresController extends Controller
                         //'genero_persona'=>$proveedores_rupae->genero_persona,
                     ]);
                     $persona->save();
-                    $proveedor->personas()->attach($persona);
+                    $proveedor->personas()->attach($persona, ['rol_persona_proveedor' => 'Representante']);
 
                     //$persona =  "";
                 } else {
