@@ -549,7 +549,6 @@ class ProveedoresController extends Controller
                     return redirect()->route('modificarRegistro', ['id' => $proveedor->id_proveedor]);
 
                 }
-            });
         } catch (\Exception$e) {
 
             //Si algo fallo, volvemos atras la transaccion
