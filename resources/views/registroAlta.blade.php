@@ -192,7 +192,8 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <label for="">Act principal: {{isset($data['actividad_principal']) ? $data['actividad_principal'] : ''}}</label><br><br>
+
+                        <label for="">Act principal: {{isset($data['cod_actividad_principal']) ? $data['cod_actividad_principal'] : ''}} - {{isset($data['actividad_principal']) ? $data['actividad_principal'] : ''}}</label><br><br>
                         <label for="">Act secundaria: {{isset($data['actividad_secundaria']) ? $data['actividad_secundaria'] : ''}}</label><br>
 
                     </td>
