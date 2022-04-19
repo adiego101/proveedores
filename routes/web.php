@@ -230,7 +230,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/gestionarSolicitudes', function () {
         return view('gestionarSolicitudes');
-    });
+    })->name('gestionarSolicitudes');
     
 
 

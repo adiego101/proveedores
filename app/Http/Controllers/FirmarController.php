@@ -289,9 +289,14 @@ class FirmarController extends Controller
 
 
 
-
+/*
         return (new Response($file, 200))
-            ->header('Content-Type', 'application/pdf');
+            ->header('Content-Type', 'application/pdf');*/
+
+            return redirect()->route('gestionarSolicitudes')->with('message', 'El documentos fue firmado Correctamente');
+
+
+
 
     }
 
@@ -300,7 +305,7 @@ class FirmarController extends Controller
 
         try {
 
-            $data = Certificado::latest()->get();
+            $data = Certificado::select("id_proveedor","razon_social","cuit")->latest()->first()->get();
             return Datatables::of($data)
                 ->make(true);
 
@@ -316,9 +321,6 @@ class FirmarController extends Controller
     
     public function getSolicitud_firmas()
     {
-
-      
-
         try {
            
             $data = Solicitud_firmas::
