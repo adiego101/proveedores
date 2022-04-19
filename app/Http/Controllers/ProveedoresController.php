@@ -30,6 +30,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
+use Carbon\Carbon;
+use App\Models\User;
 
 class ProveedoresController extends Controller
 {
@@ -537,6 +539,20 @@ class ProveedoresController extends Controller
 
                 //Fin de la transaccion
                 DB::commit();
+
+                
+                //Registro de LOG
+                $responsable_id = User::findOrFail(auth()->id())->id;
+                $responsable_nombre = User::findOrFail(auth()->id())->name;
+                $responsable_email = User::findOrFail(auth()->id())->email;
+
+                DB::connection('mysql')
+                ->table('eventos_log')->insert(['EL_Evento' => 'Se ha creado un nuevo registro con el cuit: ' . $request->cuit . '.',
+                'EL_Evento_Fecha' => Carbon::now(),
+                'EL_Id_Responsable' => $responsable_id,
+                'EL_Nombre_Responsable' => $responsable_nombre,
+                'EL_Email_Responsable' => $responsable_email]);
+
 
                 return redirect()->route('verRegistro', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Registro creado correctamente');
 
@@ -2757,6 +2773,20 @@ class ProveedoresController extends Controller
             //Fin de la transaccion
             DB::commit();
 
+
+            //Registro de LOG
+            $responsable_id = User::findOrFail(auth()->id())->id;
+            $responsable_nombre = User::findOrFail(auth()->id())->name;
+            $responsable_email = User::findOrFail(auth()->id())->email;
+
+            DB::connection('mysql')
+            ->table('eventos_log')->insert(['EL_Evento' => 'Se han modificado los datos del registro con el cuit: ' . $request->cuit . '.',
+            'EL_Evento_Fecha' => Carbon::now(),
+            'EL_Id_Responsable' => $responsable_id,
+            'EL_Nombre_Responsable' => $responsable_nombre,
+            'EL_Email_Responsable' => $responsable_email]);
+
+
             return redirect()->back()->withSuccess('Los datos del registro se han modificado satisfactoriamente !');
             }
             else{
@@ -2783,7 +2813,21 @@ class ProveedoresController extends Controller
             //return response()->json($proveedores_rupae);
             $proveedores_rupae->dado_de_baja = 1;
             $proveedores_rupae->save();
+
+            //Registro de LOG
+            $responsable_id = User::findOrFail(auth()->id())->id;
+            $responsable_nombre = User::findOrFail(auth()->id())->name;
+            $responsable_email = User::findOrFail(auth()->id())->email;
+
+            DB::connection('mysql')
+            ->table('eventos_log')->insert(['EL_Evento' => 'Se ha dado de baja el registro con el cuit: ' . $proveedores_rupae->cuit . '.',
+            'EL_Evento_Fecha' => Carbon::now(),
+            'EL_Id_Responsable' => $responsable_id,
+            'EL_Nombre_Responsable' => $responsable_nombre,
+            'EL_Email_Responsable' => $responsable_email]);
+
             return redirect()->back();
+
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -2812,7 +2856,21 @@ class ProveedoresController extends Controller
             //return response()->json($proveedores_rupae);
             $proveedores_rupae->dado_de_baja = 1;
             $proveedores_rupae->save();
+
+            //Registro de LOG
+            $responsable_id = User::findOrFail(auth()->id())->id;
+            $responsable_nombre = User::findOrFail(auth()->id())->name;
+            $responsable_email = User::findOrFail(auth()->id())->email;
+
+            DB::connection('mysql')
+            ->table('eventos_log')->insert(['EL_Evento' => 'Se ha dado de baja el registro con el cuit: ' . $proveedores_rupae->cuit . '.',
+            'EL_Evento_Fecha' => Carbon::now(),
+            'EL_Id_Responsable' => $responsable_id,
+            'EL_Nombre_Responsable' => $responsable_nombre,
+            'EL_Email_Responsable' => $responsable_email]);
+
             return redirect()->back();
+
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -2830,7 +2888,21 @@ class ProveedoresController extends Controller
             //return response()->json($proveedores_rupae);
             $proveedores_rupae->dado_de_baja = 0;
             $proveedores_rupae->save();
+
+            //Registro de LOG
+            $responsable_id = User::findOrFail(auth()->id())->id;
+            $responsable_nombre = User::findOrFail(auth()->id())->name;
+            $responsable_email = User::findOrFail(auth()->id())->email;
+
+            DB::connection('mysql')
+            ->table('eventos_log')->insert(['EL_Evento' => 'Se ha dado de alta el registro con el cuit: ' . $proveedores_rupae->cuit . '.',
+            'EL_Evento_Fecha' => Carbon::now(),
+            'EL_Id_Responsable' => $responsable_id,
+            'EL_Nombre_Responsable' => $responsable_nombre,
+            'EL_Email_Responsable' => $responsable_email]);
+
             return redirect()->back();
+
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -3007,6 +3079,20 @@ return $select;
                 'valor_hasta' => htmlspecialchars($request->foraneo_final),
             ]);
 
+
+            //Registro de LOG
+            $responsable_id = User::findOrFail(auth()->id())->id;
+            $responsable_nombre = User::findOrFail(auth()->id())->name;
+            $responsable_email = User::findOrFail(auth()->id())->email;
+
+            DB::connection('mysql')
+            ->table('eventos_log')->insert(['EL_Evento' => 'Se han modificado los valores de las fórmulas (Ponderación - Jerarquía e Indice)',
+            'EL_Evento_Fecha' => Carbon::now(),
+            'EL_Id_Responsable' => $responsable_id,
+            'EL_Nombre_Responsable' => $responsable_nombre,
+            'EL_Email_Responsable' => $responsable_email]);
+
+
             return redirect()->back()->withSuccess('Los valores de las fórmulas se han actualizado satisfactoriamente.');
 
         } catch (\Illuminate\Database\QueryException$ex) {
@@ -3032,6 +3118,15 @@ return $select;
             return Redirect::back()
                 ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
+    }
+
+
+    //Devuelve el contenido de la tabla eventos_log
+    public function obtenerListadoAcciones()
+    {
+        $acciones = DB::connection("mysql")->select("SELECT * FROM eventos_log");
+
+        return datatables()->of($acciones)->make(true);
     }
 
 }

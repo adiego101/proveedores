@@ -212,4 +212,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/exportar', 'App\Http\Controllers\ExportController@exportar')->name('exportar');
     Route::post('limpiar', 'App\Http\Controllers\ProveedoresController@limpiar')->name('limpiar');
+
+    //Ruta del registro de LOGs
+    Route::get('/historial_acciones', function () {
+        return view('historialAcciones');
+    });
+
+    Route::get('/listado_acciones', 'App\Http\Controllers\ProveedoresController@obtenerListadoAcciones')->name('listado_acciones');
 });
