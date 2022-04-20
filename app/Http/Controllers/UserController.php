@@ -72,7 +72,7 @@ class UserController extends Controller
         $responsable_email = User::findOrFail(auth()->id())->email;
 
         DB::connection('mysql')
-        ->table('eventos_log')->insert(['EL_Evento' => 'Se ha creado el usuario: ' . $request->name . ', cuil número: ' . $request->cuil . ', cargo: ' . $request->cargo . ' email: ' . $request->email . '.',
+        ->table('eventos_log')->insert(['EL_Evento' => 'Se ha creado el usuario: ' . $request->name . ', cuil número: ' . $request->cuil . ', cargo: ' . $request->cargo . ', email: ' . $request->email . '.',
         'EL_Evento_Fecha' => Carbon::now(),
         'EL_Id_Responsable' => $responsable_id,
         'EL_Nombre_Responsable' => $responsable_nombre,
@@ -152,7 +152,7 @@ class UserController extends Controller
         $responsable_email = User::findOrFail(auth()->id())->email;
 
         DB::connection('mysql')
-        ->table('eventos_log')->insert(['EL_Evento' => 'Se ha modificado el usuario: ' . $request->name . ', cuil número: ' . $request->cuil . ', cargo: ' . $request->cargo . ' email: ' . $request->email . '.',
+        ->table('eventos_log')->insert(['EL_Evento' => 'Se ha modificado el usuario: ' . $request->name . ', cuil número: ' . $request->cuil . ', cargo: ' . $request->cargo . ', email: ' . $request->email . '.',
         'EL_Evento_Fecha' => Carbon::now(),
         'EL_Id_Responsable' => $responsable_id,
         'EL_Nombre_Responsable' => $responsable_nombre,
@@ -249,7 +249,7 @@ class UserController extends Controller
         $responsable_email = User::findOrFail(auth()->id())->email;
 
         DB::connection('mysql')
-        ->table('eventos_log')->insert(['EL_Evento' => 'Se ha eliminado el usuario: ' . $user->name . ', cuil número: ' . $user->cuil . ', cargo: ' . $user->cargo . ' email: ' . $user->email . '.',
+        ->table('eventos_log')->insert(['EL_Evento' => 'Se ha eliminado el usuario: ' . $user->name . ', cuil número: ' . $user->cuil . ', cargo: ' . $user->cargo . ', email: ' . $user->email . '.',
         'EL_Evento_Fecha' => Carbon::now(),
         'EL_Id_Responsable' => $responsable_id,
         'EL_Nombre_Responsable' => $responsable_nombre,
