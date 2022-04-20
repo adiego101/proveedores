@@ -1,20 +1,19 @@
 <?php
 
-use App\Models\Pais;
-use App\Models\Sector;
-use App\Models\Producto;
-use App\Models\Localidad;
-use App\Models\Provincia;
-use App\Models\Tipo_actividad;
-use App\Models\Actividad_economica;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
-use App\Models\Jerarquia_compre_local;
+use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\Actividad_economica;
+use App\Models\Jerarquia_compre_local;
+use App\Models\Localidad;
+use App\Models\Pais;
 use App\Models\Ponderacion_compre_local;
-use App\Http\Controllers\FirmarController;
-use App\Http\Controllers\ProveedoresController;
+use App\Models\Producto;
+use App\Models\Provincia;
+use App\Models\Tipo_actividad;
+use App\Models\Sector;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 
 

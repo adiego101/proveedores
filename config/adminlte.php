@@ -252,15 +252,6 @@ return [
             'icon' => 'fas fa-fw fa-folder',
             'label_color' => 'success',
         ],
-      
-        [
-            'text' => 'Solicitudes de Firma',
-            'url' => '/gestionarSolicitudes',
-            'icon' => 'fas fa-fw fa-folder',
-            'label_color' => 'success',
-            'can'    => 'admin_users'
-
-        ],
        //DESCOMENTAR DESPÚES DE LA EXPOSICIÓN
        /*
         [

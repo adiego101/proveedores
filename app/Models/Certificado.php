@@ -58,10 +58,7 @@ class Certificado extends Model
                             'valor_agregado',
                             'valor_indice_rupae',
                             'desc_jerarquia_compre_local',
-                            'fecha_emision_certificado',
-                            'nombreArchivo',
-                            'idTransaccion',
-                            'firmado'
+                            'fecha_emision_certificado'
                         ];
 
     public function proveedor(){
