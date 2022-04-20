@@ -141,10 +141,13 @@ class FirmarController extends Controller
         }
     }
 
-    public function Firmar($id, Request $request)
+    public function Firmar($solicitud, Request $request)
     {
 
-        $idTransaccion = uniqid();
+        $solicitud_firma = Solicitud_firmas::where('solicitud', $solicitud)->first();
+        $id = $solicitud_firma->id_proveedor;
+
+        $idTransaccion = $solicitud;
 
         //Datos capturados del formulario index
 
@@ -173,6 +176,7 @@ class FirmarController extends Controller
             "documento": "' . $documento . '",
             "metadata": {
             "sistemaOrigen" : "origen"
+
             },
             "type": "' . $tipo_documento . '",
             "urlRedirect": "' . $url_redirect . '"
@@ -282,7 +286,7 @@ class FirmarController extends Controller
         $certificado->firmado = 1;
         $certificado->save();
 
-        $solicitud = Solicitud_firmas::where('id_proveedor', $certificado->id_proveedor)->first();
+        $solicitud = Solicitud_firmas::where('solicitud', $idtransaccion)->first();
         $solicitud->firmado = 1;
         $solicitud->save();
 
@@ -300,13 +304,36 @@ class FirmarController extends Controller
 
     }
 
-    public function getCertificados()
+    public function descargarCertificadoAlta($id)
+    {
+        
+        $file = Storage::disk('local')->get("$id.pdf");
+
+        return response($file, 200)
+            ->header('Content-type', 'application/pdf');
+
+    }
+
+    public function getCertificados($id)
     {
 
         try {
 
-            $data = Certificado::select("id_proveedor","razon_social","cuit")->latest()->first()->get();
+            $data = Certificado::where("id_proveedor",$id)            
+            ->where("firmado", "1")
+            ->latest()->get();
             return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $url = url('descargarCertificadoAlta/' . $row->nombreArchivo);
+                $url2 = url('descargarCertificadoInscripccion/' . $row->nombreArchivo);
+
+                $actionBtn = ' <a href="' . "$url" . '" class="view btn btn-primary btn-sm" title="descargarPDF">
+                <i class="fas fa-pencil-alt"></i></a>';
+                    return $actionBtn;
+                
+            })
+            ->rawColumns(['action'])
                 ->make(true);
 
         } catch (\Exception$e) {
@@ -325,12 +352,13 @@ class FirmarController extends Controller
            
             $data = Solicitud_firmas::
             join('proveedores', 'solicitud_firmas.id_proveedor', '=', 'proveedores.id_proveedor')
-            ->select('proveedores.id_proveedor','proveedores.nombre_fantasia', 'proveedores.razon_social', 'proveedores.cuit')
+            ->select('proveedores.id_proveedor','proveedores.nombre_fantasia', 'proveedores.razon_social', 'proveedores.cuit', 'solicitud_firmas.solicitud')
+            ->where("firmado", "0")
             ->get();
             return Datatables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
-                $url = url('firmar/' . $row->id_proveedor);
+                $url = url('firmar/' . $row->solicitud);
                 
                 $actionBtn = ' <a href="' . "$url" . '" class="view btn btn-primary btn-sm" title="firmar">
                 <i class="fas fa-pencil-alt"></i></a>';
@@ -510,8 +538,12 @@ class FirmarController extends Controller
 
     public function SolicitudFirmar($id)
     {
+        $solicitud = uniqid();
+
         $solicitud = Solicitud_firmas::create([
+            
             'id_proveedor' => $id,
+            'solicitud' => $solicitud,
         ]);
         $solicitud->save();
     }

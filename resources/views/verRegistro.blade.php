@@ -63,7 +63,9 @@
                 <a class="nav-link " id="otrosDatos-tab" data-toggle="tab" href="#otrosDatos">Otros
                     Datos</a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link " id="listaCertificados-tab" data-toggle="tab" href="#listaCertificados">Certificados</a>
+            </li>
         </ul>
 
         <br>
@@ -117,6 +119,9 @@
 
         <div class="tab-pane fade" id="otrosDatos" role="tabpanel" aria-labelledby="nav-otrosDatos-tab">
             @include('editarRegistro.otrosDatos') </div>
+
+        <div class="tab-pane fade" id="listaCertificados" role="tabpanel" aria-labelledby="nav-listaCertificados-tab">
+            @include('editarRegistro.listaCertificados') </div>
     </div>
     @include('edicionesModales.editarpagos')
     @include('edicionesModales.editarActividades')

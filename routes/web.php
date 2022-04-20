@@ -221,11 +221,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/verificarFirma/{id}', 'App\Http\Controllers\FirmarController@verificarFirma')->name('verificarFirma');
     
-    Route::get('/certificados/list', 'App\Http\Controllers\FirmarController@getCertificados')->name('certificados.list');
+    Route::get('/certificados/list/{id}', 'App\Http\Controllers\FirmarController@getCertificados')->name('certificados.list');
 
     
 
     Route::get('/solicitudes/list', 'App\Http\Controllers\FirmarController@getSolicitud_firmas')->name('solicitudes.list');
+    Route::get('/descargarCertificadoAlta/{id}', 'App\Http\Controllers\FirmarController@descargarCertificadoAlta')->name('descargarCertificadoAlta');
 
 
     Route::get('/gestionarCertificados', function () {
