@@ -124,7 +124,7 @@ class ProveedoresController extends Controller
     public function crear_registro(Request $request)
     {
         try {
-            
+
             $cuit = Proveedor::where('cuit', $request->cuit)->exists();
             $dado_de_baja = Proveedor::where('cuit', $request->cuit)->where('dado_de_baja', '0')->get();
             //return $dado_de_baja->isEmpty();
@@ -138,12 +138,8 @@ class ProveedoresController extends Controller
                 //return $request->input('retencion');
 
                 //Inicio de la transaccion
-                DB::beginTransaction();
-
-                $proveedores_rupae = new Proveedor($request->all());
+            DB::beginTransaction();
                 //$proveedores_rupae->id_tamanio_empresa = $id_tamanio_empresa;
-
-                $proveedores_rupae->save();
 
                     //$id_tamanio_empresa = $request->id_tamanio_empresa;
 
@@ -540,7 +536,7 @@ class ProveedoresController extends Controller
                 //Fin de la transaccion
                 DB::commit();
 
-                
+
                 //Registro de LOG
                 $responsable_id = User::findOrFail(auth()->id())->id;
                 $responsable_nombre = User::findOrFail(auth()->id())->name;
@@ -556,7 +552,7 @@ class ProveedoresController extends Controller
 
                 return redirect()->route('verRegistro', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Registro creado correctamente');
 
-               
+
 
             } else {
 
@@ -580,7 +576,7 @@ class ProveedoresController extends Controller
         }
 
     }
-    
+
 
     /*
     Funcion que devuelve un listado de proveedores almacenados en la BD (Datatable)
