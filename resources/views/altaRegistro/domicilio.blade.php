@@ -92,12 +92,13 @@
 
                 <label for="cp_{{$tipo_domicilio}}">Código Postal:</label><br>
                 <input type="text" class="form-control" aria-describedby="basic-addon1" id="cp_{{$tipo_domicilio}}" name="cp_{{$tipo_domicilio}}" placeholder="Ingrese el código postal" maxlength="8"><br>
-
+                
+                @if($tipo_domicilio =='real')
                 <br>
                 <br>
                 <br>
                 <br>
-
+                @endif
 
                 <div class="row">
                     <div class="col-sm">
