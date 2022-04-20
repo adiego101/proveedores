@@ -9,6 +9,7 @@ use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Spatie\Permission\Models\Role;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -63,6 +64,19 @@ class UserController extends Controller
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
+
+
+        //Registro de LOG
+        $responsable_id = User::findOrFail(auth()->id())->id;
+        $responsable_nombre = User::findOrFail(auth()->id())->name;
+        $responsable_email = User::findOrFail(auth()->id())->email;
+
+        DB::connection('mysql')
+        ->table('eventos_log')->insert(['EL_Evento' => 'Se ha creado el usuario: ' . $request->name . ', cuil número: ' . $request->cuil . ', cargo: ' . $request->cargo . ', email: ' . $request->email . '.',
+        'EL_Evento_Fecha' => Carbon::now(),
+        'EL_Id_Responsable' => $responsable_id,
+        'EL_Nombre_Responsable' => $responsable_nombre,
+        'EL_Email_Responsable' => $responsable_email]);
 
         return redirect()->route('users.index')
             ->with('success', 'Usuario creado exitosamente !');
@@ -132,6 +146,18 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
+        //Registro de LOG
+        $responsable_id = User::findOrFail(auth()->id())->id;
+        $responsable_nombre = User::findOrFail(auth()->id())->name;
+        $responsable_email = User::findOrFail(auth()->id())->email;
+
+        DB::connection('mysql')
+        ->table('eventos_log')->insert(['EL_Evento' => 'Se ha modificado el usuario: ' . $request->name . ', cuil número: ' . $request->cuil . ', cargo: ' . $request->cargo . ', email: ' . $request->email . '.',
+        'EL_Evento_Fecha' => Carbon::now(),
+        'EL_Id_Responsable' => $responsable_id,
+        'EL_Nombre_Responsable' => $responsable_nombre,
+        'EL_Email_Responsable' => $responsable_email]);
+
         return redirect()->route('users.index')
             ->with('success', 'Usuario actualizado exitosamente !');
     }
@@ -152,7 +178,7 @@ class UserController extends Controller
         $regex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
 
         $input = $request->all();
-
+        
         if (!empty($input['password']) && !empty($input['new-password']) && !empty($input['confirm-password'])) {
 
             if (Hash::check($input["password"], $request->user()->password)) {
@@ -188,6 +214,18 @@ class UserController extends Controller
         $user->password = $password;
         $user->save();
 
+        //Registro de LOG
+        $responsable_id = User::findOrFail(auth()->id())->id;
+        $responsable_nombre = User::findOrFail(auth()->id())->name;
+        $responsable_email = User::findOrFail(auth()->id())->email;
+
+        DB::connection('mysql')
+        ->table('eventos_log')->insert(['EL_Evento' => 'Se ha modificado la contraseña del usuario: ' . $user->name . '.',
+        'EL_Evento_Fecha' => Carbon::now(),
+        'EL_Id_Responsable' => $responsable_id,
+        'EL_Nombre_Responsable' => $responsable_nombre,
+        'EL_Email_Responsable' => $responsable_email]);
+
         return redirect()->route('home')
             ->with('success', 'Su Contraseña ha sido actualizada con éxito');
 
@@ -201,7 +239,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::find($id);
+
         User::find($id)->delete();
+
+        //Registro de LOG
+        $responsable_id = User::findOrFail(auth()->id())->id;
+        $responsable_nombre = User::findOrFail(auth()->id())->name;
+        $responsable_email = User::findOrFail(auth()->id())->email;
+
+        DB::connection('mysql')
+        ->table('eventos_log')->insert(['EL_Evento' => 'Se ha eliminado el usuario: ' . $user->name . ', cuil número: ' . $user->cuil . ', cargo: ' . $user->cargo . ', email: ' . $user->email . '.',
+        'EL_Evento_Fecha' => Carbon::now(),
+        'EL_Id_Responsable' => $responsable_id,
+        'EL_Nombre_Responsable' => $responsable_nombre,
+        'EL_Email_Responsable' => $responsable_email]);
+
         return redirect()->route('users.index')
             ->with('success', 'Usuario eliminado exitosamente !');
     }

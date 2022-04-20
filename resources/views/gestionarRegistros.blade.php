@@ -30,7 +30,7 @@
 @include('modalAltaRegistro')
 
 <!--Incluimos el modal para eliminar de la BD un registro -->
-@include('modalEliminarRegistro')
+{{--@include('modalEliminarRegistro')--}}
 
 
 @endsection
