@@ -125,7 +125,9 @@
     @include('edicionesModales.editarSedes')
     @include('edicionesModales.editarSeguros')
     @include('edicionesModales.editarVehiculos')
-
+    @include('edicionesModales.palabraClave')
+    @include('edicionesModales.editarPalabraClave')
+    
     <!--Incluimos el modal para editar los campos de las sucursales -->
 
     @include('sucursales.edit')

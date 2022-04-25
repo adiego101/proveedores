@@ -233,6 +233,19 @@ $('input[type="checkbox"]').on('change', function(){
             }
 
 
+            var cant_filas_palabra_clave = document.getElementById("body_table_palabra_clave").rows.length;
+
+            if(cant_filas_palabra_clave == 0){
+
+                $("#body_table_palabra_clave").append(
+                '<tr id="row_palabra_clave" class="alert alert-light" role="alert">'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
+
+
             var cant_filas_pago = document.getElementById("body_table_pago").rows.length;
 
             if(cant_filas_pago == 0){
