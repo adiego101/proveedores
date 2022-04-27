@@ -3,7 +3,7 @@
 @endif
     @csrf
   <!-- Modal -->
-  <div class="modal fade" id="nuevaActividad" tabindex="-1" role="dialog" aria-labelledby="modalNuevaActividad" aria-hidden="true">
+  <div class="modal fade" id="nuevaActividad"  role="dialog" aria-labelledby="modalNuevaActividad" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -14,10 +14,7 @@
         </div>
         <div class="modal-body">
 
-<fieldset>
 
-        <div class="row">
-            <div class="col-sm">
                 <label for="tipo_actividad">Tipo de Actividad:</label><br>
                     <select @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="tipo_actividad" name="tipo_actividad">
                         @forelse($tipos_actividades as $tipo_actividad)
@@ -27,22 +24,17 @@
                         @endforelse
                     </select>
                 <br />
-            </div>
 
-            <div class="col-sm">
                 <label for="actividad_1">Actividad:</label><br>
-                    <select class="form-control"  @if ( $mode == "show") disabled @endif aria-describedby="basic-addon1" id="actividad_1" name="actividad_1">
-                        @forelse($actividades as $actividad)
-                            <option value="{{$actividad->desc_actividad}}">{{$actividad->cod_actividad}} - {{$actividad->desc_actividad}}</option>
-                        @empty
-                            <option value=" "></option>
-                        @endforelse
-                    </select>
+                <select  class=" js-example-basic-single form-control"  @if ( $mode == "show") disabled @endif  id="actividad_1" name="actividad_1">
+                    @forelse($actividades as $actividad)
+                        <option value="{{$actividad->desc_actividad}}">{{$actividad->cod_actividad}} - {{$actividad->desc_actividad}}</option>
+                    @empty
+                        <option value=" "></option>
+                    @endforelse
+                </select>
                 <br />
-            </div>
-        </div>
         <br>
-    </fieldset>
 
         </div>
         <div class="modal-footer">
