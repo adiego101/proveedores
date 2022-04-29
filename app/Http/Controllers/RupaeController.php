@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use PDF;
 use Carbon\Carbon;
 use App\Models\Localidad;
+use App\Models\Pago;
 use App\Models\Proveedor;
 use App\Models\Provincia;
 use App\Models\Certificado;
@@ -161,7 +162,7 @@ class RupaeController extends Controller
     }
     }
 
-//Prueba generacion PDF
+
     public function generarRegistroAlta($id, $idCertificado)
     {
         try{
@@ -249,14 +250,18 @@ class RupaeController extends Controller
         }
 
         $fecha_emision_certificado = Carbon::now();
+
+        //Obtenemos el primer pago de inscripcion (fecha minima)
+        $primer_pago_inscripcion = Pago::where('id_proveedor', $id)->min('fecha');
+
         $data = [
             'proveedor' => $proveedor,
             'titulo' => 'Certificado inscripción',
             'cuit' => $proveedor->cuit,
             'nombre_fantasia' => $proveedor->nombre_fantasia,
             'razon_social' => $proveedor->razon_social,
-            'cod_actividad_principal' => $Actividad_economica->cod_actividad,
-            'actividad_principal' => $Actividad_economica->desc_actividad,
+            'cod_actividad_principal' => isset($Actividad_economica->cod_actividad) ? $Actividad_economica->cod_actividad : '',
+            'actividad_principal' => isset($Actividad_economica->desc_actividad) ? $Actividad_economica->desc_actividad : '',
             'actividad_secundaria' => $actividades_Secundarias,
             'calle_ruta_real' => $proveedor_domicilio_real->calle . ' ' . $proveedor_domicilio_real->numero,
 
@@ -272,10 +277,10 @@ class RupaeController extends Controller
             'email_legal' => isset($proveedor_email_legal->email) ? $proveedor_email_legal->email : '',
             'representante_legal' => $persona,
             'cod_tel_legal' => isset($proveedor_telefono_legal->cod_area_tel) ? $proveedor_telefono_legal->cod_area_tel : null,
-
             'localidad_legal' => isset($proveedor_localidad_legal->nombre_localidad) ? $proveedor_localidad_legal->nombre_localidad : '',
-            'fecha_inscripcion' => isset($proveedor->fecha_inscripcion) ? $proveedor->fecha_inscripcion : '',
             'fecha_emision_certificado' => $fecha_emision_certificado->format("d/m/Y H:i:s"),
+            'fecha_inscripcion' => isset($primer_pago_inscripcion) ? $primer_pago_inscripcion : null,
+            
         ];
 
         /*
@@ -492,6 +497,12 @@ class RupaeController extends Controller
             $tipo_proveedor = $proveedor->desc_jerarquia_compre_local;
         }
 
+        //Obtenemos el primer pago de inscripcion (fecha minima)
+        $primer_pago_inscripcion = Pago::where('id_proveedor', $id)->min('fecha');
+
+        //Obtenemos el ultimo pago de renovacion (fecha maxima)
+        $ultimo_pago_renovacion= Pago::where('id_proveedor', $id)->max('fecha');
+    
 
         $data = [
             'titulo' => 'Certificado inscripción',
@@ -504,9 +515,10 @@ class RupaeController extends Controller
             'calle_ruta' => $proveedor_domicilio_real->calle . ' ' . $proveedor_domicilio_real->numero,
             'telefono' => isset($proveedor_telefono_real->nro_tel) ? $proveedor_telefono_real->nro_tel : '',
             'cod_tel_real' => isset($proveedor_telefono_real->cod_area_tel) ? $proveedor_telefono_real->cod_area_tel : null,
-            'fecha_inscripcion' => isset($proveedor->fecha_inscripcion) ? $proveedor->fecha_inscripcion : '',
             'localidad' => isset($proveedor_localidad_real->nombre_localidad) ? $proveedor_localidad_real->nombre_localidad : '',
             'tipo_proveedor' => isset($tipo_proveedor) ? $tipo_proveedor : '',
+            'fecha_inscripcion' => isset($primer_pago_inscripcion) ? $primer_pago_inscripcion : null,
+            'fecha_renovacion' => isset($ultimo_pago_renovacion) ? $ultimo_pago_renovacion : null,
 
         ];
 

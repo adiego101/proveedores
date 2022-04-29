@@ -1,16 +1,34 @@
 <?php
 
-//Recuperamos la fecha de inscripcion desde la BD
-//La fecha original tiene el formato YYYY-mm-dd H:i:s
-$fechaOriginalInscripcion = htmlspecialchars($data['fecha_inscripcion']);
+if (isset($data['fecha_inscripcion']) && isset($data['fecha_renovacion'])) {
 
-//Cambiamos el formato por dd/mm/YYYY H:i:s
-$timestamp = strtotime($fechaOriginalInscripcion);
-$fechaInscripcionFormat = date("d/m/Y", $timestamp);
+    //Recuperamos la fecha de inscripcion desde la BD
+    //La fecha original tiene el formato YYYY-mm-dd H:i:s
+    $fechaOriginalInscripcion = htmlspecialchars($data['fecha_inscripcion']);
 
-//Tomamos la fecha de inscripcion y le aumentamos un año (para el campo valido hasta)
-$anioSiguiente = strtotime($fechaOriginalInscripcion.'+1 year');
-$fechaValidoHasta = date("d/m/Y", $anioSiguiente);
+    //Cambiamos el formato por dd/mm/YYYY H:i:s
+    $timestamp = strtotime($fechaOriginalInscripcion);
+    $fechaInscripcionFormat = date("d/m/Y", $timestamp);
+
+    //Recuperamos la fecha de renovacion desde la BD
+    //La fecha original tiene el formato YYYY-mm-dd H:i:s
+    $fechaOriginalRenovacion = htmlspecialchars($data['fecha_renovacion']);
+
+    //Cambiamos el formato por dd/mm/YYYY H:i:s
+    $timestamps = strtotime($fechaOriginalRenovacion);
+    $fechaRenovacionFormat = date("d/m/Y", $timestamps);
+
+    //Tomamos la fecha de renovacion y le aumentamos un año (para el campo valido hasta)
+    $anioSiguiente = strtotime($fechaOriginalRenovacion.'+1 year');
+    $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
+
+} else {
+
+    $fechaInscripcionFormat = "";
+    $fechaRenovacionFormat = "";
+    $fechaValidoHasta = "";
+
+}
 ?>
 
 <html>
@@ -138,10 +156,11 @@ $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
             <label for="">Actividad principal: {{isset($data['cod_actividad_principal']) ? $data['cod_actividad_principal'] : ''}} - {{isset($data['actividad_principal']) ? $data['actividad_principal'] : ''}}</label><br><br>
             <label for="">Actividad secundaria: {{isset($data['actividad_secundaria']) ? $data['actividad_secundaria'] : ''}}</label><br><br>
             <label for="">Calle o ruta: {{isset($data['calle_ruta']) ? $data['calle_ruta'] : ''}}</label><br><br>
-            <label for="">Teléfono:{{isset($data['cod_tel_real']) ? $data['cod_tel_real'] : ''}} - {{isset($data['telefono']) ? $data['telefono'] : ''}}</label>
+            <label for="">Teléfono: {{isset($data['cod_tel_real']) ? $data['cod_tel_real'] : ''}} - {{isset($data['telefono']) ? $data['telefono'] : ''}}</label>
             <label for="" class="txt-right">Localidad / Paraje: {{isset($data['localidad']) ? $data['localidad'] : ''}}</label><br><br>
-            <label for="">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label>
+            <label for="">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label><br><br>
             <label for="" class="txt-right"><b>Válido hasta:</b> {{$fechaValidoHasta}}</label>
+            <label for="">Fecha de Renovación: {{$fechaRenovacionFormat}}</label>
 
             <br>
             <br>
