@@ -482,6 +482,17 @@ class RupaeController extends Controller
             }
         }
 
+
+        if ($proveedor->desc_jerarquia_compre_local == 'PROVEEDOR LOCAL') {
+
+            $tipo_proveedor = 'PROVEEDOR SANTACRUCEÑO';
+
+        } else {
+
+            $tipo_proveedor = $proveedor->desc_jerarquia_compre_local;
+        }
+
+
         $data = [
             'titulo' => 'Certificado inscripción',
             'cuit' => $proveedor->cuit,
@@ -495,6 +506,7 @@ class RupaeController extends Controller
             'cod_tel_real' => isset($proveedor_telefono_real->cod_area_tel) ? $proveedor_telefono_real->cod_area_tel : null,
             'fecha_inscripcion' => isset($proveedor->fecha_inscripcion) ? $proveedor->fecha_inscripcion : '',
             'localidad' => isset($proveedor_localidad_real->nombre_localidad) ? $proveedor_localidad_real->nombre_localidad : '',
+            'tipo_proveedor' => isset($tipo_proveedor) ? $tipo_proveedor : '',
 
         ];
 

@@ -146,9 +146,13 @@ $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
             <br>
             <br>
             <br>
+            <br>
+
+            <label for="">{{isset($data['tipo_proveedor']) ? $data['tipo_proveedor'] : ''}}</label>
 
             <label for="" class="txt-right">_________________________ <br>Firma</label>
 
+           
             <footer>
                 <hr>
                 Dirección Provincial de Comercio - Avellaneda Nº 801 - Teléfono (02966) 422748 - Interno 6259 <br>
