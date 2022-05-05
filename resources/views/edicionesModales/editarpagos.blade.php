@@ -32,6 +32,15 @@
 
                             <br>
 
+                            <label for="tipo_pago_editar">Tipo de pago:</label><br>
+                            <select @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="tipo_pago_editar" name="tipo_pago_editar">
+                            <option selected value="Inscripcion">Inscripción</option>
+                            <option value="Renovacion">Renovación</option>
+                            <option value="Otros">Otros</option>
+                            </select>
+
+                            <br>
+
                         <label for="observacionespagoeditar">Observaciones:</label><br>
                         <input @if ($mode == 'show') readonly @endif type="text" class="form-control"
                             placeholder="Ingrese las observaciones del pago" aria-describedby="basic-addon1"
@@ -150,10 +159,10 @@
                 $('#editarPago').modal('show');
                 ms = Date.parse(response[0].fecha);
                 fecha = new Date(ms);
-
+                console.log(response);
                 document.getElementById("fechaeditar").valueAsDate = fecha;
                 $('#importeeditar').val(response[0].importe);
-
+                $('#tipo_pago_editar').val(response[0].tipo_pago);
                 $('#observacionespagoeditar').val(response[0].observaciones);
                 $('#editar_pago').val(response[0].id_pagos);
                 $('#ver_pago').val(response[0].id_pagos);

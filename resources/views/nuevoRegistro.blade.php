@@ -240,6 +240,7 @@ $('input[type="checkbox"]').on('change', function(){
                 $("#body_table_pago").append(
                 '<tr id="row_pago" class="alert alert-light" role="alert">'+
                     '<td></td>'+
+                    '<td></td>'+
                     '<td>No hay registros</td>'+
                     '<td></td>'+
                     '<td></td>'+

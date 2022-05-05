@@ -47,6 +47,7 @@
                 <tr>
                     <th>Fecha</th>
                     <th>Importe</th>
+                    <th>Tipo pago</th>
                     <th>Observaciones</th>
                     <th>Acciones</th>
                 </tr>
@@ -116,6 +117,10 @@
                     {
                         data: 'importe',
                         name: 'importe'
+                    },
+                    {
+                        data: 'tipo_pago',
+                        name: 'tipo_pago'
                     },
                     {
                         data: 'observaciones',

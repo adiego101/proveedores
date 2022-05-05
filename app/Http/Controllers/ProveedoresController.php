@@ -532,6 +532,7 @@ class ProveedoresController extends Controller
                                 'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
                                 'fecha' => $request->fechas_pagos[$i],
                                 'importe' => $request->importes_pagos[$i],
+                                'tipo_pago' => $request->tipos_pagos[$i],
                                 'observaciones' => $request->observaciones_pagos[$i],
 
                             ]);
@@ -948,6 +949,7 @@ class ProveedoresController extends Controller
             $pago = Pago::find($id);
             $pago->importe = $request->importeeditar;
             $pago->fecha = $request->fechaeditar;
+            $pago->tipo_pago = $request->tipo_pago_editar;
             $pago->observaciones = $request->observacionespagoeditar;
 
             $pago = $pago->fill($request->all());
