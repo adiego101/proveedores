@@ -251,8 +251,10 @@ class RupaeController extends Controller
 
         $fecha_emision_certificado = Carbon::now();
 
-        //Obtenemos el primer pago de inscripcion (fecha minima)
-        $primer_pago_inscripcion = Pago::where('id_proveedor', $id)->min('fecha');
+        //Obtenemos el ultimo pago de inscripcion (en el caso de que se tenga que volver a reinscribir)
+        //si no ha renovado antes de los 3 años de vigencia.
+        //Sino siempre es el primer pago de inscripcion.
+        $pago_inscripcion = Pago::where('id_proveedor', $id)->where('tipo_pago', 'Inscripcion')->max('fecha');
 
         $data = [
             'proveedor' => $proveedor,
@@ -279,7 +281,7 @@ class RupaeController extends Controller
             'cod_tel_legal' => isset($proveedor_telefono_legal->cod_area_tel) ? $proveedor_telefono_legal->cod_area_tel : null,
             'localidad_legal' => isset($proveedor_localidad_legal->nombre_localidad) ? $proveedor_localidad_legal->nombre_localidad : '',
             'fecha_emision_certificado' => $fecha_emision_certificado->format("d/m/Y H:i:s"),
-            'fecha_inscripcion' => isset($primer_pago_inscripcion) ? $primer_pago_inscripcion : null,
+            'fecha_inscripcion' => isset($pago_inscripcion) ? $pago_inscripcion : null,
             
         ];
 
@@ -497,11 +499,17 @@ class RupaeController extends Controller
             $tipo_proveedor = $proveedor->desc_jerarquia_compre_local;
         }
 
-        //Obtenemos el primer pago de inscripcion (fecha minima)
-        $primer_pago_inscripcion = Pago::where('id_proveedor', $id)->min('fecha');
+        //Obtenemos el ultimo pago de inscripcion (en el caso de que se tenga que volver a reinscribir)
+        //si no ha renovado antes de los 3 años de vigencia.
+        //Sino siempre es el primer pago de inscripcion.
+        $pago_inscripcion = Pago::where('id_proveedor', $id)->where('tipo_pago', 'Inscripcion')->max('fecha');
 
-        //Obtenemos el ultimo pago de renovacion (fecha maxima)
-        $ultimo_pago_renovacion= Pago::where('id_proveedor', $id)->max('fecha');
+        //Obtenemos el ultimo pago de renovacion
+        $pago_renovacion = Pago::where('id_proveedor', $id)->where('tipo_pago', 'Renovacion')->max('fecha');
+
+        if($pago_inscripcion > $pago_renovacion){
+            $pago_renovacion = $pago_inscripcion;
+        }
     
 
         $data = [
@@ -517,8 +525,8 @@ class RupaeController extends Controller
             'cod_tel_real' => isset($proveedor_telefono_real->cod_area_tel) ? $proveedor_telefono_real->cod_area_tel : null,
             'localidad' => isset($proveedor_localidad_real->nombre_localidad) ? $proveedor_localidad_real->nombre_localidad : '',
             'tipo_proveedor' => isset($tipo_proveedor) ? $tipo_proveedor : '',
-            'fecha_inscripcion' => isset($primer_pago_inscripcion) ? $primer_pago_inscripcion : null,
-            'fecha_renovacion' => isset($ultimo_pago_renovacion) ? $ultimo_pago_renovacion : null,
+            'fecha_inscripcion' => isset($pago_inscripcion) ? $pago_inscripcion : null,
+            'fecha_renovacion' => isset($pago_renovacion) ? $pago_renovacion : null,
 
         ];
 
