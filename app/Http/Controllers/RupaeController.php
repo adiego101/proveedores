@@ -679,10 +679,19 @@ class RupaeController extends Controller
     public function guardarHistorico($id)
     {
         try{
+
         $proveedor = Proveedor::find($id);
+
         if($proveedor->dado_de_baja != 1){
 
-            $this->asignarNroRupaeProveedor($proveedor);
+            //Verificamos si existe el proveedor en la tabla certificados (historico)
+            $proveedor_historico = Certificado::where('id_proveedor',$id)->exists();
+
+            //Si no existe, se asigna un nuevo nuemero, caso contrario mantiene el mismo. Es decir, el que se asigno inicialmente.
+            if (!$proveedor_historico) {
+
+                $this->asignarNroRupaeProveedor($proveedor);
+            }
 
 
         $idAlta = $proveedor->nro_rupae_proveedor;
