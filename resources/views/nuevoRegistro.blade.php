@@ -94,6 +94,9 @@
 
 
 @push('js')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
@@ -186,9 +189,12 @@ $('input[type="checkbox"]').on('change', function(){
 
 <script type="text/javascript">
 
+
         /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
         window.onload = function() {
 
+            $('.js-example-basic-single').select2({
+            });
             var cant_filas_sucursal = document.getElementById("body_table_sucursal").rows.length;
 
             if(cant_filas_sucursal == 0){

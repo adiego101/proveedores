@@ -23,7 +23,7 @@
 
         <div class="col-sm">
             <label for="actividad">Actividad:</label><br>
-            <select class="form-control" aria-describedby="basic-addon1" id="actividad" name="actividad">
+            <select class="js-example-basic-single form-control" aria-describedby="basic-addon1" id="actividad" name="actividad">
                 @forelse($actividades as $actividad)
                     <option value="{{$actividad->desc_actividad}}">{{$actividad->cod_actividad}} - {{$actividad->desc_actividad}}</option>
                 @empty
@@ -472,6 +472,11 @@ $(document).on("click", ".btn_edit_producto", function() {
     $('#numero_fila_producto').val(button_id);
 
 });
+
+
+
+        /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
+       
 
 </script>
 
