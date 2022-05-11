@@ -34,9 +34,9 @@ value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="11" req
     <input type="text" @if ( $mode == "show") readonly @endif class="form-control limpiar" value="{{ isset($persona->nombre_persona) ? $persona->nombre_persona : '' }}" placeholder="Ingrese el nombre completo del representante legal" aria-describedby="basic-addon1" id="nombre_persona" name="nombre_persona" maxlength="50"><br>
 
     <label for="dni_legal">DNI:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control limpiar" placeholder="Ingrese el dni del representante legal" @if ( $mode == "show") readonly @endif
-value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="8">
-    <small class="small" id="small-dni"></small>
+    <input type="text" class="form-control limpiar" placeholder="Ingrese el dni del representante legal" @if ( $mode == "show") readonly @endif
+value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="12">
+    <small class="small" id="small-dni2"></small>
 
     <br>
     <br>
@@ -74,15 +74,19 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
 
         function validarDni() {
 
-            if (!(/^[0-9]+$/.test($('#dni_legal').val()))) {
-                if($('#dni_legal').val() != ""){
+        if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test($('#dni_legal').val()))) {
+            if($('#dni_legal').val() != ""){
 
-                mostrarError('#dni_legal', '#small-dni', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> debe contener solamente dígitos numéricos.</div>');
-                return false;
-                }
+            mostrarError('#dni_legal', '#small-dni', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> tiene un formato incorrecto.</div>');
+            mostrarError('#dni_legal', '#small-dni2', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> tiene un formato incorrecto.</div>');
+
+            return false;
             }
-            ocultarError('#dni_legal', '#small-dni');
-            return true;
+        }
+        ocultarError('#dni_legal', '#small-dni');
+        ocultarError('#dni_legal', '#small-dni2');
+
+        return true;
         }
 
     </script>

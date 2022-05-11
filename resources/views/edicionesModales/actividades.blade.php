@@ -26,7 +26,7 @@
                 <br />
 
                 <label for="actividad_1">Actividad:</label><br>
-                <select  class=" js-example-basic-single form-control"  @if ( $mode == "show") disabled @endif  id="actividad_1" name="actividad_1">
+                <select  class=" js-example-basic-single"  @if ( $mode == "show") disabled @endif  id="actividad_1" name="actividad_1">
                     @forelse($actividades as $actividad)
                         <option value="{{$actividad->desc_actividad}}">{{$actividad->cod_actividad}} - {{$actividad->desc_actividad}}</option>
                     @empty

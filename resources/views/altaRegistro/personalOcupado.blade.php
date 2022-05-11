@@ -48,7 +48,7 @@
     <br>
 
     <label for="masa_salarial_bruta">Masa salarial bruta total en la Provincia de Santa Cruz:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" aria-describedby="basic-addon1" id="masa_salarial_bruta" name="masa_salarial_bruta" placeholder="Ingrese la masa salarial bruta total en la Provincia de Santa Cruz" maxlength="9">
+    <input type="text" class="form-control" aria-describedby="basic-addon1" id="masa_salarial_bruta" name="masa_salarial_bruta" placeholder="Ingrese la masa salarial bruta total en la Provincia de Santa Cruz" maxlength="99">
     <small class="small" id="small-masa_salarial_bruta"></small>
     <br>
 
@@ -89,23 +89,6 @@ function validarpuestos_trabajo_Sta_Cruz() {
         }
     }
     ocultarError('#puestos_trabajo_Sta_Cruz', '#small-puestos_trabajo_Sta_Cruz');
-    return true;
-}
-
-
-
-$('#masa_salarial_bruta').keyup(validarmasa_salarial_bruta);
-
-function validarmasa_salarial_bruta() {
-
-    if (!(/^[0-9]+$/.test($('#masa_salarial_bruta').val()))) {
-        if($('#masa_salarial_bruta').val() != ""){
-
-        mostrarError('#masa_salarial_bruta', '#small-masa_salarial_bruta', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de masa salarial</strong> debe contener solamente dígitos numéricos.</div>');
-        return false;
-        }
-    }
-    ocultarError('#masa_salarial_bruta', '#small-masa_salarial_bruta');
     return true;
 }
 

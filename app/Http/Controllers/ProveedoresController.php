@@ -141,6 +141,9 @@ class ProveedoresController extends Controller
 
                     //-------------------Carga Proveedor-------------------
                     $proveedores_rupae = new Proveedor($request->all());
+
+                    $proveedores_rupae->masa_salarial_bruta= str_replace(",","",str_replace(".","",$request->masa_salarial_bruta));
+
                     $proveedores_rupae->save();
 
 
@@ -2770,6 +2773,8 @@ class ProveedoresController extends Controller
             $proveedores_rupae->producto_post_venta = $request->producto_post_venta;
             $proveedores_rupae->producto_venta_asistida = $request->producto_venta_asistida;
             $proveedores_rupae->producto_garantia = $request->producto_garantia;
+            $proveedores_rupae->masa_salarial_bruta= str_replace(",","",str_replace(".","",$request->masa_salarial_bruta));
+
 
             $proveedores_rupae->save();
 
