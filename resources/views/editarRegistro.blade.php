@@ -190,7 +190,7 @@ formulario.addEventListener("submit", function(event){
         //Detenemos el envio del formulario
         event.preventDefault();
 
-            if(validardni_legal()){
+            if(validarDni()){
                 this.submit();
             }
 
