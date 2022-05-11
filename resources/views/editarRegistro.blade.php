@@ -3,6 +3,7 @@
 @section('content2')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
+
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -73,6 +74,7 @@
         <br>
 
     </nav>
+    <small class="small" id="small-dni"></small>
 
     <form id="edit_form" action="{{ url('editarProveedor/' . $proveedor->id_proveedor) }}" method="POST">
         @csrf
@@ -171,6 +173,9 @@
 @endsection
 
 @push('js')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" integrity="sha512-CbQfNVBSMAYmnzP3IC+mZZmYMP2HUnVkV4+PwuhpiMUmITtSpS7Prr3fNncV1RBOnWxzz4pYQ5EAGG4ck46Oig==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
@@ -178,6 +183,19 @@
 
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script>
+    let formulario = document.getElementById("edit_form");
+
+formulario.addEventListener("submit", function(event){
+
+        //Detenemos el envio del formulario
+        event.preventDefault();
+
+            if(validardni_legal()){
+                this.submit();
+            }
+
+        }, false);
+
         $('input[type="checkbox"]').on('change', function() {
             this.value = this.checked ? 1 : 0;
             //console.log(this.value);
@@ -215,6 +233,15 @@
         }).change();
 
         window.onload = function() {
+          $('.js-example-basic-single').select2({
+            theme: "bootstrap",    width: 'resolve' // need to override the changed default
+});
+
+$("#masa_salarial_bruta").val(function (index, value ) {
+            return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+        });
 
             @if (!$proveedor_domicilio_real->id_localidad == '')
                 recargarListaRealEdit2();
@@ -233,6 +260,23 @@
 
 
         };
+        $("#masa_salarial_bruta").on({
+    "focus": function (event) {
+        $(event.target).select();
+    },
+    "keyup": function (event) {
+        $(event.target).val(function (index, value ) {
+            return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+        });
+    }
+
+});
+
+
+
+
     </script>
 
     <!-- Script para resetear los campos del formulario. Todavia no funciona bien.

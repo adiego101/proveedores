@@ -5,7 +5,7 @@
   <h4>Ingresos brutos:</h4><br>
 
   <label for="nro_ingresos_brutos">Número de ingresos brutos:</label><br>
-  <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de ingresos brutos" aria-describedby="basic-addon1" id="nro_ingresos_brutos" name="nro_ingresos_brutos" maxlength="9">
+  <input type="text" class="form-control" placeholder="Ingrese el número de ingresos brutos" aria-describedby="basic-addon1" id="nro_ingresos_brutos" name="nro_ingresos_brutos" maxlength="100">
   <small class="small" id="small-nro_ingresos_brutos"></small>
   <br>
 
@@ -25,7 +25,7 @@
   <h4>Habilitaciones:</h4><br>
 
   <label for="nro_habilitacion_municipal">Número de habilitación municipal:</label><br>
-  <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de habilitación municipal" aria-describedby="basic-addon1" id="nro_habilitacion_municipal" name="nro_habilitacion_municipal" maxlength="20">
+  <input type="text"  class="form-control" placeholder="Ingrese el número de habilitación municipal" aria-describedby="basic-addon1" id="nro_habilitacion_municipal" name="nro_habilitacion_municipal" maxlength="40">
   <small class="small" id="small-nro_habilitacion_municipal"></small>
   <br>
 
@@ -136,38 +136,6 @@ function validarnro_inscripcion_personas_juridicas() {
     ocultarError('#nro_inscripcion_personas_juridicas', '#small-nro_inscripcion_personas_juridicas');
     return true;
 }
-
-$('#nro_ingresos_brutos').keyup(validarnro_ingresos_brutos);
-
-function validarnro_ingresos_brutos() {
-
-    if (!(/^[0-9]+$/.test($('#nro_ingresos_brutos').val()))) {
-        if($('#nro_ingresos_brutos').val() != ""){
-
-        mostrarError('#nro_ingresos_brutos', '#small-nro_ingresos_brutos', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de ingresos brutos</strong> debe contener solamente dígitos numéricos.</div>');
-        return false;
-        }
-    }
-    ocultarError('#nro_ingresos_brutos', '#small-nro_ingresos_brutos');
-    return true;
-}
-
-$('#nro_habilitacion_municipal').keyup(validarnro_habilitacion_municipal);
-
-function validarnro_habilitacion_municipal() {
-
-    if (!(/^[0-9]+$/.test($('#nro_habilitacion_municipal').val()))) {
-        if($('#nro_habilitacion_municipal').val() != ""){
-
-        mostrarError('#nro_habilitacion_municipal', '#small-nro_habilitacion_municipal', '<div class="alert alert-danger mt-3 pt-1">El <strong>Número de habilitación municipal</strong> debe contener solamente dígitos numéricos.</div>');
-        return false;
-        }
-    }
-    ocultarError('#nro_habilitacion_municipal', '#small-nro_habilitacion_municipal');
-    return true;
-}
-
-
 
 	$(document).ready(function(){
 

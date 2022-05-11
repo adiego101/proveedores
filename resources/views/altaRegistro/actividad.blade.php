@@ -23,7 +23,7 @@
 
         <div class="col-sm">
             <label for="actividad">Actividad:</label><br>
-            <select class="form-control" aria-describedby="basic-addon1" id="actividad" name="actividad">
+            <select class="js-example-basic-single" aria-describedby="basic-addon1" id="actividad" name="actividad">
                 @forelse($actividades as $actividad)
                     <option value="{{$actividad->desc_actividad}}">{{$actividad->cod_actividad}} - {{$actividad->desc_actividad}}</option>
                 @empty
@@ -78,7 +78,7 @@
     <hr>
 
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="8">
+    <input type="text" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="15">
     <small class="small" id="small-rne"></small>
     <br>
 
@@ -208,24 +208,6 @@
 @push('js')
 
     <script type="text/javascript">
-
-        $('#rne').keyup(validarRne);
-
-        function validarRne() {
-
-            if (!(/^[0-9]+$/.test($('#rne').val()))) {
-
-                if($('#rne').val() != ""){
-
-
-                mostrarError('#rne', '#small-rne', '<div class="alert alert-danger mt-3 pt-1">El <strong>Registro Nacional de Establecimientos</strong> debe contener solamente dígitos numéricos.</div>');
-                return false;
-                }
-            }
-            ocultarError('#rne', '#small-rne');
-            return true;
-        }
-
 
         $('#unidad_producida').keyup(validarUnidadProducida);
 
@@ -510,6 +492,11 @@ $(document).on("click", ".btn_edit_producto", function() {
     $('#numero_fila_producto').val(button_id);
 
 });
+
+
+
+        /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
+       
 
 </script>
 
