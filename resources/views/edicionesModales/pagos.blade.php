@@ -31,6 +31,15 @@
 
                             <br>
 
+                            <label for="tipo_pago">Tipo de pago:</label><br>
+                            <select @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="tipo_pago" name="tipo_pago">
+                            <option selected value="Inscripcion">Inscripción</option>
+                            <option value="Renovacion">Renovación</option>
+                            <option value="Otros">Otros</option>
+                            </select>
+
+                            <br>
+
                         <label for="observacionespago">Observaciones:</label><br>
                         <input @if ($mode == 'show') readonly @endif type="text" class="form-control"
                             placeholder="Ingrese las observaciones del pago" aria-describedby="basic-addon1"

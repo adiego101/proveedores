@@ -18,6 +18,14 @@
                         <small class="small" id="small-importe-pago-modal"></small>
                         <br />
 
+                        <label for="modal_tipo_pago">Tipo de pago:</label><br>
+                        <select class="form-control" aria-describedby="basic-addon1" id="modal_tipo_pago" name="modal_tipo_pago">
+                        <option selected value="Inscripcion">Inscripción</option>
+                        <option value="Renovacion">Renovación</option>
+                        <option value="Otros">Otros</option>
+                        </select>
+                        <br>
+
                         <label for="modal_observaciones">Observaciones:</label><br />
                         <input type="text" class="form-control" placeholder="Ingrese las observaciones del pago" aria-describedby="basic-addon1" id="modal_observaciones" maxlength="50"/><br />
                     </div>
@@ -64,6 +72,7 @@
             //Recuperamos los valores de los campos del modal
             var modal_fecha = $("#modal_fecha").val();
             var modal_importe = $("#modal_importe").val();
+            var modal_tipo_pago = $("#modal_tipo_pago").val();
             var modal_observaciones = $("#modal_observaciones").val();
 
             //Obtenemos los campos obligatorios para aplicarles estilos css
@@ -79,12 +88,14 @@
                 //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
                 $('#fecha_pago' + id_filapago).val(modal_fecha);
                 $('#importe_pago' + id_filapago).val(modal_importe);
+                $('#tipo_pago' + id_filapago).val(modal_tipo_pago);
                 $('#observaciones_pago' + id_filapago).val(modal_observaciones);
 
                 //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
                 var modal_fecha_clasica_pago = modal_fecha.split('-').reverse().join('/');
                 $('#fecha_pago_text' + id_filapago).text(modal_fecha_clasica_pago);
                 $('#importe_pago_text' + id_filapago).text(modal_importe);
+                $('#tipo_pago_text' + id_filapago).text(modal_tipo_pago);
                 $('#observaciones_pago_text' + id_filapago).text(modal_observaciones);
 
                 modal_fecha_css.style.border = '1px solid #DFDFDF';
