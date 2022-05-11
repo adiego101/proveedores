@@ -1,5 +1,7 @@
 <?php
 
+if (isset($data['fecha_inscripcion'])) {
+
 //Recuperamos la fecha de inscripcion desde la BD
 //La fecha original tiene el formato YYYY-mm-dd H:i:s
 $fechaOriginalInscripcion = htmlspecialchars($data['fecha_inscripcion']);
@@ -7,6 +9,13 @@ $fechaOriginalInscripcion = htmlspecialchars($data['fecha_inscripcion']);
 //Cambiamos el formato por dd/mm/YYYY H:i:s
 $timestamp = strtotime($fechaOriginalInscripcion);
 $fechaInscripcionFormat = date("d/m/Y", $timestamp);
+
+} else {
+
+    $fechaInscripcionFormat = "";
+
+}
+
 ?>
 
 <html>
@@ -165,7 +174,7 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
                     <td>
                         <label for="">Tipo de sociedad: {{isset($data['proveedor']['tipo_de_sociedad']) ? $data['proveedor']['tipo_de_sociedad'] : ''}}</label><br>
                         <label for="">Situación IVA: {{isset($data['proveedor']['situacion_iva']) ? $data['proveedor']['situacion_iva'] : ''}}</label><br>
-                        <label for="">Nro Ingresos brutos {{isset($data['proveedor']['nro_ingresos_brutos']) ? $data['proveedor']['nro_ingresos_brutos'] : ''}}</label><br>
+                        <label for="">Nro Ingresos brutos: {{isset($data['proveedor']['nro_ingresos_brutos']) ? $data['proveedor']['nro_ingresos_brutos'] : ''}}</label><br>
                         <label for="">Tipo contribuyente: {{isset($data['proveedor']['tipo_contribuyente']) ? $data['proveedor']['tipo_contribuyente'] : ''}}</label><br>
                     </td>
                     <td>
@@ -181,7 +190,7 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
                         <label for="">Inspección general de justicia: {{isset($data['proveedor']['inspeccion_gral_justicia']) ? $data['proveedor']['inspeccion_gral_justicia'] : ''}}</label><br>
                     </td>
                     <td>
-                        <label for="">Localidad habilitación {{isset($data['proveedor']['localidad_habilitacion']) ? $data['proveedor']['localidad_habilitacion'] : ''}}</label><br>
+                        <label for="">Localidad habilitación: {{isset($data['proveedor']['localidad_habilitacion']) ? $data['proveedor']['localidad_habilitacion'] : ''}}</label><br>
                         <label for="">Provincia inscrip personas jurídicas: {{isset($data['proveedor']['provincia_inscrip_personas_jur']) ? $data['proveedor']['provincia_inscrip_personas_jur'] : ''}}</label><br>
                         <label for="">Provincia registro público: {{isset($data['proveedor']['provincia_registro_publico']) ? $data['proveedor']['provincia_registro_publico'] : ''}}</label><br>
                         <label for="">Provincia inspección justicia: {{isset($data['proveedor']['provincia_inspeccion_justicia']) ? $data['proveedor']['provincia_inspeccion_justicia'] : ''}}</label><br>
@@ -221,9 +230,8 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
             <br>
             <br>
 
-            <label for="">Río Gallegos, </label>
-            {{$data['fecha_emision_certificado']}}
-
+            <label for="">Río Gallegos, {{$data['fecha_emision_certificado']}}</label>
+            
         </main>
 
         <script type="text/php">

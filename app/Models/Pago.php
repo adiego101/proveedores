@@ -17,6 +17,7 @@ class Pago extends Model
                             'fecha',
                             'id_proveedor',
                             'importe',
+                            'tipo_pago',
                             'observaciones',
                             ];
 

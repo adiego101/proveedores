@@ -158,6 +158,8 @@
     @include('edicionesModales.altaVehiculos')
     @include('edicionesModales.editarVehiculos')
     @include('sucursales.create')
+    @include('edicionesModales.palabraClave')
+    @include('edicionesModales.editarPalabraClave')
 
     <!--Incluimos el modal para editar los campos de las sucursales -->
 

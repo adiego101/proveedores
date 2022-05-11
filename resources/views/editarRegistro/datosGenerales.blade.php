@@ -16,8 +16,8 @@ value="{{ isset($proveedor->nombre_fantasia) ? $proveedor->nombre_fantasia : '' 
     <input type="text" class="form-control" onkeypress="return valideKey(event);"
         placeholder="Ingrese el número de cuit de la empresa (sin guiones medios)" aria-describedby="basic-addon1" id="cuit" name="cuit"
         @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="11" required>
-    <small class="small" id="small-cuit"></small>
+value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="13" pattern="^([0-9]{2})([0-9]{9}|-[0-9]{8}-[0-9]{1})$" required>
+
     <br>
 
     <label for="observaciones">Observaciones:</label><br>
@@ -53,28 +53,11 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
 
     <script type="text/javascript">
 
-
-        $('#cuit').keyup(validarCuit);
-
-        function validarCuit() {
-
-            if (!(/^[0-9]+$/.test($('#cuit').val()))) {
-                if($('#cuit').val() != ""){
-                mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de CUIT</strong> debe contener solamente dígitos numéricos.</div>');
-                return false;
-                }
-            }
-            ocultarError('#cuit', '#small-cuit');
-            return true;
-        }
-
-
-
         $('#dni_legal').keyup(validarDni);
 
         function validarDni() {
 
-        if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test($('#dni_legal').val()))) {
+            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test($('#dni_legal').val()))) {
             if($('#dni_legal').val() != ""){
 
             mostrarError('#dni_legal', '#small-dni', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> tiene un formato incorrecto.</div>');
@@ -87,6 +70,28 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
         ocultarError('#dni_legal', '#small-dni2');
 
         return true;
+        }
+
+
+
+        $(document).ready(valida_cuit_datos_generales_editar);
+
+        function valida_cuit_datos_generales_editar(){
+
+        
+            $(document).on('keyup','#cuit',function(e){
+                if($(this).val().length == 2) {
+
+                    $(this).val($(this).val()+"-");
+
+                }
+
+                if($(this).val().length == 11) {
+
+                    $(this).val($(this).val()+"-");
+
+                }
+            });
         }
 
     </script>

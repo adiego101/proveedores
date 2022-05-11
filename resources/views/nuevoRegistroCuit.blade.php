@@ -29,7 +29,7 @@
             <div class="col-sm">
 
                 <label for="cuit">CUIT: <sup>*</sup></label><br>
-                <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el número de cuit de la empresa (sin guiones medios)" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="11" pattern="^([0-9]{2})([0-9]{9}|-[0-9]{8}-[0-9]{1})$" required><br>
+                <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el número de cuit" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="13" pattern="^([0-9]{2})([0-9]{9}|-[0-9]{8}-[0-9]{1})$" required><br>
 
             </div>
 
@@ -64,6 +64,29 @@
           return false;
         }
     }
+
+    
+
+    $(document).ready(valida_cuit);
+
+    function valida_cuit(){
+
+        $(document).on('keyup','#cuit',function(e){
+            if($(this).val().length == 2) {
+
+                $(this).val($(this).val()+"-");
+
+            }
+
+            if($(this).val().length == 11) {
+
+                $(this).val($(this).val()+"-");
+
+            }
+        });
+    }
+
+
 </script>
 
 @endpush

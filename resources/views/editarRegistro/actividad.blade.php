@@ -79,6 +79,46 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8">
         @include('modales.modalBajaProducto')
 
     <br />
+
+
+    <hr>
+
+    <h3>Palabras claves</h3>
+    <br>
+
+    <div class="row">
+    
+
+        <div class="col-sm">
+
+            @if ($mode == "edit")
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaPalabraClave">
+                    Agregar Nueva Palabra
+                </button><br>
+                <hr>
+            @endif
+
+        </div>
+    </div>
+
+        <div>
+            <table style="width:100%" class="yajra-palabras-claves table table-hover  table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th>Palabra clave</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        @include('modales.modalBajaPalabraClave')
+
+    <br />
+
 <div class="row navbuttons ">
     <div class="col-6 col-sm-auto" id="btnPrevious">
         <a class="btn btn-outline-secondary btnPrevious">Atrás</a>
@@ -186,6 +226,47 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8">
 
 
 
+  $(function () {
+
+    var table = $('.yajra-palabras-claves').DataTable({
+    language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+    },
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('palabras_clave/'.$id.'/'.$mode) }}",
+        columns: [
+            {data: 'desc_palabra_clave', name: 'desc_palabra_clave'},
+            {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+            },
+        ]
+    });
+
+    });
+
+
+
     function verRegistro() {
 
         return  alert("Retornar vista para visualizar un registro!");
@@ -206,6 +287,39 @@ value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8">
         $('#modal_baja_producto').modal('show');
         $('#baja_producto').val(id_registro);
     }
+
+    function bajaPalabraClave(id_registro) {
+
+        //Desplegamos el modal
+        $('#modal_baja_palabra_clave').modal('show');
+        $('#baja_palabra_clave').val(id_registro);
+    }
+
+
+    //Enviamos el id del registro que queremos modificar (id de la tabla)
+    function editarPalabraClave(id_registro) {
+
+        $.ajax ({
+        url: "{{ url('palabrasClaveBD/') }}/"+id_registro,
+        success: function (response) {
+
+            abrirModalEditarPalabras(response);
+        }
+        });
+
+
+        function abrirModalEditarPalabras(response){
+
+            //Desplegamos el modal
+            $('#editarPalabraClave').modal('show');
+            //Enviamos los valores a cada campo
+            $('#palabras_claves').val(response [0].desc_palabra_clave);
+            $('#id_palabra_clave').val(response [0].id_proveedor_palabra_clave);
+
+        }
+
+    }
+
 
 </script>
 
