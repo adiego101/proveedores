@@ -25,6 +25,7 @@ use App\Models\Sucursal;
 use App\Models\Sucursal_email;
 use App\Models\Sucursal_telefono;
 use App\Models\Tipo_actividad;
+use App\Models\Proveedor_palabra_clave;
 use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -457,6 +458,25 @@ class ProveedoresController extends Controller
                             ]);
 
                             $producto->save();
+                        }
+                    }
+
+
+                    //---------Contador de Palabras claves----------
+                    if (isset($request->palabras_claves)) {
+
+                        $arraySize = count($request->palabras_claves);
+
+                        for ($i = 0; $i < $arraySize; $i++) {
+                            //---------Carga de Palabras claves----------
+
+                            $palabra_clave = Proveedor_palabra_clave::create([
+                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'desc_palabra_clave' => $request->palabras_claves[$i],
+                        
+                            ]);
+
+                            $palabra_clave->save();
                         }
                     }
 
@@ -1192,6 +1212,91 @@ class ProveedoresController extends Controller
 
     }
 
+    public function getPalabrasClave(Request $request, $id, $mode = null)
+    {
+        try {
+            $data = Proveedor_palabra_clave::where('id_proveedor', $id)
+                ->select('proveedores_palabras_claves.id_proveedor', 'proveedores_palabras_claves.id_proveedor_palabra_clave', 'proveedores_palabras_claves.desc_palabra_clave')
+                ->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) use ($mode) {
+                    $url = url('editarPalabrasClave/' . $row->id_proveedor_palabra_clave);
+                    $url2 = url('verPalabrasClave/' . $row->id_proveedor_palabra_clave);
+                    if ($mode == "show") {
+                        $actionBtn = ' <a onclick="editarPalabraClave(' . $row->id_proveedor_palabra_clave . ');" class="view btn btn-primary btn-sm" title="ver palabra clave">
+                        <i class="fas fa-eye"></i></a>  ';
+
+                        return $actionBtn;
+
+                    } else {
+
+                        $actionBtn = '<a onclick="editarPalabraClave(' . $row->id_proveedor_palabra_clave . ');" class="view btn btn-warning btn-sm" title="editar palabra clave">
+                        <i class="fas fa-edit"></i></a> <a onclick="bajaPalabraClave(' . $row->id_proveedor_palabra_clave . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
+                        <i class="fas fa-exclamation-circle"></i></a>';
+
+                        return $actionBtn;
+                    }
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+
+    public function crearPalabrasClave($id, Request $request)
+    {
+        try {
+            $palabra = new Proveedor_palabra_clave();
+            $palabra->id_proveedor = $id;
+            $palabra->desc_palabra_clave = $request->palabra_clave;
+            $palabra->save();
+
+            return redirect()->back()->with('message', 'Palabra clave Creada Correctamente');
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+
+    public function bajaPalabrasClave($id)
+    {
+        try {
+            Proveedor_palabra_clave::findOrFail($id)->delete();
+            return "success";
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+
+    public function getPalabrasClaveBD($id)
+    {
+        try {
+            $data = Proveedor_palabra_clave::where('id_proveedor_palabra_clave', $id)->get();
+
+            return $data;
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+
     public function getProductos(Request $request, $id, $mode = null)
     {
         try {
@@ -1322,6 +1427,25 @@ class ProveedoresController extends Controller
                 ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
+
+
+    public function guardarPalabrasClave($id, Request $request)
+    {
+        try {
+            $palabra = Proveedor_palabra_clave::find($id);
+
+            $palabra->desc_palabra_clave = $request->palabras_claves;
+
+            $palabra->save();
+
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
 
     public function getPatentes(Request $request, $id, $mode = null)
     {
