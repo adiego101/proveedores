@@ -139,7 +139,7 @@ $('input[type="checkbox"]').on('change', function(){
 
 
 
-    let formulario = document.getElementById("regiration_form");
+   /* let formulario = document.getElementById("regiration_form");
 
     formulario.addEventListener("submit", function(event){
 
@@ -186,8 +186,8 @@ $('input[type="checkbox"]').on('change', function(){
             this.submit();
         }
 
-    }, false);
-    
+    }, false);*/
+
     let formulario = document.getElementById("regiration_form");
 
     formulario.addEventListener("submit", function(event){
