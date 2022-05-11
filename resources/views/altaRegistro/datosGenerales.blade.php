@@ -9,8 +9,7 @@
     <input type="text" class="form-control" placeholder="Ingrese el nombre de fantasía" aria-describedby="basic-addon1" id="nombre_fantasia" name="nombre_fantasia" maxlength="50" required value="{{old('nombre_fantasia')}}"><br>
 
     <label for="cuit">CUIT: <sup>*</sup></label><br>
-    <input type="text" value="{{ isset($cuit) ? $cuit : '' }}" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el número de cuit de la empresa (sin guiones medios)" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="11" required>
-    <small class="small" id="small-cuit"></small>
+    <input type="text" value="{{ isset($cuit) ? $cuit : '' }}" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el número de cuit" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="13" pattern="^([0-9]{2})([0-9]{9}|-[0-9]{8}-[0-9]{1})$" required>
 
     <br>
 
@@ -50,20 +49,6 @@
             $("#next_datos").attr("disabled", "disabled");
     });
 */
-
-    $('#cuit').keyup(validarNumerocuit);
-
-    function validarNumerocuit() {
-
-        if (!(/^[0-9]+$/.test($('#cuit').val()))) {
-            if($('#cuit').val() != ""){
-            mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de CUIT</strong> debe contener solamente dígitos numéricos.</div>');
-            return false;
-            }
-        }
-        ocultarError('#cuit', '#small-cuit');
-        return true;
-    }
 
 
     $('#dni_legal').keyup(validardni_legal);
@@ -112,6 +97,26 @@
 
     onkeyup="validaInputDatos()"
 */
+
+
+    $(document).ready(valida_cuit_datos_generales_alta);
+
+    function valida_cuit_datos_generales_alta(){
+
+        $(document).on('keyup','#cuit',function(e){
+            if($(this).val().length == 2) {
+
+                $(this).val($(this).val()+"-");
+
+            }
+
+            if($(this).val().length == 11) {
+
+                $(this).val($(this).val()+"-");
+
+            }
+        });
+    }
 
 </script>
 
