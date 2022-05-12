@@ -46,9 +46,9 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
     <br>
 
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
-    <input type="text" class="form-control limpiar" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="15"
+    <input type="text" class="form-control limpiar" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="40"
         @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}" maxlength="8">
+value="{{ isset($proveedor->rne) ? $proveedor->rne : '' }}">
     <small class="small" id="small-rne"></small>
     <br>
 @if ($mode == "edit")

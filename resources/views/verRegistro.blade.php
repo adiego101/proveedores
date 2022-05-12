@@ -127,7 +127,7 @@
     @include('edicionesModales.editarVehiculos')
     @include('edicionesModales.palabraClave')
     @include('edicionesModales.editarPalabraClave')
-    
+
     <!--Incluimos el modal para editar los campos de las sucursales -->
 
     @include('sucursales.edit')
@@ -233,6 +233,12 @@ Swal.fire({
         }).change();
 
         window.onload = function() {
+
+            $("#masa_salarial_bruta").val(function (index, value ) {
+            return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+        });
 
             @if (!$proveedor_domicilio_real->id_localidad == '')
                 recargarListaRealEdit2();
