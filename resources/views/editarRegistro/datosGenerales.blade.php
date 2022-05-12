@@ -5,19 +5,23 @@
     <label for="razon_social">Razón social: <sup>*</sup></label><br>
     <input type="text" class="form-control" placeholder="Ingrese la razón social" aria-describedby="basic-addon1" id="razon_social" name="razon_social"
         @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor->razon_social) ? $proveedor->razon_social : '' }}" maxlength="50" autofocus required><br>
+value="{{ isset($proveedor->razon_social) ? $proveedor->razon_social : '' }}" maxlength="50" autofocus required>
+<small class="small" id="small-razon_social2"></small>
+<br>
 
     <label for="nombre_fantasia">Nombre de fantasía: <sup>*</sup></label><br>
     <input type="text" class="form-control" placeholder="Ingrese el nombre de fantasía" aria-describedby="basic-addon1" id="nombre_fantasia" name="nombre_fantasia"
         @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor->nombre_fantasia) ? $proveedor->nombre_fantasia : '' }}" maxlength="50" required><br>
+value="{{ isset($proveedor->nombre_fantasia) ? $proveedor->nombre_fantasia : '' }}" maxlength="50" required>
+<small class="small" id="small-nombre_fantasia2"></small>
+<br>
 
     <label for="cuit">CUIT: <sup>*</sup></label><br>
     <input type="text" class="form-control" onkeypress="return valideKey(event);"
         placeholder="Ingrese el número de cuit de la empresa (sin guiones medios)" aria-describedby="basic-addon1" id="cuit" name="cuit"
         @if ( $mode == "show") readonly @endif
 value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="13" pattern="^([0-9]{2})([0-9]{9}|-[0-9]{8}-[0-9]{1})$" required>
-
+<small class="small" id="small-cuit2"></small>
     <br>
 
     <label for="observaciones">Observaciones:</label><br>
@@ -71,6 +75,67 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
 
         return true;
         }
+
+
+
+        $('#razon_social').keyup(validar_razon_social);
+
+    function validar_razon_social() {
+
+            if($('#razon_social').val() == ""){
+
+            mostrarError('#razon_social', '#small-razon_social', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+            mostrarError('#razon_social', '#small-razon_social2', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+
+            return false;
+            }
+        
+        ocultarError('#razon_social', '#small-razon_social');
+        ocultarError('#razon_social', '#small-razon_social2');
+
+        return true;
+    }
+
+
+
+    $('#nombre_fantasia').keyup(validar_nombre_fantasia);
+
+    function validar_nombre_fantasia() {
+
+            if($('#nombre_fantasia').val() == ""){
+
+            mostrarError('#nombre_fantasia', '#small-nombre_fantasia', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
+            mostrarError('#nombre_fantasia', '#small-nombre_fantasia2', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
+
+            return false;
+            }
+        
+        ocultarError('#nombre_fantasia', '#small-nombre_fantasia');
+        ocultarError('#nombre_fantasia', '#small-nombre_fantasia2');
+
+        return true;
+    }
+
+
+
+    $('#cuit').keyup(validar_cuit);
+
+    function validar_cuit() {
+
+            if($('#cuit').val() == ""){
+
+            mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
+            mostrarError('#cuit', '#small-cuit2', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
+
+            return false;
+            }
+        
+        ocultarError('#cuit', '#small-cuit');
+        ocultarError('#cuit', '#small-cuit2');
+
+        return true;
+    }
+
 
 
 
