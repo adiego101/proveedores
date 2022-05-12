@@ -5,8 +5,7 @@
 
 <br/>
     <label for="facturacion_anual_alcanzada">Facturación anual alcanzada:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada" name="facturacion_anual_alcanzada" maxlength="9">
-    <small class="small" id="small-facturacion-anual"></small>
+    <input type="text" class="form-control" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada" name="facturacion_anual_alcanzada" maxlength="40">
     <br>
 
     <div class="row">
@@ -24,7 +23,7 @@
 
         <div class="col-sm">
             <label for="actividad">Actividad:</label><br>
-            <select class="form-control" aria-describedby="basic-addon1" id="actividad" name="actividad">
+            <select class="js-example-basic-single" aria-describedby="basic-addon1" id="actividad" name="actividad">
                 @forelse($actividades as $actividad)
                     <option value="{{$actividad->desc_actividad}}">{{$actividad->cod_actividad}} - {{$actividad->desc_actividad}}</option>
                 @empty
@@ -49,7 +48,28 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="body_table_actividad"></tbody>
+            <tbody id="body_table_actividad">
+                @if(old('tipos_actividades') && old('actividades'))
+                    @foreach(old('tipos_actividades') as $actividad)
+                        <tr id="row_actividad{{$loop->iteration}}">
+                            <td>{{$actividad}}</td>
+                            @php
+                                $old_actividad=old('actividades')[$loop->index]
+                            @endphp
+                            @foreach($actividades as $actividad)
+                                @if($actividad->desc_actividad == $old_actividad)
+                                    <td>{{$actividad->cod_actividad}} - {{$actividad->desc_actividad}}</td>
+                                @endif
+                            @endforeach
+                            <td>
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="tipo_actividad{{$loop->iteration}}" name="tipos_actividades[]" readonly value="{{$actividad}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="actividad{{$loop->iteration}}" name="actividades[]" readonly value="{{old('actividades')[$loop->index]}}">
+                                <button type="button" name="remove" id="{{$loop->iteration}}" class="btn btn-danger btn-sm btn_remove_actividad" title="quitar actividad"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
         </table>
     </div>
 
@@ -58,7 +78,7 @@
     <hr>
 
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="8">
+    <input type="text" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="15">
     <small class="small" id="small-rne"></small>
     <br>
 
@@ -108,7 +128,59 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="body_table_producto"></tbody>
+            <tbody id="body_table_producto">
+                @if(old('productos'))
+                    @foreach(old('productos') as $producto)
+                        <tr id="row_producto{{$loop->iteration}}">
+                            <td> <div id="producto_elaborado_text{{$loop->iteration}}">{{$producto}}</div></td>
+                            <td> <div id="unidad_producida_text{{$loop->iteration}}">{{old('unidades')[$loop->index]}}</div></td>
+                            <td> <div id="rnpa_text{{$loop->iteration}}">{{old('rnpas')[$loop->index]}}</div></td>
+                            <td> <div id="produccion_total_text{{$loop->iteration}}">{{old('producciones')[$loop->index]}}</div></td>
+                            <td>
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="producto_elaborado{{$loop->iteration}}" name="productos[]" readonly value="{{$producto}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="unidad_producida{{$loop->iteration}}" name="unidades[]" readonly value="{{old('unidades')[$loop->index]}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="rnpa{{$loop->iteration}}" name="rnpas[]" readonly value="{{old('rnpas')[$loop->index]}}">
+                                <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="produccion_total{{$loop->iteration}}" name="producciones[]" readonly value="{{old('producciones')[$loop->index]}}">
+                                <button type="button" name="edit" id="{{$loop->iteration}}" class="btn btn-warning btn-sm btn_edit_producto" title="editar producto"><i class="fas fa-edit"></i></button> <button type="button" name="remove" id="{{$loop->iteration}}" class="btn btn-danger btn-sm btn_remove_producto" title="quitar producto"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
+        </table>
+    </div>
+
+    <br />
+
+    <hr>
+
+    <div class="row">
+        <div class="col-sm">
+            <label for="palabra_clave">Palabra clave:</label><br>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" id="palabra_clave" name="palabra_clave" placeholder="Ingrese una palabra clave" maxlength="40">
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm"></div>
+
+        <div class="col-sm">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a id="add_palabra_clave" class="btn btn-success">Agregar Palabra</a>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Palabra clave</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="body_table_palabra_clave"></tbody>
         </table>
     </div>
 
@@ -129,42 +201,13 @@
 
     @include('modales.validarProducto')
 
+    <!--Incluimos el modal para validar una palabra clave -->
+
+    @include('modales.validarPalabraClave')
+
 @push('js')
 
     <script type="text/javascript">
-
-        $('#facturacion_anual_alcanzada').keyup(validarFacturacionAnual);
-
-        function validarFacturacionAnual() {
-
-            if (!(/^[0-9]+$/.test($('#facturacion_anual_alcanzada').val()))) {
-                if($('#facturacion_anual_alcanzada').val() != ""){
-                mostrarError('#facturacion_anual_alcanzada', '#small-facturacion-anual', '<div class="alert alert-danger mt-3 pt-1">La <strong>facturación anual</strong> debe contener solamente dígitos numéricos.</div>');
-                return false;
-                }
-            }
-            ocultarError('#facturacion_anual_alcanzada', '#small-facturacion-anual');
-            return true;
-        }
-
-
-        $('#rne').keyup(validarRne);
-
-        function validarRne() {
-
-            if (!(/^[0-9]+$/.test($('#rne').val()))) {
-
-                if($('#rne').val() != ""){
-
-
-                mostrarError('#rne', '#small-rne', '<div class="alert alert-danger mt-3 pt-1">El <strong>Registro Nacional de Establecimientos</strong> debe contener solamente dígitos numéricos.</div>');
-                return false;
-                }
-            }
-            ocultarError('#rne', '#small-rne');
-            return true;
-        }
-
 
         $('#unidad_producida').keyup(validarUnidadProducida);
 
@@ -447,6 +490,110 @@ $(document).on("click", ".btn_edit_producto", function() {
     $('#modal_rnpa').val(modal_rnpa);
     $('#modal_produccion_total').val(modal_produccion_total);
     $('#numero_fila_producto').val(button_id);
+
+});
+
+
+
+        /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
+       
+
+</script>
+
+
+<script type="text/javascript">
+
+let palabra_clave;
+let o = 1; //contador para asignar id al boton que borrara la fila
+
+$("#add_palabra_clave").on("click", function(e) {
+
+    palabra_clave = $("#palabra_clave").val();
+
+    //Obtenemos los campos obligatorios para aplicarles estilos css
+    let palabra_clave_css = document.getElementById("palabra_clave");
+
+    if(palabra_clave.length != 0){
+
+        //borra la fila con el mensaje vacio
+        $("#row_palabra_clave").remove();
+
+        $("#body_table_palabra_clave").append(
+            '<tr id="row_palabra_clave' + o +'">'+
+                '<td> <div id="palabra_clave_text' + o +'">' + palabra_clave +'</div></td>'+
+                '<td> <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="palabra_clave' + o +'" name="palabras_claves[]" readonly value="' + palabra_clave +'">'+
+                '<button type="button" name="remove" id="' + o +'" class="btn btn-danger btn-sm btn_remove_palabra_clave" title="quitar palabra clave"><i class="fas fa-trash"></i></button>'+
+                '</td>'+
+            '</tr>'
+        );
+
+        o++;
+
+        //Limpiamos cada campo luego de presionar el botón Agregar palabra
+
+        document.getElementById("palabra_clave").value = "";
+
+        palabra_clave_css.style.border = '1px solid #DFDFDF';
+      
+
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Palabra clave Guardada',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+        })
+
+
+    } else {
+
+        if(palabra_clave.length == 0){
+
+            palabra_clave_css.style.border = '2px dashed red';
+        }
+
+      
+        /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
+        //Desplegamos el modal
+        $('#modal_validar_palabra_clave').modal('show');
+
+    }
+
+});
+
+
+$(document).on("click", ".btn_remove_palabra_clave", function() {
+
+    //cuando da click al boton quitar, obtenemos el id del boton
+    let button_id = $(this).attr("id");
+
+    //borra la fila
+    $("#row_palabra_clave" + button_id + "").remove();
+
+    Swal.fire({
+                position: 'top-end',
+                icon: 'info',
+                title: 'Palabra clave dada de baja',
+                showConfirmButton: false,
+                timer: 1500,
+                toast: true
+
+    })
+
+    var cant_filas_palabra_clave = document.getElementById("body_table_palabra_clave").rows.length;
+
+    /*Si al eliminar una fila, la tabla esta vacia, volvemos a mostrar el mensaje de aviso*/
+    if(cant_filas_palabra_clave == 0){
+
+        $("#body_table_palabra_clave").append(
+                '<tr id="row_palabra_clave" class="alert alert-light" role="alert">'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                '</tr>'
+        );
+    }
 
 });
 

@@ -290,6 +290,13 @@ return [
         ],
 
         [
+            'text' => 'Historial de acciones',
+            'url' => '/historial_acciones',
+            'icon' => 'fas fa-fw fa-regular fa-address-card',
+            'label_color' => 'success',
+        ],
+
+        [
             'text' => 'Cambiar Contraseña',
             'url' => '/Cambiar_contraseña',
             'icon' => 'fas fa-key',

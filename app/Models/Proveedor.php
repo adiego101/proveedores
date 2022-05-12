@@ -171,9 +171,9 @@ class Proveedor extends Model
                     ->withTimestamps();
     }
 
-    public function representantes(){
+    public function representante(){
         return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
-                    ->wherePivot('rol_persona_proveedor', 'representante');
+                    ->wherePivot('rol_persona_proveedor', 'Representante');
     }
 
     public function actividades_economicas(){
