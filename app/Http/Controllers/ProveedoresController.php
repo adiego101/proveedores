@@ -143,7 +143,8 @@ class ProveedoresController extends Controller
                     //-------------------Carga Proveedor-------------------
                     $proveedores_rupae = new Proveedor($request->all());
 
-                    $proveedores_rupae->masa_salarial_bruta= str_replace(",","",str_replace(".","",$request->masa_salarial_bruta));
+                    $proveedores_rupae->masa_salarial_bruta= str_replace(",",".",str_replace(".","",$request->masa_salarial_bruta));
+                    $proveedores_rupae->facturacion_anual_alcanzada= str_replace(",",".",str_replace(".","",$request->facturacion_anual_alcanzada));
 
                     $proveedores_rupae->save();
 
@@ -476,7 +477,7 @@ class ProveedoresController extends Controller
                             $palabra_clave = Proveedor_palabra_clave::create([
                                 'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
                                 'desc_palabra_clave' => $request->palabras_claves[$i],
-                        
+
                             ]);
 
                             $palabra_clave->save();
@@ -2899,7 +2900,9 @@ class ProveedoresController extends Controller
             $proveedores_rupae->producto_post_venta = $request->producto_post_venta;
             $proveedores_rupae->producto_venta_asistida = $request->producto_venta_asistida;
             $proveedores_rupae->producto_garantia = $request->producto_garantia;
-            $proveedores_rupae->masa_salarial_bruta= str_replace(",","",str_replace(".","",$request->masa_salarial_bruta));
+            $proveedores_rupae->masa_salarial_bruta= str_replace(",",".",str_replace(".","",$request->masa_salarial_bruta));
+            $proveedores_rupae->facturacion_anual_alcanzada= str_replace(",",".",str_replace(".","",$request->facturacion_anual_alcanzada));
+
 
 
             $proveedores_rupae->save();
