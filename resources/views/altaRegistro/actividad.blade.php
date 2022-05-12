@@ -23,7 +23,7 @@
 
         <div class="col-sm">
             <label for="actividad">Actividad:</label><br>
-            <select class="form-control" aria-describedby="basic-addon1" id="actividad" name="actividad">
+            <select class="js-example-basic-single" aria-describedby="basic-addon1" id="actividad" name="actividad">
                 @forelse($actividades as $actividad)
                     <option value="{{$actividad->desc_actividad}}">{{$actividad->cod_actividad}} - {{$actividad->desc_actividad}}</option>
                 @empty
@@ -78,7 +78,7 @@
     <hr>
 
     <label for="rne">Registro Nacional de Establecimientos (RNE) N°:</label><br>
-    <input type="text" onkeypress="return valideKey(event);" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="8">
+    <input type="text" class="form-control" placeholder="Ingrese el número de RNE" aria-describedby="basic-addon1" id="rne" name="rne" maxlength="40">
     <small class="small" id="small-rne"></small>
     <br>
 
@@ -152,6 +152,40 @@
 
     <br />
 
+    <hr>
+
+    <div class="row">
+        <div class="col-sm">
+            <label for="palabra_clave">Palabra clave:</label><br>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" id="palabra_clave" name="palabra_clave" placeholder="Ingrese una palabra clave" maxlength="40">
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm"></div>
+
+        <div class="col-sm">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a id="add_palabra_clave" class="btn btn-success">Agregar Palabra</a>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Palabra clave</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="body_table_palabra_clave"></tbody>
+        </table>
+    </div>
+
+    <br />
+
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
@@ -167,27 +201,13 @@
 
     @include('modales.validarProducto')
 
+    <!--Incluimos el modal para validar una palabra clave -->
+
+    @include('modales.validarPalabraClave')
+
 @push('js')
 
     <script type="text/javascript">
-
-        $('#rne').keyup(validarRne);
-
-        function validarRne() {
-
-            if (!(/^[0-9]+$/.test($('#rne').val()))) {
-
-                if($('#rne').val() != ""){
-
-
-                mostrarError('#rne', '#small-rne', '<div class="alert alert-danger mt-3 pt-1">El <strong>Registro Nacional de Establecimientos</strong> debe contener solamente dígitos numéricos.</div>');
-                return false;
-                }
-            }
-            ocultarError('#rne', '#small-rne');
-            return true;
-        }
-
 
         $('#unidad_producida').keyup(validarUnidadProducida);
 
@@ -470,6 +490,110 @@ $(document).on("click", ".btn_edit_producto", function() {
     $('#modal_rnpa').val(modal_rnpa);
     $('#modal_produccion_total').val(modal_produccion_total);
     $('#numero_fila_producto').val(button_id);
+
+});
+
+
+
+        /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
+       
+
+</script>
+
+
+<script type="text/javascript">
+
+let palabra_clave;
+let o = 1; //contador para asignar id al boton que borrara la fila
+
+$("#add_palabra_clave").on("click", function(e) {
+
+    palabra_clave = $("#palabra_clave").val();
+
+    //Obtenemos los campos obligatorios para aplicarles estilos css
+    let palabra_clave_css = document.getElementById("palabra_clave");
+
+    if(palabra_clave.length != 0){
+
+        //borra la fila con el mensaje vacio
+        $("#row_palabra_clave").remove();
+
+        $("#body_table_palabra_clave").append(
+            '<tr id="row_palabra_clave' + o +'">'+
+                '<td> <div id="palabra_clave_text' + o +'">' + palabra_clave +'</div></td>'+
+                '<td> <input type="hidden" class="form-control" aria-describedby="basic-addon1" id="palabra_clave' + o +'" name="palabras_claves[]" readonly value="' + palabra_clave +'">'+
+                '<button type="button" name="remove" id="' + o +'" class="btn btn-danger btn-sm btn_remove_palabra_clave" title="quitar palabra clave"><i class="fas fa-trash"></i></button>'+
+                '</td>'+
+            '</tr>'
+        );
+
+        o++;
+
+        //Limpiamos cada campo luego de presionar el botón Agregar palabra
+
+        document.getElementById("palabra_clave").value = "";
+
+        palabra_clave_css.style.border = '1px solid #DFDFDF';
+      
+
+        Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Palabra clave Guardada',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+
+        })
+
+
+    } else {
+
+        if(palabra_clave.length == 0){
+
+            palabra_clave_css.style.border = '2px dashed red';
+        }
+
+      
+        /*Definir bien cuales campos deben ser requeridos y luego mostrar un mensaje en un modal*/
+        //Desplegamos el modal
+        $('#modal_validar_palabra_clave').modal('show');
+
+    }
+
+});
+
+
+$(document).on("click", ".btn_remove_palabra_clave", function() {
+
+    //cuando da click al boton quitar, obtenemos el id del boton
+    let button_id = $(this).attr("id");
+
+    //borra la fila
+    $("#row_palabra_clave" + button_id + "").remove();
+
+    Swal.fire({
+                position: 'top-end',
+                icon: 'info',
+                title: 'Palabra clave dada de baja',
+                showConfirmButton: false,
+                timer: 1500,
+                toast: true
+
+    })
+
+    var cant_filas_palabra_clave = document.getElementById("body_table_palabra_clave").rows.length;
+
+    /*Si al eliminar una fila, la tabla esta vacia, volvemos a mostrar el mensaje de aviso*/
+    if(cant_filas_palabra_clave == 0){
+
+        $("#body_table_palabra_clave").append(
+                '<tr id="row_palabra_clave" class="alert alert-light" role="alert">'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                '</tr>'
+        );
+    }
 
 });
 

@@ -56,8 +56,9 @@
         Complete los campos que se presentan continuación
         y presione el botón <b>Siguiente</b>, para continuar la carga de datos.
     </div>
+    <small class="small" id="small-dni_legal"></small>
 
-    <form id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
+    <form  id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
         @csrf
         @include('altaRegistro.datosGenerales')
 
@@ -94,6 +95,10 @@
 
 
 @push('js')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" integrity="sha512-CbQfNVBSMAYmnzP3IC+mZZmYMP2HUnVkV4+PwuhpiMUmITtSpS7Prr3fNncV1RBOnWxzz4pYQ5EAGG4ck46Oig==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
 
@@ -132,7 +137,9 @@ $('input[type="checkbox"]').on('change', function(){
 
 <script type="text/javascript">
 
-    let formulario = document.getElementById("regiration_form");
+
+
+   /* let formulario = document.getElementById("regiration_form");
 
     formulario.addEventListener("submit", function(event){
 
@@ -179,16 +186,72 @@ $('input[type="checkbox"]').on('change', function(){
             this.submit();
         }
 
-    }, false);
+    }, false);*/
 
+    let formulario = document.getElementById("regiration_form");
+
+    formulario.addEventListener("submit", function(event){
+
+        //Detenemos el envio del formulario
+        event.preventDefault();
+
+            if(validardni_legal()){
+                this.submit();
+            }
+
+        }, false);
 </script>
 
 
 <script type="text/javascript">
 
+$("#masa_salarial_bruta").on({
+    "focus": function (event) {
+        $(event.target).select();
+    },
+    "keyup": function (event) {
+        $(event.target).val(function (index, value ) {
+            return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+        });
+    }
+
+});
+
+$("#facturacion_anual_alcanzada").on({
+    "focus": function (event) {
+        $(event.target).select();
+    },
+    "keyup": function (event) {
+        $(event.target).val(function (index, value ) {
+            return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+        });
+    }
+
+});
+
+
         /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
         window.onload = function() {
 
+            $("#masa_salarial_bruta").val(function (index, value ) {
+            return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+        });
+        $("#facturacion_anual_alcanzada").val(function (index, value ) {
+            return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+        });
+
+
+            $('.js-example-basic-single').select2({
+            theme: "bootstrap",    width: 'resolve' // need to override the changed default
+});
             var cant_filas_sucursal = document.getElementById("body_table_sucursal").rows.length;
 
             if(cant_filas_sucursal == 0){
@@ -227,6 +290,19 @@ $('input[type="checkbox"]').on('change', function(){
                     '<td></td>'+
                     '<td>No hay registros</td>'+
                     '<td></td>'+
+                    '<td></td>'+
+                '</tr>'
+                );
+            }
+
+
+            var cant_filas_palabra_clave = document.getElementById("body_table_palabra_clave").rows.length;
+
+            if(cant_filas_palabra_clave == 0){
+
+                $("#body_table_palabra_clave").append(
+                '<tr id="row_palabra_clave" class="alert alert-light" role="alert">'+
+                    '<td>No hay registros</td>'+
                     '<td></td>'+
                 '</tr>'
                 );
