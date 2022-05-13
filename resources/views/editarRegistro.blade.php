@@ -74,6 +74,11 @@
         <br>
 
     </nav>
+    
+    <small class="small" id="small-razon_social"></small>
+    <small class="small" id="small-nombre_fantasia"></small>
+    <small class="small" id="small-cuit4"></small>
+    <small class="small" id="small-cuit2"></small>
     <small class="small" id="small-dni"></small>
 
     <form id="edit_form" action="{{ url('editarProveedor/' . $proveedor->id_proveedor) }}" method="POST">
@@ -232,6 +237,13 @@ formulario.addEventListener("submit", function(event){
         }).change();
 
         window.onload = function() {
+
+            validar_razon_social();
+        
+            validar_nombre_fantasia();
+
+            validar_cuit();
+
           $('.js-example-basic-single').select2({
             theme: "bootstrap",    width: 'resolve' // need to override the changed default
 });
