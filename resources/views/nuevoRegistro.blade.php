@@ -242,6 +242,8 @@ $("#facturacion_anual_alcanzada").on({
         /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
         window.onload = function() {
 
+            
+
             $("#masa_salarial_bruta").val(function (index, value ) {
             return value.replace(/\D/g, "")
                         .replace(/([0-9])([0-9]{2})$/, '$1,$2')

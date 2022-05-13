@@ -85,15 +85,15 @@ class ProveedoresController extends Controller
     public function crear_registro_cuit(Request $request)
     {
         try {
-            $cuit = Proveedor::where('cuit', $request->cuit)->exists();
+            $cuit = Proveedor::where('cuit', str_replace("-","",$request->cuit))->exists();
 
-            $dado_de_baja = Proveedor::where('cuit', $request->cuit)->get();
+            $dado_de_baja = Proveedor::where('cuit', str_replace("-","",$request->cuit))->get();
             //dd($dado_de_baja[0]['dado_de_baja']);
 
             /*Primero verificamos si el cuit NO existe en la BD. En este caso, lo redirijimos al usuario al formulario de alta.*/
             if (!$cuit) {
 
-                return redirect()->route('nuevoRegistro', ['cuit' => $request->cuit]);
+                return redirect()->route('nuevoRegistro', ['cuit' => str_replace("-","",$request->cuit)]);
 
             } else {
 
@@ -103,7 +103,7 @@ class ProveedoresController extends Controller
 
                 if ($dado_de_baja[0]['dado_de_baja'] == 0) {
 
-                    $proveedor = Proveedor::where('cuit', $request->cuit)->first();
+                    $proveedor = Proveedor::where('cuit', str_replace("-","",$request->cuit))->first();
 
                     return redirect()->route('modificarRegistro', ['id' => $proveedor->id_proveedor]);
 
@@ -126,8 +126,10 @@ class ProveedoresController extends Controller
     {
         try {
 
-            $cuit = Proveedor::where('cuit', $request->cuit)->exists();
-            $dado_de_baja = Proveedor::where('cuit', $request->cuit)->where('dado_de_baja', '0')->get();
+
+
+            $cuit = Proveedor::where('cuit', str_replace("-","",$request->cuit))->exists();
+            $dado_de_baja = Proveedor::where('cuit', str_replace("-","",$request->cuit))->where('dado_de_baja', '0')->get();
             //return $dado_de_baja->isEmpty();
             //return empty($dado_de_baja);
             //return $cuit;
@@ -142,6 +144,7 @@ class ProveedoresController extends Controller
 
                     //-------------------Carga Proveedor-------------------
                     $proveedores_rupae = new Proveedor($request->all());
+                    $proveedores_rupae->cuit= str_replace("-","",$request->cuit);
 
                     $proveedores_rupae->masa_salarial_bruta= str_replace(",",".",str_replace(".","",$request->masa_salarial_bruta));
                     $proveedores_rupae->facturacion_anual_alcanzada= str_replace(",",".",str_replace(".","",$request->facturacion_anual_alcanzada));
@@ -307,7 +310,9 @@ class ProveedoresController extends Controller
                     }*/
 
                     $Representante_legal = Persona::create([
-                        'dni_persona' => htmlspecialchars($request->dni_legal),
+                         
+
+                        'dni_persona' => htmlspecialchars(str_replace(".","",$request->dni_legal)),
                         //'cuil_persona'=>$proveedores_rupae->cuil_persona,
                         'nombre_persona' => htmlspecialchars($request->nombre_persona),
                         'apellido_persona' => htmlspecialchars($request->apellido_persona),
@@ -587,7 +592,7 @@ class ProveedoresController extends Controller
 
             } else {
 
-                    $proveedor = Proveedor::where('cuit', $request->cuit)->first();
+                    $proveedor = Proveedor::where('cuit', str_replace("-","",$request->cuit))->first();
 
                     return redirect()->route('modificarRegistro', ['id' => $proveedor->id_proveedor]);
 
@@ -2271,7 +2276,7 @@ class ProveedoresController extends Controller
     public function editarProveedor($id, Request $request)
     {
         try {
-            $cuit = Proveedor::where('cuit', $request->cuit)->where('id_proveedor','<>',$id)->exists();
+            $cuit = Proveedor::where('cuit', str_replace("-","",$request->cuit))->where('id_proveedor','<>',$id)->exists();
             if(!$cuit){
 
                 //Inicio de la transaccion
@@ -2286,7 +2291,7 @@ class ProveedoresController extends Controller
 
                 if ($request->dni_legal || $request->nombre_persona || $request->apellido_persona) {
                     $persona = Persona::create([
-                        'dni_persona' => htmlspecialchars($request->dni_legal),
+                        'dni_persona' => htmlspecialchars(str_replace(".","",$request->dni_legal)),
                         //'cuil_persona'=>$proveedores_rupae->cuil_persona,
                         'nombre_persona' => htmlspecialchars($request->nombre_persona),
                         'apellido_persona' => htmlspecialchars($request->apellido_persona),
@@ -2302,7 +2307,7 @@ class ProveedoresController extends Controller
             } else {
                 $persona = $proveedor->personas()->first();
                 $persona->update([
-                    'dni_persona' => htmlspecialchars($request->dni_legal),
+                    'dni_persona' => htmlspecialchars(str_replace(".","",$request->dni_legal)),
                     //'cuil_persona'=>$proveedores_rupae->cuil_persona,
                     'nombre_persona' => htmlspecialchars($request->nombre_persona),
                     'apellido_persona' => htmlspecialchars($request->apellido_persona),
@@ -2901,6 +2906,8 @@ class ProveedoresController extends Controller
             $proveedores_rupae->producto_venta_asistida = $request->producto_venta_asistida;
             $proveedores_rupae->producto_garantia = $request->producto_garantia;
             $proveedores_rupae->masa_salarial_bruta= str_replace(",",".",str_replace(".","",$request->masa_salarial_bruta));
+            $proveedores_rupae->cuit= str_replace("-","",$request->cuit);
+
             $proveedores_rupae->facturacion_anual_alcanzada= str_replace(",",".",str_replace(".","",$request->facturacion_anual_alcanzada));
 
 

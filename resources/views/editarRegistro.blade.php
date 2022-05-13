@@ -260,6 +260,19 @@ $("#facturacion_anual_alcanzada").val(function (index, value ) {
                         .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
         });
 
+$("#dni_legal").val(function (index, value ) {
+    return value.replace(/\D/g, "")
+                .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+});
+
+$("#cuit").val(function (index, value ) {
+    return value.replace(/\D/g, "")
+                .replace(/([0-9])([0-9]{1})$/, '$1-$2')
+                .replace(/^([0-9]{2})/, '$1-')
+
+});
+
             @if (!$proveedor_domicilio_real->id_localidad == '')
                 recargarListaRealEdit2();
             @endif
