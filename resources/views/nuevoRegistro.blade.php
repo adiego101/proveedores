@@ -59,7 +59,8 @@
     
     <small class="small" id="small-razon_social"></small>
     <small class="small" id="small-nombre_fantasia"></small>
-    <small class="small" id="small-cuit"></small>
+    <small class="small" id="small-cuit4"></small>
+    <small class="small" id="small-cuit2"></small>
     <small class="small" id="small-dni_legal"></small>
 
     <form  id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">

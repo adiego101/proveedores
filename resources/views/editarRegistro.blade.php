@@ -77,7 +77,8 @@
     
     <small class="small" id="small-razon_social"></small>
     <small class="small" id="small-nombre_fantasia"></small>
-    <small class="small" id="small-cuit"></small>
+    <small class="small" id="small-cuit4"></small>
+    <small class="small" id="small-cuit2"></small>
     <small class="small" id="small-dni"></small>
 
     <form id="edit_form" action="{{ url('editarProveedor/' . $proveedor->id_proveedor) }}" method="POST">

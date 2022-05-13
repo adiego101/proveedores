@@ -29,8 +29,9 @@
             <div class="col-sm">
 
                 <label for="cuit">CUIT: <sup>*</sup></label><br>
-                <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el número de cuit" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="13" pattern="^([0-9]{2})([0-9]{9}|-[0-9]{8}-[0-9]{1})$" required><br>
-
+                <input type="text" class="form-control" placeholder="Ingrese el número de cuit" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="13" pattern="^([0-9]{2})-([0-9]{7}|[0-9]{8})-([0-9]{1})$" required>
+                <small class="small" id="small-cuit"></small>
+                <br>
             </div>
 
     </div>
@@ -50,42 +51,22 @@
 @push('js')
 
 <script type="text/javascript">
-    function valideKey(evt){
 
-        // El código es la representación decimal ASCII de la clave presionada.
-        var code = (evt.which) ? evt.which : evt.keyCode;
+    $('#cuit').keyup(validaCuit);
 
-        if(code==8) { // espacio.
-          return true;
-        } else if(code>=48 && code<=57) { // es un numero.
-          return true;
-        } else{ // otras teclas
-        //console.log("no es un numero");
-          return false;
+    function validaCuit() {
+
+        if (!(/^([0-9]{2})-([0-9]{7}|[0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) {
+
+        mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
+
+        return false;
         }
-    }
-
     
+        ocultarError('#cuit', '#small-cuit');
 
-    $(document).ready(valida_cuit);
-
-    function valida_cuit(){
-
-        $(document).on('keyup','#cuit',function(e){
-            if($(this).val().length == 2) {
-
-                $(this).val($(this).val()+"-");
-
-            }
-
-            if($(this).val().length == 11) {
-
-                $(this).val($(this).val()+"-");
-
-            }
-        });
+        return true;
     }
-
 
 </script>
 
