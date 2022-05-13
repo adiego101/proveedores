@@ -19,7 +19,7 @@ value="{{ isset($proveedor->nombre_fantasia) ? $proveedor->nombre_fantasia : '' 
     <label for="cuit">CUIT: <sup>*</sup></label><br>
     <input type="text" class="form-control" placeholder="Ingrese el número de cuit de la empresa (sin guiones medios)" aria-describedby="basic-addon1" id="cuit" name="cuit"
         @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="13" pattern="^([0-9]{2})-([0-9]{7}|[0-9]{8})-([0-9]{1})$" required>
+value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="13" pattern="^([0-9]{2})-([0-9]{8})-([0-9]{1})$" required>
     <small class="small" id="small-cuit3"></small>
     <small class="small" id="small-cuit1"></small>
     <br>
@@ -122,7 +122,7 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
 
     function validar_cuit() {
 
-        if (!(/^([0-9]{2})-([0-9]{7}|[0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) {
+        if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) {
 
             mostrarError('#cuit', '#small-cuit1', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
             mostrarError('#cuit', '#small-cuit2', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
