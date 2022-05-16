@@ -56,6 +56,11 @@
         Complete los campos que se presentan continuación
         y presione el botón <b>Siguiente</b>, para continuar la carga de datos.
     </div>
+    
+    <small class="small" id="small-razon_social"></small>
+    <small class="small" id="small-nombre_fantasia"></small>
+    <small class="small" id="small-cuit4"></small>
+    <small class="small" id="small-cuit2"></small>
     <small class="small" id="small-dni_legal"></small>
 
     <form  id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
@@ -237,6 +242,8 @@ $("#facturacion_anual_alcanzada").on({
         /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
         window.onload = function() {
 
+            
+
             $("#masa_salarial_bruta").val(function (index, value ) {
             return value.replace(/\D/g, "")
                         .replace(/([0-9])([0-9]{2})$/, '$1,$2')
@@ -248,7 +255,13 @@ $("#facturacion_anual_alcanzada").on({
                         .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
         });
 
+ 
+            validar_razon_social();
 
+            validar_nombre_fantasia();
+
+            validar_cuit();
+        
             $('.js-example-basic-single').select2({
             theme: "bootstrap",    width: 'resolve' // need to override the changed default
 });

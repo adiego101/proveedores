@@ -74,6 +74,11 @@
         <br>
 
     </nav>
+    
+    <small class="small" id="small-razon_social"></small>
+    <small class="small" id="small-nombre_fantasia"></small>
+    <small class="small" id="small-cuit4"></small>
+    <small class="small" id="small-cuit2"></small>
     <small class="small" id="small-dni"></small>
 
     <form id="edit_form" action="{{ url('editarProveedor/' . $proveedor->id_proveedor) }}" method="POST">
@@ -232,6 +237,13 @@ formulario.addEventListener("submit", function(event){
         }).change();
 
         window.onload = function() {
+
+            validar_razon_social();
+        
+            validar_nombre_fantasia();
+
+            validar_cuit();
+
           $('.js-example-basic-single').select2({
             theme: "bootstrap",    width: 'resolve' // need to override the changed default
 });
@@ -247,6 +259,19 @@ $("#facturacion_anual_alcanzada").val(function (index, value ) {
                         .replace(/([0-9])([0-9]{2})$/, '$1,$2')
                         .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
         });
+
+$("#dni_legal").val(function (index, value ) {
+    return value.replace(/\D/g, "")
+                .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+});
+
+$("#cuit").val(function (index, value ) {
+    return value.replace(/\D/g, "")
+                .replace(/([0-9])([0-9]{1})$/, '$1-$2')
+                .replace(/^([0-9]{2})/, '$1-')
+
+});
 
             @if (!$proveedor_domicilio_real->id_localidad == '')
                 recargarListaRealEdit2();
