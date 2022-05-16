@@ -93,7 +93,7 @@ class ProveedoresController extends Controller
             /*Primero verificamos si el cuit NO existe en la BD. En este caso, lo redirijimos al usuario al formulario de alta.*/
             if (!$cuit) {
 
-                return redirect()->route('nuevoRegistro', ['cuit' => str_replace("-","",$request->cuit)]);
+                return redirect()->route('nuevoRegistro', ['cuit' => $request->cuit]);
 
             } else {
 
@@ -146,8 +146,24 @@ class ProveedoresController extends Controller
                     $proveedores_rupae = new Proveedor($request->all());
                     $proveedores_rupae->cuit= str_replace("-","",$request->cuit);
 
-                    $proveedores_rupae->masa_salarial_bruta= str_replace(",",".",str_replace(".","",$request->masa_salarial_bruta));
-                    $proveedores_rupae->facturacion_anual_alcanzada= str_replace(",",".",str_replace(".","",$request->facturacion_anual_alcanzada));
+                    if(isset($proveedores_rupae->masa_salarial_bruta)){
+
+                        $proveedores_rupae->masa_salarial_bruta= str_replace(",",".",str_replace(".","",$request->masa_salarial_bruta));
+                        
+                    } else {
+
+                        $proveedores_rupae->masa_salarial_bruta= $request->masa_salarial_bruta;
+                    }
+
+                    
+                    if(isset($proveedores_rupae->facturacion_anual_alcanzada)){
+
+                        $proveedores_rupae->facturacion_anual_alcanzada= str_replace(",",".",str_replace(".","",$request->facturacion_anual_alcanzada));
+
+                    } else {
+
+                        $proveedores_rupae->facturacion_anual_alcanzada= $request->facturacion_anual_alcanzada;
+                    }
 
                     $proveedores_rupae->save();
 
