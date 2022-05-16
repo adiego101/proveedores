@@ -256,10 +256,21 @@ class RupaeController extends Controller
         //Sino siempre es el primer pago de inscripcion.
         $pago_inscripcion = Pago::where('id_proveedor', $id)->where('tipo_pago', 'Inscripcion')->max('fecha');
 
+        $ntar = trim($proveedor->cuit);
+        $digi1 = substr($ntar,0,2);
+        $digi2 = substr($ntar,2,8);
+        $digi3 = substr($ntar,9,1);
+
+        $cuit =  $digi1.'-'.$digi2.'-'.$digi3;
+
+
+
+
+
         $data = [
             'proveedor' => $proveedor,
             'titulo' => 'Certificado inscripción',
-            'cuit' => $proveedor->cuit,
+            'cuit' => $cuit,
             'nombre_fantasia' => $proveedor->nombre_fantasia,
             'razon_social' => $proveedor->razon_social,
             'cod_actividad_principal' => isset($Actividad_economica->cod_actividad) ? $Actividad_economica->cod_actividad : '',
@@ -282,7 +293,7 @@ class RupaeController extends Controller
             'localidad_legal' => isset($proveedor_localidad_legal->nombre_localidad) ? $proveedor_localidad_legal->nombre_localidad : '',
             'fecha_emision_certificado' => $fecha_emision_certificado->format("d/m/Y H:i:s"),
             'fecha_inscripcion' => isset($pago_inscripcion) ? $pago_inscripcion : null,
-            
+
         ];
 
         /*
@@ -510,11 +521,17 @@ class RupaeController extends Controller
         if($pago_inscripcion > $pago_renovacion){
             $pago_renovacion = $pago_inscripcion;
         }
-    
+
+        $ntar = trim($proveedor->cuit);
+        $digi1 = substr($ntar,0,2);
+        $digi2 = substr($ntar,2,8);
+        $digi3 = substr($ntar,9,1);
+
+        $cuit =  $digi1.'-'.$digi2.'-'.$digi3;
 
         $data = [
             'titulo' => 'Certificado inscripción',
-            'cuit' => $proveedor->cuit,
+            'cuit' =>  $cuit,
             'nombre_fantasia' => $proveedor->nombre_fantasia,
             'razon_social' => $proveedor->razon_social,
             'cod_actividad_principal' => isset($Actividad_economica->cod_actividad) ? $Actividad_economica->cod_actividad : '',
@@ -777,6 +794,9 @@ class RupaeController extends Controller
             }
 
         }
+
+
+
         $proveedor->fecha_inscripcion = $fecha_emision_certificado;
         $proveedor->save();
         $certificado = Certificado::create([

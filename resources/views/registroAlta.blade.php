@@ -137,8 +137,8 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
                         <br>
                     </td>
                     <td>
-                        <label for="calle">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label><br>
-                        <label for="numero">Cuit: {{isset($data['proveedor']['cuit']) ? $data['proveedor']['cuit'] : ''}}</label><br>
+                        <label for="">Fecha de Inscripción: {{$fechaInscripcionFormat}}</label><br>
+                        <label for="">Cuit: {{isset($data['cuit']) ? $data['cuit'] : ''}}</label><br>
                         <br>
                     </td>
                 </tr>
@@ -231,7 +231,7 @@ $fechaInscripcionFormat = date("d/m/Y", $timestamp);
             <br>
 
             <label for="">Río Gallegos, {{$data['fecha_emision_certificado']}}</label>
-            
+
         </main>
 
         <script type="text/php">
