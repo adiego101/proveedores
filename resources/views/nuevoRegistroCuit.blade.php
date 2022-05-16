@@ -29,7 +29,7 @@
             <div class="col-sm">
 
                 <label for="cuit">CUIT: <sup>*</sup></label><br>
-                <input type="text" class="form-control" placeholder="Ingrese el número de cuit" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="13" pattern="^([0-9]{2})-([0-9]{7}|[0-9]{8})-([0-9]{1})$" required>
+                <input type="text" class="form-control" placeholder="Ingrese el número de cuit" aria-describedby="basic-addon1" id="cuit" name="cuit" maxlength="13" pattern="^([0-9]{2})-([0-9]{8})-([0-9]{1})$" required>
                 <small class="small" id="small-cuit"></small>
                 <br>
             </div>
@@ -56,9 +56,9 @@
 
     function validaCuit() {
 
-        if (!(/^([0-9]{2})-([0-9]{7}|[0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) {
+        if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) {
 
-        mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
+        mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxxx-x</strong></div>');
 
         return false;
         }
