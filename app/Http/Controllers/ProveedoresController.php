@@ -2921,11 +2921,26 @@ class ProveedoresController extends Controller
             $proveedores_rupae->producto_post_venta = $request->producto_post_venta;
             $proveedores_rupae->producto_venta_asistida = $request->producto_venta_asistida;
             $proveedores_rupae->producto_garantia = $request->producto_garantia;
-            $proveedores_rupae->masa_salarial_bruta= str_replace(",",".",str_replace(".","",$request->masa_salarial_bruta));
             $proveedores_rupae->cuit= str_replace("-","",$request->cuit);
 
-            $proveedores_rupae->facturacion_anual_alcanzada= str_replace(",",".",str_replace(".","",$request->facturacion_anual_alcanzada));
+            if(isset($proveedores_rupae->masa_salarial_bruta)){
 
+                $proveedores_rupae->masa_salarial_bruta= str_replace(",",".",str_replace(".","",$request->masa_salarial_bruta));
+                
+            } else {
+
+                $proveedores_rupae->masa_salarial_bruta= $request->masa_salarial_bruta;
+            }
+
+
+            if(isset($proveedores_rupae->facturacion_anual_alcanzada)){
+
+                $proveedores_rupae->facturacion_anual_alcanzada= str_replace(",",".",str_replace(".","",$request->facturacion_anual_alcanzada));
+
+            } else {
+
+                $proveedores_rupae->facturacion_anual_alcanzada= $request->facturacion_anual_alcanzada;
+            }
 
 
             $proveedores_rupae->save();
