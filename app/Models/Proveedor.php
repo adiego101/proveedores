@@ -171,7 +171,7 @@ class Proveedor extends Model
                     ->withTimestamps();
     }
 
-    public function representante(){
+    public function representantes(){
         return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
                     ->wherePivot('rol_persona_proveedor', 'Representante');
     }

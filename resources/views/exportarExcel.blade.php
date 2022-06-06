@@ -4,8 +4,8 @@
 
 <h1>Descargar Excel:</h1>
 <br>
-
-<form action="{{ route('exportar') }}"  method="GET">
+<small class="small" id="small-excel"></small>
+<form id="form" action="{{ route('exportar') }}"  method="GET">
     <select class="form-control" aria-describedby="basic-addon1" name="tipo_descarga" id="tipo_descarga">
             <option>TODOS LOS PROVEEDORES</option>
             <option>PROVEEDORES POR LOCALIDAD</option>
@@ -158,6 +158,47 @@
                 }
             });
     }
+
+    function mostrarError(campo, error, msg) {
+        $(campo).addClass('is-invalid');
+        $(error).html(msg);
+        $(error).show();
+    }
+    function ocultarError(campo, error) {
+        $(campo).removeClass('is-invalid');
+        $(error).hide();
+    }
+
+    
+
+        $('#form').submit(function(event) {
+
+            if($('#tipo_descarga').val()=="PROVEEDORES POR LOCALIDAD") {
+
+                let provincia_descarga;
+
+                provincia_descarga = $("#provincia_descarga").val();
+
+                if(provincia_descarga != " "){ 
+
+                    //Permitir la descarga
+                    ocultarError('#provincia_descarga','#small-excel');
+                    $('#form').submit();
+                    return false;
+                } else {
+
+                    event.preventDefault();
+                    mostrarError('#provincia_descarga','#small-excel', '<div class="alert alert-danger mt-3 pt-1">Debe seleccionar una <strong>provincia</strong> para continuar.</div>');
+                    return true;
+                }
+            }
+        });
+
+            $( "#provincia_descarga" ).change(function() {
+                ocultarError('#provincia_descarga','#small-excel');
+                return false;
+            });
+    
 
 </script>
 @endsection
