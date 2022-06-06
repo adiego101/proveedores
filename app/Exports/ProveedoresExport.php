@@ -133,7 +133,7 @@ class ProveedoresExport implements FromCollection, WithHeadings, ShouldAutoSize,
                     $telLegal.= $telefono_legal->cod_area_tel.'-';
                 if($telefono_legal->nro_tel != null)
                     if($proveedor->telefonos_legal->last() == $telefono_legal)
-                        $tel.= $telefono_legal->nro_tel;
+                        $telLegal.= $telefono_legal->nro_tel;
                     else
                     $telLegal.= $telefono_legal->nro_tel.'/';
             }
