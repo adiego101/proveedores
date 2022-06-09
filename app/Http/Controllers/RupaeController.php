@@ -519,7 +519,8 @@ class RupaeController extends Controller
         $pago_renovacion = Pago::where('id_proveedor', $id)->where('tipo_pago', 'Renovacion')->max('fecha');
 
         if($pago_inscripcion > $pago_renovacion){
-            $pago_renovacion = $pago_inscripcion;
+            
+            $pago_renovacion = null;
         }
 
         $ntar = trim($proveedor->cuit);

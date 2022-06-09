@@ -1,6 +1,6 @@
 <?php
 
-if (isset($data['fecha_inscripcion']) && isset($data['fecha_renovacion'])) {
+if (isset($data['fecha_inscripcion'])) {
 
     //Recuperamos la fecha de inscripcion desde la BD
     //La fecha original tiene el formato YYYY-mm-dd H:i:s
@@ -9,6 +9,17 @@ if (isset($data['fecha_inscripcion']) && isset($data['fecha_renovacion'])) {
     //Cambiamos el formato por dd/mm/YYYY H:i:s
     $timestamp = strtotime($fechaOriginalInscripcion);
     $fechaInscripcionFormat = date("d/m/Y", $timestamp);
+
+} else {
+
+    $fechaInscripcionFormat = "-";
+
+}
+
+
+
+if (isset($data['fecha_renovacion'])) {
+
 
     //Recuperamos la fecha de renovacion desde la BD
     //La fecha original tiene el formato YYYY-mm-dd H:i:s
@@ -24,11 +35,22 @@ if (isset($data['fecha_inscripcion']) && isset($data['fecha_renovacion'])) {
 
 } else {
 
-    $fechaInscripcionFormat = "";
-    $fechaRenovacionFormat = "";
-    $fechaValidoHasta = "";
+    $fechaRenovacionFormat = "-";
+
+    if (isset($data['fecha_inscripcion'])) {
+    
+        //Tomamos la fecha de inscripcion y le aumentamos un año (para el campo valido hasta)
+        $anioSiguiente = strtotime($fechaOriginalInscripcion.'+1 year');
+        $fechaValidoHasta = date("d/m/Y", $anioSiguiente);
+
+    } else {
+
+        $fechaValidoHasta = "-";
+        
+    }
 
 }
+
 ?>
 
 <html>
