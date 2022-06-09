@@ -34,7 +34,7 @@
     <input type="text" class="form-control" placeholder="Ingrese el nombre completo del representante legal" aria-describedby="basic-addon1" id="nombre_persona" name="nombre_persona" maxlength="50" value="{{old('nombre_persona')}}"><br>
 
     <label for="dni_legal">DNI:</label><br>
-    <input type="text"    class="form-control" placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="12" value="{{old('dni_legal')}}">
+    <input type="text" class="form-control" placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="10" value="{{old('dni_legal')}}">
     <small class="small" id="small-dni_legal2"></small>
     <br>
     <br>
