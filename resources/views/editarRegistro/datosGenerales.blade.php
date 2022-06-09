@@ -39,7 +39,7 @@ value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="13" pat
 
     <label for="dni_legal">DNI:</label><br>
     <input type="text" class="form-control limpiar" placeholder="Ingrese el dni del representante legal" @if ( $mode == "show") readonly @endif
-value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="12">
+value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="10">
     <small class="small" id="small-dni2"></small>
 
     <br>
