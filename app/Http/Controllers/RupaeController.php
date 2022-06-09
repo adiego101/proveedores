@@ -259,7 +259,7 @@ class RupaeController extends Controller
         $ntar = trim($proveedor->cuit);
         $digi1 = substr($ntar,0,2);
         $digi2 = substr($ntar,2,8);
-        $digi3 = substr($ntar,9,1);
+        $digi3 = substr($ntar,10,1);
 
         $cuit =  $digi1.'-'.$digi2.'-'.$digi3;
 
@@ -525,7 +525,7 @@ class RupaeController extends Controller
         $ntar = trim($proveedor->cuit);
         $digi1 = substr($ntar,0,2);
         $digi2 = substr($ntar,2,8);
-        $digi3 = substr($ntar,9,1);
+        $digi3 = substr($ntar,10,1);
 
         $cuit =  $digi1.'-'.$digi2.'-'.$digi3;
 
