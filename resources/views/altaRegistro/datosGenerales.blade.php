@@ -34,7 +34,7 @@
     <input type="text" class="form-control" placeholder="Ingrese el nombre completo del representante legal" aria-describedby="basic-addon1" id="nombre_persona" name="nombre_persona" maxlength="50" value="{{old('nombre_persona')}}"><br>
 
     <label for="dni_legal">DNI:</label><br>
-    <input type="text"    class="form-control" placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="12" value="{{old('dni_legal')}}">
+    <input type="text" class="form-control" placeholder="Ingrese el dni del representante legal" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="10" value="{{old('dni_legal')}}" pattern="^(\d{2}\.{1}\d{3}\.\d{3})|(\d{1}\.{1}\d{3}\.\d{3})$">
     <small class="small" id="small-dni_legal2"></small>
     <br>
     <br>
@@ -63,7 +63,7 @@
 
     function validardni_legal() {
 
-        if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test($('#dni_legal').val()))) {
+        if (!(/^(\d{2}\.{1}\d{3}\.\d{3})|(\d{1}\.{1}\d{3}\.\d{3})$/g.test($('#dni_legal').val()))) {
             if($('#dni_legal').val() != ""){
 
             mostrarError('#dni_legal', '#small-dni_legal', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> tiene un formato incorrecto.</div>');
