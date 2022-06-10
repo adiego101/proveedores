@@ -39,7 +39,7 @@ value="{{ isset($proveedor->cuit) ? $proveedor->cuit : '' }}" maxlength="13" pat
 
     <label for="dni_legal">DNI:</label><br>
     <input type="text" class="form-control limpiar" placeholder="Ingrese el dni del representante legal" @if ( $mode == "show") readonly @endif
-value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="10">
+value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="10" pattern="^(\d{2}\.{1}\d{3}\.\d{3})|(\d{1}\.{1}\d{3}\.\d{3})$">
     <small class="small" id="small-dni2"></small>
 
     <br>
@@ -61,7 +61,7 @@ value="{{ isset($persona->dni_persona) ? $persona->dni_persona : '' }}" aria-des
 
         function validarDni() {
 
-            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test($('#dni_legal').val()))) {
+            if (!(/^(\d{2}\.{1}\d{3}\.\d{3})|(\d{1}\.{1}\d{3}\.\d{3})$/g.test($('#dni_legal').val()))) {
             if($('#dni_legal').val() != ""){
 
             mostrarError('#dni_legal', '#small-dni', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> tiene un formato incorrecto.</div>');
