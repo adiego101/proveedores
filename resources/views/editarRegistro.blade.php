@@ -332,6 +332,25 @@ $("#cuit").val(function (index, value ) {
         "focus": function (event) {
             $(event.target).select();
         },
+        "change" : function(){
+           
+           var numero_facturacion = $('#facturacion_anual_alcanzada').val();
+
+           var cadena_facturacion = numero_facturacion.toString();
+       
+           const regex_facturacion = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
+           const only_number_facturacion = regex_facturacion.test(cadena_facturacion);
+
+           if (only_number_facturacion == false){
+
+               mostrarError('#facturacion_anual_alcanzada', '#small-facturacion', '<div class="alert alert-danger mt-3 pt-1">El campo <strong>facturacion anual alcanzada</strong> contiene datos <strong>incorrectos</strong>.</div>');
+
+           } else {
+
+               ocultarError('#facturacion_anual_alcanzada', '#small-facturacion');
+           }
+
+       },
         "keyup": function (event) {
             $(event.target).val(function (index, value ) {
                 return value.replace(/\D/g, "")
