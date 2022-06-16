@@ -231,7 +231,7 @@ var cadena_masa = numero_masa.toString();
 const regex_masa = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
 const only_number_masa = regex_masa.test(cadena_masa);
 
-if (only_number_masa == true){
+if (only_number_masa == true || numero_masa=='' ){
 return true;
 }
 else{
@@ -247,7 +247,7 @@ var cadena_facturacion = numero_facturacion.toString();
 const regex_facturacion = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
 const only_number_facturacion = regex_facturacion.test(cadena_facturacion);
 
-if (only_number_facturacion == true){
+if (only_number_facturacion == true || numero_facturacion == ''){
 return true;
 }
 else{
@@ -346,13 +346,13 @@ $("#cuit").val(function (index, value ) {
            const regex_masa = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
            const only_number_masa = regex_masa.test(cadena_masa);
 
-           if (only_number_masa == false){
+           if (only_number_masa == true || numero_masa == ''){
 
-               mostrarError('#masa_salarial_bruta', '#small-masa', '<div class="alert alert-danger mt-3 pt-1">El campo <strong>masa salarial bruta</strong> contiene datos <strong>incorrectos</strong>.</div>');
+            ocultarError('#masa_salarial_bruta', '#small-masa');
 
            } else {
+            mostrarError('#masa_salarial_bruta', '#small-masa', '<div class="alert alert-danger mt-3 pt-1">El campo <strong>masa salarial bruta</strong> contiene datos <strong>incorrectos</strong>.</div>');
 
-               ocultarError('#masa_salarial_bruta', '#small-masa');
            }
 
        },
@@ -380,13 +380,13 @@ $("#cuit").val(function (index, value ) {
            const regex_facturacion = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
            const only_number_facturacion = regex_facturacion.test(cadena_facturacion);
 
-           if (only_number_facturacion == false){
+           if (only_number_facturacion == true || numero_facturacion == ''){
 
-               mostrarError('#facturacion_anual_alcanzada', '#small-facturacion', '<div class="alert alert-danger mt-3 pt-1">El campo <strong>facturacion anual alcanzada</strong> contiene datos <strong>incorrectos</strong>.</div>');
+            ocultarError('#facturacion_anual_alcanzada', '#small-facturacion');
 
            } else {
+            mostrarError('#facturacion_anual_alcanzada', '#small-facturacion', '<div class="alert alert-danger mt-3 pt-1">El campo <strong>facturacion anual alcanzada</strong> contiene datos <strong>incorrectos</strong>.</div>');
 
-               ocultarError('#facturacion_anual_alcanzada', '#small-facturacion');
            }
 
        },
