@@ -74,7 +74,7 @@
         <br>
 
     </nav>
-    
+
     <small class="small" id="small-razon_social"></small>
     <small class="small" id="small-nombre_fantasia"></small>
     <small class="small" id="small-cuit4"></small>
@@ -196,11 +196,16 @@ formulario.addEventListener("submit", function(event){
         //Detenemos el envio del formulario
         event.preventDefault();
 
-            if(validarDni()){
-                this.submit();
-            }
 
-        }, false);
+            if(validarDni()){
+                if(validarMasa()){
+                                    if(validarFacturacion()){
+                                        this.submit();
+                                    }
+                                }
+                            }
+           }
+        , false);
 
         $('input[type="checkbox"]').on('change', function() {
             this.value = this.checked ? 1 : 0;
@@ -216,6 +221,40 @@ formulario.addEventListener("submit", function(event){
         })
     </script>
     <script type="text/javascript">
+
+function validarMasa() {
+
+var numero_masa = $('#masa_salarial_bruta').val();
+
+var cadena_masa = numero_masa.toString();
+
+const regex_masa = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
+const only_number_masa = regex_masa.test(cadena_masa);
+
+if (only_number_masa == true){
+return true;
+}
+else{
+return false;
+}
+}
+function validarFacturacion() {
+
+var numero_facturacion = $('#facturacion_anual_alcanzada').val();
+
+var cadena_facturacion = numero_facturacion.toString();
+
+const regex_facturacion = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
+const only_number_facturacion = regex_facturacion.test(cadena_facturacion);
+
+if (only_number_facturacion == true){
+return true;
+}
+else{
+return false;
+}
+}
+
         function valideKey(evt) {
 
             // El código es la representación decimal ASCII de la clave presionada.
@@ -241,7 +280,7 @@ formulario.addEventListener("submit", function(event){
         window.onload = function() {
 
             validar_razon_social();
-        
+
             validar_nombre_fantasia();
 
             validar_cuit();
@@ -299,11 +338,11 @@ $("#cuit").val(function (index, value ) {
             $(event.target).select();
         },
         "change" : function(){
-           
+
            var numero_masa = $('#masa_salarial_bruta').val();
 
            var cadena_masa = numero_masa.toString();
-       
+
            const regex_masa = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
            const only_number_masa = regex_masa.test(cadena_masa);
 
@@ -333,11 +372,11 @@ $("#cuit").val(function (index, value ) {
             $(event.target).select();
         },
         "change" : function(){
-           
+
            var numero_facturacion = $('#facturacion_anual_alcanzada').val();
 
            var cadena_facturacion = numero_facturacion.toString();
-       
+
            const regex_facturacion = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
            const only_number_facturacion = regex_facturacion.test(cadena_facturacion);
 
