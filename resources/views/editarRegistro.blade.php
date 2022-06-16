@@ -80,6 +80,8 @@
     <small class="small" id="small-cuit4"></small>
     <small class="small" id="small-cuit2"></small>
     <small class="small" id="small-dni"></small>
+    <small class="small" id="small-facturacion"></small>
+    <small class="small" id="small-masa"></small>
 
     <form id="edit_form" action="{{ url('editarProveedor/' . $proveedor->id_proveedor) }}" method="POST">
         @csrf
@@ -290,35 +292,55 @@ $("#cuit").val(function (index, value ) {
 
 
         };
-        $("#masa_salarial_bruta").on({
-    "focus": function (event) {
-        $(event.target).select();
-    },
-    "keyup": function (event) {
-        $(event.target).val(function (index, value ) {
-            return value.replace(/\D/g, "")
-                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-        });
-    }
-
-});
-
-$("#facturacion_anual_alcanzada").on({
-    "focus": function (event) {
-        $(event.target).select();
-    },
-    "keyup": function (event) {
-        $(event.target).val(function (index, value ) {
-            return value.replace(/\D/g, "")
-                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-        });
-    }
-
-});
 
 
+    $("#masa_salarial_bruta").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "change" : function(){
+           
+           var numero_masa = $('#masa_salarial_bruta').val();
+
+           var cadena_masa = numero_masa.toString();
+       
+           const regex_masa = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
+           const only_number_masa = regex_masa.test(cadena_masa);
+
+           if (only_number_masa == false){
+
+               mostrarError('#masa_salarial_bruta', '#small-masa', '<div class="alert alert-danger mt-3 pt-1">El campo <strong>masa salarial bruta</strong> contiene datos <strong>incorrectos</strong>.</div>');
+
+           } else {
+
+               ocultarError('#masa_salarial_bruta', '#small-masa');
+           }
+
+       },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/([0-9])([0-9]{2})$/, '$1,$2')
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+
+    });
+
+
+    $("#facturacion_anual_alcanzada").on({
+        "focus": function (event) {
+            $(event.target).select();
+        },
+        "keyup": function (event) {
+            $(event.target).val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/([0-9])([0-9]{2})$/, '$1,$2')
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
+        }
+
+    });
 
 
     </script>
