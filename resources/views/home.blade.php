@@ -10,7 +10,7 @@
             @endif
 
 
-                <div class="card-header"> {{ __('Registro Único de Proveedores de Actividades Económicas de la provincia de Santa Cruz.') }}</div>
+                <div class="card-header"> {{ __('Sistema Integrado de Proveedores y Licitaciones.') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -20,7 +20,7 @@
                     @endif
 
                     <div align="center">
-                        <img src="logo_minpro.png" alt="Logo del Ministerio de la Producción, Comercio e Industria" title="Ministerio de la Producción, Comercio e Industria">
+                        <img src="logo-mefi.png" alt="Logo del Sistema Integrado de Proveedores y Licitaciones" title="Sistema Integrado de Proveedores y Licitaciones">
                     </div>
 
                 </div>

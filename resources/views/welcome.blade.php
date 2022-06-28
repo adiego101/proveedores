@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
 
-    <title>RUPAE</title>
+    <title>SIPLIC</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -126,7 +126,7 @@
         class=" container et_pb_module et_pb_fullwidth_header et_pb_fullwidth_header_0 et_pb_section_parallax_hover et_pb_text_align_center et_pb_bg_layout_dark et_pb_fullscreen">
 
         <div class="  float-left fixed top-0 left-0 px-6 py-4 sm:block">
-            <h1>RUPAE</h1>
+            <h1>SIPLIC</h1>
         </div>
 
         @if (Route::has('login'))
@@ -155,9 +155,9 @@
             <div class="header-content-container center">
                 <div class="header-content">
                     <img  loading="lazy"
-                        src="hero.png"
+                        src="mefieescudi.png"
                         title="" alt=""
-                        srcset="hero.png 622w, hero.png 188w"
+                        srcset="mefieescudi.png 622w, mefieescudi.png 188w"
                         sizes="(max-width: 622px) 100vw, 622px" class="header-logo wp-image-322"
                         height="380">
 

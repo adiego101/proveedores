@@ -14,7 +14,7 @@ return [
     |
      */
 
-    'title' => 'Registro Único de Proveedores de Actividades Económicas',
+    'title' => 'Sistema Integrado de Proveedores y Licitaciones',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,12 +45,12 @@ return [
     |
      */
 
-    'logo' => '<b>RUPAE</b>',
-    'logo_img' => '/logo_color_minpro.png',
+    'logo' => '<b>SIPLIC</b>',
+    'logo_img' => '/logo_santacruz.png',
     'logo_img_class' => 'brand-image   ',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Logo MinPro',
+    'logo_img_alt' => 'Logo Santa Cruz',
 
     /*
     |--------------------------------------------------------------------------

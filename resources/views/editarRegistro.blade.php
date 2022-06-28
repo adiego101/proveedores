@@ -64,10 +64,10 @@
                     data-toggle="tab" href="#patente">Patente y Seguro</a>
             </li>
 
-            <li class="nav-item">
+           <!-- <li class="nav-item">
                 <a class="nav-link " id="otrosDatos-tab" data-toggle="tab" href="#otrosDatos">Otros
                     Datos</a>
-            </li>
+            </li> -->
 
         </ul>
 
@@ -133,8 +133,8 @@
                 @include('editarRegistro.patenteSeguro')
             </div>
 
-            <div class="tab-pane fade" id="otrosDatos" role="tabpanel" aria-labelledby="nav-otrosDatos-tab">
-                @include('editarRegistro.otrosDatos') </div>
+           <!-- <div class="tab-pane fade" id="otrosDatos" role="tabpanel" aria-labelledby="nav-otrosDatos-tab"> -->
+               {{-- @include('editarRegistro.otrosDatos') --}} <!--  </div> -->
         </div>
 
 

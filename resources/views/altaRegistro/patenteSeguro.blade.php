@@ -145,7 +145,6 @@
 
 
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-    <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
 
     <!--Incluimos el modal para editar los campos de un vehiculo -->
