@@ -23,52 +23,19 @@
                 <a class=" nav-link" id="domicilioReal-tab" data-toggle="tab" href="#domicilioReal">Domicilio Real</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " id="domicilioLegal-tab" data-toggle="tab" href="#domicilioLegal">Domicilio
-                    Legal</a>
+                <a class="nav-link " id="domicilioLegal-tab" data-toggle="tab" href="#domicilioLegal">Domicilio Legal</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " id="domicilioFiscal-tab" data-toggle="tab" href="#domicilioFiscal">Domicilio
-                    fiscal</a>
+                <a class="nav-link " id="domicilioFiscal-tab" data-toggle="tab" href="#domicilioFiscal">Domicilio fiscal</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link @if ($tab == 'sucursal') {{ 'active' }} @endif" id="sucursales-tab"
-                    data-toggle="tab" href="#sucursales">Sucursales</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " id="infoImpositiva-tab" data-toggle="tab" href="#infoImpositiva">Informacion
-                    Impositiva</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " id="ingresosbrutos-tab" data-toggle="tab" href="#ingresosbrutos">Impuestos sobre
-                    ingresos brutos</a>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link @if ($tab == 'actividad') {{ 'active' }} @endif" id="actividad-tab"
                     data-toggle="tab" href="#actividad">Actividad</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " id="valorAgregado-tab" data-toggle="tab" href="#valorAgregado">Valor Agregado</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " id="personalOcupado-tab" data-toggle="tab" href="#personalOcupado">Personal
-                    Ocupado</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link @if ($tab == 'pago') {{ 'active' }} @endif" id="pagos-tab"
                     data-toggle="tab" href="#pagos">Pagos</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link @if ($tab == 'patente') {{ 'active' }} @endif " id="patente-tab"
-                    data-toggle="tab" href="#patente">Patente y Seguro</a>
-            </li>
-
-           <!-- <li class="nav-item">
-                <a class="nav-link " id="otrosDatos-tab" data-toggle="tab" href="#otrosDatos">Otros
-                    Datos</a>
-            </li> -->
-
         </ul>
 
         <br>
@@ -80,8 +47,6 @@
     <small class="small" id="small-cuit4"></small>
     <small class="small" id="small-cuit2"></small>
     <small class="small" id="small-dni"></small>
-    <small class="small" id="small-facturacion"></small>
-    <small class="small" id="small-masa"></small>
 
     <form id="edit_form" action="{{ url('editarProveedor/' . $proveedor->id_proveedor) }}" method="POST">
         @csrf
@@ -98,16 +63,6 @@
                 @include('editarRegistro.domicilioLegal')
 
             </div>
-            <div class="tab-pane fade @if ($tab == 'sucursal') {{ 'show active' }} @endif" id="sucursales"
-                role="tabpanel" aria-labelledby="nav-sucursales-tab">
-                @include('editarRegistro.sucursales')
-            </div>
-            <div class="tab-pane fade" id="infoImpositiva" role="tabpanel" aria-labelledby="nav-infoImpositiva-tab">
-                @include('editarRegistro.infoImpositiva')
-            </div>
-            <div class="tab-pane fade" id="ingresosbrutos" role="tabpanel" aria-labelledby="nav-ingresosbrutos-tab">
-                @include('editarRegistro.Impuestosingresosbrutos')
-            </div>
             <div class="tab-pane fade" id="domicilioFiscal" role="tabpanel"
                 aria-labelledby="nav-domicilioFiscal.blade-tab">
                 @include('editarRegistro.domicilioFiscal')
@@ -116,67 +71,29 @@
                 role="tabpanel" aria-labelledby="nav-actividad-tab">
                 @include('editarRegistro.actividad')
             </div>
-            <div class="tab-pane fade" id="valorAgregado" role="tabpanel" aria-labelledby="nav-valorAgregado-tab">
-                @include('editarRegistro.valorAgregado')
-
-            </div>
-            <div class="tab-pane fade" id="personalOcupado" role="tabpanel" aria-labelledby="nav-personalOcupado-tab">
-                @include('editarRegistro.personalOcupado')
-            </div>
             <div class="tab-pane fade  @if ($tab == 'pago') {{ 'show active' }} @endif" id="pagos"
                 role="tabpanel" aria-labelledby="nav-pagos-tab">
                 @include('editarRegistro.pagos')
             </div>
 
-            <div class="tab-pane fade  @if ($tab == 'patente') {{ 'show active' }} @endif" id="patente"
-                role="tabpanel" aria-labelledby="nav-patente-tab">
-                @include('editarRegistro.patenteSeguro')
-            </div>
-
-           <!-- <div class="tab-pane fade" id="otrosDatos" role="tabpanel" aria-labelledby="nav-otrosDatos-tab"> -->
-               {{-- @include('editarRegistro.otrosDatos') --}} <!--  </div> -->
         </div>
-
-
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <div class="btn-group">
                 <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
-                <!--<a id="reset" class="btn btn-success">Reset</a>-->
+               
             </div>
-            <!--@if (isset($proveedor->nro_rupae_proveedor) && $proveedor->nro_rupae_proveedor != null)
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAltaInscripcion">
-                        {{ 'Finalizar' }}
-                    </button>
-    @endif-->
         </div>
 
     </form>
+
     @include('edicionesModales.editarpagos')
     @include('edicionesModales.pagos')
     @include('edicionesModales.editarActividades')
     @include('edicionesModales.actividades')
-    @include('edicionesModales.editarProducto')
-    @include('edicionesModales.producto')
-    @include('edicionesModales.altaSedes')
-    @include('edicionesModales.editarSedes')
-    @include('edicionesModales.altaSeguros')
-    @include('edicionesModales.editarSeguros')
-    @include('edicionesModales.altaVehiculos')
-    @include('edicionesModales.editarVehiculos')
-    @include('sucursales.create')
-    @include('edicionesModales.palabraClave')
-    @include('edicionesModales.editarPalabraClave')
-
-    <!--Incluimos el modal para editar los campos de las sucursales -->
-
-    @include('sucursales.edit')
-
-    <!--Incluimos el modal para dar de baja un registro -->
-
-    @include('modales.modalBajaSucursal')
 
     @yield('datos')
+
 @endsection
 
 @push('js')
@@ -198,14 +115,11 @@ formulario.addEventListener("submit", function(event){
 
 
             if(validarDni()){
-                if(validarMasa()){
-                                    if(validarFacturacion()){
-                                        this.submit();
-                                    }
-                                }
-                            }
-           }
-        , false);
+                                  
+                this.submit();              
+            }
+
+}, false);
 
         $('input[type="checkbox"]').on('change', function() {
             this.value = this.checked ? 1 : 0;
@@ -221,39 +135,6 @@ formulario.addEventListener("submit", function(event){
         })
     </script>
     <script type="text/javascript">
-
-function validarMasa() {
-
-var numero_masa = $('#masa_salarial_bruta').val();
-
-var cadena_masa = numero_masa.toString();
-
-const regex_masa = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
-const only_number_masa = regex_masa.test(cadena_masa);
-
-if (only_number_masa == true || numero_masa=='' ){
-return true;
-}
-else{
-return false;
-}
-}
-function validarFacturacion() {
-
-var numero_facturacion = $('#facturacion_anual_alcanzada').val();
-
-var cadena_facturacion = numero_facturacion.toString();
-
-const regex_facturacion = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
-const only_number_facturacion = regex_facturacion.test(cadena_facturacion);
-
-if (only_number_facturacion == true || numero_facturacion == ''){
-return true;
-}
-else{
-return false;
-}
-}
 
         function valideKey(evt) {
 
@@ -289,17 +170,6 @@ return false;
             theme: "bootstrap",    width: 'resolve' // need to override the changed default
 });
 
-$("#masa_salarial_bruta").val(function (index, value ) {
-            return value.replace(/\D/g, "")
-                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-        });
-
-$("#facturacion_anual_alcanzada").val(function (index, value ) {
-            return value.replace(/\D/g, "")
-                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-        });
 
 $("#dni_legal").val(function (index, value ) {
     return value.replace(/\D/g, "")
@@ -332,145 +202,7 @@ $("#cuit").val(function (index, value ) {
 
         };
 
-
-    $("#masa_salarial_bruta").on({
-        "focus": function (event) {
-            $(event.target).select();
-        },
-        "change" : function(){
-
-           var numero_masa = $('#masa_salarial_bruta').val();
-
-           var cadena_masa = numero_masa.toString();
-
-           const regex_masa = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
-           const only_number_masa = regex_masa.test(cadena_masa);
-
-           if (only_number_masa == true || numero_masa == ''){
-
-            ocultarError('#masa_salarial_bruta', '#small-masa');
-
-           } else {
-            mostrarError('#masa_salarial_bruta', '#small-masa', '<div class="alert alert-danger mt-3 pt-1">El campo <strong>masa salarial bruta</strong> contiene datos <strong>incorrectos</strong>.</div>');
-
-           }
-
-       },
-        "keyup": function (event) {
-            $(event.target).val(function (index, value ) {
-                return value.replace(/\D/g, "")
-                            .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-            });
-        }
-
-    });
-
-
-    $("#facturacion_anual_alcanzada").on({
-        "focus": function (event) {
-            $(event.target).select();
-        },
-        "change" : function(){
-
-           var numero_facturacion = $('#facturacion_anual_alcanzada').val();
-
-           var cadena_facturacion = numero_facturacion.toString();
-
-           const regex_facturacion = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
-           const only_number_facturacion = regex_facturacion.test(cadena_facturacion);
-
-           if (only_number_facturacion == true || numero_facturacion == ''){
-
-            ocultarError('#facturacion_anual_alcanzada', '#small-facturacion');
-
-           } else {
-            mostrarError('#facturacion_anual_alcanzada', '#small-facturacion', '<div class="alert alert-danger mt-3 pt-1">El campo <strong>facturacion anual alcanzada</strong> contiene datos <strong>incorrectos</strong>.</div>');
-
-           }
-
-       },
-        "keyup": function (event) {
-            $(event.target).val(function (index, value ) {
-                return value.replace(/\D/g, "")
-                            .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-            });
-        }
-
-    });
-
-
     </script>
-
-    <!-- Script para resetear los campos del formulario. Todavia no funciona bien.
-    Sugerencia: agregar una nueva clase a cada campo a borrar. -->
-
-    <!-- <script type="text/javascript">
-        $("#reset").on("click", function(e) {
-
-            //const inputs = document.getElementsByTagName('input');
-            const inputs_text = document.querySelectorAll('[type="text"]');
-            //const inputs_select = document.getElementsByTagName('select');
-            const inputs_text_area = document.getElementsByTagName('textarea');
-            const inputs_number = document.querySelectorAll('[type="number"]');
-            const inputs_check = document.querySelectorAll('[type="checkbox"]');
-            const inputs_email = document.querySelectorAll('[type="email"]');
-
-            for (var i = 0; i < inputs_text.length; i++) {
-
-                inputs_text[i].value = "";
-
-            }
-
-            /*for(var i = 0; i < inputs_select.length; i++) {
-
-               inputs_select[i].value = "";
-
-           }*/
-
-            for (var i = 0; i < inputs_text_area.length; i++) {
-
-                inputs_text_area[i].value = "";
-
-            }
-
-            for (var i = 0; i < inputs_number.length; i++) {
-
-                inputs_number[i].value = "";
-
-            }
-
-
-            for (var i = 0; i < inputs_check.length; i++) {
-
-                inputs_check[i].checked = 0;
-
-            }
-
-
-            for (var i = 0; i < inputs_email.length; i++) {
-
-                inputs_email[i].value = "";
-
-            }
-
-        });
-    </script>
-
-    <script>
-        $("#reset").on("click", function(e) {
-            $(".limpiar").val('');
-            $('#edit_form :select').selectedIndex = 1;
-            $.ajax({
-                url: "{{ route('limpiar') }}",
-                data: {
-                    'id_proveedor': "{{ $id }}"
-                },
-                type: 'post'
-            });
-        });
-    </script>-->
 
 @endpush
 
