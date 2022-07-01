@@ -1148,7 +1148,7 @@ class ProveedoresController extends Controller
             $mode = "show";
 
             return view('verRegistro', compact('tab', 'persona', 'mode',
-                'provinciaidReal', 'provinciaidLegal', 'provinciaidFiscal', 'paises', 'jerarquias', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'proveedor',
+                'provinciaidReal', 'provinciaidLegal', 'provinciaidFiscal', 'paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'proveedor',
                 'id', 'proveedor_telefono_fiscal', 'proveedor_domicilio_fiscal', 'proveedor_email_fiscal', 'proveedor_telefono_legal', 'proveedor_domicilio_legal',
                 'proveedor_email_legal', 'proveedor_telefono_real', 'proveedor_domicilio_real', 'proveedor_email_real', 'proveedores_tipos_proveedores', 'actividades', 'pagos')
             );

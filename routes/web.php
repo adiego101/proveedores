@@ -4,11 +4,8 @@ use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\Actividad_economica;
-use App\Models\Jerarquia_compre_local;
 use App\Models\Localidad;
 use App\Models\Pais;
-use App\Models\Ponderacion_compre_local;
-use App\Models\Producto;
 use App\Models\Provincia;
 use App\Models\Tipo_actividad;
 use App\Models\Sector;
@@ -54,11 +51,8 @@ Route::group(['middleware' => ['auth']], function () {
         $localidades = Localidad::all();
         $tipos_actividades = Tipo_actividad::All();
         $actividades = Actividad_economica::All();
-        $productos = Producto::All();
-        $ponderaciones = Ponderacion_compre_local::All();
-        $jerarquias = Jerarquia_compre_local::All();
 
-        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones', 'jerarquias'));
+        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades'));
     })->name('nuevoRegistro');
 
 

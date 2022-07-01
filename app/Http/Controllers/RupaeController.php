@@ -16,7 +16,6 @@ use App\Models\Proveedor_telefono;
 use App\Models\Actividad_economica;
 use App\Models\Proveedor_domicilio;
 use Illuminate\Support\Facades\Log;
-use App\Models\Jerarquia_compre_local;
 use App\Models\Actividades_proveedores;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
@@ -264,9 +263,6 @@ class RupaeController extends Controller
         $cuit =  $digi1.'-'.$digi2.'-'.$digi3;
 
 
-
-
-
         $data = [
             'proveedor' => $proveedor,
             'titulo' => 'Certificado inscripción',
@@ -501,14 +497,9 @@ class RupaeController extends Controller
         }
 
 
-        if ($proveedor->desc_jerarquia_compre_local == 'PROVEEDOR LOCAL') {
-
             $tipo_proveedor = 'PROVEEDOR SANTACRUCEÑO';
 
-        } else {
-
-            $tipo_proveedor = $proveedor->desc_jerarquia_compre_local;
-        }
+      
 
         //Obtenemos el ultimo pago de inscripcion (en el caso de que se tenga que volver a reinscribir)
         //si no ha renovado antes de los 3 años de vigencia.
@@ -787,16 +778,8 @@ class RupaeController extends Controller
             $actividades_Secundarias = $Actividad_economica2->cod_actividad . "," . $actividades_Secundarias;
         }
         $fecha_emision_certificado = Carbon::now();
-        $jerarquias = Jerarquia_compre_local::all();
+    
         $desc_jerarquia_compre_local = '';
-        foreach ($jerarquias as $jerarquia) {
-            if ($proveedor->valor_indice_rupae >= $jerarquia->valor_desde && $proveedor->valor_indice_rupae <= $jerarquia->valor_hasta) {
-                $desc_jerarquia_compre_local = $jerarquia->desc_jerarquia_compre_local;
-            }
-
-        }
-
-
 
         $proveedor->fecha_inscripcion = $fecha_emision_certificado;
         $proveedor->save();
