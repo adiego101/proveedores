@@ -4,11 +4,8 @@ use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\Actividad_economica;
-use App\Models\Jerarquia_compre_local;
 use App\Models\Localidad;
 use App\Models\Pais;
-use App\Models\Ponderacion_compre_local;
-use App\Models\Producto;
 use App\Models\Provincia;
 use App\Models\Tipo_actividad;
 use App\Models\Sector;
@@ -54,11 +51,8 @@ Route::group(['middleware' => ['auth']], function () {
         $localidades = Localidad::all();
         $tipos_actividades = Tipo_actividad::All();
         $actividades = Actividad_economica::All();
-        $productos = Producto::All();
-        $ponderaciones = Ponderacion_compre_local::All();
-        $jerarquias = Jerarquia_compre_local::All();
 
-        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'productos', 'ponderaciones', 'jerarquias'));
+        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades'));
     })->name('nuevoRegistro');
 
 
@@ -79,15 +73,8 @@ Route::group(['middleware' => ['auth']], function () {
         return view('bajaRegistro');
     });
 
-    Route::get('/actualizarFormulas', function () {
-        $ponderaciones = Ponderacion_compre_local::All();
-        $jerarquias = Jerarquia_compre_local::All();
-        return view('actualizarFormulas', compact('ponderaciones', 'jerarquias'));
-    })->middleware(['can:admin_users']);;
 
     Route::post('/crear_registro_cuit', [ProveedoresController::class, 'crear_registro_cuit'])->name('crear_registro_cuit');
-
-    Route::post('/actualizar_formulas', [ProveedoresController::class, 'actualizar_formulas'])->name('actualizar_formulas')->middleware(['can:admin_users']);;
 
     Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
 
@@ -129,78 +116,29 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('idLocalidad/{nombre_localidad}', 'App\Http\Controllers\ProveedoresController@idLocalidad');
 
-    Route::get('sucursales/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getSucursales')->name('sucursales.list');
-    //Obtenemos las sucursales de la BD para cargar en el modal, para modificar
-    Route::get('sucursalesBD/{id}/', 'App\Http\Controllers\ProveedoresController@getSucursalesBD');
     Route::get('pagos/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPagos')->name('pagos.list');
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
-    Route::get('productos/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getProductos')->name('productos.list');
-    Route::get('palabras_clave/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPalabrasClave')->name('palabras_clave.list');
-    Route::get('patentes/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPatentes')->name('patentes.list');
-    //Obtenemos los vehiculos de la BD para cargar en el modal, para modificar
-    Route::get('patentesBD/{id}', 'App\Http\Controllers\ProveedoresController@getPatentesBD');
-    Route::get('seguros/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getSeguros')->name('seguros.list');
-    //Obtenemos los seguros de la BD para cargar en el modal, para modificar
-    Route::get('segurosBD/{id}', 'App\Http\Controllers\ProveedoresController@getSegurosBD');
-    //Obtenemos las palabras clave de la BD para cargar en el modal, para modificar
-    Route::get('palabrasClaveBD/{id}', 'App\Http\Controllers\ProveedoresController@getPalabrasClaveBD');
 
-    Route::get('sedes/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getSedes')->name('sedes.list');
-    //Obtenemos las sedes de la BD para cargar en el modal, para modificar
-    Route::get('sedesBD/{id}', 'App\Http\Controllers\ProveedoresController@getSedesBD');
-
-    Route::post('bajaSucursales/{id}', 'App\Http\Controllers\ProveedoresController@bajaSucursales')->name('sucursales.baja');
     Route::post('bajaPagos/{id}', 'App\Http\Controllers\ProveedoresController@bajaPagos')->name('pagos.baja');
     Route::post('bajaActividades/{id}', 'App\Http\Controllers\ProveedoresController@bajaActividades')->name('actividades.baja');
-    Route::post('bajaProductos/{id}', 'App\Http\Controllers\ProveedoresController@bajaProductos')->name('productos.baja');
-    Route::post('bajaPalabrasClave/{id}', 'App\Http\Controllers\ProveedoresController@bajaPalabrasClave')->name('palabras_clave.baja');
-    Route::post('bajaPatentes/{id}', 'App\Http\Controllers\ProveedoresController@bajaPatentes')->name('patentes.baja');
-    Route::post('bajaSeguros/{id}', 'App\Http\Controllers\ProveedoresController@bajaSeguros')->name('seguros.baja');
-    Route::post('bajaSedes/{id}', 'App\Http\Controllers\ProveedoresController@bajaSedes')->name('sedes.baja');
 
-    Route::get('editarSucursales/{id}', 'App\Http\Controllers\ProveedoresController@editarSucursales')->name('sucursales.editar');
     Route::get('editarPagos/{id}', 'App\Http\Controllers\ProveedoresController@editarPagos')->name('pagos.editar');
     Route::get('editarActividades/{id}', 'App\Http\Controllers\ProveedoresController@editarActividades')->name('actividades.editar');
-    Route::get('editarProductos/{id}', 'App\Http\Controllers\ProveedoresController@editarProductos')->name('productos.editar');
-    Route::get('editarPatentes/{id}', 'App\Http\Controllers\ProveedoresController@editarPatentes')->name('patentes.editar');
-    Route::get('editarSeguros/{id}', 'App\Http\Controllers\ProveedoresController@editarSeguros')->name('seguros.editar');
-    Route::get('editarSedes/{id}', 'App\Http\Controllers\ProveedoresController@editarSedes')->name('sedes.editar');
 
-    Route::post('guardarSucursales/{id}', 'App\Http\Controllers\ProveedoresController@guardarSucursales')->name('sucursales.guardar');
     Route::post('guardarPagos/{id}', 'App\Http\Controllers\ProveedoresController@guardarPagos')->name('pagos.guardar');
     Route::post('guardarActividades/{id}', 'App\Http\Controllers\ProveedoresController@guardarActividades')->name('actividades.guardar');
-    Route::post('guardarProductos/{id}', 'App\Http\Controllers\ProveedoresController@guardarProductos')->name('productos.guardar');
-    Route::post('guardarPalabrasClave/{id}', 'App\Http\Controllers\ProveedoresController@guardarPalabrasClave')->name('palabras_clave.guardar');
-    Route::post('guardarPatentes/{id}', 'App\Http\Controllers\ProveedoresController@guardarPatentes')->name('patentes.guardar');
-    Route::post('guardarSeguros/{id}', 'App\Http\Controllers\ProveedoresController@guardarSeguros')->name('seguros.guardar');
-    Route::post('guardarSedes/{id}', 'App\Http\Controllers\ProveedoresController@guardarSedes')->name('sedes.guardar');
 
-    Route::get('nuevoSucursales/{id}', 'App\Http\Controllers\ProveedoresController@nuevoSucursales')->name('sucursales.nuevo');
     Route::get('nuevoPagos/{id}', 'App\Http\Controllers\ProveedoresController@nuevoPagos')->name('pagos.nuevo');
     Route::get('nuevoActividades/{id}', 'App\Http\Controllers\ProveedoresController@nuevoActividades')->name('actividades.nuevo');
-    Route::get('nuevoProductos/{id}', 'App\Http\Controllers\ProveedoresController@nuevoProductos')->name('productos.nuevo');
-    Route::get('nuevoPatentes/{id}', 'App\Http\Controllers\ProveedoresController@nuevoPatentes')->name('patentes.nuevo');
-    Route::get('nuevoSeguros/{id}', 'App\Http\Controllers\ProveedoresController@nuevoSeguros')->name('seguros.nuevo');
-    Route::get('nuevoSedes/{id}', 'App\Http\Controllers\ProveedoresController@nuevoSedes')->name('sedes.nuevo');
-
 
     Route::post('crearSucursales/{id}', 'App\Http\Controllers\ProveedoresController@crearSucursales')->name('sucursales.crear');
     Route::post('crearPagos/{id}', 'App\Http\Controllers\ProveedoresController@crearPagos')->name('pagos.crear');
     Route::post('crearActividades/{id}', 'App\Http\Controllers\ProveedoresController@crearActividades')->name('actividades.crear');
-    Route::post('crearProductos/{id}', 'App\Http\Controllers\ProveedoresController@crearProductos')->name('productos.crear');
-    Route::post('crearPalabrasClave/{id}', 'App\Http\Controllers\ProveedoresController@crearPalabrasClave')->name('palabras_clave.crear');
-    Route::post('crearPatentes/{id}', 'App\Http\Controllers\ProveedoresController@crearPatentes')->name('patentes.crear');
-    Route::post('crearSeguros/{id}', 'App\Http\Controllers\ProveedoresController@crearSeguros')->name('seguros.crear');
-    Route::post('crearSedes/{id}', 'App\Http\Controllers\ProveedoresController@crearSedes')->name('sedes.crear');
 
     Route::get('verSucursales/{id}', 'App\Http\Controllers\ProveedoresController@verSucursales')->name('sucursales.ver');
     Route::get('verPagos/{id}', 'App\Http\Controllers\ProveedoresController@verPagos')->name('pagos.ver');
     Route::get('verActividades/{id}', 'App\Http\Controllers\ProveedoresController@verActividades')->name('actividades.ver');
-    Route::get('verProductos/{id}', 'App\Http\Controllers\ProveedoresController@verProductos')->name('productos.ver');
-    Route::get('verPatentes/{id}', 'App\Http\Controllers\ProveedoresController@verPatentes')->name('patentes.ver');
-    Route::get('verSeguros/{id}', 'App\Http\Controllers\ProveedoresController@verSeguros')->name('seguros.ver');
-    Route::get('verSedes/{id}', 'App\Http\Controllers\ProveedoresController@verSedes')->name('sedes.ver');
-
+    
 //Prueba generacion PDF
 
     Route::get('/registro-alta/{id}', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');

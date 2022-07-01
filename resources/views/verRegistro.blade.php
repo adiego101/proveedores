@@ -26,44 +26,13 @@
                     fiscal</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if ($tab == 'sucursal') {{ 'active' }} @endif" id="sucursales-tab"
-                    data-toggle="tab" href="#sucursales">Sucursales</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " id="infoImpositiva-tab" data-toggle="tab" href="#infoImpositiva">Informacion
-                    Impositiva</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " id="ingresosbrutos-tab" data-toggle="tab" href="#ingresosbrutos">Impuestos sobre
-                    ingresos brutos</a>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link @if ($tab == 'actividad') {{ 'active' }} @endif" id="actividad-tab"
                     data-toggle="tab" href="#actividad">Actividad</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " id="valorAgregado-tab" data-toggle="tab" href="#valorAgregado">Valor Agregado</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " id="personalOcupado-tab" data-toggle="tab" href="#personalOcupado">Personal
-                    Ocupado</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link @if ($tab == 'pago') {{ 'active' }} @endif" id="pagos-tab"
                     data-toggle="tab" href="#pagos">Pagos</a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link @if ($tab == 'patente') {{ 'active' }} @endif " id="patente-tab"
-                    data-toggle="tab" href="#patente">Patente y Seguro</a>
-            </li>
-
-        <!--    <li class="nav-item">
-                <a class="nav-link " id="otrosDatos-tab" data-toggle="tab" href="#otrosDatos">Otros
-                    Datos</a>
-            </li> -->
-
         </ul>
 
         <br>
@@ -81,16 +50,6 @@
             @include('editarRegistro.domicilioLegal')
 
         </div>
-        <div class="tab-pane fade @if ($tab == 'sucursal') {{ 'show active' }} @endif" id="sucursales"
-            role="tabpanel" aria-labelledby="nav-sucursales-tab">
-            @include('editarRegistro.sucursales')
-        </div>
-        <div class="tab-pane fade" id="infoImpositiva" role="tabpanel" aria-labelledby="nav-infoImpositiva-tab">
-            @include('editarRegistro.infoImpositiva')
-        </div>
-        <div class="tab-pane fade" id="ingresosbrutos" role="tabpanel" aria-labelledby="nav-ingresosbrutos-tab">
-            @include('editarRegistro.Impuestosingresosbrutos')
-        </div>
         <div class="tab-pane fade" id="domicilioFiscal" role="tabpanel" aria-labelledby="nav-domicilioFiscal.blade-tab">
             @include('editarRegistro.domicilioFiscal')
         </div>
@@ -98,39 +57,14 @@
             role="tabpanel" aria-labelledby="nav-actividad-tab">
             @include('editarRegistro.actividad')
         </div>
-        <div class="tab-pane fade" id="valorAgregado" role="tabpanel" aria-labelledby="nav-valorAgregado-tab">
-            @include('editarRegistro.valorAgregado')
-
-        </div>
-        <div class="tab-pane fade" id="personalOcupado" role="tabpanel" aria-labelledby="nav-personalOcupado-tab">
-            @include('editarRegistro.personalOcupado')
-        </div>
         <div class="tab-pane fade  @if ($tab == 'pago') {{ 'show active' }} @endif" id="pagos" role="tabpanel"
             aria-labelledby="nav-pagos-tab">
             @include('editarRegistro.pagos')
         </div>
-
-        <div class="tab-pane fade  @if ($tab == 'patente') {{ 'show active' }} @endif" id="patente"
-            role="tabpanel" aria-labelledby="nav-patente-tab">
-            @include('editarRegistro.patenteSeguro')
-        </div>
-
-        <!-- <div class="tab-pane fade" id="otrosDatos" role="tabpanel" aria-labelledby="nav-otrosDatos-tab"> -->
-         {{-- @include('editarRegistro.otrosDatos') --}}   <!-- </div> -->
     </div>
+
     @include('edicionesModales.editarpagos')
     @include('edicionesModales.editarActividades')
-    @include('edicionesModales.editarProducto')
-    {{-- @include('edicionesModales.sucursales') --}}
-    @include('edicionesModales.editarSedes')
-    @include('edicionesModales.editarSeguros')
-    @include('edicionesModales.editarVehiculos')
-    @include('edicionesModales.palabraClave')
-    @include('edicionesModales.editarPalabraClave')
-
-    <!--Incluimos el modal para editar los campos de las sucursales -->
-
-    @include('sucursales.edit')
 
     @yield('datos')
     <br>
@@ -246,18 +180,6 @@ $("#cuit").val(function (index, value ) {
                 .replace(/^([0-9]{2})/, '$1-')
 
 });
-
-            $("#masa_salarial_bruta").val(function (index, value ) {
-            return value.replace(/\D/g, "")
-                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-        });
-
-        $("#facturacion_anual_alcanzada").val(function (index, value ) {
-            return value.replace(/\D/g, "")
-                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-        });
 
             @if (!$proveedor_domicilio_real->id_localidad == '')
                 recargarListaRealEdit2();

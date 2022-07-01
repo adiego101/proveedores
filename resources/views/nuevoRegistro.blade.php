@@ -62,27 +62,15 @@
     <small class="small" id="small-cuit4"></small>
     <small class="small" id="small-cuit2"></small>
     <small class="small" id="small-dni_legal"></small>
-    <small class="small" id="small-facturacion"></small>
-    <small class="small" id="small-masa"></small>
 
     <form  id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
         @csrf
         @include('altaRegistro.datosGenerales')
-
         @include('altaRegistro.domicilio',['tipo_domicilio'=>'real'])
         @include('altaRegistro.domicilio',['tipo_domicilio'=>'legal'])
         @include('altaRegistro.domicilio',['tipo_domicilio'=>'fiscal'])
-        @include('altaRegistro.sucursales')
-        @include('altaRegistro.infoImpositiva')
-        @include('altaRegistro.Impuestosingresosbrutos')
         @include('altaRegistro.actividad')
         @include('altaRegistro.pagos')
-
-        @include('altaRegistro.valorAgregado')
-        @include('altaRegistro.personalOcupado')
-
-        @include('altaRegistro.patenteSeguro')
-        {{-- @include('altaRegistro.otrosDatos') --}}
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <div class="btn-group">
@@ -204,138 +192,19 @@ $('input[type="checkbox"]').on('change', function(){
         event.preventDefault();
 
         if(validardni_legal()){
-                if(validarMasa()){
-                    if(validarFacturacion()){
-                        this.submit();
+              
+            this.submit();       
+        }
 
-                    }
-                }
-            }
+    }, false);
 
-        }, false);
 </script>
 
 
 <script type="text/javascript">
 
-function validarMasa() {
-
-var numero_masa = $('#masa_salarial_bruta').val();
-
-var cadena_masa = numero_masa.toString();
-
-const regex_masa = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
-const only_number_masa = regex_masa.test(cadena_masa);
-
-if (only_number_masa == true || numero_masa=='' ){
-return true;
-}
-else{
-return false;
-}
-}
-function validarFacturacion() {
-
-var numero_facturacion = $('#facturacion_anual_alcanzada').val();
-
-var cadena_facturacion = numero_facturacion.toString();
-
-const regex_facturacion = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
-const only_number_facturacion = regex_facturacion.test(cadena_facturacion);
-
-if (only_number_facturacion == true || numero_facturacion == ''){
-return true;
-}
-else{
-return false;
-}
-}
-
-$("#masa_salarial_bruta").on({
-    "focus": function (event) {
-        $(event.target).select();
-    },
-    "change" : function(){
-
-           var numero_masa = $('#masa_salarial_bruta').val();
-
-           var cadena_masa = numero_masa.toString();
-
-           const regex_masa = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
-           const only_number_masa = regex_masa.test(cadena_masa);
-
-           if (only_number_masa == true || numero_masa == ''){
-
-            ocultarError('#masa_salarial_bruta', '#small-masa');
-
-           } else {
-            mostrarError('#masa_salarial_bruta', '#small-masa', '<div class="alert alert-danger mt-3 pt-1">El campo <strong>masa salarial bruta</strong> contiene datos <strong>incorrectos</strong>.</div>');
-
-           }
-
-       },
-    "keyup": function (event) {
-        $(event.target).val(function (index, value ) {
-            return value.replace(/\D/g, "")
-                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-        });
-    }
-
-});
-
-$("#facturacion_anual_alcanzada").on({
-    "focus": function (event) {
-        $(event.target).select();
-    },
-    "change" : function(){
-
-            var numero_facturacion = $('#facturacion_anual_alcanzada').val();
-
-            var cadena_facturacion = numero_facturacion.toString();
-
-            const regex_facturacion = /^(\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$/;
-            const only_number_facturacion = regex_facturacion.test(cadena_facturacion);
-
-            if (only_number_facturacion == true || numero_facturacion == '' ){
-                ocultarError('#facturacion_anual_alcanzada', '#small-facturacion');
-
-
-            } else {
-                mostrarError('#facturacion_anual_alcanzada', '#small-facturacion', '<div class="alert alert-danger mt-3 pt-1">El campo <strong>facturacion anual alcanzada</strong> contiene datos <strong>incorrectos</strong>.</div>');
-
-            }
-
-        },
-    "keyup": function (event) {
-        ocultarError('#facturacion_anual_alcanzada', '#small-facturacion');
-        $(event.target).val(function (index, value ) {
-            return value.replace(/\D/g, "")
-                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-        });
-    }
-
-});
-
-
-
         /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
         window.onload = function() {
-
-
-
-            $("#masa_salarial_bruta").val(function (index, value ) {
-            return value.replace(/\D/g, "")
-                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-        });
-        $("#facturacion_anual_alcanzada").val(function (index, value ) {
-            return value.replace(/\D/g, "")
-                        .replace(/([0-9])([0-9]{2})$/, '$1,$2')
-                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-        });
-
 
             validar_razon_social();
 
@@ -346,21 +215,7 @@ $("#facturacion_anual_alcanzada").on({
             $('.js-example-basic-single').select2({
             theme: "bootstrap",    width: 'resolve' // need to override the changed default
 });
-            var cant_filas_sucursal = document.getElementById("body_table_sucursal").rows.length;
-
-            if(cant_filas_sucursal == 0){
-
-                $("#body_table_sucursal").append(
-                        '<tr id="row_sucursal" class="alert alert-light" role="alert">'+
-                            '<td></td>'+
-                            '<td>No hay registros</td>'+
-                            '<td></td>'+
-                            '<td></td>'+
-                        '</tr>'
-                );
-            }
-
-
+           
             var cant_filas_actividad = document.getElementById("body_table_actividad").rows.length;
 
             if(cant_filas_actividad == 0){
@@ -371,34 +226,6 @@ $("#facturacion_anual_alcanzada").on({
                             '<td>No hay registros</td>'+
                             '<td></td>'+
                         '</tr>'
-                );
-            }
-
-            var cant_filas_producto = document.getElementById("body_table_producto").rows.length;
-
-            if(cant_filas_producto == 0){
-
-                $("#body_table_producto").append(
-                '<tr id="row_producto" class="alert alert-light" role="alert">'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td>No hay registros</td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                '</tr>'
-                );
-            }
-
-
-            var cant_filas_palabra_clave = document.getElementById("body_table_palabra_clave").rows.length;
-
-            if(cant_filas_palabra_clave == 0){
-
-                $("#body_table_palabra_clave").append(
-                '<tr id="row_palabra_clave" class="alert alert-light" role="alert">'+
-                    '<td>No hay registros</td>'+
-                    '<td></td>'+
-                '</tr>'
                 );
             }
 
@@ -418,52 +245,6 @@ $("#facturacion_anual_alcanzada").on({
                 );
             }
 
-
-            var cant_filas_vehiculo = document.getElementById("body_table_vehiculo").rows.length;
-
-            if(cant_filas_vehiculo == 0){
-
-                $("#body_table_vehiculo").append(
-                '<tr id="row_vehiculo" class="alert alert-light" role="alert">'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td>No hay registros</td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                '</tr>'
-                );
-            }
-
-
-            var cant_filas_seguro = document.getElementById("body_table_seguro").rows.length;
-
-            if(cant_filas_seguro == 0){
-
-                $("#body_table_seguro").append(
-                '<tr id="row_seguro" class="alert alert-light" role="alert">'+
-                    '<td></td>'+
-                    '<td></td>'+
-                    '<td>No hay registros</td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                '</tr>'
-                );
-            }
-
-
-            var cant_filas_sede = document.getElementById("body_table_sede").rows.length;
-
-            if(cant_filas_sede == 0){
-
-                $("#body_table_sede").append(
-                '<tr id="row_sede" class="alert alert-light" role="alert">'+
-                    '<td></td>'+
-                    '<td>No hay registros</td>'+
-                    '<td></td>'+
-                    '<td></td>'+
-                '</tr>'
-                );
-            }
         };
 
     </script>
