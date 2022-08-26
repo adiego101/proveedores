@@ -2,7 +2,7 @@
 
 @section('content2')
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -65,12 +65,12 @@
 
     <form  id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
         @csrf
-        @include('altaRegistro.datosGenerales')
-        @include('altaRegistro.domicilio',['tipo_domicilio'=>'real'])
-        @include('altaRegistro.domicilio',['tipo_domicilio'=>'legal'])
-        @include('altaRegistro.domicilio',['tipo_domicilio'=>'fiscal'])
-        @include('altaRegistro.actividad')
-        @include('altaRegistro.pagos')
+        @include('editarRegistro.datosGenerales',['mode'=>'create'])
+        @include('editarRegistro.domicilio',['tipo_domicilio'=>'real', 'mode'=>'create'])
+        @include('editarRegistro.domicilio',['tipo_domicilio'=>'legal', 'mode'=>'create'])
+        @include('editarRegistro.domicilio',['tipo_domicilio'=>'fiscal', 'mode'=>'create'])
+        @include('altaRegistro.actividad',['mode'=>'create'])
+        @include('altaRegistro.pagos',['mode'=>'create'])
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <div class="btn-group">
@@ -90,162 +90,62 @@
 
 
 @push('js')
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" integrity="sha512-CbQfNVBSMAYmnzP3IC+mZZmYMP2HUnVkV4+PwuhpiMUmITtSpS7Prr3fNncV1RBOnWxzz4pYQ5EAGG4ck46Oig==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-
-<script type="text/javascript">
-    function valideKey(evt){
-
-        // El código es la representación decimal ASCII de la clave presionada.
-        var code = (evt.which) ? evt.which : evt.keyCode;
-
-        if(code==8) { // espacio.
-          return true;
-        } else if(code>=48 && code<=57) { // es un numero.
-          return true;
-        } else{ // otras teclas
-        //console.log("no es un numero");
-          return false;
-        }
-    }
-</script>
-
-<script>
-
-$('input[type="checkbox"]').on('change', function(){
-    this.value = this.checked ? 1 : 0;
-     //console.log(this.value);
- }).change();
-</script>
-
-
-<!--Validacion de campos del formulario -->
 
 <script type="text/javascript">
 
+    $(document).ready(function() 
+    {
+        if ($('#provincia_real_create').val()!='')
+            recargarListaDomicilio($('#provincia_real_create').val(), $("#localidad_real_create"));
+        if ($('#provincia_legal_create').val()!='')
+            recargarListaDomicilio($('#provincia_legal_create').val(), $('#localidad_legal_create'));
+        if ($('#provincia_fiscal_create').val()!='')
+            recargarListaDomicilio($('#provincia_fiscal_create').val(), $('#localidad_fiscal_create'));
+        if ($('#provincia_habilitacion').val()!='')
+            recargarListaHabilitacion();
+        
+        $("#regiration_form").on('submit',function(){
+            event.preventDefault();
 
+            if(validarDni())
+                this.submit();
+        });
 
-   /* let formulario = document.getElementById("regiration_form");
+    });
 
-    formulario.addEventListener("submit", function(event){
-
-        //Detenemos el envio del formulario
-        event.preventDefault();
-
-        let comodin = true;
-        let texto = "Faltan completar los siguientes campos: ";
-
-        //Obtenemos los valores de cada campo
-        let razon = document.getElementById('razon_social').value;
-        let nombre = document.getElementById('nombre_fantasia').value;
-        let cuit = document.getElementById('cuit').value;
-
-        if (razon.length == 0)
-        {
-            texto = texto + "\n*Razón social (Datos generales)";
-            comodin = false;
-        }
-
-        if (nombre.length == 0)
-        {
-            texto = texto + "\n*Nombre de fantasía (Datos generales)";
-            comodin = false;
-        }
-
-        if (cuit.length == 0)
-        {
-            texto = texto + "\n*Cuit (Datos generales)";
-            comodin = false;
-        }
-
-        if (!comodin)
-        {
-            //Desplegamos el modal
-            $('#modal_validar_formulario').modal('show');
-
-            //Enviamos los valores recuperados anteriormente a los inputs del modal
-            $('#modal_aviso').text(texto);
-        }
-
-        if (comodin)
-        {
-            this.submit();
-        }
-
-    }, false);*/
-
-
-    let formulario = document.getElementById("regiration_form");
-
-    formulario.addEventListener("submit", function(event){
-
-        //Detenemos el envio del formulario
-        event.preventDefault();
-
-        if(validardni_legal()){
-              
-            this.submit();       
-        }
-
-    }, false);
-
-</script>
-
-
-<script type="text/javascript">
-
-        /*Al cargar el formulario verificamos si las tablas estan vacias, mostramos un mensaje de aviso*/
-        window.onload = function() {
-
-            validar_razon_social();
-
-            validar_nombre_fantasia();
-
-            validar_cuit();
-
-            $('.js-example-basic-single').select2({
-            theme: "bootstrap",    width: 'resolve' // need to override the changed default
-});
-           
-            var cant_filas_actividad = document.getElementById("body_table_actividad").rows.length;
-
-            if(cant_filas_actividad == 0){
-
-                $("#body_table_actividad").append(
-                        '<tr id="row_actividad" class="alert alert-light" role="alert">'+
-                            '<td></td>'+
-                            '<td>No hay registros</td>'+
-                            '<td></td>'+
-                        '</tr>'
-                );
+    function recargarListaDomicilio(provincia_selected, select_localidad){
+        $.ajax({
+            type:"GET",
+            url:"{{url('localidades')}}/"+provincia_selected,
+            success:function(r){
+                select_localidad.html(r);
             }
+        });
+    }
 
+    function recargarListaHabilitacion(){
+        $.ajax({
+        type:"GET",
+                url:"{{url('localidades')}}/"+$('#provincia_habilitacion').val(),
 
-            var cant_filas_pago = document.getElementById("body_table_pago").rows.length;
+        success:function(r){
+            $('#localidad_habilitacion').html(r);
+        }
+        });
+    }
 
-            if(cant_filas_pago == 0){
+    </script>
+    <script type="text/javascript">
 
-                $("#body_table_pago").append(
-                '<tr id="row_pago" class="alert alert-light" role="alert">'+
-                    '<td></td>'+
+        var cant_filas_actividad = document.getElementById("body_table_actividad").rows.length;
+
+        if(cant_filas_actividad == 0)
+            $("#body_table_actividad").append(
+                '<tr id="row_actividad" class="alert alert-light" role="alert">'+
                     '<td></td>'+
                     '<td>No hay registros</td>'+
                     '<td></td>'+
-                    '<td></td>'+
-                '</tr>'
-                );
-            }
-
-        };
+                '</tr>');
 
     </script>
 

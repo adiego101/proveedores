@@ -175,9 +175,10 @@ class Proveedor extends Model
         return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
                     ->wherePivot('rol_persona_proveedor', 'Representante');
     }
-    public function representante(){
+    public function representante_actual(){
         return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
-                    ->wherePivot('rol_persona_proveedor', 'Representante');
+                    ->wherePivot('rol_persona_proveedor', 'Representante')
+                    ->latest();
     }
 
     public function actividades_economicas(){

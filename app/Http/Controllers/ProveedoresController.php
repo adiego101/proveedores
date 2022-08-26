@@ -135,26 +135,6 @@ class ProveedoresController extends Controller
                     //-------------------Carga Proveedor-------------------
                     $proveedores_rupae = new Proveedor($request->all());
                     $proveedores_rupae->cuit= str_replace("-","",$request->cuit);
-
-                    if(isset($proveedores_rupae->masa_salarial_bruta)){
-
-                        $proveedores_rupae->masa_salarial_bruta= str_replace(",",".",str_replace(".","",$request->masa_salarial_bruta));
-                        
-                    } else {
-
-                        $proveedores_rupae->masa_salarial_bruta= $request->masa_salarial_bruta;
-                    }
-
-                    
-                    if(isset($proveedores_rupae->facturacion_anual_alcanzada)){
-
-                        $proveedores_rupae->facturacion_anual_alcanzada= str_replace(",",".",str_replace(".","",$request->facturacion_anual_alcanzada));
-
-                    } else {
-
-                        $proveedores_rupae->facturacion_anual_alcanzada= $request->facturacion_anual_alcanzada;
-                    }
-
                     $proveedores_rupae->save();
 
 
@@ -189,202 +169,71 @@ class ProveedoresController extends Controller
                         $Proveedores_tipos_proveedores->save();}
 
                     //----------------------------------Carga Domicilio Real---------------------------------------------
+                    $this->crear_domicilio($proveedores_rupae->id_proveedor, 'real', $request);
 
-                    $domicilio_real = Proveedor_domicilio::create([
-                        'tipo_domicilio' => 'real',
-                        //'nro_orden_domicilio',
-                        'calle' => htmlspecialchars($request->input('calle_real')),
-                        'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                        'numero' => $request->input('numero_real'),
-                        'dpto' => htmlspecialchars($request->input('dpto_real')),
-                        'puerta' => htmlspecialchars($request->input('puerta_real')),
-                        'lote' => htmlspecialchars($request->input('lote_real')),
-                        'manzana' => htmlspecialchars($request->input('manzana_real')),
-                        'entre_calles' => htmlspecialchars($request->input('entreCalles_real')),
-                        'oficina' => htmlspecialchars($request->input('oficina_real')),
-                        'monoblock' => htmlspecialchars($request->input('monoblock_real')),
-                        'barrio' => htmlspecialchars($request->input('barrio_real')),
-                        'id_localidad' => $request->input('localidad_real'),
-                        'codigo_postal' => htmlspecialchars($request->input('cp_real')),
-                    ]);
-                    $domicilio_real->save();
+                    //---------Carga Telefono/s_Real----------
 
-                    //---------Contador de Telefono_Real----------
+                    $this->crear_telefonos($proveedores_rupae->id_proveedor, 'real', $request);
 
-                    $arraySize = count($request->telefono_real);
+                    //---------Carga de Email/s_Real----------
 
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        //---------Carga de Telefonos_Real----------
-
-                        $telefono_real = Proveedor_telefono::create([
-                            'nro_tel' => $request->telefono_real[$i],
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'cod_area_tel' => $request->telefono_real_cod[$i],
-                            //'tipo_medio'=>,
-                            //'desc_telefono'=>,
-                            'tipo_telefono' => 'real',
-                            //'nro_orden_telefono'=>,
-                        ]);
-                        $telefono_real->save();
-                    }
-
-                    //---------Contador de Email_Real----------
-
-                    $arraySize = count($request->email_real);
-
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        //---------Carga de Email_Real----------
-
-                        $email_real = Proveedor_email::create([
-                            'email' => $request->email_real[$i],
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'tipo_email' => 'real',
-                        ]);
-                        $email_real->save();
-                    }
+                    $this->crear_emails($proveedores_rupae->id_proveedor, 'real', $request);
 
                     //----------------------------------Carga Domicilio Legal---------------------------------------------
 
-                    $domicilio_legal = Proveedor_domicilio::create([
-                        'tipo_domicilio' => 'legal',
-                        'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                    $this->crear_domicilio($proveedores_rupae->id_proveedor, 'legal', $request);
 
-                        //'nro_orden_domicilio',
-                        'calle' => htmlspecialchars($request->input('calle_legal')),
-                        'numero' => $request->input('numero_legal'),
-                        'lote' => htmlspecialchars($request->input('lote_legal')),
-                        'entre_calles' => htmlspecialchars($request->input('entreCalles_legal')),
-                        'monoblock' => htmlspecialchars($request->input('monoblock_legal')),
-                        'dpto' => htmlspecialchars($request->input('dpto_legal')),
-                        'puerta' => htmlspecialchars($request->input('puerta_legal')),
-                        'oficina' => htmlspecialchars($request->input('oficina_legal')),
-                        'manzana' => htmlspecialchars($request->input('manzana_legal')),
-                        'barrio' => htmlspecialchars($request->input('barrio_legal')),
-                        'codigo_postal' => htmlspecialchars($request->input('cp_legal')),
-                        'id_localidad' => $request->input('localidad_legal'),
+                    //---------Carga Telefono/s_Legal----------
 
-                    ]);
-                    $domicilio_legal->save();
-                    //---------Contador de Telefono_Legal----------
+                    $this->crear_telefonos($proveedores_rupae->id_proveedor, 'legal', $request);
 
-                    $arraySize = count($request->telefono_legal);
+                    //---------Carga de Email/s_Legal----------
 
-                    //---------Carga de Telefonos_Legal----------
+                    $this->crear_emails($proveedores_rupae->id_proveedor, 'legal', $request);
+                    
+                    //---------Carga de Representante Legal----------
 
-                    for ($i = 0; $i < $arraySize; $i++) {
+                    $dni_persona=htmlspecialchars(str_replace(".","",$request->dni_legal));
+                    $nombre_persona=htmlspecialchars($request->nombre_persona);
+                    $apellido_persona=htmlspecialchars($request->apellido_persona);
+                    if($dni_persona!='' && $nombre_persona!='' && $apellido_persona!='')
+                    {
+                        $Representante_legal = Persona::where('dni_persona',$dni_persona)
+                                                    ->first();
+                        
 
-                        $telefono_legal = Proveedor_telefono::create([
-                            'nro_tel' => $request->telefono_legal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'cod_area_tel' => $request->telefono_legal_cod[$i],
-                            //'tipo_medio'=>,
-                            //'desc_telefono'=>,
-                            'tipo_telefono' => 'legal',
-                            //'nro_orden_telefono'=>,
-                        ]);
-                        $telefono_legal->save();
-                    }
-                    //---------Contador de Email_Legal----------
+                        if(!$Representante_legal)
+                            $Representante_legal = Persona::create([
+                                'dni_persona' => $dni_persona,
+                                //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                                'nombre_persona' => $nombre_persona,
+                                'apellido_persona' => $apellido_persona,
+                                //'apellido_persona'=>$proveedores_rupae->apellido_persona,
+                                //'genero_persona'=>$proveedores_rupae->genero_persona,
+                            ]);
+                        else
+                        {
+                            if($Representante_legal->nombre_persona!=htmlspecialchars($request->nombre_persona))
+                                $Representante_legal->update(['nombre_persona'=>htmlspecialchars($request->nombre_persona)]);
+                            if($Representante_legal->apellido_persona!=htmlspecialchars($request->apellido_persona))
+                                $Representante_legal->update(['apellido_persona'=>htmlspecialchars($request->apellido_persona)]);
+                        }
 
-                    $arraySize = count($request->email_legal);
-
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        //---------Carga de Email_legal----------
-
-                        $email_legal = Proveedor_email::create([
-                            'email' => $request->email_legal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'tipo_email' => 'legal',
-                        ]);
-                        $email_legal->save();
+                        $proveedores_rupae->personas()->attach($Representante_legal, ['rol_persona_proveedor' => 'Representante']);
                     }
 
-                    /*
-                    $Representante_legal = Persona::where('dni_persona',htmlspecialchars($request->dni_legal))
-                                                ->fierst();
-                    if(!$Representante_legal){
-                        $Representante_legal = Persona::create([
-                            'dni_persona' => htmlspecialchars($request->dni_legal),
-                            //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                            'nombre_persona' => htmlspecialchars($request->nombre_persona),
-                            'apellido_persona' => htmlspecialchars($request->apellido_persona),
-                            //'apellido_persona'=>$proveedores_rupae->apellido_persona,
-                            //'genero_persona'=>$proveedores_rupae->genero_persona,
-                        ]);
-
-                        $Representante_legal->save();
-                    }*/
-
-                    $Representante_legal = Persona::create([
-                         
-
-                        'dni_persona' => htmlspecialchars(str_replace(".","",$request->dni_legal)),
-                        //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                        'nombre_persona' => htmlspecialchars($request->nombre_persona),
-                        'apellido_persona' => htmlspecialchars($request->apellido_persona),
-                        //'apellido_persona'=>$proveedores_rupae->apellido_persona,
-                        //'genero_persona'=>$proveedores_rupae->genero_persona,
-                    ]);
-
-                    $Representante_legal->save();
-
-
-                    $proveedores_rupae->personas()->attach($Representante_legal, ['rol_persona_proveedor' => 'Representante']);
 
                     //----------------------------------Carga Domicilio Fiscal---------------------------------------------
 
-                    $domicilio_fiscal = Proveedor_domicilio::create([
-                        'tipo_domicilio' => 'fiscal',
-                        'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                        //'nro_orden_domicilio',
-                        'calle' => htmlspecialchars($request->input('calle_fiscal')),
-                        'numero' => $request->input('numero_fiscal'),
-                        'lote' => htmlspecialchars($request->input('lote_fiscal')),
-                        'entre_calles' => htmlspecialchars($request->input('entreCalles_fiscal')),
-                        'monoblock' => htmlspecialchars($request->input('monoblock_fiscal')),
-                        'dpto' => htmlspecialchars($request->input('dpto_fiscal')),
-                        'puerta' => htmlspecialchars($request->input('puerta_fiscal')),
-                        'oficina' => htmlspecialchars($request->input('oficina_fiscal')),
-                        'manzana' => htmlspecialchars($request->input('manzana_fiscal')),
-                        'barrio' => htmlspecialchars($request->input('barrio_fiscal')),
-                        'id_localidad' => $request->input('localidad_fiscal'),
-                        'codigo_postal' => htmlspecialchars($request->input('cp_fiscal')),
-                    ]);
-                    $domicilio_fiscal->save();
-                    //---------Contador de Telefono_Fiscal----------
+                    $this->crear_domicilio($proveedores_rupae->id_proveedor, 'fiscal', $request);
 
-                    $arraySize = count($request->telefono_fiscal);
+                    //---------Carga Telefono_Fiscal----------
 
-                    //---------Carga de Telefonos_Fiscal----------
+                    $this->crear_telefonos($proveedores_rupae->id_proveedor, 'fiscal', $request);
 
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        $telefono_fiscal = Proveedor_telefono::create([
-                            'nro_tel' => $request->telefono_fiscal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'cod_area_tel' => $request->telefono_fiscal_cod[$i],
-                            //'tipo_medio'=>,
-                            //'desc_telefono'=>,
-                            'tipo_telefono' => 'fiscal',
-                            //'nro_orden_telefono'=>,
-                        ]);
-                        $telefono_fiscal->save();
+                    //---------Carga de Email/s_fiscal----------
 
-                    }
-
-                    //---------Contador de Email_fiscal----------
-
-                    $arraySize = count($request->email_fiscal);
-
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        //---------Carga de Email_fiscal----------
-
-                        $email_fiscal = Proveedor_email::create([
-                            'email' => $request->email_fiscal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
-                            'tipo_email' => 'fiscal',
-                        ]);
-                        $email_fiscal->save();
-                    }
+                    $this->crear_emails($proveedores_rupae->id_proveedor, 'fiscal', $request);
 
 
                     //---------Contador de Actividades----------
@@ -426,11 +275,6 @@ class ProveedoresController extends Controller
                             $Pago->save();
                         }
                     }
-
-                //Fin de la transaccion
-                DB::commit();
-
-
                 //Registro de LOG
                 $responsable_id = User::findOrFail(auth()->id())->id;
                 $responsable_nombre = User::findOrFail(auth()->id())->name;
@@ -442,7 +286,9 @@ class ProveedoresController extends Controller
                 'EL_Id_Responsable' => $responsable_id,
                 'EL_Nombre_Responsable' => $responsable_nombre,
                 'EL_Email_Responsable' => $responsable_email]);
-
+                
+                //Fin de la transaccion
+                DB::commit();
 
                 return redirect()->route('verRegistro', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Registro creado correctamente');
 
@@ -471,6 +317,307 @@ class ProveedoresController extends Controller
 
     }
 
+    public function crear_domicilio($id_proveedor, $tipo_domicilio, Request $request)
+    {
+        $calle=htmlspecialchars($request->input("calle_$tipo_domicilio"));
+        $numero=htmlspecialchars($request->input("numero_$tipo_domicilio"));
+        $dpto=htmlspecialchars($request->input("dpto_$tipo_domicilio"));
+        $puerta=htmlspecialchars($request->input("puerta_$tipo_domicilio"));
+        $lote=htmlspecialchars($request->input("lote_$tipo_domicilio"));
+        $manzana=htmlspecialchars($request->input("manzana_$tipo_domicilio"));
+        $entre_calles=htmlspecialchars($request->input("entreCalles_$tipo_domicilio"));
+        $oficina=htmlspecialchars($request->input("oficina_$tipo_domicilio"));
+        $monoblock=htmlspecialchars($request->input("monoblock_$tipo_domicilio"));
+        $barrio=htmlspecialchars($request->input("barrio_$tipo_domicilio"));
+        $localidad=$request->input("localidad_$tipo_domicilio");
+        $codigo_postal=htmlspecialchars($request->input("cp_$tipo_domicilio"));
+
+        if( $calle!=''||$numero!=''||$dpto!=''||$puerta!=''||
+            $lote!=''||$manzana!=''||$entre_calles!=''||
+            $oficina!=''||$monoblock!=''||$barrio!=''||
+            $localidad!=''||$codigo_postal!='')
+        {
+            if($numero!='')
+                $domicilio = Proveedor_domicilio::create([
+                    'tipo_domicilio' => $tipo_domicilio,
+                    //'nro_orden_domicilio',
+                    'calle' => $calle,
+                    'id_proveedor' => $id_proveedor,
+                    'numero' => $numero,
+                    'dpto' => $dpto,
+                    'puerta' => $puerta,
+                    'lote' => $lote,
+                    'manzana' => $manzana,
+                    'entre_calles' => $entre_calles,
+                    'oficina' => $oficina,
+                    'monoblock' => $monoblock,
+                    'barrio' => $barrio,
+                    'id_localidad' => $localidad,
+                    'codigo_postal' => $codigo_postal,
+                ]);
+            else
+                $domicilio = Proveedor_domicilio::create([
+                    'tipo_domicilio' => $tipo_domicilio,
+                    //'nro_orden_domicilio',
+                    'calle' => $calle,
+                    'id_proveedor' => $id_proveedor,
+                    'dpto' => $dpto,
+                    'puerta' => $puerta,
+                    'lote' => $lote,
+                    'manzana' => $manzana,
+                    'entre_calles' => $entre_calles,
+                    'oficina' => $oficina,
+                    'monoblock' => $monoblock,
+                    'barrio' => $barrio,
+                    'id_localidad' => $localidad,
+                    'codigo_postal' => $codigo_postal,
+                ]);
+            $domicilio->save();
+        }
+        return;
+    }
+
+    public function actualizar_domicilio($domicilio, $tipo_domicilio, Request $request)
+    {
+        $calle=htmlspecialchars($request->input("calle_$tipo_domicilio"));
+        $numero=htmlspecialchars($request->input("numero_$tipo_domicilio"));
+        $dpto=htmlspecialchars($request->input("dpto_$tipo_domicilio"));
+        $puerta=htmlspecialchars($request->input("puerta_$tipo_domicilio"));
+        $lote=htmlspecialchars($request->input("lote_$tipo_domicilio"));
+        $manzana=htmlspecialchars($request->input("manzana_$tipo_domicilio"));
+        $entre_calles=htmlspecialchars($request->input("entreCalles_$tipo_domicilio"));
+        $oficina=htmlspecialchars($request->input("oficina_$tipo_domicilio"));
+        $monoblock=htmlspecialchars($request->input("monoblock_$tipo_domicilio"));
+        $barrio=htmlspecialchars($request->input("barrio_$tipo_domicilio"));
+        $localidad=$request->input("localidad_$tipo_domicilio");
+        $codigo_postal=htmlspecialchars($request->input("cp_$tipo_domicilio"));
+        Log::info("codigo postal =".$codigo_postal);
+
+        if( $calle!=''||$numero!=''||$dpto!=''||$puerta!=''||
+            $lote!=''||$manzana!=''||$entre_calles!=''||
+            $oficina!=''||$monoblock!=''||$barrio!=''||
+            $localidad!=''||$codigo_postal!='')
+        {
+            $domicilio = $domicilio->update([
+                'tipo_domicilio' => $tipo_domicilio,
+                //'nro_orden_domicilio',
+                'calle' => $calle,
+                'numero' => $numero,
+                'dpto' => $dpto,
+                'puerta' => $puerta,
+                'lote' => $lote,
+                'manzana' => $manzana,
+                'entre_calles' => $entre_calles,
+                'oficina' => $oficina,
+                'monoblock' => $monoblock,
+                'barrio' => $barrio,
+                'id_localidad' => $localidad,
+                'codigo_postal' => $codigo_postal
+            ]);
+        }
+        return;
+    }
+
+    public function crear_telefonos($id_proveedor, $tipo_telefono, Request $request)
+    {   
+        $cantidad_telefonos=0;
+        switch($tipo_telefono){
+            case('real'):
+                $cantidad_telefonos=count($request->telefono_real);
+                break;
+            case('legal'):
+                $cantidad_telefonos=count($request->telefono_legal);
+                break;
+            case('fiscal'):
+                $cantidad_telefonos=count($request->telefono_fiscal);
+                break;
+        }
+        
+        for($i = 0; $i < $cantidad_telefonos; $i++)
+        {
+            $nro_tel=$request->input("telefono_$tipo_telefono.".$i);
+            $cod_area_tel=$request->input("telefono_$tipo_telefono"."_cod.".$i);
+            if($nro_tel!=''||$cod_area_tel!='')
+                $this->crear_telefono($id_proveedor, $nro_tel, $cod_area_tel, $tipo_telefono);
+        }
+        return;
+    }
+
+    public function crear_telefono($id_proveedor, $nro_tel, $cod_area_tel, $tipo_telefono)
+    {
+        $telefono = Proveedor_telefono::create([
+            'nro_tel' => $nro_tel,
+            'id_proveedor' => $id_proveedor,
+            'cod_area_tel' => $cod_area_tel,
+            //'tipo_medio'=>,
+            //'desc_telefono'=>,
+            'tipo_telefono' => $tipo_telefono,
+            //'nro_orden_telefono'=>,
+        ]);
+        $telefono->save();
+        return;
+    }
+
+    public function actualizar_telefonos($id_proveedor, $tipo_telefono, Request $request)
+    {
+        $cantidad_telefonos=0;
+        switch($tipo_telefono){
+            case('real'):
+                $cantidad_telefonos=count($request->telefono_real);
+                break;
+            case('legal'):
+                $cantidad_telefonos=count($request->telefono_legal);
+                break;
+            case('fiscal'):
+                $cantidad_telefonos=count($request->telefono_fiscal);
+                break;
+        }
+        
+        $telefonos_proveedor=Proveedor_telefono::where('id_proveedor',$id_proveedor)
+                                                ->where('tipo_telefono',$tipo_telefono)
+                                                ->get();     
+        if(isset($telefonos_proveedor) && $telefonos_proveedor->isNotEmpty())
+        {
+            foreach($telefonos_proveedor as $telefono_proveedor)
+            {
+                $encontrado=false;
+
+                for($i = 0; $i < $cantidad_telefonos; $i++)
+                {
+                    $nro_tel=$request->input("telefono_$tipo_telefono.".$i);
+                    $cod_area_tel=$request->input("telefono_$tipo_telefono"."_cod.".$i);
+                    if($nro_tel!=''||$cod_area_tel!='')
+                        if($telefono_proveedor->nro_tel==$nro_tel && $telefono_proveedor->cod_area_tel==$cod_area_tel)
+                        {
+                            $encontrado=true;
+                            $telefono_proveedor->updated_at=Carbon::now();
+                            $telefono_proveedor->save();
+                        }
+                }
+                if(!$encontrado)
+                    $telefono_proveedor->delete();
+            }
+            for($i = 0; $i < $cantidad_telefonos; $i++)
+            {
+                $encontrado=false;
+                $nro_tel=$request->input("telefono_$tipo_telefono.".$i);
+                $cod_area_tel=$request->input("telefono_$tipo_telefono"."_cod.".$i);
+                if($nro_tel!=''||$cod_area_tel!='')
+                {
+                    foreach($telefonos_proveedor as $telefono_proveedor)
+                        if($telefono_proveedor->nro_tel==$nro_tel && $telefono_proveedor->cod_area_tel==$cod_area_tel)
+                            $encontrado=true;
+                    if(!$encontrado)
+                        $this->crear_telefono($id_proveedor,$nro_tel, $cod_area_tel, $tipo_telefono);
+                }
+            }
+        }
+        else
+            $this->crear_telefonos($id_proveedor, $tipo_telefono, $request);
+        return;
+    }
+
+    public function crear_emails($id_proveedor, $tipo_email, Request $request)
+    {
+        $cantidad_emails=0;
+        switch($tipo_email){
+            case('real'):
+                $cantidad_emails=count($request->email_real);
+                Log::info("cantidad emails real request=".$cantidad_emails);
+                break;
+            case('legal'):
+                $cantidad_emails=count($request->email_legal);
+                Log::info("cantidad emails legal request=".$cantidad_emails);
+                break;
+            case('fiscal'):
+                $cantidad_emails=count($request->email_fiscal);
+                Log::info("cantidad emails fiscal request=".$cantidad_emails);
+                break;
+        }
+
+        for($i = 0; $i < $cantidad_emails; $i++)
+        {
+            $email=$request->input("email_$tipo_email.".$i);
+            Log::info("email nº".$i."=".$email);
+            if($email!='')
+                $this->crear_email($id_proveedor, $email, $tipo_email);
+        }
+        return;
+    }
+
+    public function crear_email($id_proveedor, $email, $tipo_email)
+    {
+        $email = Proveedor_email::create([
+            'email' => $email,
+            'id_proveedor' => $id_proveedor,
+            'tipo_email' => $tipo_email,
+        ]);
+        $email->save();
+        Log::info("email guardado = ".$email);
+        return;
+    }
+
+    public function actualizar_emails($id_proveedor, $tipo_email, Request $request)
+    {
+        $cantidad_emails=0;
+        switch($tipo_email){
+            case('real'):
+                $cantidad_emails=count($request->email_real);
+                Log::info('Cantidad de emails real='.$cantidad_emails);
+                break;
+            case('legal'):
+                $cantidad_emails=count($request->email_legal);
+                Log::info('Cantidad de emails legal='.$cantidad_emails);
+                break;
+            case('fiscal'):
+                $cantidad_emails=count($request->email_fiscal);
+                Log::info('Cantidad de emails fiscal='.$cantidad_emails);
+                break;
+        }
+        
+        $emails_proveedor=Proveedor_email::where('id_proveedor',$id_proveedor)
+                                                ->where('tipo_email',$tipo_email)
+                                                ->get();
+        Log::info('Emails '.$emails_proveedor.'='.$cantidad_emails);  
+        if(isset($emails_proveedor) && $emails_proveedor->isNotEmpty())
+        {
+            Log::info('Existe emails proveedor y no esta vacio');  
+            foreach($emails_proveedor as $email_proveedor)
+            {
+                $encontrado=false;
+                for($i = 0; $i < $cantidad_emails; $i++)
+                {
+                    $email=$request->input("email_$tipo_email.$i");
+                    if($email!='')
+                        if($email_proveedor->email==$email)
+                        {
+                            $encontrado=true;
+                            $email_proveedor->updated_at=Carbon::now();
+                            $email_proveedor->save();
+                        }
+                }
+                if(!$encontrado)
+                    $email_proveedor->delete();
+            }
+            for($i = 0; $i < $cantidad_emails; $i++)
+            {
+                $encontrado=false;
+                $email=$request->input("email_$tipo_email.$i");
+                if($email!='')
+                {
+                    foreach($emails_proveedor as $email_proveedor)
+                        if($email_proveedor->email==$email)
+                            $encontrado=true;
+                    if(!$encontrado)
+                        $this->crear_email($id_proveedor,$email, $tipo_email);
+                }
+            }
+
+        }
+        else
+            $this->crear_emails($id_proveedor, $tipo_email, $request);
+        return;
+    }
 
     /*
     Funcion que devuelve un listado de proveedores almacenados en la BD (Datatable)
@@ -491,7 +638,7 @@ class ProveedoresController extends Controller
 
                             //BOTON ELIMINAR REGISTRO COMENTADO
 
-                            /*$actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a> <a onclick="eliminarRegistro(' . $row->id_proveedor . ');" class="eliminar btn btn-outline-danger btn-sm" title="Eliminar">X</a>';*/
+                            $actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a> <a onclick="eliminarRegistro(' . $row->id_proveedor . ');" class="eliminar btn btn-outline-danger btn-sm" title="Eliminar">X</a>';
 
                             $actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a>';
                         }
@@ -967,72 +1114,24 @@ class ProveedoresController extends Controller
     {
         try {
             $proveedor = Proveedor::findOrFail($id);
-
-            /*Cambio para utilizar relacion representante
-            $persona = $proveedor->personas()->get();
-
-            if ($persona->isEmpty()) {
-                $persona = "";
-
-            } else {
-                $persona = $persona[0];
+            $proveedor->load([  'domicilio_real',
+                                'domicilio_legal',
+                                'domicilio_fiscal',
+                                'telefonos_real',
+                                'telefonos_legal',
+                                'telefonos_fiscal',
+                                'representante_actual']);
+            /* Se obtiene el representante del proveedor,
+                * se agrega el indice porque la relación representante_actual
+                * es una relación muchos a muchos y de esa relación se obtiene un array 
+                * con un unico registro de persona (ultimo representante del proveedor)
+            * */
+            $representante='';
+            if($proveedor->representante_actual->isNotEmpty())
+            {
+                $representante=$proveedor->representante_actual[0];
+                Log::info('representante='.$representante);
             }
-
-            //return $persona;*/
-
-            $persona=$proveedor->representante->first();
-
-            $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
-                ->first();
-
-            $provinciaidFiscal = Localidad::where('id_localidad', $proveedor_domicilio_fiscal->id_localidad)->get();
-
-            if ($provinciaidFiscal->isEmpty()) {
-                $provinciaidFiscal = "";
-            } else {
-                $provinciaidFiscal = $provinciaidFiscal[0]->id_provincia;
-            }
-
-            $proveedor_email_fiscal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'fiscal')
-                ->get();
-
-            $proveedor_telefono_fiscal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'fiscal')
-                ->get();
-
-            $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
-                ->first();
-
-            $provinciaidLegal = Localidad::where('id_localidad', $proveedor_domicilio_legal->id_localidad)->get();
-
-            if ($provinciaidLegal->isEmpty()) {
-                $provinciaidLegal = "";
-            } else {
-                $provinciaidLegal = $provinciaidLegal[0]->id_provincia;
-            }
-
-            $proveedor_email_legal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'legal')
-                ->get();
-
-            $proveedor_telefono_legal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'legal')
-                ->get();
-
-            $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
-                ->first();
-
-            $provinciaidReal = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->get();
-
-            if ($provinciaidReal->isEmpty()) {
-                $provinciaidReal = "";
-            } else {
-                $provinciaidReal = $provinciaidReal[0]->id_provincia;
-            }
-
-            $proveedor_email_real = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'real')
-                ->get();
-
-            $proveedor_telefono_real = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'real')
-                ->get();
-
             $proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $id)->get();
 
             $actividades = Actividades_proveedores::where('id_proveedor', $id)->get();
@@ -1047,10 +1146,9 @@ class ProveedoresController extends Controller
 
             $mode = "edit";
 
-            return view('editarRegistro', compact('tab', 'persona', 'mode',
-                'provinciaidReal', 'provinciaidLegal', 'provinciaidFiscal', 'paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'proveedor',
-                'id', 'proveedor_telefono_fiscal', 'proveedor_domicilio_fiscal', 'proveedor_email_fiscal', 'proveedor_telefono_legal', 'proveedor_domicilio_legal',
-                'proveedor_email_legal', 'proveedor_telefono_real', 'proveedor_domicilio_real', 'proveedor_email_real', 'proveedores_tipos_proveedores', 'actividades', 'pagos')
+            return view('editarRegistro', compact('tab', 'mode',
+                'paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'proveedor',
+                'id', 'proveedores_tipos_proveedores', 'actividades', 'pagos')
             );
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
@@ -1064,76 +1162,17 @@ class ProveedoresController extends Controller
     {
         try {
             $proveedor = Proveedor::findOrFail($id);
-
-            //return $proveedor;
-            /*Cambio para utilizar relacion representante
-            $persona = $proveedor->personas()->get();
-
-            if ($persona->isEmpty()) {
-                $persona = "";
-
-            } else {
-                $persona = $persona[0];
-            }
-
-            //return $persona;*/
-
-            $persona=$proveedor->representante->first();
-            $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
-                ->first();
-            if (empty($proveedor_domicilio_fiscal)) {
-                $proveedor_domicilio_fiscal = "";
-                $provinciaidFiscal = "";
-            } else {
-                $provinciaidFiscal = Localidad::where('id_localidad', $proveedor_domicilio_fiscal->id_localidad)->get();
-
-                if ($provinciaidFiscal->isEmpty()) {
-                    $provinciaidFiscal = "";
-                } else {
-                    $provinciaidFiscal = $provinciaidFiscal[0]->id_provincia;
-                }
-            }
-
-            $proveedor_email_fiscal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'fiscal')
-                ->get();
-
-            $proveedor_telefono_fiscal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'fiscal')
-                ->get();
-
-            $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
-                ->first();
-
-            $provinciaidLegal = Localidad::where('id_localidad', $proveedor_domicilio_legal->id_localidad)->get();
-
-            if ($provinciaidLegal->isEmpty()) {
-                $provinciaidLegal = "";
-            } else {
-                $provinciaidLegal = $provinciaidLegal[0]->id_provincia;
-            }
-
-            $proveedor_email_legal = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'legal')
-                ->get();
-
-            $proveedor_telefono_legal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'legal')
-                ->get();
-
-            $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
-                ->first();
-
-            $provinciaidReal = Localidad::where('id_localidad', $proveedor_domicilio_real->id_localidad)->get();
-
-            if ($provinciaidReal->isEmpty()) {
-                $provinciaidReal = "";
-            } else {
-                $provinciaidReal = $provinciaidReal[0]->id_provincia;
-            }
-
-            $proveedor_email_real = Proveedor_email::where('id_proveedor', $id)->where('tipo_email', 'real')
-                ->get();
-
-            $proveedor_telefono_real = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'real')
-                ->get();
-
+            $proveedor->load([  'domicilio_real',
+                                'domicilio_legal',
+                                'domicilio_fiscal',
+                                'telefonos_real',
+                                'telefonos_legal',
+                                'telefonos_fiscal',
+                                'representante_actual']);
+            $representante='';
+            if($proveedor->representante_actual->isNotEmpty())
+                $representante=$proveedor->representante_actual[0];
+            
             $proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $id)->get();
 
             $actividades = Actividades_proveedores::where('id_proveedor', $id)->get();
@@ -1147,10 +1186,9 @@ class ProveedoresController extends Controller
             $actividades = Actividad_economica::All();
             $mode = "show";
 
-            return view('verRegistro', compact('tab', 'persona', 'mode',
-                'provinciaidReal', 'provinciaidLegal', 'provinciaidFiscal', 'paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'proveedor',
-                'id', 'proveedor_telefono_fiscal', 'proveedor_domicilio_fiscal', 'proveedor_email_fiscal', 'proveedor_telefono_legal', 'proveedor_domicilio_legal',
-                'proveedor_email_legal', 'proveedor_telefono_real', 'proveedor_domicilio_real', 'proveedor_email_real', 'proveedores_tipos_proveedores', 'actividades', 'pagos')
+            return view('verRegistro', compact('tab', 'mode',
+                'paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'proveedor',
+                'id', 'proveedores_tipos_proveedores', 'actividades', 'pagos')
             );
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
@@ -1164,682 +1202,237 @@ class ProveedoresController extends Controller
     {
         try {
             $cuit = Proveedor::where('cuit', str_replace("-","",$request->cuit))->where('id_proveedor','<>',$id)->exists();
-            if(!$cuit){
-
+            if(!$cuit)
+            {
                 //Inicio de la transaccion
                 DB::beginTransaction();
 
-            $proveedor = Proveedor::find($id);
+                $proveedor = Proveedor::find($id);
+                $proveedor->load([  'representante_actual',
+                                    'domicilio_real',
+                                    'domicilio_legal',
+                                    'domicilio_fiscal']);
 
-            //Cambio para utilizar relacion representante
-            $persona = $proveedor->personas()->get();
+                //---------Carga de Representante Legal----------
 
-            if ($persona->isEmpty()) {
+                $dni_persona= htmlspecialchars(str_replace(".","",$request->dni_legal));
+                $representante = $proveedor->representante_actual->first();
+                if($dni_persona!='')
+                {
+                    $persona=Persona::where('dni_persona', $dni_persona)
+                                    ->first();
+                    $nombre_persona= htmlspecialchars($request->nombre_persona);
+                    $apellido_persona= htmlspecialchars($request->apellido_persona);
+                    
+                    if($nombre_persona!='' && $apellido_persona!='')
+                    {
+                        if (!isset($representante)) {        
+                            if(!isset($persona))
+                                $persona = Persona::create([
+                                    'dni_persona' => $dni_persona,
+                                    //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                                    'nombre_persona' => $nombre_persona,
+                                    'apellido_persona' => $apellido_persona,
+                                    //'genero_persona'=>$proveedores_rupae->genero_persona,
+                                ]);
+                            else
+                            {
+                                if($persona->nombre_persona!=$nombre_persona)
+                                    $persona->update(['nombre_persona' => $nombre_persona]);
+                                if($persona->apellido_persona!=$apellido_persona)
+                                    $persona->update(['apellido_persona' => $apellido_persona]);
+                            }
+                            $proveedor->personas()->attach($persona, ['rol_persona_proveedor' => 'Representante']);
+                        } 
+                        else 
+                        {
+                            if($representante->dni_persona!=$dni_persona)
+                            {
+                                $proveedor->representante_actual()->detach();
+                                if($representante->proveedores->count()==0)
+                                    $representante->delete();
+                                if(!isset($persona))
+                                    $persona = Persona::create([
+                                        'dni_persona' => $dni_persona,
+                                        //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                                        'nombre_persona' => $nombre_persona,
+                                        'apellido_persona' => $apellido_persona,
+                                        //'genero_persona'=>$proveedores_rupae->genero_persona,
+                                    ]);
+                                else{
+                                    if($persona->nombre_persona!=$nombre_persona)
+                                        $persona->update(['nombre_persona' => $nombre_persona]);
+                                    if($persona->apellido_persona!=$apellido_persona)
+                                        $persona->update(['apellido_persona' => $apellido_persona]);
+                                }
+                                $proveedor->personas()->attach($persona, ['rol_persona_proveedor' => 'Representante']);
+                            }
+                            else
+                            {
+                                if($representante->nombre_persona!=$nombre_persona)
+                                    $persona->update(['nombre_persona' => $nombre_persona]);
+                                if($representante->apellido_persona!=$apellido_persona)
+                                    $persona->update(['apellido_persona' => $apellido_persona]);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if(isset($representante))
+                    {
+                        $proveedor->representante_actual()->detach();
+                        if($representante->proveedores->count()==0)
+                                    $representante->delete();
+                    }
+                }
 
-                if ($request->dni_legal || $request->nombre_persona || $request->apellido_persona) {
-                    $persona = Persona::create([
-                        'dni_persona' => htmlspecialchars(str_replace(".","",$request->dni_legal)),
-                        //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                        'nombre_persona' => htmlspecialchars($request->nombre_persona),
-                        'apellido_persona' => htmlspecialchars($request->apellido_persona),
-                        //'genero_persona'=>$proveedores_rupae->genero_persona,
-                    ]);
-                    $persona->save();
-                    $proveedor->personas()->attach($persona);
+                //----------------------------------Editar Domicilio Real---------------------------------------------
 
-                    //$persona =  "";
+                $proveedor_domicilio_real = $proveedor->domicilio_real;
+                Log::info('domicilio real='.$proveedor_domicilio_real);
+                if($proveedor_domicilio_real=='')
+                {
+                    Log::info('crea domicilio real');
+                    $this->crear_domicilio($proveedor->id_proveedor, 'real', $request);
+                }
+                else
+                {
+                    Log::info('actualiza domicilio real');
+                    $this->actualizar_domicilio($proveedor_domicilio_real, 'real', $request);
+                }
+
+                //---------Crear Telefono_Real----------
+                $this->actualizar_telefonos($proveedor->id_proveedor, 'real', $request);
+
+                //---------Crear de Email_Real----------
+                $this->actualizar_emails($proveedor->id_proveedor, 'real', $request);
+
+                //----------------------------------Editar Domicilio Legal---------------------------------------------
+
+                $proveedor_domicilio_legal = $proveedor->domicilio_legal;
+                Log::info('domicilio legal='.$proveedor_domicilio_legal);
+                if($proveedor_domicilio_legal=='')
+                    $this->crear_domicilio($proveedor->id_proveedor, 'legal', $request);
+                else
+                    $this->actualizar_domicilio($proveedor_domicilio_legal, 'legal', $request);
+
+                //---------Crear Telefono_Legal----------
+                $this->actualizar_telefonos($proveedor->id_proveedor, 'legal', $request);
+
+                //---------Crear de Email_Legal----------
+                $this->actualizar_emails($proveedor->id_proveedor, 'legal', $request);
+
+                //----------------------------------Editar Domicilio Fiscal---------------------------------------------
+
+                $proveedor_domicilio_fiscal = $proveedor->domicilio_fiscal;
+                Log::info('domicilio fiscal='.$proveedor_domicilio_fiscal);
+                if($proveedor_domicilio_fiscal=='')
+                    $this->crear_domicilio($proveedor->id_proveedor, 'fiscal', $request);
+                else
+                    $this->actualizar_domicilio($proveedor_domicilio_fiscal, 'fiscal', $request);
+
+                //---------Crear Telefono_Fiscal----------
+                $this->actualizar_telefonos($proveedor->id_proveedor, 'fiscal', $request);
+
+                //---------Crear de Email_Fiscal----------
+                $this->actualizar_emails($proveedor->id_proveedor, 'fiscal', $request);
+
+                //---------Tipo de Proveedor ----------
+                if (isset($request->prov_provincial)) {
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '4')->get();
+                    if ($Proveedores_tipos_proveedores->isEmpty()) {
+                        $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
+                            'id_tipo_proveedor' => '4',
+                        ]);
+                        $Proveedores_tipos_proveedores->save();
+                    }
                 } else {
-                    $persona = "";
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '4')->get();
+                    if (!$Proveedores_tipos_proveedores->isEmpty()) {
+                        Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '4')->delete();
+                    }
+
                 }
-            } else {
-                $persona = $proveedor->personas()->first();
-                $persona->update([
-                    'dni_persona' => htmlspecialchars(str_replace(".","",$request->dni_legal)),
-                    //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                    'nombre_persona' => htmlspecialchars($request->nombre_persona),
-                    'apellido_persona' => htmlspecialchars($request->apellido_persona),
-                    //'genero_persona'=>$proveedores_rupae->genero_persona,
-                ]);
-                $persona->save();
 
-            }
-
-/*
-            $persona = $proveedor->representante->first();
-
-            if (!$persona) {
-
-                if ($request->dni_legal || $request->nombre_persona || $request->apellido_persona) {
-                    $persona = Persona::create([
-                        'dni_persona' => htmlspecialchars($request->dni_legal),
-                        //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                        'nombre_persona' => htmlspecialchars($request->nombre_persona),
-                        'apellido_persona' => htmlspecialchars($request->apellido_persona),
-                        //'genero_persona'=>$proveedores_rupae->genero_persona,
-                    ]);
-                    $persona->save();
-                    $proveedor->personas()->attach($persona, ['rol_persona_proveedor' => 'Representante']);
-
-                    //$persona =  "";
+                if (isset($request->prov_estado)) {
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '1')->get();
+                    if ($Proveedores_tipos_proveedores->isEmpty()) {
+                        $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
+                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
+                            'id_tipo_proveedor' => '1',
+                        ]);
+                        $Proveedores_tipos_proveedores->save();
+                    }
                 } else {
-                    $persona = "";
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '1')->get();
+                    if (!$Proveedores_tipos_proveedores->isEmpty()) {
+                        Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '1')->delete();
+                    }
+
                 }
-            } else {
-                $persona->update([
-                    'dni_persona' => htmlspecialchars($request->dni_legal),
-                    //'cuil_persona'=>$proveedores_rupae->cuil_persona,
-                    'nombre_persona' => htmlspecialchars($request->nombre_persona),
-                    'apellido_persona' => htmlspecialchars($request->apellido_persona),
-                    //'genero_persona'=>$proveedores_rupae->genero_persona,
-                ]);
-                $persona->save();
-            }*/
-            //----------------------------------Editar Domicilio Real---------------------------------------------
 
-            $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
-                ->get();
-            if ($proveedor_domicilio_real->isEmpty()) {
-
-                if ($request->input('calle_real')) {
-                    $proveedor_domicilio_real = Proveedor_domicilio::create([
-                        'tipo_domicilio' => 'real',
-                        //'nro_orden_domicilio',
-                        'calle' => htmlspecialchars($request->input('calle_real')),
-                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                        'numero' => $request->input('numero_real'),
-                        'dpto' => htmlspecialchars($request->input('dpto_real')),
-                        'puerta' => htmlspecialchars($request->input('puerta_real')),
-                        'lote' => htmlspecialchars($request->input('lote_real')),
-                        'manzana' => htmlspecialchars($request->input('manzana_real')),
-                        'entre_calles' => htmlspecialchars($request->input('entreCalles_real')),
-                        'oficina' => htmlspecialchars($request->input('oficina_real')),
-                        'monoblock' => htmlspecialchars($request->input('monoblock_real')),
-                        'barrio' => htmlspecialchars($request->input('barrio_real')),
-                        'id_localidad' => $request->input('localidad_real'),
-                        'codigo_postal' => htmlspecialchars($request->input('cp_real')),
-                    ]);
-                    $proveedor_domicilio_real->save();
-
-                    //---------Contador de Telefono_Real----------
-
-                    $arraySize = count($request->telefono_real);
-
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        //---------Carga de Telefonos_Real----------
-                        $telefono_real = Proveedor_telefono::create([
-                            'nro_tel' => $request->telefono_real[$i],
+                if (isset($request->prov_minero)) {
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '2')->get();
+                    if ($Proveedores_tipos_proveedores->isEmpty()) {
+                        $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
                             'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'cod_area_tel' => $request->telefono_real_cod[$i],
-                            //'tipo_medio'=>,
-                            //'desc_telefono'=>,
-                            'tipo_telefono' => 'real',
-                            //'nro_orden_telefono'=>,
+                            'id_tipo_proveedor' => '2',
                         ]);
-                        $telefono_real->save();
+                        $Proveedores_tipos_proveedores->save();
                     }
-
-                    //---------Contador de Email_Real----------
-
-                    $arraySize = count($request->email_real);
-
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        //---------Carga de Email_Real----------
-
-                        $email_real = Proveedor_email::create([
-                            'email' => $request->email_real[$i],
-                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'tipo_email' => 'real',
-                        ]);
-                        $email_real->save();
-                    }
-
                 } else {
-                    $proveedor_domicilio_real = "";
-                }
-            } else {
-                $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
-                    ->first();
-
-                $proveedor_domicilio_real->update([
-                    'tipo_domicilio' => 'real',
-                    //'nro_orden_domicilio',
-                    'calle' => htmlspecialchars($request->input('calle_real')),
-                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                    'numero' => $request->input('numero_real'),
-                    'dpto' => htmlspecialchars($request->input('dpto_real')),
-                    'puerta' => htmlspecialchars($request->input('puerta_real')),
-                    'lote' => htmlspecialchars($request->input('lote_real')),
-                    'manzana' => htmlspecialchars($request->input('manzana_real')),
-                    'entre_calles' => htmlspecialchars($request->input('entreCalles_real')),
-                    'oficina' => htmlspecialchars($request->input('oficina_real')),
-                    'monoblock' => htmlspecialchars($request->input('monoblock_real')),
-                    'barrio' => htmlspecialchars($request->input('barrio_real')),
-                    'id_localidad' => $request->input('localidad_real'),
-                    'codigo_postal' => htmlspecialchars($request->input('cp_real')),
-                ]);
-                $proveedor_domicilio_real->save();
-
-                //---------Contador de Telefono_Real----------
-
-                $telefonos_real = Proveedor_telefono::where('id_proveedor', $proveedor->id_proveedor)->where('tipo_telefono', 'real')->get();
-                //return $telefonos_real;
-
-                $i = 0;
-                foreach ($telefonos_real as $k) {
-                    //return $request->telefono_real[$i];
-
-                    $telefono_real = Proveedor_telefono::where('id_proveedor_telefono', $k->id_proveedor_telefono)->first();
-
-                    $telefono_real->update([
-                        'nro_tel' => $request->telefono_real[$i],
-                        'cod_area_tel' => $request->telefono_real_cod[$i],
-
-                    ]);
-                    $telefono_real->save();
-                    $i++;
-
-                }
-
-                $arraySize = count($request->telefono_real);
-                if ($i < 3) {
-                    for ($i; $i < $arraySize; $i++) {
-                        //---------Carga de Telefonos_Real----------
-
-                        $telefono_real = Proveedor_telefono::create([
-                            'nro_tel' => $request->telefono_real[$i],
-                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'cod_area_tel' => $request->telefono_real_cod[$i],
-                            //'tipo_medio'=>,
-                            //'desc_telefono'=>,
-                            'tipo_telefono' => 'real',
-                            //'nro_orden_telefono'=>,
-                        ]);
-                        $telefono_real->save();
-                    }
-                }
-                //---------Contador de Email_Real----------
-
-                $emails_real = Proveedor_email::where('id_proveedor', $proveedor->id_proveedor)->where('tipo_email', 'real')->get();
-                //return $emails_real;
-                $i = 0;
-                foreach ($emails_real as $j) {
-                    //return $request->email_real[$i];
-
-                    $email_real = Proveedor_email::where('id_proveedor_email', $j->id_proveedor_email)->first();
-
-                    $email_real->update([
-                        'email' => $request->email_real[$i],
-                    ]);
-                    $email_real->save();
-                    $i++;
-
-                }
-
-                $arraySize = count($request->email_real);
-                if ($i < 3) {
-
-                    for ($i; $i < $arraySize; $i++) {
-                        $email_real = Proveedor_email::create([
-                            'email' => $request->email_real[$i],
-                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'tipo_email' => 'real',
-                        ]);
-                        $email_real->save();
-
-                    }
-                }
-
-            }
-            //----------------------------------Editar Domicilio Legal---------------------------------------------
-
-            $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
-                ->get();
-            if ($proveedor_domicilio_legal->isEmpty()) {
-
-                if ($request->input('calle_legal')) {
-                    $proveedor_domicilio_legal = Proveedor_domicilio::create([
-                        'tipo_domicilio' => 'legal',
-                        //'nro_orden_domicilio',
-                        'calle' => htmlspecialchars($request->input('calle_legal')),
-                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                        'numero' => $request->input('numero_legal'),
-                        'dpto' => htmlspecialchars($request->input('dpto_legal')),
-                        'puerta' => htmlspecialchars($request->input('puerta_legal')),
-                        'lote' => htmlspecialchars($request->input('lote_legal')),
-                        'manzana' => htmlspecialchars($request->input('manzana_legal')),
-                        'entre_calles' => htmlspecialchars($request->input('entreCalles_legal')),
-                        'oficina' => htmlspecialchars($request->input('oficina_legal')),
-                        'monoblock' => htmlspecialchars($request->input('monoblock_legal')),
-                        'barrio' => htmlspecialchars($request->input('barrio_legal')),
-                        'id_localidad' => $request->input('localidad_legal'),
-                        'codigo_postal' => htmlspecialchars($request->input('cp_legal')),
-                    ]);
-                    $proveedor_domicilio_legal->save();
-
-                    //---------Contador de Telefono_Legal----------
-
-                    $arraySize = count($request->telefono_legal);
-
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        //---------Carga de Telefonos_Legal----------
-
-                        $telefono_legal = Proveedor_telefono::create([
-                            'nro_tel' => $request->telefono_legal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'cod_area_tel' => $request->telefono_legal_cod[$i],
-                            //'tipo_medio'=>,
-                            //'desc_telefono'=>,
-                            'tipo_telefono' => 'legal',
-                            //'nro_orden_telefono'=>,
-                        ]);
-                        $telefono_legal->save();
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '2')->get();
+                    if (!$Proveedores_tipos_proveedores->isEmpty()) {
+                        Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '2')->delete();
                     }
 
-                    //---------Contador de Email_Legal----------
+                }
 
-                    $arraySize = count($request->email_legal);
-
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        //---------Carga de Email_Legal----------
-
-                        $email_legal = Proveedor_email::create([
-                            'email' => $request->email_legal[$i],
+                if (isset($request->prov_petrolero)) {
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '3')->get();
+                    if ($Proveedores_tipos_proveedores->isEmpty()) {
+                        $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
                             'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'tipo_email' => 'legal',
+                            'id_tipo_proveedor' => '3',
                         ]);
-                        $email_legal->save();
+                        $Proveedores_tipos_proveedores->save();
                     }
-
                 } else {
-                    $proveedor_domicilio_legal = "";
-                }
-            } else {
-                $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
-                    ->first();
-
-                $proveedor_domicilio_legal->update([
-                    'tipo_domicilio' => 'legal',
-                    //'nro_orden_domicilio',
-                    'calle' => htmlspecialchars($request->input('calle_legal')),
-                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                    'numero' => $request->input('numero_legal'),
-                    'dpto' => htmlspecialchars($request->input('dpto_legal')),
-                    'puerta' => htmlspecialchars($request->input('puerta_legal')),
-                    'lote' => htmlspecialchars($request->input('lote_legal')),
-                    'manzana' => htmlspecialchars($request->input('manzana_legal')),
-                    'entre_calles' => htmlspecialchars($request->input('entreCalles_legal')),
-                    'oficina' => htmlspecialchars($request->input('oficina_legal')),
-                    'monoblock' => htmlspecialchars($request->input('monoblock_legal')),
-                    'barrio' => htmlspecialchars($request->input('barrio_legal')),
-                    'id_localidad' => $request->input('localidad_legal'),
-                    'codigo_postal' => htmlspecialchars($request->input('cp_legal')),
-                ]);
-                $proveedor_domicilio_legal->save();
-
-                //---------Contador de Telefono_Legal----------
-
-                $telefonos_legal = Proveedor_telefono::where('id_proveedor', $proveedor->id_proveedor)->where('tipo_telefono', 'legal')->get();
-                //return $telefonos_legal;
-
-                $i = 0;
-                foreach ($telefonos_legal as $k) {
-                    //return $request->telefono_legal[$i];
-
-                    $telefono_legal = Proveedor_telefono::where('id_proveedor_telefono', $k->id_proveedor_telefono)->first();
-
-                    $telefono_legal->update([
-                        'nro_tel' => $request->telefono_legal[$i],
-                        'cod_area_tel' => $request->telefono_legal_cod[$i],
-                    ]);
-                    $telefono_legal->save();
-                    $i++;
-
-                }
-
-                $arraySize = count($request->telefono_legal);
-                if ($i < 3) {
-                    for ($i; $i < $arraySize; $i++) {
-                        //---------Carga de Telefonos_Legal----------
-
-                        $telefono_legal = Proveedor_telefono::create([
-                            'nro_tel' => $request->telefono_legal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'cod_area_tel' => $request->telefono_legal_cod[$i],
-
-                            //'cod_area_tel' =>,
-                            //'tipo_medio'=>,
-                            //'desc_telefono'=>,
-                            'tipo_telefono' => 'legal',
-                            //'nro_orden_telefono'=>,
-                        ]);
-                        $telefono_legal->save();
-                    }
-                }
-                //---------Contador de Email_Legal----------
-
-                $emails_legal = Proveedor_email::where('id_proveedor', $proveedor->id_proveedor)->where('tipo_email', 'legal')->get();
-                //return $emails_legal;
-                $i = 0;
-                foreach ($emails_legal as $j) {
-                    //return $request->email_legal[$i];
-
-                    $email_legal = Proveedor_email::where('id_proveedor_email', $j->id_proveedor_email)->first();
-
-                    $email_legal->update([
-                        'email' => $request->email_legal[$i],
-                    ]);
-                    $email_legal->save();
-                    $i++;
-
-                }
-
-                $arraySize = count($request->email_legal);
-                if ($i < 3) {
-
-                    for ($i; $i < $arraySize; $i++) {
-                        $email_legal = Proveedor_email::create([
-                            'email' => $request->email_legal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'tipo_email' => 'legal',
-                        ]);
-                        $email_legal->save();
-
-                    }
-                }
-
-            }
-            //----------------------------------Editar Domicilio Fiscal---------------------------------------------
-
-            $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
-                ->get();
-            if ($proveedor_domicilio_fiscal->isEmpty()) {
-
-                if ($request->input('calle_fiscal')) {
-                    $proveedor_domicilio_fiscal = Proveedor_domicilio::create([
-                        'tipo_domicilio' => 'fiscal',
-                        //'nro_orden_domicilio',
-                        'calle' => htmlspecialchars($request->input('calle_fiscal')),
-                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                        'numero' => $request->input('numero_fiscal'),
-                        'dpto' => htmlspecialchars($request->input('dpto_fiscal')),
-                        'puerta' => htmlspecialchars($request->input('puerta_fiscal')),
-                        'lote' => htmlspecialchars($request->input('lote_fiscal')),
-                        'manzana' => htmlspecialchars($request->input('manzana_fiscal')),
-                        'entre_calles' => htmlspecialchars($request->input('entreCalles_fiscal')),
-                        'oficina' => htmlspecialchars($request->input('oficina_fiscal')),
-                        'monoblock' => htmlspecialchars($request->input('monoblock_fiscal')),
-                        'barrio' => htmlspecialchars($request->input('barrio_fiscal')),
-                        'id_localidad' => $request->input('localidad_fiscal'),
-                        'codigo_postal' => htmlspecialchars($request->input('cp_fiscal')),
-                    ]);
-                    $proveedor_domicilio_fiscal->save();
-
-                    //---------Contador de Telefono_Fiscal----------
-
-                    $arraySize = count($request->telefono_fiscal);
-
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        //---------Carga de Telefonos_Fiscal----------
-
-                        $telefono_fiscal = Proveedor_telefono::create([
-                            'nro_tel' => $request->telefono_fiscal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'cod_area_tel' => $request->telefono_fiscal_cod[$i],
-
-                            //'cod_area_tel' =>,
-                            //'tipo_medio'=>,
-                            //'desc_telefono'=>,
-                            'tipo_telefono' => 'fiscal',
-                            //'nro_orden_telefono'=>,
-                        ]);
-                        $telefono_fiscal->save();
+                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '3')->get();
+                    if (!$Proveedores_tipos_proveedores->isEmpty()) {
+                        Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '3')->delete();
                     }
 
-                    //---------Contador de Email_Fiscal----------
-
-                    $arraySize = count($request->email_fiscal);
-
-                    for ($i = 0; $i < $arraySize; $i++) {
-                        //---------Carga de Email_Fiscal----------
-
-                        $email_fiscal = Proveedor_email::create([
-                            'email' => $request->email_fiscal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'tipo_email' => 'fiscal',
-                        ]);
-                        $email_fiscal->save();
-                    }
-
-                } else {
-                    $proveedor_domicilio_fiscal = "";
                 }
-            } else {
-                $proveedor_domicilio_fiscal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'fiscal')
-                    ->first();
+                $proveedor = $proveedor->fill($request->all());
+                $proveedor->cuit= str_replace("-","",$request->cuit);
 
-                $proveedor_domicilio_fiscal->update([
-                    'tipo_domicilio' => 'fiscal',
-                    //'nro_orden_domicilio',
-                    'calle' => htmlspecialchars($request->input('calle_fiscal')),
-                    'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                    'numero' => $request->input('numero_fiscal'),
-                    'dpto' => htmlspecialchars($request->input('dpto_fiscal')),
-                    'puerta' => htmlspecialchars($request->input('puerta_fiscal')),
-                    'lote' => htmlspecialchars($request->input('lote_fiscal')),
-                    'manzana' => htmlspecialchars($request->input('manzana_fiscal')),
-                    'entre_calles' => htmlspecialchars($request->input('entreCalles_fiscal')),
-                    'oficina' => htmlspecialchars($request->input('oficina_fiscal')),
-                    'monoblock' => htmlspecialchars($request->input('monoblock_fiscal')),
-                    'barrio' => htmlspecialchars($request->input('barrio_fiscal')),
-                    'id_localidad' => $request->input('localidad_fiscal'),
-                    'codigo_postal' => htmlspecialchars($request->input('cp_fiscal')),
-                ]);
-                $proveedor_domicilio_fiscal->save();
+                $proveedor->save();
 
-                //---------Contador de Telefono_Fiscal----------
+                //Registro de LOG
+                $responsable_id = User::findOrFail(auth()->id())->id;
+                $responsable_nombre = User::findOrFail(auth()->id())->name;
+                $responsable_email = User::findOrFail(auth()->id())->email;
 
-                $telefonos_fiscal = Proveedor_telefono::where('id_proveedor', $proveedor->id_proveedor)->where('tipo_telefono', 'fiscal')->get();
-                //return $telefonos_fiscal;
+                DB::connection('mysql')
+                ->table('eventos_log')->insert(['EL_Evento' => 'Se han modificado los datos del registro con el cuit: ' . $request->cuit . '.',
+                'EL_Evento_Fecha' => Carbon::now(),
+                'EL_Id_Responsable' => $responsable_id,
+                'EL_Nombre_Responsable' => $responsable_nombre,
+                'EL_Email_Responsable' => $responsable_email]);
 
-                $i = 0;
-                foreach ($telefonos_fiscal as $k) {
-                    //return $request->telefono_fiscal[$i];
+                //Fin de la transaccion
+                DB::commit();
 
-                    $telefono_fiscal = Proveedor_telefono::where('id_proveedor_telefono', $k->id_proveedor_telefono)->first();
-
-                    $telefono_fiscal->update([
-                        'nro_tel' => $request->telefono_fiscal[$i],
-                        'cod_area_tel' => $request->telefono_fiscal_cod[$i],
-
-                    ]);
-                    $telefono_fiscal->save();
-                    $i++;
-
+                return redirect()->back()->withSuccess('Los datos del registro se han modificado satisfactoriamente !');
                 }
-
-                $arraySize = count($request->telefono_fiscal);
-                if ($i < 3) {
-                    for ($i; $i < $arraySize; $i++) {
-                        //---------Carga de Telefonos_Fiscal----------
-
-                        $telefono_fiscal = Proveedor_telefono::create([
-                            'nro_tel' => $request->telefono_fiscal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'cod_area_tel' => $request->telefono_fiscal_cod[$i],
-                            //'tipo_medio'=>,
-                            //'desc_telefono'=>,
-                            'tipo_telefono' => 'fiscal',
-                            //'nro_orden_telefono'=>,
-                        ]);
-                        $telefono_fiscal->save();
-                    }
+                else{
+                    return Redirect::back()
+                    ->withErrors(['El CUIT ya se encuentra registrado']);
                 }
-                //---------Contador de Email_Fiscal----------
-
-                $emails_fiscal = Proveedor_email::where('id_proveedor', $proveedor->id_proveedor)->where('tipo_email', 'fiscal')->get();
-                //return $emails_fiscal;
-                $i = 0;
-                foreach ($emails_fiscal as $j) {
-                    //return $request->email_fiscal[$i];
-
-                    $email_fiscal = Proveedor_email::where('id_proveedor_email', $j->id_proveedor_email)->first();
-
-                    $email_fiscal->update([
-                        'email' => $request->email_fiscal[$i],
-                    ]);
-                    $email_fiscal->save();
-                    $i++;
-
-                }
-
-                $arraySize = count($request->email_fiscal);
-                if ($i < 3) {
-
-                    for ($i; $i < $arraySize; $i++) {
-                        $email_fiscal = Proveedor_email::create([
-                            'email' => $request->email_fiscal[$i],
-                            'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                            'tipo_email' => 'fiscal',
-                        ]);
-                        $email_fiscal->save();
-
-                    }
-                }
-
-            }
-
-            //---------Tipo de Proveedor ----------
-            if (isset($request->prov_provincial)) {
-                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '4')->get();
-                if ($Proveedores_tipos_proveedores->isEmpty()) {
-                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                        'id_tipo_proveedor' => '4',
-                    ]);
-                    $Proveedores_tipos_proveedores->save();
-                }
-            } else {
-                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '4')->get();
-                if (!$Proveedores_tipos_proveedores->isEmpty()) {
-                    Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '4')->delete();
-                }
-
-            }
-
-            if (isset($request->prov_estado)) {
-                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '1')->get();
-                if ($Proveedores_tipos_proveedores->isEmpty()) {
-                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                        'id_tipo_proveedor' => '1',
-                    ]);
-                    $Proveedores_tipos_proveedores->save();
-                }
-            } else {
-                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '1')->get();
-                if (!$Proveedores_tipos_proveedores->isEmpty()) {
-                    Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '1')->delete();
-                }
-
-            }
-
-            if (isset($request->prov_minero)) {
-                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '2')->get();
-                if ($Proveedores_tipos_proveedores->isEmpty()) {
-                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                        'id_tipo_proveedor' => '2',
-                    ]);
-                    $Proveedores_tipos_proveedores->save();
-                }
-            } else {
-                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '2')->get();
-                if (!$Proveedores_tipos_proveedores->isEmpty()) {
-                    Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '2')->delete();
-                }
-
-            }
-
-            if (isset($request->prov_petrolero)) {
-                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '3')->get();
-                if ($Proveedores_tipos_proveedores->isEmpty()) {
-                    $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::create([
-                        'id_proveedor' => htmlspecialchars($proveedor->id_proveedor),
-                        'id_tipo_proveedor' => '3',
-                    ]);
-                    $Proveedores_tipos_proveedores->save();
-                }
-            } else {
-                $Proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '3')->get();
-                if (!$Proveedores_tipos_proveedores->isEmpty()) {
-                    Proveedores_tipos_proveedores::where('id_proveedor', $proveedor->id_proveedor)->where('id_tipo_proveedor', '3')->delete();
-                }
-
-            }
-
-            $proveedores_rupae = Proveedor::find($id);
-            //return response()->json($proveedores_rupae);
-            $proveedores_rupae = $proveedores_rupae->fill($request->all());
-            $proveedores_rupae->valor_agregado = $request->valor_agregado;
-
-            $proveedores_rupae->servicio_atencion_cliente = $request->servicio_atencion_cliente;
-            $proveedores_rupae->servicio_post_venta = $request->servicio_post_venta;
-            $proveedores_rupae->servicio_personal_especializado = $request->servicio_personal_especializado;
-            $proveedores_rupae->servicio_entrega_a_domicilio = $request->servicio_entrega_a_domicilio;
-            $proveedores_rupae->servicio_capacitacion_personal = $request->servicio_capacitacion_personal;
-            $proveedores_rupae->producto_transformacion_significativa = $request->producto_transformacion_significativa;
-            $proveedores_rupae->producto_compra_y_vende_unic = $request->producto_compra_y_vende_unic;
-            $proveedores_rupae->producto_post_venta = $request->producto_post_venta;
-            $proveedores_rupae->producto_venta_asistida = $request->producto_venta_asistida;
-            $proveedores_rupae->producto_garantia = $request->producto_garantia;
-            $proveedores_rupae->cuit= str_replace("-","",$request->cuit);
-
-            if(isset($proveedores_rupae->masa_salarial_bruta)){
-
-                $proveedores_rupae->masa_salarial_bruta= str_replace(",",".",str_replace(".","",$request->masa_salarial_bruta));
-                
-            } else {
-
-                $proveedores_rupae->masa_salarial_bruta= $request->masa_salarial_bruta;
-            }
-
-
-            if(isset($proveedores_rupae->facturacion_anual_alcanzada)){
-
-                $proveedores_rupae->facturacion_anual_alcanzada= str_replace(",",".",str_replace(".","",$request->facturacion_anual_alcanzada));
-
-            } else {
-
-                $proveedores_rupae->facturacion_anual_alcanzada= $request->facturacion_anual_alcanzada;
-            }
-
-
-            $proveedores_rupae->save();
-
-            //Fin de la transaccion
-            DB::commit();
-
-
-            //Registro de LOG
-            $responsable_id = User::findOrFail(auth()->id())->id;
-            $responsable_nombre = User::findOrFail(auth()->id())->name;
-            $responsable_email = User::findOrFail(auth()->id())->email;
-
-            DB::connection('mysql')
-            ->table('eventos_log')->insert(['EL_Evento' => 'Se han modificado los datos del registro con el cuit: ' . $request->cuit . '.',
-            'EL_Evento_Fecha' => Carbon::now(),
-            'EL_Id_Responsable' => $responsable_id,
-            'EL_Nombre_Responsable' => $responsable_nombre,
-            'EL_Email_Responsable' => $responsable_email]);
-
-
-            return redirect()->back()->withSuccess('Los datos del registro se han modificado satisfactoriamente !');
-            }
-            else{
-                return Redirect::back()
-                ->withErrors(['El CUIT ya se encuentra registrado']);
-            }
-        } catch (\Exception$e) {
+            } catch (\Exception$e) {
 
             //Si algo fallo, volvemos la transaccion atras
             DB::rollBack();
@@ -1851,9 +1444,11 @@ class ProveedoresController extends Controller
         }
     }
 
-    public function dar_baja(Request $request)
+    /*public function dar_baja(Request $request)
     {
         try {
+            //Inicio de la transaccion
+            DB::beginTransaction();
             $id_proveedor = htmlspecialchars($request->id);
             $proveedores_rupae = Proveedor::find($id_proveedor);
             //return response()->json($proveedores_rupae);
@@ -1871,32 +1466,27 @@ class ProveedoresController extends Controller
             'EL_Id_Responsable' => $responsable_id,
             'EL_Nombre_Responsable' => $responsable_nombre,
             'EL_Email_Responsable' => $responsable_email]);
-
+            //Fin de la transaccion
+            DB::commit();
             return redirect()->back();
 
         } catch (\Exception$e) {
+            //Si algo fallo, volvemos la transaccion atras
+            DB::rollBack();
+
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
                 ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
 
-    }
-
-    /*public function dar_baja_id($id)
-    {
-
-    $proveedores_rupae = Proveedor::find($id);
-    //return response()->json($proveedores_rupae);
-    $proveedores_rupae->dado_de_baja = 1;
-    $proveedores_rupae->save();
-    return redirect()->back();
-
     }*/
 
     public function dar_baja_id(Request $request)
     {
         try {
+            //Inicio de la transaccion
+            DB::beginTransaction();
             $id_proveedor = htmlspecialchars($request->id);
             $proveedores_rupae = Proveedor::find($id_proveedor);
             //return response()->json($proveedores_rupae);
@@ -1914,10 +1504,14 @@ class ProveedoresController extends Controller
             'EL_Id_Responsable' => $responsable_id,
             'EL_Nombre_Responsable' => $responsable_nombre,
             'EL_Email_Responsable' => $responsable_email]);
-
+            //Fin de la transaccion
+            DB::commit();
             return redirect()->back();
 
         } catch (\Exception$e) {
+            //Si algo fallo, volvemos la transaccion atras
+            DB::rollBack();
+
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
@@ -1929,6 +1523,8 @@ class ProveedoresController extends Controller
     public function dar_alta_id(Request $request)
     {
         try {
+            //Inicio de la transaccion
+            DB::beginTransaction();
             $id_proveedor = htmlspecialchars($request->id);
             $proveedores_rupae = Proveedor::find($id_proveedor);
             //return response()->json($proveedores_rupae);
@@ -1946,10 +1542,14 @@ class ProveedoresController extends Controller
             'EL_Id_Responsable' => $responsable_id,
             'EL_Nombre_Responsable' => $responsable_nombre,
             'EL_Email_Responsable' => $responsable_email]);
-
+            //Fin de la transaccion
+            DB::commit();
             return redirect()->back();
 
         } catch (\Exception$e) {
+            //Si algo fallo, volvemos la transaccion atras
+            DB::rollBack();
+
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
@@ -1959,32 +1559,43 @@ class ProveedoresController extends Controller
 
 //ESTA FUNCION SE VA A UTILIZAR PARA ELIMINAR UN REGISTRO DE LA BD (FALTA TERMINAR DE IMPLEMENTAR)
 
-/*
-    public function eliminar_id(Request $request)
-    {
-        try {
-            $id_proveedor = htmlspecialchars($request->id);
-            $proveedor = Proveedor::findOrFail($id_proveedor);
-            $personas = $proveedor->personas();
-            $proveedor->personas()->detach();
-            $personas->delete();
-            $proveedor->delete();
-            //return "success";
+public function eliminar_id(Request $request)
+{
+    Log::info('Entra a funcion eliminar_id');
+    try {
+        $id_proveedor = htmlspecialchars($request->id);
+        $proveedor = Proveedor::findOrFail($id_proveedor);
 
-            //$proveedores_rupae = Proveedor::find($id_proveedor);
-            //return response()->json($proveedores_rupae);
-            //$proveedores_rupae->dado_de_baja = 1;
-            //$proveedores_rupae->save();
-            return redirect()->back();
-        } catch (\Exception$e) {
-            Log::error('Error inesperado.' . $e->getMessage());
+        $proveedor->domicilios()->delete();
 
-            return Redirect::back()
-                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
-        }
+        $proveedor->telefonos()->delete();
 
+        $personas=$proveedor->personas;
+        $proveedor->personas()->detach();
+        foreach($personas as $persona)
+            if($persona->proveedores->count()==0)
+                $persona->delete();
+
+        $proveedor->actividades_economicas()->detach();
+
+        $proveedor->tipos_actividades()->detach();
+        
+        $proveedor->emails()->delete();
+
+        $proveedor->pagos()->delete();
+
+        $proveedor->tipos_proveedor()->detach();
+
+        $proveedor->delete();
+        return redirect()->back();
+    } catch (\Exception$e) {
+        Log::error('Error inesperado.' . $e->getMessage());
+
+        return Redirect::back()
+            ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
     }
-*/
+
+}
 
     public function getLocalidades($provincia, Request $request)
     {
@@ -2074,6 +1685,21 @@ class ProveedoresController extends Controller
         $acciones = DB::connection("mysql")->select("SELECT * FROM eventos_log");
 
         return datatables()->of($acciones)->make(true);
+    }
+
+    public function getResponsable($dni){
+        $personas=Persona::where('dni_persona', 'like', str_replace(".","",$dni).'%')
+                ->get();
+        /*$result='<ul id="personas-list">';
+        foreach($personas as $persona){
+            $result.= '<li onClick="selectPersona('.$persona->dni_persona.')">'.$persona->dni_persona.'</li>';
+        }*/
+        return $personas->map(function($persona){
+                                return collect(['label'=>number_format($persona->dni_persona, 0, ",", "."),
+                                                'value'=>number_format($persona->dni_persona, 0, ",", "."),
+                                                'nombre_persona'=>$persona->nombre_persona,
+                                                'apellido_persona'=>$persona->apellido_persona]);
+                                });
     }
 
 }

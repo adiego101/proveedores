@@ -1,9 +1,7 @@
 @extends('layouts')
 
 @section('content2')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-
+    
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -46,7 +44,9 @@
     <small class="small" id="small-nombre_fantasia"></small>
     <small class="small" id="small-cuit4"></small>
     <small class="small" id="small-cuit2"></small>
-    <small class="small" id="small-dni"></small>
+    <small class="small" id="small-dni-legal"></small>
+    <small class="small" id="small-apellido-legal"></small>
+    <small class="small" id="small-nombre-legal"></small>
 
     <form id="edit_form" action="{{ url('editarProveedor/' . $proveedor->id_proveedor) }}" method="POST">
         @csrf
@@ -54,26 +54,26 @@
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade  @if (empty($tab)) {{ 'show active' }} @endif" id="datos-generales"
                 role="tabpanel" aria-labelledby="nav-datos-generales-tab">
-                @include('editarRegistro.datosGenerales')
+                @include('editarRegistro.datosGenerales',['mode'=>'edit'])
             </div>
             <div class="tab-pane fade" id="domicilioReal" role="tabpanel" aria-labelledby="nav-domicilioReal-tab">
-                @include('editarRegistro.domicilioReal')
+            @include('editarRegistro.domicilio',['tipo_domicilio'=>'real', 'mode'=>'edit'])
             </div>
             <div class="tab-pane fade" id="domicilioLegal" role="tabpanel" aria-labelledby="nav-domicilioLegal-tab">
-                @include('editarRegistro.domicilioLegal')
+            @include('editarRegistro.domicilio',['tipo_domicilio'=>'legal', 'mode'=>'edit'])
 
             </div>
             <div class="tab-pane fade" id="domicilioFiscal" role="tabpanel"
                 aria-labelledby="nav-domicilioFiscal.blade-tab">
-                @include('editarRegistro.domicilioFiscal')
+                @include('editarRegistro.domicilio',['tipo_domicilio'=>'fiscal', 'mode'=>'edit'])
             </div>
             <div class="tab-pane fade @if ($tab == 'actividad') {{ 'show active' }} @endif " id="actividad"
                 role="tabpanel" aria-labelledby="nav-actividad-tab">
-                @include('editarRegistro.actividad')
+                @include('editarRegistro.actividad',['mode'=>'edit'])
             </div>
             <div class="tab-pane fade  @if ($tab == 'pago') {{ 'show active' }} @endif" id="pagos"
                 role="tabpanel" aria-labelledby="nav-pagos-tab">
-                @include('editarRegistro.pagos')
+                @include('editarRegistro.pagos',['mode'=>'edit'])
             </div>
 
         </div>
@@ -97,113 +97,82 @@
 @endsection
 
 @push('js')
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.css" integrity="sha512-CbQfNVBSMAYmnzP3IC+mZZmYMP2HUnVkV4+PwuhpiMUmITtSpS7Prr3fNncV1RBOnWxzz4pYQ5EAGG4ck46Oig==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script>
-    let formulario = document.getElementById("edit_form");
+        $(document).ready(function() 
+        {
+            $("#dni_legal").val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+            });
 
-formulario.addEventListener("submit", function(event){
+            $("#cuit").val(function (index, value ) {
+                return value.replace(/\D/g, "")
+                            .replace(/([0-9])([0-9]{1})$/, '$1-$2')
+                            .replace(/^([0-9]{2})/, '$1-')
+            });
 
-        //Detenemos el envio del formulario
-        event.preventDefault();
+            if ($('#provincia_real_edit').val()!='')
+                recargarListaDomicilio($('#provincia_real_edit').val(), $("#localidad_real_edit"));
+            if ($('#provincia_legal_edit').val()!='')
+                recargarListaDomicilio($('#provincia_legal_edit').val(), $('#localidad_legal_edit'));
+            if ($('#provincia_fiscal_edit').val()!='')
+                recargarListaDomicilio($('#provincia_fiscal_edit').val(), $('#localidad_fiscal_edit'));
+            if ($('#provincia_habilitacion').val()!='')
+                recargarListaHabilitacion();
+            $("#edit_form").on('submit',function(e){
+                console.log("detecta evento finalizar edicion");
+                e.preventDefault();
 
+                if(validarDni())
+                    this.submit();
+            });
+            $('.btnNext').click(function() {
+                $('.nav-tabs .active').parent().next('li').find('a').trigger('click');
+            });
 
-            if(validarDni()){
-                                  
-                this.submit();              
+            $('.btnPrevious').click(function() {
+                $('.nav-tabs .active').parent().prev('li').find('a').trigger('click');
+            });
+        });
+        function recargarListaDomicilio(provincia_selected, select_localidad){
+            console.log("entra en esta funcion de recarga de localidades");
+            $.ajax({
+                type:"GET",
+                url:"{{url('localidades')}}/"+provincia_selected,
+                success:function(r){
+                    select_localidad.html(r);
+                }
+            }).done(function(){
+                let proveedor = @json($proveedor);
+                if(proveedor.domicilio_real!=null && proveedor.domicilio_real.localidad!=null)
+                    if ($('#provincia_real_edit').val()!='')
+                        $("#localidad_real_edit option[value='"+proveedor.domicilio_real.localidad.id_localidad+"']").attr("selected", true);
+                if(proveedor.domicilio_legal!=null && proveedor.domicilio_legal.localidad!=null)
+                    if ($('#provincia_legal_edit').val()!='')
+                        $("#localidad_legal_edit option[value='"+proveedor.domicilio_legal.localidad.id_localidad+"']").attr("selected", true);
+                if(proveedor.domicilio_fiscal!=null && proveedor.domicilio_fiscal.localidad!=null)
+                    if ($('#provincia_fiscal_edit').val()!='')
+                        $("#localidad_fiscal_edit option[value='"+proveedor.domicilio_fiscal.localidad.id_localidad+"']").attr("selected", true);
+            });
+        }
+
+        function recargarListaHabilitacion(){
+            $.ajax({
+            type:"GET",
+                    url:"{{url('localidades')}}/"+$('#provincia_habilitacion').val(),
+
+            success:function(r){
+                $('#localidad_habilitacion').html(r);
             }
-
-}, false);
-
-        $('input[type="checkbox"]').on('change', function() {
-            this.value = this.checked ? 1 : 0;
-            //console.log(this.value);
-        }).change();
-
-        $('.btnNext').click(function() {
-            $('.nav-tabs .active').parent().next('li').find('a').trigger('click');
-        })
-
-        $('.btnPrevious').click(function() {
-            $('.nav-tabs .active').parent().prev('li').find('a').trigger('click');
-        })
-    </script>
-    <script type="text/javascript">
-
-        function valideKey(evt) {
-
-            // El código es la representación decimal ASCII de la clave presionada.
-            var code = (evt.which) ? evt.which : evt.keyCode;
-
-            if (code == 8) { // espacio.
-                return true;
-            } else if (code >= 48 && code <= 57) { // es un numero.
-                return true;
-            } else { // otras teclas
-                //console.log("no es un numero");
-                return false;
-            }
+            }).done(function(){
+            let localidad_habilitacion = @json($proveedor->localidad_habilitacion);
+            if($("#provincia_habilitacion").val()!='' && localidad_habilitacion != null)
+                $("#localidad_habilitacion option[value='"+localidad_habilitacion+"']").attr("selected", true);
+            });
         }
     </script>
-
-    <script>
-        $('input[type="checkbox"]').on('change', function() {
-            this.value = this.checked ? 1 : 0;
-            //console.log(this.value);
-        }).change();
-
-        window.onload = function() {
-
-            validar_razon_social();
-
-            validar_nombre_fantasia();
-
-            validar_cuit();
-
-          $('.js-example-basic-single').select2({
-            theme: "bootstrap",    width: 'resolve' // need to override the changed default
-});
-
-
-$("#dni_legal").val(function (index, value ) {
-    return value.replace(/\D/g, "")
-                .replace(/([0-9])([0-9]{3})$/, '$1.$2')
-                .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-});
-
-$("#cuit").val(function (index, value ) {
-    return value.replace(/\D/g, "")
-                .replace(/([0-9])([0-9]{1})$/, '$1-$2')
-                .replace(/^([0-9]{2})/, '$1-')
-
-});
-
-            @if (!$proveedor_domicilio_real->id_localidad == '')
-                recargarListaRealEdit2();
-            @endif
-            @if (!$proveedor_domicilio_fiscal->id_localidad == '')
-                recargarListaFiscal2();
-            @endif
-
-            @if (!$proveedor_domicilio_legal->id_localidad == '')
-                recargarListaLegal2();
-            @endif
-
-            @if (!$proveedor->localidad_habilitacion == '')
-                recargarListaHabilitacion2();
-            @endif
-
-
-        };
-
-    </script>
-
+        
 @endpush
 
 @push('css')
@@ -214,9 +183,6 @@ $("#cuit").val(function (index, value ) {
         }
 
     </style>
-@endpush
-
-@push('css')
 
     <style>
         input:invalid:required {

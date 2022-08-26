@@ -98,7 +98,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //RUTA PARA ELIMINAR UN REGISTRO DE LA BD
 
-    //Route::get('eliminarRegistro/{id}', 'App\Http\Controllers\ProveedoresController@eliminar_id');
+    Route::get('eliminarRegistro/{id}', 'App\Http\Controllers\ProveedoresController@eliminar_id');
 
     Route::post('/dar_baja', 'App\Http\Controllers\ProveedoresController@dar_baja');
 
@@ -131,11 +131,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('nuevoPagos/{id}', 'App\Http\Controllers\ProveedoresController@nuevoPagos')->name('pagos.nuevo');
     Route::get('nuevoActividades/{id}', 'App\Http\Controllers\ProveedoresController@nuevoActividades')->name('actividades.nuevo');
 
-    Route::post('crearSucursales/{id}', 'App\Http\Controllers\ProveedoresController@crearSucursales')->name('sucursales.crear');
     Route::post('crearPagos/{id}', 'App\Http\Controllers\ProveedoresController@crearPagos')->name('pagos.crear');
     Route::post('crearActividades/{id}', 'App\Http\Controllers\ProveedoresController@crearActividades')->name('actividades.crear');
 
-    Route::get('verSucursales/{id}', 'App\Http\Controllers\ProveedoresController@verSucursales')->name('sucursales.ver');
     Route::get('verPagos/{id}', 'App\Http\Controllers\ProveedoresController@verPagos')->name('pagos.ver');
     Route::get('verActividades/{id}', 'App\Http\Controllers\ProveedoresController@verActividades')->name('actividades.ver');
     
@@ -156,7 +154,8 @@ Route::group(['middleware' => ['auth']], function () {
         $actividades_economicas=Actividad_economica::all();
         return view('exportarExcel',compact('paises','provincias','sectores','actividades_economicas'));
     });
-
+    
+    Route::get('responsable/{dni}', 'App\Http\Controllers\ProveedoresController@getResponsable')->name('responsable');
     Route::get('/exportar', 'App\Http\Controllers\ExportController@exportar')->name('exportar');
     Route::post('limpiar', 'App\Http\Controllers\ProveedoresController@limpiar')->name('limpiar');
 
