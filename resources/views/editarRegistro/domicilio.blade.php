@@ -120,6 +120,10 @@
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                         <a href="javascript:void(0);" class="add_email_{{$tipo_domicilio}}_{{$mode}}" title="Agregue un nuevo correo"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
                     </div>
+                @else
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="javascript:void(0);" class="add_email_{{$tipo_domicilio}}_{{$mode}}" title="Agregue un nuevo correo" style="display:none;"><input type="button" @if ( $mode == "show") readonly @endif value="Agregar nuevo correo" class="btn btn-outline-success"></a>
+                    </div>
                 @endif
 
                <!-- <label for="telefono_real">Teléfono:</label><br>
@@ -233,22 +237,22 @@
                     @forelse($telefonos as $telefono)
                         <div>
                             @if (!$loop->first)
-                            <div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm">
-                                        <label>Código de área:</label><br>
-                                        <input type="text" onkeypress="return valideKey(event);" class="form-control codigos_telefono_{{$tipo_domicilio}}_{{$mode}}" @if ( $mode == "show" || $mode=='modal-show') disabled @endif placeholder="Ej: 2966" aria-describedby="basic-addon1" name="telefono_{{$tipo_domicilio}}_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono->cod_area_tel}}" maxlength="4">
-                                        <small class="small" id="small-telefono-{{$tipo_domicilio}}-cod-{{$mode}}"></small>
+                                <div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <label>Código de área:</label><br>
+                                            <input type="text" onkeypress="return valideKey(event);" class="form-control codigos_telefono_{{$tipo_domicilio}}_{{$mode}}" @if ( $mode == "show" || $mode=='modal-show') disabled @endif placeholder="Ej: 2966" aria-describedby="basic-addon1" name="telefono_{{$tipo_domicilio}}_cod[]" @if ( $mode == "show") readonly @endif value="{{$telefono->cod_area_tel}}" maxlength="4">
+                                            <small class="small" id="small-telefono-{{$tipo_domicilio}}-cod-{{$mode}}"></small>
+                                        </div>
+                                        <div class="col-sm">
+                                            <label> Número de Teléfono:</label><br>
+                                            <input type="text" onkeypress="return valideKey(event);" class="form-control nros_telefono_{{$tipo_domicilio}}_{{$mode}}" @if ( $mode == "show" || $mode=='modal-show') disabled @endif placeholder="Teléfono" aria-describedby="basic-addon1" name="telefono_{{$tipo_domicilio}}[]" @if ( $mode == "show") readonly @endif value="{{$telefono->nro_tel}}" maxlength="14">
+                                            <small class="small" id="small-telefono-{{$tipo_domicilio}}-{{$mode}}"></small>
+                                        </div>
                                     </div>
-                                    <div class="col-sm">
-                                        <label> Número de Teléfono:</label><br>
-                                        <input type="text" onkeypress="return valideKey(event);" class="form-control nros_telefono_{{$tipo_domicilio}}_{{$mode}}" @if ( $mode == "show" || $mode=='modal-show') disabled @endif placeholder="Teléfono" aria-describedby="basic-addon1" name="telefono_{{$tipo_domicilio}}[]" @if ( $mode == "show") readonly @endif value="{{$telefono->nro_tel}}" maxlength="14">
-                                        <small class="small" id="small-telefono-{{$tipo_domicilio}}-{{$mode}}"></small>
-                                    </div>
+                                    @if($mode=='edit')<a href="javascript:void(0);" class="remove_telefono_{{$tipo_domicilio}}_{{$mode}}" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>@endif
                                 </div>
-                                @if($mode=='edit')<a href="javascript:void(0);" class="remove_telefono_{{$tipo_domicilio}}_{{$mode}}" title="Elimine el teléfono"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>@endif
-                            </div>
                             @else
                                 <div class="row">
                                     <div class="col-sm">
@@ -283,6 +287,10 @@
                 @if ( $mode != "show" && count($telefonos) < 3 )
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                         <a href="javascript:void(0);" class="add_telefono_{{$tipo_domicilio}}_{{$mode}}" title="Agregue un nuevo teléfono"><input type="button" @if ( $mode == "show" || $mode=='modal-show') readonly @endif value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>
+                    </div>
+                @else
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="javascript:void(0);" class="add_telefono_{{$tipo_domicilio}}_{{$mode}}" title="Agregue un nuevo teléfono" style="display:none;"><input type="button" @if ( $mode == "show" || $mode=='modal-show') readonly @endif value="Agregar nuevo teléfono" class="btn btn-outline-success"></a>
                     </div>
                 @endif
             </div>

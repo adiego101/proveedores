@@ -196,26 +196,11 @@ class ProveedoresController extends Controller
                     $dni_persona=htmlspecialchars(str_replace(".","",$request->dni_legal));
                     $nombre_persona=htmlspecialchars($request->nombre_persona);
                     $apellido_persona=htmlspecialchars($request->apellido_persona);
-                    if($dni_persona!='')
-                        Log::info("dni persona no vacio");
-                    else
-                        Log::info("dni persona vacio");
-                    if($nombre_persona!='')
-                        Log::info("nombre persona no vacio");
-                    else
-                        Log::info("nombre persona vacio");
-                    if($apellido_persona!='')
-                        Log::info("apellido persona no vacio");
-                    else
-                        Log::info("apellido persona vacio");
                     if($dni_persona!='' && $nombre_persona!='' && $apellido_persona!='')
                     {
                         $Representante_legal = Persona::where('dni_persona',$dni_persona)
                                                     ->first();
-                        Log::info("isset Representante legal".isset($Representante_legal));
                         if(!isset($Representante_legal))
-                        {
-                            Log::info("entra por no existe representante legal");
                             $Representante_legal = Persona::create([
                                 'dni_persona' => $dni_persona,
                                 //'cuil_persona'=>$proveedores_rupae->cuil_persona,
@@ -224,10 +209,8 @@ class ProveedoresController extends Controller
                                 //'apellido_persona'=>$proveedores_rupae->apellido_persona,
                                 //'genero_persona'=>$proveedores_rupae->genero_persona,
                             ]);
-                        }
                         else
                         {
-                            Log::info("entra por existe representante legal");
                             if($Representante_legal->nombre_persona!=$nombre_persona)
                                 $Representante_legal->update(['nombre_persona'=>$nombre_persona]);
                             if($Representante_legal->apellido_persona!=$apellido_persona)
@@ -236,7 +219,6 @@ class ProveedoresController extends Controller
 
                         $proveedores_rupae->personas()->attach($Representante_legal, ['rol_persona_proveedor' => 'Representante']);
                     }
-
 
                     //----------------------------------Carga Domicilio Fiscal---------------------------------------------
 

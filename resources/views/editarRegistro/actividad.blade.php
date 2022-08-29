@@ -6,12 +6,6 @@
 <h3>Actividades</h3>
 
 <br/>
-    <label for="facturacion_anual_alcanzada">Facturación anual alcanzada:</label><br>
-    <input type="text" class="form-control limpiar" placeholder="Ingrese el monto de la facturación anual alcanzada" aria-describedby="basic-addon1" id="facturacion_anual_alcanzada"
-    name="facturacion_anual_alcanzada" maxlength="40"
-     @if ( $mode == "show") readonly @endif
-value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturacion_anual_alcanzada : '' }}">
-<br>
 @if ($mode == "edit")
 <br>
 <!-- Button trigger modal -->
