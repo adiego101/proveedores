@@ -236,21 +236,14 @@ return [
             'url' => '/nuevoRegistroCuit',
             'icon' => 'fas fa-fw fa-plus-circle',
             'label_color' => 'success',
+            'can'    => 'crear_registros',
         ],
-
-        /*
-        [
-            'text' => 'Nuevo Registro',
-            'url' => '/nuevoRegistro',
-            'icon' => 'fas fa-fw fa-plus-circle',
-            'label_color' => 'success',
-        ],
-        */
         [
             'text' => 'Gestionar Registros',
             'url' => '/gestionarRegistros',
             'icon' => 'fas fa-fw fa-folder',
             'label_color' => 'success',
+            'can'    => ['editar_registros', 'ver_registros'],
         ],
        //DESCOMENTAR DESPÚES DE LA EXPOSICIÓN
        /*
@@ -279,6 +272,7 @@ return [
             'url' => '/excel',
             'icon' => 'fas fa-fw fa-download',
             'label_color' => 'success',
+            'can'    => 'descargar_excel',
         ],
 
         [
@@ -286,6 +280,7 @@ return [
             'url' => '/historial_acciones',
             'icon' => 'fas fa-fw fa-regular fa-address-card',
             'label_color' => 'success',
+            'can'    => 'consultar_historial_acciones',
         ],
 
         [
