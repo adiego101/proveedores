@@ -1,33 +1,5 @@
 <fieldset>
-    <h1>Pagos</h1>
-    <br>
-    <h4>Tipo de Proveedor:</h4><br>
-
-    <input @if ($mode == 'show') onclick="return false" @endif
-        {{ !$proveedores_tipos_proveedores->where('id_tipo_proveedor', '1')->isEmpty() ? 'checked' : '' }}
-        type="checkbox" id="prov_estado" value="0" name="prov_estado">
-    <label for="prov_estado">Proveedor del Estado</label><br>
-
-    <input @if ($mode == 'show') onclick="return false" @endif
-        {{ !$proveedores_tipos_proveedores->where('id_tipo_proveedor', '2')->isEmpty() ? 'checked' : '' }}
-        type="checkbox" id="prov_minero" value="0" name="prov_minero">
-    <label for="prov_minero">Proveedor Minero</label><br>
-
-    <input @if ($mode == 'show') onclick="return false" @endif
-        {{ !$proveedores_tipos_proveedores->where('id_tipo_proveedor', '3')->isEmpty() ? 'checked' : '' }}
-        type="checkbox" id="prov_petrolero" value="0" name="prov_petrolero">
-    <label for="prov_petrolero">Proveedor Petrolero</label><br>
-
-    <input @if ($mode == 'show') onclick="return false" @endif
-        {{ !$proveedores_tipos_proveedores->where('id_tipo_proveedor', '4')->isEmpty() ? 'checked' : '' }}
-        type="checkbox" id="prov_provincial" value="0" name="prov_provincial">
-    <label for="prov_provincial">Productor Provincial</label><br>
-
-    <br>
-
-    <hr>
-
-    <h4>Registro de Pagos de inscripción y renovación:</h4><br>
+    <h1>Registro de Pagos de inscripción y renovación</h1><br>
 
     @if ($mode == 'edit')
         <!-- Button trigger modal -->

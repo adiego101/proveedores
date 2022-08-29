@@ -1,25 +1,5 @@
 <fieldset>
-    <h1>Pagos</h1>
-    <br>
-    <h4>Tipo de Proveedor:</h4><br>
-
-    <input type="checkbox" id="prov_estado" value="0" name="prov_estado">
-    <label for="prov_estado">Proveedor del Estado</label><br>
-
-    <input type="checkbox" id="prov_minero" value="0" name="prov_minero">
-    <label for="prov_minero">Proveedor Minero</label><br>
-
-    <input type="checkbox" id="prov_petrolero" value="0" name="prov_petrolero">
-    <label for="prov_petrolero">Proveedor Petrolero</label><br>
-
-    <input type="checkbox" id="prov_provincial" value="0" name="prov_provincial">
-    <label for="prov_provincial">Productor Provincial</label><br>
-
-    <br>
-
-    <hr>
-
-    <h4>Registro de Pagos de inscripción y renovación:</h4><br>
+    <h1>Registro de Pagos de inscripción y renovación</h1><br>
 
     <label for="fecha_pago">Fecha:</label><br>
     <input type="date" class="form-control" placeholder="Ingrese la fecha en la que se realizó el pago" aria-describedby="basic-addon1" id="fecha_pago"><br>

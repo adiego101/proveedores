@@ -1,11 +1,5 @@
 <fieldset>
-<div class="row">
-        <h2>Actividad</h2>
-</div>
-<br>
-<h3>Actividades</h3>
-
-<br/>
+<h1>Actividades</h1>
 @if ($mode == "edit")
 <br>
 <!-- Button trigger modal -->
