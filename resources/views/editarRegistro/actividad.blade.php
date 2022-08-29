@@ -39,15 +39,19 @@ value="{{ isset($proveedor->facturacion_anual_alcanzada) ? $proveedor->facturaci
     <br />
 
     @include('modales.modalBajaActividad')
-
-    <div class="row navbuttons ">
-        <div class="col-6 col-sm-auto" id="btnPrevious">
-            <a class="btn btn-outline-secondary btnPrevious">Atrás</a>
+    @if($mode=='create')
+        <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
+        <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+    @else
+        <div class="row navbuttons ">
+            <div class="col-6 col-sm-auto" id="btnPrevious">
+                <a class="btn btn-outline-secondary btnPrevious">Atrás</a>
+            </div>
+            <div class="col-6 col-sm-auto" id="btnNext">
+                <a class="btn btn-primary btnNext">Siguiente</a>
+            </div>
         </div>
-        <div class="col-6 col-sm-auto" id="btnNext">
-            <a class="btn btn-primary btnNext">Siguiente</a>
-        </div>
-    </div>
+    @endif
 
     <!--Incluimos el modal para validar una actividad -->
 
