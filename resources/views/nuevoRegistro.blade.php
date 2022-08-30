@@ -70,6 +70,7 @@
         @include('editarRegistro.domicilio',['tipo_domicilio'=>'legal', 'mode'=>'create'])
         @include('editarRegistro.domicilio',['tipo_domicilio'=>'fiscal', 'mode'=>'create'])
         @include('altaRegistro.actividad',['mode'=>'create'])
+        @include('altaRegistro.firmas',['mode'=>'create'])
         @include('altaRegistro.pagos',['mode'=>'create'])
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
