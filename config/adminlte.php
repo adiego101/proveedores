@@ -14,7 +14,7 @@ return [
     |
      */
 
-    'title' => 'Sistema Integrado de Proveedores y Licitaciones',
+    'title' => 'Registro Único de Proveedores del Estado Provincial',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,7 +45,7 @@ return [
     |
      */
 
-    'logo' => '<b>SIPLIC</b>',
+    'logo' => '<b>RUPEP</b>',
     'logo_img' => '/logo_santacruz.png',
     'logo_img_class' => 'brand-image   ',
     'logo_img_xl' => null,

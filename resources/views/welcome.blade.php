@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
 
 
-    <title>SIPLIC</title>
+    <title>RUPEP</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -126,7 +126,7 @@
         class=" container et_pb_module et_pb_fullwidth_header et_pb_fullwidth_header_0 et_pb_section_parallax_hover et_pb_text_align_center et_pb_bg_layout_dark et_pb_fullscreen">
 
         <div class="  float-left fixed top-0 left-0 px-6 py-4 sm:block">
-            <h1>SIPLIC</h1>
+            <h1>RUPEP</h1>
         </div>
 
         @if (Route::has('login'))

@@ -10,7 +10,7 @@
             @endif
 
 
-                <div class="card-header"> {{ __('Sistema Integrado de Proveedores y Licitaciones.') }}</div>
+                <div class="card-header"> {{ __('Registro Único de Proveedores del Estado Provincial.') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -20,7 +20,7 @@
                     @endif
 
                     <div align="center">
-                        <img src="logo-mefi.png" alt="Logo del Sistema Integrado de Proveedores y Licitaciones" title="Sistema Integrado de Proveedores y Licitaciones">
+                        <img src="logo-mefi.png" alt="Logo del Registro Único de Proveedores del Estado Provincial" title="Registro Único de Proveedores del Estado Provincial">
                     </div>
 
                 </div>
