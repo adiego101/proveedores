@@ -688,6 +688,8 @@ class ProveedoresController extends Controller
                 ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
+
+
     public function editarPagos($id)
     {
         try {
@@ -786,6 +788,45 @@ class ProveedoresController extends Controller
         }
 
     }
+
+
+    //METODO PARA RECUPERAR LAS DENOMINACIONES DE LA BD Y CARGARLAS EN LA TABLA DEL EDITAR REGISTRO
+    //Falta implementar.
+    public function getDenominaciones(Request $request, $id, $mode = null)
+    {
+        try {
+            $data = Proveedor_firma::where('id_proveedor', $id)->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) use ($mode) {
+                    $url = url('editarFirmas/' . $row->id_proveedor_firma_nac_extr);
+                    $url2 = url('verFirmas/' . $row->id_proveedor_firma_nac_extr);
+
+                    if ($mode == "show") {
+                        $actionBtn = '
+                    <a onclick="verDenominacion(' . $row->id_proveedor_firma_nac_extr . ');" class="view btn btn-primary btn-sm" title="ver Denominación">
+                    <i class="fas fa-eye"></i></a>';
+                        return $actionBtn;
+                    } else {
+                        $actionBtn = '
+                    <a onclick="verDenominacion(' . $row->id_proveedor_firma_nac_extr . ');" class="view btn btn-warning btn-sm" title="editar denominación">
+                    <i class="fas fa-edit"></i></a> <a onclick="bajaDenominacion(' . $row->id_proveedor_firma_nac_extr . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
+                    <i class="fas fa-exclamation-circle"></i></a>';
+                        return $actionBtn;
+                    }
+
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
 
     public function getActividades(Request $request, $id, $mode = null)
     {

@@ -141,6 +141,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('idLocalidad/{nombre_localidad}', 'App\Http\Controllers\ProveedoresController@idLocalidad');
 
     Route::get('pagos/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPagos')->name('pagos.list');
+
+    //RUTA PARA OBTENER LAS FIRMAS NAC Y EXTR EN EL MODAL DE EDITAR. Todavia falta implementar.
+    Route::get('firmas/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getDenominaciones')->name('denominaciones.list');
+
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
 
     //Prueba generacion PDF
