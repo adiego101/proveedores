@@ -143,7 +143,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('pagos/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPagos')->name('pagos.list');
 
     //RUTA PARA OBTENER LAS FIRMAS NAC Y EXTR EN EL MODAL DE EDITAR. Todavia falta implementar.
-    Route::get('firmas/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getDenominaciones')->name('denominaciones.list');
+    Route::get('firmas/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getDenominaciones')->name('firmas.list');
+
+    //RUTA PARA ELIMINAR LAS FIRMAS NAC Y EXTR EN EL MODAL DE BAJA DEL EDITAR. Todavia falta implementar.
+    Route::post('bajaFirmas/{id}', 'App\Http\Controllers\ProveedoresController@bajaDenominacion')->name('firmas.baja');
+
+    //RUTA PARA CREAR UNA FIRMA NAC Y EXTR EN EL MODAL DE ALTA DEL EDITAR. Todavia falta implementar.
+    Route::post('crearFirmas/{id}', 'App\Http\Controllers\ProveedoresController@crearDenominacion')->name('firmas.crear');
 
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
 

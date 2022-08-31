@@ -35,8 +35,8 @@
         </div>
     @endif
 
-    <!--Incluimos el modal para editar los campos de un pago-->
-    {{-- @include('modales.modalBajaPago') --}}
+    <!-- Incluimos el modal para dar de baja una denominación -->
+    {{-- @include('modales.bajaDenominacion') --}}
 
 </fieldset>
 

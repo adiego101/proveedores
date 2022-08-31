@@ -14,6 +14,7 @@ use App\Models\Proveedores_tipos_proveedores;
 use App\Models\Proveedor_domicilio;
 use App\Models\Proveedor_email;
 use App\Models\Proveedor_telefono;
+use App\Models\Proveedor_firma;
 use App\Models\Provincia;
 use App\Models\Tipo_actividad;
 use DataTables;
@@ -819,12 +820,50 @@ class ProveedoresController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
             return Redirect::back()
                 ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
+    }
+
+
+    //METODO PARA ELIMINAR LAS DENOMINACIONES DE LA BD - TABLA DEL EDITAR REGISTRO
+    //Falta implementar.
+    public function bajaDenominacion($id)
+    {
+        try {
+            $denominacion = Proveedor_firma::findOrFail($id)->delete();
+
+            return "success";
+        } catch (\Exception $e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+
+    }
+
+
+    //METODO PARA CREAR UNA DENOMINACION - TABLA DEL EDITAR REGISTRO
+    //Falta implementar.
+    public function crearDenominacion($id, Request $request)
+    {
+        try {
+
+            $denominacion = new Proveedor_firma($request->all());
+
+            $denominacion->save();
+            
+        } catch (\Exception $e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+
     }
 
 
