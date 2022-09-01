@@ -9,6 +9,7 @@ use App\Models\Pais;
 use App\Models\Provincia;
 use App\Models\Tipo_actividad;
 use App\Models\Sector;
+use App\Models\Banco;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,8 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
         $localidades = Localidad::all();
         $tipos_actividades = Tipo_actividad::All();
         $actividades = Actividad_economica::All();
+        $bancos = Banco::all();
 
-        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades'));
+        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'bancos'));
     })->name('nuevoRegistro')->middleware(['can:crear_registros']);
 
 
