@@ -66,6 +66,11 @@
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
+
+    <!--Incluimos el modal para editar los campos de una referencia bancaria-->
+
+    @include('modales.editarReferenciaBancaria')
+
     <!--Incluimos el modal para validar una referencia bancaria -->
 
     @include('modales.validarReferenciaBancaria')
@@ -98,10 +103,10 @@
 
                 $("#body_table_banco").append(
                     '<tr id="row_banco' + n +'">'+
-                            '<td>' + nombre_banco +'</td>'+
-                            '<td>' + sucursal +'</td>'+
-                            '<td>' + tipo_cuenta +'</td>'+
-                            '<td>' + nro_cuenta +'</td>'+
+                            '<td> <div id="nombre_banco_text' + n + '">' + nombre_banco +'</div></td>'+
+                            '<td> <div id="sucursal_text' + n + '">' + sucursal +'</div></td>'+
+                            '<td> <div id="tipo_cuenta_text' + n + '">' + tipo_cuenta +'</div></td>'+
+                            '<td> <div id="nro_cuenta_text' + n + '">' + nro_cuenta +'</div></td>'+
                             '<td>'+
                             '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="nombre_banco' + n +'" name="nombres_bancos[]" readonly value="' + nombre_banco +'">'+
                             '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="sucursal' + n +'" name="sucursales[]" readonly value="' + sucursal +'">'+
@@ -195,6 +200,34 @@
                 }
 
         });
+
+
+
+        //Cargamos los inputs del modal con los datos de la fila de la tabla
+
+        $(document).on("click", ".btn_edit_banco", function() {
+
+            //cuando da click al boton editar, obtenemos el id del boton
+            let button_id = $(this).attr("id");
+
+            //Recuperamos los valores de los campos pertenecientes a una fila
+            let modal_nombre_banco = $("#nombre_banco" + button_id).val();
+            let modal_sucursal = $("#sucursal" + button_id).val();
+            let modal_tipo_cuenta = $("#tipo_cuenta" + button_id).val();
+            let modal_nro_cuenta = $("#nro_cuenta" + button_id).val();
+
+            //Desplegamos el modal
+            $('#modal_banco').modal('show');
+
+            //Enviamos los valores recuperados anteriormente a los inputs del modal
+            $('#modal_nombre_banco').val(modal_nombre_banco);
+            $('#modal_sucursal').val(modal_sucursal);
+            $('#modal_tipo_cuenta').val(modal_tipo_cuenta);
+            $('#modal_nro_cuenta').val(modal_nro_cuenta);
+            $('#numero_fila_banco').val(button_id);
+
+        });
+
 
     </script>
 @endpush
