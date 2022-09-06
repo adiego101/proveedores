@@ -153,6 +153,15 @@ Route::group(['middleware' => ['auth']], function () {
     //RUTA PARA CREAR UNA FIRMA NAC Y EXTR EN EL MODAL DE ALTA DEL EDITAR. Todavia falta implementar.
     Route::post('crearFirmas/{id}', 'App\Http\Controllers\ProveedoresController@crearDenominacion')->name('firmas.crear');
 
+    //RUTA PARA OBTENER LAS REFERENCIAS BANCARIAS EN EL MODAL DE EDITAR. Todavia falta implementar.
+    Route::get('referenciasBancarias/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getReferenciasBancarias')->name('referenciasBancarias.list');
+
+    //RUTA PARA ELIMINAR LAS REFERENCIAS BANCARIAS EN EL MODAL DE BAJA DEL EDITAR. Todavia falta implementar.
+    Route::post('bajaReferenciasBancarias/{id}', 'App\Http\Controllers\ProveedoresController@bajaReferenciaBancaria')->name('referenciasBancarias.baja');
+
+    //RUTA PARA CREAR UNA REFERENCIA BANCARIA EN EL MODAL DE ALTA DEL EDITAR. Todavia falta implementar.
+    Route::post('crearReferenciasBancarias/{id}', 'App\Http\Controllers\ProveedoresController@crearReferenciaBancaria')->name('referenciasBancarias.crear');
+
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
 
     //Prueba generacion PDF

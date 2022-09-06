@@ -29,6 +29,14 @@
                     data-toggle="tab" href="#actividad">Actividad</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link @if ($tab == 'firma') {{ 'active' }} @endif" id="firma-tab"
+                    data-toggle="tab" href="#firma">Firma</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if ($tab == 'referencia bancaria') {{ 'active' }} @endif" id="referencia-bancaria-tab"
+                    data-toggle="tab" href="#referencia-bancaria">Referencia Bancaria</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link @if ($tab == 'pago') {{ 'active' }} @endif" id="pagos-tab"
                     data-toggle="tab" href="#pagos">Pagos</a>
             </li>
@@ -55,6 +63,13 @@
         <div class="tab-pane fade @if ($tab == 'actividad') {{ 'show active' }} @endif " id="actividad"
             role="tabpanel" aria-labelledby="nav-actividad-tab">
             @include('editarRegistro.actividad',['mode'=>'show'])
+        </div>
+        <div class="tab-pane fade @if ($tab == 'firma') {{ 'show active' }} @endif " id="firma"
+            role="tabpanel" aria-labelledby="nav-firma-tab">
+            @include('editarRegistro.firmas',['mode'=>'show'])
+        </div>
+        <div class="tab-pane fade @if ($tab == 'referencia bancaria') {{ 'show active' }} @endif " id="referencia-bancaria" role="tabpanel" aria-labelledby="nav-referencia-bancaria-tab">
+            @include('editarRegistro.referenciasBancarias',['mode'=>'show'])
         </div>
         <div class="tab-pane fade  @if ($tab == 'pago') {{ 'show active' }} @endif" id="pagos" role="tabpanel"
             aria-labelledby="nav-pagos-tab">
