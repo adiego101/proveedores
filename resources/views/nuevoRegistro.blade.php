@@ -71,6 +71,7 @@
         @include('editarRegistro.domicilio',['tipo_domicilio'=>'fiscal', 'mode'=>'create'])
         @include('altaRegistro.actividad',['mode'=>'create'])
         @include('altaRegistro.firmas',['mode'=>'create'])
+        @include('altaRegistro.referenciasBancarias',['mode'=>'create'])
         @include('altaRegistro.pagos',['mode'=>'create'])
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -436,6 +437,29 @@
                 '<tr id="row_actividad" class="alert alert-light" role="alert">'+
                     '<td></td>'+
                     '<td>No hay registros</td>'+
+                    '<td></td>'+
+                '</tr>');
+
+
+        var cant_filas_firma = document.getElementById("body_table_denominacion").rows.length;
+
+        if(cant_filas_firma == 0)
+            $("#body_table_denominacion").append(
+                '<tr id="row_denominacion" class="alert alert-light" role="alert">'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
+                '</tr>');
+
+
+        var cant_filas_banco = document.getElementById("body_table_banco").rows.length;
+
+        if(cant_filas_banco == 0)
+            $("#body_table_banco").append(
+                '<tr id="row_banco" class="alert alert-light" role="alert">'+
+                    '<td></td>'+
+                    '<td></td>'+
+                    '<td>No hay registros</td>'+
+                    '<td></td>'+
                     '<td></td>'+
                 '</tr>');
 

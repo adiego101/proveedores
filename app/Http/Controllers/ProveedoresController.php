@@ -15,6 +15,7 @@ use App\Models\Proveedor_domicilio;
 use App\Models\Proveedor_email;
 use App\Models\Proveedor_telefono;
 use App\Models\Proveedor_firma;
+use App\Models\Proveedor_banco;
 use App\Models\Provincia;
 use App\Models\Tipo_actividad;
 use DataTables;
@@ -865,6 +866,86 @@ class ProveedoresController extends Controller
         }
 
     }
+
+
+
+    //METODO PARA RECUPERAR LAS REFERENCIAS BANCARIAS DE LA BD Y CARGARLAS EN LA TABLA DEL EDITAR REGISTRO
+    //Falta implementar.
+    public function getReferenciasBancarias(Request $request, $id, $mode = null)
+    {
+        try {
+            $data = Proveedor_banco::where('id_proveedor', $id)->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) use ($mode) {
+                    $url = url('editarReferenciasBancarias/' . $row->id_banco);
+                    $url2 = url('verReferenciasBancarias/' . $row->id_banco);
+
+                    if ($mode == "show") {
+                        $actionBtn = '
+                    <a onclick="verReferenciaBancaria(' . $row->id_banco . ');" class="view btn btn-primary btn-sm" title="ver banco">
+                    <i class="fas fa-eye"></i></a>';
+                        return $actionBtn;
+                    } else {
+                        $actionBtn = '
+                    <a onclick="verReferenciaBancaria(' . $row->id_banco . ');" class="view btn btn-warning btn-sm" title="editar banco">
+                    <i class="fas fa-edit"></i></a> <a onclick="bajaReferenciaBancaria(' . $row->id_banco . ');" class="delete btn btn-danger btn-sm" title="Dar de baja">
+                    <i class="fas fa-exclamation-circle"></i></a>';
+                        return $actionBtn;
+                    }
+
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        } catch (\Exception $e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+
+    //METODO PARA ELIMINAR LAS REFERENCIAS BANCARIAS DE LA BD - TABLA DEL EDITAR REGISTRO
+    //Falta implementar.
+    public function bajaReferenciaBancaria($id)
+    {
+        try {
+
+            $banco = Proveedor_banco::findOrFail($id)->delete();
+
+            return "success";
+
+        } catch (\Exception $e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+
+    }
+
+
+    //METODO PARA CREAR UNA REFERENCIA BANCARIA - TABLA DEL EDITAR REGISTRO
+    //Falta implementar.
+    public function crearReferenciaBancaria($id, Request $request)
+    {
+        try {
+
+            $banco = new Proveedor_banco($request->all());
+
+            $banco->save();
+            
+        } catch (\Exception $e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+
+    }
+
 
 
     public function getActividades(Request $request, $id, $mode = null)

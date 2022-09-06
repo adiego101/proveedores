@@ -1,10 +1,10 @@
 <fieldset>
-    <h1>Firmas Nacionales y Extranjeras que representa</h1><br>
+    <h1>Referencias Bancarias</h1><br>
 
     @if ($mode == 'edit')
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaDenominacion">
-            Agregar Nueva Denominación
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevoBanco">
+            Agregar Nuevo Banco
         </button>
 
         <br>
@@ -14,10 +14,13 @@
 
     <div>
 
-        <table style="width:100%" class="yajra-denominaciones table table-hover  table-striped table-condensed">
+        <table style="width:100%" class="yajra-bancos table table-hover  table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>Denominación</th>
+                    <th>Bancos con los que opera</th>
+                    <th>Sucursal</th>
+                    <th>Tipo cuenta</th>
+                    <th>Nº cuenta</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -40,8 +43,8 @@
         </div>
     @endif
 
-    <!-- Incluimos el modal para dar de baja una denominación -->
-    {{-- @include('modales.bajaDenominacion') --}}
+    <!-- Incluimos el modal para dar de baja un banco -->
+    {{-- @include('modales.bajaReferenciaBancaria') --}}
 
 </fieldset>
 
@@ -51,7 +54,7 @@
     /*
         $(function() {
 
-            var table = $('.yajra-denominaciones').DataTable({
+            var table = $('.yajra-bancos').DataTable({
                 language: {
                     "decimal": "",
                     "emptyTable": "No hay información",
@@ -74,11 +77,23 @@
                 },
                 processing: true,
                 serverSide: true,
-                ajax: "{{ url('firmas/' . $id . '/' . $mode) }}",
+                ajax: "{{ url('referenciasBancarias/' . $id . '/' . $mode) }}",
                 columns: [
                     {
-                        data: 'denominaciones',
-                        name: 'denominaciones'
+                        data: 'bancos',
+                        name: 'bancos'
+                    },
+                    {
+                        data: 'sucursales',
+                        name: 'sucursales'
+                    },
+                    {
+                        data: 'tipos_cuentas',
+                        name: 'tipos_cuentas'
+                    },
+                    {
+                        data: 'nros_cuentas',
+                        name: 'nros_cuentas'
                     },
                     {
                         data: 'action',
@@ -93,11 +108,11 @@
         });
 
 
-        function bajaDenominacion(id_registro) {
+        function bajaReferenciaBancaria(id_registro) {
 
             //Desplegamos el modal
-            $('#modal_baja_denominacion').modal('show');
-            $('#baja_denominacion').val(id_registro);
+            $('#modal_baja_referencia_bancaria').modal('show');
+            $('#baja_referencia_bancaria').val(id_registro);
         }
 
     */

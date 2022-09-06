@@ -9,6 +9,7 @@ use App\Models\Pais;
 use App\Models\Provincia;
 use App\Models\Tipo_actividad;
 use App\Models\Sector;
+use App\Models\Banco;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,8 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
         $localidades = Localidad::all();
         $tipos_actividades = Tipo_actividad::All();
         $actividades = Actividad_economica::All();
+        $bancos = Banco::all();
 
-        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades'));
+        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'bancos'));
     })->name('nuevoRegistro')->middleware(['can:crear_registros']);
 
 
@@ -150,6 +152,15 @@ Route::group(['middleware' => ['auth']], function () {
 
     //RUTA PARA CREAR UNA FIRMA NAC Y EXTR EN EL MODAL DE ALTA DEL EDITAR. Todavia falta implementar.
     Route::post('crearFirmas/{id}', 'App\Http\Controllers\ProveedoresController@crearDenominacion')->name('firmas.crear');
+
+    //RUTA PARA OBTENER LAS REFERENCIAS BANCARIAS EN EL MODAL DE EDITAR. Todavia falta implementar.
+    Route::get('referenciasBancarias/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getReferenciasBancarias')->name('referenciasBancarias.list');
+
+    //RUTA PARA ELIMINAR LAS REFERENCIAS BANCARIAS EN EL MODAL DE BAJA DEL EDITAR. Todavia falta implementar.
+    Route::post('bajaReferenciasBancarias/{id}', 'App\Http\Controllers\ProveedoresController@bajaReferenciaBancaria')->name('referenciasBancarias.baja');
+
+    //RUTA PARA CREAR UNA REFERENCIA BANCARIA EN EL MODAL DE ALTA DEL EDITAR. Todavia falta implementar.
+    Route::post('crearReferenciasBancarias/{id}', 'App\Http\Controllers\ProveedoresController@crearReferenciaBancaria')->name('referenciasBancarias.crear');
 
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
 
