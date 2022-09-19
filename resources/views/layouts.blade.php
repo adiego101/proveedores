@@ -6,7 +6,7 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <link rel="stylesheet" href="{{asset('assets/jquery-ui-1.13.1.custom/jquery-ui.css')}}">
     <style>
-        #dni_legal.ui-autocomplete-loading.is-invalid { 
+        .dni.ui-autocomplete-loading{ 
             background:url("{{asset('assets/jquery-ui-1.13.1.custom/images/ui-anim_basic_16x16.gif')}}");
             background-repeat:no-repeat;
             background-position:center;

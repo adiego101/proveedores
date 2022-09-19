@@ -181,6 +181,26 @@ class Proveedor extends Model
                     ->latest();
     }
 
+    public function miembros(){
+        return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
+                    ->wherePivot('rol_persona_proveedor', 'miembro');
+    }
+
+    public function miembrosDireccion_administradoresFirma(){
+        return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
+                    ->wherePivot('rol_persona_proveedor', '<>', 'miembro')
+                    ->wherePivot('rol_persona_proveedor', '<>', 'direccion_firma')
+                    ->wherePivot('rol_persona_proveedor', '<>', 'apoderado')
+                    ->whereHas('proveedores', function ($query) {
+                        $query  ->where('rol_persona_proveedor','direccion_firma');
+                    })
+                    ->withPivot('rol_persona_proveedor');
+    }
+    public function apoderados(){
+        return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
+                    ->wherePivot('rol_persona_proveedor', 'apoderado');
+    }
+
     public function actividades_economicas(){
         return $this->belongsToMany(Actividad_economica::class, 'actividades_proveedores', 'id_proveedor', 'id_actividad_economica');
     }
