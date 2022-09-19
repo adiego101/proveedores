@@ -111,21 +111,26 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('bajaPagos/{id}', 'App\Http\Controllers\ProveedoresController@bajaPagos')->name('pagos.baja');
     Route::post('bajaActividades/{id}', 'App\Http\Controllers\ProveedoresController@bajaActividades')->name('actividades.baja');
+    Route::post('proveedor/{id_proveedor}/{tipo_persona}/{id_persona}/eliminar', 'App\Http\Controllers\ProveedoresController@eliminarPersona')->name('personas.eliminar');
 
     Route::get('editarPagos/{id}', 'App\Http\Controllers\ProveedoresController@editarPagos')->name('pagos.editar');
     Route::get('editarActividades/{id}', 'App\Http\Controllers\ProveedoresController@editarActividades')->name('actividades.editar');
 
     Route::post('guardarPagos/{id}', 'App\Http\Controllers\ProveedoresController@guardarPagos')->name('pagos.guardar');
     Route::post('guardarActividades/{id}', 'App\Http\Controllers\ProveedoresController@guardarActividades')->name('actividades.guardar');
+    Route::post('proveedor/{id_proveedor}/{tipo_persona}/{id_persona}/actualizar', 'App\Http\Controllers\ProveedoresController@actualizarPersona')->name('personas.actualizar');
+
 
     Route::get('nuevoPagos/{id}', 'App\Http\Controllers\ProveedoresController@nuevoPagos')->name('pagos.nuevo');
     Route::get('nuevoActividades/{id}', 'App\Http\Controllers\ProveedoresController@nuevoActividades')->name('actividades.nuevo');
 
     Route::post('crearPagos/{id}', 'App\Http\Controllers\ProveedoresController@crearPagos')->name('pagos.crear');
     Route::post('crearActividades/{id}', 'App\Http\Controllers\ProveedoresController@crearActividades')->name('actividades.crear');
+    Route::post('crearPersona/{id}', 'App\Http\Controllers\ProveedoresController@crearPersona')->name('personas.crear');
 
     Route::get('verPagos/{id}', 'App\Http\Controllers\ProveedoresController@verPagos')->name('pagos.ver');
     Route::get('verActividades/{id}', 'App\Http\Controllers\ProveedoresController@verActividades')->name('actividades.ver');
+    Route::get('proveedor/{id_proveedor}/{tipo_persona}/{id_persona}/editar', 'App\Http\Controllers\ProveedoresController@verPersona')->name('personas.ver');
 
     });
 
@@ -142,6 +147,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('pagos/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPagos')->name('pagos.list');
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
+    Route::get('personas/{tipo_persona}/{id_proveedor}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPersonas')->name('personas.list');
 
     //Prueba generacion PDF
 

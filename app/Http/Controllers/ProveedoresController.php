@@ -898,6 +898,208 @@ class ProveedoresController extends Controller
         }
     }
 
+    public function crearPersona($id, Request $request)
+    {
+        $proveedor=Proveedor::findOrFail($id);
+        try {
+            //---------Carga de Persona----------
+            
+            $dni_persona=htmlspecialchars(str_replace(".","",$request->dni));
+            $nombre_persona=htmlspecialchars($request->nombre);
+            $apellido_persona=htmlspecialchars($request->apellido);
+            if($dni_persona!='' && $nombre_persona!='' && $apellido_persona!='')
+            {
+                $persona = Persona::where('dni_persona',$dni_persona)
+                                            ->first();
+                if(!isset($persona))
+                {
+                    Log::info("no existe persona ");
+                    $persona = Persona::create([
+                        'dni_persona' => $dni_persona,
+                        //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                        'nombre_persona' => $nombre_persona,
+                        'apellido_persona' => $apellido_persona,
+                        //'apellido_persona'=>$proveedores_rupae->apellido_persona,
+                        //'genero_persona'=>$proveedores_rupae->genero_persona,
+                    ]);
+                }
+                else
+                {
+                    if($persona->nombre_persona!=$nombre_persona)
+                        $persona->update(['nombre_persona'=>$nombre_persona]);
+                    if($persona->apellido_persona!=$apellido_persona)
+                        $persona->update(['apellido_persona'=>$apellido_persona]);
+                }
+                $tipo_persona=htmlspecialchars($request->tipo_persona);
+                if($tipo_persona!='direccion_firma')
+                    $proveedor->personas()->attach($persona, ['rol_persona_proveedor' => $tipo_persona]);
+                else
+                {
+                    $cargo_persona = htmlspecialchars($request->cargo);
+                    $proveedor->personas()->attach($persona, [  'rol_persona_proveedor' => $tipo_persona]);
+                    $proveedor->personas()->attach($persona, [  'rol_persona_proveedor' => $cargo_persona]);
+                }
+            }
+            
+        }catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function actualizarPersona($id_proveedor, $tipo_persona, $id_persona, Request $request)
+    {
+        try {
+            $proveedor=Proveedor::findOrFail($id_proveedor);
+            switch($tipo_persona)
+                {
+                    case('miembro'):
+                        $proveedor  ->load('miembros');
+                        $persona=$proveedor->miembros->where('id_persona',$id_persona)->first();
+                    break;
+                    case('direccion_firma'):
+                        $proveedor  ->load('miembrosDireccion_administradoresFirma');
+                        $persona=$proveedor->miembrosDireccion_administradoresFirma->where('id_persona',$id_persona)->first();
+                    break;
+                    case('apoderados'):
+                        $proveedor  ->load('apoderados');
+                        $persona=$proveedor->apoderados->where('id_persona',$id_persona)->first();
+                    break;
+                }
+        
+            //---------Actualiza Persona----------
+            
+            $dni_persona=htmlspecialchars(str_replace(".","",$request->dni));
+            $nombre_persona=htmlspecialchars($request->nombre);
+            $apellido_persona=htmlspecialchars($request->apellido);
+            if($dni_persona!='' && $nombre_persona!='' && $apellido_persona!='')
+            {
+                if($persona->dni_persona==$dni_persona)
+                {
+                    if($persona->nombre_persona != $nombre_persona)
+                        $persona->update(['nombre_persona'=>$nombre_persona]);
+                    if($persona->apellido_persona != $apellido_persona)
+                        $persona->update(['apellido_persona'=>$apellido_persona]);
+                }
+            }
+            
+        }catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function eliminarPersona($id_proveedor, $tipo_persona, $id_persona, Request $request)
+    {
+        try 
+        {
+            $proveedor=Proveedor::findOrFail($id_proveedor);
+            switch($tipo_persona)
+                {
+                    case('miembro'):
+                        $proveedor  ->load('miembros');
+                        $persona=$proveedor->miembros->where('id_persona',$id_persona)->first();
+                        $proveedor->miembros()->detach($persona);
+                    break;
+                    case('direccion_firma'):
+                        $proveedor  ->load('miembrosDireccion_administradoresFirma');
+                        $persona=$proveedor->miembrosDireccion_administradoresFirma->where('id_persona',$id_persona)->first();
+                        $proveedor->miembrosDireccion_administradoresFirma()->detach($persona);
+                    break;
+                    case('apoderado'):
+                        $proveedor  ->load('apoderados');
+                        $persona=$proveedor->apoderados->where('id_persona',$id_persona)->first();
+                        $proveedor->apoderados()->detach($persona);
+                    break;
+                }
+            }
+        catch (\Exception$e) 
+        {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function getPersonas(Request $request, $tipo_persona, $id_proveedor, $mode = null)
+    {
+        try {
+            $proveedor = Proveedor::findOrFail($id_proveedor);
+            switch($tipo_persona)
+            {
+                case 'miembro':
+                    $personas = $proveedor->miembros;
+                break;
+                case 'direccion_firma':
+                    $personas = $proveedor->miembrosDireccion_administradoresFirma;
+                break;
+                case 'apoderado':
+                    $personas = $proveedor->apoderados;
+                break;
+            }
+            return Datatables::of($personas)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) use ($mode, $tipo_persona) {
+                    if ($mode == "show") 
+                    {
+                        $actionBtn = ' <a onclick="verPersona($row->id_proveedor,$tipo_persona,$row->id_persona);" class="view btn btn-primary btn-sm" title="ver persona">
+                    <i class="fas fa-eye"></i></a>  ';
+                        return $actionBtn;
+                    } 
+                    else 
+                    {
+                        $actionBtn = '<a class="view btn btn-warning btn-sm edit_persona" title="editar persona" data-id-proveedor="'.$row->pivot->id_proveedor.'" data-tipo-persona="'.$tipo_persona.'" data-id-persona="'.$row->id_persona.'">
+                    <i class="fas fa-edit"></i></a> <a type="button" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#modalBaja" title="Dar de baja" data-tipo-baja="persona" data-id-proveedor="'.$row->pivot->id_proveedor.'" data-tipo-persona="'.$tipo_persona.'" data-id-persona="'.$row->id_persona.'">
+                    <i class="fas fa-exclamation-circle"></i></a>';
+                        return $actionBtn;
+                    }
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function verPersona($id_proveedor, $tipo_persona, $id_persona)
+    {
+        try {
+            $proveedor=Proveedor::findOrFail($id_proveedor);
+            switch($tipo_persona)
+            {
+                case('miembro'):
+                    $proveedor  ->load('miembros');
+                    $persona=$proveedor->miembros->where('id_persona',$id_persona)->first();
+                break;
+                case('direccion_firma'):
+                    $proveedor  ->load('miembrosDireccion_administradoresFirma');
+                    $persona=$proveedor->miembrosDireccion_administradoresFirma->where('id_persona',$id_persona)->first();
+                break;
+                case('apoderado'):
+                    $proveedor  ->load('apoderados');
+                    $persona=$proveedor->apoderados->where('id_persona',$id_persona)->first();
+                break;
+            }
+            
+            Log::info("persona=".$persona);
+            return $persona;
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+
+    }
+
     public function nuevoActividades($id)
     {
         try {

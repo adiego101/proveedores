@@ -29,25 +29,7 @@ value=@if(isset($proveedor->cuit))"{{$proveedor->cuit}}"@elseif(isset($cuit))"{{
     <br>
     <hr>
     <br>
-    <h1>Representante Legal</h1><br>
-    <div class="ui-widget">
-        <label for="dni_legal">DNI:</label><br>
-            <input type="text" class="form-control limpiar" placeholder="Ingrese el dni del representante legal" @if ( $mode == "show") readonly @endif
-                value="{{ isset($representante->dni_persona) ? $representante->dni_persona : '' }}" aria-describedby="basic-addon1" id="dni_legal" name="dni_legal" maxlength="10">
-            <small class="small" id="small-dni"></small>
-    </div>
-    <br>
-
-    <label for="apellido_persona">Apellido:</label><br>
-    <input type="text" @if ( $mode == "show") readonly @endif value="{{ isset($representante->apellido_persona) ? $representante->apellido_persona : '' }}" class="form-control limpiar" placeholder="Ingrese el apellido del representante legal" aria-describedby="basic-addon1" id="apellido_persona" name="apellido_persona" maxlength="50">
-    <small class="small" id="small-apellido"></small><br>
-
-
-    <label for="nombre_persona">Nombre:</label><br>
-    <input type="text" @if ( $mode == "show") readonly @endif class="form-control limpiar" value="{{ isset($representante->nombre_persona) ? $representante->nombre_persona : '' }}" placeholder="Ingrese el nombre completo del representante legal" aria-describedby="basic-addon1" id="nombre_persona" name="nombre_persona" maxlength="50">
-    <small class="small" id="small-nombre"></small><br>
-
-    <br>
+    
     @if($mode=='create')
         <input type="button" id="next_datos" name="next" class="next btn btn-info" value="Siguiente"/>
     @else
