@@ -17,3 +17,92 @@
     </div>
   </div>
 </div>
+
+@push('js')
+  <script>
+    $("#apellido_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+
+    $("#nombre_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+
+    $("#dni_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+
+    $("#cargo_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+
+    function validarExisteDatosPersona()
+    {
+      let tipo_persona = @json($tipo_persona);
+      let mode = @json($mode);
+
+      console.log("#si pasa por ak tipo persona ="+tipo_persona+" mode = "+mode);
+      if($('#apellido_{{$tipo_persona}}_{{$mode}}').val()=='')
+      {
+      mostrarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El APELLIDO de la persona <strong>no</strong> puede quedar vacío.</div>');
+      if($("#dni_{{$tipo_persona}}_{{$mode}}").val()=='')
+      {
+          mostrarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El DNI de la persona <strong>no</strong> puede quedar vacío.</div>');
+          if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
+          {
+            ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-{{$mode}}');
+            ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-{{$mode}}');
+            ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}');
+            return true;
+          }
+          else
+          {
+            ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}');
+            return true;
+          }
+      }
+      else
+      {
+          
+          ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-{{$mode}}');
+          validarDni($('#dni_{{$tipo_persona}}_{{$mode}}'));
+          if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
+          {
+          mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</div>');
+          return false;
+          }
+          else
+          {
+          ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}');
+          return true;
+          }
+      }
+      }
+      else
+      {
+      ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-{{$mode}}');
+          if($("#dni_{{$tipo_persona}}_{{$mode}}").val()=='')
+          {
+              mostrarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El DNI de la persona <strong>no</strong> puede quedar vacío.</div>');
+              if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
+              {
+              mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</div>');
+              return false;
+              }
+              else
+              {
+              ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}');
+              return true;
+              }
+          }
+          else
+          {
+              ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-{{$mode}}');
+              validarDni($('#dni_{{$tipo_persona}}_{{$mode}}'));
+              if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
+              {
+              mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</div>');
+              return false;
+              }
+              else
+              {
+              ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}');
+              return true;
+              }
+          }
+      }
+    }
+  </script>
+@endpush
