@@ -271,36 +271,36 @@
                 tipo_persona = 'miembro de órgano de dirección y administración de firma';
                 if($('#cargo_{{$tipo_persona}}_{{$mode}}').val()=='')
                 {
-                    mostrarError('#cargo_{{$tipo_persona}}_{{$mode}}', '#small-cargo-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El CARGO del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
+                    mostrarError('#cargo_{{$tipo_persona}}_{{$mode}}', '#small-cargo-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El CARGO del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                     mostrarError('#cargo_{{$tipo_persona}}_{{$mode}}', '#small-cargo-{{$tipo_persona}}-head', '<div class="alert alert-danger mt-3 pt-1">El CARGO del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                 }
                 else
                 {
-                    ocultarError('#cargo_{{$tipo_persona}}_{{$mode}}', '#small-cargo-{{$tipo_persona}}');
+                    ocultarError('#cargo_{{$tipo_persona}}_{{$mode}}', '#small-cargo-{{$tipo_persona}}-{{$mode}}');
                     ocultarError('#cargo_{{$tipo_persona}}_{{$mode}}', '#small-cargo-{{$tipo_persona}}-head');
                 }
             }
             if($('#apellido_{{$tipo_persona}}_{{$mode}}').val()=='')
             {
-            mostrarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El APELLIDO del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
+            mostrarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El APELLIDO del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
             mostrarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-head', '<div class="alert alert-danger mt-3 pt-1">El APELLIDO del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
             if($("#dni_{{$tipo_persona}}_{{$mode}}").val()=='')
             {
-                mostrarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El DNI del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
+                mostrarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El DNI del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                 mostrarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-head', '<div class="alert alert-danger mt-3 pt-1">El DNI del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                 if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
                 {
-                ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}');
+                ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-{{$mode}}');
                 ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-head');
-                ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}');
+                ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-{{$mode}}');
                 ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-head');
-                ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}');
+                ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}');
                 ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-head');
                 return true;
                 }
                 else
                 {
-                ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}');
+                ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}');
                 ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-head');
                 return true;
                 }
@@ -308,18 +308,18 @@
             else
             {
                 
-                ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}');
+                ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-{{$mode}}');
                 ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-head');
                 validarDni($(this));
                 if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
                 {
-                mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
+                mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                 mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-head', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                 return false;
                 }
                 else
                 {
-                ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}');
+                ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}');
                 ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-head');
                 return true;
                 }
@@ -327,39 +327,39 @@
             }
             else
             {
-            ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}');
+            ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-{{$mode}}');
             ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-head');
                 if($("#dni_{{$tipo_persona}}_{{$mode}}").val()=='')
                 {
-                    mostrarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El DNI del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
+                    mostrarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El DNI del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                     mostrarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-head', '<div class="alert alert-danger mt-3 pt-1">El DNI del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                     if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
                     {
-                    mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
+                    mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                     mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-head', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                     return false;
                     }
                     else
                     {
-                    ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}');
+                    ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}');
                     ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-head');
                     return true;
                     }
                 }
                 else
                 {
-                    ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}');
+                    ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-{{$mode}}');
                     ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-head');
                     validarDni($(this));
                     if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
                     {
-                    mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
+                    mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                     mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-head', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
                     return false;
                     }
                     else
                     {
-                    ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}');
+                    ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-{{$mode}}');
                     ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-head');
                     return true;
                     }
@@ -370,6 +370,7 @@
         function validarDni(dni)
         {
             let tipo_persona = dni.data('tipo-persona');
+            console.log("pasa por ak con tipo persona="+tipo_persona);
             let mode = dni.data('mode');
             if(dni.val() != "")
             {   
@@ -380,13 +381,13 @@
                         {
                             if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
                             {
-                                mostrarError('#dni_miembro_create', '#small-dni-miembro', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                mostrarError('#dni_miembro_create', '#small-dni-miembro-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                 mostrarError('#dni_miembro_create', '#small-dni-miembro-head', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                 return false;
                             }  
                             else
                             {
-                                ocultarError('#dni_miembro_create', '#small-dni-miembro');
+                                ocultarError('#dni_miembro_create', '#small-dni-miembro-create');
                                 ocultarError('#dni_miembro_create', '#small-dni-miembro-head');
 
                                 return true;
@@ -397,13 +398,13 @@
                             {
                                 if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
                                 {
-                                    mostrarError('#dni_miembro_edit', '#small-dni-miembro', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                    mostrarError('#dni_miembro_edit', '#small-dni-miembro-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                     mostrarError('#dni_miembro_edit', '#small-dni-miembro-head', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                     return false;
                                 }  
                                 else
                                 {
-                                    ocultarError('#dni_miembro_edit', '#small-dni-miembro');
+                                    ocultarError('#dni_miembro_edit', '#small-dni-miembro-edit');
                                     ocultarError('#dni_miembro_edit', '#small-dni-miembro-head');
 
                                     return true;
@@ -416,13 +417,13 @@
                         {
                             if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
                             {
-                                mostrarError('#dni_direccion_firma_create', '#small-dni-direccion_firma', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                mostrarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                 mostrarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-head', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                 return false;
                             }  
                             else
                             {
-                                ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma');
+                                ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-create');
                                 ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-head');
 
                                 return true;
@@ -433,13 +434,13 @@
                             {
                                 if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
                                 {
-                                    mostrarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                    mostrarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                     mostrarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-head', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                     return false;
                                 }  
                                 else
                                 {
-                                    ocultarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma');
+                                    ocultarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-edit');
                                     ocultarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-head');
 
                                     return true;
@@ -451,13 +452,13 @@
                         {
                             if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
                             {
-                                mostrarError('#dni_apoderado_create', '#small-dni-apoderado', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                mostrarError('#dni_apoderado_create', '#small-dni-apoderado-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                 mostrarError('#dni_apoderado_create', '#small-dni-apoderado-head', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                 return false;
                             }  
                             else
                             {
-                                ocultarError('#dni_apoderado_create', '#small-dni-apoderado');
+                                ocultarError('#dni_apoderado_create', '#small-dni-apoderado-create');
                                 ocultarError('#dni_apoderado_create', '#small-dni-apoderado-head');
 
                                 return true;
@@ -468,14 +469,45 @@
                             {
                                 if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
                                 {
-                                    mostrarError('#dni_apoderado_edit', '#small-dni-apoderado', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                    mostrarError('#dni_apoderado_edit', '#small-dni-apoderado-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                     mostrarError('#dni_apoderado_edit', '#small-dni-apoderado-head', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                     return false;
                                 }  
                                 else
                                 {
-                                    ocultarError('#dni_apoderado_edit', '#small-dni-apoderado');
+                                    ocultarError('#dni_apoderado_edit', '#small-dni-apoderado-edit');
                                     ocultarError('#dni_apoderado_edit', '#small-dni-apoderado-head');
+
+                                    return true;
+                                }
+                            }
+                    break;
+                    case 'x':
+                        if(mode=='create')
+                        {
+                            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                            {
+                                mostrarError('#dni_x_create', '#small-dni-x-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de la persona </strong> tiene un formato incorrecto.</div>');
+                                return false;
+                            }  
+                            else
+                            {
+                                ocultarError('#dni_x_create', '#small-dni-x-create');
+
+                                return true;
+                            }
+                        }
+                        else
+                            if(mode=='edit')
+                            {
+                                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                                {
+                                    mostrarError('#dni_x_edit', '#small-dni-x-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de la persona </strong> tiene un formato incorrecto.</div>');
+                                    return false;
+                                }  
+                                else
+                                {
+                                    ocultarError('#dni_x_edit', '#small-dni-x-edit');
 
                                     return true;
                                 }

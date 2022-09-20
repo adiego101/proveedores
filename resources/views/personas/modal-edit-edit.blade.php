@@ -17,3 +17,16 @@
     </div>
   </div>
 </div>
+
+@push('js')
+  <script>
+    $("#apellido_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+
+    $("#nombre_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+
+    $("#dni_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+
+    $("#cargo_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+
+  </script>
+@endpush

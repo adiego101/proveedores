@@ -148,11 +148,11 @@
                                 console.log("entra por miembro create");
                                 $("#apellido_miembro_create").val(ui.item.apellido_persona);
                                 $("#nombre_miembro_create").val(ui.item.nombre_persona);
-                                ocultarError('#dni_miembro_create', '#small-dni-miembro');
+                                ocultarError('#dni_miembro_create', '#small-dni-miembro-create');
                                 ocultarError('#dni_miembro_create', '#small-dni-miembro-head');
-                                ocultarError('#apellido_miembro_create', '#small-apellido-miembro');
+                                ocultarError('#apellido_miembro_create', '#small-apellido-miembro-create');
                                 ocultarError('#apellido_miembro_create', '#small-apellido-miembro-head');
-                                ocultarError('#nombre_miembro_create', '#small-nombre-miembro');
+                                ocultarError('#nombre_miembro_create', '#small-nombre-miembro-create');
                                 ocultarError('#nombre_miembro_create', '#small-nombre-miembro-head');
                             }
                             else
@@ -161,11 +161,11 @@
                                     console.log("entra por miembro create");
                                     $("#apellido_miembro_edit").val(ui.item.apellido_persona);
                                     $("#nombre_miembro_edit").val(ui.item.nombre_persona);
-                                    ocultarError('#dni_miembro_edit', '#small-dni-miembro');
+                                    ocultarError('#dni_miembro_edit', '#small-dni-miembro-edit');
                                     ocultarError('#dni_miembro_edit', '#small-dni-miembro-head');
-                                    ocultarError('#apellido_miembro_edit', '#small-apellido-miembro');
+                                    ocultarError('#apellido_miembro_edit', '#small-apellido-miembro-edit');
                                     ocultarError('#apellido_miembro_edit', '#small-apellido-miembro-head');
-                                    ocultarError('#nombre_miembro_edit', '#small-nombre-miembro');
+                                    ocultarError('#nombre_miembro_edit', '#small-nombre-miembro-edit');
                                     ocultarError('#nombre_miembro_edit', '#small-nombre-miembro-head');
                                 }
                         break;
@@ -175,11 +175,11 @@
                                 console.log("entra por direccion firma create");
                                 $("#apellido_direccion_firma_create").val(ui.item.apellido_persona);
                                 $("#nombre_direccion_firma_create").val(ui.item.nombre_persona);
-                                ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma');
+                                ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-create');
                                 ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-head');
-                                ocultarError('#apellido_direccion_firma_create', '#small-apellido-direccion_firma');
+                                ocultarError('#apellido_direccion_firma_create', '#small-apellido-direccion_firma-create');
                                 ocultarError('#apellido_direccion_firma_create', '#small-apellido-direccion_firma-head');
-                                ocultarError('#nombre_direccion_firma_create', '#small-nombre-direccion_firma');
+                                ocultarError('#nombre_direccion_firma_create', '#small-nombre-direccion_firma-create');
                                 ocultarError('#nombre_direccion_firma_create', '#small-nombre-direccion_firma-head');
                             }
                             else
@@ -188,11 +188,11 @@
                                     console.log("entra por direccion firma edit");
                                     $("#apellido_direccion_firma_edit").val(ui.item.apellido_persona);
                                     $("#nombre_direccion_firma_edit").val(ui.item.nombre_persona);
-                                    ocultarError('#dni-direccion_firma_edit', '#small-dni-direccion_firma');
+                                    ocultarError('#dni-direccion_firma_edit', '#small-dni-direccion_firma-edit');
                                     ocultarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-head');
-                                    ocultarError('#apellido_direccion_firma_edit', '#small-apellido-direccion_firma');
+                                    ocultarError('#apellido_direccion_firma_edit', '#small-apellido-direccion_firma-edit');
                                     ocultarError('#apellido_direccion_firma_edit', '#small-apellido-direccion_firma-head');
-                                    ocultarError('#nombre_direccion_firma_edit', '#small-nombre-direccion_firma');
+                                    ocultarError('#nombre_direccion_firma_edit', '#small-nombre-direccion_firma-edit');
                                     ocultarError('#nombre_direccion_firma_edit', '#small-nombre-direccion_firma-head');
                                 }
                         break;
@@ -202,11 +202,11 @@
                                 console.log("entra por apoderado create");
                                 $("#apellido_apoderado_create").val(ui.item.apellido_persona);
                                 $("#nombre_apoderado_create").val(ui.item.nombre_persona);
-                                ocultarError('#dni_apoderado_create', '#small-dni-apoderado');
+                                ocultarError('#dni_apoderado_create', '#small-dni-apoderado-create');
                                 ocultarError('#dni_apoderado_create', '#small-dni-apoderado-head');
-                                ocultarError('#apellido_apoderado_create', '#small-apellido-apoderado');
+                                ocultarError('#apellido_apoderado_create', '#small-apellido-apoderado-create');
                                 ocultarError('#apellido_apoderado_create', '#small-apellido-apoderado-head');
-                                ocultarError('#nombre_apoderado_create', '#small-nombre-apoderado');
+                                ocultarError('#nombre_apoderado_create', '#small-nombre-apoderado-create');
                                 ocultarError('#nombre_apoderado_create', '#small-nombre-apoderado-head');
                             }
                             else
@@ -215,11 +215,11 @@
                                     console.log("entra por direccion firma edit");
                                     $("#apellido_direccion_firma_edit").val(ui.item.apellido_persona);
                                     $("#nombre_direccion_firma_edit").val(ui.item.nombre_persona);
-                                    ocultarError('#dni_apoderado_edit', '#small-dni-apoderado');
+                                    ocultarError('#dni_apoderado_edit', '#small-dni-apoderado-edit');
                                     ocultarError('#dni_apoderado_edit', '#small-dni-apoderado-head');
-                                    ocultarError('#apellido_apoderado_edit', '#small-apellido-apoderado');
+                                    ocultarError('#apellido_apoderado_edit', '#small-apellido-apoderado-edit');
                                     ocultarError('#apellido_apoderado_edit', '#small-apellido-apoderado-head');
-                                    ocultarError('#nombre_apoderado_edit', '#small-nombre-apoderado');
+                                    ocultarError('#nombre_apoderado_edit', '#small-nombre-apoderado-edit');
                                     ocultarError('#nombre_apoderado_edit', '#small-nombre-apoderado-head');
                                 }
                         break;
@@ -445,6 +445,10 @@
             $("#nombre_x_edit").css('border','1px solid #DFDFDF');
             $("#dni_x_edit").css('border','1px solid #DFDFDF');
             $("#cargo_x_edit").css('border','1px solid #DFDFDF');
+            ocultarError('#dni_x_edit', '#small-dni-x');
+            ocultarError('#apellido_x_edit', '#small-apellido-x');
+            ocultarError('#nombre_x_edit', '#small-nombre-x');
+            ocultarError('#cargo_x_edit', '#small-cargo-x');
             $("#div_cargo_x_edit").hide();
         });
 
@@ -454,6 +458,10 @@
             $("#nombre_x_edit").css('border','1px solid #DFDFDF');
             $("#dni_x_edit").css('border','1px solid #DFDFDF');
             $("#cargo_x_edit").css('border','1px solid #DFDFDF');
+            ocultarError('#dni_x_edit', '#small-dni-x');
+            ocultarError('#apellido_x_edit', '#small-apellido-x');
+            ocultarError('#nombre_x_edit', '#small-nombre-x');
+            ocultarError('#cargo_x_edit', '#small-cargo-x');
             $("#div_cargo_x_edit").hide();
         });
 

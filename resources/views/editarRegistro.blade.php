@@ -164,7 +164,9 @@
                         $("#dni_x_create").css('border','1px solid #DFDFDF');
                         $("#apellido_x_create").css('border','1px solid #DFDFDF');
                         $("#nombre_x_create").css('border','1px solid #DFDFDF');
-                        ocultarError('#dni_x_create', '#small-dni-x');
+                        ocultarError('#dni_x_create', '#small-dni-x-create');
+                        ocultarError('#apellido_x_create', '#small-apellido-x-create');
+                        ocultarError('#nombre_x_create', '#small-nombre-x-create');
                     }
                     else
                     {
@@ -174,7 +176,9 @@
                         $("#dni_x_edit").css('border','1px solid #DFDFDF');
                         $("#apellido_x_edit").css('border','1px solid #DFDFDF');
                         $("#nombre_x_edit").css('border','1px solid #DFDFDF');
-                        ocultarError('#dni_x_edit', '#small-dni-x');
+                        ocultarError('#dni_x_edit', '#small-dni-x-edit');
+                        ocultarError('#apellido_x_edit', '#small-apellido-x-edit');
+                        ocultarError('#nombre_x_edit', '#small-nombre-x-edit');
                     }
                 }
             } );
@@ -575,7 +579,7 @@
             $(document).on("click", ".btn_cancel_modal", function(event) {
 
                 //Obtenemos los campos obligatorios para aplicarles estilos css
-                borrarDatosModal;
+                borrarDatosModal();
             });
 
             $('#add_persona').on('hidden.bs.modal', function (event) {
@@ -592,10 +596,14 @@
         });
 
         function borrarDatosModal(){
-            $("#apellido_x_create").val('border','1px solid #DFDFDF');
+            $("#apellido_x_create").css('border','1px solid #DFDFDF');
             $("#nombre_x_create").css('border','1px solid #DFDFDF');
             $("#dni_x_create").css('border','1px solid #DFDFDF');
             $("#cargo_x_create").css('border','1px solid #DFDFDF');
+            ocultarError('#dni_x_create', '#small-dni-x-create');
+            ocultarError('#apellido_x_create', '#small-apellido-x-create');
+            ocultarError('#nombre_x_create', '#small-nombre-x-create');
+            ocultarError('#cargo_x_create', '#small-cargo-x-create');
             $("#apellido_x_create").val('');
             $("#nombre_x_create").val('');
             $("#dni_x_create").val('');
@@ -605,6 +613,10 @@
             $("#nombre_x_edit").css('border','1px solid #DFDFDF');
             $("#dni_x_edit").css('border','1px solid #DFDFDF');
             $("#cargo_x_edit").css('border','1px solid #DFDFDF');
+            ocultarError('#dni_x_edit', '#small-dni-x-edit');
+            ocultarError('#apellido_x_edit', '#small-apellido-x-edit');
+            ocultarError('#nombre_x_edit', '#small-nombre-x-edit');
+            ocultarError('#cargo_x_edit', '#small-cargo-x-edit');
             $("#apellido_x_edit").val('');
             $("#nombre_x_edit").val('');
             $("#dni_x_edit").val('');
@@ -705,20 +717,138 @@
 
         function validarDni(dni)
         {
+            let tipo_persona = dni.data('tipo-persona');
+            console.log("pasa por ak con tipo persona="+tipo_persona);
+            let mode = dni.data('mode');
             if(dni.val() != "")
-            {
-                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+            {   
+                switch(tipo_persona)
                 {
-                    mostrarError('#'.concat(dni.attr('id')), '#small-dni-x', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> tiene un formato incorrecto.</div>');
-                    //mostrarError('#dni_legal', '#small-dni2', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> tiene un formato incorrecto.</div>');
-                    return false;
-                }  
-                else
-                {
-                    ocultarError('#'.concat(dni.attr('id')), '#small-dni-x');
-                    //ocultarError('#dni_legal', '#small-dni2');
+                    case 'miembro':
+                        if(mode=='create')
+                        {
+                            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                            {
+                                mostrarError('#dni_miembro_create', '#small-dni-miembro-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                return false;
+                            }  
+                            else
+                            {
+                                ocultarError('#dni_miembro_create', '#small-dni-miembro-create');
 
-                    return true;
+                                return true;
+                            }
+                        }
+                        else
+                            if(mode=='edit')
+                            {
+                                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                                {
+                                    mostrarError('#dni_miembro_edit', '#small-dni-miembro-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                    return false;
+                                }  
+                                else
+                                {
+                                    ocultarError('#dni_miembro_edit', '#small-dni-miembro-edit');
+
+                                    return true;
+                                }
+                            }
+                    break;
+                    case 'direccion_firma':
+                        tipo_persona = 'miembro de órgano de dirección y administración de firma';
+                        if(mode=='create')
+                        {
+                            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                            {
+                                mostrarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                return false;
+                            }  
+                            else
+                            {
+                                ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-create');
+
+                                return true;
+                            }
+                        }
+                        else
+                            if(mode=='edit')
+                            {
+                                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                                {
+                                    mostrarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                    return false;
+                                }  
+                                else
+                                {
+                                    ocultarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-edit');
+
+                                    return true;
+                                }
+                            }
+                    break;
+                    case 'apoderado':
+                        if(mode=='create')
+                        {
+                            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                            {
+                                mostrarError('#dni_apoderado_create', '#small-dni-apoderado-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                return false;
+                            }  
+                            else
+                            {
+                                ocultarError('#dni_apoderado_create', '#small-dni-apoderado-create');
+
+                                return true;
+                            }
+                        }
+                        else
+                            if(mode=='edit')
+                            {
+                                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                                {
+                                    mostrarError('#dni_apoderado_edit', '#small-dni-apoderado-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                    return false;
+                                }  
+                                else
+                                {
+                                    ocultarError('#dni_apoderado_edit', '#small-dni-apoderado-edit');
+
+                                    return true;
+                                }
+                            }
+                    break;
+                    case 'x':
+                        if(mode=='create')
+                        {
+                            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                            {
+                                mostrarError('#dni_x_create', '#small-dni-x-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de la persona </strong> tiene un formato incorrecto.</div>');
+                                return false;
+                            }  
+                            else
+                            {
+                                ocultarError('#dni_x_create', '#small-dni-x-create');
+
+                                return true;
+                            }
+                        }
+                        else
+                            if(mode=='edit')
+                            {
+                                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                                {
+                                    mostrarError('#dni_x_edit', '#small-dni-x-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de la persona </strong> tiene un formato incorrecto.</div>');
+                                    return false;
+                                }  
+                                else
+                                {
+                                    ocultarError('#dni_x_edit', '#small-dni-x-edit');
+
+                                    return true;
+                                }
+                            }
+                    break;
                 }
             }
             else
