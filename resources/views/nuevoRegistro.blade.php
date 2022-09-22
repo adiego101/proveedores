@@ -536,19 +536,6 @@
         }
         }
 
-        
-
-        
-
-        function mostrarError(campo, error, msg) {
-            $(campo).addClass('is-invalid');
-            $(error).html(msg);
-            $(error).show();
-        }
-        function ocultarError(campo, error) {
-            $(campo).removeClass('is-invalid');
-            $(error).hide();
-        }
 
     function recargarListaDomicilio(provincia_selected, select_localidad){
         $.ajax({
