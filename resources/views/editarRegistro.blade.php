@@ -729,7 +729,7 @@
                         {
                             if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
                             {
-                                mostrarError('#dni_miembro_create', '#small-dni-miembro-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                mostrarError('#dni_miembro_create', '#small-dni-miembro-create', '<div class="invalid-feedback">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
                                 return false;
                             }  
                             else
@@ -823,7 +823,7 @@
                         {
                             if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
                             {
-                                mostrarError('#dni_x_create', '#small-dni-x-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de la persona </strong> tiene un formato incorrecto.</div>');
+                                mostrarError('#dni_x_create', '#small-dni-x-create', 'El <strong>número de DNI de la persona </strong> tiene un formato incorrecto.');
                                 return false;
                             }  
                             else
@@ -838,7 +838,7 @@
                             {
                                 if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
                                 {
-                                    mostrarError('#dni_x_edit', '#small-dni-x-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de la persona </strong> tiene un formato incorrecto.</div>');
+                                    mostrarError('#dni_x_edit', '#small-dni-x-edit', '<div class="invalid-feedback">El <strong>número de DNI de la persona </strong> tiene un formato incorrecto.</div>');
                                     return false;
                                 }  
                                 else

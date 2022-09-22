@@ -24,7 +24,7 @@
 
     $("#nombre_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
 
-    $("#dni_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+    $("#dni_{{$tipo_persona}}_{{$mode}}").change(validarExisteDatosPersona);
 
     $("#cargo_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
 

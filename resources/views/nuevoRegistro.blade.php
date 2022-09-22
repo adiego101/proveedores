@@ -16,6 +16,9 @@
                 current_step.hide();
                 setProgressBar(++current);
                 $(window).scrollTop(0);
+                let tipo_persona = $(this).data('tipo-persona');
+                if(tipo_persona)
+                    borrarAdvertenciasPersona(tipo_persona);
             });
             $(".previous").click(function() {
                 current_step = $(this).parent();
@@ -24,7 +27,11 @@
                 current_step.hide();
                 setProgressBar(--current);
                 $(window).scrollTop(0);
+                let tipo_persona = $(this).data('tipo-persona');
+                if(tipo_persona)
+                    borrarAdvertenciasPersona(tipo_persona);
             });
+
             setProgressBar(current);
             // Change progress bar action
             function setProgressBar(curStep) {
@@ -36,6 +43,29 @@
             }
         });
 
+        function borrarAdvertenciasPersona(tipo_persona)
+        {
+            if(tipo_persona != 'direccion_firma')
+            {
+                if($('#dni_'+tipo_persona+'_create').val()=='' && $('#apellido_'+tipo_persona+'_create').val()=='' && $('#nombre_'+tipo_persona+'_create').val()=='')
+                {    
+                    ocultarError('#dni_'+tipo_persona+'_create', '#small-dni-'+tipo_persona+'-head');
+                    ocultarError('#apellido_'+tipo_persona+'_create', '#small-apellido-'+tipo_persona+'-head');
+                    ocultarError('#nombre_'+tipo_persona+'_create', '#small-nombre-'+tipo_persona+'-head');
+                }
+            }
+            else
+            {
+                if($('#dni_'+tipo_persona+'_create').val()=='' && $('#apellido_'+tipo_persona+'_create').val()=='' && $('#nombre_'+tipo_persona+'_create').val()=='' && $('#cargo_'+tipo_persona+'_create').val()=='')
+                {    
+                    ocultarError('#dni_'+tipo_persona+'_create', '#small-dni-'+tipo_persona+'-head');
+                    ocultarError('#apellido_'+tipo_persona+'_create', '#small-apellido-'+tipo_persona+'-head');
+                    ocultarError('#nombre_'+tipo_persona+'_create', '#small-nombre-'+tipo_persona+'-head');
+                    ocultarError('#cargo_'+tipo_persona+'_create', '#small-cargo-'+tipo_persona+'-head');
+                }
+            }
+        }
+
     </script>
 
 
@@ -44,6 +74,17 @@
         #regiration_form fieldset:not(:first-of-type) {
             display: none;
         }
+
+        $form-validation-states: (
+            "valid": (
+                "color": $form-feedback-valid-color,
+                "icon": $form-feedback-icon-valid
+            ),
+            "invalid": (
+                "color": $form-feedback-invalid-color,
+                "icon": $form-feedback-icon-invalid
+            )
+        );
 
     </style>
 
@@ -311,53 +352,41 @@
             var tipo_persona = $(this).data('tipo-persona');
             var id_filapersona = $("#numero_fila_persona").val();
 
-            //Recuperamos los valores de los campos del modal
-            var apellido_persona = $("#apellido_x_edit").val();
-            var nombre_persona = $("#nombre_x_edit").val();
-            var dni_persona = $("#dni_x_edit").val();
-            var cargo_persona='';
-            if(tipo_persona =='direccion_firma')
-                cargo_persona = $('#cargo_x_edit').val();
+            
 
             //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
-            if(apellido_persona != '' && nombre_persona != '' && dni_persona != '')
+            if(validarExisteDatosPersonaModal('edit', $("#dni_x_edit"), $("#apellido_x_edit"), $("#nombre_x_edit"), $("#cargo_x_edit")))
             {
+                //Recuperamos los valores de los campos del modal
+                var apellido_persona = $("#apellido_x_edit").val();
+                var nombre_persona = $("#nombre_x_edit").val();
+                var dni_persona = $("#dni_x_edit").val();
+                var cargo_persona='';
+                if(tipo_persona =='direccion_firma')
+                    cargo_persona = $('#cargo_x_edit').val();
                 if(tipo_persona=='direccion_firma')
                 {
-                    if(cargo_persona!='')
-                    {
-                        $('#edit_persona').modal('hide');
-                        //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                        
-                        $('#nombre_persona_direccion_firma' + id_filapersona).val(nombre_persona);
-                        $('#dni_persona_direccion_firma' + id_filapersona).val(dni_persona);
-                        $('#cargo_persona_direccion_firma' + id_filapersona).val(cargo_persona);
+                    $('#edit_persona').modal('hide');
+                    //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
+                    
+                    $('#nombre_persona_direccion_firma' + id_filapersona).val(nombre_persona);
+                    $('#dni_persona_direccion_firma' + id_filapersona).val(dni_persona);
+                    $('#cargo_persona_direccion_firma' + id_filapersona).val(cargo_persona);
 
-                        //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
-                        $('#apellido_persona_text_direccion_firma' + id_filapersona).text(apellido_persona);
-                        $('#nombre_persona_text_direccion_firma' + id_filapersona).text(nombre_persona);
-                        $('#dni_persona_text_direccion_firma' + id_filapersona).text(dni_persona);
-                        $('#cargo_persona_text_direccion_firma' + id_filapersona).text(cargo_persona);
+                    //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+                    $('#apellido_persona_text_direccion_firma' + id_filapersona).text(apellido_persona);
+                    $('#nombre_persona_text_direccion_firma' + id_filapersona).text(nombre_persona);
+                    $('#dni_persona_text_direccion_firma' + id_filapersona).text(dni_persona);
+                    $('#cargo_persona_text_direccion_firma' + id_filapersona).text(cargo_persona);
 
-                        $("#apellido_x_edit").css('border','1px solid #DFDFDF');
-                        $("#nombre_x_edit").css('border','1px solid #DFDFDF');
-                        $("#dni_x_edit").css('border','1px solid #DFDFDF');
-                        $("#cargo_x_edit").css('border','1px solid #DFDFDF');
-
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Persona Modificada',
-                            showConfirmButton: false,
-                            timer: 1500,
-                            toast: true
-                        });
-                    }
-                    else
-                    {
-                        event.preventDefault();
-                        $("#cargo_x_edit").css('border','2px dashed red');
-                    }
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Persona Modificada',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        toast: true
+                    });
                 }
                 else
                 {
@@ -378,10 +407,6 @@
                             $('#apellido_persona_text_miembro' + id_filapersona).text(apellido_persona);
                             $('#nombre_persona_text_miembro' + id_filapersona).text(nombre_persona);
                             $('#dni_persona_text_miembro' + id_filapersona).text(dni_persona);
-
-                            $("#apellido_x_edit").css('border','1px solid #DFDFDF');
-                            $("#nombre_x_edit").css('border','1px solid #DFDFDF');
-                            $("#dni_x_edit").css('border','1px solid #DFDFDF');
 
                             Swal.fire({
                                 position: 'top-end',
@@ -406,10 +431,6 @@
                             $('#nombre_persona_text_apoderado' + id_filapersona).text(nombre_persona);
                             $('#dni_persona_text_apoderado' + id_filapersona).text(dni_persona);
 
-                            $("#apellido_x_edit").css('border','1px solid #DFDFDF');
-                            $("#nombre_x_edit").css('border','1px solid #DFDFDF');
-                            $("#dni_x_edit").css('border','1px solid #DFDFDF');
-
                             Swal.fire({
                                 position: 'top-end',
                                 icon: 'success',
@@ -427,41 +448,24 @@
             {
                 //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
                 event.preventDefault();
-                if(apellido_persona == '')
-                    $("#apellido_x_edit").css('border','2px dashed red');
-                if(nombre_persona == '')
-                    $("#nombre_x_edit").css('border','2px dashed red');
-                if(dni_persona == '')
-                    $("#dni_x_edit").css('border','2px dashed red');
             }
         });
 
 
 
         $(document).on("click", ".btn_cancel_modal", function(event) {
-
-            //Obtenemos los campos obligatorios para aplicarles estilos css
-            $("#apellido_x_edit").css('border','1px solid #DFDFDF');
-            $("#nombre_x_edit").css('border','1px solid #DFDFDF');
-            $("#dni_x_edit").css('border','1px solid #DFDFDF');
-            $("#cargo_x_edit").css('border','1px solid #DFDFDF');
-            ocultarError('#dni_x_edit', '#small-dni-x');
-            ocultarError('#apellido_x_edit', '#small-apellido-x');
-            ocultarError('#nombre_x_edit', '#small-nombre-x');
-            ocultarError('#cargo_x_edit', '#small-cargo-x');
+            ocultarError($('#dni_x_edit'), '#small-dni-x-edit');
+            ocultarError($('#apellido_x_edit'), '#small-apellido-x-edit');
+            ocultarError($('#nombre_x_edit'), '#small-nombre-x-edit');
+            ocultarError($('#cargo_x_edit'), '#small-cargo-x-edit');
             $("#div_cargo_x_edit").hide();
         });
 
         $('#edit_persona').on('hidden.bs.modal', function (event) {
-            //Obtenemos los campos obligatorios para aplicarles estilos css
-            $("#apellido_x_edit").css('border','1px solid #DFDFDF');
-            $("#nombre_x_edit").css('border','1px solid #DFDFDF');
-            $("#dni_x_edit").css('border','1px solid #DFDFDF');
-            $("#cargo_x_edit").css('border','1px solid #DFDFDF');
-            ocultarError('#dni_x_edit', '#small-dni-x');
-            ocultarError('#apellido_x_edit', '#small-apellido-x');
-            ocultarError('#nombre_x_edit', '#small-nombre-x');
-            ocultarError('#cargo_x_edit', '#small-cargo-x');
+            ocultarError($('#dni_x_edit'), '#small-dni-x-edit');
+            ocultarError($('#apellido_x_edit'), '#small-apellido-x-edit');
+            ocultarError($('#nombre_x_edit'), '#small-nombre-x-edit');
+            ocultarError($('#cargo_x_edit'), '#small-cargo-x-edit');
             $("#div_cargo_x_edit").hide();
         });
 

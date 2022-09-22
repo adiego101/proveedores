@@ -21,95 +21,24 @@
 
 @push('js')
   <script>
-    $("#apellido_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
-
-    $("#nombre_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
-
-    $("#dni_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
-
-    $("#cargo_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
-
-    function validarExisteDatosPersona()
-    {
-      if($('#apellido_{{$tipo_persona}}_{{$mode}}').val()=='')
-      {
-      mostrarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El APELLIDO de la persona <strong>no</strong> puede quedar vacío.</div>');
-      if($("#dni_{{$tipo_persona}}_{{$mode}}").val()=='')
-      {
-          mostrarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El DNI de la persona <strong>no</strong> puede quedar vacío.</div>');
-          if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
-          {
-          ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}');
-          ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}');
-          ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}');
-          if($('#cargo_{{$tipo_persona}}_{{$mode}}').val()=='')
-            {
-                mostrarError('#cargo_{{$tipo_persona}}_{{$mode}}', '#small-cargo-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El CARGO de la persona <strong>no</strong> puede quedar vacío.</div>');
-            }
-            else
-            {
-                ocultarError('#cargo_{{$tipo_persona}}_{{$mode}}', '#small-cargo-{{$tipo_persona}}');
-                return true;
-            }
+    $(document).ready(function(){
+      $("#dni_x_{{$mode}}").change(function(){
+        if($(this).val()!='')
+            validarDniModal('{{$mode}}', $(this));
+      });
           
-          }
-          else
-          {
-          ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}');
-          return true;
-          }
-      }
-      else
-      {
-          
-          ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}');
-          validarDni($('#dni_{{$tipo_persona}}_{{$mode}}'));
-          if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
-          {
-          mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</div>');
-          return false;
-          }
-          else
-          {
-          ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}');
-          return true;
-          }
-      }
-      }
-      else
-      {
-      ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}');
-          if($("#dni_{{$tipo_persona}}_{{$mode}}").val()=='')
-          {
-              mostrarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El DNI de la persona <strong>no</strong> puede quedar vacío.</div>');
-              if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
-              {
-              mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</div>');
-              return false;
-              }
-              else
-              {
-              ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}');
-              return true;
-              }
-          }
-          else
-          {
-              ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}');
-              validarDni($('#dni_{{$tipo_persona}}_{{$mode}}'));
-              if($("#nombre_{{$tipo_persona}}_{{$mode}}").val()=='')
-              {
-              mostrarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</div>');
-              return false;
-              }
-              else
-              {
-              ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}');
-              return true;
-              }
-          }
-      }
-    }
+      $("#apellido_x_{{$mode}}").keyup(function(){
+          ocultarError($(this), '#small-apellido-x-{{$mode}}');
+      });
+
+      $("#nombre_x_edit").keyup(function(){
+          ocultarError($(this), '#small-nombre-x-{{$mode}}');
+      });
+
+      $("#cargo_x_edit").keyup(function(){
+          ocultarError($(this), '#small-cargo-x-{{$mode}}');
+      });
+    })
 
   </script>
 @endpush
