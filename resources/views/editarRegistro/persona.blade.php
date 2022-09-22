@@ -87,7 +87,15 @@
                     columns: [
                         {data: 'apellido_persona', name: 'apellido_persona'},
                         {data: 'nombre_persona', name: 'nombre_persona'},
-                        {data: 'dni_persona', name: 'dni_persona'},
+                        {   data: 'dni_persona', 
+                            name: 'dni_persona', 
+                            render: function (data)
+                            {
+                                return data.replace(/\D/g, "")
+                                            .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+                            }
+                        },
                         {
                             data: 'action',
                             name: 'action',
@@ -150,7 +158,7 @@
             $.ajax({
                 url: url,
                 success: function(response) {
-                    abrirModalverActividad(response);
+                    abrirModalverPersona(response);
                 }
             });
         }

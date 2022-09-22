@@ -121,7 +121,7 @@ class ProveedoresController extends Controller
 
 
             $cuit = Proveedor::where('cuit', str_replace("-","",$request->cuit))->exists();
-            $dado_de_baja = Proveedor::where('cuit', str_replace("-","",$request->cuit))->where('dado_de_baja', '0')->get();
+            //$dado_de_baja = Proveedor::where('cuit', str_replace("-","",$request->cuit))->where('dado_de_baja', '0')->get();
             //return $dado_de_baja->isEmpty();
             //return empty($dado_de_baja);
             //return $cuit;
@@ -279,12 +279,12 @@ class ProveedoresController extends Controller
                 $responsable_nombre = User::findOrFail(auth()->id())->name;
                 $responsable_email = User::findOrFail(auth()->id())->email;
 
-                DB::connection('mysql')
+                /*DB::connection('mysql')
                 ->table('eventos_log')->insert(['EL_Evento' => 'Se ha creado un nuevo registro con el cuit: ' . $request->cuit . '.',
                 'EL_Evento_Fecha' => Carbon::now(),
                 'EL_Id_Responsable' => $responsable_id,
                 'EL_Nombre_Responsable' => $responsable_nombre,
-                'EL_Email_Responsable' => $responsable_email]);
+                'EL_Email_Responsable' => $responsable_email]);*/
                 
                 //Fin de la transaccion
                 DB::commit();
@@ -1135,15 +1135,19 @@ class ProveedoresController extends Controller
             $dni_persona=htmlspecialchars(str_replace(".","",$request->dni));
             $nombre_persona=htmlspecialchars($request->nombre);
             $apellido_persona=htmlspecialchars($request->apellido);
+            
             if($dni_persona!='' && $nombre_persona!='' && $apellido_persona!='')
             {
                 if($persona->dni_persona==$dni_persona)
                 {
+                    Log::info("dni persona igual");
                     if($persona->nombre_persona != $nombre_persona)
                         $persona->update(['nombre_persona'=>$nombre_persona]);
                     if($persona->apellido_persona != $apellido_persona)
                         $persona->update(['apellido_persona'=>$apellido_persona]);
                 }
+                else
+                    Log::info("dni persona diferente");
             }
             
         }catch (\Exception$e) {
@@ -1492,7 +1496,7 @@ class ProveedoresController extends Controller
                 $representante=$proveedor->representante_actual[0];
                 Log::info('representante='.$representante);
             }
-            $proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $id)->get();
+            //$proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $id)->get();
 
             $actividades = Actividades_proveedores::where('id_proveedor', $id)->get();
 
@@ -1508,7 +1512,7 @@ class ProveedoresController extends Controller
 
             return view('editarRegistro', compact('tab', 'mode',
                 'paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'proveedor', 'representante',
-                'id', 'proveedores_tipos_proveedores', 'actividades', 'pagos')
+                'id', 'actividades', 'pagos')
             );
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());

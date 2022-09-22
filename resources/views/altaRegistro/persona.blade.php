@@ -299,30 +299,33 @@
                 }
                 else
                 {
-                    validarDni(dni);
-                    if(nombre.val()=='')
+                    if(validarDni(dni))
                     {
-                        mostrarError(nombre, '#small-nombre-'+tipo_persona+'-head', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
-                        if(tipo_persona == 'direccion_firma')
+                        if(nombre.val()=='')
                         {
-                            if(cargo.val()=='')
+                            mostrarError(nombre, '#small-nombre-'+tipo_persona+'-head', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
+                            if(tipo_persona == 'direccion_firma')
                             {
-                                mostrarError(cargo, '#small-cargo-'+tipo_persona+'-head', '<div class="alert alert-danger mt-3 pt-1">El CARGO del miembro de órgano de dirección y administración de firma <strong>no</strong> puede quedar vacío.</div>');
-                                return false;
+                                if(cargo.val()=='')
+                                {
+                                    mostrarError(cargo, '#small-cargo-'+tipo_persona+'-head', '<div class="alert alert-danger mt-3 pt-1">El CARGO del miembro de órgano de dirección y administración de firma <strong>no</strong> puede quedar vacío.</div>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    return false;
+                                }
                             }
                             else
-                            {
                                 return false;
-                            }
                         }
                         else
+                        {
+                            ocultarError(nombre, '#small-nombre-'+tipo_persona+'-head');
                             return false;
-                    }
+                        }
                     else
-                    {
-                        ocultarError(nombre, '#small-nombre-'+tipo_persona+'-head');
                         return false;
-                    }
                 }
             }
             else
@@ -358,49 +361,53 @@
                 }
                 else
                 {
-                    validarDni(dni);
-                    if(nombre.val()=='')
+                    if(validarDni(dni))
                     {
-                        mostrarError(nombre, '#small-nombre-'+tipo_persona+'-head', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
-                        if(tipo_persona == 'direccion_firma')
+                        if(nombre.val()=='')
                         {
-                            
-                            if(cargo.val()=='')
+                            mostrarError(nombre, '#small-nombre-'+tipo_persona+'-head', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del '+tipo_persona+' <strong>no</strong> puede quedar vacío.</div>');
+                            if(tipo_persona == 'direccion_firma')
                             {
-                                mostrarError(cargo, '#small-cargo-'+tipo_persona+'-head', '<div class="alert alert-danger mt-3 pt-1">El CARGO del miembro de órgano de dirección y administración de firma <strong>no</strong> puede quedar vacío.</div>');
-                                return false;
+                                
+                                if(cargo.val()=='')
+                                {
+                                    mostrarError(cargo, '#small-cargo-'+tipo_persona+'-head', '<div class="alert alert-danger mt-3 pt-1">El CARGO del miembro de órgano de dirección y administración de firma <strong>no</strong> puede quedar vacío.</div>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    ocultarError(cargo, '#small-cargo-'+tipo_persona+'-head');
+                                    return false;
+                                }
                             }
                             else
-                            {
-                                ocultarError(cargo, '#small-cargo-'+tipo_persona+'-head');
                                 return false;
-                            }
                         }
                         else
-                            return false;
+                        {
+                            if(tipo_persona == 'direccion_firma')
+                            {
+                                if(cargo.val()=='')
+                                {
+                                    mostrarError(cargo, '#small-cargo-'+tipo_persona+'-head', '<div class="alert alert-danger mt-3 pt-1">El CARGO del miembro de órgano de dirección y administración de firma <strong>no</strong> puede quedar vacío.</div>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    return true;
+                                }
+                            }
+                            else
+                                return true;
+                        }
                     }
                     else
-                    {
-                        if(tipo_persona == 'direccion_firma')
-                        {
-                            if(cargo.val()=='')
-                            {
-                                mostrarError(cargo, '#small-cargo-'+tipo_persona+'-head', '<div class="alert alert-danger mt-3 pt-1">El CARGO del miembro de órgano de dirección y administración de firma <strong>no</strong> puede quedar vacío.</div>');
-                                return false;
-                            }
-                            else
-                            {
-                                return true;
-                            }
-                        }
-                        else
-                            return true;
-                    }
+                        return false;
                 }
             }
         }
 
-        function validarExisteDatosPersonaModal(mode, dni, apellido, nombre, cargo)
+        function validarExisteDatosPersonaModal(tipo_persona, mode, dni, apellido, nombre, cargo)
         {   
             if(apellido.val()=='')
             {
@@ -411,13 +418,18 @@
                     if(nombre.val()=='')
                     {
                         mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
-                        if(cargo.val()=='')
+                        if(tipo_persona=='direccion_firma')
                         {
-                            mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
-                            return false;
+                            if(cargo.val()=='')
+                            {
+                                mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                return false;
+                            }
+                            else
+                                return false;
                         }
                         else
-                            return false;
+                            return true;
                     }
                     else
                     {
@@ -427,24 +439,32 @@
                 }
                 else
                 {
-                    validarDniModal('edit', dni);
-                    if(nombre.val()=='')
+                    if(validarDniModal(mode, dni))
                     {
-                        mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
-                        
-                        if(cargo.val()=='')
+                        if(nombre.val()=='')
                         {
-                            mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
-                            return false;
+                            mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
+                            if(tipo_persona=='direccion_firma')
+                            {
+                                if(cargo.val()=='')
+                                {
+                                    mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                    return false;
+                                }
+                                else
+                                    return false;
+                            }
+                            else
+                                return true;
                         }
                         else
-                            return false;
+                            {
+                                ocultarError(nombre, '#small-nombre-x-'+mode);
+                                return false;
+                            }
                     }
                     else
-                    {
-                        ocultarError(nombre, '#small-nombre-x-'+mode);
                         return false;
-                    }
                 }
             }
             else
@@ -455,16 +475,21 @@
                     if(nombre.val()=='')
                     {
                         mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
-                        if(cargo.val()=='')
+                        if(tipo_persona=='direccion_firma')
                         {
-                            mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
-                            return false;
+                            if(cargo.val()=='')
+                            {
+                                mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                return false;
+                            }
+                            else
+                            {
+                                ocultarError(cargo, '#small-cargo-x-'+mode);
+                                return false;
+                            }
                         }
                         else
-                        {
-                            ocultarError(cargo, '#small-cargo-x-'+mode);
-                            return false;
-                        }
+                            return true;
                     }
                     else
                     {
@@ -474,35 +499,44 @@
                 }
                 else
                 {
-                    validarDniModal('edit', dni);
-                    if(nombre.val()=='')
+                    if(validarDniModal(mode, dni))
                     {
-                        mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
-                        if(cargo.val()=='')
-                        {
-                            mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
-                            return false;
-                        }
+                        console.log("pasa por ak?");
+                        if(nombre.val()=='')
+                            {
+                                mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                if(cargo.val()=='')
+                                {
+                                    mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    ocultarError(cargo, '#small-cargo-x-'+mode);
+                                    return false;
+                                }
+                            }
                         else
                         {
-                            ocultarError(cargo, '#small-cargo-x-'+mode);
-                            return false;
+                            if(tipo_persona=='direccion_firma')
+                            {
+                                if(cargo.val()=='')
+                                {
+                                    mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                    return false;
+                                }
+                                else
+                                    return true;
+                            }
+                            else
+                                return true;
                         }
                     }
                     else
-                    {
-                        if(cargo.val()=='')
-                        {
-                            mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
-                            return false;
-                        }
-                        else
-                            return true;
-                    }
+                        return false;
                 }
             }
         }
-
         function validarDni(dni)
         {
             let tipo_persona = dni.data('tipo-persona');

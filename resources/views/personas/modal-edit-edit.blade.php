@@ -20,13 +20,23 @@
 
 @push('js')
   <script>
-    $("#apellido_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+    $(document).ready(function(){
+      $("#dni_x_{{$mode}}").change(function(){
+        if($(this).val()!='')
+            validarDniModal('{{$mode}}', $(this));
+      });
+          
+      $("#apellido_x_{{$mode}}").keyup(function(){
+          ocultarError($(this), '#small-apellido-x-{{$mode}}');
+      });
 
-    $("#nombre_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
+      $("#nombre_x_{{$mode}}").keyup(function(){
+          ocultarError($(this), '#small-nombre-x-{{$mode}}');
+      });
 
-    $("#dni_{{$tipo_persona}}_{{$mode}}").change(validarExisteDatosPersona);
-
-    $("#cargo_{{$tipo_persona}}_{{$mode}}").keyup(validarExisteDatosPersona);
-
+      $("#cargo_x_{{$mode}}").keyup(function(){
+          ocultarError($(this), '#small-cargo-x-{{$mode}}');
+      });
+    })
   </script>
 @endpush

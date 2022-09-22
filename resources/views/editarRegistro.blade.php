@@ -183,10 +183,6 @@
                 }
             } );
 
-            $(".dni").keyup(function(){
-                validarDni($(this));
-            });
-
             $('input[type="checkbox"]').on('change', function(){
                 this.value = this.checked ? 1 : 0;
                 //console.log(this.value);
@@ -267,188 +263,178 @@
             });
 
             $('#store_persona').click(function(event){
+                console.log("detecta evento store");
                 var tipo_persona=$(this).data('tipo-persona');
-                var dni_persona = $("#dni_x_create").val();
-                var apellido_persona = $("#apellido_x_create").val();
-                var nombre_persona = $("#nombre_x_create").val();
-                var cargo_persona = $("#cargo_x_create").val();
-                var datos;
-                if(tipo_persona!='direccion_firma')
+                if(validarExisteDatosPersonaModal(tipo_persona, 'create', $("#dni_x_create"), $("#apellido_x_create"), $("#nombre_x_create"), $("#cargo_x_create")))
                 {
-                    if(dni_persona!='' && apellido_persona!='' && nombre_persona!='')
-                        datos={ dni: dni_persona, 
-                                apellido: apellido_persona,
-                                nombre: nombre_persona,
-                                tipo_persona: tipo_persona};
+                    console.log("pasa validacion con tipo_persona ="+tipo_persona);
+                    var dni_persona = $("#dni_x_create").val();
+                    var apellido_persona = $("#apellido_x_create").val();
+                    var nombre_persona = $("#nombre_x_create").val();
+                    var cargo_persona = $("#cargo_x_create").val();
+                    var datos;
+                    if(tipo_persona!='direccion_firma')
+                    {
+                        if(dni_persona!='' && apellido_persona!='' && nombre_persona!='')
+                            datos={ dni: dni_persona, 
+                                    apellido: apellido_persona,
+                                    nombre: nombre_persona,
+                                    tipo_persona: tipo_persona};
+                        else
+                        {
+                            //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
+                            if(apellido_persona == '')
+                                $("#apellido_x_create").css('border','2px dashed red');
+                            if(nombre_persona == '')
+                                $("#nombre_x_create").css('border','2px dashed red');
+                            if(dni_persona == '')
+                                $("#dni_x_create").css('border','2px dashed red');
+                            return true;
+                        }
+                    }
                     else
                     {
-                        //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
-                        if(apellido_persona == '')
-                            $("#apellido_x_create").css('border','2px dashed red');
-                        if(nombre_persona == '')
-                            $("#nombre_x_create").css('border','2px dashed red');
-                        if(dni_persona == '')
-                            $("#dni_x_create").css('border','2px dashed red');
-                        return true;
+                        if(dni_persona!='' && apellido_persona!='' && nombre_persona!='' && cargo_persona!='')
+                            datos={ dni: dni_persona, 
+                                    apellido: apellido_persona,
+                                    nombre: nombre_persona,
+                                    tipo_persona: tipo_persona,
+                                    cargo: cargo_persona};
+                        else
+                        {
+                            //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
+                            if(apellido_persona == '')
+                                $("#apellido_x_create").css('border','2px dashed red');
+                            if(nombre_persona == '')
+                                $("#nombre_x_create").css('border','2px dashed red');
+                            if(dni_persona == '')
+                                $("#dni_x_create").css('border','2px dashed red');
+                            if(cargo_persona == '')
+                                $("#cargo_x_create").css('border','2px dashed red');
+                            return true;
+                        }
                     }
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: "{{ url('crearPersona/' . $id) }}",
+                        data: datos,
+                        success: function(response) {
+
+                            $('#add_persona').modal('hide');
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Persona Guardada',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                toast: true
+
+                                });
+                            switch(tipo_persona)
+                            {
+                                case('miembro'):
+                                    $('.yajra-personas-miembro').DataTable().ajax.reload();
+                                break;
+                                case('direccion_firma'):
+                                    $('.yajra-personas-direccion_firma').DataTable().ajax.reload();
+                                break;
+                                case('apoderado'):
+                                    $('.yajra-personas-apoderado').DataTable().ajax.reload();
+                                break;
+                            }
+                            $("button").prop("disabled", false);
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Actividad no guardada");
+                        }
+                    });
                 }
                 else
                 {
-                    if(dni_persona!='' && apellido_persona!='' && nombre_persona!='' && cargo_persona!='')
-                        datos={ dni: dni_persona, 
-                                apellido: apellido_persona,
-                                nombre: nombre_persona,
-                                tipo_persona: tipo_persona,
-                                cargo: cargo_persona};
-                    else
-                    {
-                        //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
-                        if(apellido_persona == '')
-                            $("#apellido_x_create").css('border','2px dashed red');
-                        if(nombre_persona == '')
-                            $("#nombre_x_create").css('border','2px dashed red');
-                        if(dni_persona == '')
-                            $("#dni_x_create").css('border','2px dashed red');
-                        if(cargo_persona == '')
-                            $("#cargo_x_create").css('border','2px dashed red');
-                        return true;
-                    }
+                    console.log("no pasa validacion");
+                    event.preventDefault();
                 }
-                $("button").prop("disabled", true);
-                $.ajax({
-                    type: "post",
-                    url: "{{ url('crearPersona/' . $id) }}",
-                    data: datos,
-                    success: function(response) {
-
-                        $('#add_persona').modal('hide');
-
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Persona Guardada',
-                            showConfirmButton: false,
-                            timer: 1500,
-                            toast: true
-
-                            });
-                        switch(tipo_persona)
-                        {
-                            case('miembro'):
-                                $('.yajra-personas-miembro').DataTable().ajax.reload();
-                            break;
-                            case('direccion_firma'):
-                                $('.yajra-personas-direccion_firma').DataTable().ajax.reload();
-                            break;
-                            case('apoderado'):
-                                $('.yajra-personas-apoderado').DataTable().ajax.reload();
-                            break;
-                        }
-                        $("button").prop("disabled", false);
-                    },
-                    error: function(error) {
-                        //console.log(error)
-                        $("button").prop("disabled", false);
-                        alert("ERROR!! Actividad no guardada");
-                    }
-                });
             });
 
             $('#update_persona').click(function(event){
-                
                 var tipo_persona=$(this).data('tipo-persona');
-                var dni_persona = $("#dni_x_edit").val();
-                var apellido_persona = $("#apellido_x_edit").val();
-                var nombre_persona = $("#nombre_x_edit").val();
-                var cargo_persona = $("#cargo_x_edit").val();
-                var datos;
-                if(tipo_persona!='direccion_firma')
+                if(validarExisteDatosPersonaModal(tipo_persona, 'edit', $("#dni_x_edit"), $("#apellido_x_edit"), $("#nombre_x_edit"), $("#cargo_x_edit")))
                 {
-                    if(dni_persona!='' && apellido_persona!='' && nombre_persona!='')
-                        datos={ dni: $("#dni_persona_edit").val(), 
-                                apellido: $("#apellido_persona_edit").val(),
-                                nombre: $("#nombre_persona_edit").val(),
-                                tipo_persona: tipo_persona};
+                    var dni_persona = $("#dni_x_edit").val();
+                    var apellido_persona = $("#apellido_x_edit").val();
+                    var nombre_persona = $("#nombre_x_edit").val();
+                    var cargo_persona = $("#cargo_x_edit").val();
+                    var datos;
+                    if(tipo_persona!='direccion_firma')
+                    {
+                        if(dni_persona!='' && apellido_persona!='' && nombre_persona!='')
+                            datos={ dni: dni_persona, 
+                                    apellido: apellido_persona,
+                                    nombre: nombre_persona,
+                                    tipo_persona: tipo_persona};
+                    }
                     else
                     {
-                        //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
-                        if(apellido_persona == '')
-                            $("#apellido_x_edit").css('border','2px dashed red');
-                        if(nombre_persona == '')
-                            $("#nombre_x_edit").css('border','2px dashed red');
-                        if(dni_persona == '')
-                            $("#dni_x_edit").css('border','2px dashed red');
-                        return true;
+                        if(dni_persona!='' && apellido_persona!='' && nombre_persona!='' && cargo_persona !='')
+                            datos={ dni: dni_persona, 
+                                    apellido: apellido_persona,
+                                    nombre: nombre_persona,
+                                    tipo_persona: tipo_persona,
+                                    cargo: cargo_persona};
                     }
+                    var id_proveedor=$(this).data('id-proveedor');
+                    var id_persona=$(this).data('id-persona');
+                    console.log("id_proveedor"+id_proveedor);
+                    let url = '{{ url("proveedor/:id_proveedor/:tipo_persona/:id_persona/actualizar") }}';
+                    url = url.replace(':id_proveedor', id_proveedor);
+                    url = url.replace(':tipo_persona', tipo_persona);
+                    url = url.replace(':id_persona', id_persona);
+                    console.log("url"+url);
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: datos,
+                        success: function(response) {
+
+                            $('#edit_persona').modal('hide');
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Persona Guardada',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                toast: true
+
+                                });
+                            switch(tipo_persona)
+                            {
+                                case('miembro'):
+                                    $('.yajra-personas-miembro').DataTable().ajax.reload();
+                                break;
+                                case('direccion_firma'):
+                                    $('.yajra-personas-direccion_firma').DataTable().ajax.reload();
+                                break;
+                                case('apoderado'):
+                                    $('.yajra-personas-apoderado').DataTable().ajax.reload();
+                                break;
+                            }
+                            $("button").prop("disabled", false);
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Actividad no guardada");
+                        }
+                    });
                 }
                 else
-                {
-                    if(dni_persona!='' && apellido_persona!='' && nombre_persona!='' && cargo_persona !='')
-                        datos={ dni: $("#dni_persona_edit").val(), 
-                                apellido: $("#apellido_persona_edit").val(),
-                                nombre: $("#nombre_persona_edit").val(),
-                                tipo_persona: tipo_persona,
-                                cargo: $("#cargo_persona_edit").val()};
-                    else
-                    {
-                        //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
-                        if(apellido_persona == '')
-                            $("#apellido_x_edit").css('border','2px dashed red');
-                        if(nombre_persona == '')
-                            $("#nombre_x_edit").css('border','2px dashed red');
-                        if(dni_persona == '')
-                            $("#dni_x_edit").css('border','2px dashed red');
-                        if(cargo_persona == '')
-                            $("#cargo_x_edit").css('border','2px dashed red');
-                        return true;
-                    }
-                }
-                var id_proveedor=$(this).data('id-proveedor');
-                var id_persona=$(this).data('id-persona');
-                console.log("id_proveedor"+id_proveedor);
-                let url = '{{ url("proveedor/:id_proveedor/:tipo_persona/:id_persona/actualizar") }}';
-                url = url.replace(':id_proveedor', id_proveedor);
-                url = url.replace(':tipo_persona', tipo_persona);
-                url = url.replace(':id_persona', id_persona);
-                console.log("url"+url);
-                $("button").prop("disabled", true);
-                $.ajax({
-                    type: "post",
-                    url: url,
-                    data: datos,
-                    success: function(response) {
-
-                        $('#edit_persona').modal('hide');
-
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Persona Guardada',
-                            showConfirmButton: false,
-                            timer: 1500,
-                            toast: true
-
-                            });
-                        switch(tipo_persona)
-                        {
-                            case('miembro'):
-                                $('.yajra-personas-miembro').DataTable().ajax.reload();
-                            break;
-                            case('direccion_firma'):
-                                $('.yajra-personas-direccion_firma').DataTable().ajax.reload();
-                            break;
-                            case('apoderado'):
-                                $('.yajra-personas-apoderado').DataTable().ajax.reload();
-                            break;
-                        }
-                        $("button").prop("disabled", false);
-                    },
-                    error: function(error) {
-                        //console.log(error)
-                        $("button").prop("disabled", false);
-                        alert("ERROR!! Actividad no guardada");
-                    }
-                });
+                    event.preventDefault();
             });
 
             $(document).on('click', '.edit_persona', function(event){
@@ -715,144 +701,177 @@
             }
         }
 
-        function validarDni(dni)
-        {
-            let tipo_persona = dni.data('tipo-persona');
-            console.log("pasa por ak con tipo persona="+tipo_persona);
-            let mode = dni.data('mode');
-            if(dni.val() != "")
-            {   
-                switch(tipo_persona)
+        function validarExisteDatosPersonaModal(tipo_persona, mode, dni, apellido, nombre, cargo)
+        {   
+            if(apellido.val()=='')
+            {
+                mostrarError(apellido, '#small-apellido-x-'+mode, '<p style="color:red;">El APELLIDO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                if(dni.val()=='')
                 {
-                    case 'miembro':
-                        if(mode=='create')
+                    mostrarError(dni, '#small-dni-x-'+mode, '<p style="color:red;">El DNI de la persona <strong>no</strong> puede quedar vacío.</p>');
+                    if(nombre.val()=='')
+                    {
+                        mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
+                        if(tipo_persona=='direccion_firma')
                         {
-                            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                            if(cargo.val()=='')
                             {
-                                mostrarError('#dni_miembro_create', '#small-dni-miembro-create', '<div class="invalid-feedback">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
                                 return false;
-                            }  
-                            else
-                            {
-                                ocultarError('#dni_miembro_create', '#small-dni-miembro-create');
-
-                                return true;
                             }
+                            else
+                                return false;
                         }
                         else
-                            if(mode=='edit')
-                            {
-                                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
-                                {
-                                    mostrarError('#dni_miembro_edit', '#small-dni-miembro-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
-                                    return false;
-                                }  
-                                else
-                                {
-                                    ocultarError('#dni_miembro_edit', '#small-dni-miembro-edit');
-
-                                    return true;
-                                }
-                            }
-                    break;
-                    case 'direccion_firma':
-                        tipo_persona = 'miembro de órgano de dirección y administración de firma';
-                        if(mode=='create')
+                            return true;
+                    }
+                    else
+                    {
+                        ocultarError(nombre, '#small-nombre-x-'+mode);
+                        return false;
+                    }
+                }
+                else
+                {
+                    if(validarDniModal(mode, dni))
+                    {
+                        if(nombre.val()=='')
                         {
-                            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                            mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
+                            if(tipo_persona=='direccion_firma')
                             {
-                                mostrarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
-                                return false;
-                            }  
-                            else
-                            {
-                                ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-create');
-
-                                return true;
+                                if(cargo.val()=='')
+                                {
+                                    mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                    return false;
+                                }
+                                else
+                                    return false;
                             }
+                            else
+                                return false;
                         }
                         else
-                            if(mode=='edit')
                             {
-                                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
-                                {
-                                    mostrarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
-                                    return false;
-                                }  
-                                else
-                                {
-                                    ocultarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-edit');
-
-                                    return true;
-                                }
-                            }
-                    break;
-                    case 'apoderado':
-                        if(mode=='create')
-                        {
-                            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
-                            {
-                                mostrarError('#dni_apoderado_create', '#small-dni-apoderado-create', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
+                                ocultarError(nombre, '#small-nombre-x-'+mode);
                                 return false;
-                            }  
-                            else
-                            {
-                                ocultarError('#dni_apoderado_create', '#small-dni-apoderado-create');
-
-                                return true;
                             }
-                        }
-                        else
-                            if(mode=='edit')
-                            {
-                                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
-                                {
-                                    mostrarError('#dni_apoderado_edit', '#small-dni-apoderado-edit', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI de '+tipo_persona+' </strong> tiene un formato incorrecto.</div>');
-                                    return false;
-                                }  
-                                else
-                                {
-                                    ocultarError('#dni_apoderado_edit', '#small-dni-apoderado-edit');
-
-                                    return true;
-                                }
-                            }
-                    break;
-                    case 'x':
-                        if(mode=='create')
-                        {
-                            if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
-                            {
-                                mostrarError('#dni_x_create', '#small-dni-x-create', 'El <strong>número de DNI de la persona </strong> tiene un formato incorrecto.');
-                                return false;
-                            }  
-                            else
-                            {
-                                ocultarError('#dni_x_create', '#small-dni-x-create');
-
-                                return true;
-                            }
-                        }
-                        else
-                            if(mode=='edit')
-                            {
-                                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
-                                {
-                                    mostrarError('#dni_x_edit', '#small-dni-x-edit', '<div class="invalid-feedback">El <strong>número de DNI de la persona </strong> tiene un formato incorrecto.</div>');
-                                    return false;
-                                }  
-                                else
-                                {
-                                    ocultarError('#dni_x_edit', '#small-dni-x-edit');
-
-                                    return true;
-                                }
-                            }
-                    break;
+                    }
+                    else
+                        return false;
                 }
             }
             else
-                return true;
+            {
+                if(dni.val()=='')
+                {
+                    mostrarError(dni, '#small-dni-x-'+mode, '<p style="color:red;">El DNI de la persona <strong>no</strong> puede quedar vacío.</p>');
+                    if(nombre.val()=='')
+                    {
+                        mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
+                        if(tipo_persona=='direccion_firma')
+                        {
+                            if(cargo.val()=='')
+                            {
+                                mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                return false;
+                            }
+                            else
+                            {
+                                ocultarError(cargo, '#small-cargo-x-'+mode);
+                                return false;
+                            }
+                        }
+                        else
+                            return true;
+                    }
+                    else
+                    {
+                        ocultarError(cargo, '#small-nombre-x-'+mode);
+                        return false;
+                    }
+                }
+                else
+                {
+                    if(validarDniModal(mode, dni))
+                    {
+                        console.log("pasa por ak?");
+                        if(nombre.val()=='')
+                            {
+                                mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                if(tipo_persona=='direccion_firma')
+                                {
+                                    if(cargo.val()=='')
+                                    {
+                                        mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                        return false;
+                                    }
+                                    else
+                                    {
+                                        ocultarError(cargo, '#small-cargo-x-'+mode);
+                                        return false;
+                                    }
+                                }
+                                else
+                                    return false;
+                            }
+                        else
+                        {
+                            if(tipo_persona=='direccion_firma')
+                            {
+                                if(cargo.val()=='')
+                                {
+                                    mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                    return false;
+                                }
+                                else
+                                    return true;
+                            }
+                            else
+                                return true;
+                        }
+                    }
+                    else
+                        return false;
+                }
+            }
+        }
+
+        function validarDniModal(mode, dni)
+        {
+            if(mode=='create')
+            {
+                console.log("mode = create");
+                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                {
+                    mostrarError('#dni_x_create', '#small-dni-x-create', '<p style="color:red;">El <strong>número de DNI de la persona </strong> tiene un formato incorrecto. Ingrese DNI con puntos.</p>');
+                    console.log("mode = create return false");
+                    return false;
+                }  
+                else
+                {
+                    ocultarError('#dni_x_create', '#small-dni-x-create');
+                    console.log("mode = create return true");
+                    return true;
+                }
+            }
+            else
+                if(mode=='edit')
+                {
+                    console.log("mode = edit");
+                    if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
+                    {
+                        mostrarError('#dni_x_edit', '#small-dni-x-edit', '<p style="color:red;">El <strong>número de DNI de la persona </strong> tiene un formato incorrecto. Ingrese DNI con puntos.</p>');
+                        console.log("mode = create return false");
+                        return false;
+                    }  
+                    else
+                    {
+                        ocultarError('#dni_x_edit', '#small-dni-x-edit');
+                        console.log("mode = create return true");
+                        return true;
+                    }
+                }
         }
         
         

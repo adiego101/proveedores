@@ -31,11 +31,11 @@
           ocultarError($(this), '#small-apellido-x-{{$mode}}');
       });
 
-      $("#nombre_x_edit").keyup(function(){
+      $("#nombre_x_{{$mode}}").keyup(function(){
           ocultarError($(this), '#small-nombre-x-{{$mode}}');
       });
 
-      $("#cargo_x_edit").keyup(function(){
+      $("#cargo_x_{{$mode}}").keyup(function(){
           ocultarError($(this), '#small-cargo-x-{{$mode}}');
       });
     })

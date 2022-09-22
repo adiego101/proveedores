@@ -337,13 +337,6 @@
             recargarListaDomicilio($('#provincia_fiscal_create').val(), $('#localidad_fiscal_create'));
         if ($('#provincia_habilitacion').val()!='')
             recargarListaHabilitacion();
-        
-        $("#regiration_form").on('submit',function(){
-            event.preventDefault();
-
-            if(validarDni())
-                this.submit();
-        });
 
         //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
