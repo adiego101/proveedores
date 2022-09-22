@@ -248,22 +248,74 @@
             $(".btn_edit_modal").data('tipo-persona', tipo_persona);
         });
 
-        $("#dni_{{$tipo_persona}}_{{$mode}}").change(function(){
-            if($(this).val()!='')
-                validarDni($(this));
+        $(document).ready(function(){
+            applyInputMask($("#dni_{{$tipo_persona}}_{{$mode}}"), '00.000.000');
+            $("#dni_{{$tipo_persona}}_{{$mode}}").change(function(){
+                if($(this).val()!='')
+                    validarDni($(this));
+            });
+            
+            $("#apellido_{{$tipo_persona}}_{{$mode}}").keyup(function(){
+                ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-head');
+            });
+
+            $("#nombre_{{$tipo_persona}}_{{$mode}}").keyup(function(){
+                ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-head');
+            });
+
+            $("#cargo_{{$tipo_persona}}_{{$mode}}").keyup(function(){
+                ocultarError('#cargo_{{$tipo_persona}}_{{$mode}}', '#small-cargo-{{$tipo_persona}}-head');
+            });
         });
+
+        function applyInputMask(dni, mask) {
+            let content = '';
+            let maxChars = numberCharactersPattern(mask);
+            
+            dni.keydown(function(e) {
+                e.preventDefault();
+                if (isNumeric(e.key) && content.length < maxChars) {
+                content += e.key;
+                }
+                if(e.keyCode == 8) {
+                if(content.length > 0) {
+                    content = content.substr(0, content.length - 1);
+                }
+                }
+                dni.val(maskIt('00.000.000', content));
+            });
+        }
+
+        function isNumeric(char) {
+            return !isNaN(char - parseInt(char));
+        }
+
+        function maskIt(pattern, value) {
+            let position = 0;
+            let currentChar = 0;
+            let masked = '';
+            while(position < pattern.length && currentChar < value.length) {
+                if(pattern[position] === '0') {
+                masked += value[currentChar];
+                currentChar++;
+                } else {
+                masked += pattern[position];
+                }
+                position++;
+            }
+            return masked;
+        }
+
+        function numberCharactersPattern(pattern) {
+            let numberChars = 0;
+            for(let i = 0; i < pattern.length; i++) {
+                if(pattern[i] === '0') {
+                numberChars ++;
+                }
+            }
+            return numberChars;
+        }
         
-        $("#apellido_{{$tipo_persona}}_{{$mode}}").keyup(function(){
-            ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-head');
-        });
-
-        $("#nombre_{{$tipo_persona}}_{{$mode}}").keyup(function(){
-            ocultarError('#nombre_{{$tipo_persona}}_{{$mode}}', '#small-nombre-{{$tipo_persona}}-head');
-        });
-
-        $("#cargo_{{$tipo_persona}}_{{$mode}}").keyup(function(){
-            ocultarError('#cargo_{{$tipo_persona}}_{{$mode}}', '#small-cargo-{{$tipo_persona}}-head');
-        });
 
         function validarExisteDatosPersona(tipo_persona, dni, apellido, nombre, cargo)
         {   
