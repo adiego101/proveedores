@@ -324,6 +324,7 @@
                             ocultarError(nombre, '#small-nombre-'+tipo_persona+'-head');
                             return false;
                         }
+                    }
                     else
                         return false;
                 }
