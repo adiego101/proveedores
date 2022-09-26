@@ -110,6 +110,29 @@
                 return true;
             }
         });
+
+        $('#cuit').keyup(function() 
+            {
+                if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) 
+                {
+                    mostrarError('#cuit', '#small-cuit-mal-formato', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
+                    //mostrarError('#cuit', '#small-cuit2', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
+                    if($('#cuit').val() == "")
+                    {
+                        mostrarError('#cuit', '#small-cuit-vacio', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
+                        //mostrarError('#cuit', '#small-cuit4', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
+                        return false;
+                    }
+                }
+                else
+                {
+                    ocultarError('#cuit', '#small-cuit-mal-formato');
+                    //ocultarError('#cuit', '#small-cuit2');
+                    ocultarError('#cuit', '#small-cuit-vacio');
+                    //ocultarError('#cuit', '#small-cuit4');
+                    return true;
+                }
+            });
     });
 
     function applyInputMask(dni, mask) {

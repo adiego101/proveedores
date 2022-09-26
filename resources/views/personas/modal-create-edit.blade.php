@@ -21,6 +21,7 @@
 @push('js')
   <script>
     $(document).ready(function(){
+      applyInputMask($("#dni_x_{{$mode}}"), '0.000.000');
       $("#dni_x_{{$mode}}").change(function(){
         if($(this).val()!='')
             validarDniModal('{{$mode}}', $(this));
