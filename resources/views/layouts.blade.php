@@ -69,21 +69,74 @@
 
 @push('js')
 <script>
+    $(document).ready(function() 
+    {
+        $('.js-example-basic-single').select2({
+                theme: "bootstrap",    width: 'resolve' // need to override the changed default
+            });
+
+
+        $('input[type="checkbox"]').on('change', function(){
+            this.value = this.checked ? 1 : 0;
+            //console.log(this.value);
+        }).change();
+
+        $('#razon_social').keyup(function() {
+            if($('#razon_social').val() == "")
+            {
+                mostrarError('#razon_social', '#small-razon_social', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+                //mostrarError('#razon_social', '#small-razon_social2', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+                return false;
+            }
+            else
+            {
+                ocultarError('#razon_social', '#small-razon_social');
+                //ocultarError('#razon_social', '#small-razon_social2');
+                return true;
+            }
+        });
+
+        $('#nombre_fantasia').keyup(function() {
+            if($('#nombre_fantasia').val() == "")
+            {
+                mostrarError('#nombre_fantasia', '#small-nombre_fantasia', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
+                //mostrarError('#nombre_fantasia', '#small-nombre_fantasia2', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
+                return false;
+            }
+            else
+            {
+                ocultarError('#nombre_fantasia', '#small-nombre_fantasia');
+                //ocultarError('#nombre_fantasia', '#small-nombre_fantasia2');
+                return true;
+            }
+        });
+    });
+
     function applyInputMask(dni, mask) {
         let content = '';
         let maxChars = numberCharactersPattern(mask);
-        
         dni.keydown(function(e) {
             e.preventDefault();
-            if (isNumeric(e.key) && content.length < maxChars) {
-            content += e.key;
+            if (isNumeric(e.key))
+                if(content.length < maxChars)
+                    content += e.key;
+                else
+                {
+                    mask='00.000.000';
+                    maxChars = numberCharactersPattern(mask);
+                    if(content.length < maxChars)
+                        content += e.key;
+                }
+            if(e.code == 'Backspace') 
+            {
+                if(content.length > 0)
+                {
+                    content = content.substr(0, content.length - 1);
+                    if(mask=='00.000.000')
+                        mask='0.000.000';
+                }
             }
-            if(e.keyCode == 8) {
-            if(content.length > 0) {
-                content = content.substr(0, content.length - 1);
-            }
-            }
-            dni.val(maskIt('00.000.000', content));
+            dni.val(maskIt(mask, content));
         });
     }
 

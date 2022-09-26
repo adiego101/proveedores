@@ -249,7 +249,7 @@
         });
 
         $(document).ready(function(){
-            applyInputMask($("#dni_{{$tipo_persona}}_{{$mode}}"), '00.000.000');
+            applyInputMask($("#dni_{{$tipo_persona}}_{{$mode}}"), '0.000.000');
             $("#dni_{{$tipo_persona}}_{{$mode}}").change(function(){
                 if($(this).val()!='')
                     validarDni($(this));

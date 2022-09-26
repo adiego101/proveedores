@@ -152,158 +152,111 @@
 
     $(document).ready(function() 
     {
-        $('.js-example-basic-single').select2({
-            theme: "bootstrap",    width: 'resolve' // need to override the changed default
-        });
-
-        $('#razon_social').keyup(validar_razon_social);
-
-        $('#nombre_fantasia').keyup(validar_nombre_fantasia);
-
         $('#cuit').keyup(validar_cuit);
 
-       
-
-            
-            
-            $( ".dni" ).autocomplete({
-                source: function( request, response ) {
-                    $.ajax( {
-                    url: "{{url('responsable/')}}/"+request.term,
-                    dataType: "json",
-                    success: function( data ) {
-                        response( data );
-                    }
-                    } );
-                },
-                minLength: 2,
-                select: function( event, ui ) {
-                    let dni_persona=$(this);
-                    let tipo_persona = dni_persona.data('tipo-persona');
-                    let mode=dni_persona.data('mode');
-                    switch(tipo_persona)
-                    {
-                        case 'miembro':
-                            if(mode=='create')
+        $( ".dni" ).autocomplete({
+            source: function( request, response ) {
+                $.ajax( {
+                url: "{{url('responsable/')}}/"+request.term,
+                dataType: "json",
+                success: function( data ) {
+                    response( data );
+                }
+                } );
+            },
+            minLength: 2,
+            select: function( event, ui ) {
+                let dni_persona=$(this);
+                let tipo_persona = dni_persona.data('tipo-persona');
+                let mode=dni_persona.data('mode');
+                switch(tipo_persona)
+                {
+                    case 'miembro':
+                        if(mode=='create')
+                        {
+                            console.log("entra por miembro create");
+                            $("#apellido_miembro_create").val(ui.item.apellido_persona);
+                            $("#nombre_miembro_create").val(ui.item.nombre_persona);
+                            ocultarError('#dni_miembro_create', '#small-dni-miembro-create');
+                            ocultarError('#dni_miembro_create', '#small-dni-miembro-head');
+                            ocultarError('#apellido_miembro_create', '#small-apellido-miembro-create');
+                            ocultarError('#apellido_miembro_create', '#small-apellido-miembro-head');
+                            ocultarError('#nombre_miembro_create', '#small-nombre-miembro-create');
+                            ocultarError('#nombre_miembro_create', '#small-nombre-miembro-head');
+                        }
+                        else
+                            if(mode=='edit')
                             {
                                 console.log("entra por miembro create");
-                                $("#apellido_miembro_create").val(ui.item.apellido_persona);
-                                $("#nombre_miembro_create").val(ui.item.nombre_persona);
-                                ocultarError('#dni_miembro_create', '#small-dni-miembro-create');
-                                ocultarError('#dni_miembro_create', '#small-dni-miembro-head');
-                                ocultarError('#apellido_miembro_create', '#small-apellido-miembro-create');
-                                ocultarError('#apellido_miembro_create', '#small-apellido-miembro-head');
-                                ocultarError('#nombre_miembro_create', '#small-nombre-miembro-create');
-                                ocultarError('#nombre_miembro_create', '#small-nombre-miembro-head');
+                                $("#apellido_miembro_edit").val(ui.item.apellido_persona);
+                                $("#nombre_miembro_edit").val(ui.item.nombre_persona);
+                                ocultarError('#dni_miembro_edit', '#small-dni-miembro-edit');
+                                ocultarError('#dni_miembro_edit', '#small-dni-miembro-head');
+                                ocultarError('#apellido_miembro_edit', '#small-apellido-miembro-edit');
+                                ocultarError('#apellido_miembro_edit', '#small-apellido-miembro-head');
+                                ocultarError('#nombre_miembro_edit', '#small-nombre-miembro-edit');
+                                ocultarError('#nombre_miembro_edit', '#small-nombre-miembro-head');
                             }
-                            else
-                                if(mode=='edit')
-                                {
-                                    console.log("entra por miembro create");
-                                    $("#apellido_miembro_edit").val(ui.item.apellido_persona);
-                                    $("#nombre_miembro_edit").val(ui.item.nombre_persona);
-                                    ocultarError('#dni_miembro_edit', '#small-dni-miembro-edit');
-                                    ocultarError('#dni_miembro_edit', '#small-dni-miembro-head');
-                                    ocultarError('#apellido_miembro_edit', '#small-apellido-miembro-edit');
-                                    ocultarError('#apellido_miembro_edit', '#small-apellido-miembro-head');
-                                    ocultarError('#nombre_miembro_edit', '#small-nombre-miembro-edit');
-                                    ocultarError('#nombre_miembro_edit', '#small-nombre-miembro-head');
-                                }
-                        break;
-                        case 'direccion_firma':
-                            if(mode=='create')
+                    break;
+                    case 'direccion_firma':
+                        if(mode=='create')
+                        {
+                            console.log("entra por direccion firma create");
+                            $("#apellido_direccion_firma_create").val(ui.item.apellido_persona);
+                            $("#nombre_direccion_firma_create").val(ui.item.nombre_persona);
+                            ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-create');
+                            ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-head');
+                            ocultarError('#apellido_direccion_firma_create', '#small-apellido-direccion_firma-create');
+                            ocultarError('#apellido_direccion_firma_create', '#small-apellido-direccion_firma-head');
+                            ocultarError('#nombre_direccion_firma_create', '#small-nombre-direccion_firma-create');
+                            ocultarError('#nombre_direccion_firma_create', '#small-nombre-direccion_firma-head');
+                        }
+                        else
+                            if(mode=='edit')
                             {
-                                console.log("entra por direccion firma create");
-                                $("#apellido_direccion_firma_create").val(ui.item.apellido_persona);
-                                $("#nombre_direccion_firma_create").val(ui.item.nombre_persona);
-                                ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-create');
-                                ocultarError('#dni_direccion_firma_create', '#small-dni-direccion_firma-head');
-                                ocultarError('#apellido_direccion_firma_create', '#small-apellido-direccion_firma-create');
-                                ocultarError('#apellido_direccion_firma_create', '#small-apellido-direccion_firma-head');
-                                ocultarError('#nombre_direccion_firma_create', '#small-nombre-direccion_firma-create');
-                                ocultarError('#nombre_direccion_firma_create', '#small-nombre-direccion_firma-head');
+                                console.log("entra por direccion firma edit");
+                                $("#apellido_direccion_firma_edit").val(ui.item.apellido_persona);
+                                $("#nombre_direccion_firma_edit").val(ui.item.nombre_persona);
+                                ocultarError('#dni-direccion_firma_edit', '#small-dni-direccion_firma-edit');
+                                ocultarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-head');
+                                ocultarError('#apellido_direccion_firma_edit', '#small-apellido-direccion_firma-edit');
+                                ocultarError('#apellido_direccion_firma_edit', '#small-apellido-direccion_firma-head');
+                                ocultarError('#nombre_direccion_firma_edit', '#small-nombre-direccion_firma-edit');
+                                ocultarError('#nombre_direccion_firma_edit', '#small-nombre-direccion_firma-head');
                             }
-                            else
-                                if(mode=='edit')
-                                {
-                                    console.log("entra por direccion firma edit");
-                                    $("#apellido_direccion_firma_edit").val(ui.item.apellido_persona);
-                                    $("#nombre_direccion_firma_edit").val(ui.item.nombre_persona);
-                                    ocultarError('#dni-direccion_firma_edit', '#small-dni-direccion_firma-edit');
-                                    ocultarError('#dni_direccion_firma_edit', '#small-dni-direccion_firma-head');
-                                    ocultarError('#apellido_direccion_firma_edit', '#small-apellido-direccion_firma-edit');
-                                    ocultarError('#apellido_direccion_firma_edit', '#small-apellido-direccion_firma-head');
-                                    ocultarError('#nombre_direccion_firma_edit', '#small-nombre-direccion_firma-edit');
-                                    ocultarError('#nombre_direccion_firma_edit', '#small-nombre-direccion_firma-head');
-                                }
-                        break;
-                        case 'apoderado':
-                            if(mode=='create')
+                    break;
+                    case 'apoderado':
+                        if(mode=='create')
+                        {
+                            console.log("entra por apoderado create");
+                            $("#apellido_apoderado_create").val(ui.item.apellido_persona);
+                            $("#nombre_apoderado_create").val(ui.item.nombre_persona);
+                            ocultarError('#dni_apoderado_create', '#small-dni-apoderado-create');
+                            ocultarError('#dni_apoderado_create', '#small-dni-apoderado-head');
+                            ocultarError('#apellido_apoderado_create', '#small-apellido-apoderado-create');
+                            ocultarError('#apellido_apoderado_create', '#small-apellido-apoderado-head');
+                            ocultarError('#nombre_apoderado_create', '#small-nombre-apoderado-create');
+                            ocultarError('#nombre_apoderado_create', '#small-nombre-apoderado-head');
+                        }
+                        else
+                            if(mode=='edit')
                             {
-                                console.log("entra por apoderado create");
-                                $("#apellido_apoderado_create").val(ui.item.apellido_persona);
-                                $("#nombre_apoderado_create").val(ui.item.nombre_persona);
-                                ocultarError('#dni_apoderado_create', '#small-dni-apoderado-create');
-                                ocultarError('#dni_apoderado_create', '#small-dni-apoderado-head');
-                                ocultarError('#apellido_apoderado_create', '#small-apellido-apoderado-create');
-                                ocultarError('#apellido_apoderado_create', '#small-apellido-apoderado-head');
-                                ocultarError('#nombre_apoderado_create', '#small-nombre-apoderado-create');
-                                ocultarError('#nombre_apoderado_create', '#small-nombre-apoderado-head');
+                                console.log("entra por direccion firma edit");
+                                $("#apellido_direccion_firma_edit").val(ui.item.apellido_persona);
+                                $("#nombre_direccion_firma_edit").val(ui.item.nombre_persona);
+                                ocultarError('#dni_apoderado_edit', '#small-dni-apoderado-edit');
+                                ocultarError('#dni_apoderado_edit', '#small-dni-apoderado-head');
+                                ocultarError('#apellido_apoderado_edit', '#small-apellido-apoderado-edit');
+                                ocultarError('#apellido_apoderado_edit', '#small-apellido-apoderado-head');
+                                ocultarError('#nombre_apoderado_edit', '#small-nombre-apoderado-edit');
+                                ocultarError('#nombre_apoderado_edit', '#small-nombre-apoderado-head');
                             }
-                            else
-                                if(mode=='edit')
-                                {
-                                    console.log("entra por direccion firma edit");
-                                    $("#apellido_direccion_firma_edit").val(ui.item.apellido_persona);
-                                    $("#nombre_direccion_firma_edit").val(ui.item.nombre_persona);
-                                    ocultarError('#dni_apoderado_edit', '#small-dni-apoderado-edit');
-                                    ocultarError('#dni_apoderado_edit', '#small-dni-apoderado-head');
-                                    ocultarError('#apellido_apoderado_edit', '#small-apellido-apoderado-edit');
-                                    ocultarError('#apellido_apoderado_edit', '#small-apellido-apoderado-head');
-                                    ocultarError('#nombre_apoderado_edit', '#small-nombre-apoderado-edit');
-                                    ocultarError('#nombre_apoderado_edit', '#small-nombre-apoderado-head');
-                                }
-                        break;
-                        case 'x':
-                            $("#apellido_x_edit").val(ui.item.apellido_persona);
-                            $("#nombre_x_edit").val(ui.item.nombre_persona);
-                        break;
-                    }
+                    break;
+                    case 'x':
+                        $("#apellido_x_edit").val(ui.item.apellido_persona);
+                        $("#nombre_x_edit").val(ui.item.nombre_persona);
+                    break;
                 }
-            });
-
-        $('input[type="checkbox"]').on('change', function(){
-            this.value = this.checked ? 1 : 0;
-            //console.log(this.value);
-        }).change();
-
-        $('#razon_social').keyup(function() {
-            if($('#razon_social').val() == "")
-            {
-                mostrarError('#razon_social', '#small-razon_social', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-                //mostrarError('#razon_social', '#small-razon_social2', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-                return false;
-            }
-            else
-            {
-                ocultarError('#razon_social', '#small-razon_social');
-                //ocultarError('#razon_social', '#small-razon_social2');
-                return true;
-            }
-        });
-
-        $('#nombre_fantasia').keyup(function() {
-            if($('#nombre_fantasia').val() == "")
-            {
-                mostrarError('#nombre_fantasia', '#small-nombre_fantasia', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
-                //mostrarError('#nombre_fantasia', '#small-nombre_fantasia2', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
-                return false;
-            }
-            else
-            {
-                ocultarError('#nombre_fantasia', '#small-nombre_fantasia');
-                //ocultarError('#nombre_fantasia', '#small-nombre_fantasia2');
-                return true;
             }
         });
 

@@ -134,10 +134,6 @@
         $(document).ready(function() 
         {
 
-            $('.js-example-basic-single').select2({
-                theme: "bootstrap",    width: 'resolve' // need to override the changed default
-            });
-
             $('#razon_social').keyup(validar_razon_social);
 
             $('#nombre_fantasia').keyup(validar_nombre_fantasia);
@@ -183,40 +179,7 @@
                 }
             } );
 
-            $('input[type="checkbox"]').on('change', function(){
-                this.value = this.checked ? 1 : 0;
-                //console.log(this.value);
-            }).change();
-
-            $('#razon_social').keyup(function() {
-                if($('#razon_social').val() == "")
-                {
-                    mostrarError('#razon_social', '#small-razon_social', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-                    //mostrarError('#razon_social', '#small-razon_social2', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-                    return false;
-                }
-                else
-                {
-                    ocultarError('#razon_social', '#small-razon_social');
-                    //ocultarError('#razon_social', '#small-razon_social2');
-                    return true;
-                }
-            });
-
-            $('#nombre_fantasia').keyup(function() {
-                if($('#nombre_fantasia').val() == "")
-                {
-                    mostrarError('#nombre_fantasia', '#small-nombre_fantasia', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
-                    //mostrarError('#nombre_fantasia', '#small-nombre_fantasia2', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
-                    return false;
-                }
-                else
-                {
-                    ocultarError('#nombre_fantasia', '#small-nombre_fantasia');
-                    //ocultarError('#nombre_fantasia', '#small-nombre_fantasia2');
-                    return true;
-                }
-            });
+            
 
             $('#cuit').keyup(function() 
             {
@@ -627,79 +590,7 @@
                 $('#div_cargo_x_edit').show();
             }
             
-        }
-
-        function validar_razon_social() {
-
-            if($('#razon_social').val() == ""){
-
-            mostrarError('#razon_social', '#small-razon_social', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-            //mostrarError('#razon_social', '#small-razon_social2', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-
-            return false;
-            }
-
-            ocultarError('#razon_social', '#small-razon_social');
-            //ocultarError('#razon_social', '#small-razon_social2');
-
-            return true;
-        }
-
-
-        function validar_nombre_fantasia() {
-
-            if($('#nombre_fantasia').val() == ""){
-
-            mostrarError('#nombre_fantasia', '#small-nombre_fantasia', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
-            //mostrarError('#nombre_fantasia', '#small-nombre_fantasia2', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
-
-            return false;
-            }
-
-            ocultarError('#nombre_fantasia', '#small-nombre_fantasia');
-            //ocultarError('#nombre_fantasia', '#small-nombre_fantasia2');
-
-            return true;
-        }
-            
-        function validar_cuit() {
-
-            if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) {
-
-                mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
-                //mostrarError('#cuit', '#small-cuit2', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
-
-                if($('#cuit').val() == ""){
-
-                mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
-                //mostrarError('#cuit', '#small-cuit4', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
-
-                return false;
-                }
-            }
-
-            ocultarError('#cuit', '#small-cuit');
-            /*ocultarError('#cuit', '#small-cuit2');
-            ocultarError('#cuit', '#small-cuit3');
-            ocultarError('#cuit', '#small-cuit4');*/
-
-            return true;
-        }
-
-        function valideKey(evt) {
-
-            // El código es la representación decimal ASCII de la clave presionada.
-            var code = (evt.which) ? evt.which : evt.keyCode;
-
-            if (code == 8) { // espacio.
-                return true;
-            } else if (code >= 48 && code <= 57) { // es un numero.
-                return true;
-            } else { // otras teclas
-                //console.log("no es un numero");
-                return false;
-            }
-        }        
+        }   
         
     </script>
         
