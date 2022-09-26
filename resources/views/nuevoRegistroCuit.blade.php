@@ -51,23 +51,23 @@
 @push('js')
 
 <script type="text/javascript">
+    $(document).ready(function(){
+        applyInputMaskCuit($("#cuit"), '00-00000000-0');
+    })
 
-    $('#cuit').keyup(validaCuit);
-
-    function validaCuit() {
-
-        if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) {
-
-        mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxxx-x</strong></div>');
-
-        return false;
-        }
-    
-        ocultarError('#cuit', '#small-cuit');
-
-        return true;
+    function applyInputMaskCuit(cuit, mask) {
+        let content = '';
+        let maxChars = numberCharactersPattern(mask);
+        cuit.keydown(function(e) {
+            e.preventDefault();
+            if (isNumeric(e.key) && content.length < maxChars)
+                content += e.key;
+            if(e.code == 'Backspace') 
+                if(content.length > 0)
+                    content = content.substr(0, content.length - 1);
+            cuit.val(maskIt(mask, content));
+        });
     }
-
 </script>
 
 @endpush

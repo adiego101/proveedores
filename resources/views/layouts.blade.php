@@ -135,7 +135,7 @@
             });
     });
 
-    function applyInputMask(dni, mask) {
+    function applyInputMaskDni(dni, mask) {
         let content = '';
         let maxChars = numberCharactersPattern(mask);
         dni.keydown(function(e) {
