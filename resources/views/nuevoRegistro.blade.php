@@ -316,10 +316,11 @@
             //Obtenemos el numero de la fila que queremos modificar
             var tipo_persona = $(this).data('tipo-persona');
             var id_filapersona = $("#numero_fila_persona").val();
+            console.log("pasa por ak con id_filapersona ="+id_filapersona);
             if(id_filapersona!='')
             {
                 //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
-                if(validarExisteDatosPersonaModal('edit', $("#dni_x_edit"), $("#apellido_x_edit"), $("#nombre_x_edit"), $("#cargo_x_edit")))
+                if(validarExisteDatosPersonaModal(tipo_persona, 'edit', $("#dni_x_edit"), $("#apellido_x_edit"), $("#nombre_x_edit"), $("#cargo_x_edit")))
                 {
                     //Recuperamos los valores de los campos del modal
                     var apellido_persona = $("#apellido_x_edit").val();
@@ -407,6 +408,7 @@
                             break;
                         }
                     }
+                    applyInputMaskDni($("#dni_x_edit"), '0.000.000');
                 }
                 else
                 {

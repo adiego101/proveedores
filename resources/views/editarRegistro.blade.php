@@ -139,6 +139,7 @@
             $( ".dni" ).autocomplete({
                 source: function( request, response ) {
                     $.ajax( {
+                    cache: false,
                     url: "{{url('responsable/')}}/"+request.term,
                     dataType: "json",
                     success: function( data ) {
@@ -153,9 +154,6 @@
                         $("#apellido_x_create").val(ui.item.apellido_persona);
                         $("#nombre_x_create").val(ui.item.nombre_persona);
                         $("#cargo_x_create").val('');
-                        $("#dni_x_create").css('border','1px solid #DFDFDF');
-                        $("#apellido_x_create").css('border','1px solid #DFDFDF');
-                        $("#nombre_x_create").css('border','1px solid #DFDFDF');
                         ocultarError('#dni_x_create', '#small-dni-x-create');
                         ocultarError('#apellido_x_create', '#small-apellido-x-create');
                         ocultarError('#nombre_x_create', '#small-nombre-x-create');
@@ -165,13 +163,16 @@
                         $("#apellido_x_edit").val(ui.item.apellido_persona);
                         $("#nombre_x_edit").val(ui.item.nombre_persona);
                         $("#cargo_x_edit").val('');
-                        $("#dni_x_edit").css('border','1px solid #DFDFDF');
-                        $("#apellido_x_edit").css('border','1px solid #DFDFDF');
-                        $("#nombre_x_edit").css('border','1px solid #DFDFDF');
                         ocultarError('#dni_x_edit', '#small-dni-x-edit');
                         ocultarError('#apellido_x_edit', '#small-apellido-x-edit');
                         ocultarError('#nombre_x_edit', '#small-nombre-x-edit');
                     }
+                },
+                close: function(event, ui)
+                {
+                    // Close event fires when selection options closes
+
+                    $(this).data().autocomplete.term = null; // Clear the cached search term, make every search new
                 }
             } );
 
@@ -248,6 +249,7 @@
                                     $('.yajra-personas-apoderado').DataTable().ajax.reload();
                                 break;
                             }
+                            applyInputMaskDni($("#dni_x_create"), '0.000.000');
                             $("button").prop("disabled", false);
                         },
                         error: function(error) {
@@ -328,6 +330,7 @@
                                     $('.yajra-personas-apoderado').DataTable().ajax.reload();
                                 break;
                             }
+                            applyInputMaskDni($("#dni_x_edit"), '0.000.000');
                             $("button").prop("disabled", false);
                         },
                         error: function(error) {

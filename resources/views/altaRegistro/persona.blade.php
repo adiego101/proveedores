@@ -118,6 +118,7 @@
                         toast: true
 
                     })
+                    applyInputMaskDni($("#dni_{{$tipo_persona}}_{{$mode}}"), '0.000.000');
                 }
                 else
                 {
@@ -160,6 +161,7 @@
                         toast: true
 
                     })
+                    applyInputMaskDni($("#dni_{{$tipo_persona}}_{{$mode}}"), '0.000.000');
                 }
             } 
             else 
@@ -245,21 +247,20 @@
             //Enviamos los valores recuperados anteriormente a los inputs del modal
             $('#apellido_x_edit').val(apellido_persona);
             $('#nombre_x_edit').val(nombre_persona);
+            applyInputMaskDni($("#dni_x_edit"), '0.000.000');
             $('#dni_x_edit').val(dni_persona);
             $("#numero_fila_persona").val(button_id);
             $(".btn_edit_modal").data('tipo-persona', tipo_persona);
         });
 
         $(document).ready(function(){
-            
+            applyInputMaskDni($("#dni_{{$tipo_persona}}_{{$mode}}"), '0.000.000');
             $("#dni_{{$tipo_persona}}_{{$mode}}").blur(function(){
                 if($(this).val()!='')
                     validarDni($(this));
                 else
                     ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-head');
             });
-
-            applyInputMaskDni($("#dni_{{$tipo_persona}}_{{$mode}}"), '0.000.000');
             $("#apellido_{{$tipo_persona}}_{{$mode}}").keyup(function(){
                 ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-head');
             });

@@ -325,7 +325,6 @@
             {
                 if(validarDniModal(mode, dni))
                 {
-                    console.log("pasa por ak?");
                     if(nombre.val()=='')
                         {
                             mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
@@ -364,6 +363,7 @@
 
     function validarDniModal(mode, dni)
         {
+
             if(mode=='create')
             {
                 if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test(dni.val()))) 
