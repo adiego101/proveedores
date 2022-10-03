@@ -1,6 +1,6 @@
 <div class="ui-widget">
     <label for="dni_{{$tipo_persona}}_{{$mode}}">DNI:</label><br>
-    <input type="text" class="form-control dni" placeholder="Ingrese el dni del representante legal" @if ( $mode == "show") readonly @endif
+    <input type="text" class="form-control dni" placeholder="Ingrese el dni" @if ( $mode == "show") readonly @endif
         aria-describedby="basic-addon1" id="dni_{{$tipo_persona}}_{{$mode}}" name="dni_persona" data-tipo-persona="{{$tipo_persona}}" data-mode={{$mode}} maxlength="10" autocomplete="off">
     <small class="small" id="small-dni-{{$tipo_persona}}-{{$mode}}"></small>
 </div>

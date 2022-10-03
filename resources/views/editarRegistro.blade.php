@@ -124,6 +124,8 @@
     @include('edicionesModales.actividades')
     @include('personas.modal-create-edit', ['tipo_persona'=>'x', 'mode'=>'create'])
     @include('personas.modal-edit-edit', ['tipo_persona'=>'x', 'mode'=>'edit'])
+    @include('firmasNacExt.modal-create-edit', ['mode'=>'create'])
+    @include('firmasNacExt.modal-edit-edit', ['mode'=>'edit'])
     @include('modales.modalBaja')
     @yield('datos')
 
@@ -206,46 +208,16 @@
                     var cargo_persona = $("#cargo_x_create").val();
                     var datos;
                     if(tipo_persona!='direccion_firma')
-                    {
-                        if(dni_persona!='' && apellido_persona!='' && nombre_persona!='')
-                            datos={ dni: dni_persona, 
-                                    apellido: apellido_persona,
-                                    nombre: nombre_persona,
-                                    tipo_persona: tipo_persona};
-                        else
-                        {
-                            //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
-                            if(apellido_persona == '')
-                                $("#apellido_x_create").css('border','2px dashed red');
-                            if(nombre_persona == '')
-                                $("#nombre_x_create").css('border','2px dashed red');
-                            if(dni_persona == '')
-                                $("#dni_x_create").css('border','2px dashed red');
-                            return true;
-                        }
-                    }
+                        datos={ dni: dni_persona, 
+                                apellido: apellido_persona,
+                                nombre: nombre_persona,
+                                tipo_persona: tipo_persona};
                     else
-                    {
-                        if(dni_persona!='' && apellido_persona!='' && nombre_persona!='' && cargo_persona!='')
-                            datos={ dni: dni_persona, 
-                                    apellido: apellido_persona,
-                                    nombre: nombre_persona,
-                                    tipo_persona: tipo_persona,
-                                    cargo: cargo_persona};
-                        else
-                        {
-                            //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
-                            if(apellido_persona == '')
-                                $("#apellido_x_create").css('border','2px dashed red');
-                            if(nombre_persona == '')
-                                $("#nombre_x_create").css('border','2px dashed red');
-                            if(dni_persona == '')
-                                $("#dni_x_create").css('border','2px dashed red');
-                            if(cargo_persona == '')
-                                $("#cargo_x_create").css('border','2px dashed red');
-                            return true;
-                        }
-                    }
+                        datos={ dni: dni_persona, 
+                                apellido: apellido_persona,
+                                nombre: nombre_persona,
+                                tipo_persona: tipo_persona,
+                                cargo: cargo_persona};
                     $("button").prop("disabled", true);
                     $.ajax({
                         type: "post",
@@ -369,6 +341,51 @@
                     event.preventDefault();
             });
 
+            $("#store_banco").click(function(){
+                let nombre_banco = $("#nombre_banco_create").val();
+                let localidad_sucursal = $("#localidad_sucursal_create").val();
+                let tipo_cuenta = $("#tipo_cuenta_create").val();
+                let nro_cuenta = $("#nro_cuenta_create").val();
+                if(nombre_banco != '' && localidad_sucursal != '' && tipo_cuenta != '' && nro_cuenta != '')
+                {
+                    let datos = {   nombre_banco:nombre_banco,
+                                    localidad:localidad_sucursal,
+                                    tipo_cuenta:tipo_cuenta,
+                                    nro_cuenta:nro_cuenta}
+                    let url = '{{ url("proveedor/$id/banco/store") }}';
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: datos,
+                        success: function(response) {
+
+                            $('#add_banco').modal('hide');
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Referencia bancaria Guardada',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                toast: true
+
+                                });
+                            $('.yajra-bancos').DataTable().ajax.reload();
+                            $("button").prop("disabled", false);
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Referencia bancaria no guardada");
+                        }
+                    });
+                }
+                else
+                    event.preventDefault();
+
+            });
+
             $(document).on('click', '.edit_persona', function(event){
                 //event.stopImmediatePropagation();
                 console.log("detecta evento click en edit_persona");
@@ -399,14 +416,16 @@
 
             $(document).on("click", "#btn_baja", function() {
                 let tipo_baja = $("#btn_baja").data('tipo-baja');
+                let id_proveedor;
+                let url;
                 switch(tipo_baja)
                 {
                     case 'persona':
                         //Obtenemos el numero de la fila que queremos modificar
-                        var id_proveedor=   $("#btn_baja").data('id-proveedor');
+                        id_proveedor=   $("#btn_baja").data('id-proveedor');
                         let tipo_persona = $("#btn_baja").data('tipo-persona');
                         let id_persona = $("#btn_baja").data('id-persona');
-                        let url = '{{ url("proveedor/:id_proveedor/:tipo_persona/:id_persona/eliminar") }}';
+                        url = '{{ url("proveedor/:id_proveedor/:tipo_persona/:id_persona/eliminar") }}';
                         url = url.replace(':id_proveedor', id_proveedor);
                         url = url.replace(':tipo_persona', tipo_persona);
                         url = url.replace(':id_persona', id_persona);
@@ -438,7 +457,33 @@
 
                                             })
                             }
-                        });   
+                        }); 
+                    break;
+                    case 'firma':
+                        //Obtenemos el numero de la fila que queremos modificar
+                        id_proveedor=   $("#btn_baja").data('id-proveedor');
+                        let id_firma = $("#btn_baja").data('id-firma');
+                        url = '{{ url("proveedor/:id_proveedor/firma/:id_firma/eliminar") }}';
+                        url = url.replace(':id_proveedor', id_proveedor);
+                        url = url.replace(':id_firma', id_firma);
+
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            success: function() {
+                                $('.yajra-denominaciones').DataTable().ajax.reload();
+                                Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'info',
+                                            title: 'Firma dada de baja',
+                                            showConfirmButton: false,
+                                            timer: 1500,
+                                            toast: true
+
+                                            })
+                            }
+                        }); 
+                    break;
                 }
                 
 
@@ -472,13 +517,14 @@
             $('#modalBaja').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget); // Button that triggered the modal
                 var tipo_baja = button.data('tipo-baja');
+                var modal = $(this);
                 switch(tipo_baja)
                 {
                     case 'persona':
                         var tipo_persona = button.data('tipo-persona'); // Extract info from data-* attributes
                         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                        var modal = $(this);
+                        
                         if(tipo_persona == 'direccion_firma')
                             modal.find('.modal-body').html(   '<p>¿Está seguro que desea dar de baja a este miembro de los órganos de dirección y administración de firma?</p>'+
                                                                 '<p>Esta operación <b>NO</b> podrá deshacerse.</p>');
@@ -489,6 +535,13 @@
                         $("#btn_baja").data('id-proveedor',button.data('id-proveedor'));
                         $("#btn_baja").data('tipo-persona',tipo_persona);
                         $("#btn_baja").data('id-persona', button.data('id-persona'));
+                    break;
+                    case 'firma':
+                        modal.find('.modal-body').html(  '<p>¿Está seguro que desea dar de baja esta firma que representa?</p>'+
+                                                        '<p>Esta operación <b>NO</b> podrá deshacerse.</p>');
+                        $("#btn_baja").data('tipo-baja','firma');
+                        $("#btn_baja").data('id-proveedor',button.data('id-proveedor'));
+                        $("#btn_baja").data('id-firma', button.data('id-firma'));
                     break;
                 }
                 
@@ -509,9 +562,205 @@
                 //Obtenemos los campos obligatorios para aplicarles estilos css
                 borrarDatosModal();
             });
-            
 
+            $(document).on('click', '.edit_firma', function(event){
+                //event.stopImmediatePropagation();
+                console.log("detecta evento click en edit_firma");
+                var id_proveedor=$(this).data('id-proveedor');
+                var id_firma=$(this).data('id-firma');
+                console.log("id_proveedor"+id_proveedor);
+                let url = '{{ url("proveedor/:id_proveedor/firma/:id_firma/editar") }}';
+                url = url.replace(':id_proveedor', id_proveedor);
+                url = url.replace(':id_firma', id_firma);
+                console.log(url);
+                $('#update_firma').data('id-proveedor',id_proveedor);
+                $('#update_firma').data('id-firma',id_firma);
+                $('#edit_firma').find('.modal-title').text('Editar Firma Nacional o Extranjera');
+                
+                $.ajax({
+                    url: url,
+                    success: function(response) {
+                        abrirModalverFirma(response);
+                    }
+                });
+                
+            });
+            $('#store_firma').click(function(event){
+                if($("#denominacion_create").val()!='')
+                {
+                    let denominacion = $("#denominacion_create").val();
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: "{{ url('crearFirma/' . $id) }}",
+                        data: {denominacion:denominacion},
+                        success: function(response) {
+
+                            $('#add_firma').modal('hide');
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Firma Guardada',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                toast: true
+
+                                });
+                            $('.yajra-denominaciones').DataTable().ajax.reload();
+                            $("button").prop("disabled", false);
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Firma no guardada");
+                        }
+                    });
+                }
+            });
+            
+            $("#update_firma").click(function(){
+                let denominacion = $("#denominacion_edit").val();
+                if(denominacion!='')
+                {
+                    var id_proveedor=$(this).data('id-proveedor');
+                    var id_firma=$(this).data('id-firma');
+                    console.log("id_proveedor"+id_proveedor);
+                    let url = '{{ url("proveedor/:id_proveedor/firma/:id_firma/actualizar") }}';
+                    url = url.replace(':id_proveedor', id_proveedor);
+                    url = url.replace(':id_firma', id_firma);
+                    console.log("url"+url);
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: {denominacion:denominacion},
+                        success: function(response) {
+
+                            $('#edit_firma').modal('hide');
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Firma Nacional o Extranjera Guardada',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                toast: true
+
+                                });
+                            $('.yajra-denominaciones').DataTable().ajax.reload();
+                            $("button").prop("disabled", false);
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Firma nacional o extranjera no guardada");
+                        }
+                    });
+                }
+                else
+                {
+                    event.preventDefault();
+                    mostrarError($("#denominacion_edit"), '#small-denominacion-edit', '<p style="color:red;">La DENOMINACIÓN DE LA FIRMA <strong>no</strong> puede quedar vacía.</p>');
+                }
+            });
+
+        $(document).on('click', '.edit_banco', function(event){
+            console.log("detecta evento click en edit_banco");
+            var id_proveedor=$(this).data('id-proveedor');
+            var id_banco=$(this).data('id-banco');
+            console.log("id_proveedor"+id_proveedor);
+            let url = '{{ url("proveedor/:id_proveedor/banco/:id_banco/editar") }}';
+            url = url.replace(':id_proveedor', id_proveedor);
+            url = url.replace(':id_banco', id_banco);
+            console.log(url);
+            $('#update_banco').data('id-proveedor',id_proveedor);
+            $('#update_banco').data('id-banco',id_banco);
+            
+            $.ajax({
+                url: url,
+                success: function(response) {
+                    abrirModalverBanco(response);
+                }
+            });
         });
+
+        $("#update_banco").click(function(){
+                let nombre_banco = $("#nombre_banco_edit").val();
+                let localidad_sucursal = $("#localidad_sucursal_edit").val();
+                let tipo_cuenta = $("#tipo_cuenta_edit").val();
+                let nro_cuenta = $("#nro_cuenta_edit").val();
+                console.log("nombre_banco="+nombre_banco+" localidad="+localidad_sucursal+" tipo cuenta="+tipo_cuenta+" nro_cuenta="+nro_cuenta);
+                if(nombre_banco!='' && localidad_sucursal!='' && tipo_cuenta!='' && nro_cuenta!='')
+                {
+                    var id_proveedor=$(this).data('id-proveedor');
+                    var id_banco=$(this).data('id-banco');
+                    console.log("id_proveedor"+id_proveedor);
+                    let url = '{{ url("proveedor/:id_proveedor/banco/:id_banco/actualizar") }}';
+                    url = url.replace(':id_proveedor', id_proveedor);
+                    url = url.replace(':id_banco', id_banco);
+                    console.log("url"+url);
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: 
+                            {   nombre_banco:nombre_banco,
+                                localidad_sucursal:localidad_sucursal,
+                                tipo_cuenta:tipo_cuenta,
+                                nro_cuenta:nro_cuenta
+                            },
+                        success: function(response) {
+                            if(response['error'])
+                            {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: response['error'],
+                                    showConfirmButton: false,
+                                    timer: 2500,
+                                    toast: true
+                                    });
+                                $("button").prop("disabled", false);
+                            }
+                            else
+                            {
+                                $('#edit_banco').modal('hide');
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Referencia bancaria guardada',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    toast: true
+
+                                    });
+                                $('.yajra-bancos').DataTable().ajax.reload();
+                                $("button").prop("disabled", false);
+                            }
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Referencia bancaria no guardada");
+                        }
+                    });
+                }
+                else
+                {
+                    event.preventDefault();
+                    if(nombre_banco=='')
+                        mostrarError($("#nombre_banco_edit"), '#small-banco-edit', '<p style="color:red;">El NOMBRE DEL BANCO DE REFERENCIA <strong>no</strong> puede quedar vacío.</p>');
+                    if(localidad_sucursal=='')
+                        mostrarError($("#localidad_sucursal_edit"), '#small-localidad-sucursal-edit', '<p style="color:red;">La LOCALIDAD DE LA SUCURSAL <strong>no</strong> puede quedar vacía.</p>');
+                    if(tipo_cuenta=='')
+                        mostrarError($("#tipo_cuenta_edit"), '#small-tipo-cuenta-edit', '<p style="color:red;">El TIPO DE CUENTA <strong>no</strong> puede quedar vacío.</p>');
+                    if(nro_cuenta=='')
+                        mostrarError($("#nro_cuenta_edit"), '#small-nro-cuenta-edit', '<p style="color:red;">El NRO DE CUENTA <strong>no</strong> puede quedar vacío.</p>');
+                }
+            });
+
+    });
 
         function borrarDatosModal(){
             $("#apellido_x_create").css('border','1px solid #DFDFDF');
@@ -559,7 +808,7 @@
                 $('#div_cargo_x_edit').show();
             }
             
-        }   
+        } 
         
     </script>
         

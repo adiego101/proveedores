@@ -79,7 +79,7 @@
                     $("#row_persona_{{$tipo_persona}}").remove();
 
                     $("#body_table_persona_{{$tipo_persona}}").append(
-                        '<tr id="row_persona' + indice + '">' +
+                        '<tr id="row_persona_{{$tipo_persona}}' + indice + '">' +
                             '<td> <div id="apellido_persona_text_{{$tipo_persona}}' + indice + '">' + apellido_persona +'</div></td>'+
                             '<td> <div id="nombre_persona_text_{{$tipo_persona}}' + indice + '">' + nombre_persona +'</div></td>'+
                             '<td> <div id="dni_persona_text_{{$tipo_persona}}' + indice + '">' + dni_persona +'</div></td>'+
@@ -161,7 +161,9 @@
 
                     })
                 }
-            } else {
+            } 
+            else 
+            {
                 event.preventDefault();
                 //Desplegamos el modal
                 $('#modal_validar_persona').modal('show');
@@ -249,12 +251,15 @@
         });
 
         $(document).ready(function(){
-            applyInputMaskDni($("#dni_{{$tipo_persona}}_{{$mode}}"), '0.000.000');
-            $("#dni_{{$tipo_persona}}_{{$mode}}").change(function(){
+            
+            $("#dni_{{$tipo_persona}}_{{$mode}}").blur(function(){
                 if($(this).val()!='')
                     validarDni($(this));
+                else
+                    ocultarError('#dni_{{$tipo_persona}}_{{$mode}}', '#small-dni-{{$tipo_persona}}-head');
             });
-            
+
+            applyInputMaskDni($("#dni_{{$tipo_persona}}_{{$mode}}"), '0.000.000');
             $("#apellido_{{$tipo_persona}}_{{$mode}}").keyup(function(){
                 ocultarError('#apellido_{{$tipo_persona}}_{{$mode}}', '#small-apellido-{{$tipo_persona}}-head');
             });

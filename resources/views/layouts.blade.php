@@ -75,7 +75,7 @@
                 theme: "bootstrap",    width: 'resolve' // need to override the changed default
             });
 
-
+        
         $('input[type="checkbox"]').on('change', function(){
             this.value = this.checked ? 1 : 0;
             //console.log(this.value);
@@ -84,13 +84,13 @@
         $('#razon_social').keyup(function() {
             if($('#razon_social').val() == "")
             {
-                mostrarError('#razon_social', '#small-razon_social', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+                mostrarError('#razon_social', '#small-razon-social-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
                 //mostrarError('#razon_social', '#small-razon_social2', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
                 return false;
             }
             else
             {
-                ocultarError('#razon_social', '#small-razon_social');
+                ocultarError('#razon_social', '#small-razon-social-head');
                 //ocultarError('#razon_social', '#small-razon_social2');
                 return true;
             }
@@ -99,13 +99,13 @@
         $('#nombre_fantasia').keyup(function() {
             if($('#nombre_fantasia').val() == "")
             {
-                mostrarError('#nombre_fantasia', '#small-nombre_fantasia', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
+                mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
                 //mostrarError('#nombre_fantasia', '#small-nombre_fantasia2', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
                 return false;
             }
             else
             {
-                ocultarError('#nombre_fantasia', '#small-nombre_fantasia');
+                ocultarError('#nombre_fantasia', '#small-nombre-fantasia-head');
                 //ocultarError('#nombre_fantasia', '#small-nombre_fantasia2');
                 return true;
             }
@@ -113,26 +113,28 @@
 
         $('#cuit').keyup(function() 
             {
-                if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) 
-                {
-                    mostrarError('#cuit', '#small-cuit-mal-formato', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
-                    //mostrarError('#cuit', '#small-cuit2', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
-                    if($('#cuit').val() == "")
-                    {
-                        mostrarError('#cuit', '#small-cuit-vacio', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
-                        //mostrarError('#cuit', '#small-cuit4', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
-                        return false;
-                    }
-                }
+                if($('#cuit').val() == "")
+                    mostrarError('#cuit', '#small-cuit-vacio-head', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
                 else
                 {
-                    ocultarError('#cuit', '#small-cuit-mal-formato');
-                    //ocultarError('#cuit', '#small-cuit2');
-                    ocultarError('#cuit', '#small-cuit-vacio');
-                    //ocultarError('#cuit', '#small-cuit4');
-                    return true;
+                    ocultarError('#cuit', '#small-cuit-vacio-head');
+                    if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) 
+                        mostrarError('#cuit', '#small-cuit-mal-formato-head', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
+                    else
+                        ocultarError('#cuit', '#small-cuit-mal-formato-head');
                 }
             });
+        applyInputMaskCuit($("#cuit"), '00-00000000-0');
+
+        $("#provincia_sucursal_create").change(function(){
+                if ($('#provincia_sucursal_create').val()!='')
+                    recargarLocalidadSucursal($('#provincia_sucursal_create').val(), $('#localidad_sucursal_create'));
+            });
+
+        $("#provincia_sucursal_edit").change(function(){
+            if ($('#provincia_sucursal_edit').val()!='')
+                recargarLocalidadSucursal($('#provincia_sucursal_edit').val(), $('#localidad_sucursal_edit'));
+        });
     });
 
     function applyInputMaskDni(dni, mask) {
@@ -160,6 +162,20 @@
                 }
             }
             dni.val(maskIt(mask, content));
+        });
+    }
+
+    function applyInputMaskCuit(cuit, mask) {
+        let content = '';
+        let maxChars = numberCharactersPattern(mask);
+        cuit.keydown(function(e) {
+            e.preventDefault();
+            if (isNumeric(e.key) && content.length < maxChars)
+                content += e.key;
+            if(e.code == 'Backspace') 
+                if(content.length > 0)
+                    content = content.substr(0, content.length - 1);
+            cuit.val(maskIt(mask, content));
         });
     }
 
@@ -215,7 +231,7 @@
                             return false;
                     }
                     else
-                        return true;
+                        return false;
                 }
                 else
                 {
@@ -250,7 +266,29 @@
                         }
                 }
                 else
-                    return false;
+                {
+                    if(nombre.val()=='')
+                    {
+                        mostrarError(nombre, '#small-nombre-x-'+mode, '<p style="color:red;">El NOMBRE de la persona <strong>no</strong> puede quedar vacío.</p>');
+                        if(tipo_persona=='direccion_firma')
+                        {
+                            if(cargo.val()=='')
+                            {
+                                mostrarError(cargo, '#small-cargo-x-'+mode, '<p style="color:red;">El CARGO de la persona <strong>no</strong> puede quedar vacío.</p>');
+                                return false;
+                            }
+                            else
+                                return false;
+                        }
+                        else
+                            return false;
+                    }
+                    else
+                        {
+                            ocultarError(nombre, '#small-nombre-x-'+mode);
+                            return false;
+                        }
+                }
             }
         }
         else
@@ -356,6 +394,29 @@
                     }
                 }
         }
+    
+    function recargarLocalidadSucursal(provincia_selected, select_localidad){
+        $.ajax({
+            type:"GET",
+            url:"{{url('localidades')}}/"+provincia_selected,
+            success:function(r){
+                select_localidad.html(r);
+            }
+        });
+    }
+
+    function recargarLocalidadSucursal(provincia_selected, select_localidad, nro_sucursal){
+        $.ajax({
+            type:"GET",
+            url:"{{url('localidades')}}/"+provincia_selected,
+            success:function(r){
+                select_localidad.html(r);
+            }
+        }).done(function(){
+            if($("#localidad_sucursal" + nro_sucursal).val()!='')
+                $('#localidad_sucursal_edit').val($("#localidad_sucursal" + nro_sucursal).val()).trigger('change.select2');       
+        });
+    }
 
     function mostrarError(campo, error, msg) {
         $(campo).addClass('is-invalid');

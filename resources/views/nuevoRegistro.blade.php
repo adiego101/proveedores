@@ -86,6 +86,11 @@
             )
         );
 
+        .invalid.select2-selection
+        {
+            border: 1px solid red;
+        }
+
     </style>
 
 
@@ -98,10 +103,10 @@
         y presione el botón <b>Siguiente</b>, para continuar la carga de datos.
     </div>
 
-    <small class="small" id="small-razon_social"></small>
-    <small class="small" id="small-nombre_fantasia"></small>
-    <small class="small" id="small-cuit4"></small>
-    <small class="small" id="small-cuit2"></small>
+    <small class="small" id="small-razon-social-head"></small>
+    <small class="small" id="small-nombre-fantasia-head"></small>
+    <small class="small" id="small-cuit-mal-formato-head"></small>
+    <small class="small" id="small-cuit-vacio-head"></small>
     <small class="small" id="small-dni-miembro-head"></small>
     <small class="small" id="small-apellido-miembro-head"></small>
     <small class="small" id="small-nombre-miembro-head"></small>
@@ -112,6 +117,12 @@
     <small class="small" id="small-dni-apoderado-head"></small>
     <small class="small" id="small-apellido-apoderado-head"></small>
     <small class="small" id="small-nombre-apoderado-head"></small>
+    <small class="small" id="small-denominacion-head"></small>
+    <small class="small" id="small-banco-head"></small>
+    <small class="small" id="small-localidad-sucursal-head"></small>
+    <small class="small" id="small-tipo-cuenta-head"></small>
+    <small class="small" id="small-nro-cuenta-head"></small>
+    
 
     <form  id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
         @csrf
@@ -258,37 +269,12 @@
                 }
             }
         });
-
-        $('#cuit').keyup(function() 
-        {
-            if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) 
-            {
-                mostrarError('#cuit', '#small-cuit-mal-formato', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
-                //mostrarError('#cuit', '#small-cuit2', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
-                if($('#cuit').val() == "")
-                {
-                    mostrarError('#cuit', '#small-cuit-vacio', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
-                    //mostrarError('#cuit', '#small-cuit4', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
-                    return false;
-                }
-            }
-            else
-            {
-                ocultarError('#cuit', '#small-cuit-mal-formato');
-                //ocultarError('#cuit', '#small-cuit2');
-                ocultarError('#cuit', '#small-cuit-vacio');
-                //ocultarError('#cuit', '#small-cuit4');
-                return true;
-            }
-        });
         if ($('#provincia_real_create').val()!='')
             recargarListaDomicilio($('#provincia_real_create').val(), $("#localidad_real_create"));
         if ($('#provincia_legal_create').val()!='')
             recargarListaDomicilio($('#provincia_legal_create').val(), $('#localidad_legal_create'));
         if ($('#provincia_fiscal_create').val()!='')
             recargarListaDomicilio($('#provincia_fiscal_create').val(), $('#localidad_fiscal_create'));
-        if ($('#provincia_habilitacion').val()!='')
-            recargarListaHabilitacion();
 
         //Modificamos los valores actuales, por los nuevos valores ingresados en el modal
 
@@ -296,103 +282,206 @@
             //Obtenemos el numero de la fila que queremos modificar
             var tipo_persona = $(this).data('tipo-persona');
             var id_filapersona = $("#numero_fila_persona").val();
-
-            
-
-            //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
-            if(validarExisteDatosPersonaModal('edit', $("#dni_x_edit"), $("#apellido_x_edit"), $("#nombre_x_edit"), $("#cargo_x_edit")))
+            if(id_filapersona!='')
             {
-                //Recuperamos los valores de los campos del modal
-                var apellido_persona = $("#apellido_x_edit").val();
-                var nombre_persona = $("#nombre_x_edit").val();
-                var dni_persona = $("#dni_x_edit").val();
-                var cargo_persona='';
-                if(tipo_persona =='direccion_firma')
-                    cargo_persona = $('#cargo_x_edit').val();
-                if(tipo_persona=='direccion_firma')
+                //Si los campos obligatorios NO estan vacios, permite enviar los nuevos valores a la tabla
+                if(validarExisteDatosPersonaModal('edit', $("#dni_x_edit"), $("#apellido_x_edit"), $("#nombre_x_edit"), $("#cargo_x_edit")))
                 {
-                    $('#edit_persona').modal('hide');
-                    //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                    
-                    $('#nombre_persona_direccion_firma' + id_filapersona).val(nombre_persona);
-                    $('#dni_persona_direccion_firma' + id_filapersona).val(dni_persona);
-                    $('#cargo_persona_direccion_firma' + id_filapersona).val(cargo_persona);
+                    //Recuperamos los valores de los campos del modal
+                    var apellido_persona = $("#apellido_x_edit").val();
+                    var nombre_persona = $("#nombre_x_edit").val();
+                    var dni_persona = $("#dni_x_edit").val();
+                    var cargo_persona='';
+                    if(tipo_persona =='direccion_firma')
+                        cargo_persona = $('#cargo_x_edit').val();
+                    if(tipo_persona=='direccion_firma')
+                    {
+                        $('#edit_persona').modal('hide');
+                        //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
+                        
+                        $('#nombre_persona_direccion_firma' + id_filapersona).val(nombre_persona);
+                        $('#dni_persona_direccion_firma' + id_filapersona).val(dni_persona);
+                        $('#cargo_persona_direccion_firma' + id_filapersona).val(cargo_persona);
 
-                    //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
-                    $('#apellido_persona_text_direccion_firma' + id_filapersona).text(apellido_persona);
-                    $('#nombre_persona_text_direccion_firma' + id_filapersona).text(nombre_persona);
-                    $('#dni_persona_text_direccion_firma' + id_filapersona).text(dni_persona);
-                    $('#cargo_persona_text_direccion_firma' + id_filapersona).text(cargo_persona);
+                        //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+                        $('#apellido_persona_text_direccion_firma' + id_filapersona).text(apellido_persona);
+                        $('#nombre_persona_text_direccion_firma' + id_filapersona).text(nombre_persona);
+                        $('#dni_persona_text_direccion_firma' + id_filapersona).text(dni_persona);
+                        $('#cargo_persona_text_direccion_firma' + id_filapersona).text(cargo_persona);
 
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Persona Modificada',
+                            showConfirmButton: false,
+                            timer: 1500,
+                            toast: true
+                        });
+                    }
+                    else
+                    {
+
+                        //Ocultamos el modal
+                        $('#edit_persona').modal('hide');
+                        switch(tipo_persona)
+                        {
+                            case 'miembro':
+                                //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
+                            
+                                $('#apellido_persona_miembro' + id_filapersona).val(apellido_persona);
+                                
+                                $('#nombre_persona_miembro' + id_filapersona).val(nombre_persona);
+                                $('#dni_persona_miembro' + id_filapersona).val(dni_persona);
+
+                                //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+                                $('#apellido_persona_text_miembro' + id_filapersona).text(apellido_persona);
+                                $('#nombre_persona_text_miembro' + id_filapersona).text(nombre_persona);
+                                $('#dni_persona_text_miembro' + id_filapersona).text(dni_persona);
+
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Persona Modificada',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    toast: true
+
+                                });
+                            break;
+                            case 'apoderado':
+                                //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
+                            
+                                $('#apellido_persona_apoderado' + id_filapersona).val(apellido_persona);
+                                
+                                $('#nombre_persona_apoderado' + id_filapersona).val(nombre_persona);
+                                $('#dni_persona_apoderado' + id_filapersona).val(dni_persona);
+
+                                //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
+                                $('#apellido_persona_text_apoderado' + id_filapersona).text(apellido_persona);
+                                $('#nombre_persona_text_apoderado' + id_filapersona).text(nombre_persona);
+                                $('#dni_persona_text_apoderado' + id_filapersona).text(dni_persona);
+
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Persona Modificada',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                    toast: true
+
+                                });
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
+                    event.preventDefault();
+                }
+            }
+            //Obtenemos el numero de la fila que queremos modificar
+            var id_fila_denominacion = $("#numero_fila_denominacion").val();
+            if(id_fila_denominacion!='')
+            {
+                //Recuperamos el valor del campo del modal
+                var modal_denominacion = $("#denominacion_edit").val();
+
+                //Si el campo obligatorio NO esta vacio, permite enviar el nuevo valore a la tabla
+                if(modal_denominacion != ''){
+
+                    //Ocultamos el modal
+                    $('#modal_denominaciones').modal('hide');
+
+                    //Enviamos el valor recuperado anteriormente del modal, al input de la tabla
+                    $('#denominacion' + id_fila_denominacion).val(modal_denominacion);
+
+                    //Enviamos el valor recuperado anteriormente del modal, al texto visible de la tabla
+                
+                    $('#denominacion_text' + id_fila_denominacion).text(modal_denominacion);
+                    ocultarError($('#denominacion_edit'), '#small-denominacion-head');
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Persona Modificada',
+                        title: 'Denominación Modificada',
                         showConfirmButton: false,
                         timer: 1500,
                         toast: true
-                    });
+
+                    })
+
                 }
                 else
                 {
 
-                    //Ocultamos el modal
-                    $('#edit_persona').modal('hide');
-                    switch(tipo_persona)
-                    {
-                        case 'miembro':
-                            //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                        
-                            $('#apellido_persona_miembro' + id_filapersona).val(apellido_persona);
-                            
-                            $('#nombre_persona_miembro' + id_filapersona).val(nombre_persona);
-                            $('#dni_persona_miembro' + id_filapersona).val(dni_persona);
-
-                            //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
-                            $('#apellido_persona_text_miembro' + id_filapersona).text(apellido_persona);
-                            $('#nombre_persona_text_miembro' + id_filapersona).text(nombre_persona);
-                            $('#dni_persona_text_miembro' + id_filapersona).text(dni_persona);
-
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Persona Modificada',
-                                showConfirmButton: false,
-                                timer: 1500,
-                                toast: true
-
-                            });
-                        break;
-                        case 'apoderado':
-                            //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                        
-                            $('#apellido_persona_apoderado' + id_filapersona).val(apellido_persona);
-                            
-                            $('#nombre_persona_apoderado' + id_filapersona).val(nombre_persona);
-                            $('#dni_persona_apoderado' + id_filapersona).val(dni_persona);
-
-                            //Enviamos los valores recuperados anteriormente del modal, a los textos visibles de la tabla
-                            $('#apellido_persona_text_apoderado' + id_filapersona).text(apellido_persona);
-                            $('#nombre_persona_text_apoderado' + id_filapersona).text(nombre_persona);
-                            $('#dni_persona_text_apoderado' + id_filapersona).text(dni_persona);
-
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Persona Modificada',
-                                showConfirmButton: false,
-                                timer: 1500,
-                                toast: true
-
-                            });
-                        break;
-                    }
+                    //Si el campo obligatorio esta vacio, detenemos el envio del dato.
+                    event.preventDefault();
+                    mostrarError($("#denominacion_edit"), '#small-denominacion-edit', '<p style="color:red;">La DENOMICACIÓN de la firma nacional o extranjera que representa <strong>no</strong> puede quedar vacía.</p>');
                 }
             }
-            else
+            //Obtenemos el numero de la fila que queremos modificar
+            var id_fila_banco= $("#numero_fila_banco").val();
+            if(id_fila_banco!='')
             {
-                //Si alguno de los campos obligatorios esta vacio, detenemos el envio de los datos.
-                event.preventDefault();
+                //Recuperamos el valor del campo del modal
+                var nombre_banco = $("#nombre_banco_edit").val();
+                var tipo_cuenta = $("#tipo_cuenta_edit").val();
+                var provincia_sucursal = $("#provincia_sucursal_edit").val();
+                var localidad_sucursal = $("#localidad_sucursal_edit").val();
+                var nro_cuenta = $("#nro_cuenta_edit").val();
+                console.log('"nombre de banco ='+nombre_banco+' tipo cuenta ='+tipo_cuenta+' provincia = '+provincia_sucursal+' localidad = '+ localidad_sucursal + 'nro cuenta = '+nro_cuenta);
+                //Si el campo obligatorio NO esta vacio, permite enviar el nuevo valore a la tabla
+                if(nombre_banco != '' && tipo_cuenta != '' && localidad_sucursal != '' && nro_cuenta != '')
+                {
+                    //Ocultamos el modal
+                    $('#modal_banco').modal('hide');
+
+                    //Enviamos el valor recuperado anteriormente del modal, al input de la tabla
+                    $('#nombre_banco' + id_fila_banco).val(nombre_banco);
+                    $('#provincia_sucursal' + id_fila_banco).val(provincia_sucursal);
+                    $('#localidad_sucursal' + id_fila_banco).val(localidad_sucursal);
+                    $('#tipo_cuenta' + id_fila_banco).val(tipo_cuenta);
+                    $('#nro_cuenta' + id_fila_banco).val(nro_cuenta);
+
+                    //Enviamos el valor recuperado anteriormente del modal, al texto visible de la tabla
+                
+                    $('#nombre_banco_text' + id_fila_banco).text(nombre_banco);
+                    $('#sucursal_text' + id_fila_banco).text($("#localidad_sucursal_edit option:selected").text());
+                    $('#tipo_cuenta_text' + id_fila_banco).text(tipo_cuenta);
+                    $('#nro_cuenta_text' + id_fila_banco).text(nro_cuenta);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Referencia bancaria modificada',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        toast: true
+                    })
+                    ocultarError($('#nombre_banco_edit'), '#small-banco-edit');
+                    ocultarError($('#tipo_cuenta_edit'), '#small-tipo-cuenta-edit');
+                    ocultarError($('#localidad_sucursal_edit'), '#small-localidad-sucursal-edit');
+                    ocultarError($('#nro_cuenta_edit'), '#small-nro-cuenta-edit');
+                }
+                else
+                {
+
+                    //Si el campo obligatorio esta vacio, detenemos el envio del dato.
+                    event.preventDefault();
+                    if($("#nombre_banco_edit").val()=='')
+                    {
+                        $("#nombre_banco_create").parents('.form-group').find('.select2-selection').css('border', '1px solid red');
+                        mostrarError($("#nombre_banco_edit"), '#small-banco-edit', '<p style="color:red;">El NOMBRE DEL BANCO DE REFERENCIA <strong>no</strong> puede quedar vacío.</p>');
+                    }
+                    if($("#tipo_cuenta_edit").val()=='')
+                        mostrarError($("#tipo_cuenta_edit"), '#small-tipo-cuenta-edit', '<p style="color:red;">El TIPO DE CUENTA <strong>no</strong> puede quedar vacío.</p>');
+                    if($("#localidad_sucursal_edit").val()=='')
+                    {
+                        $("#localidad_sucursal_create").parents('.form-group').find('.select2-selection').css('border', '1px solid red');
+                        mostrarError($("#sucursal_edit"), '#small-localidad-sucursal-edit', '<p style="color:red;">La LOCALIDAD DE SUCURSAL <strong>no</strong> puede quedar vacío.</p>');
+                    }
+                    if($("#nro_cuenta_edit").val()=='')
+                        mostrarError($("#nro_cuenta_edit"), '#small-nro-cuenta-edit', '<p style="color:red;">El NRO DE CUENTA <strong>no</strong> puede quedar vacío.</p>');
+                }
             }
         });
 
@@ -404,6 +493,15 @@
             ocultarError($('#nombre_x_edit'), '#small-nombre-x-edit');
             ocultarError($('#cargo_x_edit'), '#small-cargo-x-edit');
             $("#div_cargo_x_edit").hide();
+
+            ocultarError($('#denominacion_edit'), '#small-denominacion-edit');
+
+            $("#nombre_banco_edit").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+            ocultarError('#nombre_banco_edit', '#small-banco-edit');
+            $("#localidad_sucursal_edit").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+            ocultarError('#localidad_sucursal_edit', '#small-localidad-sucursal-edit');
+            ocultarError('#tipo_cuenta_edit', '#small-tipo-cuenta-edit');
+            ocultarError('#nro_cuenta_edit', '#small-nro-cuenta-edit');
         });
 
         $('#edit_persona').on('hidden.bs.modal', function (event) {
@@ -412,6 +510,65 @@
             ocultarError($('#nombre_x_edit'), '#small-nombre-x-edit');
             ocultarError($('#cargo_x_edit'), '#small-cargo-x-edit');
             $("#div_cargo_x_edit").hide();
+        });
+        
+        $('#modal_denominaciones').on('hidden.bs.modal', function (event) {
+            ocultarError($('#denominacion_edit'), '#small-denominacion-edit');
+        });
+
+        $('#modal_banco').on('hidden.bs.modal', function (event) {
+            $("#nombre_banco_edit").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+            ocultarError('#nombre_banco_edit', '#small-banco-edit');
+            $("#localidad_sucursal_edit").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+            ocultarError('#localidad_sucursal_edit', '#small-localidad-sucursal-edit');
+            ocultarError('#tipo_cuenta_edit', '#small-tipo-cuenta-edit');
+            ocultarError('#nro_cuenta_edit', '#small-nro-cuenta-edit');
+        });
+
+        $('#denominacion_edit').keyup(function(){
+            ocultarError($('#denominacion_edit'), '#small-denominacion-edit');
+        });
+
+        $('#denominacion_create').keyup(function(){
+            ocultarError($('#denominacion_create'), '#small-denominacion-head');
+        });
+
+        $('#nombre_banco_create').change(function(){
+            if($('#nombre_banco_create').val()!='')
+                ocultarError($('#nombre_banco_create'), '#small-banco-head');
+        });
+
+        $('#tipo_cuenta_create').change(function(){
+            if($('#tipo_cuenta_create').val()!='')
+                ocultarError($('#tipo_cuenta_create'), '#small-tipo-cuenta-head');
+        });
+
+        $('#localidad_sucursal_create').change(function(){
+            if($('#localidad_sucursal_create').val()!='')
+                ocultarError($('#localidad_sucursal_create'), '#small-localidad-sucursal-head');
+        });
+
+        $('#nro_cuenta_create').change(function(){
+            if($('#nro_cuenta_create').val()!='')
+                ocultarError($('#nro_cuenta_create'), '#small-nro-cuenta-head');
+        });
+
+        $('#nombre_banco_edit').change(function(){
+            if($('#nombre_banco_edit').val()!='')
+                ocultarError($('#nombre_banco_edit'), '#small-banco-edit');
+        });
+
+        $('#tipo_cuenta_edit').keyup(function(){
+                ocultarError($('#tipo_cuenta_edit'), '#small-tipo-cuenta-edit');
+        });
+
+        $('#localidad_sucursal_edit').change(function(){
+            if($('#localidad_sucursal_edit').val()!='')
+                ocultarError($('#localidad_sucursal_edit'), '#small-localidad-sucursal-edit');
+        });
+
+        $('#nro_cuenta_edit').keyup(function(){
+            ocultarError($('#nro_cuenta_edit'), '#small-nro-cuenta-edit');
         });
 
     });
@@ -451,17 +608,6 @@
                     '<td>No hay registros</td>'+
                     '<td></td>'+
                 '</tr>');
-
-
-        var cant_filas_firma = document.getElementById("body_table_denominacion").rows.length;
-
-        if(cant_filas_firma == 0)
-            $("#body_table_denominacion").append(
-                '<tr id="row_denominacion" class="alert alert-light" role="alert">'+
-                    '<td>No hay registros</td>'+
-                    '<td></td>'+
-                '</tr>');
-
 
         var cant_filas_banco = document.getElementById("body_table_banco").rows.length;
 

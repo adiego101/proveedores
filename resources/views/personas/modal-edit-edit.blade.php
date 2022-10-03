@@ -21,10 +21,12 @@
 @push('js')
   <script>
     $(document).ready(function(){
-      applyInputMask($("#dni_x_{{$mode}}"), '0.000.000');
-      $("#dni_x_{{$mode}}").change(function(){
+      applyInputMaskDni($("#dni_x_{{$mode}}"), '0.000.000');
+      $("#dni_x_{{$mode}}").blur(function(){
         if($(this).val()!='')
-            validarDniModal('{{$mode}}', $(this));
+            validarDniModal($(this).data('mode'), $(this));
+        else
+            ocultarError($(this), '#small-dni-x-{{$mode}}');
       });
           
       $("#apellido_x_{{$mode}}").keyup(function(){

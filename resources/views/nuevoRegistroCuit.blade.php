@@ -48,29 +48,6 @@
 
 
 
-@push('js')
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        applyInputMaskCuit($("#cuit"), '00-00000000-0');
-    })
-
-    function applyInputMaskCuit(cuit, mask) {
-        let content = '';
-        let maxChars = numberCharactersPattern(mask);
-        cuit.keydown(function(e) {
-            e.preventDefault();
-            if (isNumeric(e.key) && content.length < maxChars)
-                content += e.key;
-            if(e.code == 'Backspace') 
-                if(content.length > 0)
-                    content = content.substr(0, content.length - 1);
-            cuit.val(maskIt(mask, content));
-        });
-    }
-</script>
-
-@endpush
 
 
 @push('css')

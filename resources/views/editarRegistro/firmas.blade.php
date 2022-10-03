@@ -3,13 +3,9 @@
 
     @if ($mode == 'edit')
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaDenominacion">
-            Agregar Nueva Denominación
-        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_firma" >Agregar Firma</button>
 
         <br>
-        <br>
-
     @endif
 
     <div>
@@ -48,8 +44,7 @@
 @push('js')
 
     <script type="text/javascript">
-    /*
-        $(function() {
+        $(document).ready(function() {
 
             var table = $('.yajra-denominaciones').DataTable({
                 language: {
@@ -77,8 +72,8 @@
                 ajax: "{{ url('firmas/' . $id . '/' . $mode) }}",
                 columns: [
                     {
-                        data: 'denominaciones',
-                        name: 'denominaciones'
+                        data: 'denominacion_firma',
+                        name: 'denominacion_firma'
                     },
                     {
                         data: 'action',
@@ -89,9 +84,31 @@
                     },
                 ]
             });
-
+            
         });
 
+        function verFirma(elemento) {
+            console.log("**detecta evento click en edit_firma");
+            var id_proveedor=elemento.data('id-proveedor');
+            var id_firma=elemento.data('id-firma');
+            console.log("id_proveedor = "+id_proveedor);
+            let url = '{{ url("proveedor/:id_proveedor/firma/:id_firma.") }}';
+            url = url.replace(':id_proveedor', id_proveedor);
+            url = url.replace(':id_firma', id_firma);
+            console.log(url);
+            $.ajax({
+                url: url,
+                success: function(response) {
+                    abrirModalverFirma(response);
+                }
+            });
+        }
+
+        function abrirModalverFirma(response) {
+            $('#edit_firma').modal('show');
+            console.log("denominacion_firma="+response['denominacion_firma']);
+            $('#denominacion_edit').val(response['denominacion_firma']);            
+        } 
 
         function bajaDenominacion(id_registro) {
 
@@ -99,8 +116,6 @@
             $('#modal_baja_denominacion').modal('show');
             $('#baja_denominacion').val(id_registro);
         }
-
-    */
     </script>
     
 @endpush

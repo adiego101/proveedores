@@ -29,7 +29,11 @@ class Banco extends Model
         return Banco::find($id);
     }
 
-    public function proveedor(){
-        return $this->belongsTo(Proveedor::class, 'id_proveedor', 'id_proveedor');
+    public function proveedores(){
+        return $this->belongsToMany(Proveedor::class, 'proveedores_bancos', 'id_banco', 'id_proveedor');
+    }
+
+    public function localidades(){
+        return $this->belongsToMany(Localidad::class, 'proveedores_bancos', 'id_banco', 'id_localidad');
     }
 }

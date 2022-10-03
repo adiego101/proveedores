@@ -4,10 +4,7 @@
 
     <br>
       
-    <label for="denominacion">Denominación:</label><br>
-    <input type="text" class="form-control" placeholder="Ingrese la denominación" aria-describedby="basic-addon1" id="denominacion" name="denominacion" maxlength="50">
-
-    <br>
+    @include('firmasNacExt.form', ['mode'=>'create'])
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a id="add_denominacion" class="btn btn-success">Agregar Denominación</a>
@@ -16,7 +13,7 @@
     <br>
 
     <div>
-        <table class="table table-hover">
+        <table class="table table-hover" id="firmas_nac_ext">
             <thead>
                 <tr>
                     <th>Denominación</th>
@@ -38,7 +35,7 @@
 
     <!--Incluimos el modal para editar una denominación-->
 
-    @include('modales.editarFirma')
+    @include('firmasNacExt.modal-edit-create',['mode'=>'edit'])
 
     <!--Incluimos el modal para validar una denominación -->
 
@@ -47,6 +44,18 @@
 </fieldset>
 
 @push('js')
+    <script type="text/javascript">
+
+        var cant_filas_firma = $("#body_table_denominacion > tr").length;
+        var cant_columnas_firma = $("#firmas_nac_ext > thead> tr > th").length;
+console.log("cantidad de columnas denominacion ="+cant_columnas_firma);
+        if(cant_filas_firma == 0)
+            $("#body_table_denominacion").append(
+                '<tr id="row_denominacion" class="alert alert-light" role="alert">No hay registros'+
+                '<td colspan="'+cant_columnas_firma+'" align="center">No hay registros</td>'+
+                '</tr>');
+
+    </script>
 
     <script type="text/javascript">
 
@@ -55,13 +64,9 @@
 
         $("#add_denominacion").on("click", function(e) {
 
-            denominacion = $('#denominacion').val();
-
-            //Obtenemos los campos obligatorios para aplicarles estilos css
-            let denominacion_css = document.getElementById("denominacion");
-
-
-            if(denominacion.length != 0){
+            denominacion = $('#denominacion_{{$mode}}').val();
+            if(denominacion!= '')
+            {
 
                 //borra la fila con el mensaje vacio
                 $("#row_denominacion").remove();
@@ -81,9 +86,8 @@
 
                 //Limpiamos cada campo luego de presionar el botón Agregar Denominacion
 
-                document.getElementById("denominacion").value = "";
-                
-                denominacion_css.style.border = '1px solid #DFDFDF';
+                $('#denominacion_{{$mode}}').val('');
+                ocultarError($('#denominacion_{{$mode}}'), '#small-denominacion-head');
 
                 Swal.fire({
                     position: 'top-end',
@@ -95,18 +99,14 @@
 
                 })
 
-            } else {
-
-                if(denominacion.length == 0){
-
-                    denominacion_css.style.border = '2px dashed red';
-                }
-
-            //Desplegamos el modal
-            $('#modal_validar_denominacion').modal('show');
+            } 
+            else 
+            {
+                event.preventDefault();
+                mostrarError($("#denominacion_{{$mode}}"), '#small-denominacion-head', '<div class="alert alert-danger mt-3 pt-1">La DENOMINACIÓN de la firma nacional o extranjera que representa <strong>no</strong> puede quedar vacía.</div>');
             }
 
-            });
+        });
 
 
             $(document).on("click", ".btn_remove_denominacion", function() {
@@ -127,7 +127,7 @@
 
             })
 
-            var cant_filas_denominacion = document.getElementById("body_table_denominacion").rows.length;
+            var cant_filas_denominacion = $("#body_table_denominacion > tr").length;
 
             if(cant_filas_denominacion == 0){
 
@@ -156,7 +156,7 @@
             $('#modal_denominaciones').modal('show');
 
             //Enviamos el valor recuperado anteriormente al input del modal
-            $('#modal_denominacion').val(modal_denominacion);
+            $('#denominacion_edit').val(modal_denominacion);
             $('#numero_fila_denominacion').val(button_id);
 
         });
