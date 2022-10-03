@@ -1040,18 +1040,21 @@ class ProveedoresController extends Controller
             switch($tipo_persona)
             {
                 case 'miembro':
+                    $proveedor->load('miembros');
                     $proveedor_personas=$proveedor->miembros;
                 break;
                 case 'direccion_firma':
+                    $proveedor->load('miembrosDireccion_administradoresFirma');
                     $proveedor_personas=$proveedor->miembrosDireccion_administradoresFirma;
                 break;
                 case 'apoderado':
+                    $proveedor->load('apoderados');
                     $proveedor_personas=$proveedor->apoderados;
                 break;
             }
             $dni_persona=htmlspecialchars(str_replace(".","",$request->dni));
             $encontrado = false;
-            foreach($proveedor_personas as $proveedor_persona)
+            foreach($proveedor_personas as &$proveedor_persona)
                 if($proveedor_persona->dni_persona==$dni_persona)
                     $encontrado=true;
             if(!$encontrado)

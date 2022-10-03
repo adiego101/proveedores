@@ -29,8 +29,8 @@
     <hr>
 
     
-    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-    <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" data-tipo='firma' value="Atrás" />
+    <input type="button" name="next" class="next btn btn-info" data-tipo='firma' value="Siguiente" />
 
 
     <!--Incluimos el modal para editar una denominación-->

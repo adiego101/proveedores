@@ -763,10 +763,6 @@
     });
 
         function borrarDatosModal(){
-            $("#apellido_x_create").css('border','1px solid #DFDFDF');
-            $("#nombre_x_create").css('border','1px solid #DFDFDF');
-            $("#dni_x_create").css('border','1px solid #DFDFDF');
-            $("#cargo_x_create").css('border','1px solid #DFDFDF');
             ocultarError('#dni_x_create', '#small-dni-x-create');
             ocultarError('#apellido_x_create', '#small-apellido-x-create');
             ocultarError('#nombre_x_create', '#small-nombre-x-create');
@@ -776,10 +772,6 @@
             $("#dni_x_create").val('');
             $("#cargo_x_create").val('');
 
-            $("#apellido_x_edit").css('border','1px solid #DFDFDF');
-            $("#nombre_x_edit").css('border','1px solid #DFDFDF');
-            $("#dni_x_edit").css('border','1px solid #DFDFDF');
-            $("#cargo_x_edit").css('border','1px solid #DFDFDF');
             ocultarError('#dni_x_edit', '#small-dni-x-edit');
             ocultarError('#apellido_x_edit', '#small-apellido-x-edit');
             ocultarError('#nombre_x_edit', '#small-nombre-x-edit');

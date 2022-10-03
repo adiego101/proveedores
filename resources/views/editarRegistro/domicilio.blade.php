@@ -59,7 +59,7 @@
                 <br>
 
                 <label for="localidad_{{$tipo_domicilio}}_{{$mode}}">Localidad:</label><br>
-                <select class="form-control" @if ( $mode == "show" || $mode=='modal-show') disabled @endif aria-describedby="basic-addon1" id="localidad_{{$tipo_domicilio}}_{{$mode}}" name="localidad_{{$tipo_domicilio}}">
+                <select class="js-example-basic-single" @if ( $mode == "show" || $mode=='modal-show') disabled @endif aria-describedby="basic-addon1" id="localidad_{{$tipo_domicilio}}_{{$mode}}" name="localidad_{{$tipo_domicilio}}">
                     <option value= {{--@if($tipo_domicilio=='real')"{{isset($proveedor->domicilio_real->localidad) ? $proveedor->domicilio_real->localidad->id_localidad : '' }}"@endif
                                     @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal->localidad) ? $proveedor->domicilio_legal->localidad->id_localidad : '' }}"@endif
                                     @if($tipo_domicilio=='fiscal')"{{isset($proveedor->domicilio_fiscal->localidad) ? $proveedor->domicilio_fiscal->localidad->id_localidad : '' }}"@endif
@@ -169,7 +169,7 @@
                             @if($tipo_domicilio=='sucursal')"{{isset($sucursal->barrio) ? $sucursal->barrio : '' }}"@endif><br>
 
                 <label for="provincia_{{$tipo_domicilio}}_{{$mode}}">Provincia:</label><br>
-                <select class="form-control" @if ( $mode == "show" || $mode=='modal-show') disabled @endif aria-describedby="basic-addon1" id="provincia_{{$tipo_domicilio}}_{{$mode}}" name="provincia_{{$tipo_domicilio}}">
+                <select class="js-example-basic-single" @if ( $mode == "show" || $mode=='modal-show') disabled @endif aria-describedby="basic-addon1" id="provincia_{{$tipo_domicilio}}_{{$mode}}" name="provincia_{{$tipo_domicilio}}">
                 <!--<option value=  @if($tipo_domicilio=='real')"{{isset($proveedor->domicilio_real->localidad->provincia) ? $proveedor->domicilio_real->localidad->provincia->nombre_provincia : '' }}"@endif
                                 @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal->localidad->provincia) ? $proveedor->domicilio_legal->localidad->provincia->nombre_provincia : '' }}"@endif
                                 @if($tipo_domicilio=='fiscal')"{{isset($proveedor->domicilio_fiscal->localidad->provincia) ? $proveedor->domicilio_fiscal->localidad->provincia->nombre_provincia : '' }}"@endif

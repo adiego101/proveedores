@@ -19,6 +19,14 @@
                 let tipo_persona = $(this).data('tipo-persona');
                 if(tipo_persona)
                     borrarAdvertenciasPersona(tipo_persona);
+                let tipo = $(this).data('tipo');
+                if(tipo)
+                {
+                    if(tipo=='firma')
+                        borrarAdvertenciasFirma();
+                    if(tipo=='banco')
+                        borrarAdvertenciasBanco()
+                }
             });
             $(".previous").click(function() {
                 current_step = $(this).parent();
@@ -30,6 +38,14 @@
                 let tipo_persona = $(this).data('tipo-persona');
                 if(tipo_persona)
                     borrarAdvertenciasPersona(tipo_persona);
+                    let tipo = $(this).data('tipo');
+                if(tipo)
+                {
+                    if(tipo=='firma')
+                        borrarAdvertenciasFirma();
+                    if(tipo=='banco')
+                        borrarAdvertenciasBanco()
+                }
             });
 
             setProgressBar(current);
@@ -63,6 +79,24 @@
                     ocultarError('#nombre_'+tipo_persona+'_create', '#small-nombre-'+tipo_persona+'-head');
                     ocultarError('#cargo_'+tipo_persona+'_create', '#small-cargo-'+tipo_persona+'-head');
                 }
+            }
+        }
+
+        function borrarAdvertenciasFirma()
+        {
+            ocultarError($('#denominacion_create'), '#small-denominacion-head');
+        }
+
+        function borrarAdvertenciasBanco()
+        {
+            if($("#nombre_banco_create").val()=='' && $("#localidad_sucursal_create").val()=='' && $('#tipo_cuenta_create').val()=='' && $('#nro_cuenta_create').val()=='')
+            {
+                $("#nombre_banco_create").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+                ocultarError($('#nombre_banco_create'), '#small-banco-head');
+                $("#localidad_sucursal_create").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+                ocultarError($('#localidad_sucursal_create'), '#small-localidad-sucursal-head');
+                ocultarError($('#tipo_cuenta_create'), '#small-tipo-cuenta-head');
+                ocultarError($('#nro_cuenta_create'), '#small-nro-cuenta-head');
             }
         }
 
@@ -535,7 +569,10 @@
 
         $('#nombre_banco_create').change(function(){
             if($('#nombre_banco_create').val()!='')
+            {
+                $("#nombre_banco_create").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
                 ocultarError($('#nombre_banco_create'), '#small-banco-head');
+            }
         });
 
         $('#tipo_cuenta_create').change(function(){
@@ -545,7 +582,10 @@
 
         $('#localidad_sucursal_create').change(function(){
             if($('#localidad_sucursal_create').val()!='')
+            {
+                $("#localidad_sucursal_create").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
                 ocultarError($('#localidad_sucursal_create'), '#small-localidad-sucursal-head');
+            }
         });
 
         $('#nro_cuenta_create').change(function(){
