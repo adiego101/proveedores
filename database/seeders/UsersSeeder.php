@@ -20,7 +20,6 @@ class UsersSeeder extends Seeder
                             'email'=>'admin_acceso@domain.com',
                             'password'=>Hash::make('3LwVKiSf')]);
         $user_administrador->assignRole('administrador_de_acceso');
-    
         //Gestor
         $user_gestor=User::create(['name'=>'gestor',
                             'email'=>'gestor@domain.com',
@@ -55,7 +54,6 @@ class UsersSeeder extends Seeder
         $seededUserEmail = 'egesto@santacruz.gob.ar';
         $user = User::where('email', '=', $seededUserEmail)->first();
         $user->assignRole(['administrador_de_acceso', 'funcionario', 'gestor']);
-        
         $seededUserEmail = 'stresguerres@gmail.com';
         $user = User::where('email', '=', $seededUserEmail)->first();
         $user->assignRole(['administrador_de_acceso', 'funcionario', 'gestor']);
@@ -71,6 +69,6 @@ class UsersSeeder extends Seeder
         $seededUserEmail = 'adiego6743@gmail.com';
         $user = User::where('email', '=', $seededUserEmail)->first();
         $user->assignRole(['administrador_de_acceso', 'funcionario', 'gestor']);
-       */ 
+       */
     }
 }
