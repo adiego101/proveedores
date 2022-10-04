@@ -1,5 +1,4 @@
-<fieldset>
-
+<fieldset>    
     <h1>Datos generales</h1><br>
 
     <label for="razon_social">Razón social: <sup>*</sup></label><br>
@@ -30,7 +29,8 @@ value=@if(isset($proveedor->cuit))"{{$proveedor->cuit}}"@elseif(isset($cuit))"{{
     <br>
     
     @if($mode=='create')
-        <input type="button" id="next_datos" name="next" class="next btn btn-info" value="Siguiente"/>
+    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
+        <input type="button" name="next" class="next btn btn-info" value="Siguiente" data-tipo='datos_generales'/>
     @else
         <div class="row navbuttons">
             <div class="col-6 col-sm-auto" id="btnNext">
@@ -40,19 +40,4 @@ value=@if(isset($proveedor->cuit))"{{$proveedor->cuit}}"@elseif(isset($cuit))"{{
     @endif
 </fieldset>
 
-@push('js')
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#next_datos").click(function(){
-            if($("#razon_social").val()=='')
-                mostrarError('#razon_social', '#small-razon-social-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-            else
-                ocultarError('#razon_social', '#small-razon-social-head');
-            if($("#nombre_fantasia").val()=='')
-                mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-            else
-                ocultarError('#nombre_fantasia', '#small-nombre-fantasia-head');
-        });
-    })
-</script>
-@endpush
+

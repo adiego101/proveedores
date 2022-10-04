@@ -212,6 +212,30 @@
             $("#nro_cuenta_create").keyup(function(){
                 ocultarError('#nro_cuenta_create', '#small-nro-cuenta-head');
             });
+
+            $('#nombre_banco_edit').change(function(){
+                if($('#nombre_banco_edit').val()!='')
+                {
+                    $("#nombre_banco_edit").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+                    ocultarError($('#nombre_banco_edit'), '#small-banco-edit');
+                }
+            });
+
+            $('#tipo_cuenta_edit').keyup(function(){
+                    ocultarError($('#tipo_cuenta_edit'), '#small-tipo-cuenta-edit');
+            });
+
+            $('#localidad_sucursal_edit').change(function(){
+                if($('#localidad_sucursal_edit').val()!='')
+                {
+                    $("#localidad_sucursal_edit").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+                    ocultarError($('#localidad_sucursal_edit'), '#small-localidad-sucursal-edit');
+                }
+            });
+
+            $('#nro_cuenta_edit').keyup(function(){
+                ocultarError($('#nro_cuenta_edit'), '#small-nro-cuenta-edit');
+            });
         });
 
     </script>

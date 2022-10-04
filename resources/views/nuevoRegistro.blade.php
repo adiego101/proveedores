@@ -22,6 +22,36 @@
                 let tipo = $(this).data('tipo');
                 if(tipo)
                 {
+                    if(tipo=='disposicion')
+                    {
+                        if($("#tipo_disposicion").val()=='')
+                            $('#small-tipo-disposicion-head').append('<div class="alert alert-danger mt-3 pt-1">El TIPO DE DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+                        else
+                            $('#small-tipo-disposicion-head').empty();
+                        if($("#nro_expte_gde").val()=='')
+                            mostrarError('#nro_expte_gde', '#small-nro-expte-head', '<div class="alert alert-danger mt-3 pt-1">El NÚMERO DE EXPEDIENTE DE GDE <strong>no</strong> puede quedar vacío.</div>');
+                        else
+                            ocultarError('#nro_expte_gde', '#small-nro-expte-head');
+                        if($("#fecha_inicio_disposicion").val()=='')
+                            mostrarError('#fecha_inicio_disposicion', '#small-inicio-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE INICIO DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+                        else
+                            ocultarError('#fecha_inicio_disposicion', '#small-inicio-disposicion-head');
+                        if($("#fecha_fin_disposicion").val()=='')
+                            mostrarError('#fecha_fin_disposicion', '#small-fin-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE FIN DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+                        else
+                            ocultarError('#fecha_fin_disposicion', '#small-fin-disposicion-head');
+                    }
+                    if(tipo=='datos_generales')
+                    {
+                        if($("#razon_social").val()=='')
+                            mostrarError('#razon_social', '#small-razon-social-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+                        else
+                            ocultarError('#razon_social', '#small-razon-social-head');
+                        if($("#nombre_fantasia").val()=='')
+                            mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+                        else
+                            ocultarError('#nombre_fantasia', '#small-nombre-fantasia-head');
+                    }
                     if(tipo=='firma')
                         borrarAdvertenciasFirma();
                     if(tipo=='banco')
@@ -137,6 +167,10 @@
         y presione el botón <b>Siguiente</b>, para continuar la carga de datos.
     </div>
 
+    <small class="small" id="small-tipo-disposicion-head"></small>
+    <small class="small" id="small-nro-expte-head"></small>
+    <small class="small" id="small-inicio-disposicion-head"></small>
+    <small class="small" id="small-fin-disposicion-head"></small>
     <small class="small" id="small-razon-social-head"></small>
     <small class="small" id="small-nombre-fantasia-head"></small>
     <small class="small" id="small-cuit-mal-formato-head"></small>
@@ -160,6 +194,7 @@
 
     <form  id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
         @csrf
+        @include('altaRegistro.disposicion',['mode'=>'create'])
         @include('editarRegistro.datosGenerales',['mode'=>'create'])
         @include('altaRegistro.persona',['tipo_persona'=>'miembro', 'mode'=>'create'])
         @include('altaRegistro.persona',['tipo_persona'=>'direccion_firma', 'mode'=>'create'])
@@ -560,59 +595,6 @@
             ocultarError('#tipo_cuenta_edit', '#small-tipo-cuenta-edit');
             ocultarError('#nro_cuenta_edit', '#small-nro-cuenta-edit');
         });
-
-        $('#denominacion_edit').keyup(function(){
-            ocultarError($('#denominacion_edit'), '#small-denominacion-edit');
-        });
-
-        $('#denominacion_create').keyup(function(){
-            ocultarError($('#denominacion_create'), '#small-denominacion-head');
-        });
-
-        $('#nombre_banco_create').change(function(){
-            if($('#nombre_banco_create').val()!='')
-            {
-                $("#nombre_banco_create").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
-                ocultarError($('#nombre_banco_create'), '#small-banco-head');
-            }
-        });
-
-        $('#tipo_cuenta_create').change(function(){
-            if($('#tipo_cuenta_create').val()!='')
-                ocultarError($('#tipo_cuenta_create'), '#small-tipo-cuenta-head');
-        });
-
-        $('#localidad_sucursal_create').change(function(){
-            if($('#localidad_sucursal_create').val()!='')
-            {
-                $("#localidad_sucursal_create").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
-                ocultarError($('#localidad_sucursal_create'), '#small-localidad-sucursal-head');
-            }
-        });
-
-        $('#nro_cuenta_create').change(function(){
-            if($('#nro_cuenta_create').val()!='')
-                ocultarError($('#nro_cuenta_create'), '#small-nro-cuenta-head');
-        });
-
-        $('#nombre_banco_edit').change(function(){
-            if($('#nombre_banco_edit').val()!='')
-                ocultarError($('#nombre_banco_edit'), '#small-banco-edit');
-        });
-
-        $('#tipo_cuenta_edit').keyup(function(){
-                ocultarError($('#tipo_cuenta_edit'), '#small-tipo-cuenta-edit');
-        });
-
-        $('#localidad_sucursal_edit').change(function(){
-            if($('#localidad_sucursal_edit').val()!='')
-                ocultarError($('#localidad_sucursal_edit'), '#small-localidad-sucursal-edit');
-        });
-
-        $('#nro_cuenta_edit').keyup(function(){
-            ocultarError($('#nro_cuenta_edit'), '#small-nro-cuenta-edit');
-        });
-
     });
 
     function recargarListaDomicilio(provincia_selected, select_localidad){
@@ -678,6 +660,11 @@
         }
 
         input:invalid:required {
+
+            border: 1px dashed red;
+        }
+
+        select:required {
 
             border: 1px dashed red;
         }

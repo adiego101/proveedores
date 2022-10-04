@@ -161,6 +161,16 @@ console.log("cantidad de columnas denominacion ="+cant_columnas_firma);
 
         });
 
+        $(document).ready(function(){
+            $('#denominacion_edit').keyup(function(){
+                ocultarError($('#denominacion_edit'), '#small-denominacion-edit');
+            });
+
+            $('#denominacion_create').keyup(function(){
+                ocultarError($('#denominacion_create'), '#small-denominacion-head');
+            });
+        });
+
     </script>
 
 @endpush
