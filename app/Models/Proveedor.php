@@ -277,6 +277,10 @@ class Proveedor extends Model
         ->withTimestamps();
     }
 
+    public function disposiciones(){
+        return $this->hasMany(Disposicion::class, 'id_proveedor');
+    }
+
     public function emails(){
         return $this->hasMany(Proveedor_email::class, 'id_proveedor');
     }

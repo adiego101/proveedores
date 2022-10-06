@@ -20,6 +20,7 @@ use App\Models\Provincia;
 use App\Models\Tipo_actividad;
 use App\Models\Proveedor_firma_nac_extr;
 use App\Models\Banco;
+use App\Models\Disposicion;
 use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -657,6 +658,123 @@ class ProveedoresController extends Controller
         }
     }
 
+    public function getDisposiciones(Request $request, $id_proveedor, $mode = null)
+    {
+        try {
+            $proveedor = Proveedor::findOrFail($id_proveedor);
+            $proveedor->load('disposiciones');
+            $disposiciones = $proveedor->disposiciones;
+            Log::info("disposiciones = ".$disposiciones);
+            return Datatables::of($disposiciones)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) use ($mode) {
+                    if ($mode == "show") 
+                    {
+                        $actionBtn = ' <a onclick="verFirma($row->id_proveedor,$row->id_proveedor_firma_nac_extr);" class="view btn btn-primary btn-sm" title="ver firma">
+                    <i class="fas fa-eye"></i></a>  ';
+                        return $actionBtn;
+                    } 
+                    else 
+                    {
+                        $actionBtn = '<a class="view btn btn-warning btn-sm edit_disposicion" title="editar disposicion" data-id-proveedor="'.$row->id_proveedor.'" data-id-disposicion="'.$row->id_disposicion.'">
+                    <i class="fas fa-edit"></i></a> <a type="button" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#modalBaja" title="Dar de baja" data-tipo-baja="disposicion" data-id-disposicion="'.$row->id_disposicion.'">
+                    <i class="fas fa-exclamation-circle"></i></a>';
+                        return $actionBtn;
+                    }
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        } catch (\Exception $e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function getNroDisposiciones($id_proveedor, $nro_disposicion)
+    {
+        Log::info("nro_disposicion=".$nro_disposicion);
+        try {
+            $disposiciones=Disposicion::where('id_proveedor',$id_proveedor)
+                        ->select('nro_disposicion')
+                        ->where('nro_disposicion', 'like', $nro_disposicion.'%')
+                        ->get();
+            Log::info("disposiciones por numero = ".$disposiciones);
+            return $disposiciones->map(function($disposicion){
+                return collect(['label'=>$disposicion->nro_disposicion,
+                                'value'=>$disposicion->nro_disposicion]);
+                });
+            return $disposiciones;
+        } catch (\Exception $e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function crearDisposicion($id_proveedor, Request $request)
+    {
+        Log::info("Entra en funcion crearDisposicion con nro_disposicion=".$request->nro_disposicion." fecha inicio=".$request->fecha_inicio." fecha fin=".$request->fecha_fin." tipo disposicion=".$request->tipo_disposicion ." observaciones=".$request->observaciones);
+        try {
+            Disposicion::create([   'id_proveedor'=>$id_proveedor,
+                                    'nro_disposicion'=>$request->nro_disposicion,
+                                    'fecha_ini_vigencia'=>$request->fecha_inicio,
+                                    'fecha_fin_vigencia'=>$request->fecha_fin,
+                                    'disposicion_tipo'=>$request->tipo_disposicion,
+                                    //'GDE_Exp'=>$request->nro_expte_gde,
+                                    'observaciones'=>$request->observaciones]);            
+        } catch (\Exception $e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+
+    }
+
+    public function verDisposicion($id_proveedor, $id_disposicion)
+    {
+        Log::info("***");
+        Log::info('si entra a ver disposicion con '.$id_proveedor. ' y '.$id_disposicion);
+        try {
+            $proveedor=Proveedor::findOrFail($id_proveedor);
+            $proveedor->load('disposiciones');
+            $disposicion=$proveedor->disposiciones->where('id_disposicion', $id_disposicion)->first();
+            Log::info("disposicion".$disposicion);
+            return $disposicion;
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function actualizarDisposicion($id_proveedor, $id_disposicion, Request $request)
+    {
+        Log::info("**");
+        Log::info('si entra a actualizar disposicion con '.$id_proveedor. ' y '.$id_disposicion);
+        try {
+            $proveedor=Proveedor::findOrFail($id_proveedor);
+            $proveedor->load('disposiciones');
+            $disposicion=$proveedor->disposiciones->where('id_disposicion', $id_disposicion)->first();
+            $disposicion->update([  'nro_disposicion'=>$request->nro_disposicion,
+                                    'fecha_ini_vigencia'=>$request->fecha_inicio,
+                                    'fecha_fin_vigencia'=>$request->fecha_fin,
+                                    'disposicion_tipo'=>$request->tipo_disposicion,
+                                    //'GDE_Exp'=>$request->nro_expte_gde,
+                                    'observaciones'=>$request->observaciones]);
+            Log::info("disposicion".$disposicion);
+            return $disposicion;
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
     
     public function getPagos(Request $request, $id, $mode = null)
     {

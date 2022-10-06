@@ -12,6 +12,13 @@
             background-position:center;
             background-position-x:95%;
         }
+
+        .disposicion_actividad.ui-autocomplete-loading{ 
+            background:url("{{asset('assets/jquery-ui-1.13.1.custom/images/ui-anim_basic_16x16.gif')}}");
+            background-repeat:no-repeat;
+            background-position:center;
+            background-position-x:95%;
+        }
     </style>
 
 @endsection
