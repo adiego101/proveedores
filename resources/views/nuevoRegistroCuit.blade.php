@@ -48,38 +48,6 @@
 
 
 
-@push('js')
-
-<script type="text/javascript">
-
-    $('#cuit').keyup(validaCuit);
-
-    function validaCuit() {
-
-        if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) {
-
-        mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxxx-x</strong></div>');
-
-        return false;
-        }
-    
-        ocultarError('#cuit', '#small-cuit');
-
-        return true;
-    }
-    function mostrarError(campo, error, msg) {
-        $(campo).addClass('is-invalid');
-        $(error).html(msg);
-        $(error).show();
-    }
-    function ocultarError(campo, error) {
-        $(campo).removeClass('is-invalid');
-        $(error).hide();
-    }
-
-</script>
-
-@endpush
 
 
 @push('css')

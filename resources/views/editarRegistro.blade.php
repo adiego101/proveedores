@@ -13,9 +13,21 @@
 
     <nav>
         <ul class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+        <li class="nav-item">
+                <a class=" nav-link @if (empty($tab)) {{ 'active' }} @endif" id="disposiciones-tab"
+                    data-toggle="tab" href="#disposiciones">Disposiciones</a>
+            </li>
             <li class="nav-item">
-                <a class=" nav-link @if (empty($tab)) {{ 'active' }} @endif" id="datos-generales-tab"
-                    data-toggle="tab" href="#datos-generales">Datos Generales</a>
+                <a class="nav-link" id="datos-generales-tab" data-toggle="tab" href="#datos-generales">Datos Generales</a>
+            </li>
+            <li class="nav-item">
+                <a class=" nav-link" id="miembros-tab" data-toggle="tab" href="#miembros">Miembros</a>
+            </li>
+            <li class="nav-item">
+                <a class=" nav-link" id="direccion-firma-tab" data-toggle="tab" href="#direccionFirma">Dirección y Firma</a>
+            </li>
+            <li class="nav-item">
+                <a class=" nav-link" id="apoderado-tab" data-toggle="tab" href="#apoderado">Apoderado</a>
             </li>
             <li class="nav-item">
                 <a class=" nav-link" id="domicilioReal-tab" data-toggle="tab" href="#domicilioReal">Domicilio Real</a>
@@ -52,17 +64,27 @@
     <small class="small" id="small-nombre_fantasia"></small>
     <small class="small" id="small-cuit4"></small>
     <small class="small" id="small-cuit2"></small>
-    <small class="small" id="small-dni-legal"></small>
-    <small class="small" id="small-apellido-legal"></small>
-    <small class="small" id="small-nombre-legal"></small>
 
     <form id="edit_form" action="{{ url('editarProveedor/' . $proveedor->id_proveedor) }}" method="POST">
         @csrf
 
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade  @if (empty($tab)) {{ 'show active' }} @endif" id="datos-generales"
+            <div class="tab-pane fade  @if (empty($tab)) {{ 'show active' }} @endif" id="disposiciones"
+                role="tabpanel" aria-labelledby="nav-disposiciones-tab">
+                @include('editarRegistro.disposicion',['mode'=>'edit'])
+            </div>
+            <div class="tab-pane fade" id="datos-generales"
                 role="tabpanel" aria-labelledby="nav-datos-generales-tab">
                 @include('editarRegistro.datosGenerales',['mode'=>'edit'])
+            </div>
+            <div class="tab-pane fade" id="miembros" role="tabpanel" aria-labelledby="nav-miembros-tab">
+                @include('editarRegistro.persona',['tipo_persona'=>'miembro', 'mode'=>'edit'])
+            </div>
+            <div class="tab-pane fade" id="direccionFirma" role="tabpanel" aria-labelledby="nav-direccion-firma-tab">
+                @include('editarRegistro.persona',['tipo_persona'=>'direccion_firma', 'mode'=>'edit'])
+            </div>
+            <div class="tab-pane fade" id="apoderado" role="tabpanel" aria-labelledby="nav-apoderado-tab">
+                @include('editarRegistro.persona',['tipo_persona'=>'apoderado', 'mode'=>'edit'])
             </div>
             <div class="tab-pane fade" id="domicilioReal" role="tabpanel" aria-labelledby="nav-domicilioReal-tab">
                 @include('editarRegistro.domicilio',['tipo_domicilio'=>'real', 'mode'=>'edit'])
@@ -107,7 +129,11 @@
     @include('edicionesModales.pagos')
     @include('edicionesModales.editarActividades')
     @include('edicionesModales.actividades')
-
+    @include('personas.modal-create-edit', ['tipo_persona'=>'x', 'mode'=>'create'])
+    @include('personas.modal-edit-edit', ['tipo_persona'=>'x', 'mode'=>'edit'])
+    @include('firmasNacExt.modal-create-edit', ['mode'=>'create'])
+    @include('firmasNacExt.modal-edit-edit', ['mode'=>'edit'])
+    @include('modales.modalBaja')
     @yield('datos')
 
 @endsection
@@ -116,27 +142,11 @@
     <script>
         $(document).ready(function() 
         {
-            $('.js-example-basic-single').select2({
-                theme: "bootstrap",    width: 'resolve' // need to override the changed default
-            });
-
-            $('#razon_social').keyup(validar_razon_social);
-
-            $('#nombre_fantasia').keyup(validar_nombre_fantasia);
-
-            $('#cuit').keyup(validar_cuit);
-
-            $('#dni_legal').keyup(validarDni);
-
-            $("#apellido_persona").keyup(validarExisteDatosRepresentante);
-
-            $("#nombre_persona").keyup(validarExisteDatosRepresentante);
-
-            $("#dni_legal").keyup(validarExisteDatosRepresentante);
-
-            $( "#dni_legal" ).autocomplete({
+            
+            $( ".dni" ).autocomplete({
                 source: function( request, response ) {
                     $.ajax( {
+                    cache: false,
                     url: "{{url('responsable/')}}/"+request.term,
                     dataType: "json",
                     success: function( data ) {
@@ -146,79 +156,32 @@
                 },
                 minLength: 2,
                 select: function( event, ui ) {
-                    $("#apellido_persona").val(ui.item.apellido_persona);
-                    $("#nombre_persona").val(ui.item.nombre_persona);
-                    ocultarError('#dni_legal', '#small-dni');
-                    ocultarError('#dni_legal', '#small-dni-legal');
-                    ocultarError('#apellido_persona', '#small-apellido');
-                    ocultarError('#apellido_persona', '#small-apellido-legal');
-                    ocultarError('#nombre_persona', '#small-nombre');
-                    ocultarError('#nombre_persona', '#small-nombre-legal');
+                    if($(this).data('mode')=='create')
+                    {
+                        $("#apellido_x_create").val(ui.item.apellido_persona);
+                        $("#nombre_x_create").val(ui.item.nombre_persona);
+                        $("#cargo_x_create").val('');
+                        ocultarError('#dni_x_create', '#small-dni-x-create');
+                        ocultarError('#apellido_x_create', '#small-apellido-x-create');
+                        ocultarError('#nombre_x_create', '#small-nombre-x-create');
+                    }
+                    else
+                    {
+                        $("#apellido_x_edit").val(ui.item.apellido_persona);
+                        $("#nombre_x_edit").val(ui.item.nombre_persona);
+                        $("#cargo_x_edit").val('');
+                        ocultarError('#dni_x_edit', '#small-dni-x-edit');
+                        ocultarError('#apellido_x_edit', '#small-apellido-x-edit');
+                        ocultarError('#nombre_x_edit', '#small-nombre-x-edit');
+                    }
+                },
+                close: function(event, ui)
+                {
+                    // Close event fires when selection options closes
+
+                    $(this).data().autocomplete.term = null; // Clear the cached search term, make every search new
                 }
             } );
-
-            $('input[type="checkbox"]').on('change', function(){
-                this.value = this.checked ? 1 : 0;
-                //console.log(this.value);
-            }).change();
-
-            $('#razon_social').keyup(function() {
-                if($('#razon_social').val() == "")
-                {
-                    mostrarError('#razon_social', '#small-razon_social', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-                    //mostrarError('#razon_social', '#small-razon_social2', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-                    return false;
-                }
-                else
-                {
-                    ocultarError('#razon_social', '#small-razon_social');
-                    //ocultarError('#razon_social', '#small-razon_social2');
-                    return true;
-                }
-            });
-
-            $('#nombre_fantasia').keyup(function() {
-                if($('#nombre_fantasia').val() == "")
-                {
-                    mostrarError('#nombre_fantasia', '#small-nombre_fantasia', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
-                    //mostrarError('#nombre_fantasia', '#small-nombre_fantasia2', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
-                    return false;
-                }
-                else
-                {
-                    ocultarError('#nombre_fantasia', '#small-nombre_fantasia');
-                    //ocultarError('#nombre_fantasia', '#small-nombre_fantasia2');
-                    return true;
-                }
-            });
-
-            $('#cuit').keyup(function() 
-            {
-                if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) 
-                {
-                    mostrarError('#cuit', '#small-cuit-mal-formato', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
-                    //mostrarError('#cuit', '#small-cuit2', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
-                    if($('#cuit').val() == "")
-                    {
-                        mostrarError('#cuit', '#small-cuit-vacio', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
-                        //mostrarError('#cuit', '#small-cuit4', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
-                        return false;
-                    }
-                }
-                else
-                {
-                    ocultarError('#cuit', '#small-cuit-mal-formato');
-                    //ocultarError('#cuit', '#small-cuit2');
-                    ocultarError('#cuit', '#small-cuit-vacio');
-                    //ocultarError('#cuit', '#small-cuit4');
-                    return true;
-                }
-            });
-            $("#dni_legal").val(function (index, value ) {
-                return value.replace(/\D/g, "")
-                            .replace(/([0-9])([0-9]{3})$/, '$1.$2')
-                            .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-            });
 
             $("#cuit").val(function (index, value ) {
                 return value.replace(/\D/g, "")
@@ -232,16 +195,7 @@
                 recargarListaDomicilio($('#provincia_legal_edit').val(), $('#localidad_legal_edit'));
             if ($('#provincia_fiscal_edit').val()!='')
                 recargarListaDomicilio($('#provincia_fiscal_edit').val(), $('#localidad_fiscal_edit'));
-            if ($('#provincia_habilitacion').val()!='')
-                recargarListaHabilitacion();
-
-            $("#edit_form").on('submit',function(e){
-                console.log("detecta evento finalizar edicion");
-                e.preventDefault();
-
-                if(validarDni())
-                    this.submit();
-            });
+                
             $('.btnNext').click(function() {
                 $('.nav-tabs .active').parent().next('li').find('a').trigger('click');
             });
@@ -249,236 +203,436 @@
             $('.btnPrevious').click(function() {
                 $('.nav-tabs .active').parent().prev('li').find('a').trigger('click');
             });
-        });
-        function validar_razon_social() {
 
-            if($('#razon_social').val() == ""){
-
-            mostrarError('#razon_social', '#small-razon_social', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-            //mostrarError('#razon_social', '#small-razon_social2', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-
-            return false;
-            }
-
-            ocultarError('#razon_social', '#small-razon_social');
-            //ocultarError('#razon_social', '#small-razon_social2');
-
-            return true;
-        }
-
-
-        function validar_nombre_fantasia() {
-
-            if($('#nombre_fantasia').val() == ""){
-
-            mostrarError('#nombre_fantasia', '#small-nombre_fantasia', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
-            //mostrarError('#nombre_fantasia', '#small-nombre_fantasia2', '<div class="alert alert-danger mt-3 pt-1">El nombre de fantasía <strong>no</strong> puede quedar vacío.</div>');
-
-            return false;
-            }
-
-            ocultarError('#nombre_fantasia', '#small-nombre_fantasia');
-            //ocultarError('#nombre_fantasia', '#small-nombre_fantasia2');
-
-            return true;
-        }
-            
-        function validar_cuit() {
-
-            if (!(/^([0-9]{2})-([0-9]{8})-([0-9]{1})$/g.test($('#cuit').val()))) {
-
-                mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
-                //mostrarError('#cuit', '#small-cuit2', '<div class="alert alert-danger mt-3 pt-1">El CUIT debe respetar el siguiente formato: <strong>xx-xxxxxxx-x</strong></div>');
-
-                if($('#cuit').val() == ""){
-
-                mostrarError('#cuit', '#small-cuit', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
-                //mostrarError('#cuit', '#small-cuit4', '<div class="alert alert-danger mt-3 pt-1">El CUIT <strong>no</strong> puede quedar vacío.</div>');
-
-                return false;
-                }
-            }
-
-            ocultarError('#cuit', '#small-cuit');
-            /*ocultarError('#cuit', '#small-cuit2');
-            ocultarError('#cuit', '#small-cuit3');
-            ocultarError('#cuit', '#small-cuit4');*/
-
-            return true;
-        }
-
-        function valideKey(evt) {
-
-            // El código es la representación decimal ASCII de la clave presionada.
-            var code = (evt.which) ? evt.which : evt.keyCode;
-
-            if (code == 8) { // espacio.
-                return true;
-            } else if (code >= 48 && code <= 57) { // es un numero.
-                return true;
-            } else { // otras teclas
-                //console.log("no es un numero");
-                return false;
-            }
-        }
-
-        function validarDni()
-        {
-            if($('#dni_legal').val() != "")
-            {
-                if (!(/^(\d{1,2}\.{1}\d{3}\.\d{3})|(\d{1,2}\s{1}\d{3}\s\d{3})$/g.test($('#dni_legal').val()))) 
+            $('#store_persona').click(function(event){
+                console.log("detecta evento store");
+                var tipo_persona=$(this).data('tipo-persona');
+                if(validarExisteDatosPersonaModal(tipo_persona, 'create', $("#dni_x_create"), $("#apellido_x_create"), $("#nombre_x_create"), $("#cargo_x_create")))
                 {
-                    mostrarError('#dni_legal', '#small-dni', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> tiene un formato incorrecto.</div>');
-                    //mostrarError('#dni_legal', '#small-dni2', '<div class="alert alert-danger mt-3 pt-1">El <strong>número de DNI</strong> tiene un formato incorrecto.</div>');
-                    return false;
-                }  
-                else
-                {
-                    ocultarError('#dni_legal', '#small-dni');
-                    //ocultarError('#dni_legal', '#small-dni2');
+                    console.log("pasa validacion con tipo_persona ="+tipo_persona);
+                    var dni_persona = $("#dni_x_create").val();
+                    var apellido_persona = $("#apellido_x_create").val();
+                    var nombre_persona = $("#nombre_x_create").val();
+                    var cargo_persona = $("#cargo_x_create").val();
+                    var datos;
+                    if(tipo_persona!='direccion_firma')
+                        datos={ dni: dni_persona, 
+                                apellido: apellido_persona,
+                                nombre: nombre_persona,
+                                tipo_persona: tipo_persona};
+                    else
+                        datos={ dni: dni_persona, 
+                                apellido: apellido_persona,
+                                nombre: nombre_persona,
+                                tipo_persona: tipo_persona,
+                                cargo: cargo_persona};
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: "{{ url('crearPersona/' . $id) }}",
+                        data: datos,
+                        success: function(response) {
 
-                    return true;
-                }
-            }
-            else
-                return true;
-        }
-        
-        function validarExisteDatosRepresentante()
-        {
-            if($('#apellido_persona').val()=='')
-            {
-            mostrarError('#apellido_persona', '#small-apellido', '<div class="alert alert-danger mt-3 pt-1">El APELLIDO del representante <strong>no</strong> puede quedar vacío.</div>');
-            mostrarError('#apellido_persona', '#small-apellido-legal', '<div class="alert alert-danger mt-3 pt-1">El APELLIDO del representante <strong>no</strong> puede quedar vacío.</div>');
-            if($("#dni_legal").val()=='')
-            {
-                mostrarError('#dni_legal', '#small-dni', '<div class="alert alert-danger mt-3 pt-1">El DNI del representante <strong>no</strong> puede quedar vacío.</div>');
-                mostrarError('#dni_legal', '#small-dni-legal', '<div class="alert alert-danger mt-3 pt-1">El DNI del representante <strong>no</strong> puede quedar vacío.</div>');
-                if($("#nombre_persona").val()=='')
-                {
-                ocultarError('#dni_legal', '#small-dni');
-                ocultarError('#dni_legal', '#small-dni-legal');
-                ocultarError('#apellido_persona', '#small-apellido');
-                ocultarError('#apellido_persona', '#small-apellido-legal');
-                ocultarError('#nombre_persona', '#small-nombre');
-                ocultarError('#nombre_persona', '#small-nombre-legal');
-                return true;
+                            $('#add_persona').modal('hide');
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Persona Guardada',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                toast: true
+
+                                });
+                            switch(tipo_persona)
+                            {
+                                case('miembro'):
+                                    $('.yajra-personas-miembro').DataTable().ajax.reload();
+                                break;
+                                case('direccion_firma'):
+                                    $('.yajra-personas-direccion_firma').DataTable().ajax.reload();
+                                break;
+                                case('apoderado'):
+                                    $('.yajra-personas-apoderado').DataTable().ajax.reload();
+                                break;
+                            }
+                            applyInputMaskDni($("#dni_x_create"), '0.000.000');
+                            $("button").prop("disabled", false);
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Actividad no guardada");
+                        }
+                    });
                 }
                 else
                 {
-                ocultarError('#nombre_persona', '#small-nombre');
-                ocultarError('#nombre_persona', '#small-nombre-legal');
-                return true;
+                    console.log("no pasa validacion");
+                    event.preventDefault();
                 }
-            }
-            else
-            {
+            });
+
+            $('#update_persona').click(function(event){
+                var tipo_persona=$(this).data('tipo-persona');
+                if(validarExisteDatosPersonaModal(tipo_persona, 'edit', $("#dni_x_edit"), $("#apellido_x_edit"), $("#nombre_x_edit"), $("#cargo_x_edit")))
+                {
+                    var dni_persona = $("#dni_x_edit").val();
+                    var apellido_persona = $("#apellido_x_edit").val();
+                    var nombre_persona = $("#nombre_x_edit").val();
+                    var cargo_persona = $("#cargo_x_edit").val();
+                    var datos;
+                    if(tipo_persona!='direccion_firma')
+                    {
+                        if(dni_persona!='' && apellido_persona!='' && nombre_persona!='')
+                            datos={ dni: dni_persona, 
+                                    apellido: apellido_persona,
+                                    nombre: nombre_persona,
+                                    tipo_persona: tipo_persona};
+                    }
+                    else
+                    {
+                        if(dni_persona!='' && apellido_persona!='' && nombre_persona!='' && cargo_persona !='')
+                            datos={ dni: dni_persona, 
+                                    apellido: apellido_persona,
+                                    nombre: nombre_persona,
+                                    tipo_persona: tipo_persona,
+                                    cargo: cargo_persona};
+                    }
+                    var id_proveedor=$(this).data('id-proveedor');
+                    var id_persona=$(this).data('id-persona');
+                    console.log("id_proveedor"+id_proveedor);
+                    let url = '{{ url("proveedor/:id_proveedor/:tipo_persona/:id_persona/actualizar") }}';
+                    url = url.replace(':id_proveedor', id_proveedor);
+                    url = url.replace(':tipo_persona', tipo_persona);
+                    url = url.replace(':id_persona', id_persona);
+                    console.log("url"+url);
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: datos,
+                        success: function(response) {
+
+                            $('#edit_persona').modal('hide');
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Persona Guardada',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                toast: true
+
+                                });
+                            switch(tipo_persona)
+                            {
+                                case('miembro'):
+                                    $('.yajra-personas-miembro').DataTable().ajax.reload();
+                                break;
+                                case('direccion_firma'):
+                                    $('.yajra-personas-direccion_firma').DataTable().ajax.reload();
+                                break;
+                                case('apoderado'):
+                                    $('.yajra-personas-apoderado').DataTable().ajax.reload();
+                                break;
+                            }
+                            applyInputMaskDni($("#dni_x_edit"), '0.000.000');
+                            $("button").prop("disabled", false);
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Actividad no guardada");
+                        }
+                    });
+                }
+                else
+                    event.preventDefault();
+            });
+
+            $("#store_banco").click(function(){
+                let nombre_banco = $("#nombre_banco_create").val();
+                let localidad_sucursal = $("#localidad_sucursal_create").val();
+                let tipo_cuenta = $("#tipo_cuenta_create").val();
+                let nro_cuenta = $("#nro_cuenta_create").val();
+                if(nombre_banco != '' && localidad_sucursal != '' && tipo_cuenta != '' && nro_cuenta != '')
+                {
+                    let datos = {   nombre_banco:nombre_banco,
+                                    localidad:localidad_sucursal,
+                                    tipo_cuenta:tipo_cuenta,
+                                    nro_cuenta:nro_cuenta}
+                    let url = '{{ url("proveedor/$id/banco/store") }}';
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: datos,
+                        success: function(response) {
+
+                            $('#add_banco').modal('hide');
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Referencia bancaria Guardada',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                toast: true
+
+                                });
+                            $('.yajra-bancos').DataTable().ajax.reload();
+                            $("button").prop("disabled", false);
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Referencia bancaria no guardada");
+                        }
+                    });
+                }
+                else
+                    event.preventDefault();
+
+            });
+
+            $(document).on('click', '.edit_persona', function(event){
+                //event.stopImmediatePropagation();
+                console.log("detecta evento click en edit_persona");
+                var id_proveedor=$(this).data('id-proveedor');
+                var tipo_persona=$(this).data('tipo-persona');
+                var id_persona=$(this).data('id-persona');
+                console.log("id_proveedor"+id_proveedor);
+                let url = '{{ url("proveedor/:id_proveedor/:tipo_persona/:id_persona/editar") }}';
+                url = url.replace(':id_proveedor', id_proveedor);
+                url = url.replace(':tipo_persona', tipo_persona);
+                url = url.replace(':id_persona', id_persona);
+                console.log(url);
+                $('#update_persona').data('id-proveedor',id_proveedor);
+                $('#update_persona').data('tipo-persona',tipo_persona);
+                $('#update_persona').data('id-persona',id_persona);
+                if(tipo_persona=='direccion_firma')
+                    tipo_persona='miembro de los órganos de dirección y administración de firma';
+                $('#edit_persona').find('.modal-title').text('Editar ' + tipo_persona);
                 
-                ocultarError('#dni_legal', '#small-dni');
-                ocultarError('#dni_legal', '#small-dni-legal');
-                validarDni();
-                if($("#nombre_persona").val()=='')
-                {
-                mostrarError('#nombre_persona', '#small-nombre', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del representante <strong>no</strong> puede quedar vacío.</div>');
-                mostrarError('#nombre_persona', '#small-nombre-legal', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del representante <strong>no</strong> puede quedar vacío.</div>');
-                return false;
-                }
-                else
-                {
-                ocultarError('#nombre_persona', '#small-nombre');
-                ocultarError('#nombre_persona', '#small-nombre-legal');
-                return true;
-                }
-            }
-            }
-            else
-            {
-            ocultarError('#apellido_persona', '#small-apellido');
-            ocultarError('#apellido_persona', '#small-apellido-legal');
-            if($("#dni_legal").val()=='')
-            {
-                mostrarError('#dni_legal', '#small-dni', '<div class="alert alert-danger mt-3 pt-1">El DNI del representante <strong>no</strong> puede quedar vacío.</div>');
-                mostrarError('#dni_legal', '#small-dni-legal', '<div class="alert alert-danger mt-3 pt-1">El DNI del representante <strong>no</strong> puede quedar vacío.</div>');
-                if($("#nombre_persona").val()=='')
-                {
-                mostrarError('#nombre_persona', '#small-nombre', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del representante <strong>no</strong> puede quedar vacío.</div>');
-                mostrarError('#nombre_persona', '#small-nombre-legal', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del representante <strong>no</strong> puede quedar vacío.</div>');
-                return false;
-                }
-                else
-                {
-                ocultarError('#nombre_persona', '#small-nombre');
-                ocultarError('#nombre_persona', '#small-nombre-legal');
-                return true;
-                }
-            }
-            else
-            {
-                ocultarError('#dni_legal', '#small-dni');
-                ocultarError('#dni_legal', '#small-dni-legal');
-                validarDni();
-                if($("#nombre_persona").val()=='')
-                {
-                mostrarError('#nombre_persona', '#small-nombre', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del representante <strong>no</strong> puede quedar vacío.</div>');
-                mostrarError('#nombre_persona', '#small-nombre-legal', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE del representante <strong>no</strong> puede quedar vacío.</div>');
-                return false;
-                }
-                else
-                {
-                ocultarError('#nombre_persona', '#small-nombre');
-                ocultarError('#nombre_persona', '#small-nombre-legal');
-                return true;
-                }
-            }
-            }
-        }
-
-        function mostrarError(campo, error, msg) {
-            $(campo).addClass('is-invalid');
-            $(error).html(msg);
-            $(error).show();
-        }
-        function ocultarError(campo, error) {
-            $(campo).removeClass('is-invalid');
-            $(error).hide();
-        }
-
-        function recargarListaDomicilio(provincia_selected, select_localidad){
-            console.log("entra en esta funcion de recarga de localidades");
-            $.ajax({
-                type:"GET",
-                url:"{{url('localidades')}}/"+provincia_selected,
-                success:function(r){
-                    select_localidad.html(r);
-                }
-            }).done(function(){
-                let proveedor = @json($proveedor);
-                if(proveedor.domicilio_real!=null && proveedor.domicilio_real.localidad!=null)
-                    if ($('#provincia_real_edit').val()!='')
-                        $("#localidad_real_edit option[value='"+proveedor.domicilio_real.localidad.id_localidad+"']").attr("selected", true);
-                if(proveedor.domicilio_legal!=null && proveedor.domicilio_legal.localidad!=null)
-                    if ($('#provincia_legal_edit').val()!='')
-                        $("#localidad_legal_edit option[value='"+proveedor.domicilio_legal.localidad.id_localidad+"']").attr("selected", true);
-                if(proveedor.domicilio_fiscal!=null && proveedor.domicilio_fiscal.localidad!=null)
-                    if ($('#provincia_fiscal_edit').val()!='')
-                        $("#localidad_fiscal_edit option[value='"+proveedor.domicilio_fiscal.localidad.id_localidad+"']").attr("selected", true);
+                $.ajax({
+                    url: url,
+                    success: function(response) {
+                        abrirModalverPersona(response);
+                    }
+                });
+                
             });
-        }
 
-        function recargarListaHabilitacion(){
-            $.ajax({
-            type:"GET",
-                    url:"{{url('localidades')}}/"+$('#provincia_habilitacion').val(),
+            $(document).on("click", "#btn_baja", function() {
+                let tipo_baja = $("#btn_baja").data('tipo-baja');
+                let id_proveedor;
+                let url;
+                switch(tipo_baja)
+                {
+                    case 'persona':
+                        //Obtenemos el numero de la fila que queremos modificar
+                        id_proveedor=   $("#btn_baja").data('id-proveedor');
+                        let tipo_persona = $("#btn_baja").data('tipo-persona');
+                        let id_persona = $("#btn_baja").data('id-persona');
+                        url = '{{ url("proveedor/:id_proveedor/:tipo_persona/:id_persona/eliminar") }}';
+                        url = url.replace(':id_proveedor', id_proveedor);
+                        url = url.replace(':tipo_persona', tipo_persona);
+                        url = url.replace(':id_persona', id_persona);
 
-            success:function(r){
-                $('#localidad_habilitacion').html(r);
-            }
-            }).done(function(){
-            let localidad_habilitacion = @json($proveedor->localidad_habilitacion);
-            if($("#provincia_habilitacion").val()!='' && localidad_habilitacion != null)
-                $("#localidad_habilitacion option[value='"+localidad_habilitacion+"']").attr("selected", true);
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            success: function() {
+                                $('.yajra-personas-'+tipo_persona).DataTable().ajax.reload();
+                                switch(tipo_persona)
+                                {
+                                    case 'miembro':
+                                        tipo_persona='Miembro';   
+                                    break;
+                                    case 'direccion_firma':
+                                        tipo_persona='Miembro de los órganos de dirección y adminitración de firma';   
+                                    break;
+                                    case 'apoderado':
+                                        tipo_persona='Apoderado';   
+                                    break;
+                                }
+                                Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'info',
+                                            title: tipo_persona+' dada de baja',
+                                            showConfirmButton: false,
+                                            timer: 1500,
+                                            toast: true
+
+                                            })
+                            }
+                        }); 
+                    break;
+                    case 'firma':
+                        //Obtenemos el numero de la fila que queremos modificar
+                        id_proveedor=   $("#btn_baja").data('id-proveedor');
+                        let id_firma = $("#btn_baja").data('id-firma');
+                        url = '{{ url("proveedor/:id_proveedor/firma/:id_firma/eliminar") }}';
+                        url = url.replace(':id_proveedor', id_proveedor);
+                        url = url.replace(':id_firma', id_firma);
+
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            success: function() {
+                                $('.yajra-denominaciones').DataTable().ajax.reload();
+                                Swal.fire({
+                                            position: 'top-end',
+                                            icon: 'info',
+                                            title: 'Firma dada de baja',
+                                            showConfirmButton: false,
+                                            timer: 1500,
+                                            toast: true
+
+                                            })
+                            }
+                        }); 
+                    break;
+                }
+                
+
+                //Ocultamos el modal
+                $('#modalBaja').modal('hide');
+
+                });
+
+            $('#add_persona').on('show.bs.modal', function (event) {
+                //event.stopImmediatePropagation();
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var tipo_persona = button.data('tipo-persona'); // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this);
+                
+                if(tipo_persona=='direccion_firma')
+                {   
+                    modal.find('.modal-title').text('Nuevo miembro de los órganos de dirección y administración de firma');
+                    $("#div_cargo_x_create").show();
+                }
+                else
+                {
+                    modal.find('.modal-title').text('Nuevo '+tipo_persona);
+                    $("#div_cargo_x_create").hide();
+                }
+                $('#store_persona').data('tipo-persona',tipo_persona);
+                //modal.find('.modal-body input').val(tipo_persona);
             });
+
+            
+            $('#modalBaja').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var tipo_baja = button.data('tipo-baja');
+                var modal = $(this);
+                switch(tipo_baja)
+                {
+                    case 'persona':
+                        var tipo_persona = button.data('tipo-persona'); // Extract info from data-* attributes
+                        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                        
+                        if(tipo_persona == 'direccion_firma')
+                            modal.find('.modal-body').html(   '<p>¿Está seguro que desea dar de baja a este miembro de los órganos de dirección y administración de firma?</p>'+
+                                                                '<p>Esta operación <b>NO</b> podrá deshacerse.</p>');
+                        else
+                            modal.find('.modal-body').html(   '<p>¿Está seguro que desea dar de baja a este '+tipo_persona+'?</p>'+
+                                                                '<p>Esta operación <b>NO</b> podrá deshacerse.</p>');
+                        $("#btn_baja").data('tipo-baja','persona');
+                        $("#btn_baja").data('id-proveedor',button.data('id-proveedor'));
+                        $("#btn_baja").data('tipo-persona',tipo_persona);
+                        $("#btn_baja").data('id-persona', button.data('id-persona'));
+                    break;
+                    case 'firma':
+                        modal.find('.modal-body').html(  '<p>¿Está seguro que desea dar de baja esta firma que representa?</p>'+
+                                                        '<p>Esta operación <b>NO</b> podrá deshacerse.</p>');
+                        $("#btn_baja").data('tipo-baja','firma');
+                        $("#btn_baja").data('id-proveedor',button.data('id-proveedor'));
+                        $("#btn_baja").data('id-firma', button.data('id-firma'));
+                    break;
+                    case 'disposicion':
+                        modal.find('.modal-body').html(  '<p>¿Está seguro que desea dar de baja esta disposición?</p>'+
+                                                        '<p>Esta operación <b>NO</b> podrá deshacerse.</p>');
+                        $("#btn_baja").data('tipo-baja','disposicion');
+                        $("#btn_baja").data('id-proveedor',button.data('id-proveedor'));
+                        $("#btn_baja").data('id-disposicion', button.data('id-disposicion'));
+                    break;
+                }
+                
+            });
+
+            $(document).on("click", ".btn_cancel_modal", function(event) {
+
+                //Obtenemos los campos obligatorios para aplicarles estilos css
+                borrarDatosModalPersona();
+            });
+
+            $('#add_persona').on('hidden.bs.modal', function (event) {
+                //Obtenemos los campos obligatorios para aplicarles estilos css
+                borrarDatosModalPersona();
+            });
+            
+            $('#edit_persona').on('hidden.bs.modal', function (event) {
+                //Obtenemos los campos obligatorios para aplicarles estilos css
+                borrarDatosModalPersona();
+            });
+            $( ".disposicion_actividad" ).autocomplete({
+                source: function( request, response ) {
+                    $.ajax( {
+                        url: "{{url('proveedor/'.$id.'/nro_disposicion')}}/"+request.term,
+                        dataType: "json",
+                        success: function( data ) {
+                            response( data );
+                        }
+                    } );
+                },
+                minLength: 2
+            });
+    });
+
+        function borrarDatosModalPersona(){
+            ocultarError('#dni_x_create', '#small-dni-x-create');
+            ocultarError('#apellido_x_create', '#small-apellido-x-create');
+            ocultarError('#nombre_x_create', '#small-nombre-x-create');
+            ocultarError('#cargo_x_create', '#small-cargo-x-create');
+            $("#apellido_x_create").val('');
+            $("#nombre_x_create").val('');
+            $("#dni_x_create").val('');
+            $("#cargo_x_create").val('');
+
+            ocultarError('#dni_x_edit', '#small-dni-x-edit');
+            ocultarError('#apellido_x_edit', '#small-apellido-x-edit');
+            ocultarError('#nombre_x_edit', '#small-nombre-x-edit');
+            ocultarError('#cargo_x_edit', '#small-cargo-x-edit');
+            $("#apellido_x_edit").val('');
+            $("#nombre_x_edit").val('');
+            $("#dni_x_edit").val('');
+            $("#cargo_x_edit").val('');
+
+            $("#div_cargo_x_create").hide();
+            $("#div_cargo_x_edit").hide();
         }
+
+        function abrirModalverPersona(response) {
+            $('#edit_persona').modal('show');
+            console.log("dni"+response['dni_persona']);
+            $('#dni_x_edit').val(response['dni_persona'].replace(/\D/g, "")
+                                                        .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                                                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, "."));
+            $('#apellido_x_edit').val(response['apellido_persona']);
+
+            $('#nombre_x_edit').val(response['nombre_persona']);
+            if(response['pivot']['rol_persona_proveedor'])
+            {
+                $('#cargo_x_edit').val(response['pivot']['rol_persona_proveedor']);
+                $('#div_cargo_x_edit').show();
+            }
+        } 
+        
     </script>
         
 @endpush

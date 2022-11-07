@@ -4,45 +4,17 @@
 </div>
 
 <br/>
-    <div class="row">
-        <div class="col-sm">
-            <label for="nombre_banco">Banco con el que opera:</label><br>
-                <select class="js-example-basic-single" aria-describedby="basic-addon1" id="nombre_banco" name="nombre_banco">
-                     @forelse($bancos as $banco)
-                       <option value="{{$banco->nombre_banco}}">{{$banco->nombre_banco}}</option> 
-                    @empty
-                        <option value=" "></option>
-                    @endforelse
-                </select>
-            <br />
-
-            <label for="tipo_cuenta">Tipo de cuenta:</label><br>
-            <input type="text" class="form-control" placeholder="Ingrese el tipo de cuenta" aria-describedby="basic-addon1" id="tipo_cuenta" name="tipo_cuenta" maxlength="50">
-            <br>
-        </div>
-
-        <div class="col-sm">
-            <label for="sucursal">Sucursal:</label><br>
-            <select class="js-example-basic-single" aria-describedby="basic-addon1" id="sucursal" name="sucursal">
-               {{-- @forelse($sucursales as $sucursal)
-                   <!-- <option value="{{$sucursal->desc_sucursal}}">{{$sucursal->desc_sucursal}}</option> 
-                @empty
-                    <option value=" "></option>
-                @endforelse --> --}}
-            </select>
-            <br />
-
-            <label for="nro_cuenta">Nº de cuenta:</label><br>
-            <input type="text" class="form-control" placeholder="Ingrese el Nº de cuenta" aria-describedby="basic-addon1" id="nro_cuenta" name="nro_cuenta" maxlength="50">
-            <br>
-
-            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <a id="add_banco" class="btn btn-success">Agregar Banco</a>
-            </div>
+    @include('bancos.form', ['mode'=>'create'])
+    <br>
+<div class="row">
+    <div class="col-sm"></div>
+    <div class="col-sm">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a id="add_banco" class="btn btn-success">Agregar Banco</a>
         </div>
     </div>
-    <br>
-
+</div>
+<br>
     <div>
         <table class="table table-hover">
             <thead>
@@ -63,13 +35,13 @@
     <hr>
 
     
-    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-    <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+    <input type="button" name="previous" class="previous btn btn btn-outline-secondary" data-tipo='banco' value="Atrás" />
+    <input type="button" name="next" class="next btn btn-info" data-tipo='banco' value="Siguiente" />
 
 
     <!--Incluimos el modal para editar los campos de una referencia bancaria-->
 
-    @include('modales.editarReferenciaBancaria')
+    @include('bancos.modal-edit-create',['mode'=>'edit'])
 
     <!--Incluimos el modal para validar una referencia bancaria -->
 
@@ -86,30 +58,26 @@
 
         $("#add_banco").on("click", function(e) {
 
-            nombre_banco = $("#nombre_banco").val();
-            sucursal = $("#sucursal").val();
-            tipo_cuenta = $("#tipo_cuenta").val();
-            nro_cuenta = $("#nro_cuenta").val();
+            nombre_banco = $("#nombre_banco_create").val();
+            sucursal = $("#localidad_sucursal_create").val();
+            tipo_cuenta = $("#tipo_cuenta_create").val();
+            nro_cuenta = $("#nro_cuenta_create").val();
 
-            //Obtenemos los campos obligatorios para aplicarles estilos css
-            let sucursal_css = document.getElementById("sucursal");
-            let tipo_cuenta_css = document.getElementById("tipo_cuenta");
-            let nro_cuenta_css = document.getElementById("nro_cuenta");
-
-            if(sucursal != " " && tipo_cuenta.length != 0 && nro_cuenta.length != 0) {
-
+            if(nombre_banco!='' && sucursal != '' && tipo_cuenta!= '' && nro_cuenta != '') 
+            {
                 //borra la fila con el mensaje vacio
                 $("#row_banco").remove();
 
                 $("#body_table_banco").append(
                     '<tr id="row_banco' + n +'">'+
                             '<td> <div id="nombre_banco_text' + n + '">' + nombre_banco +'</div></td>'+
-                            '<td> <div id="sucursal_text' + n + '">' + sucursal +'</div></td>'+
+                            '<td> <div id="sucursal_text' + n + '">' + $("#localidad_sucursal_create option:selected").text() +'</div></td>'+
                             '<td> <div id="tipo_cuenta_text' + n + '">' + tipo_cuenta +'</div></td>'+
                             '<td> <div id="nro_cuenta_text' + n + '">' + nro_cuenta +'</div></td>'+
                             '<td>'+
                             '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="nombre_banco' + n +'" name="nombres_bancos[]" readonly value="' + nombre_banco +'">'+
-                            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="sucursal' + n +'" name="sucursales[]" readonly value="' + sucursal +'">'+
+                            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="provincia_sucursal' + n +'" name="provincia_sucursales[]" readonly value="' + $("#provincia_sucursal_create").val() +'">'+
+                            '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="localidad_sucursal' + n +'" name="localidad_sucursales[]" readonly value="' + $("#localidad_sucursal_create").val() +'">'+
                             '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="tipo_cuenta' + n +'" name="tipos_cuentas[]" readonly value="' + tipo_cuenta +'">'+
                             '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="nro_cuenta' + n +'" name="nros_cuentas[]" readonly value="' + nro_cuenta +'">'+
                             '<button type="button" name="edit" id="' + n + '" class="btn btn-warning btn-sm btn_edit_banco" title="editar banco"><indice class="fas fa-edit"></i></button>' +
@@ -122,44 +90,37 @@
 
                 //Limpiamos cada campo luego de presionar el botón Agregar Banco
 
-                document.getElementById("tipo_cuenta").value = "";
-                document.getElementById("nro_cuenta").value = "";
+                nombre_banco = $("#nombre_banco_create option:first").attr('selected','selected').change();
+                sucursal = $("#provincia_sucursal_create option:first").attr('selected','selected').change();
+                $("#localidad_sucursal_create").empty();
+                $("#localidad_sucursal_create").append("<option val=''>Seleccione una localidad</option>");
+                tipo_cuenta = $("#tipo_cuenta_create").val('');
+                nro_cuenta = $("#nro_cuenta_create").val('');
 
-                tipo_cuenta_css.style.border = '1px solid #DFDFDF';
-                nro_cuenta_css.style.border = '1px solid #DFDFDF';
-
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Banco Guardado',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        toast: true
-
-                    })
-
-
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Banco Guardado',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    toast: true
+                })
             } else {
-
-                if(sucursal == " "){
-
-                    sucursal_css.style.border = '2px dashed red';
+                if(nombre_banco == '')
+                {
+                    $("#nombre_banco_create").parents('.form-group').find('.select2-selection').css('border', '1px solid red');
+                    mostrarError($("#nombre_banco_create"), '#small-banco-head', '<div class="alert alert-danger mt-3 pt-1">El BANCO <strong>no</strong> puede quedar vacío.</div>');    
                 }
 
-                if(tipo_cuenta.length == 0){
-
-                    tipo_cuenta_css.style.border = '2px dashed red';
+                if(sucursal == ''){
+                    $("#localidad_sucursal_create").parents('.form-group').find('.select2-selection').css('border', '1px solid red');
+                    mostrarError($("#localidad_sucursal_create"), '#small-localidad-sucursal-head', '<div class="alert alert-danger mt-3 pt-1">La LOCALIDAD DE SUCURSAL <strong>no</strong> puede quedar vacío.</div>');
                 }
 
-                if(nro_cuenta.length == 0){
-
-                    nro_cuenta_css.style.border = '2px dashed red';
-                }
-
-
-                //Desplegamos el modal
-                $('#modal_validar_referencia').modal('show');
-
+                if(tipo_cuenta == '')
+                    mostrarError($("#tipo_cuenta_create"), '#small-tipo-cuenta-head', '<div class="alert alert-danger mt-3 pt-1">El TIPO DE CUENTA <strong>no</strong> puede quedar vacío.</div>');
+                if(nro_cuenta == '')
+                    mostrarError($("#nro_cuenta_create"), '#small-nro-cuenta-head', '<div class="alert alert-danger mt-3 pt-1">El NRO DE CUENTA <strong>no</strong> puede quedar vacío.</div>');
             }
 
         });
@@ -206,13 +167,13 @@
         //Cargamos los inputs del modal con los datos de la fila de la tabla
 
         $(document).on("click", ".btn_edit_banco", function() {
-
             //cuando da click al boton editar, obtenemos el id del boton
             let button_id = $(this).attr("id");
 
             //Recuperamos los valores de los campos pertenecientes a una fila
             let modal_nombre_banco = $("#nombre_banco" + button_id).val();
-            let modal_sucursal = $("#sucursal" + button_id).val();
+            let modal_provincia_sucursal = $("#provincia_sucursal" + button_id).val();
+            let modal_localidad_sucursal = $("#localidad_sucursal" + button_id).val();
             let modal_tipo_cuenta = $("#tipo_cuenta" + button_id).val();
             let modal_nro_cuenta = $("#nro_cuenta" + button_id).val();
 
@@ -220,14 +181,62 @@
             $('#modal_banco').modal('show');
 
             //Enviamos los valores recuperados anteriormente a los inputs del modal
-            $('#modal_nombre_banco').val(modal_nombre_banco);
-            $('#modal_sucursal').val(modal_sucursal);
-            $('#modal_tipo_cuenta').val(modal_tipo_cuenta);
-            $('#modal_nro_cuenta').val(modal_nro_cuenta);
+            $("#nombre_banco_edit option[value='"+modal_nombre_banco+"']").attr('selected','selected').change();
+            $("#provincia_sucursal_edit option[value='"+modal_provincia_sucursal+"']").attr('selected','selected').change();
+            recargarLocalidadSucursal($('#provincia_sucursal_edit').val(),$('#localidad_sucursal_edit'), button_id);
+            $('#tipo_cuenta_edit').val(modal_tipo_cuenta);
+            $('#nro_cuenta_edit').val(modal_nro_cuenta);
             $('#numero_fila_banco').val(button_id);
-
         });
 
+        $(document).ready(function(){
+            $("#nombre_banco_create").change(function(){
+                if ($('#nombre_banco_create').val()!='')
+                {
+                    $("#nombre_banco_create").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+                    ocultarError('#nombre_banco_create', '#small-banco-head');
+                }
+            });
+            $("#localidad_sucursal_create").change(function(){
+                if ($('#localidad_sucursal_create').val()!='')
+                {
+                    $("#localidad_sucursal_create").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+                    ocultarError('#localidad_sucursal_create', '#small-localidad-sucursal-head');
+                }
+            });
+
+            $("#tipo_cuenta_create").keyup(function(){
+                ocultarError('#tipo_cuenta_create', '#small-tipo-cuenta-head');
+            });
+
+            $("#nro_cuenta_create").keyup(function(){
+                ocultarError('#nro_cuenta_create', '#small-nro-cuenta-head');
+            });
+
+            $('#nombre_banco_edit').change(function(){
+                if($('#nombre_banco_edit').val()!='')
+                {
+                    $("#nombre_banco_edit").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+                    ocultarError($('#nombre_banco_edit'), '#small-banco-edit');
+                }
+            });
+
+            $('#tipo_cuenta_edit').keyup(function(){
+                    ocultarError($('#tipo_cuenta_edit'), '#small-tipo-cuenta-edit');
+            });
+
+            $('#localidad_sucursal_edit').change(function(){
+                if($('#localidad_sucursal_edit').val()!='')
+                {
+                    $("#localidad_sucursal_edit").parents('.form-group').find('.select2-selection').css('border', '1px solid #ccc');
+                    ocultarError($('#localidad_sucursal_edit'), '#small-localidad-sucursal-edit');
+                }
+            });
+
+            $('#nro_cuenta_edit').keyup(function(){
+                ocultarError($('#nro_cuenta_edit'), '#small-nro-cuenta-edit');
+            });
+        });
 
     </script>
 @endpush

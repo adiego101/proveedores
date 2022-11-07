@@ -3,13 +3,9 @@
 
     @if ($mode == 'edit')
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#nuevaDenominacion">
-            Agregar Nueva Denominación
-        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_firma" >Agregar Firma</button>
 
         <br>
-        <br>
-
     @endif
 
     <div>
@@ -48,8 +44,7 @@
 @push('js')
 
     <script type="text/javascript">
-    /*
-        $(function() {
+        $(document).ready(function() {
 
             var table = $('.yajra-denominaciones').DataTable({
                 language: {
@@ -77,8 +72,8 @@
                 ajax: "{{ url('firmas/' . $id . '/' . $mode) }}",
                 columns: [
                     {
-                        data: 'denominaciones',
-                        name: 'denominaciones'
+                        data: 'denominacion_firma',
+                        name: 'denominacion_firma'
                     },
                     {
                         data: 'action',
@@ -90,8 +85,132 @@
                 ]
             });
 
+            $(document).on('click', '.edit_firma', function(event){
+                //event.stopImmediatePropagation();
+                console.log("detecta evento click en edit_firma");
+                var id_proveedor=$(this).data('id-proveedor');
+                var id_firma=$(this).data('id-firma');
+                console.log("id_proveedor"+id_proveedor);
+                let url = '{{ url("proveedor/:id_proveedor/firma/:id_firma/editar") }}';
+                url = url.replace(':id_proveedor', id_proveedor);
+                url = url.replace(':id_firma', id_firma);
+                console.log(url);
+                $('#update_firma').data('id-proveedor',id_proveedor);
+                $('#update_firma').data('id-firma',id_firma);
+                $('#edit_firma').find('.modal-title').text('Editar Firma Nacional o Extranjera');
+                
+                $.ajax({
+                    url: url,
+                    success: function(response) {
+                        abrirModalverFirma(response);
+                    }
+                });
+            });
+            
+            $('#store_firma').click(function(event){
+                if($("#denominacion_create").val()!='')
+                {
+                    let denominacion = $("#denominacion_create").val();
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: "{{ url('crearFirma/' . $id) }}",
+                        data: {denominacion:denominacion},
+                        success: function(response) {
+
+                            $('#add_firma').modal('hide');
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Firma Guardada',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                toast: true
+
+                                });
+                            $('.yajra-denominaciones').DataTable().ajax.reload();
+                            $("button").prop("disabled", false);
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Firma no guardada");
+                        }
+                    });
+                }
+            });
+            
+            $("#update_firma").click(function(){
+                let denominacion = $("#denominacion_edit").val();
+                if(denominacion!='')
+                {
+                    var id_proveedor=$(this).data('id-proveedor');
+                    var id_firma=$(this).data('id-firma');
+                    console.log("id_proveedor"+id_proveedor);
+                    let url = '{{ url("proveedor/:id_proveedor/firma/:id_firma/actualizar") }}';
+                    url = url.replace(':id_proveedor', id_proveedor);
+                    url = url.replace(':id_firma', id_firma);
+                    console.log("url"+url);
+                    $("button").prop("disabled", true);
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        data: {denominacion:denominacion},
+                        success: function(response) {
+
+                            $('#edit_firma').modal('hide');
+
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Firma Nacional o Extranjera Guardada',
+                                showConfirmButton: false,
+                                timer: 1500,
+                                toast: true
+
+                                });
+                            $('.yajra-denominaciones').DataTable().ajax.reload();
+                            $("button").prop("disabled", false);
+                        },
+                        error: function(error) {
+                            //console.log(error)
+                            $("button").prop("disabled", false);
+                            alert("ERROR!! Firma nacional o extranjera no guardada");
+                        }
+                    });
+                }
+                else
+                {
+                    event.preventDefault();
+                    mostrarError($("#denominacion_edit"), '#small-denominacion-edit', '<p style="color:red;">La DENOMINACIÓN DE LA FIRMA <strong>no</strong> puede quedar vacía.</p>');
+                }
+            });
+            
         });
 
+        function verFirma(elemento) {
+            console.log("**detecta evento click en edit_firma");
+            var id_proveedor=elemento.data('id-proveedor');
+            var id_firma=elemento.data('id-firma');
+            console.log("id_proveedor = "+id_proveedor);
+            let url = '{{ url("proveedor/:id_proveedor/firma/:id_firma.") }}';
+            url = url.replace(':id_proveedor', id_proveedor);
+            url = url.replace(':id_firma', id_firma);
+            console.log(url);
+            $.ajax({
+                url: url,
+                success: function(response) {
+                    abrirModalverFirma(response);
+                }
+            });
+        }
+
+        function abrirModalverFirma(response) {
+            $('#edit_firma').modal('show');
+            console.log("denominacion_firma="+response['denominacion_firma']);
+            $('#denominacion_edit').val(response['denominacion_firma']);            
+        } 
 
         function bajaDenominacion(id_registro) {
 
@@ -99,8 +218,6 @@
             $('#modal_baja_denominacion').modal('show');
             $('#baja_denominacion').val(id_registro);
         }
-
-    */
     </script>
     
 @endpush

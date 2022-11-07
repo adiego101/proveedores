@@ -24,7 +24,7 @@ class RolesSeeder extends Seeder
                                 'solicitar_firma',
                                 'descargar_excel',
                                 'descargar_documentos',
-                                'consultar_historial_acciones']); 
+                                'consultar_historial_acciones']);
 
 
         //Rol Funcionario
@@ -37,7 +37,7 @@ class RolesSeeder extends Seeder
                                 'descargar_documentos',
                                 'consultar_historial_acciones']);
 
-        
+
         //Rol Administrador de Acceso
         $rol_administrador_acceso = Role::create(['name'=>'administrador_de_acceso']);
         //$rol4 = Role::findByName('Informatica');
@@ -58,19 +58,19 @@ class RolesSeeder extends Seeder
                                 'ver_registros',
                                 'baja_registros',
                                 'alta_registros',
-                                'descargar_excel']);   
+                                'descargar_excel']);
 
 
 
         //Rol Consultor
         $rol_consultor = Role::create(['name'=>'consultor']);
-        $rol_consultor->givePermissionTo(['ver_registros']);  
+        $rol_consultor->givePermissionTo(['ver_registros']);
 
 
         //Rol Usuario Externo
         $rol_usuario_externo = Role::create(['name'=>'usuario_externo']);
         $rol_usuario_externo->givePermissionTo(['ver_registros',
-                                                'descargar_documentos']); 
+                                                'descargar_documentos']);
 
     }
 }

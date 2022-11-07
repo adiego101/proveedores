@@ -113,21 +113,40 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('bajaPagos/{id}', 'App\Http\Controllers\ProveedoresController@bajaPagos')->name('pagos.baja');
     Route::post('bajaActividades/{id}', 'App\Http\Controllers\ProveedoresController@bajaActividades')->name('actividades.baja');
+    Route::post('proveedor/{id_proveedor}/firma/{id_firma}/eliminar', 'App\Http\Controllers\ProveedoresController@eliminarFirma')->name('firmas.eliminar');
+    Route::post('proveedor/{id_proveedor}/{tipo_persona}/{id_persona}/eliminar', 'App\Http\Controllers\ProveedoresController@eliminarPersona')->name('personas.eliminar');
 
     Route::get('editarPagos/{id}', 'App\Http\Controllers\ProveedoresController@editarPagos')->name('pagos.editar');
     Route::get('editarActividades/{id}', 'App\Http\Controllers\ProveedoresController@editarActividades')->name('actividades.editar');
 
     Route::post('guardarPagos/{id}', 'App\Http\Controllers\ProveedoresController@guardarPagos')->name('pagos.guardar');
     Route::post('guardarActividades/{id}', 'App\Http\Controllers\ProveedoresController@guardarActividades')->name('actividades.guardar');
+    Route::post('proveedor/{id_proveedor}/firma/{id_persona}/actualizar', 'App\Http\Controllers\ProveedoresController@actualizarFirma')->name('firmas.actualizar');
+    Route::post('proveedor/{id_proveedor}/banco/{id_banco}/actualizar', 'App\Http\Controllers\ProveedoresController@actualizarBanco')->name('bancos.actualizar');
+    Route::post('proveedor/{id_proveedor}/disposicion/{id_disposicion}/actualizar', 'App\Http\Controllers\ProveedoresController@actualizarDisposicion')->name('disposiciones.actualizar');
+    Route::post('proveedor/{id_proveedor}/{tipo_persona}/{id_persona}/actualizar', 'App\Http\Controllers\ProveedoresController@actualizarPersona')->name('personas.actualizar');
+
 
     Route::get('nuevoPagos/{id}', 'App\Http\Controllers\ProveedoresController@nuevoPagos')->name('pagos.nuevo');
     Route::get('nuevoActividades/{id}', 'App\Http\Controllers\ProveedoresController@nuevoActividades')->name('actividades.nuevo');
 
     Route::post('crearPagos/{id}', 'App\Http\Controllers\ProveedoresController@crearPagos')->name('pagos.crear');
     Route::post('crearActividades/{id}', 'App\Http\Controllers\ProveedoresController@crearActividades')->name('actividades.crear');
+    Route::post('crearPersona/{id}', 'App\Http\Controllers\ProveedoresController@crearPersona')->name('personas.crear');
+    Route::post('crearFirma/{id}', 'App\Http\Controllers\ProveedoresController@crearFirma')->name('firmas.crear');
 
     Route::get('verPagos/{id}', 'App\Http\Controllers\ProveedoresController@verPagos')->name('pagos.ver');
     Route::get('verActividades/{id}', 'App\Http\Controllers\ProveedoresController@verActividades')->name('actividades.ver');
+    
+    Route::get('proveedor/{id_proveedor}/nro_disposicion/{nro_disposicion}', 'App\Http\Controllers\ProveedoresController@getNroDisposiciones')->name('disposiciones.nroslist');
+    Route::get('proveedor/{id_proveedor}/disposiciones/{mode?}', 'App\Http\Controllers\ProveedoresController@getDisposiciones')->name('disposiciones.list');
+    Route::post('proveedor/{id_proveedor}/disposicion/guardar', 'App\Http\Controllers\ProveedoresController@crearDisposicion')->name('disposiciones.crear');
+    
+    Route::get('proveedor/{id_proveedor}/disposicion/{id_disposicion}/editar', 'App\Http\Controllers\ProveedoresController@verDisposicion')->name('disposiciones.ver');
+    
+    Route::get('proveedor/{id_proveedor}/firma/{id_firma}/editar', 'App\Http\Controllers\ProveedoresController@verFirma')->name('firmas.ver');
+    Route::get('proveedor/{id_proveedor}/banco/{id_banco}/editar', 'App\Http\Controllers\ProveedoresController@verBanco')->name('bancos.ver');
+    Route::get('proveedor/{id_proveedor}/{tipo_persona}/{id_persona}/editar', 'App\Http\Controllers\ProveedoresController@verPersona')->name('personas.ver');
 
     });
 
@@ -144,15 +163,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('pagos/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPagos')->name('pagos.list');
 
-    //RUTA PARA OBTENER LAS FIRMAS NAC Y EXTR EN EL MODAL DE EDITAR. Todavia falta implementar.
-    Route::get('firmas/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getDenominaciones')->name('firmas.list');
-
-    //RUTA PARA ELIMINAR LAS FIRMAS NAC Y EXTR EN EL MODAL DE BAJA DEL EDITAR. Todavia falta implementar.
-    Route::post('bajaFirmas/{id}', 'App\Http\Controllers\ProveedoresController@bajaDenominacion')->name('firmas.baja');
-
-    //RUTA PARA CREAR UNA FIRMA NAC Y EXTR EN EL MODAL DE ALTA DEL EDITAR. Todavia falta implementar.
-    Route::post('crearFirmas/{id}', 'App\Http\Controllers\ProveedoresController@crearDenominacion')->name('firmas.crear');
-
     //RUTA PARA OBTENER LAS REFERENCIAS BANCARIAS EN EL MODAL DE EDITAR. Todavia falta implementar.
     Route::get('referenciasBancarias/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getReferenciasBancarias')->name('referenciasBancarias.list');
 
@@ -160,9 +170,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('bajaReferenciasBancarias/{id}', 'App\Http\Controllers\ProveedoresController@bajaReferenciaBancaria')->name('referenciasBancarias.baja');
 
     //RUTA PARA CREAR UNA REFERENCIA BANCARIA EN EL MODAL DE ALTA DEL EDITAR. Todavia falta implementar.
-    Route::post('crearReferenciasBancarias/{id}', 'App\Http\Controllers\ProveedoresController@crearReferenciaBancaria')->name('referenciasBancarias.crear');
+    Route::post('proveedor/{id_proveedor}/banco/store', 'App\Http\Controllers\ProveedoresController@crearReferenciaBancaria')->name('referenciasBancarias.crear');
 
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
+    Route::get('personas/{tipo_persona}/{id_proveedor}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPersonas')->name('personas.list');
+    Route::get('firmas/{id_proveedor}/{mode?}', 'App\Http\Controllers\ProveedoresController@getFirmas')->name('firmas.list');
+    
 
     //Prueba generacion PDF
 
