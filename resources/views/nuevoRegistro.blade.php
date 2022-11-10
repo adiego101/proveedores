@@ -218,7 +218,7 @@
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <div class="btn-group">
-                <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
+                <button type="submit" name="finalizar" class="btn finalizar btn-success"> {{ 'Finalizar' }} </button>
             </div>
         </div>
 
@@ -239,8 +239,41 @@
 
 <script type="text/javascript">
 
+$(".finalizar").click(function(e){
+            console.log("prueba captura de formulario");
+            e.preventDefault();
+            var form = $(this);
+            if($("#razon_social").val()=='')
+                mostrarError('#razon_social', '#small-razon-social-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+            else
+                ocultarError('#razon_social', '#small-razon-social-head');
+            if($("#nombre_fantasia").val()=='')
+                mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE DE FANTASIA <strong>no</strong> puede quedar vacía.</div>');
+            else
+                ocultarError('#nombre_fantasia', '#small-nombre-fantasia-head');
+            if($("#tipo_disposicion_{{$mode}}").val()=='')
+                $('#small-tipo-disposicion-head').append('<div class="alert alert-danger mt-3 pt-1">El TIPO DE DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+            else
+                $('#small-tipo-disposicion-head').empty();
+            if($("#nro_expte_gde_{{$mode}}").val()=='')
+                mostrarError('#nro_expte_gde_{{$mode}}', '#small-nro-expte-head', '<div class="alert alert-danger mt-3 pt-1">El NÚMERO DE EXPEDIENTE DE GDE <strong>no</strong> puede quedar vacío.</div>');
+            else
+                ocultarError('#nro_expte_gde_{{$mode}}', '#small-nro-expte-head');
+
+            if($("#fecha_inicio_disposicion_{{$mode}}").val()=='')
+                mostrarError('#fecha_inicio_disposicion_{{$mode}}', '#small-inicio-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE INICIO DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+            else
+                ocultarError('#fecha_inicio_disposicion_{{$mode}}', '#small-inicio-disposicion-head');
+            if($("#fecha_fin_disposicion_{{$mode}}").val()=='')
+                mostrarError('#fecha_fin_disposicion_{{$mode}}', '#small-fin-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE FIN DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+            else
+                ocultarError('#fecha_fin_disposicion_{{$mode}}', '#small-fin-disposicion-head');
+
+        });
+
     $(document).ready(function()
     {
+
 
         $( ".dni" ).autocomplete({
             source: function( request, response ) {
