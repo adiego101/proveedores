@@ -56,7 +56,7 @@
                         else
                             ocultarError('#razon_social', '#small-razon-social-head');
                         if($("#nombre_fantasia").val()=='')
-                            mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+                            mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">El Nombre de Fantasia <strong>no</strong> puede quedar vacía.</div>');
                         else
                             ocultarError('#nombre_fantasia', '#small-nombre-fantasia-head');
                     }
