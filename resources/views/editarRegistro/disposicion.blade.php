@@ -93,7 +93,7 @@
             let observaciones = $("#observaciones_disposicion_modal-create").val();
             if(tipo_disposicion != '' && nro_disposicion != '' && fecha_inicio != '' && fecha_fin != '')
             {
-                let datos = {   
+                let datos = {
                                 tipo_disposicion:tipo_disposicion,
                                 nro_disposicion:nro_disposicion,
                                 fecha_inicio:fecha_inicio,
@@ -144,14 +144,14 @@
             console.log(url);
             $('#update_disposicion').data('id-proveedor',id_proveedor);
             $('#update_disposicion').data('id-disposicion',id_disposicion);
-            
+
             $.ajax({
                 url: url,
                 success: function(response) {
                     abrirModalverDisposicion(response);
                 }
             });
-            
+
         });
 
         $("#update_disposicion").click(function(){
@@ -175,7 +175,7 @@
                 $.ajax({
                     type: "post",
                     url: url,
-                    data: 
+                    data:
                         {   tipo_disposicion:tipo_disposicion,
                             //nro_expte_gde:nro_expte_gde,
                             nro_disposicion:nro_disposicion,
@@ -221,11 +221,11 @@
             }
             else
             {
-                $('#small-tipo-disposicion-modal-edit').empty();
+                $('#small-tipo_disposicion_{{$mode}}').empty();
                 event.preventDefault();
                 if(tipo_disposicion=='')
                 {
-                    $("#tipo_disposicion_modal-edit").css('border','1px solid red');
+                    $("#tipo_disposicion_{{$mode}}").css('border','1px solid red');
                     $('#small-tipo-disposicion-modal-edit').append('<p style="color:red;">El TIPO DE DISPOSICIÓN <strong>no</strong> puede quedar vacío.</p>');
                 }
                 /*if(nro_expte_gde=='')
@@ -266,8 +266,8 @@
         $("#nro_disposicion_modal-edit").val(response['nro_disposicion']);
         $("#fecha_inicio_disposicion_modal-edit").val(response['fecha_ini_vigencia']);
         $("#fecha_fin_disposicion_modal-edit").val(response['fecha_fin_vigencia']);
-        $("#observaciones_disposicion_modal-edit").val(response['observaciones']);        
-    } 
+        $("#observaciones_disposicion_modal-edit").val(response['observaciones']);
+    }
 
     function borrarDatosModalDisposicion(response) {
         $("#tipo_disposicion_modal-edit").val();
@@ -281,8 +281,8 @@
         ocultarError($("#fecha_inicio_disposicion_modal-edit"),'#small-fecha-inicio-modal-edit');
         $("#fecha_fin_disposicion_modal-edit").val();
         ocultarError($("#fecha_fin_disposicion_modal-edit"),'#small-fecha-fin-modal-edit');
-        $("#observaciones_disposicion_modal-edit").val();        
-    } 
+        $("#observaciones_disposicion_modal-edit").val();
+    }
 
     function bajaDisposicion(id_disposicion) {
 

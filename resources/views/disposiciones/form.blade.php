@@ -4,6 +4,8 @@
         <label for="nro_expte_gde_{{$mode}}">Nro Expediente GDE: <sup>*</sup></label><br>
         <input type="text" class="form-control" placeholder="Ingrese el número de expediente de GDE" aria-describedby="basic-addon1" id="nro_expte_gde_{{$mode}}" name="nro_expte_gde"
             @if ( $mode == "show") readonly @endif value="" maxlength="50" @if($mode=='create')autofocus required @endif>
+            <small class="small" id="small-nro_expte_gde_{{$mode}}"></small>
+
     </div>
 </div>
 <br>
@@ -43,3 +45,26 @@
 <br>
 <label for="observaciones_disposicion_{{$mode}}">Observaciones:</label><br>
 <textarea id="observaciones_disposicion_{{$mode}}"   @if ( $mode == "show") readonly @endif name="observaciones_disposicion" class="form-control" placeholder="Ingrese las observaciones que considere necesarias" maxlength="200"></textarea>
+@push('js')
+
+<script type="text/javascript">
+
+          $('#nro_expte_gde_{{$mode}}').change(validar_nro_expte_gde);
+
+          function validar_nro_expte_gde() {
+
+            if($('#nro_expte_gde_{{$mode}}').val() == ""){
+                console.log("asdasd");
+
+                mostrarError('#nro_expte_gde_{{$mode}}', '#small-nro_expte_gde_{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El NÚMERO DE EXPEDIENTE DE GDE <strong>no</strong> puede quedar vacío.</div>');
+
+            return false;
+            }
+
+            ocultarError('#nro_expte_gde_{{$mode}}', '#small-nro_expte_gde_{{$mode}}');
+
+            return true;
+            }
+    </script>
+
+@endpush
