@@ -71,28 +71,20 @@
             {data: 'nombre_fantasia',
             render: function (data, type, row){
                 let nombre_fantasia_sub = data.substring(0, 20);
-                if (row['dado_de_baja'] === 0)
-                        return nombre_fantasia_sub;
-                    else
-                        return '<div style="color:red;">'+nombre_fantasia_sub+'</div>';
+                return nombre_fantasia_sub;
             }
             },
             {data: 'razon_social',
             render: function (data, type, row){
                 let razon_social_sub = data.substring(0, 20);
-                if (row['dado_de_baja'] === 0)
-                        return razon_social_sub;
-                    else
-                        return '<div style="color:red;">'+razon_social_sub+'</div>';
+                return razon_social_sub;
             }
             },
            {data: 'cuit',
             render: function (data, type, row){
 
-                if (row['dado_de_baja'] === 0)
-                        return data;
-                    else
-                        return '<div style="color:red;">'+data+'</div>';
+                return data;
+
             }
             },
             {
@@ -122,7 +114,7 @@
     }
 
     //FUNCION PARA ELIMINAR UN REGISTRO DE LA BD
-    
+
     /*
     function eliminarRegistro(id_registro) {
 
