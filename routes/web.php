@@ -52,9 +52,10 @@ Route::group(['middleware' => ['auth']], function () {
         $localidades = Localidad::all();
         $tipos_actividades = Tipo_actividad::All();
         $actividades = Actividad_economica::All();
+        $mode = "create";
         $bancos = Banco::all();
 
-        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'bancos'));
+        return view('nuevoRegistro', compact('cuit','paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'bancos','mode'));
     })->name('nuevoRegistro')->middleware(['can:crear_registros']);
 
 
@@ -108,7 +109,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class)->middleware(['can:admin_users']);
     Route::patch('/changePassword/{id}', 'App\Http\Controllers\UserController@changePassword')->name('changePassword')->middleware(['can:admin_users']);
 
-    
+
     Route::group(['middleware' => ['can:editar_registros']], function () {
 
     Route::post('bajaPagos/{id}', 'App\Http\Controllers\ProveedoresController@bajaPagos')->name('pagos.baja');
@@ -137,13 +138,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('verPagos/{id}', 'App\Http\Controllers\ProveedoresController@verPagos')->name('pagos.ver');
     Route::get('verActividades/{id}', 'App\Http\Controllers\ProveedoresController@verActividades')->name('actividades.ver');
-    
+
     Route::get('proveedor/{id_proveedor}/nro_disposicion/{nro_disposicion}', 'App\Http\Controllers\ProveedoresController@getNroDisposiciones')->name('disposiciones.nroslist');
     Route::get('proveedor/{id_proveedor}/disposiciones/{mode?}', 'App\Http\Controllers\ProveedoresController@getDisposiciones')->name('disposiciones.list');
     Route::post('proveedor/{id_proveedor}/disposicion/guardar', 'App\Http\Controllers\ProveedoresController@crearDisposicion')->name('disposiciones.crear');
-    
+
     Route::get('proveedor/{id_proveedor}/disposicion/{id_disposicion}/editar', 'App\Http\Controllers\ProveedoresController@verDisposicion')->name('disposiciones.ver');
-    
+
     Route::get('proveedor/{id_proveedor}/firma/{id_firma}/editar', 'App\Http\Controllers\ProveedoresController@verFirma')->name('firmas.ver');
     Route::get('proveedor/{id_proveedor}/banco/{id_banco}/editar', 'App\Http\Controllers\ProveedoresController@verBanco')->name('bancos.ver');
     Route::get('proveedor/{id_proveedor}/{tipo_persona}/{id_persona}/editar', 'App\Http\Controllers\ProveedoresController@verPersona')->name('personas.ver');
@@ -175,7 +176,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
     Route::get('personas/{tipo_persona}/{id_proveedor}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPersonas')->name('personas.list');
     Route::get('firmas/{id_proveedor}/{mode?}', 'App\Http\Controllers\ProveedoresController@getFirmas')->name('firmas.list');
-    
+
 
     //Prueba generacion PDF
 
@@ -195,7 +196,7 @@ Route::group(['middleware' => ['auth']], function () {
         return view('exportarExcel',compact('paises','provincias','sectores','actividades_economicas'));
     })->middleware(['can:descargar_excel']);
 
-    
+
     Route::get('responsable/{dni}', 'App\Http\Controllers\ProveedoresController@getResponsable')->name('responsable');
     Route::get('/exportar', 'App\Http\Controllers\ExportController@exportar')->name('exportar')->middleware(['can:descargar_excel']);
     Route::post('limpiar', 'App\Http\Controllers\ProveedoresController@limpiar')->name('limpiar');
@@ -206,5 +207,5 @@ Route::group(['middleware' => ['auth']], function () {
     })->middleware(['can:consultar_historial_acciones']);
 
     Route::get('/listado_acciones', 'App\Http\Controllers\ProveedoresController@obtenerListadoAcciones')->name('listado_acciones')->middleware(['can:consultar_historial_acciones']);
-    
+
 });

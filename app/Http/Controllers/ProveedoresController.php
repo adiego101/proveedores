@@ -130,6 +130,8 @@ class ProveedoresController extends Controller
             //return $cuit;
             if (!$cuit/*|| $dado_de_baja->isEmpty()*/) {
 
+            //return response()->json($request->cuit);
+
 
                 //-------------------Carga Proveedor-------------------
 
@@ -195,7 +197,7 @@ class ProveedoresController extends Controller
                     //---------Carga de Email/s_Legal----------
 
                     $this->crear_emails($proveedores_rupae->id_proveedor, 'legal', $request);
-                    
+
                     //---------Carga de Representante Legal----------
 
                     $dni_persona=htmlspecialchars(str_replace(".","",$request->dni_legal));
@@ -257,7 +259,7 @@ class ProveedoresController extends Controller
                         }
                     }
 
-                   
+
                     //---------Contador de Pagos----------
                     if (isset($request->importes_pagos)) {
 
@@ -288,7 +290,7 @@ class ProveedoresController extends Controller
                 'EL_Id_Responsable' => $responsable_id,
                 'EL_Nombre_Responsable' => $responsable_nombre,
                 'EL_Email_Responsable' => $responsable_email]);*/
-                
+
                 //Fin de la transaccion
                 DB::commit();
 
@@ -421,7 +423,7 @@ class ProveedoresController extends Controller
     }
 
     public function crear_telefonos($id_proveedor, $tipo_telefono, Request $request)
-    {   
+    {
         $cantidad_telefonos=0;
         switch($tipo_telefono){
             case('real'):
@@ -434,7 +436,7 @@ class ProveedoresController extends Controller
                 $cantidad_telefonos=count($request->telefono_fiscal);
                 break;
         }
-        
+
         for($i = 0; $i < $cantidad_telefonos; $i++)
         {
             $nro_tel=$request->input("telefono_$tipo_telefono.".$i);
@@ -474,10 +476,10 @@ class ProveedoresController extends Controller
                 $cantidad_telefonos=count($request->telefono_fiscal);
                 break;
         }
-        
+
         $telefonos_proveedor=Proveedor_telefono::where('id_proveedor',$id_proveedor)
                                                 ->where('tipo_telefono',$tipo_telefono)
-                                                ->get();     
+                                                ->get();
         if(isset($telefonos_proveedor) && $telefonos_proveedor->isNotEmpty())
         {
             foreach($telefonos_proveedor as $telefono_proveedor)
@@ -576,14 +578,14 @@ class ProveedoresController extends Controller
                 Log::info('Cantidad de emails fiscal='.$cantidad_emails);
                 break;
         }
-        
+
         $emails_proveedor=Proveedor_email::where('id_proveedor',$id_proveedor)
                                                 ->where('tipo_email',$tipo_email)
                                                 ->get();
-        Log::info('Emails '.$emails_proveedor.'='.$cantidad_emails);  
+        Log::info('Emails '.$emails_proveedor.'='.$cantidad_emails);
         if(isset($emails_proveedor) && $emails_proveedor->isNotEmpty())
         {
-            Log::info('Existe emails proveedor y no esta vacio');  
+            Log::info('Existe emails proveedor y no esta vacio');
             foreach($emails_proveedor as $email_proveedor)
             {
                 $encontrado=false;
@@ -668,13 +670,13 @@ class ProveedoresController extends Controller
             return Datatables::of($disposiciones)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) use ($mode) {
-                    if ($mode == "show") 
+                    if ($mode == "show")
                     {
                         $actionBtn = ' <a onclick="verFirma($row->id_proveedor,$row->id_proveedor_firma_nac_extr);" class="view btn btn-primary btn-sm" title="ver firma">
                     <i class="fas fa-eye"></i></a>  ';
                         return $actionBtn;
-                    } 
-                    else 
+                    }
+                    else
                     {
                         $actionBtn = '<a class="view btn btn-warning btn-sm edit_disposicion" title="editar disposicion" data-id-proveedor="'.$row->id_proveedor.'" data-id-disposicion="'.$row->id_disposicion.'">
                     <i class="fas fa-edit"></i></a> <a type="button" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#modalBaja" title="Dar de baja" data-tipo-baja="disposicion" data-id-disposicion="'.$row->id_disposicion.'">
@@ -724,7 +726,7 @@ class ProveedoresController extends Controller
                                     'fecha_fin_vigencia'=>$request->fecha_fin,
                                     'disposicion_tipo'=>$request->tipo_disposicion,
                                     //'GDE_Exp'=>$request->nro_expte_gde,
-                                    'observaciones'=>$request->observaciones]);            
+                                    'observaciones'=>$request->observaciones]);
         } catch (\Exception $e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -775,7 +777,7 @@ class ProveedoresController extends Controller
                 ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
         }
     }
-    
+
     public function getPagos(Request $request, $id, $mode = null)
     {
         try {
@@ -923,13 +925,13 @@ class ProveedoresController extends Controller
             return Datatables::of($bancos)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) use ($mode) {
-                    if ($mode == "show") 
+                    if ($mode == "show")
                     {
                         $actionBtn = ' <a onclick="verFirma($row->id_proveedor,$row->id_proveedor_firma_nac_extr);" class="view btn btn-primary btn-sm" title="ver firma">
                     <i class="fas fa-eye"></i></a>  ';
                         return $actionBtn;
-                    } 
-                    else 
+                    }
+                    else
                     {
                         $actionBtn = '<a class="view btn btn-warning btn-sm edit_banco" title="editar referencia bancaria" data-id-proveedor="'.$row->pivot->id_proveedor.'" data-id-banco="'.$row->id_banco.'">
                     <i class="fas fa-edit"></i></a> <a type="button" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#modalBaja" title="Dar de baja" data-tipo-baja="firma" data-id-proveedor="'.$row->pivot->id_proveedor.'" data-id-banco="'.$row->id_banco.'">
@@ -984,7 +986,7 @@ class ProveedoresController extends Controller
                                                         'tipo_cuenta' => $request->tipo_cuenta,
                                                         'nro_cuenta' => $request->nro_cuenta]);
             }
-            
+
         } catch (\Exception $e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1027,7 +1029,7 @@ class ProveedoresController extends Controller
                 else
                     return response()->json(['error'=>'No se puede actualizar el nombre del banco. Elimine la referencia bancaria y agregue una nueva.']);
             }
-            
+
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1149,10 +1151,10 @@ class ProveedoresController extends Controller
 
     public function crearPersona($id, Request $request)
     {
-        
+
         try {
             //---------Carga de Persona----------
-            
+
             $proveedor=Proveedor::findOrFail($id);
             $tipo_persona=htmlspecialchars($request->tipo_persona);
             switch($tipo_persona)
@@ -1202,7 +1204,7 @@ class ProveedoresController extends Controller
                         if($persona->apellido_persona!=$apellido_persona)
                             $persona->update(['apellido_persona'=>$apellido_persona]);
                     }
-                    
+
                     if($tipo_persona=='direccion_firma')
                     {
                         $cargo_persona = htmlspecialchars($request->cargo);
@@ -1211,7 +1213,7 @@ class ProveedoresController extends Controller
                     $proveedor->personas()->attach($persona, [  'rol_persona_proveedor' => $tipo_persona]);
                 }
             }
-            
+
         }catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1239,13 +1241,13 @@ class ProveedoresController extends Controller
                         $persona=$proveedor->apoderados->where('id_persona',$id_persona)->first();
                     break;
                 }
-        
+
             //---------Actualiza Persona----------
-            
+
             $dni_persona=htmlspecialchars(str_replace(".","",$request->dni));
             $nombre_persona=htmlspecialchars($request->nombre);
             $apellido_persona=htmlspecialchars($request->apellido);
-            
+
             if($dni_persona!='' && $nombre_persona!='' && $apellido_persona!='')
             {
                 if($persona->dni_persona==$dni_persona)
@@ -1259,7 +1261,7 @@ class ProveedoresController extends Controller
                 else
                     Log::info("dni persona diferente");
             }
-            
+
         }catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1270,7 +1272,7 @@ class ProveedoresController extends Controller
 
     public function eliminarPersona($id_proveedor, $tipo_persona, $id_persona, Request $request)
     {
-        try 
+        try
         {
             $proveedor=Proveedor::findOrFail($id_proveedor);
             switch($tipo_persona)
@@ -1292,7 +1294,7 @@ class ProveedoresController extends Controller
                     break;
                 }
             }
-        catch (\Exception$e) 
+        catch (\Exception$e)
         {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1323,13 +1325,13 @@ class ProveedoresController extends Controller
             return Datatables::of($personas)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) use ($mode, $tipo_persona) {
-                    if ($mode == "show") 
+                    if ($mode == "show")
                     {
                         $actionBtn = ' <a onclick="verPersona($row->id_proveedor,$tipo_persona,$row->id_persona);" class="view btn btn-primary btn-sm" title="ver persona">
                     <i class="fas fa-eye"></i></a>  ';
                         return $actionBtn;
-                    } 
-                    else 
+                    }
+                    else
                     {
                         $actionBtn = '<a class="view btn btn-warning btn-sm edit_persona" title="editar persona" data-id-proveedor="'.$row->pivot->id_proveedor.'" data-tipo-persona="'.$tipo_persona.'" data-id-persona="'.$row->id_persona.'">
                     <i class="fas fa-edit"></i></a> <a type="button" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#modalBaja" title="Dar de baja" data-tipo-baja="persona" data-id-proveedor="'.$row->pivot->id_proveedor.'" data-tipo-persona="'.$tipo_persona.'" data-id-persona="'.$row->id_persona.'">
@@ -1366,7 +1368,7 @@ class ProveedoresController extends Controller
                     $persona=$proveedor->apoderados->where('id_persona',$id_persona)->first();
                 break;
             }
-            
+
             Log::info("persona=".$persona);
             return $persona;
         } catch (\Exception$e) {
@@ -1459,13 +1461,13 @@ class ProveedoresController extends Controller
             return Datatables::of($firmas)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) use ($mode) {
-                    if ($mode == "show") 
+                    if ($mode == "show")
                     {
                         $actionBtn = ' <a onclick="verFirma($row->id_proveedor,$row->id_proveedor_firma_nac_extr);" class="view btn btn-primary btn-sm" title="ver firma">
                     <i class="fas fa-eye"></i></a>  ';
                         return $actionBtn;
-                    } 
-                    else 
+                    }
+                    else
                     {
                         $actionBtn = '<a class="view btn btn-warning btn-sm edit_firma" title="editar firma" data-id-proveedor="'.$row->id_proveedor.'" data-id-firma="'.$row->id_proveedor_firma_nac_extr.'">
                     <i class="fas fa-edit"></i></a> <a type="button" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#modalBaja" title="Dar de baja" data-tipo-baja="firma" data-id-proveedor="'.$row->id_proveedor.'" data-id-firma="'.$row->id_proveedor_firma_nac_extr.'">
@@ -1506,7 +1508,7 @@ class ProveedoresController extends Controller
                                                                 'desc_firma'*/]);
                 }
             }
-            
+
         }catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1536,9 +1538,9 @@ class ProveedoresController extends Controller
     {
         try {
             //---------Actualiza Firma----------
-            
+
             $denominacion=htmlspecialchars($request->denominacion);
-            
+
             if($denominacion!='')
             {
                 $proveedor=Proveedor::findOrFail($id_proveedor);
@@ -1548,7 +1550,7 @@ class ProveedoresController extends Controller
                                 'denominacion_firma'=>$denominacion/*,
                                 'desc_firma'*/]);
             }
-            
+
         }catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1559,14 +1561,14 @@ class ProveedoresController extends Controller
 
     public function eliminarFirma($id_proveedor, $id_firma, Request $request)
     {
-        try 
+        try
         {
             $proveedor=Proveedor::findOrFail($id_proveedor);
             $proveedor->load('firmas');
             $firma = $proveedor->firmas->where('id_proveedor_firma_nac_extr', $id_firma)->first();
             $firma->delete();
             }
-        catch (\Exception$e) 
+        catch (\Exception$e)
         {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1575,7 +1577,7 @@ class ProveedoresController extends Controller
         }
     }
 
-    
+
     /*public function obtenerDatosProveedor($id){
     $proveedores_rupae = new Proveedor_rupae();
     $datos = $proveedores_rupae->obtenerProveedorRupaeId($id);
@@ -1723,7 +1725,7 @@ class ProveedoresController extends Controller
                                 'telefonos_fiscal']);
             /* Se obtiene el representante del proveedor,
                 * se agrega el indice porque la relación representante_actual
-                * es una relación muchos a muchos y de esa relación se obtiene un array 
+                * es una relación muchos a muchos y de esa relación se obtiene un array
                 * con un unico registro de persona (ultimo representante del proveedor)
             * */
             //$proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $id)->get();
@@ -1757,22 +1759,27 @@ class ProveedoresController extends Controller
     {
         try {
             $proveedor = Proveedor::findOrFail($id);
+
+           // return response()->json($proveedor, 200);
             $proveedor->load([  'domicilio_real',
                                 'domicilio_legal',
-                                'domicilio_fiscal',
+                               'domicilio_fiscal',
                                 'telefonos_real',
                                 'telefonos_legal',
                                 'telefonos_fiscal',
-                                'representante_actual']);
+                                'representante_actual'
+                            ]);
+           //return response()->json($proveedor, 200);
             $representante='';
             if($proveedor->representante_actual->isNotEmpty())
                 $representante=$proveedor->representante_actual[0];
-            
-            $proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $id)->get();
+
+             //$proveedores_tipos_proveedores = Proveedores_tipos_proveedores::where('id_proveedor', $id)->get();
 
             $actividades = Actividades_proveedores::where('id_proveedor', $id)->get();
 
             $pagos = Pago::where('id_proveedor', $id)->get();
+            $bancos = Proveedor_banco::where('id_proveedor', $id)->get();
 
             $paises = Pais::all();
             $provincias = Provincia::all();
@@ -1783,7 +1790,7 @@ class ProveedoresController extends Controller
 
             return view('verRegistro', compact('tab', 'mode',
                 'paises', 'provincias', 'localidades', 'tipos_actividades', 'actividades', 'proveedor', 'representante',
-                'id', 'proveedores_tipos_proveedores', 'actividades', 'pagos')
+                'id',  'actividades', 'pagos','bancos')
             );
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
@@ -1818,10 +1825,10 @@ class ProveedoresController extends Controller
                                     ->first();
                     $nombre_persona= htmlspecialchars($request->nombre_persona);
                     $apellido_persona= htmlspecialchars($request->apellido_persona);
-                    
+
                     if($nombre_persona!='' && $apellido_persona!='')
                     {
-                        if (!isset($representante)) {        
+                        if (!isset($representante)) {
                             if(!isset($persona))
                                 $persona = Persona::create([
                                     'dni_persona' => $dni_persona,
@@ -1838,8 +1845,8 @@ class ProveedoresController extends Controller
                                     $persona->update(['apellido_persona' => $apellido_persona]);
                             }
                             $proveedor->personas()->attach($persona, ['rol_persona_proveedor' => 'Representante']);
-                        } 
-                        else 
+                        }
+                        else
                         {
                             if($representante->dni_persona!=$dni_persona)
                             {
@@ -2174,7 +2181,7 @@ public function eliminar_id(Request $request)
         $proveedor->actividades_economicas()->detach();
 
         $proveedor->tipos_actividades()->detach();
-        
+
         $proveedor->emails()->delete();
 
         $proveedor->pagos()->delete();

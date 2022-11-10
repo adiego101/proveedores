@@ -1,7 +1,7 @@
 @extends('layouts')
 
 @section('content2')
-    
+
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -119,7 +119,7 @@
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <div class="btn-group">
                 <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
-               
+
             </div>
         </div>
 
@@ -140,9 +140,13 @@
 
 @push('js')
     <script>
-        $(document).ready(function() 
+        $(document).ready(function()
         {
-            
+            $('input[type="checkbox"]').on('change', function(){
+            this.value = this.checked ? 1 : 0;
+            //console.log(this.value);
+        }).change();
+
             $( ".dni" ).autocomplete({
                 source: function( request, response ) {
                     $.ajax( {
@@ -195,7 +199,7 @@
                 recargarListaDomicilio($('#provincia_legal_edit').val(), $('#localidad_legal_edit'));
             if ($('#provincia_fiscal_edit').val()!='')
                 recargarListaDomicilio($('#provincia_fiscal_edit').val(), $('#localidad_fiscal_edit'));
-                
+
             $('.btnNext').click(function() {
                 $('.nav-tabs .active').parent().next('li').find('a').trigger('click');
             });
@@ -216,12 +220,12 @@
                     var cargo_persona = $("#cargo_x_create").val();
                     var datos;
                     if(tipo_persona!='direccion_firma')
-                        datos={ dni: dni_persona, 
+                        datos={ dni: dni_persona,
                                 apellido: apellido_persona,
                                 nombre: nombre_persona,
                                 tipo_persona: tipo_persona};
                     else
-                        datos={ dni: dni_persona, 
+                        datos={ dni: dni_persona,
                                 apellido: apellido_persona,
                                 nombre: nombre_persona,
                                 tipo_persona: tipo_persona,
@@ -285,7 +289,7 @@
                     if(tipo_persona!='direccion_firma')
                     {
                         if(dni_persona!='' && apellido_persona!='' && nombre_persona!='')
-                            datos={ dni: dni_persona, 
+                            datos={ dni: dni_persona,
                                     apellido: apellido_persona,
                                     nombre: nombre_persona,
                                     tipo_persona: tipo_persona};
@@ -293,7 +297,7 @@
                     else
                     {
                         if(dni_persona!='' && apellido_persona!='' && nombre_persona!='' && cargo_persona !='')
-                            datos={ dni: dni_persona, 
+                            datos={ dni: dni_persona,
                                     apellido: apellido_persona,
                                     nombre: nombre_persona,
                                     tipo_persona: tipo_persona,
@@ -414,14 +418,14 @@
                 if(tipo_persona=='direccion_firma')
                     tipo_persona='miembro de los órganos de dirección y administración de firma';
                 $('#edit_persona').find('.modal-title').text('Editar ' + tipo_persona);
-                
+
                 $.ajax({
                     url: url,
                     success: function(response) {
                         abrirModalverPersona(response);
                     }
                 });
-                
+
             });
 
             $(document).on("click", "#btn_baja", function() {
@@ -448,13 +452,13 @@
                                 switch(tipo_persona)
                                 {
                                     case 'miembro':
-                                        tipo_persona='Miembro';   
+                                        tipo_persona='Miembro';
                                     break;
                                     case 'direccion_firma':
-                                        tipo_persona='Miembro de los órganos de dirección y adminitración de firma';   
+                                        tipo_persona='Miembro de los órganos de dirección y adminitración de firma';
                                     break;
                                     case 'apoderado':
-                                        tipo_persona='Apoderado';   
+                                        tipo_persona='Apoderado';
                                     break;
                                 }
                                 Swal.fire({
@@ -467,7 +471,7 @@
 
                                             })
                             }
-                        }); 
+                        });
                     break;
                     case 'firma':
                         //Obtenemos el numero de la fila que queremos modificar
@@ -492,10 +496,10 @@
 
                                             })
                             }
-                        }); 
+                        });
                     break;
                 }
-                
+
 
                 //Ocultamos el modal
                 $('#modalBaja').modal('hide');
@@ -509,9 +513,9 @@
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
                 var modal = $(this);
-                
+
                 if(tipo_persona=='direccion_firma')
-                {   
+                {
                     modal.find('.modal-title').text('Nuevo miembro de los órganos de dirección y administración de firma');
                     $("#div_cargo_x_create").show();
                 }
@@ -524,7 +528,7 @@
                 //modal.find('.modal-body input').val(tipo_persona);
             });
 
-            
+
             $('#modalBaja').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget); // Button that triggered the modal
                 var tipo_baja = button.data('tipo-baja');
@@ -535,7 +539,7 @@
                         var tipo_persona = button.data('tipo-persona'); // Extract info from data-* attributes
                         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                        
+
                         if(tipo_persona == 'direccion_firma')
                             modal.find('.modal-body').html(   '<p>¿Está seguro que desea dar de baja a este miembro de los órganos de dirección y administración de firma?</p>'+
                                                                 '<p>Esta operación <b>NO</b> podrá deshacerse.</p>');
@@ -562,7 +566,7 @@
                         $("#btn_baja").data('id-disposicion', button.data('id-disposicion'));
                     break;
                 }
-                
+
             });
 
             $(document).on("click", ".btn_cancel_modal", function(event) {
@@ -575,7 +579,7 @@
                 //Obtenemos los campos obligatorios para aplicarles estilos css
                 borrarDatosModalPersona();
             });
-            
+
             $('#edit_persona').on('hidden.bs.modal', function (event) {
                 //Obtenemos los campos obligatorios para aplicarles estilos css
                 borrarDatosModalPersona();
@@ -631,10 +635,10 @@
                 $('#cargo_x_edit').val(response['pivot']['rol_persona_proveedor']);
                 $('#div_cargo_x_edit').show();
             }
-        } 
-        
+        }
+
     </script>
-        
+
 @endpush
 
 @push('css')

@@ -8,22 +8,27 @@
 @push('js')
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#tipo_disposicion").change(function(){
-                if($("#tipo_disposicion").val!='')
+            $("#tipo_disposicion_{{$mode}}").change(function(){
+                if($("#tipo_disposicion_{{$mode}}").val().trim() === '')
                 {
-                    $("#tipo_disposicion").css('border', '1px solid #ccc');
-                    $('#small-tipo-disposicion-head').empty();
+                    $("#tipo_disposicion_{{$mode}}").css('border', '1px dashed red');
+                    mostrarError('#tipo_disposicion_{{$mode}}', '#small-tipo-disposicion-{{$mode}}', '<div class="alert alert-danger mt-3 pt-1">El TIPO DE DISPOSICION <strong>no</strong> puede quedar vacío.</div>');
+
+                    return false;
                 }
-                else
-                    $("#tipo_disposicion").css('border', '1px dashed red');
+                    $("#tipo_disposicion_{{$mode}}").css('border', '1px solid #ccc');
+                    ocultarError('#tipo_disposicion_{{$mode}}', '#small-tipo-disposicion-{{$mode}}');
+                    ocultarError('#tipo_disposicion_{{$mode}}', '#small-tipo-disposicion-head');
+
+                    return true;
             });
-            $("#nro_expte_gde").keyup(function(){
-                ocultarError('#nro_expte_gde', '#small-nro-expte-head');
+            $("#nro_expte_gde_create").keyup(function(){
+                ocultarError('#nro_expte_gde_create', '#small-nro-expte-head');
             });
-            $("#fecha_inicio_disposicion").change(function(){
+            $("#fecha_inicio_disposicion_{{$mode}}").change(function(){
                 ocultarError('#fecha_inicio_disposicion', '#small-inicio-disposicion-head');
             });
-            $("#fecha_fin_disposicion").change(function(){
+            $("#fecha_fin_disposicion_{{$mode}}").change(function(){
                 ocultarError('#fecha_fin_disposicion', '#small-fin-disposicion-head');
             });
         })

@@ -6,6 +6,12 @@
 
     <script>
         $(document).ready(function() {
+
+            $('input[type="checkbox"]').on('change', function(){
+            this.value = this.checked ? 1 : 0;
+            //console.log(this.value);
+        }).change();
+
             var current = 1,
                 current_step, next_step, steps;
             steps = $("fieldset").length;
@@ -22,24 +28,26 @@
                 let tipo = $(this).data('tipo');
                 if(tipo)
                 {
+                    console.log(tipo);
                     if(tipo=='disposicion')
                     {
-                        if($("#tipo_disposicion").val()=='')
+                        if($("#tipo_disposicion_{{$mode}}").val()=='')
                             $('#small-tipo-disposicion-head').append('<div class="alert alert-danger mt-3 pt-1">El TIPO DE DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
                         else
                             $('#small-tipo-disposicion-head').empty();
-                        if($("#nro_expte_gde").val()=='')
-                            mostrarError('#nro_expte_gde', '#small-nro-expte-head', '<div class="alert alert-danger mt-3 pt-1">El NÚMERO DE EXPEDIENTE DE GDE <strong>no</strong> puede quedar vacío.</div>');
+                        if($("#nro_expte_gde_{{$mode}}").val()=='')
+                            mostrarError('#nro_expte_gde_{{$mode}}', '#small-nro-expte-head', '<div class="alert alert-danger mt-3 pt-1">El NÚMERO DE EXPEDIENTE DE GDE <strong>no</strong> puede quedar vacío.</div>');
                         else
-                            ocultarError('#nro_expte_gde', '#small-nro-expte-head');
-                        if($("#fecha_inicio_disposicion").val()=='')
-                            mostrarError('#fecha_inicio_disposicion', '#small-inicio-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE INICIO DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+                            ocultarError('#nro_expte_gde_{{$mode}}', '#small-nro-expte-head');
+
+                        if($("#fecha_inicio_disposicion_{{$mode}}").val()=='')
+                            mostrarError('#fecha_inicio_disposicion_{{$mode}}', '#small-inicio-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE INICIO DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
                         else
-                            ocultarError('#fecha_inicio_disposicion', '#small-inicio-disposicion-head');
-                        if($("#fecha_fin_disposicion").val()=='')
-                            mostrarError('#fecha_fin_disposicion', '#small-fin-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE FIN DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+                            ocultarError('#fecha_inicio_disposicion_{{$mode}}', '#small-inicio-disposicion-head');
+                        if($("#fecha_fin_disposicion_{{$mode}}").val()=='')
+                            mostrarError('#fecha_fin_disposicion_{{$mode}}', '#small-fin-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE FIN DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
                         else
-                            ocultarError('#fecha_fin_disposicion', '#small-fin-disposicion-head');
+                            ocultarError('#fecha_fin_disposicion_{{$mode}}', '#small-fin-disposicion-head');
                     }
                     if(tipo=='datos_generales')
                     {
@@ -48,7 +56,7 @@
                         else
                             ocultarError('#razon_social', '#small-razon-social-head');
                         if($("#nombre_fantasia").val()=='')
-                            mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+                            mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">El Nombre de Fantasia <strong>no</strong> puede quedar vacía.</div>');
                         else
                             ocultarError('#nombre_fantasia', '#small-nombre-fantasia-head');
                     }
@@ -89,12 +97,13 @@
             }
         });
 
+
         function borrarAdvertenciasPersona(tipo_persona)
         {
             if(tipo_persona != 'direccion_firma')
             {
                 if($('#dni_'+tipo_persona+'_create').val()=='' && $('#apellido_'+tipo_persona+'_create').val()=='' && $('#nombre_'+tipo_persona+'_create').val()=='')
-                {    
+                {
                     ocultarError('#dni_'+tipo_persona+'_create', '#small-dni-'+tipo_persona+'-head');
                     ocultarError('#apellido_'+tipo_persona+'_create', '#small-apellido-'+tipo_persona+'-head');
                     ocultarError('#nombre_'+tipo_persona+'_create', '#small-nombre-'+tipo_persona+'-head');
@@ -103,7 +112,7 @@
             else
             {
                 if($('#dni_'+tipo_persona+'_create').val()=='' && $('#apellido_'+tipo_persona+'_create').val()=='' && $('#nombre_'+tipo_persona+'_create').val()=='' && $('#cargo_'+tipo_persona+'_create').val()=='')
-                {    
+                {
                     ocultarError('#dni_'+tipo_persona+'_create', '#small-dni-'+tipo_persona+'-head');
                     ocultarError('#apellido_'+tipo_persona+'_create', '#small-apellido-'+tipo_persona+'-head');
                     ocultarError('#nombre_'+tipo_persona+'_create', '#small-nombre-'+tipo_persona+'-head');
@@ -190,7 +199,7 @@
     <small class="small" id="small-localidad-sucursal-head"></small>
     <small class="small" id="small-tipo-cuenta-head"></small>
     <small class="small" id="small-nro-cuenta-head"></small>
-    
+
 
     <form  id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
         @csrf
@@ -209,14 +218,14 @@
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <div class="btn-group">
-                <button type="submit" name="finalizar" class="btn btn-success"> {{ 'Finalizar' }} </button>
+                <button type="submit" name="finalizar" class="btn finalizar btn-success"> {{ 'Finalizar' }} </button>
             </div>
         </div>
 
 
     </form>
     @yield('datos')
-    
+
     @include('personas.modal-edit-create',['tipo_persona'=>'x', 'mode'=>'edit'])
 
     <!--Incluimos el modal para validar los campos -->
@@ -230,8 +239,41 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function() 
+$(".finalizar").click(function(e){
+            console.log("prueba captura de formulario");
+            e.preventDefault();
+            var form = $(this);
+            if($("#razon_social").val()=='')
+                mostrarError('#razon_social', '#small-razon-social-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+            else
+                ocultarError('#razon_social', '#small-razon-social-head');
+            if($("#nombre_fantasia").val()=='')
+                mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">El NOMBRE DE FANTASIA <strong>no</strong> puede quedar vacía.</div>');
+            else
+                ocultarError('#nombre_fantasia', '#small-nombre-fantasia-head');
+            if($("#tipo_disposicion_{{$mode}}").val()=='')
+                $('#small-tipo-disposicion-head').append('<div class="alert alert-danger mt-3 pt-1">El TIPO DE DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+            else
+                $('#small-tipo-disposicion-head').empty();
+            if($("#nro_expte_gde_{{$mode}}").val()=='')
+                mostrarError('#nro_expte_gde_{{$mode}}', '#small-nro-expte-head', '<div class="alert alert-danger mt-3 pt-1">El NÚMERO DE EXPEDIENTE DE GDE <strong>no</strong> puede quedar vacío.</div>');
+            else
+                ocultarError('#nro_expte_gde_{{$mode}}', '#small-nro-expte-head');
+
+            if($("#fecha_inicio_disposicion_{{$mode}}").val()=='')
+                mostrarError('#fecha_inicio_disposicion_{{$mode}}', '#small-inicio-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE INICIO DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+            else
+                ocultarError('#fecha_inicio_disposicion_{{$mode}}', '#small-inicio-disposicion-head');
+            if($("#fecha_fin_disposicion_{{$mode}}").val()=='')
+                mostrarError('#fecha_fin_disposicion_{{$mode}}', '#small-fin-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE FIN DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
+            else
+                ocultarError('#fecha_fin_disposicion_{{$mode}}', '#small-fin-disposicion-head');
+
+        });
+
+    $(document).ready(function()
     {
+
 
         $( ".dni" ).autocomplete({
             source: function( request, response ) {
@@ -368,7 +410,7 @@
                     {
                         $('#edit_persona').modal('hide');
                         //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                        
+
                         $('#nombre_persona_direccion_firma' + id_filapersona).val(nombre_persona);
                         $('#dni_persona_direccion_firma' + id_filapersona).val(dni_persona);
                         $('#cargo_persona_direccion_firma' + id_filapersona).val(cargo_persona);
@@ -397,9 +439,9 @@
                         {
                             case 'miembro':
                                 //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                            
+
                                 $('#apellido_persona_miembro' + id_filapersona).val(apellido_persona);
-                                
+
                                 $('#nombre_persona_miembro' + id_filapersona).val(nombre_persona);
                                 $('#dni_persona_miembro' + id_filapersona).val(dni_persona);
 
@@ -420,9 +462,9 @@
                             break;
                             case 'apoderado':
                                 //Enviamos los valores recuperados anteriormente del modal, a los inputs de la tabla
-                            
+
                                 $('#apellido_persona_apoderado' + id_filapersona).val(apellido_persona);
-                                
+
                                 $('#nombre_persona_apoderado' + id_filapersona).val(nombre_persona);
                                 $('#dni_persona_apoderado' + id_filapersona).val(dni_persona);
 
@@ -468,7 +510,7 @@
                     $('#denominacion' + id_fila_denominacion).val(modal_denominacion);
 
                     //Enviamos el valor recuperado anteriormente del modal, al texto visible de la tabla
-                
+
                     $('#denominacion_text' + id_fila_denominacion).text(modal_denominacion);
                     ocultarError($('#denominacion_edit'), '#small-denominacion-head');
                     Swal.fire({
@@ -515,7 +557,7 @@
                     $('#nro_cuenta' + id_fila_banco).val(nro_cuenta);
 
                     //Enviamos el valor recuperado anteriormente del modal, al texto visible de la tabla
-                
+
                     $('#nombre_banco_text' + id_fila_banco).text(nombre_banco);
                     $('#sucursal_text' + id_fila_banco).text($("#localidad_sucursal_edit option:selected").text());
                     $('#tipo_cuenta_text' + id_fila_banco).text(tipo_cuenta);
@@ -582,7 +624,7 @@
             ocultarError($('#cargo_x_edit'), '#small-cargo-x-edit');
             $("#div_cargo_x_edit").hide();
         });
-        
+
         $('#modal_denominaciones').on('hidden.bs.modal', function (event) {
             ocultarError($('#denominacion_edit'), '#small-denominacion-edit');
         });
@@ -647,7 +689,7 @@
 
     </script>
 
-    
+
 
 @endpush
 
