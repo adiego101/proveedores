@@ -14,7 +14,7 @@
 <div class="row">
     <div class="col-sm">
         <label for="tipo_disposicion_{{ $mode }}">Tipo de disposición: <sup>*</sup></label><br>
-        <select @if ($mode == 'create') required @endif id="tipo_disposicion_{{ $mode }}"
+        <select @if ($mode == 'show') readonly @endif @if ($mode == 'create') required @endif id="tipo_disposicion_{{ $mode }}"
             class="form-control" aria-label="Tipo disposicion">
             <option value="">Seleccione un tipo de disposicion</option>
             <option value="inscripcion">INSCRIPCION</option>

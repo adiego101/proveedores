@@ -272,13 +272,53 @@ class ProveedoresController extends Controller
                                 'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
                                 'fecha' => $request->fechas_pagos[$i],
                                 'importe' => $request->importes_pagos[$i],
-                                'tipo_pago' => $request->tipos_pagos[$i],
                                 'observaciones' => $request->observaciones_pagos[$i],
 
                             ]);
                             $Pago->save();
                         }
                     }
+
+                    //---------Carga de Firmas Nacionales y Extranjeras ----------
+
+
+                    if (isset($request->denominaciones)) {
+
+                        $arraySize = count($request->denominaciones);
+                        var_dump($arraySize);
+
+                        //---------Carga de Firmas Nacionales y Extranjeras ----------
+                        for ($i = 0; $i < $arraySize; $i++) {
+                            $Proveedor_firma_nac_extr = Proveedor_firma_nac_extr::create([
+                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'denominacion_firma' => $request->denominaciones[$i],
+                            ]);
+                            $Proveedor_firma_nac_extr->save();
+                        }
+                    }
+
+
+                    //---------Contador de Referencias Bancarias----------
+                    if (isset($request->nombres_bancos)) {
+
+                        $arraySize = count($request->nombres_bancos);
+                        var_dump($arraySize);
+
+                        //---------Carga de Referencias Bancarias----------
+                        for ($i = 0; $i < $arraySize; $i++) {
+                            $Proveedor_banco = Proveedor_banco::create([
+                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'id_banco' => $request->nombres_bancos[$i],
+                                'id_localidad' => $request->localidad_sucursales[$i],
+                                'tipo_cuenta' => $request->tipos_cuentas[$i],
+                                'nro_cuenta' => $request->nros_cuentas[$i],
+
+                            ]);
+                            $Proveedor_banco->save();
+                        }
+                    }
+
+
                 //Registro de LOG
                 $responsable_id = User::findOrFail(auth()->id())->id;
                 $responsable_nombre = User::findOrFail(auth()->id())->name;
@@ -672,8 +712,8 @@ class ProveedoresController extends Controller
                 ->addColumn('action', function ($row) use ($mode) {
                     if ($mode == "show")
                     {
-                        $actionBtn = ' <a onclick="verFirma($row->id_proveedor,$row->id_proveedor_firma_nac_extr);" class="view btn btn-primary btn-sm" title="ver firma">
-                    <i class="fas fa-eye"></i></a>  ';
+                        $actionBtn = '<a class="view btn btn-info btn-sm show_disposicion" title="editar disposicion" data-id-proveedor="'.$row->id_proveedor.'" data-id-disposicion="'.$row->id_disposicion.'">
+                    <i class="fas fa-eye"></i></a>';
                         return $actionBtn;
                     }
                     else
@@ -851,7 +891,6 @@ class ProveedoresController extends Controller
             $pago = Pago::find($id);
             $pago->importe = $request->importeeditar;
             $pago->fecha = $request->fechaeditar;
-            $pago->tipo_pago = $request->tipo_pago_editar;
             $pago->observaciones = $request->observacionespagoeditar;
 
             $pago = $pago->fill($request->all());

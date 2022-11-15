@@ -8,13 +8,6 @@
     <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado" aria-describedby="basic-addon1" id="importe_pago" maxlength="9">
     <small class="small" id="small-importe_pago"></small>
 
-    <br>
-    <label for="tipo_pago">Tipo de pago:</label><br>
-    <select class="form-control" aria-describedby="basic-addon1" id="tipo_pago" name="tipo_pago">
-    <option selected value="Inscripcion">Inscripción</option>
-    <option value="Renovacion">Renovación</option>
-    <option value="Otros">Otros</option>
-    </select>
 
     <br>
     <label for="observaciones_pago">Observaciones:</label><br>
@@ -32,7 +25,6 @@
                 <tr>
                     <th>Fecha</th>
                     <th>Importe</th>
-                    <th>Tipo pago</th>
                     <th>Observaciones</th>
                     <th>Acciones</th>
                 </tr>
@@ -77,7 +69,6 @@ function validarimporte_pago() {
 
         let fecha;
         let importe;
-        let tipo_pago;
         let observaciones_pago;
         let fecha_clasica_pago;
         let indice = 1;
@@ -86,7 +77,6 @@ function validarimporte_pago() {
 
             fecha = $('#fecha_pago').val();
             importe = $('#importe_pago').val();
-            tipo_pago = $('#tipo_pago').val();
             observaciones_pago = $('#observaciones_pago').val();
             fecha_clasica_pago = fecha.split('-').reverse().join('/');
 
@@ -95,7 +85,7 @@ function validarimporte_pago() {
             let importe_css = document.getElementById("importe_pago");
 
 
-            if(fecha.length != 0 && importe.length != 0){
+            if(fecha.length != 0 && importe.length != 0 && validarimporte_pago()){
 
                 //borra la fila con el mensaje vacio
                 $("#row_pago").remove();
@@ -104,12 +94,10 @@ function validarimporte_pago() {
                     '<tr id="row_pago' + indice + '">' +
                         '<td> <div id="fecha_pago_text' + indice + '">' + fecha_clasica_pago +'</div></td>'+
                         '<td> <div id="importe_pago_text' + indice + '">' + importe +'</div></td>'+
-                        '<td> <div id="tipo_pago_text' + indice + '">' + tipo_pago +'</div></td>'+
                         '<td> <div id="observaciones_pago_text' + indice + '">' + observaciones_pago +'</div></td>'+
                         '<td>'+
                         '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="fecha_pago' + indice + '" name="fechas_pagos[]" readonly value="' + fecha + '">' +
                         '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="importe_pago' + indice + '" name="importes_pagos[]" readonly value="' + importe + '">' +
-                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="tipo_pago' + indice + '" name="tipos_pagos[]" readonly value="' + tipo_pago + '">' +
                         '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="observaciones_pago' + indice + '" name="observaciones_pagos[]" readonly value="' + observaciones_pago + '">' +
                         '<button type="button" name="edit" id="' + indice + '" class="btn btn-warning btn-sm btn_edit_pago" title="editar pago"><indice class="fas fa-edit"></i></button>' +
                         '<button type="button" name="remove" id="' + indice + '" class="btn btn-danger btn-sm btn_remove_pago" title="quitar pago"><indice class="fas fa-trash"></i></button>' +
@@ -144,12 +132,20 @@ function validarimporte_pago() {
 
                     fecha_css.style.border = '2px dashed red';
                 }
+                else{
+                    fecha_css.style.border = '1px solid #DFDFDF';
+
+                }
 
                 if(importe.length == 0){
 
                     importe_css.style.border = '2px dashed red';
-                }
 
+                }
+                else{
+                    importe_css.style.border = '1px solid #DFDFDF';
+
+                }
 
                //Desplegamos el modal
                $('#modal_validar_pago').modal('show');
@@ -202,7 +198,6 @@ function validarimporte_pago() {
             //Recuperamos los valores de los campos pertenecientes a una fila
             let modal_fecha = $("#fecha_pago" + button_id).val();
             let modal_importe = $("#importe_pago" + button_id).val();
-            let modal_tipo_pago = $("#tipo_pago" + button_id).val();
             let modal_observaciones = $("#observaciones_pago" + button_id).val();
 
             //Desplegamos el modal
@@ -211,7 +206,6 @@ function validarimporte_pago() {
             //Enviamos los valores recuperados anteriormente a los inputs del modal
             $('#modal_fecha').val(modal_fecha);
             $('#modal_importe').val(modal_importe);
-            $('#modal_tipo_pago').val(modal_tipo_pago);
             $('#modal_observaciones').val(modal_observaciones);
             $('#numero_fila_pago').val(button_id);
 

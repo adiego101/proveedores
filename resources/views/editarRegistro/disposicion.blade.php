@@ -39,6 +39,8 @@
 
     @include('disposiciones.modal-create-edit',['mode'=>'modal-create'])
     @include('disposiciones.modal-edit-edit',['mode'=>'modal-edit'])
+    @include('disposiciones.modal-edit-show',['mode'=>'show'])
+
 @push('js')
 
 <script type="text/javascript">
@@ -69,7 +71,7 @@
             },
             processing: true,
             serverSide: true,
-            ajax: "{{ url('proveedor/'.$id.'/disposiciones') }}",
+            ajax: "{{ url('proveedor/'.$id.'/disposiciones/'.$mode) }}",
             columns: [
                 {data: 'disposicion_tipo', name: 'tipo'},
                 {data: 'nro_disposicion', name: 'numero'},
@@ -135,6 +137,28 @@
         $(document).on('click', '.edit_disposicion', function(event){
             //event.stopImmediatePropagation();
             console.log("detecta evento click en edit_disposicion");
+            var id_proveedor=$(this).data('id-proveedor');
+            var id_disposicion=$(this).data('id-disposicion');
+            console.log("id_proveedor"+id_proveedor);
+            let url = '{{ url("proveedor/:id_proveedor/disposicion/:id_disposicion/editar") }}';
+            url = url.replace(':id_proveedor', id_proveedor);
+            url = url.replace(':id_disposicion', id_disposicion);
+            console.log(url);
+            $('#update_disposicion').data('id-proveedor',id_proveedor);
+            $('#update_disposicion').data('id-disposicion',id_disposicion);
+
+            $.ajax({
+                url: url,
+                success: function(response) {
+                    abrirModalverDisposicion(response);
+                }
+            });
+
+        });
+
+        $(document).on('click', '.show_disposicion', function(event){
+            //event.stopImmediatePropagation();
+            console.log("detecta evento click en show_disposicion");
             var id_proveedor=$(this).data('id-proveedor');
             var id_disposicion=$(this).data('id-disposicion');
             console.log("id_proveedor"+id_proveedor);
@@ -259,14 +283,17 @@
     });
 
     function abrirModalverDisposicion(response) {
-        $('#edit_disposicion').modal('show');
+        console.log(response);
+
+        console.log(response['nro_disposicion']);
+        $('#{{$mode}}_disposicion').modal('show');
         console.log("tipo_disposicion="+response['disposicion_tipo']);
-        $("#tipo_disposicion_modal-edit").val(response['disposicion_tipo']);
+        $("#tipo_disposicion_modal-{{$mode}}").val(response['disposicion_tipo']);
         //$("#nro_expte_gde_modal-edit").val(response['GDE_Exp']);
-        $("#nro_disposicion_modal-edit").val(response['nro_disposicion']);
-        $("#fecha_inicio_disposicion_modal-edit").val(response['fecha_ini_vigencia']);
-        $("#fecha_fin_disposicion_modal-edit").val(response['fecha_fin_vigencia']);
-        $("#observaciones_disposicion_modal-edit").val(response['observaciones']);
+        $("#nro_disposicion_modal-{{$mode}}").val(response['nro_disposicion']);
+        $("#fecha_inicio_disposicion_modal-{{$mode}}").val(response['fecha_ini_vigencia']);
+        $("#fecha_fin_disposicion_modal-{{$mode}}").val(response['fecha_fin_vigencia']);
+        $("#observaciones_disposicion_modal-{{$mode}}").val(response['observaciones']);
     }
 
     function borrarDatosModalDisposicion(response) {

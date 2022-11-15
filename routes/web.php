@@ -180,8 +180,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     //Prueba generacion PDF
 
-    Route::get('/registro-alta/{id}', 'App\Http\Controllers\RupaeController@descargarRegistroAlta');
-    Route::get('/certificado-inscripcion/{id}', 'App\Http\Controllers\RupaeController@descargarCertificadoInscripcion');
 
     Route::get('/nuevo-registro/{id}', 'App\Http\Controllers\RupaeController@nuevoRegistroAlta');
     Route::get('/nuevo-certificado/{id}', 'App\Http\Controllers\RupaeController@nuevoCertificadoInscripcion');

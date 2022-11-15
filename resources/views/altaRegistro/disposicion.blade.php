@@ -6,8 +6,33 @@
 </fieldset>
 
 @push('js')
+
+<script>
+    function ValidarFechas()
+    {
+       var fechainicial = $("#fecha_inicio_disposicion_{{ $mode }}").val();
+       var fechafinal = $("#fecha_fin_disposicion_{{ $mode }}").val();
+
+       if(Date.parse(fechafinal) < Date.parse(fechainicial)) {
+
+       alert("La fecha final debe ser mayor a la fecha inicial");
+       return 0;
+    }
+    else{
+        return 1;
+    }
+}
+</script>
+
     <script type="text/javascript">
         $(document).ready(function(){
+
+            $("#fecha_fin_disposicion_{{ $mode }}").change(function(){
+                console.log("verificando Fechas");
+                ValidarFechas();
+            });
+
+
             $("#tipo_disposicion_{{$mode}}").change(function(){
                 if($("#tipo_disposicion_{{$mode}}").val().trim() === '')
                 {
