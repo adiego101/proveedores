@@ -180,6 +180,7 @@
     <small class="small" id="small-nro-expte-head"></small>
     <small class="small" id="small-inicio-disposicion-head"></small>
     <small class="small" id="small-fin-disposicion-head"></small>
+    <small class="small" id="small-fecha-mayor-fin-disposicion-head"></small>
     <small class="small" id="small-razon-social-head"></small>
     <small class="small" id="small-nombre-fantasia-head"></small>
     <small class="small" id="small-cuit-mal-formato-head"></small>
@@ -240,11 +241,19 @@
 <script type="text/javascript">
 
 function validarForm(){
-            let cont = 6;
+            let cont = 7;
             console.log(cont);
 
+                if(ValidarFechas()){
+                    ocultarError('#fecha_fin_disposicion_{{$mode}}', '#small-fecha-mayor-fin-disposicion-head');
+                    cont--;
+                }
+                else{
+                    mostrarError('#fecha_fin_disposicion_{{$mode}}', '#small-fecha-mayor-fin-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE FIN DE VIGENCIA DE LA DISPOSICIÓN debe ser mayor a la FECHA DE INICIO DE VIGENCIA DE LA DISPOSICIÓN.</div>');
+                }
+
                 if($("#razon_social").val()==''){
-                    mostrarError('#razon_social', '#small-razon-social-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+                    mostrarError('#razon_social', '#small-razon-social-head', '<div class="alert alert-danger mt-3 pt-1">La RAZON SOCIAL <strong>no</strong> puede quedar vacía.</div>');
                 }else{
                     ocultarError('#razon_social', '#small-razon-social-head');
                     cont--;}

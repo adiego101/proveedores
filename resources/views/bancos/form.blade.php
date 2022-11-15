@@ -4,7 +4,7 @@
     <select class="js-example-basic-single" aria-describedby="basic-addon1" id="nombre_banco_{{$mode}}" name="nombre_banco">
         <option value="">Seleccione un banco</option>
         @foreach($bancos as $banco)
-            <option value="{{$banco->nombre_banco}}">{{$banco->nombre_banco}}</option>
+            <option value="{{$banco->id_banco}}">{{$banco->nombre_banco}}</option>
         @endforeach
     </select>
     <small class="small" id="small-banco-{{$mode}}"></small>

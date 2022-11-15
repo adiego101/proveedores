@@ -10,7 +10,11 @@
     <nav>
         <ul class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
             <li class="nav-item">
-                <a class=" nav-link @if (empty($tab)) {{ 'active' }} @endif" id="datos-generales-tab"
+                <a class=" nav-link @if (empty($tab)) {{ 'active' }} @endif" id="disposiciones-tab"
+                    data-toggle="tab" href="#disposiciones">Disposiciones</a>
+            </li>
+            <li class="nav-item">
+                <a class=" nav-link" id="datos-generales-tab"
                     data-toggle="tab" href="#datos-generales">Datos Generales</a>
             </li>
             <li class="nav-item">
@@ -46,7 +50,11 @@
 
     </nav>
     <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade  @if (empty($tab)) {{ 'show active' }} @endif" id="datos-generales"
+        <div class="tab-pane fade  @if (empty($tab)) {{ 'show active' }} @endif" id="disposiciones"
+                role="tabpanel" aria-labelledby="nav-disposiciones-tab">
+                @include('editarRegistro.disposicion',['mode'=>'show'])
+            </div>
+        <div class="tab-pane fade  " id="datos-generales"
             role="tabpanel" aria-labelledby="nav-datos-generales-tab">
             @include('editarRegistro.datosGenerales',['mode'=>'show'])
         </div>
@@ -83,15 +91,8 @@
     @yield('datos')
     <br>
 
-    @if ($mode == 'show')
-    @if($proveedor->dado_de_baja != 1)
-        <a href="{{ url('registro-alta/' . $id) }}" class="btn btn-outline-dark" target="_blank">Descargar Registro alta</a>
-        <a href="{{ url('certificado-inscripcion/' . $id) }}" class="btn btn-outline-dark" target="_blank">Descargar Certificado inscripción</a>
-        <a href="#" class="btn btn-outline-info" id="nuevos_certificados">Generar Nuevos Certificados</a>
 
-    @endif
 
-    @endif
 
 
 @endsection
@@ -198,7 +199,7 @@
                 $("#localidad_habilitacion option[value='"+localidad_habilitacion+"']").attr("selected", true);
             });
         }
-        
+
     </script>
 
 @endpush
