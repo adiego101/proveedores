@@ -39,7 +39,7 @@
 
     @include('disposiciones.modal-create-edit',['mode'=>'modal-create'])
     @include('disposiciones.modal-edit-edit',['mode'=>'modal-edit'])
-    @include('disposiciones.modal-edit-show',['mode'=>'show'])
+    @include('disposiciones.modal-edit-show',['mode'=>'modal-show'])
 
 @push('js')
 
