@@ -182,8 +182,7 @@
                 close: function(event, ui)
                 {
                     // Close event fires when selection options closes
-
-                    $(this).data().autocomplete.term = null; // Clear the cached search term, make every search new
+                    $(this).term = null; // Clear the cached search term, make every search new
                 }
             } );
 
@@ -193,12 +192,7 @@
                             .replace(/^([0-9]{2})/, '$1-')
             });
 
-            if ($('#provincia_real_edit').val()!='')
-                recargarListaDomicilio($('#provincia_real_edit').val(), $("#localidad_real_edit"));
-            if ($('#provincia_legal_edit').val()!='')
-                recargarListaDomicilio($('#provincia_legal_edit').val(), $('#localidad_legal_edit'));
-            if ($('#provincia_fiscal_edit').val()!='')
-                recargarListaDomicilio($('#provincia_fiscal_edit').val(), $('#localidad_fiscal_edit'));
+
 
             $('.btnNext').click(function() {
                 $('.nav-tabs .active').parent().next('li').find('a').trigger('click');
@@ -636,6 +630,12 @@
                 $('#div_cargo_x_edit').show();
             }
         }
+
+
+
+
+
+
 
     </script>
 

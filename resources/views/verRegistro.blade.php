@@ -112,12 +112,7 @@
                             .replace(/^([0-9]{2})/, '$1-')
 
             });
-            if ($('#provincia_real_show').val()!='')
-                recargarListaDomicilio($('#provincia_real_show').val(), $("#localidad_real_show"));
-            if ($('#provincia_legal_show').val()!='')
-                recargarListaDomicilio($('#provincia_legal_show').val(), $('#localidad_legal_show'));
-            if ($('#provincia_fiscal_show').val()!='')
-                recargarListaDomicilio($('#provincia_fiscal_show').val(), $('#localidad_fiscal_show'));
+
             if ($('#provincia_habilitacion').val()!='')
                 recargarListaHabilitacion();
             $("#nuevos_certificados").click(function()
@@ -163,27 +158,7 @@
                 $('.nav-tabs .active').parent().prev('li').find('a').trigger('click');
             })
         });
-        function recargarListaDomicilio(provincia_selected, select_localidad){
-            console.log("entra en esta funcion de recarga de localidades");
-            $.ajax({
-                type:"GET",
-                url:"{{url('localidades')}}/"+provincia_selected,
-                success:function(r){
-                    select_localidad.html(r);
-                }
-            }).done(function(){
-                let proveedor = @json($proveedor);
-                if(proveedor.domicilio_real!=null && proveedor.domicilio_real.localidad!=null)
-                    if ($('#provincia_real_edit').val()!='')
-                        $("#localidad_real_edit option[value='"+proveedor.domicilio_real.localidad.id_localidad+"']").attr("selected", true);
-                if(proveedor.domicilio_legal!=null && proveedor.domicilio_legal.localidad!=null)
-                    if ($('#provincia_legal_edit').val()!='')
-                        $("#localidad_legal_edit option[value='"+proveedor.domicilio_legal.localidad.id_localidad+"']").attr("selected", true);
-                if(proveedor.domicilio_fiscal!=null && proveedor.domicilio_fiscal.localidad!=null)
-                    if ($('#provincia_fiscal_edit').val()!='')
-                        $("#localidad_fiscal_edit option[value='"+proveedor.domicilio_fiscal.localidad.id_localidad+"']").attr("selected", true);
-            });
-        }
+
 
         function recargarListaHabilitacion(){
             $.ajax({
