@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-sm">
                 <label for="calle_{{$tipo_domicilio}}_{{$mode}}">Calle:</label><br>
-                <input type="text" class="form-control" @if ( $mode == "show" || $mode=='modal-show') disabled @endif placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_{{$tipo_domicilio}}_{{$mode}}" name="calle_{{$tipo_domicilio}}" maxlength="50" 
+                <input type="text" class="form-control" @if ( $mode == "show" || $mode=='modal-show') disabled @endif placeholder="Ingrese la calle" aria-describedby="basic-addon1" id="calle_{{$tipo_domicilio}}_{{$mode}}" name="calle_{{$tipo_domicilio}}" maxlength="50"
                     value=  @if($tipo_domicilio=='real')"{{isset($proveedor->domicilio_real) ? $proveedor->domicilio_real->calle : '' }}"@endif
                             @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal) ? $proveedor->domicilio_legal->calle : '' }}"@endif
                             @if($tipo_domicilio=='fiscal')"{{isset($proveedor->domicilio_fiscal) ? $proveedor->domicilio_fiscal->calle : '' }}"@endif
@@ -47,7 +47,7 @@
                             @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal) ? $proveedor->domicilio_legal->monoblock : '' }}"@endif
                             @if($tipo_domicilio=='fiscal')"{{isset($proveedor->domicilio_fiscal) ? $proveedor->domicilio_fiscal->monoblock : '' }}"@endif
                             @if($tipo_domicilio=='sucursal')"{{isset($sucursal) ? $sucursal->monoblock : '' }}"@endif><br>
-                            
+
                 <label for="pais_{{$tipo_domicilio}}_{{$mode}}">País:</label><br>
                 <select class="form-control" @if ( $mode == "show" || $mode=='modal-show') disabled @endif aria-describedby="basic-addon1" id="pais_{{$tipo_domicilio}}_{{$mode}}" name="pais_{{$tipo_domicilio}}">
                     @forelse($paises as $pais)
@@ -60,14 +60,14 @@
 
                 <label for="localidad_{{$tipo_domicilio}}_{{$mode}}">Localidad:</label><br>
                 <select class="js-example-basic-single" @if ( $mode == "show" || $mode=='modal-show') disabled @endif aria-describedby="basic-addon1" id="localidad_{{$tipo_domicilio}}_{{$mode}}" name="localidad_{{$tipo_domicilio}}">
-                    <option value= {{--@if($tipo_domicilio=='real')"{{isset($proveedor->domicilio_real->localidad) ? $proveedor->domicilio_real->localidad->id_localidad : '' }}"@endif
+                    <option value= @if($tipo_domicilio=='real')"{{isset($proveedor->domicilio_real->localidad) ? $proveedor->domicilio_real->localidad->id_localidad : '' }}"@endif
                                     @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal->localidad) ? $proveedor->domicilio_legal->localidad->id_localidad : '' }}"@endif
                                     @if($tipo_domicilio=='fiscal')"{{isset($proveedor->domicilio_fiscal->localidad) ? $proveedor->domicilio_fiscal->localidad->id_localidad : '' }}"@endif
-                                    @if($tipo_domicilio=='sucursal')"{{isset($sucursal->localidad) ? $sucursal->localidad->id_localidad : '' }}"@endif--}}> Seleccione una localidad
-                    {{--@if($tipo_domicilio=='real'){{isset($proveedor->domicilio_real->localidad) ? $proveedor->domicilio_real->localidad->nombre_localidad : 'Seleccione una localidad' }}@endif
+                                    @if($tipo_domicilio=='sucursal')"{{isset($sucursal->localidad) ? $sucursal->localidad->id_localidad : '' }}"@endif>
+                    @if($tipo_domicilio=='real'){{isset($proveedor->domicilio_real->localidad) ? $proveedor->domicilio_real->localidad->nombre_localidad : 'Seleccione una localidad' }}@endif
                     @if($tipo_domicilio=='legal'){{isset($proveedor->domicilio_legal->localidad) ? $proveedor->domicilio_legal->localidad->nombre_localidad : 'Seleccione una localidad' }}@endif
                     @if($tipo_domicilio=='fiscal'){{isset($proveedor->domicilio_fiscal->localidad) ? $proveedor->domicilio_fiscal->localidad->nombre_localidad : 'Seleccione una localidad' }}@endif
-                    @if($tipo_domicilio=='sucursal'){{isset($sucursal->localidad) ? $sucursal->localidad->nombre_localidad : 'Seleccione una localidad' }}@endif--}}
+                    @if($tipo_domicilio=='sucursal'){{isset($sucursal->localidad) ? $sucursal->localidad->nombre_localidad : 'Seleccione una localidad' }}@endif
                 </option>
                 </select>
                 <br>
@@ -104,7 +104,7 @@
                                 <br>
                                 <label>Correo electrónico:</label><br>
                                 <input type="email" class="form-control emails_{{$tipo_domicilio}}_{{$mode}}" @if ( $mode == "show" || $mode=='modal-show') disabled @endif placeholder="ejemplo@dominio.com" aria-describedby="basic-addon1" name="email_{{$tipo_domicilio}}[]" @if ( $mode == "show") readonly @endif value="{{$email->email}}" maxlength="50">
-                                @if($mode=='edit')<a href="javascript:void(0);" class="remove_email_{{$tipo_domicilio}}_{{$mode}}" title="Elimine el correo"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>@endif    
+                                @if($mode=='edit')<a href="javascript:void(0);" class="remove_email_{{$tipo_domicilio}}_{{$mode}}" title="Elimine el correo"><input type="button" value="Eliminar" class="btn btn-danger btn-xs"></a>@endif
                             </div>
                         @else
                             <label for="email_{{$tipo_domicilio}}_{{$mode}}">Correo electrónico:</label><br>
@@ -173,7 +173,7 @@
                 <!--<option value=  @if($tipo_domicilio=='real')"{{isset($proveedor->domicilio_real->localidad->provincia) ? $proveedor->domicilio_real->localidad->provincia->nombre_provincia : '' }}"@endif
                                 @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal->localidad->provincia) ? $proveedor->domicilio_legal->localidad->provincia->nombre_provincia : '' }}"@endif
                                 @if($tipo_domicilio=='fiscal')"{{isset($proveedor->domicilio_fiscal->localidad->provincia) ? $proveedor->domicilio_fiscal->localidad->provincia->nombre_provincia : '' }}"@endif
-                                @if($tipo_domicilio=='sucursal')"{{isset($sucursal->localidad->provincia) ? $sucursal->localidad->provincia->nombre_provincia : '' }}"@endif> 
+                                @if($tipo_domicilio=='sucursal')"{{isset($sucursal->localidad->provincia) ? $sucursal->localidad->provincia->nombre_provincia : '' }}"@endif>
                     @if($tipo_domicilio=='real'){{isset($proveedor->domicilio_real->localidad->provincia) ? $proveedor->domicilio_real->localidad->provincia->nombre_provincia : 'Seleccione una provincia' }}@endif
                     @if($tipo_domicilio=='legal'){{isset($proveedor->domicilio_legal->localidad->provincia) ? $proveedor->domicilio_legal->localidad->provincia->nombre_provincia : 'Seleccione una provincia' }}@endif
                     @if($tipo_domicilio=='fiscal'){{isset($proveedor->domicilio_fiscal->localidad->provincia) ? $proveedor->domicilio_fiscal->localidad->provincia->nombre_provincia : 'Seleccione una provincia' }}@endif
@@ -206,7 +206,7 @@
                             @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal) ? $proveedor->domicilio_legal->codigo_postal : '' }}"@endif
                             @if($tipo_domicilio=='fiscal')"{{isset($proveedor->domicilio_fiscal) ? $proveedor->domicilio_fiscal->codigo_postal : '' }}"@endif
                             @if($tipo_domicilio=='sucursal')"{{isset($sucursal->codigo_postal) ? $sucursal->codigo_postal : '' }}"@endif><br>
-                
+
                 @if($tipo_domicilio =='real')
                 <br>
                 <br>
@@ -233,7 +233,7 @@
                             @break
                         @endswitch
                     @endif
-                    
+
                     @forelse($telefonos as $telefono)
                         <div>
                             @if (!$loop->first)
@@ -379,7 +379,52 @@
             return true;
         }
 
-        $(document).ready(function() {
+        $(document).ready(function(){
+        if ($('#provincia_real_edit').val()!=''){
+                recargarListaDomicilio($('#provincia_real_edit').val(), $("#localidad_real_edit"));
+            }
+            if ($('#provincia_legal_edit').val()!=''){
+                recargarListaDomicilio($('#provincia_legal_edit').val(), $('#localidad_legal_edit'));
+            }
+            if ($('#provincia_fiscal_edit').val()!=''){
+                recargarListaDomicilio($('#provincia_fiscal_edit').val(), $('#localidad_fiscal_edit'));
+            }
+            @if($mode!="create")
+
+            function recargarListaDomicilio(provincia_selected, select_localidad){
+
+                console.log("{{url('localidadSelect/')}}/"+@if($tipo_domicilio=='real')"{{isset($proveedor->domicilio_real->localidad) ? $proveedor->domicilio_real->localidad->id_localidad : '' }}",@endif
+                        @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal->localidad) ? $proveedor->domicilio_legal->localidad->id_localidad : '' }}",@endif
+                        @if($tipo_domicilio=='fiscal')"{{isset($proveedor->domicilio_fiscal->localidad) ? $proveedor->domicilio_fiscal->localidad->id_localidad : '' }}",@endif
+                        @if($tipo_domicilio=='sucursal')"{{isset($sucursal->localidad) ? $sucursal->localidad->id_localidad : '' }}",@endif);
+                    $.ajax({
+                        type:"GET",
+                        url:"{{url('localidadSelect/')}}/"+@if($tipo_domicilio=='real')"{{isset($proveedor->domicilio_real->localidad) ? $proveedor->domicilio_real->localidad->id_localidad : '' }}",@endif
+                        @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal->localidad) ? $proveedor->domicilio_legal->localidad->id_localidad : '' }}",@endif
+                        @if($tipo_domicilio=='fiscal')"{{isset($proveedor->domicilio_fiscal->localidad) ? $proveedor->domicilio_fiscal->localidad->id_localidad : '' }}",@endif
+                        @if($tipo_domicilio=='sucursal')"{{isset($sucursal->localidad) ? $sucursal->localidad->id_localidad : '' }}",@endif
+
+                        success:function(r){
+                            select_localidad.html(r);
+                        }
+                    });
+                };
+            @else
+            function recargarListaDomicilio(provincia_selected, select_localidad){
+                $.ajax({
+                    type:"GET",
+                    url:"{{url('localidades')}}/"+provincia_selected,
+                    success:function(r){
+                        select_localidad.html(r);
+                    }
+                });
+            }
+            @endif
+
+
+
+
+
 
             var maxField = 3; //Cantidad maxima de campos (emails y telefonos) a agregar
             var addTelefono = $('.add_telefono_{{$tipo_domicilio}}_{{$mode}}');
@@ -392,7 +437,7 @@
                 var fieldHTML_telefono='';
                 if(x == 1){
                     //Nuevo campo html (agregar un nuevo teléfono)
-                    fieldHTML_telefono= '<div>'+ 
+                    fieldHTML_telefono= '<div>'+
                                             '<br><div class="row">'+
                                                 '<div class="col-sm">'+
                                                     '<label>Código de área:</label><br>'+
@@ -403,7 +448,7 @@
                                                     '<input type="text" onkeypress="return valideKey(event);" class="form-control nros_telefono_{{$tipo_domicilio}}_{{$mode}}" placeholder="Teléfono" aria-describedby="basic-addon1" name="telefono_{{$tipo_domicilio}}[]" maxlength="14" value="">'+
                                                 '</div>'+
                                             '</div>'+
-                                            '<a href="javascript:void(0);" class="remove_telefono_{{$tipo_domicilio}}_{{$mode}}" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+    
+                                            '<a href="javascript:void(0);" class="remove_telefono_{{$tipo_domicilio}}_{{$mode}}" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                         '</div>';
                     //Obtenemos el valor del campo, al clickear el botón Agregar Teléfono
                     let tel = $('#telefono_{{$tipo_domicilio}}_{{$mode}}').val();
@@ -417,8 +462,8 @@
                 } else{
                     console.log("entra por ak con x="+x+" y maxfield="+maxField);
                     //Nuevo campo html (agregar un nuevo teléfono)
-                    fieldHTML_telefono= '<div>'+ 
-                                            '<br>'+  
+                    fieldHTML_telefono= '<div>'+
+                                            '<br>'+
                                             '<div class="row">'+
                                                 '<div class="col-sm">'+
                                                     '<label>Código de área:</label><br>'+
@@ -429,7 +474,7 @@
                                                     '<input type="text" onkeypress="return valideKey(event);" class="form-control nros_telefono_{{$tipo_domicilio}}_{{$mode}}" placeholder="Teléfono" aria-describedby="basic-addon1" name="telefono_{{$tipo_domicilio}}[]" maxlength="14">'+
                                                 '</div>'+
                                             '</div>'+
-                                            '<a href="javascript:void(0);" class="remove_telefono_{{$tipo_domicilio}}_{{$mode}}" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+    
+                                            '<a href="javascript:void(0);" class="remove_telefono_{{$tipo_domicilio}}_{{$mode}}" title="Elimine el teléfono"><input type="button" @if ( $mode == "show") readonly @endif value="Eliminar" class="btn btn-danger btn-xs"></a>'+
                                         '</div>';
                     console.log("valor de ultimo telefono = "+$('.nros_telefono_{{$tipo_domicilio}}_{{$mode}}:last').val());
                     if ($('.nros_telefono_{{$tipo_domicilio}}_{{$mode}}:last').val() != '' && $('.codigos_telefono_{{$tipo_domicilio}}_{{$mode}}:last').val() != '')
@@ -440,7 +485,7 @@
                             x+=1;
                             if(x==maxField)
                                 $('.add_telefono_{{$tipo_domicilio}}_{{$mode}}').hide();
-                        }                
+                        }
                 }
             });
 
@@ -526,7 +571,7 @@
             });
 
             //Carga de datos del domicilio real en los domicilios fiscal y legal
-                
+
             $('#copy_{{$tipo_domicilio}}').click(function() {
                 console.log("detecta evento click en copy_legal");
                 let tipo_domicilio = @json($tipo_domicilio);
@@ -568,7 +613,7 @@
                 $('#cp_{{$tipo_domicilio}}_{{$mode}}').val(cp_r);
                 $('#telefono_{{$tipo_domicilio}}_cod_{{$mode}}').val(cod_tel_r);
                 $('#telefono_{{$tipo_domicilio}}_{{$mode}}').val(tel_r);
-            });           
+            });
         });
         function recargarListaCopiaDomicilio(provincia_selected, select_localidad, tipo_domicilio){
             let mode=@json($mode);
