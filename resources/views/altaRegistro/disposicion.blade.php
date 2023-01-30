@@ -27,10 +27,6 @@
     <script type="text/javascript">
         $(document).ready(function(){
 
-            $("#fecha_fin_disposicion_{{ $mode }}").change(function(){
-                console.log("verificando Fechas");
-                ValidarFechas();
-            });
 
 
             $("#tipo_disposicion_{{$mode}}").change(function(){

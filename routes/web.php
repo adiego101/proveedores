@@ -107,7 +107,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('roles', RoleController::class)->middleware(['can:admin_lista_roles']);
     Route::resource('users', UserController::class)->middleware(['can:admin_users']);
-    Route::patch('/changePassword/{id}', 'App\Http\Controllers\UserController@changePassword')->name('changePassword')->middleware(['can:admin_users']);
+    Route::patch('/changePassword', 'App\Http\Controllers\UserController@changePassword')->name('changePassword');
 
 
     Route::group(['middleware' => ['can:editar_registros']], function () {

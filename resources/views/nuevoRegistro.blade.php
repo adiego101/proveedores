@@ -15,8 +15,10 @@
             var current = 1,
                 current_step, next_step, steps;
             steps = $("fieldset").length;
+
             $(".next").click(function() {
-                current_step = $(this).parent();
+                if(ValidarFechas() && (current == 1) ){
+                    current_step = $(this).parent();
                 next_step = $(this).parent().next();
                 next_step.show();
                 current_step.hide();
@@ -65,6 +67,8 @@
                     if(tipo=='banco')
                         borrarAdvertenciasBanco()
                 }
+                }
+
             });
             $(".previous").click(function() {
                 current_step = $(this).parent();
@@ -210,7 +214,6 @@
         @include('altaRegistro.persona',['tipo_persona'=>'direccion_firma', 'mode'=>'create'])
         @include('altaRegistro.persona',['tipo_persona'=>'apoderado', 'mode'=>'create'])
         @include('editarRegistro.domicilio',['tipo_domicilio'=>'real', 'mode'=>'create'])
-        @include('editarRegistro.domicilio',['tipo_domicilio'=>'legal', 'mode'=>'create'])
         @include('editarRegistro.domicilio',['tipo_domicilio'=>'fiscal', 'mode'=>'create'])
         @include('altaRegistro.actividad',['mode'=>'create'])
         @include('altaRegistro.firmas',['mode'=>'create'])
@@ -414,8 +417,7 @@ $(".finalizar").click(function(e){
         });
         if ($('#provincia_real_create').val()!='')
             recargarListaDomicilio($('#provincia_real_create').val(), $("#localidad_real_create"));
-        if ($('#provincia_legal_create').val()!='')
-            recargarListaDomicilio($('#provincia_legal_create').val(), $('#localidad_legal_create'));
+
         if ($('#provincia_fiscal_create').val()!='')
             recargarListaDomicilio($('#provincia_fiscal_create').val(), $('#localidad_fiscal_create'));
 

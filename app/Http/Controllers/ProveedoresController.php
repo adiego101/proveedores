@@ -144,6 +144,16 @@ class ProveedoresController extends Controller
                     $proveedores_rupae->save();
 
 
+                    //Crear Disposicion
+                    Disposicion::create([   'id_proveedor'=>$proveedores_rupae->id_proveedor,
+                    'nro_disposicion'=>$request->nro_disposicion,
+                    'fecha_ini_vigencia'=>$request->fecha_inicio_disposicion,
+                    'fecha_fin_vigencia'=>$request->fecha_fin_disposicion,
+                    'disposicion_tipo'=>$request->tipo_disposicion,
+                    //'GDE_Exp'=>$request->nro_expte_gde,
+                    'observaciones'=>$request->observaciones_disposicion]);
+
+
 
 
                     //----------------------------------Carga Domicilio Real---------------------------------------------
@@ -157,17 +167,7 @@ class ProveedoresController extends Controller
 
                     $this->crear_emails($proveedores_rupae->id_proveedor, 'real', $request);
 
-                    //----------------------------------Carga Domicilio Legal---------------------------------------------
 
-                    $this->crear_domicilio($proveedores_rupae->id_proveedor, 'legal', $request);
-
-                    //---------Carga Telefono/s_Legal----------
-
-                    $this->crear_telefonos($proveedores_rupae->id_proveedor, 'legal', $request);
-
-                    //---------Carga de Email/s_Legal----------
-
-                    $this->crear_emails($proveedores_rupae->id_proveedor, 'legal', $request);
 
                     //---------Carga de Representante Legal----------
 

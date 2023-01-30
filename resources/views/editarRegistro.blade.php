@@ -32,9 +32,7 @@
             <li class="nav-item">
                 <a class=" nav-link" id="domicilioReal-tab" data-toggle="tab" href="#domicilioReal">Domicilio Real</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link " id="domicilioLegal-tab" data-toggle="tab" href="#domicilioLegal">Domicilio Legal</a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link " id="domicilioFiscal-tab" data-toggle="tab" href="#domicilioFiscal">Domicilio fiscal</a>
             </li>
@@ -89,10 +87,7 @@
             <div class="tab-pane fade" id="domicilioReal" role="tabpanel" aria-labelledby="nav-domicilioReal-tab">
                 @include('editarRegistro.domicilio',['tipo_domicilio'=>'real', 'mode'=>'edit'])
             </div>
-            <div class="tab-pane fade" id="domicilioLegal" role="tabpanel" aria-labelledby="nav-domicilioLegal-tab">
-            @include('editarRegistro.domicilio',['tipo_domicilio'=>'legal', 'mode'=>'edit'])
 
-            </div>
             <div class="tab-pane fade" id="domicilioFiscal" role="tabpanel"
                 aria-labelledby="nav-domicilioFiscal.blade-tab">
                 @include('editarRegistro.domicilio',['tipo_domicilio'=>'fiscal', 'mode'=>'edit'])

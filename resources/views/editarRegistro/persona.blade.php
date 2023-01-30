@@ -12,19 +12,22 @@
             <h1>Apoderado/s de firma</h1>
         @break
     @endswitch
-    @switch($tipo_persona)
-        @case('miembro')
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_persona" data-tipo-persona="miembro">Agregar Miembro</button>
-        @break
-        @case('direccion_firma')
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_persona" data-tipo-persona="direccion_firma">Agregar Miembro de Órgano de Dirección y Administración de Firmas</button>
-        @break
-        @case('apoderado')
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_persona" data-tipo-persona="apoderado">Agregar Apoderado</button>
-        @break
-    @endswitch
+    @if($mode != 'show')
+        @switch($tipo_persona)
+            @case('miembro')
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_persona" data-tipo-persona="miembro">Agregar Miembro</button>
+            @break
+            @case('direccion_firma')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_persona" data-tipo-persona="direccion_firma">Agregar Miembro de Órgano de Dirección y Administración de Firmas</button>
+            @break
+            @case('apoderado')
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_persona" data-tipo-persona="apoderado">Agregar Apoderado</button>
+            @break
+        @endswitch
     <br>
     <br>
+    @endif
+
     <div>
         <table style="width:100%" class="yajra-personas-{{$tipo_persona}} table table-hover  table-striped table-condensed">
             <thead>
@@ -51,7 +54,7 @@
             <a class="btn btn-primary btnNext">Siguiente</a>
         </div>
     </div>
-    
+
 </fieldset>
 
 @push('js')
@@ -87,8 +90,8 @@
                     columns: [
                         {data: 'apellido_persona', name: 'apellido_persona'},
                         {data: 'nombre_persona', name: 'nombre_persona'},
-                        {   data: 'dni_persona', 
-                            name: 'dni_persona', 
+                        {   data: 'dni_persona',
+                            name: 'dni_persona',
                             render: function (data)
                             {
                                 return data.replace(/\D/g, "")
@@ -162,7 +165,7 @@
                 }
             });
         }
-        
-        
+
+
     </script>
 @endpush

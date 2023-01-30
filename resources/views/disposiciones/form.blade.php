@@ -14,12 +14,15 @@
 <div class="row">
     <div class="col-sm">
         <label for="tipo_disposicion_{{ $mode }}">Tipo de disposición: <sup>*</sup></label><br>
-        <select @if ($mode == 'modal-show') readonly @endif @if ($mode == 'create') required @endif id="tipo_disposicion_{{ $mode }}"
+        <select name="tipo_disposicion" @if ($mode == 'modal-show') readonly @endif @if ($mode == 'create') required @endif id="tipo_disposicion_{{ $mode }}"
             class="form-control" aria-label="Tipo disposicion">
             <option value="">Seleccione un tipo de disposicion</option>
             <option value="inscripcion">INSCRIPCION</option>
-            <option value="renovacion">RENOVACION</option>
-            <option value="actualizacion">ACTUALIZACION</option>
+            @if($mode != "create")
+                <option value="renovacion">RENOVACION</option>
+                <option value="AMPLIACION">AMPLIACION</option>
+                <option value="BAJA">BAJA</option>
+            @endif
         </select>
         <small class="small" id="small-tipo-disposicion-{{ $mode }}"></small>
     </div>
