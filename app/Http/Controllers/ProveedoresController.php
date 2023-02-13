@@ -144,7 +144,7 @@ class ProveedoresController extends Controller
                     $proveedores_rupae->save();
 
 
-                    //Crear Disposicion
+                   /* //Crear Disposicion
                     Disposicion::create([   'id_proveedor'=>$proveedores_rupae->id_proveedor,
                     'nro_disposicion'=>$request->nro_disposicion,
                     'fecha_ini_vigencia'=>$request->fecha_inicio_disposicion,
@@ -152,7 +152,7 @@ class ProveedoresController extends Controller
                     'disposicion_tipo'=>$request->tipo_disposicion,
                     //'GDE_Exp'=>$request->nro_expte_gde,
                     'observaciones'=>$request->observaciones_disposicion]);
-
+*/
 
 
 
@@ -210,7 +210,7 @@ class ProveedoresController extends Controller
 
                     $this->crear_emails($proveedores_rupae->id_proveedor, 'fiscal', $request);
 
-
+/*
                     //---------Contador de Actividades----------
                     if (isset($request->tipos_actividades)) {
 
@@ -228,7 +228,7 @@ class ProveedoresController extends Controller
 
                             $actividades_proveedores->save();
                         }
-                    }
+                    }*/
 
 
                     //---------Contador de Pagos----------
@@ -305,7 +305,7 @@ class ProveedoresController extends Controller
                 //Fin de la transaccion
                 DB::commit();
 
-                return redirect()->route('verRegistro', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Registro creado correctamente');
+                return redirect()->route('nuevoRegistro2', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Proveedor creado correctamente');
 
 
 
@@ -697,6 +697,22 @@ class ProveedoresController extends Controller
                 })
                 ->rawColumns(['action'])
                 ->make(true);
+        } catch (\Exception $e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function getDisposicionesJson(Request $request, $id_proveedor, $mode = null)
+    {
+        try {
+            $proveedor = Proveedor::findOrFail($id_proveedor);
+            $proveedor->load('disposiciones');
+            $disposiciones = $proveedor->disposiciones;
+            Log::info("disposiciones = ".$disposiciones);
+            return response()->json($disposiciones);
         } catch (\Exception $e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1130,7 +1146,6 @@ class ProveedoresController extends Controller
                     return Redirect::back()
                         ->withErrors(['Ya existe una actividad primaria, la operación no pudo completarse']);
                 } else {
-
                     $actividad = new Actividades_proveedores();
                     $actividad->id_proveedor = $id;
                     $actividad->id_actividad_economica = $this->idActividad_economica($request->actividad_1);

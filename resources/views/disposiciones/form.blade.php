@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm"></div>
-    <div class="col-sm">
+   {{-- <div class="col-sm">
         <label for="nro_expte_gde_{{ $mode }}">Nro Expediente GDE: <sup>*</sup></label><br>
         <input type="text" class="form-control" placeholder="Ingrese el número de expediente de GDE"
             aria-describedby="basic-addon1" id="nro_expte_gde_{{ $mode }}" name="nro_expte_gde"
@@ -8,7 +8,7 @@
             @if ($mode == 'create') autofocus required @endif>
         <small class="small" id="small-nro_expte_gde_{{ $mode }}"></small>
 
-    </div>
+    </div>--}}
 </div>
 <br>
 <div class="row">

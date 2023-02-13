@@ -573,6 +573,23 @@
                 //Obtenemos los campos obligatorios para aplicarles estilos css
                 borrarDatosModalPersona();
             });
+
+            function getDisposicionesJson(){
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('proveedor/'.$id.'/disposicionesJson)}}",
+                    dataType: "json",
+                    success: function(data){
+                    $.each(data,function(key, registro) {
+                        $("#disposiciones").append('<option value='+registro.id_disposicion+'>'+registro.nro_disposicion+'</option>');
+                    });
+                    },
+                    error: function(data) {
+                    alert('error');
+                    }
+                });
+            }
+
             $( ".disposicion_actividad" ).autocomplete({
                 source: function( request, response ) {
                     $.ajax( {

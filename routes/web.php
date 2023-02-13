@@ -60,13 +60,32 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
+    Route::get('/nuevoRegistro2/{id}', function ($id) {
+        $mode = "edit";
+        $tipos_actividades = Tipo_actividad::All();
+        $actividades = Actividad_economica::All();
+
+
+        return view('nuevoRegistro2',compact('id','mode','tipos_actividades','actividades'));
+    })->name('nuevoRegistro2')->middleware(['can:crear_registros']);
+
     Route::get('/nuevoRegistroCuit', function () {
 
         return view('nuevoRegistroCuit');
     })->name('nuevoRegistroCuit')->middleware(['can:crear_registros']);
 
 
+    Route::get('/nuevaDisposicion', function () {
+        $mode = "create";
 
+        return view('disposiciones.create', compact('mode'));
+    })->name('disposiciones.create')->middleware(['can:crear_registros']);
+
+    Route::get('/nuevaActividad', function () {
+        $mode = "create";
+
+        return view('actividades.create', compact('mode'));
+    })->name('actividades.create')->middleware(['can:crear_registros']);
 
     Route::get('/gestionarRegistros', function () {
         return view('gestionarRegistros');
@@ -89,9 +108,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/crear_registro', [ProveedoresController::class, 'crear_registro'])->name('crear_registro')->middleware(['can:crear_registros']);
     //Levanta las vistas para editar (del formulario)
-    Route::get('modificarRegistro/{id}/{tab?}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId')->name('modificarRegistro')->middleware(['can:editar_registros']);
+    Route::get('modificarRegistro/{id}/{tab?}', 'App\Http\Controllers\ProveedoresController@obtenerProveedorRupaeId')->name('modificar.Registro')->middleware(['can:editar_registros']);
     //Llama al metodo que realiza las modificaciones en la BD
-    Route::post('editarProveedor/{id}', 'App\Http\Controllers\ProveedoresController@editarProveedor')->middleware(['can:editar_registros']);
+    Route::post('editarProveedor/{id}', 'App\Http\Controllers\ProveedoresController@editarProveedor')->name('proveedor.editar')->middleware(['can:editar_registros']);
 
     Route::get('verRegistro/{id}/{tab?}', 'App\Http\Controllers\ProveedoresController@verProveedorRupaeId')->name('verRegistro')->middleware(['can:ver_registros']);
 
@@ -139,6 +158,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('verPagos/{id}', 'App\Http\Controllers\ProveedoresController@verPagos')->name('pagos.ver');
     Route::get('verActividades/{id}', 'App\Http\Controllers\ProveedoresController@verActividades')->name('actividades.ver');
 
+    Route::get('proveedor/{id_proveedor}/disposicionesJson', 'App\Http\Controllers\ProveedoresController@getDisposicionesJson')->name('disposiciones.json');
     Route::get('proveedor/{id_proveedor}/nro_disposicion/{nro_disposicion}', 'App\Http\Controllers\ProveedoresController@getNroDisposiciones')->name('disposiciones.nroslist');
     Route::get('proveedor/{id_proveedor}/disposiciones/{mode?}', 'App\Http\Controllers\ProveedoresController@getDisposiciones')->name('disposiciones.list');
     Route::post('proveedor/{id_proveedor}/disposicion/guardar', 'App\Http\Controllers\ProveedoresController@crearDisposicion')->name('disposiciones.crear');
