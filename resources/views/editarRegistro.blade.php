@@ -137,6 +137,29 @@
     <script>
         $(document).ready(function()
         {
+
+
+            disposicionesJson();
+             function disposicionesJson(){
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('proveedor/'.$id.'/disposicionesJson')}}",
+                    dataType:"json",
+                    success: function(data){
+                        $.each(data,function(key, registro) {
+
+                            console.log('<option value='+registro.id_disposicion+'>'+registro.nro_disposicion+'</option>');
+                            $(".dispos").append('<option value='+registro.id_disposicion+'>'+registro.nro_disposicion+'</option>');
+                        });
+                    },
+                    error: function(data) {
+                        alert('error');
+                    }
+                });
+            }
+
+
+
             $('input[type="checkbox"]').on('change', function(){
             this.value = this.checked ? 1 : 0;
             //console.log(this.value);
@@ -574,21 +597,7 @@
                 borrarDatosModalPersona();
             });
 
-            function getDisposicionesJson(){
-                $.ajax({
-                    type: "GET",
-                    url: "{{url('proveedor/'.$id.'/disposicionesJson)}}",
-                    dataType: "json",
-                    success: function(data){
-                    $.each(data,function(key, registro) {
-                        $("#disposiciones").append('<option value='+registro.id_disposicion+'>'+registro.nro_disposicion+'</option>');
-                    });
-                    },
-                    error: function(data) {
-                    alert('error');
-                    }
-                });
-            }
+
 
             $( ".disposicion_actividad" ).autocomplete({
                 source: function( request, response ) {

@@ -7,7 +7,7 @@
 </div>
 --}}
 <label for="disposiciones">Disposiciones: </label><br>
-<select class="dispos form-control"  id="disposiciones" aria-label="Default select example">
+<select class="dispos form-control"  name="disposiciones" id="disposiciones" aria-label="Default select example">
     <option selected>Seleccione una Disposicion</option>
 </select>
 <br>

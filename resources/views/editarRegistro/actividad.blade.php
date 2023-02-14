@@ -133,8 +133,6 @@
 
   });
 
-
-
     function verRegistro() {
 
         return  alert("Retornar vista para visualizar un registro!");

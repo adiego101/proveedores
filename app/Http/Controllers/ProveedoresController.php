@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\ProveedoresController;
 use App\Models\Actividades_proveedores;
 use App\Models\Actividad_economica;
+use App\Models\Disposiciones_actividades;
 use App\Models\Localidad;
 use App\Models\Pago;
 use App\Models\Pais;
@@ -1153,6 +1154,16 @@ class ProveedoresController extends Controller
 
                     $actividad->save();
 
+                    $disposiciones_actividades = new Disposiciones_actividades();
+                    $disposiciones_actividades->id_actividad_proveedor = $actividad->id_actividad_proveedor;
+                    $disposiciones_actividades->id_disposicion = $request->disposiciones;
+                    $disposiciones_actividades->start_date =Disposicion::find($request->disposiciones)->fecha_ini_vigencia;
+
+                    $disposiciones_actividades->save();
+
+                    Log::info(Disposicion::find($request->disposiciones)->fecha_ini_vigencia);
+
+
                     return redirect()->back()->with('message', 'Actividad Creada Correctamente');
                 }
             } else {
@@ -1163,6 +1174,15 @@ class ProveedoresController extends Controller
                 $actividad->id_tipo_actividad = $this->idtipos_actividades($request->tipo_actividad);
 
                 $actividad->save();
+
+                $disposiciones_actividades = new Disposiciones_actividades();
+                $disposiciones_actividades->id_actividad_proveedor = $actividad->id_actividad_proveedor;
+                $disposiciones_actividades->id_disposicion = $request->disposiciones;
+                $disposiciones_actividades->start_date =Disposicion::find($request->disposiciones)->fecha_ini_vigencia;
+
+                $disposiciones_actividades->save();
+
+                Log::info(Disposicion::find($request->disposiciones)->fecha_ini_vigencia);
 
                 return redirect()->back()->with('message', 'Actividad Creada Correctamente');
             }
