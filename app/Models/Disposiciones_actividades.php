@@ -5,30 +5,29 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Disposiciones_actividades extends Model
+class Disposiciones_act_prov extends Model
 {
     use HasFactory;
 
-    protected $table = "disposiciones_actividades";
+    protected $table = "disposiciones_act_prov";
 
     protected $fillable = [
-                            'id_actividad_proveedor',
                             'id_disposicion',
-                            'start_date',
-                            'end_date',
+                            'id_actividad_proveedor',
+
                             ];
 
     //protected $hidden = ['id_actividad_proveedor'];
-    protected $primaryKey = 'iddisposiciones_actividades';
+    protected $primaryKey = 'id_disposicion_act_prov';
 
-    public function obtenerDisposiciones_actividades(){
+    public function obtenerdisposiciones_act_prov(){
 
-        return Disposiciones_actividades::All();
+        return disposiciones_act_prov::All();
     }
 
-    public function obtenerDisposiciones_actividadesId($id){
+    public function obtenerdisposiciones_act_provId($id){
 
-        return Disposiciones_actividades::find($id);
+        return disposiciones_act_prov::find($id);
     }
 
 

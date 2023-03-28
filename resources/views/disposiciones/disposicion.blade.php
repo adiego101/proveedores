@@ -73,6 +73,9 @@
                 },
             ]
         });
+
+
+
         $("#store_disposicion").click(function(){
             let tipo_disposicion = $("#tipo_disposicion_modal-create").val();
             //let nro_expte_gde = $("#nro_expte_gde_modal-create").val();
@@ -107,6 +110,8 @@
                             toast: true
 
                             });
+                            disposicionesJson();
+
                         $('.yajra-disposiciones').DataTable().ajax.reload();
                         $("button").prop("disabled", false);
                     },

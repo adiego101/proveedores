@@ -43,17 +43,21 @@
 <script >
     $(document).ready(function()
         {
-            console.log("{{url('proveedor/'.$id.'/disposicionesJson')}}");
+            //console.log("{{url('proveedor/disposicionesJson'/'.$id)}}");
             disposicionesJson();
-            function disposicionesJson(){
+
+
+        });
+
+        function disposicionesJson(){
                 $.ajax({
                     type: "GET",
-                    url: "{{url('proveedor/'.$id.'/disposicionesJson')}}",
+                    url: "{{url('proveedor/disposicionesJson/'.$id)}}",
                     dataType:"json",
                     success: function(data){
+                        $(".dispos").empty();
                         $.each(data,function(key, registro) {
 
-                            console.log('<option value='+registro.id_disposicion+'>'+registro.nro_disposicion+'</option>');
                             $(".dispos").append('<option value='+registro.id_disposicion+'>'+registro.nro_disposicion+'</option>');
                         });
                     },
@@ -62,6 +66,5 @@
                     }
                 });
             }
-        });
 </script>
 @endpush

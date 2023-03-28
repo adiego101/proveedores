@@ -137,26 +137,8 @@
     <script>
         $(document).ready(function()
         {
-
-
             disposicionesJson();
-             function disposicionesJson(){
-                $.ajax({
-                    type: "GET",
-                    url: "{{url('proveedor/'.$id.'/disposicionesJson')}}",
-                    dataType:"json",
-                    success: function(data){
-                        $.each(data,function(key, registro) {
 
-                            console.log('<option value='+registro.id_disposicion+'>'+registro.nro_disposicion+'</option>');
-                            $(".dispos").append('<option value='+registro.id_disposicion+'>'+registro.nro_disposicion+'</option>');
-                        });
-                    },
-                    error: function(data) {
-                        alert('error');
-                    }
-                });
-            }
 
 
 
