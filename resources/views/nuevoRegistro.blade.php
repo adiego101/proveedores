@@ -15,8 +15,9 @@
             var current = 1,
                 current_step, next_step, steps;
             steps = $("fieldset").length;
+
             $(".next").click(function() {
-                current_step = $(this).parent();
+                    current_step = $(this).parent();
                 next_step = $(this).parent().next();
                 next_step.show();
                 current_step.hide();
@@ -29,26 +30,7 @@
                 if(tipo)
                 {
                     console.log(tipo);
-                    if(tipo=='disposicion')
-                    {
-                        if($("#tipo_disposicion_{{$mode}}").val()=='')
-                            $('#small-tipo-disposicion-head').append('<div class="alert alert-danger mt-3 pt-1">El TIPO DE DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
-                        else
-                            $('#small-tipo-disposicion-head').empty();
-                        if($("#nro_expte_gde_{{$mode}}").val()=='')
-                            mostrarError('#nro_expte_gde_{{$mode}}', '#small-nro-expte-head', '<div class="alert alert-danger mt-3 pt-1">El NÚMERO DE EXPEDIENTE DE GDE <strong>no</strong> puede quedar vacío.</div>');
-                        else
-                            ocultarError('#nro_expte_gde_{{$mode}}', '#small-nro-expte-head');
 
-                        if($("#fecha_inicio_disposicion_{{$mode}}").val()=='')
-                            mostrarError('#fecha_inicio_disposicion_{{$mode}}', '#small-inicio-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE INICIO DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
-                        else
-                            ocultarError('#fecha_inicio_disposicion_{{$mode}}', '#small-inicio-disposicion-head');
-                        if($("#fecha_fin_disposicion_{{$mode}}").val()=='')
-                            mostrarError('#fecha_fin_disposicion_{{$mode}}', '#small-fin-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE FIN DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
-                        else
-                            ocultarError('#fecha_fin_disposicion_{{$mode}}', '#small-fin-disposicion-head');
-                    }
                     if(tipo=='datos_generales')
                     {
                         if($("#razon_social").val()=='')
@@ -65,6 +47,8 @@
                     if(tipo=='banco')
                         borrarAdvertenciasBanco()
                 }
+
+
             });
             $(".previous").click(function() {
                 current_step = $(this).parent();
@@ -204,15 +188,12 @@
 
     <form  id="regiration_form" action="{{ route('crear_registro') }}"  method="POST">
         @csrf
-        @include('altaRegistro.disposicion',['mode'=>'create'])
         @include('editarRegistro.datosGenerales',['mode'=>'create'])
         @include('altaRegistro.persona',['tipo_persona'=>'miembro', 'mode'=>'create'])
         @include('altaRegistro.persona',['tipo_persona'=>'direccion_firma', 'mode'=>'create'])
         @include('altaRegistro.persona',['tipo_persona'=>'apoderado', 'mode'=>'create'])
         @include('editarRegistro.domicilio',['tipo_domicilio'=>'real', 'mode'=>'create'])
-        @include('editarRegistro.domicilio',['tipo_domicilio'=>'legal', 'mode'=>'create'])
         @include('editarRegistro.domicilio',['tipo_domicilio'=>'fiscal', 'mode'=>'create'])
-        @include('altaRegistro.actividad',['mode'=>'create'])
         @include('altaRegistro.firmas',['mode'=>'create'])
         @include('altaRegistro.referenciasBancarias',['mode'=>'create'])
         @include('altaRegistro.pagos',['mode'=>'create'])
@@ -241,16 +222,8 @@
 <script type="text/javascript">
 
 function validarForm(){
-            let cont = 7;
+            let cont = 2;
             console.log(cont);
-
-                if(ValidarFechas()){
-                    ocultarError('#fecha_fin_disposicion_{{$mode}}', '#small-fecha-mayor-fin-disposicion-head');
-                    cont--;
-                }
-                else{
-                    mostrarError('#fecha_fin_disposicion_{{$mode}}', '#small-fecha-mayor-fin-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE FIN DE VIGENCIA DE LA DISPOSICIÓN debe ser mayor a la FECHA DE INICIO DE VIGENCIA DE LA DISPOSICIÓN.</div>');
-                }
 
                 if($("#razon_social").val()==''){
                     mostrarError('#razon_social', '#small-razon-social-head', '<div class="alert alert-danger mt-3 pt-1">La RAZON SOCIAL <strong>no</strong> puede quedar vacía.</div>');
@@ -263,28 +236,7 @@ function validarForm(){
                     ocultarError('#nombre_fantasia', '#small-nombre-fantasia-head');
                     cont--;}
 
-                if($("#tipo_disposicion_{{$mode}}").val()==''){
-                    $('#small-tipo-disposicion-head').append('<div class="alert alert-danger mt-3 pt-1">El TIPO DE DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
-                }else{
-                    $('#small-tipo-disposicion-head').empty();
-                    cont--;}
 
-                if($("#nro_expte_gde_{{$mode}}").val()==''){
-                    mostrarError('#nro_expte_gde_{{$mode}}', '#small-nro-expte-head', '<div class="alert alert-danger mt-3 pt-1">El NÚMERO DE EXPEDIENTE DE GDE <strong>no</strong> puede quedar vacío.</div>');
-                }else{
-                    ocultarError('#nro_expte_gde_{{$mode}}', '#small-nro-expte-head');
-                    cont--;}
-                if($("#fecha_inicio_disposicion_{{$mode}}").val()==''){
-                    mostrarError('#fecha_inicio_disposicion_{{$mode}}', '#small-inicio-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE INICIO DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
-                }else{
-                    ocultarError('#fecha_inicio_disposicion_{{$mode}}', '#small-inicio-disposicion-head');
-                    cont--;}
-
-                if($("#fecha_fin_disposicion_{{$mode}}").val()==''){
-                    mostrarError('#fecha_fin_disposicion_{{$mode}}', '#small-fin-disposicion-head', '<div class="alert alert-danger mt-3 pt-1">La FECHA DE FIN DE VIGENCIA DE LA DISPOSICIÓN <strong>no</strong> puede quedar vacío.</div>');
-                }else{
-                    ocultarError('#fecha_fin_disposicion_{{$mode}}', '#small-fin-disposicion-head');
-                    cont--;}
             console.log(cont);
             return cont;
 
@@ -414,8 +366,7 @@ $(".finalizar").click(function(e){
         });
         if ($('#provincia_real_create').val()!='')
             recargarListaDomicilio($('#provincia_real_create').val(), $("#localidad_real_create"));
-        if ($('#provincia_legal_create').val()!='')
-            recargarListaDomicilio($('#provincia_legal_create').val(), $('#localidad_legal_create'));
+
         if ($('#provincia_fiscal_create').val()!='')
             recargarListaDomicilio($('#provincia_fiscal_create').val(), $('#localidad_fiscal_create'));
 

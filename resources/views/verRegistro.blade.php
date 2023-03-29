@@ -18,12 +18,18 @@
                     data-toggle="tab" href="#datos-generales">Datos Generales</a>
             </li>
             <li class="nav-item">
-                <a class=" nav-link" id="domicilioReal-tab" data-toggle="tab" href="#domicilioReal">Domicilio Real</a>
+                <a class=" nav-link" id="miembros-tab" data-toggle="tab" href="#miembros">Miembros</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " id="domicilioLegal-tab" data-toggle="tab" href="#domicilioLegal">Domicilio
-                    Legal</a>
+                <a class=" nav-link" id="direccion-firma-tab" data-toggle="tab" href="#direccionFirma">Dirección y Firma</a>
             </li>
+            <li class="nav-item">
+                <a class=" nav-link" id="apoderado-tab" data-toggle="tab" href="#apoderado">Apoderado</a>
+            </li>
+            <li class="nav-item">
+                <a class=" nav-link" id="domicilioReal-tab" data-toggle="tab" href="#domicilioReal">Domicilio Real</a>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link " id="domicilioFiscal-tab" data-toggle="tab" href="#domicilioFiscal">Domicilio
                     fiscal</a>
@@ -58,13 +64,19 @@
             role="tabpanel" aria-labelledby="nav-datos-generales-tab">
             @include('editarRegistro.datosGenerales',['mode'=>'show'])
         </div>
+        <div class="tab-pane fade" id="miembros" role="tabpanel" aria-labelledby="nav-miembros-tab">
+            @include('editarRegistro.persona',['tipo_persona'=>'miembro', 'mode'=>'show'])
+        </div>
+        <div class="tab-pane fade" id="direccionFirma" role="tabpanel" aria-labelledby="nav-direccion-firma-tab">
+            @include('editarRegistro.persona',['tipo_persona'=>'direccion_firma', 'mode'=>'show'])
+        </div>
+        <div class="tab-pane fade" id="apoderado" role="tabpanel" aria-labelledby="nav-apoderado-tab">
+            @include('editarRegistro.persona',['tipo_persona'=>'apoderado', 'mode'=>'show'])
+        </div>
         <div class="tab-pane fade" id="domicilioReal" role="tabpanel" aria-labelledby="nav-domicilioReal-tab">
             @include('editarRegistro.domicilio',['tipo_domicilio'=>'real', 'mode'=>'show'])
         </div>
-        <div class="tab-pane fade" id="domicilioLegal" role="tabpanel" aria-labelledby="nav-domicilioLegal-tab">
-            @include('editarRegistro.domicilio',['tipo_domicilio'=>'legal', 'mode'=>'show'])
 
-        </div>
         <div class="tab-pane fade" id="domicilioFiscal" role="tabpanel" aria-labelledby="nav-domicilioFiscal.blade-tab">
             @include('editarRegistro.domicilio',['tipo_domicilio'=>'fiscal', 'mode'=>'show'])
         </div>

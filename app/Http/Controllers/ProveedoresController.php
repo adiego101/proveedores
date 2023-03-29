@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\ProveedoresController;
 use App\Models\Actividades_proveedores;
 use App\Models\Actividad_economica;
+use App\Models\Disposiciones_act_prov;
 use App\Models\Localidad;
 use App\Models\Pago;
 use App\Models\Pais;
 use App\Models\Persona;
 use App\Models\Proveedor;
+use App\Models\Proveedor_estado;
+
 use App\Models\Proveedor_domicilio;
 use App\Models\Proveedor_email;
 use App\Models\Proveedor_telefono;
@@ -144,6 +147,16 @@ class ProveedoresController extends Controller
                     $proveedores_rupae->save();
 
 
+                   /* //Crear Disposicion
+                    Disposicion::create([   'id_proveedor'=>$proveedores_rupae->id_proveedor,
+                    'nro_disposicion'=>$request->nro_disposicion,
+                    'fecha_ini_vigencia'=>$request->fecha_inicio_disposicion,
+                    'fecha_fin_vigencia'=>$request->fecha_fin_disposicion,
+                    'disposicion_tipo'=>$request->tipo_disposicion,
+                    //'GDE_Exp'=>$request->nro_expte_gde,
+                    'observaciones'=>$request->observaciones_disposicion]);
+*/
+
 
 
                     //----------------------------------Carga Domicilio Real---------------------------------------------
@@ -157,17 +170,7 @@ class ProveedoresController extends Controller
 
                     $this->crear_emails($proveedores_rupae->id_proveedor, 'real', $request);
 
-                    //----------------------------------Carga Domicilio Legal---------------------------------------------
 
-                    $this->crear_domicilio($proveedores_rupae->id_proveedor, 'legal', $request);
-
-                    //---------Carga Telefono/s_Legal----------
-
-                    $this->crear_telefonos($proveedores_rupae->id_proveedor, 'legal', $request);
-
-                    //---------Carga de Email/s_Legal----------
-
-                    $this->crear_emails($proveedores_rupae->id_proveedor, 'legal', $request);
 
                     //---------Carga de Representante Legal----------
 
@@ -210,7 +213,7 @@ class ProveedoresController extends Controller
 
                     $this->crear_emails($proveedores_rupae->id_proveedor, 'fiscal', $request);
 
-
+/*
                     //---------Contador de Actividades----------
                     if (isset($request->tipos_actividades)) {
 
@@ -228,7 +231,7 @@ class ProveedoresController extends Controller
 
                             $actividades_proveedores->save();
                         }
-                    }
+                    }*/
 
 
                     //---------Contador de Pagos----------
@@ -305,7 +308,7 @@ class ProveedoresController extends Controller
                 //Fin de la transaccion
                 DB::commit();
 
-                return redirect()->route('verRegistro', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Registro creado correctamente');
+                return redirect()->route('nuevoRegistro2', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Proveedor creado correctamente');
 
 
 
@@ -705,6 +708,22 @@ class ProveedoresController extends Controller
         }
     }
 
+    public function getDisposicionesJson(Request $request, $id_proveedor, $mode = null)
+    {
+        try {
+            $proveedor = Proveedor::findOrFail($id_proveedor);
+            $proveedor->load('disposiciones');
+            $disposiciones = $proveedor->disposiciones;
+            Log::info("disposiciones = ".$disposiciones);
+            return response()->json($disposiciones);
+        } catch (\Exception $e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
     public function getNroDisposiciones($id_proveedor, $nro_disposicion)
     {
         Log::info("nro_disposicion=".$nro_disposicion);
@@ -731,13 +750,22 @@ class ProveedoresController extends Controller
     {
         Log::info("Entra en funcion crearDisposicion con nro_disposicion=".$request->nro_disposicion." fecha inicio=".$request->fecha_inicio." fecha fin=".$request->fecha_fin." tipo disposicion=".$request->tipo_disposicion ." observaciones=".$request->observaciones);
         try {
-            Disposicion::create([   'id_proveedor'=>$id_proveedor,
+            $disposicion = Disposicion::create([   'id_proveedor'=>$id_proveedor,
                                     'nro_disposicion'=>$request->nro_disposicion,
                                     'fecha_ini_vigencia'=>$request->fecha_inicio,
                                     'fecha_fin_vigencia'=>$request->fecha_fin,
                                     'disposicion_tipo'=>$request->tipo_disposicion,
                                     //'GDE_Exp'=>$request->nro_expte_gde,
                                     'observaciones'=>$request->observaciones]);
+            Proveedor_estado::create([
+
+                'id_proveedor'=>$id_proveedor,
+                'id_disposicion'=>$disposicion->id_disposicion,
+                'pe_start_date'=>$disposicion->fecha_ini_vigencia,
+                'pe_end_date'=> null,
+                'estado_cod'=> "VD a definir",]);
+
+
         } catch (\Exception $e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1130,13 +1158,22 @@ class ProveedoresController extends Controller
                     return Redirect::back()
                         ->withErrors(['Ya existe una actividad primaria, la operación no pudo completarse']);
                 } else {
-
                     $actividad = new Actividades_proveedores();
                     $actividad->id_proveedor = $id;
                     $actividad->id_actividad_economica = $this->idActividad_economica($request->actividad_1);
                     $actividad->id_tipo_actividad = $this->idtipos_actividades($request->tipo_actividad);
 
                     $actividad->save();
+
+                    $Disposiciones_act_prov = new Disposiciones_act_prov();
+                    $Disposiciones_act_prov->id_actividad_proveedor = $actividad->id_actividad_proveedor;
+                    $Disposiciones_act_prov->id_disposicion = $request->disposiciones;
+                    $Disposiciones_act_prov->start_date =Disposicion::find($request->disposiciones)->fecha_ini_vigencia;
+
+                    $Disposiciones_act_prov->save();
+
+                    Log::info(Disposicion::find($request->disposiciones)->fecha_ini_vigencia);
+
 
                     return redirect()->back()->with('message', 'Actividad Creada Correctamente');
                 }
@@ -1148,6 +1185,15 @@ class ProveedoresController extends Controller
                 $actividad->id_tipo_actividad = $this->idtipos_actividades($request->tipo_actividad);
 
                 $actividad->save();
+
+                $Disposiciones_act_prov = new Disposiciones_act_prov();
+                $Disposiciones_act_prov->id_actividad_proveedor = $actividad->id_actividad_proveedor;
+                $Disposiciones_act_prov->id_disposicion = $request->disposiciones;
+                $Disposiciones_act_prov->start_date =Disposicion::find($request->disposiciones)->fecha_ini_vigencia;
+
+                $Disposiciones_act_prov->save();
+
+                Log::info(Disposicion::find($request->disposiciones)->fecha_ini_vigencia);
 
                 return redirect()->back()->with('message', 'Actividad Creada Correctamente');
             }
@@ -1406,15 +1452,39 @@ class ProveedoresController extends Controller
         }
     }
 
-    public function bajaActividades($id)
+    public function bajaActividades($id, Request $request)
     {
         try {
-            if (Actividades_proveedores::where('id_actividad_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
+            /*if (Actividades_proveedores::where('id_actividad_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
                 return false;
-            } else {
-                Actividades_proveedores::findOrFail($id)->delete();
+            } else {*/
+                //Actividades_proveedores::findOrFail($id)->delete();
+
+                $ap = Actividades_proveedores::findOrFail($id);
+                $ap->ap_end_date = Carbon::now();
+                $ap->save();
+
+                $Disposiciones_act_prov = new Disposiciones_act_prov();
+                $Disposiciones_act_prov->id_actividad_proveedor = $ap->id_actividad_proveedor;
+                $Disposiciones_act_prov->id_disposicion = $request->disposiciones;
+                $Disposiciones_act_prov->start_date =Disposicion::find($request->disposiciones)->fecha_ini_vigencia;
+
+                $Disposiciones_act_prov->save();
+
+                //Prueba de baja agregando nuevo registro
+                /*$actividad = new Actividades_proveedores();
+                $actividad->id_proveedor = $ap->id_proveedor;
+                $actividad->id_actividad_economica = $ap->id_actividad_economica;
+                $actividad->id_tipo_actividad = $ap->id_tipo_actividad;
+                $actividad->id_disposicion = 1 ; ///Falta creacion de modal para seleccion de disposicion, el id debe existir.
+                $actividad->estado_cod = "BajaAP BD"; //mensaje de prueba a cambiar a futuro
+                $actividad->ap_start_date = Carbon::now(); /// Se toma el Start Date de la disposicion, pero al no tener el modal, se deja la fecha actual como prueba.
+                $actividad->ap_end_date = null;
+                $actividad->save();*/
+
+
                 return "success";
-            }
+            //}
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -1426,7 +1496,21 @@ class ProveedoresController extends Controller
     public function guardarActividades($id, Request $request)
     {
         try {
-            if (Actividades_proveedores::where('id_actividad_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
+           // if (Actividades_proveedores::where('id_actividad_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
+               /* $actividad = Actividades_proveedores::find($id);
+                $tipos_actividades = Tipo_actividad::All();
+                $actividades = Actividad_economica::All();
+
+                $actividad->update([
+                    'id_actividad_economica' => $this->idActividad_economica($request->actividad_11),
+                ]);
+
+                $actividad->save();
+
+                return redirect()->back()->with('message', 'Los datos de la Actividad fueron modificados correctamente');*/
+
+           // } else {
+
                 $actividad = Actividades_proveedores::find($id);
                 $tipos_actividades = Tipo_actividad::All();
                 $actividades = Actividad_economica::All();
@@ -1438,21 +1522,7 @@ class ProveedoresController extends Controller
                 $actividad->save();
 
                 return redirect()->back()->with('message', 'Los datos de la Actividad fueron modificados correctamente');
-
-            } else {
-
-                $actividad = Actividades_proveedores::find($id);
-                $tipos_actividades = Tipo_actividad::All();
-                $actividades = Actividad_economica::All();
-
-                $actividad->update([
-                    'id_actividad_economica' => $this->idActividad_economica($request->actividad_11),
-                ]);
-
-                $actividad->save();
-
-                return redirect()->back()->with('message', 'Los datos de la Actividad fueron modificados correctamente');
-            }
+           // }
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 

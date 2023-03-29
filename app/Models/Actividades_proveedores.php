@@ -15,6 +15,10 @@ class Actividades_proveedores extends Model
                             'id_proveedor',
                             'id_actividad_economica',
                             'id_tipo_actividad',
+                            'ap_start_date',
+                            'ap_end_date',
+                            'id_disposicion',
+                            'estado_cod'
                             ];
 
     //protected $hidden = ['id_actividad_proveedor'];

@@ -18,12 +18,9 @@
                         <small class="small" id="small-importe-pago-modal"></small>
                         <br />
 
-                        <label for="modal_tipo_pago">Tipo de pago:</label><br>
-                        <select class="form-control" aria-describedby="basic-addon1" id="modal_tipo_pago" name="modal_tipo_pago">
-                        <option selected value="Inscripcion">Inscripción</option>
-                        <option value="Renovacion">Renovación</option>
-                        <option value="Otros">Otros</option>
-                        </select>
+                        <label for="modal_nro_comprobante_asip">Nro de comprobante ASIP:</label><br />
+                        <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese el Nro de comprobante ASIP" aria-describedby="basic-addon1" id="modal_nro_comprobante_asip" />
+                        <small class="small" id="small-modal_nro_comprobante_asip"></small>
                         <br>
 
                         <label for="modal_observaciones">Observaciones:</label><br />
