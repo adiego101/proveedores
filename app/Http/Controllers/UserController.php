@@ -170,7 +170,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function changePassword(Request $request, $id)
+    public function changePassword(Request $request)
     {
         //Expresion regular que valida al menos un simbolo (mas completa).
         //$regex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
@@ -178,7 +178,7 @@ class UserController extends Controller
         $regex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/";
 
         $input = $request->all();
-        
+
         if (!empty($input['password']) && !empty($input['new-password']) && !empty($input['confirm-password'])) {
 
             if (Hash::check($input["password"], $request->user()->password)) {
@@ -210,7 +210,7 @@ class UserController extends Controller
                 withErrors(['msg' => 'Los campos NO pueden estar vacíos']);
         }
 
-        $user = User::find($id);
+        $user = User::find($request->user()->id);
         $user->password = $password;
         $user->save();
 

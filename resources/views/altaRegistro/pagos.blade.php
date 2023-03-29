@@ -10,6 +10,13 @@
 
 
     <br>
+
+    <label for="nro_comprobante_asip">Nro de Comprobante ASIP:</label><br>
+    <input type="text" class="form-control" onkeypress="return valideKey(event);" placeholder="Ingrese Nro de Comprobante ASIP" aria-describedby="basic-addon1" id="nro_comprobante_asip" >
+    <small class="small" id="small-nro_comprobante_asip"></small>
+
+
+    <br>
     <label for="observaciones_pago">Observaciones:</label><br>
     <input type="text" class="form-control" placeholder="Ingrese las observaciones del pago"
         aria-describedby="basic-addon1" id="observaciones_pago" maxlength="50"><br>
@@ -77,6 +84,7 @@ function validarimporte_pago() {
 
             fecha = $('#fecha_pago').val();
             importe = $('#importe_pago').val();
+            nro_comprobante_asip = $('#nro_comprobante_asip').val();
             observaciones_pago = $('#observaciones_pago').val();
             fecha_clasica_pago = fecha.split('-').reverse().join('/');
 
@@ -99,6 +107,8 @@ function validarimporte_pago() {
                         '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="fecha_pago' + indice + '" name="fechas_pagos[]" readonly value="' + fecha + '">' +
                         '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="importe_pago' + indice + '" name="importes_pagos[]" readonly value="' + importe + '">' +
                         '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="observaciones_pago' + indice + '" name="observaciones_pagos[]" readonly value="' + observaciones_pago + '">' +
+
+                        '<input type="hidden" class="form-control" aria-describedby="basic-addon1" id="nro_comprobante_asip' + indice + '" name="nros_comprobantes_asip[]" readonly value="' + nro_comprobante_asip + '">' +
                         '<button type="button" name="edit" id="' + indice + '" class="btn btn-warning btn-sm btn_edit_pago" title="editar pago"><indice class="fas fa-edit"></i></button>' +
                         '<button type="button" name="remove" id="' + indice + '" class="btn btn-danger btn-sm btn_remove_pago" title="quitar pago"><indice class="fas fa-trash"></i></button>' +
                         '</td>' +
@@ -111,6 +121,8 @@ function validarimporte_pago() {
 
                 document.getElementById("fecha_pago").value = "";
                 document.getElementById("importe_pago").value = "";
+                document.getElementById("nro_comprobante_asip").value = "";
+
                 document.getElementById("observaciones_pago").value = "";
 
                 fecha_css.style.border = '1px solid #DFDFDF';
@@ -197,7 +209,9 @@ function validarimporte_pago() {
             let button_id = $(this).attr("id");
             //Recuperamos los valores de los campos pertenecientes a una fila
             let modal_fecha = $("#fecha_pago" + button_id).val();
+            let modal_nro_comprobante_asip = $("#nro_comprobante_asip" + button_id).val();
             let modal_importe = $("#importe_pago" + button_id).val();
+
             let modal_observaciones = $("#observaciones_pago" + button_id).val();
 
             //Desplegamos el modal
@@ -206,6 +220,8 @@ function validarimporte_pago() {
             //Enviamos los valores recuperados anteriormente a los inputs del modal
             $('#modal_fecha').val(modal_fecha);
             $('#modal_importe').val(modal_importe);
+            $('#modal_nro_comprobante_asip').val(modal_nro_comprobante_asip);
+
             $('#modal_observaciones').val(modal_observaciones);
             $('#numero_fila_pago').val(button_id);
 

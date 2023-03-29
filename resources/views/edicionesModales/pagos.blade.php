@@ -30,13 +30,13 @@
                             <small class="small" id="small-importe"></small>
 
                             <br>
+                            <label for="nro_comprobante_asip">Nro de comprobante ASIP:</label><br>
+                            <input @if ($mode == 'show') readonly @endif type="text" class="form-control"
+                                onkeypress="return valideKey(event);" placeholder="Ingrese el importe pagado"
+                                aria-describedby="basic-addon1" value="{{ isset($pago->nro_comprobante_asip) ? $pago->nro_comprobante_asip : '' }}"
+                                id="nro_comprobante_asip" name="nro_comprobante_asip" required>
+                                <small class="small" id="small-nro_comprobante_asip"></small>
 
-                            <label for="tipo_pago">Tipo de pago:</label><br>
-                            <select @if ( $mode == "show") disabled @endif class="form-control" aria-describedby="basic-addon1" id="tipo_pago" name="tipo_pago">
-                            <option selected value="Inscripcion">Inscripción</option>
-                            <option value="Renovacion">Renovación</option>
-                            <option value="Otros">Otros</option>
-                            </select>
 
                             <br>
 

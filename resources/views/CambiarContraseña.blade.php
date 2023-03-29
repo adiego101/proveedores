@@ -7,7 +7,7 @@
         <p>{{ $message }}</p>
         </div>
     @endif
-    
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="float-left">
@@ -18,8 +18,8 @@
             </div>
         </div>
     </div>
-    
-    {!! Form::model(auth()->user(), ['method' => 'PATCH','route' => ['changePassword',auth()->user()->id]]) !!}
+
+    {!! Form::model(auth()->user(), ['method' => 'PATCH','route' => ['changePassword']]) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
