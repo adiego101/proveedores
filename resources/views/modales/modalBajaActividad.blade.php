@@ -35,11 +35,11 @@
 
         //Obtenemos el numero de la fila que queremos modificar
         let id = $("#baja_actividad").val();
-        let nro_disposicion = $("#nro_disposicion_modal-create").val();
+        let nro_disposicion = $(".dispos").val();
 
 
         let datos = {
-                                tipo_disposicion:tipo_disposicion,
+            nro_disposicion:nro_disposicion,
                     }
         $.ajax({
             type: "POST",
