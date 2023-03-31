@@ -43,7 +43,7 @@
 <script >
     $(document).ready(function()
         {
-            //console.log("{{url('proveedor/disposicionesJson'/'.$id)}}");
+            //console.log("{{url('proveedor/disposicionesJson/' . $id)}}");
             disposicionesJson();
 
 
@@ -52,12 +52,11 @@
         function disposicionesJson(){
                 $.ajax({
                     type: "GET",
-                    url: "{{url('proveedor/disposicionesJson/'.$id)}}",
+                    url: "{{url('proveedor/disposicionesJson/' . $id)}}",
                     dataType:"json",
                     success: function(data){
                         $(".dispos").empty();
                         $.each(data,function(key, registro) {
-
                             $(".dispos").append('<option value='+registro.id_disposicion+'>'+registro.nro_disposicion+'</option>');
                         });
                     },
