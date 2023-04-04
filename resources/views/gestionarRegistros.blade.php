@@ -100,7 +100,6 @@
 
 
     function bajaRegistro(id_registro) {
-
         //Desplegamos el modal
         $('#modal_baja').modal('show');
         $('#id_baja').val(id_registro);

@@ -145,13 +145,13 @@ class ProveedoresController extends Controller
 
 
                     //-------------------Carga Proveedor-------------------
-                    $proveedores_rupae = new Proveedor($request->all());
-                    $proveedores_rupae->cuit= str_replace("-","",$request->cuit);
-                    $proveedores_rupae->save();
+                    $proveedores_rupep = new Proveedor($request->all());
+                    $proveedores_rupep->cuit= str_replace("-","",$request->cuit);
+                    $proveedores_rupep->save();
 
 
                    /* //Crear Disposicion
-                    Disposicion::create([   'id_proveedor'=>$proveedores_rupae->id_proveedor,
+                    Disposicion::create([   'id_proveedor'=>$proveedores_rupep->id_proveedor,
                     'nro_disposicion'=>$request->nro_disposicion,
                     'fecha_ini_vigencia'=>$request->fecha_inicio_disposicion,
                     'fecha_fin_vigencia'=>$request->fecha_fin_disposicion,
@@ -163,15 +163,15 @@ class ProveedoresController extends Controller
 
 
                     //----------------------------------Carga Domicilio Real---------------------------------------------
-                    $this->crear_domicilio($proveedores_rupae->id_proveedor, 'real', $request);
+                    $this->crear_domicilio($proveedores_rupep->id_proveedor, 'real', $request);
 
                     //---------Carga Telefono/s_Real----------
 
-                    $this->crear_telefonos($proveedores_rupae->id_proveedor, 'real', $request);
+                    $this->crear_telefonos($proveedores_rupep->id_proveedor, 'real', $request);
 
                     //---------Carga de Email/s_Real----------
 
-                    $this->crear_emails($proveedores_rupae->id_proveedor, 'real', $request);
+                    $this->crear_emails($proveedores_rupep->id_proveedor, 'real', $request);
 
 
 
@@ -187,11 +187,11 @@ class ProveedoresController extends Controller
                         if(!isset($Representante_legal))
                             $Representante_legal = Persona::create([
                                 'dni_persona' => $dni_persona,
-                                //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                                //'cuil_persona'=>$proveedores_rupep->cuil_persona,
                                 'nombre_persona' => $nombre_persona,
                                 'apellido_persona' => $apellido_persona,
-                                //'apellido_persona'=>$proveedores_rupae->apellido_persona,
-                                //'genero_persona'=>$proveedores_rupae->genero_persona,
+                                //'apellido_persona'=>$proveedores_rupep->apellido_persona,
+                                //'genero_persona'=>$proveedores_rupep->genero_persona,
                             ]);
                         else
                         {
@@ -201,20 +201,20 @@ class ProveedoresController extends Controller
                                 $Representante_legal->update(['apellido_persona'=>$apellido_persona]);
                         }
 
-                        $proveedores_rupae->personas()->attach($Representante_legal, ['rol_persona_proveedor' => 'Representante']);
+                        $proveedores_rupep->personas()->attach($Representante_legal, ['rol_persona_proveedor' => 'Representante']);
                     }
 
                     //----------------------------------Carga Domicilio Fiscal---------------------------------------------
 
-                    $this->crear_domicilio($proveedores_rupae->id_proveedor, 'fiscal', $request);
+                    $this->crear_domicilio($proveedores_rupep->id_proveedor, 'fiscal', $request);
 
                     //---------Carga Telefono_Fiscal----------
 
-                    $this->crear_telefonos($proveedores_rupae->id_proveedor, 'fiscal', $request);
+                    $this->crear_telefonos($proveedores_rupep->id_proveedor, 'fiscal', $request);
 
                     //---------Carga de Email/s_fiscal----------
 
-                    $this->crear_emails($proveedores_rupae->id_proveedor, 'fiscal', $request);
+                    $this->crear_emails($proveedores_rupep->id_proveedor, 'fiscal', $request);
 
 /*
                     //---------Contador de Actividades----------
@@ -227,7 +227,7 @@ class ProveedoresController extends Controller
 
                         for ($i = 0; $i < $arraySize; $i++) {
                             $actividades_proveedores = Actividades_proveedores::create([
-                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'id_proveedor' => htmlspecialchars($proveedores_rupep->id_proveedor),
                                 'id_tipo_actividad' => $this->idtipos_actividades($request->tipos_actividades[$i]),
                                 'id_actividad_economica' => $this->idActividad_economica($request->actividades[$i]),
                             ]);
@@ -246,7 +246,7 @@ class ProveedoresController extends Controller
                         //---------Carga de Pagos----------
                         for ($i = 0; $i < $arraySize; $i++) {
                             $Pago = Pago::create([
-                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'id_proveedor' => htmlspecialchars($proveedores_rupep->id_proveedor),
                                 'fecha' => $request->fechas_pagos[$i],
                                 'importe' => $request->importes_pagos[$i],
                                 'observaciones' => $request->observaciones_pagos[$i],
@@ -267,7 +267,7 @@ class ProveedoresController extends Controller
                         //---------Carga de Firmas Nacionales y Extranjeras ----------
                         for ($i = 0; $i < $arraySize; $i++) {
                             $Proveedor_firma_nac_extr = Proveedor_firma_nac_extr::create([
-                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'id_proveedor' => htmlspecialchars($proveedores_rupep->id_proveedor),
                                 'denominacion_firma' => $request->denominaciones[$i],
                             ]);
                             $Proveedor_firma_nac_extr->save();
@@ -284,7 +284,7 @@ class ProveedoresController extends Controller
                         //---------Carga de Referencias Bancarias----------
                         for ($i = 0; $i < $arraySize; $i++) {
                             $Proveedor_banco = Proveedor_banco::create([
-                                'id_proveedor' => htmlspecialchars($proveedores_rupae->id_proveedor),
+                                'id_proveedor' => htmlspecialchars($proveedores_rupep->id_proveedor),
                                 'id_banco' => $request->nombres_bancos[$i],
                                 'id_localidad' => $request->localidad_sucursales[$i],
                                 'tipo_cuenta' => $request->tipos_cuentas[$i],
@@ -311,7 +311,7 @@ class ProveedoresController extends Controller
                 //Fin de la transaccion
                 DB::commit();
 
-                return redirect()->route('nuevoRegistro2', ['id' => $proveedores_rupae->id_proveedor])->with('message', 'Proveedor creado correctamente');
+                return redirect()->route('nuevoRegistro2', ['id' => $proveedores_rupep->id_proveedor])->with('message', 'Proveedor creado correctamente');
 
 
 
@@ -1214,7 +1214,6 @@ class ProveedoresController extends Controller
                     $Disposiciones_act_prov = new Disposiciones_act_prov();
                     $Disposiciones_act_prov->id_actividad_proveedor = $actividad->id_actividad_proveedor;
                     $Disposiciones_act_prov->id_disposicion = $request->disposiciones;
-                    $Disposiciones_act_prov->start_date =Disposicion::find($request->disposiciones)->fecha_ini_vigencia;
 
                     $Disposiciones_act_prov->save();
 
@@ -1235,7 +1234,6 @@ class ProveedoresController extends Controller
                 $Disposiciones_act_prov = new Disposiciones_act_prov();
                 $Disposiciones_act_prov->id_actividad_proveedor = $actividad->id_actividad_proveedor;
                 $Disposiciones_act_prov->id_disposicion = $request->disposiciones;
-                $Disposiciones_act_prov->start_date =Disposicion::find($request->disposiciones)->fecha_ini_vigencia;
 
                 $Disposiciones_act_prov->save();
 
@@ -1292,11 +1290,11 @@ class ProveedoresController extends Controller
                         Log::info("no existe persona ");
                         $persona = Persona::create([
                             'dni_persona' => $dni_persona,
-                            //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                            //'cuil_persona'=>$proveedores_rupep->cuil_persona,
                             'nombre_persona' => $nombre_persona,
                             'apellido_persona' => $apellido_persona,
-                            //'apellido_persona'=>$proveedores_rupae->apellido_persona,
-                            //'genero_persona'=>$proveedores_rupae->genero_persona,
+                            //'apellido_persona'=>$proveedores_rupep->apellido_persona,
+                            //'genero_persona'=>$proveedores_rupep->genero_persona,
                         ]);
                     }
                     else
@@ -1706,8 +1704,8 @@ class ProveedoresController extends Controller
 
 
     /*public function obtenerDatosProveedor($id){
-    $proveedores_rupae = new Proveedor_rupae();
-    $datos = $proveedores_rupae->obtenerProveedorRupaeId($id);
+    $proveedores_rupep = new Proveedor_rupae();
+    $datos = $proveedores_rupep->obtenerProveedorRupaeId($id);
     return $datos;
     }*/
 
@@ -1955,10 +1953,10 @@ class ProveedoresController extends Controller
                             if(!isset($persona))
                                 $persona = Persona::create([
                                     'dni_persona' => $dni_persona,
-                                    //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                                    //'cuil_persona'=>$proveedores_rupep->cuil_persona,
                                     'nombre_persona' => $nombre_persona,
                                     'apellido_persona' => $apellido_persona,
-                                    //'genero_persona'=>$proveedores_rupae->genero_persona,
+                                    //'genero_persona'=>$proveedores_rupep->genero_persona,
                                 ]);
                             else
                             {
@@ -1979,10 +1977,10 @@ class ProveedoresController extends Controller
                                 if(!isset($persona))
                                     $persona = Persona::create([
                                         'dni_persona' => $dni_persona,
-                                        //'cuil_persona'=>$proveedores_rupae->cuil_persona,
+                                        //'cuil_persona'=>$proveedores_rupep->cuil_persona,
                                         'nombre_persona' => $nombre_persona,
                                         'apellido_persona' => $apellido_persona,
-                                        //'genero_persona'=>$proveedores_rupae->genero_persona,
+                                        //'genero_persona'=>$proveedores_rupep->genero_persona,
                                     ]);
                                 else{
                                     if($persona->nombre_persona!=$nombre_persona)
@@ -2114,10 +2112,10 @@ class ProveedoresController extends Controller
             //Inicio de la transaccion
             DB::beginTransaction();
             $id_proveedor = htmlspecialchars($request->id);
-            $proveedores_rupae = Proveedor::find($id_proveedor);
-            //return response()->json($proveedores_rupae);
-            $proveedores_rupae->dado_de_baja = 1;
-            $proveedores_rupae->save();
+            $proveedores_rupep = Proveedor::find($id_proveedor);
+            //return response()->json($proveedores_rupep);
+            $proveedores_rupep->dado_de_baja = 1;
+            $proveedores_rupep->save();
 
             //Registro de LOG
             $responsable_id = User::findOrFail(auth()->id())->id;
@@ -2125,7 +2123,7 @@ class ProveedoresController extends Controller
             $responsable_email = User::findOrFail(auth()->id())->email;
 
             DB::connection('mysql')
-            ->table('eventos_log')->insert(['EL_Evento' => 'Se ha dado de baja el registro con el cuit: ' . $proveedores_rupae->cuit . '.',
+            ->table('eventos_log')->insert(['EL_Evento' => 'Se ha dado de baja el registro con el cuit: ' . $proveedores_rupep->cuit . '.',
             'EL_Evento_Fecha' => Carbon::now(),
             'EL_Id_Responsable' => $responsable_id,
             'EL_Nombre_Responsable' => $responsable_nombre,
@@ -2149,13 +2147,16 @@ class ProveedoresController extends Controller
     public function dar_baja_id(Request $request)
     {
         try {
+
+            Log::info($request->all());
+
             //Inicio de la transaccion
             DB::beginTransaction();
             $id_proveedor = htmlspecialchars($request->id);
-            $proveedores_rupae = Proveedor::find($id_proveedor);
-            //return response()->json($proveedores_rupae);
-            $proveedores_rupae->dado_de_baja = 1;
-            $proveedores_rupae->save();
+            $proveedores_rupep = Proveedor::find($id_proveedor);
+            //return response()->json($proveedores_rupep);
+            $proveedores_rupep->dado_de_baja = 1;
+            $proveedores_rupep->save();
 
             //Registro de LOG
             $responsable_id = User::findOrFail(auth()->id())->id;
@@ -2163,7 +2164,7 @@ class ProveedoresController extends Controller
             $responsable_email = User::findOrFail(auth()->id())->email;
 
             DB::connection('mysql')
-            ->table('eventos_log')->insert(['EL_Evento' => 'Se ha dado de baja el registro con el cuit: ' . $proveedores_rupae->cuit . '.',
+            ->table('eventos_log')->insert(['EL_Evento' => 'Se ha dado de baja el registro con el cuit: ' . $proveedores_rupep->cuit . '.',
             'EL_Evento_Fecha' => Carbon::now(),
             'EL_Id_Responsable' => $responsable_id,
             'EL_Nombre_Responsable' => $responsable_nombre,
@@ -2187,21 +2188,21 @@ class ProveedoresController extends Controller
     public function dar_alta_id(Request $request)
     {
         try {
+            Log::info($request->all());
             //Inicio de la transaccion
             DB::beginTransaction();
             $id_proveedor = htmlspecialchars($request->id);
-            $proveedores_rupae = Proveedor::find($id_proveedor);
-            //return response()->json($proveedores_rupae);
-            $proveedores_rupae->dado_de_baja = 0;
-            $proveedores_rupae->save();
-
+            $proveedores_rupep = Proveedor::find($id_proveedor);
+            //return response()->json($proveedores_rupep);
+            //$proveedores_rupep->dado_de_baja = 0;
+            $proveedores_rupep->save();
             //Registro de LOG
             $responsable_id = User::findOrFail(auth()->id())->id;
             $responsable_nombre = User::findOrFail(auth()->id())->name;
             $responsable_email = User::findOrFail(auth()->id())->email;
 
             DB::connection('mysql')
-            ->table('eventos_log')->insert(['EL_Evento' => 'Se ha dado de alta el registro con el cuit: ' . $proveedores_rupae->cuit . '.',
+            ->table('eventos_log')->insert(['EL_Evento' => 'Se ha dado de alta el registro con el cuit: ' . $proveedores_rupep->cuit . '.',
             'EL_Evento_Fecha' => Carbon::now(),
             'EL_Id_Responsable' => $responsable_id,
             'EL_Nombre_Responsable' => $responsable_nombre,
