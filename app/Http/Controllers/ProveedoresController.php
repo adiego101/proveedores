@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\ProveedoresController;
 use App\Models\Actividades_proveedores;
 use App\Models\Actividad_economica;
+
 use App\Models\Disposiciones_act_prov;
 use App\Models\Localidad;
 use App\Models\Pago;
@@ -102,7 +103,9 @@ class ProveedoresController extends Controller
 
                     $proveedor = Proveedor::where('cuit', str_replace("-","",$request->cuit))->first();
 
-                    return redirect()->route('modificarRegistro', ['id' => $proveedor->id_proveedor]);
+                    Log::info($proveedor);
+
+                    return redirect()->route('modificar.Registro', ['id' => $proveedor->id_proveedor])->with('message', 'El cuil ingresado: '. $request->cuit . ' ya existe. Puede modificar el registro a continuacion.');
 
                 } else {
 
@@ -1196,11 +1199,11 @@ class ProveedoresController extends Controller
     {
         try {
             if ($request->tipo_actividad == "Primaria") {
-                if (Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
+                /*if (Actividades_proveedores::where('id_proveedor', $id)->where('id_tipo_actividad', 1)->exists()) {
 
                     return Redirect::back()
                         ->withErrors(['Ya existe una actividad primaria, la operación no pudo completarse']);
-                } else {
+                } else {/*/
                     $actividad = new Actividades_proveedores();
                     $actividad->id_proveedor = $id;
                     $actividad->id_actividad_economica = $this->idActividad_economica($request->actividad_1);
@@ -1219,7 +1222,7 @@ class ProveedoresController extends Controller
 
 
                     return redirect()->back()->with('message', 'Actividad Creada Correctamente');
-                }
+                //}
             } else {
 
                 $actividad = new Actividades_proveedores();
@@ -1502,15 +1505,16 @@ class ProveedoresController extends Controller
                 return false;
             } else {*/
                 //Actividades_proveedores::findOrFail($id)->delete();
+                Log::info($request->nro_disposicion);
 
                 $ap = Actividades_proveedores::findOrFail($id);
                 $ap->ap_end_date = Carbon::now();
                 $ap->save();
 
                 $Disposiciones_act_prov = new Disposiciones_act_prov();
+                $Disposiciones_act_prov->id_disposicion = $request->nro_disposicion;
                 $Disposiciones_act_prov->id_actividad_proveedor = $ap->id_actividad_proveedor;
-                $Disposiciones_act_prov->id_disposicion = $request->disposiciones;
-                $Disposiciones_act_prov->start_date =Disposicion::find($request->disposiciones)->fecha_ini_vigencia;
+                //$Disposiciones_act_prov->start_date =Disposicion::find($request->nro_disposicion)->fecha_ini_vigencia;
 
                 $Disposiciones_act_prov->save();
 
