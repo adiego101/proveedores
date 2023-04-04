@@ -37,8 +37,14 @@
 
         //Obtenemos el numero de la fila que queremos modificar
         let id = $("#id_baja").val();
+        let nro_disposicion = $(".dispos").val();
+        let datos = {
+            nro_disposicion:nro_disposicion,
+                    }
+
         $.ajax({
             type: "GET",
+            data: datos,
             url: "bajaRegistro/"+id,
         });
 
@@ -53,6 +59,7 @@
 
     function disposicionesJson(){
         let id = $("#id_baja").val();
+
 
                 $.ajax({
                     type: "GET",
