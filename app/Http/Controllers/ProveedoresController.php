@@ -645,7 +645,7 @@ class ProveedoresController extends Controller
     {
         try {
             if ($request->ajax()) {
-
+               
                 $data = Proveedor::latest()->get();
                 return Datatables::of($data)
                     ->addIndexColumn()
@@ -664,6 +664,27 @@ class ProveedoresController extends Controller
                         return $actionBtn;
                     })
                     ->rawColumns(['action'])
+                    ->make(true);
+            }
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function getEstadoProveedores(Request $request)
+    {
+        try {
+            if ($request->ajax()) {
+                $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor','=', 'disposiciones.id_proveedor')
+                ->select('proveedores.razon_social', 'proveedores.nombre_fantasia', 'proveedores.cuit', 'disposiciones.fecha_fin_vigencia')
+                ->get();
+
+                return Datatables::of($data)
+                    ->addIndexColumn()
+                    
                     ->make(true);
             }
         } catch (\Exception$e) {
@@ -1101,6 +1122,28 @@ class ProveedoresController extends Controller
                     }
                 })
                 ->rawColumns(['action'])
+                ->make(true);
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function getHistorialActividades(Request $request, $id, $mode = null)
+    {
+        try {
+                $data = Disposicion::join("actividades_proveedores", "actividades_proveedores.id_proveedor", "=", "disposiciones.id_proveedor")
+                ->join("actividades_economicas", "actividades_economicas.id_actividad_economica", "=", "actividades_proveedores.id_actividad_economica")
+                ->join("tipos_actividades", "tipos_actividades.id_tipo_actividad", "=", "actividades_proveedores.id_tipo_actividad")
+                ->where("actividades_proveedores.id_proveedor", "=", $id)
+                ->select("actividades_economicas.cod_actividad", "actividades_economicas.desc_actividad","actividades_economicas.agrupamiento", "disposiciones.nro_disposicion", "disposiciones.fecha_fin_vigencia", "tipos_actividades.desc_tipo_actividad" )
+                ->get();
+            Log::info($data);
+            return Datatables::of($data)
+                ->addIndexColumn()
+
                 ->make(true);
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
@@ -2319,4 +2362,43 @@ public function eliminar_id(Request $request)
                                 });
     }
 
+    public function obtenerListadoNoVigentes()
+    {
+        try {
+            $fecha=date('Y-m-d');
+            $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
+            ->whereDate('fecha_fin_vigencia', '<',$fecha)
+            ->select("proveedores.nombre_fantasia", "proveedores.razon_social","proveedores.cuit", "disposiciones.fecha_fin_vigencia")
+            ->get();
+            return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+            
+        } catch (Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function obtenerListadoVigentes(Request $request)
+    {
+        try {
+            $fecha=date('Y-m-d');
+            $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
+            ->whereDate('fecha_fin_vigencia', '>=', $fecha)
+            ->select("proveedores.nombre_fantasia", "proveedores.razon_social","proveedores.cuit", "disposiciones.fecha_fin_vigencia")
+            ->get();
+            return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+            
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
 }
