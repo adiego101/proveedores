@@ -1106,11 +1106,24 @@ class ProveedoresController extends Controller
 
     public function getActividades(Request $request, $id, $mode = null)
     {
+        /*
+        $data = Disposicion::join("disposiciones_act_prov", "disposiciones_act_prov.id_disposicion", "=", "disposiciones.id_disposicion")
+                ->join("actividades_proveedores", "actividades_proveedores.id_actividad_proveedor", "=", "disposiciones_act_prov.id_actividad_proveedor")
+                ->join("actividades_economicas", "actividades_economicas.id_actividad_economica", "=", "actividades_proveedores.id_actividad_economica" )
+                ->join("tipos_actividades", "tipos_actividades.id_tipo_actividad", "=", "actividades_proveedores.id_tipo_actividad")
+                ->where("disposiciones.id_proveedor", $id)
+                ->select("disposiciones.nro_disposicion","actividades_economicas.cod_actividad", "tipos_actividades.desc_tipo_actividad", "actividades_economicas.agrupamiento","disposiciones.fecha_fin_vigencia","disposiciones.fecha_ini_vigencia", "actividades_economicas.desc_actividad")
+                ->get();
+        */ 
+        $fecha=date('Y-m-d');
         try {
-            $data = Actividades_proveedores::where('id_proveedor', $id)
+            $data = Disposicion::join("disposiciones_act_prov", "disposiciones_act_prov.id_disposicion", "=", "disposiciones.id_disposicion")
+                ->join("actividades_proveedores", "actividades_proveedores.id_actividad_proveedor", "=", "disposiciones_act_prov.id_actividad_proveedor")
                 ->join('actividades_economicas', 'actividades_proveedores.id_actividad_economica', '=', 'actividades_economicas.id_actividad_economica')
                 ->join('tipos_actividades', 'actividades_proveedores.id_tipo_actividad', '=', 'tipos_actividades.id_tipo_actividad')
-                ->select('actividades_proveedores.id_actividad_economica', 'actividades_proveedores.id_actividad_proveedor', 'actividades_proveedores.id_tipo_actividad', 'actividades_economicas.desc_actividad', 'actividades_economicas.cod_actividad', 'tipos_actividades.desc_tipo_actividad')
+                ->whereDate("disposiciones.fecha_fin_vigencia", ">", $fecha)
+                ->where("disposiciones.id_proveedor", $id)
+                ->select('actividades_proveedores.id_actividad_economica', 'actividades_proveedores.id_actividad_proveedor', 'actividades_proveedores.id_tipo_actividad', 'actividades_economicas.desc_actividad','actividades_economicas.agrupamiento', 'actividades_economicas.cod_actividad', 'tipos_actividades.desc_tipo_actividad', 'disposiciones.fecha_fin_vigencia')
                 ->get();
 
             return Datatables::of($data)
