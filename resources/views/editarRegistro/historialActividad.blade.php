@@ -2,17 +2,16 @@
 <h1>Historial de actividades</h1>
 
         <div>
-
             <table style="width:100%" class="yajra-historialActividades table table-hover  table-striped table-condensed">
                 <thead>
                     <tr>
-                        <th>N° Disposición</th>
-                        <th>Cod.act.</th>
+                        <th>N° Disp.</th>
+                        <th>Cod. Act.</th>
                         <th>Tipo de Act.</th>
                         <th>Actividad</th>
                         <th>Agrupamiento</th>
-                        <th>Vencimiento</th>
-
+                        <th>Inicio vigencia</th>
+                        <th>Fin vigencia</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,10 +35,9 @@
 <script type="text/javascript">
 
   $(function () {
-
     var table = $('.yajra-historialActividades').DataTable({
-        order: [[5, 'desc']],
-
+    order: [[ 5, "desc" ]],
+ 
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -60,7 +58,7 @@
             "previous": "Anterior"
         }
     },
-          processing: true,
+        processing: true,
         serverSide: true,
         ajax: "{{ url('historialActividades/'.$id.'/'.$mode) }}",
        
@@ -70,6 +68,7 @@
             {data: 'desc_tipo_actividad', name: 'desc_tipo_actividad'},
             {data: 'desc_actividad', name: 'desc_actividad'},
             {data: 'agrupamiento', name: 'agrupamiento'},
+            {data: 'fecha_ini_vigencia', name: 'fecha_ini_vigencia'},
             {data: 'fecha_fin_vigencia', name: 'fecha_fin_vigencia'},
         ]
     });

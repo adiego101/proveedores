@@ -26,4 +26,6 @@ class Disposicion extends Model
     public function proveedor(){
         return $this->belongsTo(Proveedor::class, 'id_proveedor');
     }
+
+    
 }

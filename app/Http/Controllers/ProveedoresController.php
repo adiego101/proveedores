@@ -1141,13 +1141,14 @@ class ProveedoresController extends Controller
     public function getHistorialActividades(Request $request, $id, $mode = null)
     {
         try {
-                $data = Disposicion::join("actividades_proveedores", "actividades_proveedores.id_proveedor", "=", "disposiciones.id_proveedor")
-                ->join("actividades_economicas", "actividades_economicas.id_actividad_economica", "=", "actividades_proveedores.id_actividad_economica")
+                $data = Disposicion::join("disposiciones_act_prov", "disposiciones_act_prov.id_disposicion", "=", "disposiciones.id_disposicion")
+                ->join("actividades_proveedores", "actividades_proveedores.id_actividad_proveedor", "=", "disposiciones_act_prov.id_actividad_proveedor")
+                ->join("actividades_economicas", "actividades_economicas.id_actividad_economica", "=", "actividades_proveedores.id_actividad_economica" )
                 ->join("tipos_actividades", "tipos_actividades.id_tipo_actividad", "=", "actividades_proveedores.id_tipo_actividad")
-                ->where("actividades_proveedores.id_proveedor", "=", $id)
-                ->select("actividades_economicas.cod_actividad", "actividades_economicas.desc_actividad","actividades_economicas.agrupamiento", "disposiciones.nro_disposicion", "disposiciones.fecha_fin_vigencia", "tipos_actividades.desc_tipo_actividad" )
+                ->where("disposiciones.id_proveedor", $id)
+                ->select("disposiciones.nro_disposicion","actividades_economicas.cod_actividad", "tipos_actividades.desc_tipo_actividad", "actividades_economicas.agrupamiento","disposiciones.fecha_fin_vigencia","disposiciones.fecha_ini_vigencia", "actividades_economicas.desc_actividad")
                 ->get();
-            Log::info($data);
+              
             return Datatables::of($data)
                 ->addIndexColumn()
 
