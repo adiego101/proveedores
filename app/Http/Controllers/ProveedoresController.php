@@ -446,9 +446,9 @@ class ProveedoresController extends Controller
             case('real'):
                 $cantidad_telefonos=count($request->telefono_real);
                 break;
-            case('legal'):
+            /*case('legal'):
                 $cantidad_telefonos=count($request->telefono_legal);
-                break;
+                break;*/
             case('fiscal'):
                 $cantidad_telefonos=count($request->telefono_fiscal);
                 break;
@@ -484,12 +484,16 @@ class ProveedoresController extends Controller
         $cantidad_telefonos=0;
         switch($tipo_telefono){
             case('real'):
+                $cantidad_telefonos=0;
                 $cantidad_telefonos=count($request->telefono_real);
                 break;
-            case('legal'):
+        /*    case('legal'):
+                $cantidad_telefonos=0;
+
                 $cantidad_telefonos=count($request->telefono_legal);
-                break;
+                break;*/
             case('fiscal'):
+                $cantidad_telefonos=0;
                 $cantidad_telefonos=count($request->telefono_fiscal);
                 break;
         }
@@ -546,10 +550,10 @@ class ProveedoresController extends Controller
                 $cantidad_emails=count($request->email_real);
                 Log::info("cantidad emails real request=".$cantidad_emails);
                 break;
-            case('legal'):
+            /*case('legal'):
                 $cantidad_emails=count($request->email_legal);
                 Log::info("cantidad emails legal request=".$cantidad_emails);
-                break;
+                break;*/
             case('fiscal'):
                 $cantidad_emails=count($request->email_fiscal);
                 Log::info("cantidad emails fiscal request=".$cantidad_emails);
@@ -586,10 +590,10 @@ class ProveedoresController extends Controller
                 $cantidad_emails=count($request->email_real);
                 Log::info('Cantidad de emails real='.$cantidad_emails);
                 break;
-            case('legal'):
+           /* case('legal'):
                 $cantidad_emails=count($request->email_legal);
                 Log::info('Cantidad de emails legal='.$cantidad_emails);
-                break;
+                break;*/
             case('fiscal'):
                 $cantidad_emails=count($request->email_fiscal);
                 Log::info('Cantidad de emails fiscal='.$cantidad_emails);
@@ -1701,7 +1705,7 @@ class ProveedoresController extends Controller
             $proveedor_telefono_fiscal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'fiscal')
                 ->get();
 
-            $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
+           /* $proveedor_domicilio_legal = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'legal')
                 ->first();
 
             if (!empty($proveedor_domicilio_legal->id_localidad)) {
@@ -1722,7 +1726,7 @@ class ProveedoresController extends Controller
                 ->get();
 
             $proveedor_telefono_legal = Proveedor_telefono::where('id_proveedor', $id)->where('tipo_telefono', 'legal')
-                ->get();
+                ->get();*/
 
             $proveedor_domicilio_real = Proveedor_domicilio::where('id_proveedor', $id)->where('tipo_domicilio', 'real')
                 ->first();
@@ -1770,16 +1774,16 @@ class ProveedoresController extends Controller
                 'proveedor_telefono_fiscal' => $proveedor_telefono_fiscal,
                 'proveedor_domicilio_fiscal' => $proveedor_domicilio_fiscal,
                 'proveedor_email_fiscal' => $proveedor_email_fiscal,
-                'proveedor_telefono_legal' => $proveedor_telefono_legal,
-                'proveedor_domicilio_legal' => $proveedor_domicilio_legal,
-                'proveedor_email_legal' => $proveedor_email_legal,
+               // 'proveedor_telefono_legal' => $proveedor_telefono_legal,
+               // 'proveedor_domicilio_legal' => $proveedor_domicilio_legal,
+               // 'proveedor_email_legal' => $proveedor_email_legal,
                 'proveedor_telefono_real' => $proveedor_telefono_real,
                 'proveedor_domicilio_real' => $proveedor_domicilio_real,
                 'proveedor_email_real' => $proveedor_email_real,
                 'proveedor_localidades_real' => $proveedor_localidades_real,
                 'proveedor_provincias_real' => $proveedor_provincias_real,
-                'proveedor_localidades_legal' => $proveedor_localidades_legal,
-                'proveedor_provincias_legal' => $proveedor_provincias_legal,
+              //  'proveedor_localidades_legal' => $proveedor_localidades_legal,
+              //  'proveedor_provincias_legal' => $proveedor_provincias_legal,
                 'proveedor_localidades_fiscal' => $proveedor_localidades_fiscal,
                 'proveedor_provincias_fiscal' => $proveedor_provincias_fiscal,
                 'actividades' => $actividades,
@@ -1798,10 +1802,10 @@ class ProveedoresController extends Controller
         try {
             $proveedor = Proveedor::findOrFail($id);
             $proveedor->load([  'domicilio_real',
-                                'domicilio_legal',
+                               // 'domicilio_legal',
                                 'domicilio_fiscal',
                                 'telefonos_real',
-                                'telefonos_legal',
+                               // 'telefonos_legal',
                                 'telefonos_fiscal']);
             /* Se obtiene el representante del proveedor,
                 * se agrega el indice porque la relación representante_actual
@@ -1841,10 +1845,10 @@ class ProveedoresController extends Controller
 
            // return response()->json($proveedor, 200);
             $proveedor->load([  'domicilio_real',
-                                'domicilio_legal',
+                              //  'domicilio_legal',
                                'domicilio_fiscal',
                                 'telefonos_real',
-                                'telefonos_legal',
+                              // 'telefonos_legal',
                                 'telefonos_fiscal',
                                 'representante_actual'
                             ]);
@@ -1890,7 +1894,7 @@ class ProveedoresController extends Controller
                 $proveedor = Proveedor::find($id);
                 $proveedor->load([  'representante_actual',
                                     'domicilio_real',
-                                    'domicilio_legal',
+                                  //  'domicilio_legal',
                                     'domicilio_fiscal']);
 
                 //---------Carga de Representante Legal----------
@@ -1990,7 +1994,7 @@ class ProveedoresController extends Controller
 
                 //----------------------------------Editar Domicilio Legal---------------------------------------------
 
-                $proveedor_domicilio_legal = $proveedor->domicilio_legal;
+               /* $proveedor_domicilio_legal = $proveedor->domicilio_legal;
                 Log::info('domicilio legal='.$proveedor_domicilio_legal);
                 if($proveedor_domicilio_legal=='')
                     $this->crear_domicilio($proveedor->id_proveedor, 'legal', $request);
@@ -2001,7 +2005,7 @@ class ProveedoresController extends Controller
                 $this->actualizar_telefonos($proveedor->id_proveedor, 'legal', $request);
 
                 //---------Crear de Email_Legal----------
-                $this->actualizar_emails($proveedor->id_proveedor, 'legal', $request);
+                $this->actualizar_emails($proveedor->id_proveedor, 'legal', $request);*/
 
                 //----------------------------------Editar Domicilio Fiscal---------------------------------------------
 
