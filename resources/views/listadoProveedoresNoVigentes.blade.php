@@ -21,6 +21,7 @@
                 <th align="center">Nombre de fantasía</th>
                 <th align="center">Razón Social</th>
                 <th align="center">CUIT</th>
+                <th align="center">Tipo Disp</th>
                 <th align="center">Fin vigencia</th>
 
             </tr>
@@ -73,6 +74,9 @@
           
             },
            {data: 'cuit',
+          
+            },
+            {data: 'disposicion_tipo',
           
             },
             {data: 'fecha_fin_vigencia',
