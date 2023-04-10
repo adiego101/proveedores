@@ -2434,11 +2434,11 @@ public function eliminar_id(Request $request)
             //->whereDate('fecha_fin_vigencia', '<',$fecha)
             ->select("proveedores.nombre_fantasia", "proveedores.razon_social","proveedores.cuit", "disposiciones.fecha_fin_vigencia", 'disposiciones.disposicion_tipo');
             
-            $data->whereIn('fecha_fin_vigencia', function($queryBuilder){
+            $data = $data->whereIn('fecha_fin_vigencia', function($queryBuilder){
                 $queryBuilder->selectRaw('MAX(fecha_fin_vigencia) as fecha')
                 ->from('disposiciones')
                 ->groupby('id_proveedor');
-            })
+            }) ->where("fecha_fin_vigencia", "<=", $fecha)
 
             ->get();
             return Datatables::of($data)
