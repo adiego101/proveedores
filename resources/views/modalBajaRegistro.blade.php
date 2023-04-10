@@ -43,9 +43,9 @@
                     }
 
         $.ajax({
-            type: "GET",
-            data: datos,
+            type: "POST",
             url: "bajaRegistro/"+id,
+            data: datos,
         });
 
         //se recarga la tabla para que desaparesca la fila dada de baja
@@ -63,7 +63,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "{{url('proveedor/disposicionesJson/')}}/"+id,
+                    url: "{{url('proveedor/disposicionesJson/')}}/"+id+"/baja",
                     dataType:"json",
                     success: function(data){
                         $(".dispos").empty();
