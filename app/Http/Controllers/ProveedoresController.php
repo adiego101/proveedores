@@ -736,14 +736,24 @@ class ProveedoresController extends Controller
         }
     }
 
-    public function getDisposicionesJson(Request $request, $id_proveedor, $mode = null)
+    public function getDisposicionesJson(Request $request, $id_proveedor, $tipo = null)
     {
         try {
-            $proveedor = Proveedor::findOrFail($id_proveedor);
-            $proveedor->load('disposiciones');
-            $disposiciones = $proveedor->disposiciones;
-            Log::info("disposiciones = ".$disposiciones);
-            return response()->json($disposiciones);
+            if($tipo == null){
+                $proveedor = Proveedor::findOrFail($id_proveedor);
+                $proveedor->load('disposiciones');
+                $disposiciones = $proveedor->disposiciones->where("disposicion_tipo",'!=' , "BAJA");
+                return response()->json($disposiciones);
+            }
+            else{
+                if($tipo == "baja"){
+                    $proveedor = Proveedor::findOrFail($id_proveedor);
+                    $proveedor->load('disposiciones');
+                    $disposiciones = $proveedor->disposiciones->where("disposicion_tipo", "BAJA");
+                    return response()->json($disposiciones);
+                }
+            }
+
         } catch (\Exception $e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -754,7 +764,7 @@ class ProveedoresController extends Controller
 
     public function getNroDisposiciones($id_proveedor, $nro_disposicion)
     {
-        Log::info("nro_disposicion=".$nro_disposicion);
+        //Log::info("nro_disposicion=".$nro_disposicion);
         try {
             $disposiciones=Disposicion::where('id_proveedor',$id_proveedor)
                         ->select('nro_disposicion')
@@ -2165,17 +2175,28 @@ class ProveedoresController extends Controller
     public function dar_baja_id(Request $request)
     {
         try {
-
-            Log::info($request->all());
-
             //Inicio de la transaccion
+
             DB::beginTransaction();
+
+            $id_disposicion = $request->nro_disposicion;
             $id_proveedor = htmlspecialchars($request->id);
             $proveedores_rupep = Proveedor::find($id_proveedor);
             //return response()->json($proveedores_rupep);
-            $proveedores_rupep->dado_de_baja = 1;
+           // $proveedores_rupep->dado_de_baja = 1;
             $proveedores_rupep->save();
 
+            $actividades = DB::table('actividades_proveedores')->where('id_proveedor', $id_proveedor)->get();
+
+
+
+           foreach($actividades as $clave => $actividad)
+           {
+            $Disposiciones_act_prov = new Disposiciones_act_prov();
+            $Disposiciones_act_prov->id_actividad_proveedor = $actividad->id_actividad_proveedor;
+            $Disposiciones_act_prov->id_disposicion = $id_disposicion;
+            $Disposiciones_act_prov->save();
+           }
             //Registro de LOG
             $responsable_id = User::findOrFail(auth()->id())->id;
             $responsable_nombre = User::findOrFail(auth()->id())->name;
@@ -2206,7 +2227,6 @@ class ProveedoresController extends Controller
     public function dar_alta_id(Request $request)
     {
         try {
-            Log::info($request->all());
             //Inicio de la transaccion
             DB::beginTransaction();
             $id_proveedor = htmlspecialchars($request->id);
