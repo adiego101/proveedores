@@ -16,40 +16,111 @@
                 current_step, next_step, steps;
             steps = $("fieldset").length;
 
-            $(".next").click(function() {
-                    current_step = $(this).parent();
-                next_step = $(this).parent().next();
-                next_step.show();
-                current_step.hide();
-                setProgressBar(++current);
-                $(window).scrollTop(0);
-                let tipo_persona = $(this).data('tipo-persona');
-                if(tipo_persona)
-                    borrarAdvertenciasPersona(tipo_persona);
-                let tipo = $(this).data('tipo');
-                if(tipo)
+            $(".next").click(function(e) {
+                let tipo_domicilio = $(this).data('tipo-domicilio');
+                if(tipo_domicilio)
                 {
-                    console.log(tipo);
-
-                    if(tipo=='datos_generales')
+                    let form_localidad;
+                    let form_calle;
+                    let form_numero;
+                    let form_manzana;
+                    let form_lote;
+                    let form_barrio;
+                    let form_small_domicilio;
+                    switch(tipo_domicilio)
                     {
-                        if($("#razon_social").val()=='')
-                            mostrarError('#razon_social', '#small-razon-social-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
-                        else
-                            ocultarError('#razon_social', '#small-razon-social-head');
-                        if($("#nombre_fantasia").val()=='')
-                            mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">El Nombre de Fantasia <strong>no</strong> puede quedar vacía.</div>');
-                        else
-                            ocultarError('#nombre_fantasia', '#small-nombre-fantasia-head');
+                        case 'real':
+                            form_localidad=$("#localidad_real_create");
+                            form_calle=$("#calle_real_create");
+                            form_numero=$("#numero_real_create");
+                            form_monoblock=$("#monoblock_real_create");
+                            form_dpto=$("#dpto_real_create");
+                            form_puerta=$("#puerta_real_create");
+                            form_oficina=$("#oficina_real_create")
+                            form_entreCalles=$("#entreCalles_real_create");
+                            form_manzana=$("#manzana_real_create");
+                            form_lote=$("#lote_real_create");
+                            form_barrio=$("#barrio_real_create");
+                            form_cp=$("#cp_real_create");
+                            form_small_domicilio=$("#small-domicilio-real-head");
+                        break;
+                        case 'fiscal':
+                            form_localidad=$("#localidad_fiscal_create");
+                            form_calle=$("#calle_fiscal_create");
+                            form_numero=$("#numero_fiscal_create");
+                            form_monoblock=$("#monoblock_fiscal_create");
+                            form_dpto=$("#dpto_fiscal_create");
+                            form_puerta=$("#puerta_fiscal_create");
+                            form_oficina=$("#oficina_fiscal_create")
+                            form_entreCalles=$("#entreCalles_fiscal_create");
+                            form_manzana=$("#manzana_fiscal_create");
+                            form_lote=$("#lote_fiscal_create");
+                            form_barrio=$("#barrio_fiscal_create");
+                            form_cp=$("#cp_fiscal_create");
+                            form_small_domicilio=$("#small-domicilio-fiscal-head");
+                        break;
                     }
-                    if(tipo=='firma')
-                        borrarAdvertenciasFirma();
-                    if(tipo=='banco')
-                        borrarAdvertenciasBanco()
+                    
+                    if(form_localidad.val()!=''||form_calle.val()!=''||form_numero.val()!=''||form_monoblock.val()!=''||form_dpto.val()!=''||form_puerta.val()!=''||form_oficina.val()!=''||form_entreCalles.val()!=''||form_manzana.val()!=''||form_lote.val()!=''||form_barrio.val()!=''||form_cp.val()!='')
+                    {
+                        if(comprobarDatoDomicilio(tipo_domicilio,form_localidad,form_calle,form_numero,form_manzana,form_lote,form_barrio,form_small_domicilio))
+                        {
+                            ocultarErrorDomicilio(form_small_domicilio);
+                            current_step = $(this).parent();
+                            next_step = $(this).parent().next();
+                            next_step.show();
+                            current_step.hide();
+                            setProgressBar(++current);
+                            $(window).scrollTop(0);
+                            
+                        }
+                    }
+                    else
+                    {
+                        ocultarErrorDomicilio(form_small_domicilio);
+                        current_step = $(this).parent();
+                        next_step = $(this).parent().next();
+                        next_step.show();
+                        current_step.hide();
+                        setProgressBar(++current);
+                        $(window).scrollTop(0);
+                    }
                 }
+                else
+                {
+                    current_step = $(this).parent();
+                    next_step = $(this).parent().next();
+                    next_step.show();
+                    current_step.hide();
+                    setProgressBar(++current);
+                    $(window).scrollTop(0);
+                    let tipo_persona = $(this).data('tipo-persona');
+                    if(tipo_persona)
+                        borrarAdvertenciasPersona(tipo_persona);
+                    let tipo = $(this).data('tipo');
+                    if(tipo)
+                    {
+                        console.log(tipo);
 
-
+                        if(tipo=='datos_generales')
+                        {
+                            if($("#razon_social").val()=='')
+                                mostrarError('#razon_social', '#small-razon-social-head', '<div class="alert alert-danger mt-3 pt-1">La razon social <strong>no</strong> puede quedar vacía.</div>');
+                            else
+                                ocultarError('#razon_social', '#small-razon-social-head');
+                            if($("#nombre_fantasia").val()=='')
+                                mostrarError('#nombre_fantasia', '#small-nombre-fantasia-head', '<div class="alert alert-danger mt-3 pt-1">El Nombre de Fantasia <strong>no</strong> puede quedar vacía.</div>');
+                            else
+                                ocultarError('#nombre_fantasia', '#small-nombre-fantasia-head');
+                        }
+                        if(tipo=='firma')
+                            borrarAdvertenciasFirma();
+                        if(tipo=='banco')
+                            borrarAdvertenciasBanco()
+                    }
+                }
             });
+
             $(".previous").click(function() {
                 current_step = $(this).parent();
                 next_step = $(this).parent().prev();
@@ -123,6 +194,171 @@
             }
         }
 
+        function comprobarDatoDomicilio(tipo, form_localidad, form_calle, form_numero, form_manzana, form_lote, form_barrio, form_small_domicilio){
+            if(form_localidad.val() == '')
+            {
+                if(form_calle.val()=='')
+                {
+                    if(form_numero.val()=='')
+                    {
+                        if(form_manzana.val()=='')
+                        {
+                            if(form_lote.val()=='')
+                            {
+                                if(form_barrio.val()=='')
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: <br><ol><li>calle, numero y localidad; o </li><li> manzana, lote, barrio y localidad</li></ol></div>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: manzana, lote y localidad</div>');
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                if(form_barrio.val()=='')
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: manzana, barrio y localidad</div>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir:manzana y localidad</div>');
+                                    return false;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if(form_lote.val()=='')
+                            {
+                                if(form_barrio.val()=='')
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: lote, barrio y localidad</li></ol></div>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir:lote y localidad</div>');
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                if(form_barrio.val()=='')
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: barrio y localidad</div>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: localidad</div>');
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: localidad</div>');
+                        return false;
+                    }
+                }
+                else
+                {
+                    if(form_numero.val()=='')
+                    {
+                        mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: numero y localidad</div>');
+                        return false;
+                    }
+                    else
+                        mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: localidad</div>');
+                        return false;
+                }
+            }
+            else
+            {
+                if(form_calle.val()=='')
+                {
+                    if(form_numero.val()=='')
+                    {
+                        if(form_manzana.val()=='')
+                        {
+                            if(form_lote.val()=='')
+                            {
+                                if(form_barrio.val()=='')
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: <br><ol><li>calle, numero y localidad; o </li><li> manzana, lote, barrio y localidad</li></ol></div>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: manzana, lote y localidad</div>');
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                if(form_barrio.val()=='')
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: manzana, barrio y localidad</div>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir:manzana y localidad</div>');
+                                    return false;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if(form_lote.val()=='')
+                            {
+                                if(form_barrio.val()=='')
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: lote, barrio y localidad</li></ol></div>');
+                                    return false;
+                                }
+                                else
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir:lote y localidad</div>');
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                if(form_barrio.val()=='')
+                                {
+                                    mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: barrio y localidad</div>');
+                                    return false;
+                                }
+                                else
+                                    return true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: localidad</div>');
+                        return false;
+                    }
+                }
+                else
+                {
+                    if(form_numero.val()=='')
+                    {
+                        mostrarErrorDomicilio(form_small_domicilio, '<div class="alert alert-danger mt-3 pt-1">Para agregar el domicilio '+tipo+' debe incluir: numero y localidad</div>');
+                        return false;
+                    }
+                    else
+                        return true;
+                }
+            }
+        }
+
     </script>
 
 
@@ -179,6 +415,9 @@
     <small class="small" id="small-dni-apoderado-head"></small>
     <small class="small" id="small-apellido-apoderado-head"></small>
     <small class="small" id="small-nombre-apoderado-head"></small>
+    <small class="small" id="small-domicilio-real-head"></small>
+    <small class="small" id="small-domicilio-legal-head"></small>
+    <small class="small" id="small-domicilio-fiscal-head"></small>
     <small class="small" id="small-denominacion-head"></small>
     <small class="small" id="small-banco-head"></small>
     <small class="small" id="small-localidad-sucursal-head"></small>

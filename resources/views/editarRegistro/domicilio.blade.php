@@ -300,7 +300,7 @@
     <br>
     @if($mode=='create')
         <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-        <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+        <input type="button" name="next" class="next btn btn-info" data-tipo-domicilio="{{$tipo_domicilio}}" value="Siguiente" />
     @else
         <div class="row navbuttons">
             <div class="col-6 col-sm-auto" id="btnPrevious">

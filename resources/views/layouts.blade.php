@@ -108,6 +108,14 @@ $(document).ready(function()
         $(campo).removeClass('is-invalid');
         $(error).hide();
     }
+    function mostrarErrorDomicilio(error, msg) {
+        error.html(msg);
+        error.show();
+    }
+    function ocultarErrorDomicilio(error) {
+        error.html('');
+        error.hide();
+    }
 
     </script>
     <script src="{{asset('assets/select2-4.0.13/dist/js/select2.min.js')}}"></script>
