@@ -158,7 +158,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('verPagos/{id}', 'App\Http\Controllers\ProveedoresController@verPagos')->name('pagos.ver');
     Route::get('verActividades/{id}', 'App\Http\Controllers\ProveedoresController@verActividades')->name('actividades.ver');
 
-    Route::get('proveedor/disposicionesJson/{id_proveedor}', 'App\Http\Controllers\ProveedoresController@getDisposicionesJson')->name('disposiciones.json');
+    Route::get('proveedor/disposicionesJson/{id_proveedor}/{tipo?}', 'App\Http\Controllers\ProveedoresController@getDisposicionesJson')->name('disposiciones.json');
     Route::get('proveedor/{id_proveedor}/nro_disposicion/{nro_disposicion}', 'App\Http\Controllers\ProveedoresController@getNroDisposiciones')->name('disposiciones.nroslist');
     Route::get('proveedor/{id_proveedor}/disposiciones/{mode?}', 'App\Http\Controllers\ProveedoresController@getDisposiciones')->name('disposiciones.list');
     Route::post('proveedor/{id_proveedor}/disposicion/guardar', 'App\Http\Controllers\ProveedoresController@crearDisposicion')->name('disposiciones.crear');

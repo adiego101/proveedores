@@ -715,14 +715,24 @@ class ProveedoresController extends Controller
         }
     }
 
-    public function getDisposicionesJson(Request $request, $id_proveedor, $mode = null)
+    public function getDisposicionesJson(Request $request, $id_proveedor, $tipo = null)
     {
         try {
-            $proveedor = Proveedor::findOrFail($id_proveedor);
-            $proveedor->load('disposiciones');
-            $disposiciones = $proveedor->disposiciones;
-            //Log::info("disposiciones = ".$disposiciones);
-            return response()->json($disposiciones);
+            if($tipo == null){
+                $proveedor = Proveedor::findOrFail($id_proveedor);
+                $proveedor->load('disposiciones');
+                $disposiciones = $proveedor->disposiciones->where("disposicion_tipo",'!=' , "BAJA");
+                return response()->json($disposiciones);
+            }
+            else{
+                if($tipo == "baja"){
+                    $proveedor = Proveedor::findOrFail($id_proveedor);
+                    $proveedor->load('disposiciones');
+                    $disposiciones = $proveedor->disposiciones->where("disposicion_tipo", "BAJA");
+                    return response()->json($disposiciones);
+                }
+            }
+
         } catch (\Exception $e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -2130,8 +2140,6 @@ class ProveedoresController extends Controller
             $Disposiciones_act_prov->id_disposicion = $id_disposicion;
             $Disposiciones_act_prov->save();
            }
-
-
             //Registro de LOG
             $responsable_id = User::findOrFail(auth()->id())->id;
             $responsable_nombre = User::findOrFail(auth()->id())->name;

@@ -63,7 +63,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "{{url('proveedor/disposicionesJson/')}}/"+id,
+                    url: "{{url('proveedor/disposicionesJson/')}}/"+id+"/baja",
                     dataType:"json",
                     success: function(data){
                         $(".dispos").empty();
