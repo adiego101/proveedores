@@ -662,11 +662,10 @@ class ProveedoresController extends Controller
                     ->orWhere('disposiciones.disposicion_tipo', '=', 'baja');
                     });
 
-                $data->whereIn('fecha_fin_vigencia', function($queryBuilder){
+                $data = $data->whereIn('fecha_fin_vigencia', function($queryBuilder){
                     $queryBuilder->selectRaw('MAX(fecha_fin_vigencia) as fecha')
                     ->from('disposiciones')
                     ->groupBy('id_proveedor');
-                    //->groupBy('id_proveedor');
                 })
                 ->get();
 
