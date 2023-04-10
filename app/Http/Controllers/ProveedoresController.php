@@ -731,6 +731,31 @@ class ProveedoresController extends Controller
                     $disposiciones = $proveedor->disposiciones->where("disposicion_tipo", "BAJA");
                     return response()->json($disposiciones);
                 }
+                else{
+                    if($tipo == "inscripcion"){
+                        $proveedor = Proveedor::findOrFail($id_proveedor);
+                        $proveedor->load('disposiciones');
+                        $disposiciones = $proveedor->disposiciones->where("disposicion_tipo", "inscripcion");
+                        return response()->json($disposiciones);
+                    }
+                    else{
+                        if($tipo == "renovacion"){
+                            $proveedor = Proveedor::findOrFail($id_proveedor);
+                            $proveedor->load('disposiciones');
+                            $disposiciones = $proveedor->disposiciones->where("disposicion_tipo", "renovacion");
+                            return response()->json($disposiciones);
+                        }
+                        else{
+                            if($tipo == "AMPLIACION"){
+                                $proveedor = Proveedor::findOrFail($id_proveedor);
+                                $proveedor->load('disposiciones');
+                                $disposiciones = $proveedor->disposiciones->where("disposicion_tipo", "AMPLIACION");
+                                return response()->json($disposiciones);
+                            }
+                        }
+                    }
+                }
+
             }
 
         } catch (\Exception $e) {
