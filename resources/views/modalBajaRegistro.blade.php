@@ -43,9 +43,9 @@
                     }
 
         $.ajax({
-            type: "GET",
-            data: datos,
+            type: "POST",
             url: "bajaRegistro/"+id,
+            data: datos,
         });
 
         //se recarga la tabla para que desaparesca la fila dada de baja

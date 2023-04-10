@@ -114,7 +114,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('verRegistro/{id}/{tab?}', 'App\Http\Controllers\ProveedoresController@verProveedorRupaeId')->name('verRegistro')->middleware(['can:ver_registros']);
 
-    Route::get('bajaRegistro/{id}', 'App\Http\Controllers\ProveedoresController@dar_baja_id')->middleware(['can:baja_registros']);
+    Route::POST('bajaRegistro/{id}', 'App\Http\Controllers\ProveedoresController@dar_baja_id')->middleware(['can:baja_registros']);
 
     Route::get('altaRegistro/{id}', 'App\Http\Controllers\ProveedoresController@dar_alta_id')->middleware(['can:alta_registros']);
 
