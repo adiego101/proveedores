@@ -8,8 +8,9 @@
 @endpush
 @section('content2')
 
-    <h2 class="mb-4">Gestionar Registros:</h2>
+    <h2 class="h2 text-center font-weight-bold ">Gestionar Registros</h2>
 
+    <hr>
     <div class="table container-fluid overflow-auto" id="tabla">
         <table id="tabla_consulta" style="width:100%" class="table table-hover yajra-datatable">
             <thead class="bg-info" align="center">

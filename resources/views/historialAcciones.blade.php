@@ -10,8 +10,9 @@
 
 @section('content2')
 
-<h2 class="mb-4">Historial de acciones:</h2>
+<h2 class="h2 text-center font-weight-bold ">Historial de acciones</h2>
 
+<hr>
 <div class="table container-fluid overflow-auto" id="tabla">
         <table id="tabla_listado_logs" style="width:100%" class="table table-hover yajra-datatable">
             <thead class="bg-info" align="center">
