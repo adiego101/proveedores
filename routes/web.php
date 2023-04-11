@@ -91,6 +91,9 @@ Route::group(['middleware' => ['auth']], function () {
         return view('gestionarRegistros');
     })->middleware(['can:ver_registros']);
 
+    Route::get('/gestionarRegistrosII', function () {
+        return view('gestionarRegistrosII');
+    })->middleware(['can:ver_registros']);
   
 
     Route::get('/baja', function () {
@@ -101,6 +104,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/crear_registro_cuit', [ProveedoresController::class, 'crear_registro_cuit'])->name('crear_registro_cuit')->middleware(['can:crear_registros']);
 
     Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
+
+    Route::get('registros/listII', [ProveedoresController::class, 'getProveedoresII'])->name('registros.listII');
 
 
     //Ruta para editar los registros, se llama desde el boton "editar" de la tabla.

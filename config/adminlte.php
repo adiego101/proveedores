@@ -240,7 +240,7 @@ return [
         ],
         [
             'text' => 'Gestionar Registros',
-            'url' => '/gestionarRegistros',
+            'url' => '/gestionarRegistrosII',
             'icon' => 'fas fa-fw fa-folder',
             'label_color' => 'success',
             'can'    => ['editar_registros', 'ver_registros'],
@@ -260,8 +260,15 @@ return [
                 [
                     'text' => 'Vigentes',
                     'url' => '/proveedores_vigentes',//fa fa-check
-                    'icon' => 'fas fa-solid fa-circle', 
+                    'icon' => 'far fa-circle', 
                     'label_color' => 'success',
+                ],
+                [
+                    'text' => 'Todos',
+                    'url' => '/gestionarRegistros',
+                    'icon' => 'far fa-circle',
+                    'label_color' => 'success',
+                    'can'    => ['editar_registros', 'ver_registros'],
                 ]
             ]
         ],
