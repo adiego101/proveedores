@@ -245,6 +245,26 @@ return [
             'label_color' => 'success',
             'can'    => ['editar_registros', 'ver_registros'],
         ],
+        [
+            'text' => 'Estado: Proveedores',
+            'icon' => 'fa fa-users',
+            'label_color' => 'success',
+            'submenu' =>
+            [
+                [
+                    'text' => 'No vigentes',
+                    'url' => '/proveedores_no_vigentes',
+                    'icon' => 'far fa-circle',//fa fa-file-excel
+                    'label_color' => 'success',
+                ],
+                [
+                    'text' => 'Vigentes',
+                    'url' => '/proveedores_vigentes',//fa fa-check
+                    'icon' => 'fas fa-solid fa-circle', 
+                    'label_color' => 'success',
+                ]
+            ]
+        ],
        //DESCOMENTAR DESPÚES DE LA EXPOSICIÓN
        /*
         [

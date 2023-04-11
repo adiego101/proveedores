@@ -8,15 +8,19 @@
 @endpush
 @section('content2')
 
-    <h2 class="mb-4">Gestionar Registros:</h2>
+    <h2 class="h2 text-center font-weight-bold ">Gestionar Registros</h2>
 
+    <hr>
     <div class="table container-fluid overflow-auto" id="tabla">
         <table id="tabla_consulta" style="width:100%" class="table table-hover yajra-datatable">
             <thead class="bg-info" align="center">
                 <tr>
-                    <th align="center">Nombre de fantasía</th>
-                    <th align="center">Razón Social</th>
-                    <th align="center">CUIT</th>
+                    <th align="center">Fin vigencia</th>
+                    <th align="center">Fin vigencia</th>
+                    <th align="center">Fin vigencia</th>
+                    <th align="center">Fin vigencia</th>
+
+                    <th align="center">Fin vigencia</th>
                     <th align="center">Acciones</th>
                 </tr>
             </thead>
@@ -81,6 +85,21 @@
             }
             },
            {data: 'cuit',
+            render: function (data, type, row){
+
+                return data;
+
+            }
+            },
+           
+           {data: 'disposicion_tipo',
+            render: function (data, type, row){
+
+                return data;
+
+            }
+            },
+            {data: 'fecha',
             render: function (data, type, row){
 
                 return data;

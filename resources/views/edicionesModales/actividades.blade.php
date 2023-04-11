@@ -61,6 +61,7 @@
                             $("button").prop("disabled", false);
 
                         $('.yajra-actividades').DataTable().ajax.reload();
+                        $('.yajra-historialActividades').DataTable().ajax.reload();
 
                     },
                     error: function(error) {
