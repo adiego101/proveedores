@@ -653,7 +653,7 @@ class ProveedoresController extends Controller
         try {
             $fecha=date('Y-m-d');
             if ($request->ajax()) {
-            
+
                 /*$data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
                 ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
                 ->where(function($query){
@@ -670,13 +670,13 @@ class ProveedoresController extends Controller
 
                 $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
                 ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
-               
+
                 ->selectRaw('MAX(fecha_fin_vigencia) as fecha')
                 ->where('disposicion_tipo', 'renovacion')
                 ->orWhere('disposicion_tipo', 'inscripcion')
                 ->orWhere('disposicion_tipo', 'baja')
                 ->groupBy('proveedores.id_proveedor');
-                
+
 
                 return Datatables::of($data)
                     ->addIndexColumn()
@@ -715,7 +715,7 @@ class ProveedoresController extends Controller
 
                 return Datatables::of($data)
                     ->addIndexColumn()
-                    
+
                     ->make(true);
             }
         } catch (\Exception$e) {
@@ -1101,16 +1101,37 @@ class ProveedoresController extends Controller
     {
         try {
             $proveedor=Proveedor::findOrFail($id_proveedor);
-            Log::info("nombre banco gui =".$request->nombre_banco);
-            $banco = Banco::where('nombre_banco',$request->nombre_banco)
+            Log::info($request->all());
+            $banco = Banco::where('id_banco',$request->nombre_banco)
                         ->first();
             Log::info("banco".$banco->nombre_banco);
             if($banco!=null)
             {
-                $proveedor->bancos()->attach($banco, [  'id_localidad' => $request->localidad,
-                                                        'tipo_cuenta' => $request->tipo_cuenta,
-                                                        'nro_cuenta' => $request->nro_cuenta]);
+               /* $proveedor->bancos()->attach($banco, [  'id_localidad' => $request->localidad_sucursal_edit,
+                                                        'tipo_cuenta' => $request->tipo_cuenta_edit,
+                                                        'nro_cuenta' => $request->nro_cuenta_edit]);*/
+                $persona = Proveedor_banco::create(
+                    [
+                        'id_proveedor' => $id_proveedor,
+                        'id_banco' => $banco->id_banco,
+                        'id_localidad' => $request->localidad,
+                        'tipo_cuenta' => $request->tipo_cuenta,
+                        'nro_cuenta' => $request->nro_cuenta,
+                ]);
             }
+          /*  else{
+
+                $persona = proveedores_bancos::create(
+                    [
+                        'id_proveedor' => $id_proveedor,
+                        'id_banco' => $banco->id_banco,
+                        'id_localidad' => $request->localidad_sucursal_edit,
+                        'tipo_cuenta' => $request->tipo_cuenta_edit,
+                        'nro_cuenta' => $request->nro_cuenta_edit
+                ]);
+
+
+            }*/
 
         } catch (\Exception $e) {
             Log::error('Error inesperado.' . $e->getMessage());
@@ -1173,7 +1194,7 @@ class ProveedoresController extends Controller
                 ->where("disposiciones.id_proveedor", $id)
                 ->select("disposiciones.nro_disposicion","actividades_economicas.cod_actividad", "tipos_actividades.desc_tipo_actividad", "actividades_economicas.agrupamiento","disposiciones.fecha_fin_vigencia","disposiciones.fecha_ini_vigencia", "actividades_economicas.desc_actividad")
                 ->get();
-        */ 
+        */
         $fecha=date('Y-m-d');
         try {
             $data = Disposicion::join("disposiciones_act_prov", "disposiciones_act_prov.id_disposicion", "=", "disposiciones.id_disposicion")
@@ -1220,7 +1241,7 @@ class ProveedoresController extends Controller
                 ->where("disposiciones.id_proveedor", $id)
                 ->select("disposiciones.nro_disposicion","actividades_economicas.cod_actividad", "tipos_actividades.desc_tipo_actividad", "actividades_economicas.agrupamiento","disposiciones.fecha_fin_vigencia","disposiciones.fecha_ini_vigencia", "actividades_economicas.desc_actividad")
                 ->get();
-              
+
             return Datatables::of($data)
                 ->addIndexColumn()
 
@@ -2457,11 +2478,11 @@ public function eliminar_id(Request $request)
     public function obtenerListadoNoVigentes()
     {
         try {
-         
+
             $fecha=date('Y-m-d');
             $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
             ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
-           
+
             ->selectRaw('MAX(fecha_fin_vigencia) as fecha')
             ->where('disposicion_tipo', 'renovacion')
             ->orWhere('disposicion_tipo', 'inscripcion')
@@ -2472,11 +2493,11 @@ public function eliminar_id(Request $request)
 
             ->where('fecha_fin_vigencia','<', $fecha);
 
-            
+
             return Datatables::of($data)
             ->addIndexColumn()
             ->make(true);
-            
+
         } catch (Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 
@@ -2496,8 +2517,8 @@ public function eliminar_id(Request $request)
                 })
             ->whereDate('fecha_fin_vigencia', '>=', $fecha)
             ->select("proveedores.nombre_fantasia", "proveedores.razon_social","proveedores.cuit", "disposiciones.fecha_fin_vigencia", "disposiciones.disposicion_tipo");
-            
-            
+
+
            $data->whereIn('fecha_fin_vigencia', function($queryBuilder){
                 $queryBuilder->selectRaw('MAX(fecha_fin_vigencia)')
                 ->from('disposiciones')
@@ -2510,7 +2531,7 @@ public function eliminar_id(Request $request)
             return Datatables::of($data)
             ->addIndexColumn()
             ->make(true);
-            
+
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
 

@@ -2,7 +2,7 @@
     <div class="d-flex">
         <div class="mr-auto p-2">
             <h1>Datos del domicilio {{$tipo_domicilio}}</h1>
-        </div>        
+        </div>
         @if($tipo_domicilio!='real' && $mode!='show')
             <div class="p-2">
                 <a href="javascript:void(0);" id="copy_{{$tipo_domicilio}}" title="Traer datos Domicilio Real"><input type="button" value="Traer datos Domicilio Real" class="btn btn-outline-secondary btn-sm"></a>
@@ -395,6 +395,8 @@
             @if($mode!="create")
 
             function recargarListaDomicilio(provincia_selected, select_localidad){
+                console.log("{{$tipo_domicilio}}");
+                console.log("{{url('localidades')}}/"+provincia_selected);
 
                 console.log("{{url('localidadSelect/')}}/"+@if($tipo_domicilio=='real')"{{isset($proveedor->domicilio_real->localidad) ? $proveedor->domicilio_real->localidad->id_localidad : '' }}",@endif
                         @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal->localidad) ? $proveedor->domicilio_legal->localidad->id_localidad : '' }}",@endif
@@ -414,6 +416,8 @@
                 };
             @else
             function recargarListaDomicilio(provincia_selected, select_localidad){
+                console.log("{{url('localidades')}}/"+provincia_selected);
+
                 $.ajax({
                     type:"GET",
                     url:"{{url('localidades')}}/"+provincia_selected,
@@ -564,8 +568,9 @@
             });
             $('#provincia_{{$tipo_domicilio}}_{{$mode}}').change(function(){
                 console.log("detecta change en provincia_tipo_domicilio_mode");
+                console.log($('#provincia_{{$tipo_domicilio}}_{{$mode}}').val());
                 if($('#provincia_{{$tipo_domicilio}}_{{$mode}}').val()!='')
-                    recargarListaDomicilio($('#provincia_{{$tipo_domicilio}}_{{$mode}}').val(), $('#localidad_{{$tipo_domicilio}}_{{$mode}}'));
+                recargarListaCopiaDomicilio($('#provincia_{{$tipo_domicilio}}_{{$mode}}').val(), $('#localidad_{{$tipo_domicilio}}_{{$mode}}'));
                 else
                 {
                     $("#localidad_{{$tipo_domicilio}}_{{$mode}}").empty();
@@ -620,6 +625,7 @@
         });
         function recargarListaCopiaDomicilio(provincia_selected, select_localidad, tipo_domicilio){
             let mode=@json($mode);
+            console.log(provincia_selected);
             $.ajax({
                 type:"GET",
                 url:"{{url('localidades')}}/"+provincia_selected,
@@ -629,17 +635,17 @@
             }).done(function(){
                 if(mode=='create')
                 {
-                    if(tipo_domicilio == 'legal')
-                        $("#localidad_legal_create option[value='"+$('#localidad_real_create').val()+"']").attr("selected", true);
+                    if(tipo_domicilio == 'real')
+                        $("#localidad_real_create option[value='"+$('#localidad_real_create').val()+"']").attr("selected", true);
                     else
-                        $("#localidad_fiscal_create option[value='"+$('#localidad_real_create').val()+"']").attr("selected", true);
+                        $("#localidad_fiscal_create option[value='"+$('#localidad_fiscal_create').val()+"']").attr("selected", true);
                 }
                 else
                 {
-                    if(tipo_domicilio == 'legal')
-                        $("#localidad_legal_edit option[value='"+$('#localidad_real_edit').val()+"']").attr("selected", true);
+                    if(tipo_domicilio == 'real')
+                        $("#localidad_real_create option[value='"+$('#localidad_real_create').val()+"']").attr("selected", true);
                     else
-                        $("#localidad_fiscal_edit option[value='"+$('#localidad_real_edit').val()+"']").attr("selected", true);
+                        $("#localidad_fiscal_create option[value='"+$('#localidad_fiscal_create').val()+"']").attr("selected", true);
                 }
             });
         }

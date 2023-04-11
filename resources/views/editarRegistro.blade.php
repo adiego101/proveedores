@@ -386,6 +386,9 @@
                                     tipo_cuenta:tipo_cuenta,
                                     nro_cuenta:nro_cuenta}
                     let url = '{{ url("proveedor/$id/banco/store") }}';
+
+                    console.log(url);
+
                     $("button").prop("disabled", true);
                     $.ajax({
                         type: "post",
@@ -660,7 +663,7 @@
                 form_small_domicilio=$("#small-domicilio-fiscal-head");
             break;
         }
-        
+
         if(form_localidad.val()!=''||form_calle.val()!=''||form_numero.val()!=''||form_monoblock.val()!=''||form_dpto.val()!=''||form_puerta.val()!=''||form_oficina.val()!=''||form_entreCalles.val()!=''||form_manzana.val()!=''||form_lote.val()!=''||form_barrio.val()!=''||form_cp.val()!='')
         {
             if(comprobarDatoDomicilio(tipo_domicilio,form_localidad,form_calle,form_numero,form_manzana,form_lote,form_barrio,form_small_domicilio))

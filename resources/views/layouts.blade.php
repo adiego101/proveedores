@@ -434,7 +434,7 @@ $(document).ready(function()
 @section('content_header')
 <div class="container ">
     <div class="row justify-content-center">
-        <div class="col-md-9 ">
+        <div class="col-lg-10">
             <div class="card">
                 @include('includes.messages')
                 @include('includes.warnings')
@@ -454,6 +454,7 @@ $(document).ready(function()
                 </div>
         </div>
     </div>
+</div>
 </div>
 
 @endsection
