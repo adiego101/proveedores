@@ -1,4 +1,4 @@
-<!--Listado Estados: Proveedores --todos -->
+<!--Gestionar registros Original-->
 
 @extends('layouts')
 @push('head')
@@ -10,19 +10,16 @@
 @endpush
 @section('content2')
 
-    <h2 class="h2 text-center font-weight-bold ">Proveedores con disposición</h2>
+<h2 class="h2 text-center font-weight-bold ">Gestionar Registros</h2>
 
-    <hr>
+<hr>
     <div class="table container-fluid overflow-auto" id="tabla">
-        <table id="tabla_consulta" style="width:100%" class="table table-hover yajra-datatable">
+        <table id="tabla_consulta" style="width:100%" class="table table-hover yajra-datatableII">
             <thead class="bg-info" align="center">
                 <tr>
-                    <th align="center">Fin vigencia</th>
-                    <th align="center">Fin vigencia</th>
-                    <th align="center">Fin vigencia</th>
-                    <th align="center">Fin vigencia</th>
-
-                    <th align="center">Fin vigencia</th>
+                    <th align="center">Nombre de fantasía</th>
+                    <th align="center">Razón Social</th>
+                    <th align="center">CUIT</th>
                     <th align="center">Acciones</th>
                 </tr>
             </thead>
@@ -49,7 +46,7 @@
 <script type="text/javascript">
   $(function () {
 
-    var table = $('.yajra-datatable').DataTable({
+    var table = $('.yajra-datatableII').DataTable({
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -72,7 +69,7 @@
     },
         processing: true,
         serverSide: true,
-        ajax: "{{ route('registros.list') }}",
+        ajax: "{{ route('registros.listII') }}",
         columns: [
             {data: 'nombre_fantasia',
             render: function (data, type, row){
@@ -87,21 +84,6 @@
             }
             },
            {data: 'cuit',
-            render: function (data, type, row){
-
-                return data;
-
-            }
-            },
-           
-           {data: 'disposicion_tipo',
-            render: function (data, type, row){
-
-                return data;
-
-            }
-            },
-            {data: 'fecha_fin_vigencia',
             render: function (data, type, row){
 
                 return data;
@@ -150,3 +132,4 @@
 </script>
 
 @endpush
+
