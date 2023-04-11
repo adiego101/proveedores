@@ -17,11 +17,10 @@
         <table id="tabla_consulta" style="width:100%" class="table table-hover yajra-datatable">
             <thead class="bg-info" align="center">
                 <tr>
-                    <th align="center">Fin vigencia</th>
-                    <th align="center">Fin vigencia</th>
-                    <th align="center">Fin vigencia</th>
-                    <th align="center">Fin vigencia</th>
-
+                    <th align="center">Nombre de fantasía</th>
+                    <th align="center">Razón Social</th>
+                    <th align="center">CUIT</th>
+                    <th align="center">Tipo Disp</th>
                     <th align="center">Fin vigencia</th>
                     <th align="center">Acciones</th>
                 </tr>
@@ -93,7 +92,7 @@
 
             }
             },
-           
+
            {data: 'disposicion_tipo',
             render: function (data, type, row){
 

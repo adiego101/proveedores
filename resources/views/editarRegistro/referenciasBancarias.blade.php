@@ -17,8 +17,7 @@
         <table style="width:100%" class="yajra-bancos table table-hover  table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>Bancos con los que opera</th>
-                    <th>Localidad sucursal</th>
+                    <th>Nombre Banco</th>
                     <th>Sucursal</th>
                     <th>Tipo cuenta</th>
                     <th>Nº cuenta</th>
@@ -29,7 +28,7 @@
             </tbody>
         </table>
     </div>
-    
+
     @if($mode=='create')
         <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
         <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
@@ -85,12 +84,7 @@
                         data: 'nombre_banco',
                         name: 'nombre_banco'
                     },
-                    {
-                        data: 'localidades[0].id_localidad',
-                        name: 'id_localidad',
-                        visible: false,
-                        searchable: false,
-                    },
+
                     {
                         data: 'localidades[0].nombre_localidad',
                         name: 'nombre_localidad'
@@ -111,9 +105,9 @@
                         searchable: true
                     }
                 ]
-                
+
             });
-            
+
             $(document).on('click', '.edit_banco', function(event){
                 console.log("detecta evento click en edit_banco");
                 var id_proveedor=$(this).data('id-proveedor');
@@ -125,7 +119,7 @@
                 console.log(url);
                 $('#update_banco').data('id-proveedor',id_proveedor);
                 $('#update_banco').data('id-banco',id_banco);
-                
+
                 $.ajax({
                     url: url,
                     success: function(response) {
@@ -153,7 +147,7 @@
                     $.ajax({
                         type: "post",
                         url: url,
-                        data: 
+                        data:
                             {   nombre_banco:nombre_banco,
                                 localidad_sucursal:localidad_sucursal,
                                 tipo_cuenta:tipo_cuenta,
@@ -232,7 +226,7 @@
             $('#edit_banco').modal('show');
             console.log("nombre_banco="+response['nombre_banco']);
             $("#nombre_banco_edit option[value='"+response['nombre_banco']+"']").attr('selected','selected').change();
-        } 
+        }
 
         function bajaReferenciaBancaria(id_registro) {
 
@@ -241,5 +235,5 @@
             $('#baja_referencia_bancaria').val(id_registro);
         }
     </script>
-    
+
 @endpush
