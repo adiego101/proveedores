@@ -15,10 +15,11 @@
         <table id="tabla_consulta" style="width:100%" class="table table-hover yajra-datatable">
             <thead class="bg-info" align="center">
                 <tr>
-                    <th align="center">Nombre de fantasia</th>
-                    <th align="center">Razon social</th>
-                    <th align="center">CUIT</th>
-                    <th align="center">Tipo Disp</th>
+                    <th align="center">Fin vigencia</th>
+                    <th align="center">Fin vigencia</th>
+                    <th align="center">Fin vigencia</th>
+                    <th align="center">Fin vigencia</th>
+
                     <th align="center">Fin vigencia</th>
                     <th align="center">Acciones</th>
                 </tr>
@@ -98,7 +99,7 @@
 
             }
             },
-            {data: 'fecha_fin_vigencia',
+            {data: 'fecha',
             render: function (data, type, row){
 
                 return data;

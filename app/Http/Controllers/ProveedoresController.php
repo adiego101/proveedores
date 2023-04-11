@@ -654,7 +654,7 @@ class ProveedoresController extends Controller
             $fecha=date('Y-m-d');
             if ($request->ajax()) {
             
-                $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
+                /*$data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
                 ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
                 ->where(function($query){
                     $query->where('disposiciones.disposicion_tipo', '=', 'inscripcion')
@@ -662,12 +662,21 @@ class ProveedoresController extends Controller
                     ->orWhere('disposiciones.disposicion_tipo', '=', 'baja');
                     });
 
-                $data = $data->whereIn('fecha_fin_vigencia', function($queryBuilder){
+                $data = $data->where('fecha_fin_vigencia', function($queryBuilder){
                     $queryBuilder->selectRaw('MAX(fecha_fin_vigencia) as fecha')
                     ->from('disposiciones')
                     ->groupBy('id_proveedor');
-                })
-                ->get();
+                })*/
+
+                $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
+                ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
+               
+                ->selectRaw('MAX(fecha_fin_vigencia) as fecha')
+                ->where('disposicion_tipo', 'renovacion')
+                ->orWhere('disposicion_tipo', 'inscripcion')
+                ->orWhere('disposicion_tipo', 'baja')
+                ->groupBy('proveedores.id_proveedor');
+                
 
                 return Datatables::of($data)
                     ->addIndexColumn()
@@ -2423,23 +2432,17 @@ public function eliminar_id(Request $request)
     public function obtenerListadoNoVigentes()
     {
         try {
+         
             $fecha=date('Y-m-d');
             $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
-            ->where(function($query){
-                $query->where('disposiciones.disposicion_tipo', '=', 'inscripcion')
-                ->orWhere('disposiciones.disposicion_tipo', '=', 'renovacion')
-                ->orWhere('disposiciones.disposicion_tipo', '=', 'baja');
-                })
-            //->whereDate('fecha_fin_vigencia', '<',$fecha)
-            ->select("proveedores.nombre_fantasia", "proveedores.razon_social","proveedores.cuit", "disposiciones.fecha_fin_vigencia", 'disposiciones.disposicion_tipo');
-            
-            $data = $data->whereIn('fecha_fin_vigencia', function($queryBuilder){
-                $queryBuilder->selectRaw('MAX(fecha_fin_vigencia) as fecha')
-                ->from('disposiciones')
-                ->groupby('id_proveedor');
-            }) ->where("fecha_fin_vigencia", "<=", $fecha)
-
-            ->get();
+            ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
+           
+            ->selectRaw('MAX(fecha_fin_vigencia) as fecha')
+            ->where('disposicion_tipo', 'renovacion')
+            ->orWhere('disposicion_tipo', 'inscripcion')
+            ->orWhere('disposicion_tipo', 'baja')
+            ->groupBy('proveedores.id_proveedor');
+            //falta filtro para fechas anterior a la actual
             return Datatables::of($data)
             ->addIndexColumn()
             ->make(true);
