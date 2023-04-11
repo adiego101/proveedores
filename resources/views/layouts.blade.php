@@ -434,12 +434,13 @@ $(document).ready(function()
 @section('content_header')
 <div class="container ">
     <div class="row justify-content-center">
-<div class="card">
-              @include('includes.messages')
+        <div class="col-md-9 ">
+            <div class="card">
+                @include('includes.messages')
                 @include('includes.warnings')
                     @include('includes.form-error')
 
-               <div class="card-body">
+                <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -450,10 +451,11 @@ $(document).ready(function()
 
                     @yield('content2')
 
-            </div>
+                </div>
         </div>
+    </div>
 </div>
-</div>
+
 @endsection
 
 @section("footer")
