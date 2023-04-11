@@ -8,6 +8,11 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
+                <label for="disposiciones">Disposiciones: </label><br>
+                <select class="dispos form-control"  name="disposiciones" id="disposiciones" aria-label="Default select example">
+                    <option selected>Seleccione una Disposicion</option>
+                </select>
+                <br>
                 <p>¿Está seguro que desea dar de baja la Actividad?</p>
                 <p>Esta operación <b>NO</b> podrá deshacerse.</p>
             </div>
@@ -30,11 +35,16 @@
 
         //Obtenemos el numero de la fila que queremos modificar
         let id = $("#baja_actividad").val();
+        let nro_disposicion = $(".dispos").val();
 
 
+        let datos = {
+            nro_disposicion:nro_disposicion,
+                    }
         $.ajax({
             type: "POST",
             url: "{{url('bajaActividades/')}}/"+id,
+            data: datos,
             success: function() {
                  $('.yajra-actividades').DataTable().ajax.reload();
 

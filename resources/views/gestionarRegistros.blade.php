@@ -100,10 +100,11 @@
 
 
     function bajaRegistro(id_registro) {
-
         //Desplegamos el modal
         $('#modal_baja').modal('show');
         $('#id_baja').val(id_registro);
+        disposicionesJson();
+
     }
 
     function altaRegistro(id_registro) {
@@ -112,6 +113,8 @@
         $('#modal_alta').modal('show');
         $('#id_alta').val(id_registro);
     }
+
+
 
     //FUNCION PARA ELIMINAR UN REGISTRO DE LA BD
 

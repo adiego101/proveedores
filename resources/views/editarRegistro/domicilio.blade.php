@@ -2,13 +2,16 @@
     <div class="d-flex">
         <div class="mr-auto p-2">
             <h1>Datos del domicilio {{$tipo_domicilio}}</h1>
-        </div>
+        </div>        
         @if($tipo_domicilio!='real' && $mode!='show')
             <div class="p-2">
                 <a href="javascript:void(0);" id="copy_{{$tipo_domicilio}}" title="Traer datos Domicilio Real"><input type="button" value="Traer datos Domicilio Real" class="btn btn-outline-secondary btn-sm"></a>
             </div>
         @endif
     </div>
+    @if($mode=='edit')
+        <small class="small" id="small-domicilio-{{$tipo_domicilio}}-head"></small>
+    @endif
     <div class="container">
         <div class="row">
             <div class="col-sm">
@@ -300,14 +303,14 @@
     <br>
     @if($mode=='create')
         <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-        <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+        <input type="button" name="next" class="next btn btn-info" data-tipo-domicilio="{{$tipo_domicilio}}" value="Siguiente" />
     @else
         <div class="row navbuttons">
-            <div class="col-6 col-sm-auto" id="btnPrevious">
-                <a class="btn btn-outline-secondary btnPrevious">Atrás</a>
+            <div class="col-6 col-sm-auto">
+                <input type="button" name="previous" class="previous btn btn-outline-secondary btnPrevious" data-tipo-domicilio="{{$tipo_domicilio}}" value="Atrás" />
             </div>
-            <div class="col-6 col-sm-auto" id="btnNext">
-                <a class="btn btn-primary btnNext">Siguiente</a>
+            <div class="col-6 col-sm-auto">
+                <input type="button" class="btnNext btn btn-info" data-tipo-domicilio="{{$tipo_domicilio}}" value="Siguiente" />
             </div>
         </div>
     @endif
