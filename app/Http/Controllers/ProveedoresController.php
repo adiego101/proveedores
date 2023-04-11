@@ -675,9 +675,9 @@ class ProveedoresController extends Controller
                 ->where('disposicion_tipo', 'renovacion')
                 ->orWhere('disposicion_tipo', 'inscripcion')
                 ->orWhere('disposicion_tipo', 'baja')
-                ->groupBy('proveedores.id_proveedor');
-                
-
+                ->groupBy('proveedores.id_proveedor')
+                ->get();
+                Log::info($data);
                 return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
@@ -2463,7 +2463,7 @@ public function eliminar_id(Request $request)
     public function obtenerListadoVigentes(Request $request)
     {
         try {
-            $fecha=date('Y-m-d');
+           /* $fecha=date('Y-m-d');
             $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
             ->where(function($query){
                 $query->where('disposiciones.disposicion_tipo', '=', 'inscripcion')
@@ -2480,8 +2480,20 @@ public function eliminar_id(Request $request)
 
                 //->groupBy('id_proveedor');
             })
-            ->get();
+            ->get();*/
+            $fecha=date('Y-m-d');
+            $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
+            ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
+           
+            ->selectRaw('MAX(fecha_fin_vigencia) as fecha')
+            ->where('disposicion_tipo', 'renovacion')
+            ->orWhere('disposicion_tipo', 'inscripcion')
 
+            ->groupBy('proveedores.id_proveedor')
+            ->get()
+
+            ->where('fecha_fin_vigencia','>', $fecha);
+            
             return Datatables::of($data)
             ->addIndexColumn()
             ->make(true);

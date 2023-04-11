@@ -99,7 +99,7 @@
 
             }
             },
-            {data: 'fecha',
+            {data: 'fecha_fin_vigencia',
             render: function (data, type, row){
 
                 return data;
