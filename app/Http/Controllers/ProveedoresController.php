@@ -2441,8 +2441,13 @@ public function eliminar_id(Request $request)
             ->where('disposicion_tipo', 'renovacion')
             ->orWhere('disposicion_tipo', 'inscripcion')
             ->orWhere('disposicion_tipo', 'baja')
-            ->groupBy('proveedores.id_proveedor');
-            //falta filtro para fechas anterior a la actual
+
+            ->groupBy('proveedores.id_proveedor')
+            ->get()
+
+            ->where('fecha_fin_vigencia','<', $fecha);
+
+            
             return Datatables::of($data)
             ->addIndexColumn()
             ->make(true);
