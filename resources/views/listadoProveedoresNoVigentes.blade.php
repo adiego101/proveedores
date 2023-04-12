@@ -30,8 +30,8 @@
         </tbody>
     </table>
 </div>
-                    
-    
+
+
 @endsection
 
 @push('js')
@@ -68,21 +68,21 @@
         ajax: "{{ route('listado.proveedoresNoVigentes') }}",
         columns: [
             {data: 'nombre_fantasia',
-           
+
             },
             {data: 'razon_social',
-          
+
             },
            {data: 'cuit',
-          
+
             },
             {data: 'disposicion_tipo',
-          
+
             },
-            {data: 'fecha_fin_vigencia',
-          
+            {data: 'fecha',
+
             },
-             
+
         ]
     });
 
