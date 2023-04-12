@@ -25,8 +25,8 @@
         </thead>
     </table>
 </div>
-                    
-    
+
+
 @endsection
 
 @push('js')
@@ -64,19 +64,19 @@
         ajax: "{{ route('listado.proveedoresVigentes') }}",
         columns: [
             {data: 'nombre_fantasia',
-           
+
             },
             {data: 'razon_social',
-           
+
             },
            {data: 'cuit',
-          
+
             },
             {data: 'disposicion_tipo',
-          
-            },    
-            {data: 'fecha_fin_vigencia',
-          
+
+            },
+            {data: 'fecha',
+
         },
         ]
     });

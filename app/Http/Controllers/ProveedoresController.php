@@ -680,16 +680,18 @@ class ProveedoresController extends Controller
                 Log::info($data);
                 return Datatables::of($data)
                     ->addIndexColumn()
-                    ->addColumn('action', function ($row) {
-                        if ($row->dado_de_baja == 0) {
+                    ->addColumn('action', function ($row) use ($fecha) {
+                        if ($row->fecha_fin_vigencia >= $fecha) {
                             $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaRegistro(' . $row->id_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
                         } else {
 
                             //BOTON ELIMINAR REGISTRO COMENTADO
 
-                            $actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a> <a onclick="eliminarRegistro(' . $row->id_proveedor . ');" class="eliminar btn btn-outline-danger btn-sm" title="Eliminar">X</a>';
+                            $actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a>
+                            ';//<a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a> <a onclick="eliminarRegistro(' . $row->id_proveedor . ');" class="eliminar btn btn-outline-danger btn-sm" title="Eliminar">X</a>';
 
-                            $actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a>';
+                            $actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a>';
+                           //  <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a>';
                         }
 
                         return $actionBtn;
@@ -2525,7 +2527,7 @@ public function eliminar_id(Request $request)
             ->groupBy('proveedores.id_proveedor')
             ->get()
 
-            ->where('fecha_fin_vigencia','<', $fecha);
+            ->where('fecha','<', $fecha);
 
 
             return Datatables::of($data)
@@ -2564,19 +2566,17 @@ public function eliminar_id(Request $request)
             $fecha=date('Y-m-d');
             $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
             ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
-           
             ->selectRaw('MAX(fecha_fin_vigencia) as fecha')
             ->where('disposicion_tipo', 'renovacion')
             ->orWhere('disposicion_tipo', 'inscripcion')
-
             ->groupBy('proveedores.id_proveedor')
             ->get()
-
-            ->where('fecha_fin_vigencia','>', $fecha);
-            
+            ->where('fecha','>', $fecha);
             return Datatables::of($data)
             ->addIndexColumn()
             ->make(true);
+
+
 
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
