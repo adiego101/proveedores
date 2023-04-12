@@ -48,4 +48,8 @@ class Localidad extends Model
     public function sucursales(){
         return $this->hasMany(Sucursal::class, 'id_localidad', 'id_localidad');
     }
+
+    public function bancos(){
+        return $this->belongsToMany(Localidad::class, 'proveedores_bancos', 'id_localidad', 'id_banco');
+    }
 }

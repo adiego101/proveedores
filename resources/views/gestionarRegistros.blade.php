@@ -1,3 +1,5 @@
+<!--Listado Estados: Proveedores --todos -->
+
 @extends('layouts')
 @push('head')
     <title>Gestionar Registros</title>
@@ -8,8 +10,9 @@
 @endpush
 @section('content2')
 
-    <h2 class="mb-4">Gestionar Registros:</h2>
+    <h2 class="h2 text-center font-weight-bold ">Proveedores con disposición</h2>
 
+    <hr>
     <div class="table container-fluid overflow-auto" id="tabla">
         <table id="tabla_consulta" style="width:100%" class="table table-hover yajra-datatable">
             <thead class="bg-info" align="center">
@@ -17,6 +20,8 @@
                     <th align="center">Nombre de fantasía</th>
                     <th align="center">Razón Social</th>
                     <th align="center">CUIT</th>
+                    <th align="center">Tipo Disp</th>
+                    <th align="center">Fin vigencia</th>
                     <th align="center">Acciones</th>
                 </tr>
             </thead>
@@ -71,28 +76,35 @@
             {data: 'nombre_fantasia',
             render: function (data, type, row){
                 let nombre_fantasia_sub = data.substring(0, 20);
-                if (row['dado_de_baja'] === 0)
-                        return nombre_fantasia_sub;
-                    else
-                        return '<div style="color:red;">'+nombre_fantasia_sub+'</div>';
+                return nombre_fantasia_sub;
             }
             },
             {data: 'razon_social',
             render: function (data, type, row){
                 let razon_social_sub = data.substring(0, 20);
-                if (row['dado_de_baja'] === 0)
-                        return razon_social_sub;
-                    else
-                        return '<div style="color:red;">'+razon_social_sub+'</div>';
+                return razon_social_sub;
             }
             },
            {data: 'cuit',
             render: function (data, type, row){
 
-                if (row['dado_de_baja'] === 0)
-                        return data;
-                    else
-                        return '<div style="color:red;">'+data+'</div>';
+                return data;
+
+            }
+            },
+
+           {data: 'disposicion_tipo',
+            render: function (data, type, row){
+
+                return data;
+
+            }
+            },
+            {data: 'fecha_fin_vigencia',
+            render: function (data, type, row){
+
+                return data;
+
             }
             },
             {
@@ -108,10 +120,11 @@
 
 
     function bajaRegistro(id_registro) {
-
         //Desplegamos el modal
         $('#modal_baja').modal('show');
         $('#id_baja').val(id_registro);
+        disposicionesJson();
+
     }
 
     function altaRegistro(id_registro) {
@@ -121,8 +134,10 @@
         $('#id_alta').val(id_registro);
     }
 
+
+
     //FUNCION PARA ELIMINAR UN REGISTRO DE LA BD
-    
+
     /*
     function eliminarRegistro(id_registro) {
 

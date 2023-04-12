@@ -14,7 +14,7 @@ return [
     |
      */
 
-    'title' => 'Sistema Integrado de Proveedores y Licitaciones',
+    'title' => 'Registro Único de Proveedores del Estado Provincial',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,7 +45,7 @@ return [
     |
      */
 
-    'logo' => '<b>SIPLIC</b>',
+    'logo' => '<b>RUPEP</b>',
     'logo_img' => '/logo_santacruz.png',
     'logo_img_class' => 'brand-image   ',
     'logo_img_xl' => null,
@@ -236,21 +236,41 @@ return [
             'url' => '/nuevoRegistroCuit',
             'icon' => 'fas fa-fw fa-plus-circle',
             'label_color' => 'success',
+            'can'    => 'crear_registros',
         ],
-
-        /*
-        [
-            'text' => 'Nuevo Registro',
-            'url' => '/nuevoRegistro',
-            'icon' => 'fas fa-fw fa-plus-circle',
-            'label_color' => 'success',
-        ],
-        */
         [
             'text' => 'Gestionar Registros',
-            'url' => '/gestionarRegistros',
+            'url' => '/gestionarRegistrosII',
             'icon' => 'fas fa-fw fa-folder',
             'label_color' => 'success',
+            'can'    => ['editar_registros', 'ver_registros'],
+        ],
+        [
+            'text' => 'Estado: Proveedores',
+            'icon' => 'fa fa-users',
+            'label_color' => 'success',
+            'submenu' =>
+            [
+                [
+                    'text' => 'No vigentes',
+                    'url' => '/proveedores_no_vigentes',
+                    'icon' => 'far fa-circle',//fa fa-file-excel
+                    'label_color' => 'success',
+                ],
+                [
+                    'text' => 'Vigentes',
+                    'url' => '/proveedores_vigentes',//fa fa-check
+                    'icon' => 'far fa-circle', 
+                    'label_color' => 'success',
+                ],
+                [
+                    'text' => 'Todos',
+                    'url' => '/gestionarRegistros',
+                    'icon' => 'far fa-circle',
+                    'label_color' => 'success',
+                    'can'    => ['editar_registros', 'ver_registros'],
+                ]
+            ]
         ],
        //DESCOMENTAR DESPÚES DE LA EXPOSICIÓN
        /*
@@ -279,6 +299,7 @@ return [
             'url' => '/excel',
             'icon' => 'fas fa-fw fa-download',
             'label_color' => 'success',
+            'can'    => 'descargar_excel',
         ],
 
         [
@@ -286,6 +307,7 @@ return [
             'url' => '/historial_acciones',
             'icon' => 'fas fa-fw fa-regular fa-address-card',
             'label_color' => 'success',
+            'can'    => 'consultar_historial_acciones',
         ],
 
         [

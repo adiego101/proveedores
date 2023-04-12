@@ -4,7 +4,6 @@
 </div>
 
 <br/>
-    
     <div class="row">
         <div class="col-sm">
             <label for="tipo_actividad">Tipo de Actividad:</label><br>
@@ -72,7 +71,9 @@
 
     <br />
 
-   
+    <hr>
+
+    
     <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
     <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
 
@@ -80,11 +81,9 @@
 
     @include('modales.validarActividad')
 
-
 @push('js')
 
     <script type="text/javascript">
-
         let tipo_actividad;
         let actividad;
         let codigo_actividad;
@@ -185,7 +184,6 @@
         });
 
     </script>
-
 @endpush
 
 </fieldset>

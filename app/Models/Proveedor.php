@@ -164,20 +164,38 @@ class Proveedor extends Model
         return $this->hasMany(Proveedor_telefono::class,'id_proveedor')
                     ->where('tipo_telefono', '=', 'fiscal');
     }
+    public function representantes(){
+        return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
+                    ->wherePivot('rol_persona_proveedor', 'Representante');
+    }
 
+    public function representante_actual(){
+        return $this->representantes()->latest();
+    }
     public function personas(){
         return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
                     ->withPivot('rol_persona_proveedor')
                     ->withTimestamps();
     }
 
-    public function representantes(){
+    public function miembros(){
         return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
-                    ->wherePivot('rol_persona_proveedor', 'Representante');
+                    ->wherePivot('rol_persona_proveedor', 'miembro');
     }
-    public function representante(){
+
+    public function miembrosDireccion_administradoresFirma(){
         return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
-                    ->wherePivot('rol_persona_proveedor', 'Representante');
+                    ->wherePivot('rol_persona_proveedor', '<>', 'miembro')
+                    ->wherePivot('rol_persona_proveedor', '<>', 'direccion_firma')
+                    ->wherePivot('rol_persona_proveedor', '<>', 'apoderado')
+                    ->whereHas('proveedores', function ($query) {
+                        $query  ->where('rol_persona_proveedor','direccion_firma');
+                    })
+                    ->withPivot('rol_persona_proveedor');
+    }
+    public function apoderados(){
+        return $this->belongsToMany(Persona::class, 'personas_proveedores', 'id_proveedor', 'id_persona')
+                    ->wherePivot('rol_persona_proveedor', 'apoderado');
     }
 
     public function actividades_economicas(){
@@ -251,6 +269,22 @@ class Proveedor extends Model
                                 ->where('desc_tipo_actividad', '<>', 'Secundaria');
                     })
                     ->with('sector');
+    }
+
+    public function firmas(){
+        return $this->hasMany(Proveedor_firma_nac_extr::class, 'id_proveedor');
+    }
+
+    public function bancos(){
+        return $this->belongsToMany(Banco::class, 'proveedores_bancos', 'id_proveedor', 'id_banco')
+        ->with('localidades')
+        ->withPivot('tipo_cuenta')
+        ->withPivot('nro_cuenta')
+        ->withTimestamps();
+    }
+
+    public function disposiciones(){
+        return $this->hasMany(Disposicion::class, 'id_proveedor');
     }
 
     public function emails(){

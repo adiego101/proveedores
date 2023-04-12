@@ -20,7 +20,19 @@ class PermissionsSeeder extends Seeder
                         'admin_eliminar_roles',
                         'user_basic',
                         'admin_users',
-                        'admin_formulas'];
+                        'admin_formulas',
+                        'crear_registros',
+                        'editar_registros',
+                        'ver_registros',
+                        'alta_registros',
+                        'baja_registros',
+                        'descargar_excel',
+                        'solicitar_firma',
+                        'firmar_documentos',
+                        'descargar_documentos',
+                        'consultar_historial_acciones'
+                    ];
+
         foreach($permisos as $permiso)
             Permission::create(['name'=>$permiso]);
     }

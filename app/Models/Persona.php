@@ -37,4 +37,13 @@ class Persona extends Model
                     ->withPivot('rol_persona_proveedor')
                     ->withTimestamps();
     }
+    public function cargos(){
+        return $this->belongsToMany(Proveedor::class, 'personas_proveedores', 'id_persona', 'id_proveedor')
+                    
+                    ->wherePivot('rol_persona_proveedor','<>','miembro')
+                    ->wherePivot('rol_persona_proveedor','<>','direccion_firma')
+                    ->wherePivot('rol_persona_proveedor','<>','apoderado')
+                    ->select('personas_proveedores.id_proveedor', 'rol_persona_proveedor')
+                    ->withTimestamps();
+    }
 }
