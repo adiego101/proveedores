@@ -651,6 +651,63 @@ class ProveedoresController extends Controller
     public function getProveedores(Request $request)
     {
         try {
+            $fecha=date('Y-m-d');
+            if ($request->ajax()) {
+
+                /*$data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
+                ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
+                ->where(function($query){
+                    $query->where('disposiciones.disposicion_tipo', '=', 'inscripcion')
+                    ->orWhere('disposiciones.disposicion_tipo', '=', 'renovacion')
+                    ->orWhere('disposiciones.disposicion_tipo', '=', 'baja');
+                    });
+
+                $data = $data->where('fecha_fin_vigencia', function($queryBuilder){
+                    $queryBuilder->selectRaw('MAX(fecha_fin_vigencia) as fecha')
+                    ->from('disposiciones')
+                    ->groupBy('id_proveedor');
+                })*/
+
+                $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
+                ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
+
+                ->selectRaw('MAX(fecha_fin_vigencia) as fecha')
+                ->where('disposicion_tipo', 'renovacion')
+                ->orWhere('disposicion_tipo', 'inscripcion')
+                ->orWhere('disposicion_tipo', 'baja')
+                ->groupBy('proveedores.id_proveedor')
+                ->get();
+                Log::info($data);
+                return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($row) {
+                        if ($row->dado_de_baja == 0) {
+                            $actionBtn = '<a href="modificarRegistro/' . "$row->id_proveedor" . '" class="edit btn btn-warning btn-sm" title="Editar"><i class="fas fa-edit"></i></a> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="bajaRegistro(' . $row->id_proveedor . ');" class="delete btn btn-danger btn-sm" title="Dar de baja"><i class="fas fa-exclamation-circle"></i></a>';
+                        } else {
+
+                            //BOTON ELIMINAR REGISTRO COMENTADO
+
+                            $actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a> <a onclick="eliminarRegistro(' . $row->id_proveedor . ');" class="eliminar btn btn-outline-danger btn-sm" title="Eliminar">X</a>';
+
+                            $actionBtn = '<button class="edit btn btn-warning btn-sm" title="Editar" disabled><i class="fas fa-edit"></i></button> <a href="verRegistro/' . "$row->id_proveedor" . '" class="view btn btn-primary btn-sm" title="Ver"><i class="fas fa-eye"></i></a> <a onclick="altaRegistro(' . $row->id_proveedor . ');" class="alta btn btn-success btn-sm" title="Dar de alta"><i class="fas fa-arrow-alt-circle-up"></i></a>';
+                        }
+
+                        return $actionBtn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+            }
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function getProveedoresII(Request $request)
+    {
+        try {
             if ($request->ajax()) {
 
                 $data = Proveedor::latest()->get();
@@ -671,6 +728,28 @@ class ProveedoresController extends Controller
                         return $actionBtn;
                     })
                     ->rawColumns(['action'])
+                    ->make(true);
+            }
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+
+    }
+
+    public function getEstadoProveedores(Request $request)
+    {
+        try {
+            if ($request->ajax()) {
+                $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor','=', 'disposiciones.id_proveedor')
+                ->select('proveedores.razon_social', 'proveedores.nombre_fantasia', 'proveedores.cuit', 'disposiciones.fecha_fin_vigencia')
+                ->get();
+
+                return Datatables::of($data)
+                    ->addIndexColumn()
+
                     ->make(true);
             }
         } catch (\Exception$e) {
@@ -1056,16 +1135,37 @@ class ProveedoresController extends Controller
     {
         try {
             $proveedor=Proveedor::findOrFail($id_proveedor);
-            Log::info("nombre banco gui =".$request->nombre_banco);
-            $banco = Banco::where('nombre_banco',$request->nombre_banco)
+            Log::info($request->all());
+            $banco = Banco::where('id_banco',$request->nombre_banco)
                         ->first();
             Log::info("banco".$banco->nombre_banco);
             if($banco!=null)
             {
-                $proveedor->bancos()->attach($banco, [  'id_localidad' => $request->localidad,
-                                                        'tipo_cuenta' => $request->tipo_cuenta,
-                                                        'nro_cuenta' => $request->nro_cuenta]);
+               /* $proveedor->bancos()->attach($banco, [  'id_localidad' => $request->localidad_sucursal_edit,
+                                                        'tipo_cuenta' => $request->tipo_cuenta_edit,
+                                                        'nro_cuenta' => $request->nro_cuenta_edit]);*/
+                $persona = Proveedor_banco::create(
+                    [
+                        'id_proveedor' => $id_proveedor,
+                        'id_banco' => $banco->id_banco,
+                        'id_localidad' => $request->localidad,
+                        'tipo_cuenta' => $request->tipo_cuenta,
+                        'nro_cuenta' => $request->nro_cuenta,
+                ]);
             }
+          /*  else{
+
+                $persona = proveedores_bancos::create(
+                    [
+                        'id_proveedor' => $id_proveedor,
+                        'id_banco' => $banco->id_banco,
+                        'id_localidad' => $request->localidad_sucursal_edit,
+                        'tipo_cuenta' => $request->tipo_cuenta_edit,
+                        'nro_cuenta' => $request->nro_cuenta_edit
+                ]);
+
+
+            }*/
 
         } catch (\Exception $e) {
             Log::error('Error inesperado.' . $e->getMessage());
@@ -1120,11 +1220,24 @@ class ProveedoresController extends Controller
 
     public function getActividades(Request $request, $id, $mode = null)
     {
+        /*
+        $data = Disposicion::join("disposiciones_act_prov", "disposiciones_act_prov.id_disposicion", "=", "disposiciones.id_disposicion")
+                ->join("actividades_proveedores", "actividades_proveedores.id_actividad_proveedor", "=", "disposiciones_act_prov.id_actividad_proveedor")
+                ->join("actividades_economicas", "actividades_economicas.id_actividad_economica", "=", "actividades_proveedores.id_actividad_economica" )
+                ->join("tipos_actividades", "tipos_actividades.id_tipo_actividad", "=", "actividades_proveedores.id_tipo_actividad")
+                ->where("disposiciones.id_proveedor", $id)
+                ->select("disposiciones.nro_disposicion","actividades_economicas.cod_actividad", "tipos_actividades.desc_tipo_actividad", "actividades_economicas.agrupamiento","disposiciones.fecha_fin_vigencia","disposiciones.fecha_ini_vigencia", "actividades_economicas.desc_actividad")
+                ->get();
+        */
+        $fecha=date('Y-m-d');
         try {
-            $data = Actividades_proveedores::where('id_proveedor', $id)
+            $data = Disposicion::join("disposiciones_act_prov", "disposiciones_act_prov.id_disposicion", "=", "disposiciones.id_disposicion")
+                ->join("actividades_proveedores", "actividades_proveedores.id_actividad_proveedor", "=", "disposiciones_act_prov.id_actividad_proveedor")
                 ->join('actividades_economicas', 'actividades_proveedores.id_actividad_economica', '=', 'actividades_economicas.id_actividad_economica')
                 ->join('tipos_actividades', 'actividades_proveedores.id_tipo_actividad', '=', 'tipos_actividades.id_tipo_actividad')
-                ->select('actividades_proveedores.id_actividad_economica', 'actividades_proveedores.id_actividad_proveedor', 'actividades_proveedores.id_tipo_actividad', 'actividades_economicas.desc_actividad', 'actividades_economicas.cod_actividad', 'tipos_actividades.desc_tipo_actividad')
+                ->whereDate("disposiciones.fecha_fin_vigencia", ">", $fecha)
+                ->where("disposiciones.id_proveedor", $id)
+                ->select('actividades_proveedores.id_actividad_economica', 'actividades_proveedores.id_actividad_proveedor', 'actividades_proveedores.id_tipo_actividad', 'actividades_economicas.desc_actividad','actividades_economicas.agrupamiento', 'actividades_economicas.cod_actividad', 'tipos_actividades.desc_tipo_actividad', 'disposiciones.fecha_fin_vigencia')
                 ->get();
 
             return Datatables::of($data)
@@ -1143,6 +1256,29 @@ class ProveedoresController extends Controller
                     }
                 })
                 ->rawColumns(['action'])
+                ->make(true);
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function getHistorialActividades(Request $request, $id, $mode = null)
+    {
+        try {
+                $data = Disposicion::join("disposiciones_act_prov", "disposiciones_act_prov.id_disposicion", "=", "disposiciones.id_disposicion")
+                ->join("actividades_proveedores", "actividades_proveedores.id_actividad_proveedor", "=", "disposiciones_act_prov.id_actividad_proveedor")
+                ->join("actividades_economicas", "actividades_economicas.id_actividad_economica", "=", "actividades_proveedores.id_actividad_economica" )
+                ->join("tipos_actividades", "tipos_actividades.id_tipo_actividad", "=", "actividades_proveedores.id_tipo_actividad")
+                ->where("disposiciones.id_proveedor", $id)
+                ->select("disposiciones.nro_disposicion","actividades_economicas.cod_actividad", "tipos_actividades.desc_tipo_actividad", "actividades_economicas.agrupamiento","disposiciones.fecha_fin_vigencia","disposiciones.fecha_ini_vigencia", "actividades_economicas.desc_actividad")
+                ->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+
                 ->make(true);
         } catch (\Exception$e) {
             Log::error('Error inesperado.' . $e->getMessage());
@@ -2373,4 +2509,80 @@ public function eliminar_id(Request $request)
                                 });
     }
 
+    public function obtenerListadoNoVigentes()
+    {
+        try {
+
+            $fecha=date('Y-m-d');
+            $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
+            ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
+
+            ->selectRaw('MAX(fecha_fin_vigencia) as fecha')
+            ->where('disposicion_tipo', 'renovacion')
+            ->orWhere('disposicion_tipo', 'inscripcion')
+            ->orWhere('disposicion_tipo', 'baja')
+
+            ->groupBy('proveedores.id_proveedor')
+            ->get()
+
+            ->where('fecha_fin_vigencia','<', $fecha);
+
+
+            return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+
+        } catch (Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
+
+    public function obtenerListadoVigentes(Request $request)
+    {
+        try {
+           /* $fecha=date('Y-m-d');
+            $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
+            ->where(function($query){
+                $query->where('disposiciones.disposicion_tipo', '=', 'inscripcion')
+                ->orWhere('disposiciones.disposicion_tipo', '=', 'renovacion');
+                })
+            ->whereDate('fecha_fin_vigencia', '>=', $fecha)
+            ->select("proveedores.nombre_fantasia", "proveedores.razon_social","proveedores.cuit", "disposiciones.fecha_fin_vigencia", "disposiciones.disposicion_tipo");
+
+
+           $data->whereIn('fecha_fin_vigencia', function($queryBuilder){
+                $queryBuilder->selectRaw('MAX(fecha_fin_vigencia)')
+                ->from('disposiciones')
+                ->groupBy('id_proveedor');
+
+                //->groupBy('id_proveedor');
+            })
+            ->get();*/
+            $fecha=date('Y-m-d');
+            $data = Proveedor::join('disposiciones', 'proveedores.id_proveedor', '=', 'disposiciones.id_proveedor')
+            ->select('razon_social', 'nombre_fantasia', 'cuit', 'disposicion_tipo','disposiciones.fecha_fin_vigencia', 'proveedores.id_proveedor')
+           
+            ->selectRaw('MAX(fecha_fin_vigencia) as fecha')
+            ->where('disposicion_tipo', 'renovacion')
+            ->orWhere('disposicion_tipo', 'inscripcion')
+
+            ->groupBy('proveedores.id_proveedor')
+            ->get()
+
+            ->where('fecha_fin_vigencia','>', $fecha);
+            
+            return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+
+        } catch (\Exception$e) {
+            Log::error('Error inesperado.' . $e->getMessage());
+
+            return Redirect::back()
+                ->withErrors(['Ocurrió un error, la operación no pudo completarse']);
+        }
+    }
 }

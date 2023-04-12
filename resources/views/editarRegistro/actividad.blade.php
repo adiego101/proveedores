@@ -15,7 +15,9 @@
                     <tr>
                         <th>Código</th>
                         <th>Actividad Económica</th>
+                        <th>Agrupamiento</th>
                         <th>Tipo Actividad</th>
+                        <th>Fin vigencia</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -53,6 +55,8 @@
   $(function () {
 
     var table = $('.yajra-productos').DataTable({
+    order: [[ 4, "desc" ]],
+
     language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -121,7 +125,9 @@
         columns: [
             {data: 'cod_actividad', name: 'cod_actividad'},
             {data: 'desc_actividad', name: 'desc_actividad'},
+            {data: 'agrupamiento', name: 'agrupamiento'},
             {data: 'desc_tipo_actividad', name: 'desc_tipo_actividad'},
+            {data: 'fecha_fin_vigencia', name: 'fecha_fin_vigencia'},
             {
                 data: 'action',
                 name: 'action',

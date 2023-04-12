@@ -434,7 +434,7 @@ $(document).ready(function()
 @section('content_header')
 <div class="container ">
     <div class="row justify-content-center">
-        <div class="col-md-9 ">
+        <div class="col-lg-10">
             <div class="card">
                 @include('includes.messages')
                 @include('includes.warnings')
@@ -455,6 +455,17 @@ $(document).ready(function()
         </div>
     </div>
 </div>
+</div>
+
+@endsection
+
+@section("footer")
+<footer class=" font-small bg-transparent">
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2022 - Desarrollado por
+      <a href="#">Dir. de Proyectos de Innovación - Secretaría de Estado de Modernización e Innovación Tecnológica </a>.
+    </div>
+</footer>
 @endsection
 
 

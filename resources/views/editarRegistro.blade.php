@@ -41,6 +41,10 @@
                     data-toggle="tab" href="#actividad">Actividad</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link @if ($tab == 'historial-actividad') {{ 'active' }} @endif" id="historial-actividad-tab"
+                    data-toggle="tab" href="#historial-actividad">Historial de actividades</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link @if ($tab == 'firma') {{ 'active' }} @endif" id="firma-tab"
                     data-toggle="tab" href="#firma">Firma</a>
             </li>
@@ -95,6 +99,10 @@
             <div class="tab-pane fade @if ($tab == 'actividad') {{ 'show active' }} @endif " id="actividad"
                 role="tabpanel" aria-labelledby="nav-actividad-tab">
                 @include('editarRegistro.actividad',['mode'=>'edit'])
+            </div>
+            <div class="tab-pane fade @if ($tab == 'historial-actividad') {{ 'show active' }} @endif " id="historial-actividad"
+            role="tabpanel" aria-labelledby="nav-historial-actividad-tab">
+            @include('editarRegistro.historialActividad',['mode'=>'show'])
             </div>
             <div class="tab-pane fade @if ($tab == 'firma') {{ 'show active' }} @endif " id="firma"
                 role="tabpanel" aria-labelledby="nav-firma-tab">
@@ -378,6 +386,9 @@
                                     tipo_cuenta:tipo_cuenta,
                                     nro_cuenta:nro_cuenta}
                     let url = '{{ url("proveedor/$id/banco/store") }}';
+
+                    console.log(url);
+
                     $("button").prop("disabled", true);
                     $.ajax({
                         type: "post",
@@ -652,7 +663,7 @@
                 form_small_domicilio=$("#small-domicilio-fiscal-head");
             break;
         }
-        
+
         if(form_localidad.val()!=''||form_calle.val()!=''||form_numero.val()!=''||form_monoblock.val()!=''||form_dpto.val()!=''||form_puerta.val()!=''||form_oficina.val()!=''||form_entreCalles.val()!=''||form_manzana.val()!=''||form_lote.val()!=''||form_barrio.val()!=''||form_cp.val()!='')
         {
             if(comprobarDatoDomicilio(tipo_domicilio,form_localidad,form_calle,form_numero,form_manzana,form_lote,form_barrio,form_small_domicilio))

@@ -91,6 +91,11 @@ Route::group(['middleware' => ['auth']], function () {
         return view('gestionarRegistros');
     })->middleware(['can:ver_registros']);
 
+    Route::get('/gestionarRegistrosII', function () {
+        return view('gestionarRegistrosII');
+    })->middleware(['can:ver_registros']);
+  
+
     Route::get('/baja', function () {
         return view('bajaRegistro');
     })->middleware(['can:baja_registros']);
@@ -99,6 +104,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/crear_registro_cuit', [ProveedoresController::class, 'crear_registro_cuit'])->name('crear_registro_cuit')->middleware(['can:crear_registros']);
 
     Route::get('registros/list', [ProveedoresController::class, 'getProveedores'])->name('registros.list');
+
+    Route::get('registros/listII', [ProveedoresController::class, 'getProveedoresII'])->name('registros.listII');
+
 
     //Ruta para editar los registros, se llama desde el boton "editar" de la tabla.
 
@@ -194,6 +202,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('proveedor/{id_proveedor}/banco/store', 'App\Http\Controllers\ProveedoresController@crearReferenciaBancaria')->name('referenciasBancarias.crear');
 
     Route::get('actividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getActividades')->name('actividades.list');
+    Route::get('historialActividades/{id}/{mode?}', 'App\Http\Controllers\ProveedoresController@getHistorialActividades')->name('historialActividades.list');
     Route::get('personas/{tipo_persona}/{id_proveedor}/{mode?}', 'App\Http\Controllers\ProveedoresController@getPersonas')->name('personas.list');
     Route::get('firmas/{id_proveedor}/{mode?}', 'App\Http\Controllers\ProveedoresController@getFirmas')->name('firmas.list');
 
@@ -225,5 +234,17 @@ Route::group(['middleware' => ['auth']], function () {
     })->middleware(['can:consultar_historial_acciones']);
 
     Route::get('/listado_acciones', 'App\Http\Controllers\ProveedoresController@obtenerListadoAcciones')->name('listado_acciones')->middleware(['can:consultar_historial_acciones']);
+
+    //Lista de proveedores Vigentes - No vigentes
+    
+    Route::get('/proveedores_no_vigentes', function () {
+        return view('listadoProveedoresNoVigentes');
+    });
+    Route::get('listado_p_no_vigentes', [ProveedoresController::class, 'obtenerListadoNoVigentes'])->name('listado.proveedoresNoVigentes');
+
+    Route::get('/proveedores_vigentes', function () {
+        return view('listadoProveedoresVigentes');
+    });
+    Route::get('listado_p_vigentes', [ProveedoresController::class, 'obtenerListadoVigentes'])->name('listado.proveedoresVigentes');
 
 });

@@ -30,5 +30,12 @@ class Disposiciones_act_prov extends Model
         return disposiciones_act_prov::find($id);
     }
 
+    public function disposicion(){
+        return $this->belongsTo(Disposicion::class, 'id_disposicion');
+    }
+
+    public function actividades_proveedores(){
+        return $this->belongsTo(Actividades_proveedores::class, 'id_actividad_proveedor');
+    }
 
 }
