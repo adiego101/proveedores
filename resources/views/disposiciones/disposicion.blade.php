@@ -1,12 +1,10 @@
 <fieldset>
-<h1>Disposiciones</h1>
-@if ($mode == "edit")
-<br>
+    <h1 align="center">Disposiciones</h1>
+    <hr>@if ($mode == "edit")
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_disposicion">
+<button type="button" class="btn float-right btn-success " data-toggle="modal" data-target="#add_disposicion">
     Agregar Nueva Disposición
   </button><br>
-<hr>
 @endif
         <div>
 
@@ -26,14 +24,7 @@
         </div>
 
     <br />
-    <div class="row navbuttons ">
-        <div class="col-6 col-sm-auto" id="btnPrevious">
-            <a class="btn btn-outline-secondary btnPrevious">Atrás</a>
-        </div>
-        <div class="col-6 col-sm-auto" id="btnNext">
-            <a class="btn btn-primary btnNext">Siguiente</a>
-        </div>
-    </div>
+
 
     <!--Incluimos el modal para validar una actividad -->
 
@@ -44,28 +35,7 @@
 @push('js')
 
 <script type="text/javascript">
-    function disposicionesJson(){
-                $.ajax({
-                    type: "GET",
-                    url: "{{url('proveedor/disposicionesJson/'.$id)}}",
-                    dataType:"json",
-                    success: function(data){
-                        $(".dispos").empty();
-                        $.each(data,function(key, registro) {
-
-                            $(".dispos").append('<option value='+registro.id_disposicion+'>'+registro.nro_disposicion+'</option>');
-                        });
-                    },
-                    error: function(data) {
-                        alert('error');
-                    }
-                });
-            }
-
     $(document).ready(function () {
-
-
-
         var table = $('.yajra-disposiciones').DataTable({
             language: {
                 "decimal": "",
@@ -103,6 +73,8 @@
                 },
             ]
         });
+
+
 
         $("#store_disposicion").click(function(){
             let tipo_disposicion = $("#tipo_disposicion_modal-create").val();
@@ -144,7 +116,6 @@
                         $("button").prop("disabled", false);
                     },
                     error: function(error) {
-                        //console.log(error)
                         $("button").prop("disabled", false);
                         alert("ERROR!! Disposicion no guardada");
                     }
@@ -156,14 +127,11 @@
 
         $(document).on('click', '.edit_disposicion', function(event){
             //event.stopImmediatePropagation();
-            console.log("detecta evento click en edit_disposicion");
             var id_proveedor=$(this).data('id-proveedor');
             var id_disposicion=$(this).data('id-disposicion');
-            console.log("id_proveedor"+id_proveedor);
             let url = '{{ url("proveedor/:id_proveedor/disposicion/:id_disposicion/editar") }}';
             url = url.replace(':id_proveedor', id_proveedor);
             url = url.replace(':id_disposicion', id_disposicion);
-            console.log(url);
             $('#update_disposicion').data('id-proveedor',id_proveedor);
             $('#update_disposicion').data('id-disposicion',id_disposicion);
 
@@ -178,14 +146,11 @@
 
         $(document).on('click', '.show_disposicion', function(event){
             //event.stopImmediatePropagation();
-            console.log("detecta evento click en show_disposicion");
             var id_proveedor=$(this).data('id-proveedor');
             var id_disposicion=$(this).data('id-disposicion');
-            console.log("id_proveedor"+id_proveedor);
             let url = '{{ url("proveedor/:id_proveedor/disposicion/:id_disposicion/editar") }}';
             url = url.replace(':id_proveedor', id_proveedor);
             url = url.replace(':id_disposicion', id_disposicion);
-            console.log(url);
             $('#update_disposicion').data('id-proveedor',id_proveedor);
             $('#update_disposicion').data('id-disposicion',id_disposicion);
 
@@ -195,7 +160,6 @@
                     abrirModalverDisposicion(response);
                 }
             });
-
         });
 
         $("#update_disposicion").click(function(){
@@ -205,16 +169,13 @@
             let fecha_inicio = $("#fecha_inicio_disposicion_modal-edit").val();
             let fecha_fin = $("#fecha_fin_disposicion_modal-edit").val();
             let observaciones = $("#observaciones_disposicion_modal-edit").val();
-            console.log("datos disposicion tipo_disposicion="+tipo_disposicion+" nro_disposicion="+nro_disposicion+" fecha inicio="+fecha_inicio+" fecha fin="+fecha_fin+" observaciones="+observaciones);
             if(tipo_disposicion!='' /*&& nro_expte_gde!=''*/ && nro_disposicion!='' && fecha_inicio!='' && fecha_fin!='')
             {
                 var id_proveedor=$(this).data('id-proveedor');
                 var id_disposicion=$(this).data('id-disposicion');
-                console.log("id_proveedor"+id_proveedor+" id_disposicion="+id_disposicion);
                 let url = '{{ url("proveedor/:id_proveedor/disposicion/:id_disposicion/actualizar") }}';
                 url = url.replace(':id_proveedor', id_proveedor);
                 url = url.replace(':id_disposicion', id_disposicion);
-                console.log("url"+url);
                 $("button").prop("disabled", true);
                 $.ajax({
                     type: "post",
@@ -257,11 +218,12 @@
                         }
                     },
                     error: function(error) {
-                        //console.log(error)
                         $("button").prop("disabled", false);
                         alert("ERROR!! Diposición no guardada");
                     }
-                }).done(function(){console.log("si pasa por ak!!");});
+                }).done(function(){
+
+                });
             }
             else
             {
@@ -303,11 +265,8 @@
     });
 
     function abrirModalverDisposicion(response) {
-        console.log(response);
 
-        console.log(response['nro_disposicion']);
         $('#{{$mode}}_disposicion').modal('show');
-        console.log("tipo_disposicion="+response['disposicion_tipo']);
         $("#tipo_disposicion_modal-{{$mode}}").val(response['disposicion_tipo']);
         //$("#nro_expte_gde_modal-edit").val(response['GDE_Exp']);
         $("#nro_disposicion_modal-{{$mode}}").val(response['nro_disposicion']);

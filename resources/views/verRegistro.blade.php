@@ -39,6 +39,11 @@
                     data-toggle="tab" href="#actividad">Actividad</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link @if ($tab == 'historial-actividad') {{ 'active' }} @endif" id="historial-actividad-tab"
+                    data-toggle="tab" href="#historial-actividad">Historial de actividades</a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link @if ($tab == 'firma') {{ 'active' }} @endif" id="firma-tab"
                     data-toggle="tab" href="#firma">Firma</a>
             </li>
@@ -84,6 +89,11 @@
             role="tabpanel" aria-labelledby="nav-actividad-tab">
             @include('editarRegistro.actividad',['mode'=>'show'])
         </div>
+        <div class="tab-pane fade @if ($tab == 'historial-actividad') {{ 'show active' }} @endif " id="historial-actividad"
+        role="tabpanel" aria-labelledby="nav-historial-actividad-tab">
+        @include('editarRegistro.historialActividad',['mode'=>'show'])
+        </div>
+
         <div class="tab-pane fade @if ($tab == 'firma') {{ 'show active' }} @endif " id="firma"
             role="tabpanel" aria-labelledby="nav-firma-tab">
             @include('editarRegistro.firmas',['mode'=>'show'])

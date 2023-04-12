@@ -9,6 +9,9 @@
             </div>
         @endif
     </div>
+    @if($mode=='edit')
+        <small class="small" id="small-domicilio-{{$tipo_domicilio}}-head"></small>
+    @endif
     <div class="container">
         <div class="row">
             <div class="col-sm">
@@ -300,14 +303,14 @@
     <br>
     @if($mode=='create')
         <input type="button" name="previous" class="previous btn btn btn-outline-secondary" value="Atrás" />
-        <input type="button" name="next" class="next btn btn-info" value="Siguiente" />
+        <input type="button" name="next" class="next btn btn-info" data-tipo-domicilio="{{$tipo_domicilio}}" value="Siguiente" />
     @else
         <div class="row navbuttons">
-            <div class="col-6 col-sm-auto" id="btnPrevious">
-                <a class="btn btn-outline-secondary btnPrevious">Atrás</a>
+            <div class="col-6 col-sm-auto">
+                <input type="button" name="previous" class="previous btn btn-outline-secondary btnPrevious" data-tipo-domicilio="{{$tipo_domicilio}}" value="Atrás" />
             </div>
-            <div class="col-6 col-sm-auto" id="btnNext">
-                <a class="btn btn-primary btnNext">Siguiente</a>
+            <div class="col-6 col-sm-auto">
+                <input type="button" class="btnNext btn btn-info" data-tipo-domicilio="{{$tipo_domicilio}}" value="Siguiente" />
             </div>
         </div>
     @endif
@@ -392,6 +395,8 @@
             @if($mode!="create")
 
             function recargarListaDomicilio(provincia_selected, select_localidad){
+                console.log("{{$tipo_domicilio}}");
+                console.log("{{url('localidades')}}/"+provincia_selected);
 
                 console.log("{{url('localidadSelect/')}}/"+@if($tipo_domicilio=='real')"{{isset($proveedor->domicilio_real->localidad) ? $proveedor->domicilio_real->localidad->id_localidad : '' }}",@endif
                         @if($tipo_domicilio=='legal')"{{isset($proveedor->domicilio_legal->localidad) ? $proveedor->domicilio_legal->localidad->id_localidad : '' }}",@endif
@@ -411,6 +416,8 @@
                 };
             @else
             function recargarListaDomicilio(provincia_selected, select_localidad){
+                console.log("{{url('localidades')}}/"+provincia_selected);
+
                 $.ajax({
                     type:"GET",
                     url:"{{url('localidades')}}/"+provincia_selected,
@@ -561,8 +568,9 @@
             });
             $('#provincia_{{$tipo_domicilio}}_{{$mode}}').change(function(){
                 console.log("detecta change en provincia_tipo_domicilio_mode");
+                console.log($('#provincia_{{$tipo_domicilio}}_{{$mode}}').val());
                 if($('#provincia_{{$tipo_domicilio}}_{{$mode}}').val()!='')
-                    recargarListaDomicilio($('#provincia_{{$tipo_domicilio}}_{{$mode}}').val(), $('#localidad_{{$tipo_domicilio}}_{{$mode}}'));
+                recargarListaCopiaDomicilio($('#provincia_{{$tipo_domicilio}}_{{$mode}}').val(), $('#localidad_{{$tipo_domicilio}}_{{$mode}}'));
                 else
                 {
                     $("#localidad_{{$tipo_domicilio}}_{{$mode}}").empty();
@@ -617,6 +625,7 @@
         });
         function recargarListaCopiaDomicilio(provincia_selected, select_localidad, tipo_domicilio){
             let mode=@json($mode);
+            console.log(provincia_selected);
             $.ajax({
                 type:"GET",
                 url:"{{url('localidades')}}/"+provincia_selected,
@@ -626,17 +635,17 @@
             }).done(function(){
                 if(mode=='create')
                 {
-                    if(tipo_domicilio == 'legal')
-                        $("#localidad_legal_create option[value='"+$('#localidad_real_create').val()+"']").attr("selected", true);
+                    if(tipo_domicilio == 'real')
+                        $("#localidad_real_create option[value='"+$('#localidad_real_create').val()+"']").attr("selected", true);
                     else
-                        $("#localidad_fiscal_create option[value='"+$('#localidad_real_create').val()+"']").attr("selected", true);
+                        $("#localidad_fiscal_create option[value='"+$('#localidad_fiscal_create').val()+"']").attr("selected", true);
                 }
                 else
                 {
-                    if(tipo_domicilio == 'legal')
-                        $("#localidad_legal_edit option[value='"+$('#localidad_real_edit').val()+"']").attr("selected", true);
+                    if(tipo_domicilio == 'real')
+                        $("#localidad_real_create option[value='"+$('#localidad_real_create').val()+"']").attr("selected", true);
                     else
-                        $("#localidad_fiscal_edit option[value='"+$('#localidad_real_edit').val()+"']").attr("selected", true);
+                        $("#localidad_fiscal_create option[value='"+$('#localidad_fiscal_create').val()+"']").attr("selected", true);
                 }
             });
         }

@@ -2,8 +2,10 @@
 
 @section('content2')
 
-<h1>Descargar Excel:</h1>
-<br>
+<h2 class="h2 text-center font-weight-bold ">Descargar Excel</h2>
+
+<hr>
+
 <small class="small" id="small-excel"></small>
 <form id="form" action="{{ route('exportar') }}"  method="GET">
     <select class="form-control" aria-describedby="basic-addon1" name="tipo_descarga" id="tipo_descarga">

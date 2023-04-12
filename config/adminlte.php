@@ -240,10 +240,37 @@ return [
         ],
         [
             'text' => 'Gestionar Registros',
-            'url' => '/gestionarRegistros',
+            'url' => '/gestionarRegistrosII',
             'icon' => 'fas fa-fw fa-folder',
             'label_color' => 'success',
             'can'    => ['editar_registros', 'ver_registros'],
+        ],
+        [
+            'text' => 'Estado: Proveedores',
+            'icon' => 'fa fa-users',
+            'label_color' => 'success',
+            'submenu' =>
+            [
+                [
+                    'text' => 'No vigentes',
+                    'url' => '/proveedores_no_vigentes',
+                    'icon' => 'far fa-circle',//fa fa-file-excel
+                    'label_color' => 'success',
+                ],
+                [
+                    'text' => 'Vigentes',
+                    'url' => '/proveedores_vigentes',//fa fa-check
+                    'icon' => 'far fa-circle', 
+                    'label_color' => 'success',
+                ],
+                [
+                    'text' => 'Todos',
+                    'url' => '/gestionarRegistros',
+                    'icon' => 'far fa-circle',
+                    'label_color' => 'success',
+                    'can'    => ['editar_registros', 'ver_registros'],
+                ]
+            ]
         ],
        //DESCOMENTAR DESPÚES DE LA EXPOSICIÓN
        /*
